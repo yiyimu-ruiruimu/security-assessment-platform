@@ -806,7 +806,7 @@
 <body>
     <!-- 登录拦截：部署在 Netlify（含 auth-utils.js）时启用；本地直接打开时自动跳过校验 -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-    <script src="../auth-utils.js"></script>
+    <script src="auth-utils.js"></script>
     <script>
     (async function() {
         if (typeof initIdentity === 'undefined') return; // 本地预览时不做登录校验
@@ -814,19 +814,19 @@
         if (!identity) return;
         const user = identity.currentUser();
         if (!user) {
-            alert('请先登录后再进入实践平台');
-            window.location.href = '../index.html';
+            // 未登录：前往登录门户（login.html），登录成功后自动回到本页
+            window.location.replace('login.html?next=' + encodeURIComponent(location.pathname.split('/').pop() || 'index.html'));
             return;
         }
 
-        // ===== 记账：进入平台（相当于考勤打卡） =====
-        trackLogin();
+        // ===== 记账：进入平台（相当于考勤打卡，5 分钟内自动去重） =====
+        if (typeof trackLogin === 'function') trackLogin();
 
         // ===== 记账：切换学习任务（点击上方时间线时记录） =====
         document.addEventListener('click', function(e) {
             var item = e.target.closest ? e.target.closest('.timeline-item') : null;
             if (item) {
-                trackOperation('切换学习任务', item.textContent.trim());
+                if (typeof trackOperation === 'function') trackOperation('切换学习任务', item.textContent.trim());
             }
         });
 
@@ -837,9 +837,9 @@
             if (!u) return;
             var bar = document.createElement('div');
             bar.id = 'userBar';
-            bar.style.cssText = 'position:fixed;top:10px;right:15px;z-index:9999;background:#fff;padding:8px 16px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:14px;color:#333;';
-            bar.innerHTML = '当前用户：' + u.email + ' | <a href="#" onclick="logout(); return false;" style="color:#e53e3e;">退出</a>';
+            bar.style.cssText = 'position:fixed;top:10px;right:15px;z-index:9999;background:#fff;padding:8px 14px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.18);font-size:14px;color:#333;line-height:26px;white-space:nowrap;';
             document.body.appendChild(bar);
+            if (typeof renderUserBar === 'function') renderUserBar('userBar');
         }
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', showUserInfo);
@@ -847,7 +847,7 @@
             showUserInfo();
         }
         identity.on('logout', function() {
-            window.location.href = '../index.html';
+            window.location.href = 'login.html?loggedOut=1';
         });
     })();
     </script>

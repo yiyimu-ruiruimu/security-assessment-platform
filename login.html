@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 - 信息安全测评与风险评估实践教学平台</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+    body { background: #f5f7fa; color: #333; line-height: 1.7; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .card { max-width: 620px; width: 100%; background: #fff; border-radius: 14px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); overflow: hidden; }
+    header { background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%); color: #fff; padding: 34px 40px 28px; text-align: center; }
+    header h1 { font-size: 1.55rem; font-weight: 600; letter-spacing: 0.5px; }
+    header .sub { font-size: 1rem; opacity: 0.9; margin-top: 8px; font-weight: 300; }
+    .body { padding: 28px 40px 34px; }
+    .tip { background: #eef4fd; border-left: 4px solid #1565c0; padding: 12px 16px; border-radius: 6px; font-size: 0.92rem; color: #2c3e50; margin-bottom: 22px; }
+    .role { border: 1px solid #e3e8ef; border-radius: 10px; padding: 16px 20px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .role .info h3 { font-size: 1.05rem; color: #0d47a1; }
+    .role .info p { font-size: 0.88rem; color: #6b7a8d; margin-top: 2px; }
+    .btn { display: inline-block; border: none; border-radius: 8px; padding: 10px 22px; font-size: 0.95rem; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.2s; }
+    .btn-primary { background: #0d47a1; color: #fff; }
+    .btn-primary:hover { background: #0b3d8a; }
+    .btn-outline { background: #fff; color: #1565c0; border: 1px solid #1565c0; }
+    .btn-outline:hover { background: #eef4fd; }
+    .btn-danger { background: #fff; color: #e53e3e; border: 1px solid #e53e3e; }
+    .btn-danger:hover { background: #fdf0f0; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    .msg { margin-bottom: 16px; padding: 10px 14px; border-radius: 6px; font-size: 0.9rem; display: none; }
+    .msg.info { background: #eef9ee; color: #1e7e34; border: 1px solid #c8e6c9; display: block; }
+    .msg.warn { background: #fff8e1; color: #8a6d1a; border: 1px solid #ffe082; display: block; }
+    .msg.err { background: #fdecea; color: #a93226; border: 1px solid #f5c6c2; display: block; }
+    .user-line { background: #f8fafc; border: 1px dashed #cfd8e3; border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; font-size: 0.95rem; color: #333; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .foot { text-align: center; font-size: 0.8rem; color: #95a5b6; margin-top: 6px; }
+    @media (max-width: 520px) { .body { padding: 22px 22px 28px; } }
+</style>
+</head>
+<body>
+<div class="card">
+    <header>
+        <h1>信息安全测评与风险评估实践教学平台</h1>
+        <div class="sub">等保2.0测评全流程实战 · 登录后进入实践</div>
+    </header>
+    <div class="body">
+        <div class="msg" id="msgBox"></div>
+
+        <!-- 未登录时显示 -->
+        <div id="guestView">
+            <div class="tip">
+                本平台需要账号登录后使用。学生请使用分配的邮箱注册/登录；
+                登录与学习行为将自动记录，作为实验考勤与过程数据。请在课堂或实验室网络环境下使用。
+            </div>
+            <div class="role">
+                <div class="info">
+                    <h3>我是学生</h3>
+                    <p>注册账号或登录后进入实践平台</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary" id="btnStudentGo" onclick="goStudent()">登录并进入平台</button>
+                    <button class="btn btn-outline" id="btnStudentReg" onclick="openSignup()">注册账号</button>
+                </div>
+            </div>
+            <div class="role">
+                <div class="info">
+                    <h3>我是教师</h3>
+                    <p>登录教师账号，进入日志管理后台</p>
+                </div>
+                <button class="btn btn-outline" onclick="goAdmin()">教师后台</button>
+            </div>
+        </div>
+
+        <!-- 已登录时显示 -->
+        <div id="loggedView" style="display:none;">
+            <div class="user-line">
+                <span>当前账号：<b id="curEmail" style="color:#0d47a1;"></b></span>
+                <span>
+                    <button class="btn btn-primary" id="btnEnter" onclick="enterPlatform()">进入平台</button>
+                    <button class="btn btn-danger" onclick="logout();">退出登录</button>
+                </span>
+            </div>
+            <div class="tip">
+                登录状态正常。点击“进入平台”开始实验；教师可进入日志后台查看学生考勤与操作记录。
+            </div>
+        </div>
+
+        <div class="foot">平台登录与日志服务由 Netlify Identity + Supabase 提供</div>
+    </div>
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="auth-utils.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    // 目标地址：仅允许站内相对路径
+    function getNext() {
+        try {
+            var p = new URLSearchParams(window.location.search);
+            var n = p.get('next');
+            if (n && n.indexOf('http') !== 0 && n.indexOf('/') !== 0 && n.indexOf('//') !== 0) return n;
+        } catch (e) { /* noop */ }
+        return 'index.html';
+    }
+    var NEXT = getNext();
+
+    function showMsg(kind, text) {
+        var m = document.getElementById('msgBox');
+        m.className = 'msg ' + kind;
+        m.textContent = text;
+    }
+
+    function onReady(cb) {
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cb);
+        else cb();
+    }
+
+    function currentEmail() {
+        try {
+            if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.currentUser) {
+                var u = netlifyIdentity.currentUser();
+                return u ? u.email : null;
+            }
+        } catch (e) { /* noop */ }
+        return null;
+    }
+
+    function refreshView() {
+        var email = currentEmail();
+        var guest = document.getElementById('guestView');
+        var logged = document.getElementById('loggedView');
+        if (email) {
+            guest.style.display = 'none';
+            logged.style.display = 'block';
+            document.getElementById('curEmail').textContent = email;
+        } else {
+            guest.style.display = 'block';
+            logged.style.display = 'none';
+        }
+    }
+
+    function goStudent() { openWidget('login', '进入平台'); }
+    function openSignup() { openWidget('signup', '注册'); }
+
+    function openWidget(tab, label) {
+        if (typeof netlifyIdentity === 'undefined') {
+            showMsg('err', '登录组件未加载：请先将站点部署到 Netlify 并在后台开启 Identity 服务。');
+            return;
+        }
+        if (currentEmail()) {
+            enterPlatform();
+            return;
+        }
+        showMsg('info', '请在弹出的窗口中' + (label === '注册' ? '填写邮箱注册' : '登录') + '……');
+        try {
+            netlifyIdentity.open(tab);
+        } catch (e) {
+            showMsg('err', '登录窗口打开失败：请确认站点已开启 Netlify Identity。');
+        }
+    }
+
+    function enterPlatform() {
+        if (!currentEmail()) { showMsg('err', '尚未登录，请先登录。'); return; }
+        window.location.href = NEXT;
+    }
+
+    function goAdmin() {
+        if (!currentEmail()) { showMsg('info', '请先登录教师账号，再进入后台。'); openWidget('login', '登录'); return; }
+        window.location.href = 'admin.html';
+    }
+
+    onReady(function () {
+        // 登出提示
+        try {
+            if (new URLSearchParams(window.location.search).get('loggedOut') === '1') {
+                showMsg('info', '您已退出登录。');
+            }
+        } catch (e) { /* noop */ }
+
+        // 本地预览（无 Netlify）提示
+        if (typeof netlifyIdentity === 'undefined') {
+            showMsg('err', '当前为本地预览模式：登录功能需部署到 Netlify 并开启 Identity 服务后才可用。');
+        }
+
+        if (typeof netlifyIdentity !== 'undefined' && netlifyIdentity.on) {
+            netlifyIdentity.on('login', function (user) {
+                refreshView();
+                if (user) {
+                    // 登录成功即进入平台（教师如要去后台，可再点“教师后台”）
+                    window.location.href = NEXT;
+                }
+            });
+            netlifyIdentity.on('logout', function () {
+                refreshView();
+            });
+        }
+        refreshView();
+    });
+
+    window.goStudent = goStudent;
+    window.openSignup = openSignup;
+    window.goAdmin = goAdmin;
+    window.enterPlatform = enterPlatform;
+})();
+</script>
+</body>
+</html>
