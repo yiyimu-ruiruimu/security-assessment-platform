@@ -34,13 +34,11 @@ Netlify 检测到 GitHub 推送会自动构建部署（本次新增 Functions，
 
 ### 第 2 步：开启 Netlify Identity（注册/登录账号体系）
 1. Netlify 后台 → 你的站点 `wlxxaq` → **Identity** → **Enable Identity**。
-2. 进入 **Settings → Identity → Registration**：
-   - 建议 **Registration preferences = Open**（学生可自助注册）。
-   - **External providers** 可加 GitHub/Google（可选）。
-   - 邮箱确认（Confirm email）：教学场景若想学生注册即用，可关闭；若开启，学生需点邮件链接激活。
-3. **Settings → Identity → Services**：`External auth` 等保持默认即可。
-
-> ⚠️ 站点正在被访问时开启后，`/.netlify/identity` 才会可用，登录组件才能工作。
+2. 进入 **Identity → Registration → Registration preferences**：
+   - 建议 **Registration preferences = Open**(默认即可,学生可自助注册)。
+   - **External providers** 可加 GitHub/Google(可选,加后该途径免邮件确认,见末尾"可选升级")。
+3. **(免费档限制)** Netlify Identity 的"邮件模板自定义 / 免邮箱确认"开关已移到 Pro 付费版,免费档的 **Emails** 标签下只有 Pro 升级提示,**没有**"Allow users to sign up without verifying their email address"入口。
+   因此学生注册后必须打开注册邮箱点击确认链接才能登录——login.html 已内置明显提示。如需免邮件确认,见本文末尾"可选升级"小节。
 
 ### 第 3 步：创建 Supabase 项目（免费）并建表
 1. 打开 https://supabase.com → **New project**（免费 Free 档即可，选一个海外区域）。
@@ -83,7 +81,23 @@ Netlify 后台 → **Site configuration → Environment variables** → 新增�
 - **`admin.html` 提示无权限**：把你邮箱加进 `ADMIN_EMAILS` 并重新部署。
 - **日志没写入**：检查 Netlify 环境变量是否配置且已重新部署；或访问 `/.netlify/functions/log` 看是否 500（返回 JSON 带 `server_not_configured` 即环境变量缺失）。
 - **想换主页**：Netlify 默认把仓库根 `index.html` 作为首页。本次已把最新教学版（原 main-page.html）同步为 `index.html`，两文件内容一致；**以后请只维护 `index.html`**，`main-page.html` 可自行删除以免改混。
-- **免费额度**：Netlify Identity 免费；Supabase Free 档足够教学实验使用，日志量大后可加保留策略（定期 DELETE 旧数据）。
+- **免费额度**：Netlify Identity 免费；Supabase Free 档足够教学实验使用,日志量大后可加保留策略(定期 DELETE 旧数据)。
+- **学生注册后登录提示"账号或密码错误"**:99% 是没点邮件里的确认链接。让对方去邮箱(可能含垃圾邮件夹)找 "Confirm your account" 或发件人为 Netlify 的邮件,点链接后再登录。
+- **邮件模板自定义/免确认开关**:Netlify 已移入 Pro 付费版,免费档在 Identity → Emails 只能看到 Pro 升级提示。详见下一节"可选升级"。
+
+## 六、可选升级:免费档下如何去掉邮箱确认步骤(无需升级 Pro)
+
+**A. 教师批量邀请学生(适合教学班)**
+1. **Identity → Users → Invite users**；
+2. 把全班邮箱一次性粘贴进去,邀请邮件同时完成"邮箱确认 + 设密码"两步,学生点链接 = 一次完成验证并登录进平台;
+3. 一次性流程,后续开放注册的新生仍走邮件确认(可重复邀请)。
+
+**B. 接入外部登录(适合学生有 Google/GitHub 账号的场景)**
+1. **Identity → Registration → External providers → Add provider**,按提示填 GitHub 或 Google 的 Client ID / Secret(免费,几分钟配好);
+2. **走外部 provider 注册的用户,Netlify 官方明确免邮件确认**;
+3. 学生点"用 GitHub 登录"即一键进平台,零邮件步骤。
+
+> 这两条都是**免费档可用**的功能,代码无需改动(External providers 配好后 Netlify Identity Widget 会自动出现对应按钮);仅在 Netlify 后台点几下即可启用。
 
 ## 五、安全说明
 
