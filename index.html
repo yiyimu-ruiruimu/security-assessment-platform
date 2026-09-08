@@ -874,7 +874,7 @@
             <div class="task-display">
 
                 <!-- 智能助教（所有任务通用） -->
-                <a href="https://yuanqi.tencent.com/webim/#/chat/OFcrDA?appid=2002290233735774592&experience=true" class="info-link" target="_blank">智能助教（所有任务通用）</a>
+                <a href="https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544" class="info-link" target="_blank">智能助教（所有任务通用）</a>
 
                 <!-- 首页：课程总览 -->
                 <div class="task-stage active" id="homepage-stage">
@@ -913,7 +913,7 @@
                             <div class="concept-box">
                                 <p>① 点击上方时间线或底部"下一任务"按钮切换任务，随时可点"🏠 返回首页"；</p>
                                 <p>② 任务页左侧为<strong>任务内容区</strong>，内容按类型分为三档，点击顶部按钮切换：<strong>📖 知识</strong>（情景分析、知识结构、概念、图表）、<strong>🧪 实验</strong>（实践任务与实验步骤）、<strong>🤖 AI 助学</strong>（AI 求助点速查与使用方法）；右侧为<strong>单元简介</strong>（学习目标、单元测评入口），始终直接显示；</p>
-                                <p>③ 遇到问题随时点击左上角"智能助教"提问，或切到"🤖 AI 助学"查看本任务的提示词模板；</p>
+                                <p>③ 遇到问题随时点击左上角"智能助教"或右下角 🛡️ 图标向等保小助教提问，或切到"🤖 AI 助学"查看本任务的提示词模板；</p>
                                 <p>④ 练习的"参考答案"默认折叠，先独立思考再展开对照；</p>
                                 <p>⑤ 每个任务遵循"情景分析 → 知识结构 → 知识学习 → 实践操作 → 单元测评"的节奏，前序成果是后续任务的重要输入；单元测评须获得 100 分方可通过，可重复测评。</p>
                             </div>
@@ -1051,7 +1051,7 @@
                     <h3>🤖 上机之前：学会"用好 AI 助教"（全课程通用技能）</h3>
                     <div class="ai-tip-box">
                         <div class="ai-tip-title">为什么第一节课先学这个？</div>
-                        <p>本课程所有实验都<strong>允许并鼓励</strong>你向 AI 求助（页面左上角"智能助教"，或任意 AI 工具）。但"会问"和"不会问"效率天差地别——<strong>问得越具体，答得越靠谱</strong>。先把方法学会，后面每个实验都能少走弯路。</p>
+                        <p>本课程所有实验都<strong>允许并鼓励</strong>你向 AI 求助（页面左上角"智能助教"或右下角 🛡️ 图标，或任意 AI 工具）。但"会问"和"不会问"效率天差地别——<strong>问得越具体，答得越靠谱</strong>。先把方法学会，后面每个实验都能少走弯路。</p>
                         <div class="concept-title">📐 AI 求助"四步问法"</div>
                         <ol style="margin-left:20px;line-height:1.9;">
                             <li><strong>给背景</strong>：我在上什么课、做什么实验、用什么工具（课程名 + 实验名 + JSecProbe）；</li>
@@ -3420,5 +3420,124 @@
         }
     })();
     </script>
+
+    <!-- ===== 等保小助教（智能助教悬浮组件） 开始 ===== -->
+    <style>
+        #db-assistant-trigger {
+            position: fixed; right: 28px; bottom: 28px; z-index: 10000;
+            width: 60px; height: 60px; border-radius: 50%;
+            background: linear-gradient(135deg, #7b1fa2, #4527a0);
+            color: #fff; border: none; cursor: pointer;
+            font-size: 26px; line-height: 1;
+            box-shadow: 0 6px 18px rgba(69, 39, 160, 0.45);
+            display: flex; align-items: center; justify-content: center;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        #db-assistant-trigger:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 24px rgba(69, 39, 160, 0.55); }
+        #db-assistant-trigger .db-assistant-tip {
+            position: absolute; right: 70px; top: 50%; transform: translateY(-50%);
+            background: #fff; color: #4527a0; font-size: 13px; white-space: nowrap;
+            padding: 6px 12px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            opacity: 0; pointer-events: none; transition: opacity .25s ease;
+        }
+        #db-assistant-trigger:hover .db-assistant-tip,
+        #db-assistant-trigger .db-assistant-tip.show { opacity: 1; }
+        #db-assistant-panel {
+            display: none; position: fixed; right: 28px; bottom: 104px; z-index: 10001;
+            width: 400px; height: min(600px, calc(100vh - 140px));
+            background: #fff; border-radius: 14px; overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+            flex-direction: column;
+        }
+        #db-assistant-panel.open { display: flex; animation: dbAssistantIn .22s ease; }
+        @keyframes dbAssistantIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+        #db-assistant-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 14px;
+            background: linear-gradient(135deg, #7b1fa2, #4527a0);
+            color: #fff;
+        }
+        #db-assistant-header .title { font-size: 15px; font-weight: 700; }
+        #db-assistant-header .sub { font-size: 12px; opacity: .85; margin-top: 2px; }
+        #db-assistant-close {
+            background: rgba(255,255,255,.18); border: none; color: #fff;
+            width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 15px; line-height: 1;
+            flex-shrink: 0;
+        }
+        #db-assistant-close:hover { background: rgba(255,255,255,.32); }
+        #db-assistant-iframe { flex: 1; width: 100%; border: none; background: #fff; }
+        @media (max-width: 480px) {
+            #db-assistant-panel { right: 0; bottom: 0; width: 100vw; height: 100vh; border-radius: 0; }
+            #db-assistant-trigger { right: 18px; bottom: 18px; }
+        }
+    </style>
+
+    <button id="db-assistant-trigger" type="button" aria-label="打开智能助教" aria-expanded="false">
+        <span class="db-assistant-tip">有问题？点我提问</span>
+        🛡️
+    </button>
+
+    <div id="db-assistant-panel" role="dialog" aria-label="智能助教对话窗口">
+        <div id="db-assistant-header">
+            <div style="flex:1;">
+                <div class="title">🛡️ 等保小助教</div>
+                <div class="sub">网络信息安全测试与风险评估 · 智能教学助手</div>
+            </div>
+            <button id="db-assistant-close" type="button" aria-label="关闭对话窗口">✕</button>
+        </div>
+        <iframe id="db-assistant-iframe" title="智能助教对话窗口" allow="microphone; clipboard-read; clipboard-write"></iframe>
+    </div>
+
+    <script>
+    (function () {
+        // ★ 唯一需要修改的配置：在腾讯元器发布新智能体后，
+        //   把下面的链接替换为元器「发布 → 网页/WebIM」给出的新链接即可
+        var YUANQI_CHAT_URL = "https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544";
+
+        var trigger = document.getElementById('db-assistant-trigger');
+        var panel = document.getElementById('db-assistant-panel');
+        var iframe = document.getElementById('db-assistant-iframe');
+        var closeBtn = document.getElementById('db-assistant-close');
+        var loaded = false;
+
+        function openPanel() {
+            if (!loaded) { iframe.src = YUANQI_CHAT_URL; loaded = true; } // 懒加载：首次打开才加载，不影响首屏速度
+            panel.classList.add('open');
+            trigger.setAttribute('aria-expanded', 'true');
+            var tip = trigger.querySelector('.db-assistant-tip');
+            if (tip) tip.classList.remove('show');
+        }
+        function closePanel() {
+            panel.classList.remove('open');
+            trigger.setAttribute('aria-expanded', 'false');
+        }
+        function togglePanel() { panel.classList.contains('open') ? closePanel() : openPanel(); }
+
+        trigger.addEventListener('click', togglePanel);
+        closeBtn.addEventListener('click', closePanel);
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
+
+        // 顶部"智能助教（所有任务通用）"链接：点击时改为打开悬浮窗（JS 失效时仍保留外链跳转兜底）
+        var headerLink = document.querySelector('a.info-link[href*="yuanqi.tencent.com"]');
+        if (headerLink) {
+            headerLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                openPanel();
+            });
+        }
+
+        // 首次访问 5 秒后轻微提示一次，引导学生发现新入口
+        setTimeout(function () {
+            if (!panel.classList.contains('open')) {
+                var tip = trigger.querySelector('.db-assistant-tip');
+                if (tip) {
+                    tip.classList.add('show');
+                    setTimeout(function () { tip.classList.remove('show'); }, 4000);
+                }
+            }
+        }, 5000);
+    })();
+    </script>
+    <!-- ===== 等保小助教（智能助教悬浮组件） 结束 ===== -->
 </body>
 </html>
