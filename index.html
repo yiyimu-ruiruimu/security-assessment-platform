@@ -874,7 +874,7 @@
             <div class="task-display">
 
                 <!-- 智能助教（所有任务通用） -->
-                <a href="https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544" class="info-link" target="_blank">智能助教（所有任务通用）</a>
+                <a href="https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544&experience=true" class="info-link" target="_blank">智能助教（所有任务通用）</a>
 
                 <!-- 首页：课程总览 -->
                 <div class="task-stage active" id="homepage-stage">
@@ -3464,8 +3464,14 @@
             width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 15px; line-height: 1;
             flex-shrink: 0;
         }
-        #db-assistant-close:hover { background: rgba(255,255,255,.32); }
-        #db-assistant-iframe { flex: 1; width: 100%; border: none; background: #fff; }
+    #db-assistant-close:hover { background: rgba(255,255,255,.32); }
+    #db-assistant-popout {
+        background: rgba(255,255,255,.18); border: none; color: #fff;
+        width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 15px; line-height: 1;
+        flex-shrink: 0; margin-right: 8px;
+    }
+    #db-assistant-popout:hover { background: rgba(255,255,255,.32); }
+    #db-assistant-iframe { flex: 1; width: 100%; border: none; background: #fff; }
         @media (max-width: 480px) {
             #db-assistant-panel { right: 0; bottom: 0; width: 100vw; height: 100vh; border-radius: 0; }
             #db-assistant-trigger { right: 18px; bottom: 18px; }
@@ -3483,6 +3489,7 @@
                 <div class="title">🛡️ 等保小助教</div>
                 <div class="sub">网络信息安全测试与风险评估 · 智能教学助手</div>
             </div>
+            <button id="db-assistant-popout" type="button" aria-label="在新窗口打开" title="如果页面显示异常，点击在新窗口打开">↗</button>
             <button id="db-assistant-close" type="button" aria-label="关闭对话窗口">✕</button>
         </div>
         <iframe id="db-assistant-iframe" title="智能助教对话窗口" allow="microphone; clipboard-read; clipboard-write"></iframe>
@@ -3492,12 +3499,13 @@
     (function () {
         // ★ 唯一需要修改的配置：在腾讯元器发布新智能体后，
         //   把下面的链接替换为元器「发布 → 网页/WebIM」给出的新链接即可
-        var YUANQI_CHAT_URL = "https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544";
+        var YUANQI_CHAT_URL = "https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544&experience=true";
 
         var trigger = document.getElementById('db-assistant-trigger');
         var panel = document.getElementById('db-assistant-panel');
         var iframe = document.getElementById('db-assistant-iframe');
         var closeBtn = document.getElementById('db-assistant-close');
+        var popoutBtn = document.getElementById('db-assistant-popout');
         var loaded = false;
 
         function openPanel() {
@@ -3515,6 +3523,11 @@
 
         trigger.addEventListener('click', togglePanel);
         closeBtn.addEventListener('click', closePanel);
+        if (popoutBtn) {
+            popoutBtn.addEventListener('click', function () {
+                window.open(YUANQI_CHAT_URL, 'yuanqi-assistant', 'noopener,noreferrer');
+            });
+        }
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePanel(); });
 
         // 顶部"智能助教（所有任务通用）"链接：点击时改为打开悬浮窗（JS 失效时仍保留外链跳转兜底）
