@@ -1,0 +1,22 @@
+# AI 工具过程产物（不部署到网站）
+agent_mode/
+.workbuddy/
+.skills/
+.sessions/
+.user_skills/
+experience/
+__pycache__/
+
+# 过程脚本与临时文件
+*.py
+*.txt
+!README.txt
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
