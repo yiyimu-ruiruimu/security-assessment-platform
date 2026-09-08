@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>测评指挥官 · 等保测评项目经理实战</title>
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --bg:#07101F; --bg2:#0B1B31; --panel:#0F2138; --panel2:#122A4A;
+  --line:rgba(84,180,255,.16); --line2:rgba(84,180,255,.34);
+  --txt:#E8F0FA; --mut:#8FA7C3; --dim:#5E7896;
+  --cyan:#4CC3FF; --teal:#2DD4BF; --amber:#F5B93E; --green:#3DDC97; --red:#F87171; --purple:#A78BFA;
+  --ok:#0E2A24; --okline:rgba(61,220,151,.4);
+  --warnbg:#2A2113; --warnline:rgba(245,185,62,.4);
+  --badbg:#2A1518; --badline:rgba(248,113,113,.4);
+  --radius:14px;
+  --shadow:0 10px 34px rgba(0,0,0,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--txt);
+  font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;
+  font-size:15px; line-height:1.7;
+  background-image:
+    radial-gradient(1200px 500px at 80% -10%, rgba(34,108,181,.22), transparent 60%),
+    radial-gradient(900px 420px at -10% 30%, rgba(45,212,191,.10), transparent 55%);
+  background-attachment:fixed;
+}
+.hidden{display:none!important}
+button{font-family:inherit;cursor:pointer}
+svg{display:inline-block;vertical-align:-.18em;flex:none}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#1C3A5E;border-radius:6px}
+::-webkit-scrollbar-track{background:transparent}
+
+/* ============ 封面 ============ */
+#screen-cover{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:28px 16px;position:relative;overflow:hidden}
+.cover-hero{position:absolute;inset:0;object-fit:cover;opacity:.42;filter:saturate(1.15)}
+.cover-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,16,31,.35),rgba(7,16,31,.9))}
+.cover-body{position:relative;z-index:2;max-width:880px;width:100%;text-align:center}
+.cover-kicker{display:inline-flex;align-items:center;gap:8px;color:var(--teal);font-size:13px;font-weight:700;letter-spacing:.16em;border:1px solid var(--okline);background:rgba(45,212,191,.08);padding:6px 16px;border-radius:999px;margin-bottom:22px}
+.cover-title{font-size:clamp(38px,7vw,68px);font-weight:900;letter-spacing:.04em;line-height:1.15;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.cover-title .hl{color:var(--amber)}
+.cover-sub{margin-top:14px;font-size:clamp(15px,2.4vw,19px);color:var(--mut);font-weight:500}
+.cover-mission{margin:30px auto 0;max-width:680px;background:rgba(15,33,56,.82);border:1px solid var(--line);border-radius:var(--radius);padding:20px 24px;text-align:left;box-shadow:var(--shadow);backdrop-filter:blur(2px)}
+.cover-mission h3{font-size:15px;color:var(--cyan);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.cover-mission p{color:#C4D6EA;font-size:14px}
+.cover-actions{margin-top:28px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,#0EA5E9,#2DD4BF);color:#04121F;font-weight:800;font-size:17px;padding:13px 34px;border:none;border-radius:12px;box-shadow:0 8px 24px rgba(14,165,233,.35);transition:transform .15s,box-shadow .15s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(14,165,233,.5)}
+.btn-ghost{background:transparent;color:var(--mut);border:1px solid var(--line2);font-weight:600;font-size:15px;padding:13px 26px;border-radius:12px;transition:color .15s,border-color .15s}
+.btn-ghost:hover{color:var(--txt);border-color:var(--cyan)}
+.cover-help{margin:18px auto 0;max-width:680px;text-align:left;background:rgba(10,24,44,.92);border:1px solid var(--line);border-radius:var(--radius);padding:18px 22px;font-size:13.5px;color:#B9CDE3}
+.cover-help li{margin:6px 0 6px 18px;color:#B9CDE3}
+.cover-help b{color:var(--amber)}
+.cover-foot{margin-top:26px;color:var(--dim);font-size:12.5px;letter-spacing:.06em}
+
+/* ============ 顶栏 ============ */
+#screen-game{max-width:1060px;margin:0 auto;padding:16px 16px 80px}
+.topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:rgba(15,33,56,.9);border:1px solid var(--line);border-radius:var(--radius);padding:12px 18px;box-shadow:var(--shadow);position:sticky;top:10px;z-index:30;backdrop-filter:blur(4px)}
+.topbar .proj{display:flex;align-items:center;gap:10px;min-width:0}
+.topbar .proj-ic{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,#0EA5E9,#2DD4BF);display:flex;align-items:center;justify-content:center;color:#04121F;flex:none}
+.topbar .proj-name{font-weight:800;font-size:14.5px;white-space:nowrap}
+.topbar .proj-name small{display:block;font-weight:500;color:var(--mut);font-size:11.5px;letter-spacing:.05em}
+.topbar .spacer{flex:1}
+.score-box{display:flex;align-items:center;gap:12px}
+.score-chip{display:flex;align-items:center;gap:7px;background:rgba(245,185,62,.1);border:1px solid var(--warnline);color:var(--amber);padding:6px 14px;border-radius:999px;font-weight:800;font-size:14px}
+.score-chip small{color:var(--mut);font-weight:600;font-size:11px}
+.stage-chip{display:none;align-items:center;gap:7px;background:rgba(76,195,255,.08);border:1px solid var(--line2);color:var(--cyan);padding:6px 14px;border-radius:999px;font-weight:700;font-size:13px}
+.btn-reset{background:transparent;color:var(--dim);border:1px solid var(--line);padding:6px 13px;border-radius:9px;font-size:12.5px;font-weight:600;transition:color .15s,border-color .15s}
+.btn-reset:hover{color:var(--red);border-color:var(--badline)}
+
+/* ============ 阶段地图 ============ */
+.stage-map{margin-top:16px;background:rgba(12,27,49,.75);border:1px solid var(--line);border-radius:var(--radius);padding:16px 20px 12px;box-shadow:var(--shadow)}
+.stage-title{font-size:12px;color:var(--dim);letter-spacing:.12em;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.stage-title .st-prog{color:var(--cyan);letter-spacing:0}
+.stage-row{display:flex;gap:8px;align-items:stretch}
+.stage-col{flex:1;min-width:0}
+.stage-col .st-name{font-size:12.5px;font-weight:700;color:var(--mut);margin-bottom:8px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.stage-col.active .st-name{color:var(--txt)}
+.stage-col.active .st-name .st-dot{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+.st-dot{width:8px;height:8px;border-radius:50%;background:#24405F;flex:none;transition:background .3s}
+.steps-dots{display:flex;gap:6px;flex-wrap:wrap}
+.step-dot{width:22px;height:22px;border-radius:7px;background:#17314F;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--dim);cursor:default;transition:all .2s}
+.step-dot.done{background:rgba(61,220,151,.14);border-color:var(--okline);color:var(--green)}
+.step-dot.cur{background:rgba(76,195,255,.18);border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 12px rgba(76,195,255,.4);cursor:default}
+.step-dot.locked{opacity:.5}
+.step-dot.reviewable{cursor:pointer}
+.step-dot.reviewable:hover{transform:scale(1.12);border-color:var(--cyan)}
+
+/* ============ 关卡卡片 ============ */
+.step-area{margin-top:18px}
+.step-card{background:rgba(15,33,56,.92);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;animation:cardIn .45s cubic-bezier(.22,1,.36,1)}
+@keyframes cardIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sc-head{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(23,49,79,.6),transparent)}
+.sc-num{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0EA5E9,#2DD4BF);color:#04121F;font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center;flex:none}
+.sc-tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:11px;font-weight:700;padding:3px 11px;border-radius:999px;letter-spacing:.05em}
+.tag-stage-0{background:rgba(76,195,255,.12);color:var(--cyan);border:1px solid rgba(76,195,255,.3)}
+.tag-stage-1{background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.3)}
+.tag-stage-2{background:rgba(245,185,62,.12);color:var(--amber);border:1px solid rgba(245,185,62,.3)}
+.tag-stage-3{background:rgba(167,139,250,.12);color:var(--purple);border:1px solid rgba(167,139,250,.3)}
+.tag-stage-4{background:rgba(61,220,151,.12);color:var(--green);border:1px solid rgba(61,220,151,.3)}
+.sc-title{font-size:19px;font-weight:900;flex:1}
+.sc-body{padding:20px 22px}
+.scene-box{border-left:3px solid var(--cyan);background:rgba(76,195,255,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px}
+.scene-box .lb{font-size:12px;font-weight:800;color:var(--cyan);letter-spacing:.12em;margin-bottom:6px}
+.scene-box p{color:#C6D8EC;font-size:14px}
+.task-box{border-left:3px solid var(--amber);background:rgba(245,185,62,.06);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px}
+.task-box .lb{font-size:12px;font-weight:800;color:var(--amber);letter-spacing:.12em;margin-bottom:6px}
+.task-box p{font-size:15px;font-weight:600;color:var(--txt)}
+.btn-hint{margin-top:10px;background:transparent;border:none;color:var(--dim);font-size:12.5px;text-decoration:underline dotted;padding:0}
+.btn-hint:hover{color:var(--cyan)}
+.hint-text{margin-top:8px;font-size:13px;color:var(--amber);background:rgba(245,185,62,.08);border:1px dashed var(--warnline);border-radius:8px;padding:8px 12px;display:none}
+.hint-text.show{display:block}
+.answer-row{display:flex;gap:12px;align-items:flex-end}
+textarea{flex:1;min-height:96px;background:#0A1A30;border:1px solid var(--line2);border-radius:10px;color:var(--txt);padding:13px 15px;font-size:14.5px;font-family:inherit;resize:vertical;outline:none;transition:border-color .15s}
+textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(76,195,255,.12)}
+.btn-submit{background:linear-gradient(135deg,#0EA5E9,#2DD4BF);color:#04121F;font-weight:800;font-size:15px;padding:13px 26px;border:none;border-radius:10px;flex:none;transition:transform .15s,box-shadow .15s}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(14,165,233,.4)}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ============ 点评区 ============ */
+.feedback{margin-top:18px;border-radius:12px;padding:18px 20px;animation:cardIn .4s cubic-bezier(.22,1,.36,1)}
+.feedback.good{background:var(--ok);border:1px solid var(--okline)}
+.feedback.mid{background:var(--warnbg);border:1px solid var(--warnline)}
+.feedback.poor{background:var(--badbg);border:1px solid var(--badline)}
+.fb-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.fb-verdict{font-size:15px;font-weight:900}
+.feedback.good .fb-verdict{color:var(--green)}
+.feedback.mid .fb-verdict{color:var(--amber)}
+.feedback.poor .fb-verdict{color:var(--red)}
+.stars{display:flex;gap:2px;color:var(--amber)}
+.stars .off{opacity:.25}
+.fb-score{margin-left:auto;font-size:13px;font-weight:800;color:var(--mut)}
+.fb-score b{font-size:17px;color:var(--amber)}
+.fb-comment{font-size:14px;color:#D7E4F3}
+.fb-comment .qa{display:block;margin-top:8px;background:rgba(0,0,0,.25);border-radius:8px;padding:8px 12px;font-size:12.5px;color:var(--mut)}
+.fb-comment .qa b{color:var(--cyan);font-weight:700}
+.teach-card{margin-top:14px;background:rgba(18,42,74,.85);border:1px solid var(--line2);border-radius:10px;padding:14px 16px}
+.teach-card .tc-lb{font-size:12px;font-weight:800;color:var(--teal);letter-spacing:.12em;display:flex;align-items:center;gap:7px;margin-bottom:8px}
+.teach-card p{font-size:13.5px;color:#C6D8EC}
+.teach-card p+p{margin-top:6px}
+.fb-next{display:flex;justify-content:flex-end;margin-top:16px}
+.btn-next{background:linear-gradient(135deg,#F5B93E,#F59E0B);color:#1A1204;font-weight:800;font-size:15px;padding:12px 30px;border:none;border-radius:10px;transition:transform .15s,box-shadow .15s}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,185,62,.4)}
+
+/* ============ 弹层 ============ */
+.modal-mask{position:fixed;inset:0;background:rgba(4,9,18,.78);z-index:60;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(3px)}
+.modal{background:var(--bg2);border:1px solid var(--line2);border-radius:16px;max-width:760px;width:100%;max-height:86vh;overflow:auto;box-shadow:var(--shadow);animation:cardIn .4s cubic-bezier(.22,1,.36,1)}
+.modal-head{display:flex;align-items:center;gap:12px;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg2);z-index:2}
+.modal-head h3{font-size:17px;font-weight:900;flex:1}
+.btn-close{background:transparent;border:1px solid var(--line2);color:var(--mut);width:30px;height:30px;border-radius:8px;font-size:15px;line-height:1}
+.btn-close:hover{color:var(--red);border-color:var(--badline)}
+.modal-body{padding:20px 22px}
+.modal-body h4{font-size:14px;color:var(--cyan);margin:16px 0 8px}
+.modal-body h4:first-child{margin-top:0}
+
+/* 复盘 */
+.rev-item{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+.rev-item .ri-q{font-weight:700;font-size:14px;margin-bottom:6px}
+.rev-item .ri-a{font-size:13px;color:var(--mut);background:rgba(0,0,0,.22);border-radius:8px;padding:8px 12px;margin-bottom:6px}
+.rev-item .ri-f{font-size:13px;color:#C6D8EC}
+.rev-item .ri-meta{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.rev-item .stars{font-size:12px}
+
+/* 报告 */
+.report-hero{text-align:center;padding:8px 0 4px}
+.report-hero .rh-badge{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:800;color:#1A1204;background:linear-gradient(135deg,#F5B93E,#F59E0B);padding:7px 18px;border-radius:999px;margin-bottom:12px}
+.report-hero .rh-title{font-size:24px;font-weight:900}
+.report-hero .rh-sub{color:var(--mut);font-size:13.5px;margin-top:4px}
+.report-score{display:flex;gap:22px;justify-content:center;margin:18px 0 6px;flex-wrap:wrap}
+.rs-box{text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 26px;min-width:120px}
+.rs-box .n{font-size:26px;font-weight:900;color:var(--amber)}
+.rs-box .l{font-size:11.5px;color:var(--mut);letter-spacing:.08em;margin-top:2px}
+.rs-box.g .n{color:var(--green)}
+.rs-box.c .n{color:var(--cyan)}
+.rs-box.p .n{color:var(--purple)}
+.kv-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.kv-table td{border:1px solid var(--line);padding:7px 11px;color:#C6D8EC}
+.kv-table td:first-child{color:var(--mut);font-weight:700;width:118px;background:rgba(18,42,74,.5)}
+.rank-card{margin-top:16px;background:rgba(18,42,74,.7);border:1px solid var(--line2);border-radius:12px;padding:16px 18px}
+.rank-card .rc-lb{font-size:12px;font-weight:800;color:var(--teal);letter-spacing:.12em;margin-bottom:8px}
+.rank-card p{font-size:13.5px;color:#C6D8EC}
+.report-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
+.report-table th{background:rgba(18,42,74,.8);color:var(--mut);font-weight:700;padding:7px 9px;border:1px solid var(--line);text-align:left;white-space:nowrap}
+.report-table td{border:1px solid var(--line);padding:7px 9px;color:#C6D8EC;vertical-align:top}
+.report-table .st3{color:var(--green);font-weight:800}
+.report-table .st2{color:var(--amber);font-weight:800}
+.report-table .st1{color:var(--red);font-weight:800}
+.modal-actions{display:flex;gap:12px;justify-content:center;margin:18px 0 6px;flex-wrap:wrap}
+
+/* ============ 工具包 ============ */
+.toolkit-toggle{position:fixed;right:18px;bottom:22px;z-index:50;display:flex;align-items:center;gap:8px;background:linear-gradient(135deg,#0EA5E9,#2DD4BF);color:#04121F;font-weight:800;font-size:14px;padding:12px 20px;border:none;border-radius:999px;box-shadow:0 8px 24px rgba(14,165,233,.35);transition:transform .15s}
+.toolkit-toggle:hover{transform:translateY(-2px)}
+.toolkit{position:fixed;right:0;top:0;bottom:0;width:min(430px,92vw);background:var(--bg2);border-left:1px solid var(--line2);z-index:55;overflow-y:auto;padding:20px;box-shadow:-14px 0 40px rgba(0,0,0,.4);animation:drawerIn .3s cubic-bezier(.22,1,.36,1)}
+@keyframes drawerIn{from{transform:translateX(100%)}to{transform:none}}
+.tk-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;position:sticky;top:-20px;background:var(--bg2);padding:14px 0;border-bottom:1px solid var(--line);z-index:2}
+.tk-head h3{font-size:16px;font-weight:900;flex:1}
+.tk-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.tk-card h4{font-size:13.5px;color:var(--amber);margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.tk-card p,.tk-card li{font-size:12.5px;color:#B9CDE3}
+.tk-card ul{margin:6px 0 0 16px}
+.tk-card li{margin:3px 0}
+.tk-table{width:100%;border-collapse:collapse;font-size:11.8px;margin-top:4px}
+.tk-table th{background:rgba(18,42,74,.8);color:var(--mut);padding:5px 8px;border:1px solid var(--line);text-align:left;font-weight:700}
+.tk-table td{border:1px solid var(--line);padding:5px 8px;color:#C6D8EC}
+.tk-motto{text-align:center;color:var(--teal);font-weight:800;font-size:13px;margin-top:4px}
+.mono{font-variant-numeric:tabular-nums}
+
+/* ============ Toast ============ */
+#toast{position:fixed;left:50%;bottom:34px;transform:translateX(-50%) translateY(20px);background:var(--panel2);border:1px solid var(--line2);color:var(--txt);padding:10px 22px;border-radius:10px;font-size:13.5px;font-weight:600;opacity:0;pointer-events:none;transition:all .3s;z-index:80;box-shadow:var(--shadow)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ============ 响应式 ============ */
+@media (max-width:720px){
+  body{font-size:14px}
+  .topbar{padding:10px 12px}
+  .score-chip{padding:5px 11px;font-size:12.5px}
+  .stage-map{padding:12px 12px 10px}
+  .stage-row{flex-wrap:wrap;gap:12px}
+  .stage-col{flex:1 1 46%;min-width:150px}
+  .sc-body{padding:16px 14px}
+  .sc-head{padding:13px 14px}
+  .answer-row{flex-direction:column;align-items:stretch}
+  .btn-submit{width:100%}
+  .modal{padding:0}
+  .report-table{font-size:11.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ 封面 ============ -->
+  <section id="screen-cover">
+    <img class="cover-hero" src="assets/hero.png" alt="">
+    <div class="cover-body">
+      <div class="cover-kicker">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        信息安全测评与风险评估 · 实战闯关
+      </div>
+      <h1 class="cover-title">测评指挥官<span class="hl">·</span>项目经理实战</h1>
+      <p class="cover-sub">从接收测评任务，到交付测评报告 —— 二十关带你走完等保测评全流程</p>
+      <div class="cover-mission">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z"/></svg>
+          任务简报
+        </h3>
+        <p>你刚刚入职XX信息安全测评中心，被任命为项目经理，独立带队完成「XX市政务服务中心综合管理平台」的等保测评任务。系统承载全市约200个政务窗口、日均服务群众约5000人次，含大量公民个人敏感信息，定级为<b style="color:#F5B93E">第三级（S3A3）</b>。</p>
+        <p style="margin-top:8px">从接单、组建团队、编制方案，到现场测评、编制报告——每一步都要你亲手作答，系统即时点评。定级环节是重中之重，将引导你一步步完成 S/A 判定与取高定级。</p>
+      </div>
+      <div class="cover-actions">
+        <button class="btn-primary" id="btnStart">开始任务</button>
+        <button class="btn-ghost" id="btnHow">玩法说明</button>
+      </div>
+      <div class="cover-help hidden" id="coverHelp">
+        <ul>
+          <li><b>第一关起</b>：每一关会给出【情景】与【任务】，你需要手动输入答案并提交；</li>
+          <li><b>即时点评</b>：系统按关键词与关键数字评分（1~3星），并给出标准答案与知识点讲解；</li>
+          <li><b>定级攻坚</b>：第6~9关围绕 S/A 两要素与「取高者」原则重点引导，答错会获得针对性纠错；</li>
+          <li><b>工具包</b>：右下角按钮可随时打开五级概览、S/A矩阵、六要素口诀等参考资料；</li>
+          <li><b>通关结算</b>：完成全部20关后，系统汇总你的全部答案生成《测评报告》与项目经理评级。</li>
+        </ul>
+      </div>
+      <p class="cover-foot">参考课件：任务1.1 等保2.0标准体系 · 1.2 安全等级识别 · 2.1 测评方案结构 · 2.2 编制完整测评方案　|　授课教师：张玉</p>
+    </div>
+  </section>
+
+  <!-- ============ 游戏主界面 ============ -->
+  <section id="screen-game" class="hidden">
+    <header class="topbar">
+      <div class="proj">
+        <div class="proj-ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+        </div>
+        <div class="proj-name">政务服务中心综合管理平台<small>等保测评项目 · 第三级 S3A3</small></div>
+      </div>
+      <div class="spacer"></div>
+      <span class="stage-chip" id="stageChip"></span>
+      <div class="score-box">
+        <div class="score-chip">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+          <span id="scoreVal">0</span><small>/ 200</small>
+        </div>
+        <button class="btn-reset" id="btnReset">重新挑战</button>
+      </div>
+    </header>
+
+    <div class="stage-map">
+      <div class="stage-title">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        项目进度 <span class="st-prog" id="stageProg">关卡 1 / 20</span>
+      </div>
+      <div class="stage-row" id="stageRow"></div>
+    </div>
+
+    <main class="step-area">
+      <div class="step-card" id="stepCard">
+        <div class="sc-head">
+          <div class="sc-num" id="scNum">1</div>
+          <div class="sc-tags"><span class="tag" id="scStage"></span></div>
+          <div class="sc-title" id="scTitle"></div>
+        </div>
+        <div class="sc-body">
+          <div class="scene-box">
+            <div class="lb">情 景</div>
+            <p id="scScene"></p>
+          </div>
+          <div class="task-box">
+            <div class="lb">任 务</div>
+            <p id="scTask"></p>
+            <button class="btn-hint" id="btnHint">需要提示</button>
+            <div class="hint-text" id="hintText"></div>
+          </div>
+          <div class="answer-row">
+            <textarea id="answerInput" placeholder="在这里输入你的答案，例如：先确认项目基本信息……"></textarea>
+            <button class="btn-submit" id="btnSubmit">提交作答</button>
+          </div>
+          <div id="feedbackSlot"></div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <!-- ============ 复盘弹层 ============ -->
+  <div class="modal-mask hidden" id="reviewMask">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>关卡复盘</h3>
+        <button class="btn-close" data-close="reviewMask">×</button>
+      </div>
+      <div class="modal-body" id="reviewBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ 结算报告弹层 ============ -->
+  <div class="modal-mask hidden" id="reportMask">
+    <div class="modal">
+      <div class="modal-head">
+        <h3>测评项目交付报告</h3>
+        <button class="btn-close" data-close="reportMask">×</button>
+      </div>
+      <div class="modal-body" id="reportBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ 工具包 ============ -->
+  <button class="toolkit-toggle" id="toolkitToggle">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    项目经理工具包
+  </button>
+  <aside class="toolkit hidden" id="toolkit">
+    <div class="tk-head">
+      <h3>项目经理工具包</h3>
+      <button class="btn-close" id="toolkitClose">×</button>
+    </div>
+    <div class="tk-card">
+      <h4>① 五级安全等级概览</h4>
+      <table class="tk-table">
+        <tr><th>等级</th><th>名称</th><th>典型系统</th><th>测评频次</th></tr>
+        <tr><td>一级</td><td>用户自主保护级</td><td>乡镇级/中小企业</td><td>无需强制测评</td></tr>
+        <tr><td>二级</td><td>系统审计保护级</td><td>县级政务、高校、一般企业</td><td>每两年至少一次</td></tr>
+        <tr><td>三级</td><td>安全标记保护级</td><td>地市级政务、金融机构</td><td>每年至少一次</td></tr>
+        <tr><td>四级</td><td>结构化保护级</td><td>国家重要领域核心系统</td><td>强制保护</td></tr>
+        <tr><td>五级</td><td>访问验证保护级</td><td>国防/军事极端重要系统</td><td>专控保护</td></tr>
+      </table>
+    </div>
+    <div class="tk-card">
+      <h4>② S / A 判定矩阵</h4>
+      <table class="tk-table">
+        <tr><th>等级</th><th>S 业务信息安全（数据出事）</th><th>A 系统服务安全（服务中断）</th></tr>
+        <tr><td>二级</td><td>损害公民/法人权益</td><td>严重损害公民权益或损害社会秩序</td></tr>
+        <tr><td>三级</td><td>严重损害社会秩序/公共利益</td><td>严重损害社会秩序或损害国家安全</td></tr>
+        <tr><td>四级</td><td>特别严重损害社会秩序/公共利益</td><td>特别严重损害社会秩序或严重损害国家安全</td></tr>
+      </table>
+      <p class="tk-motto">S 看数据 · A 看服务 · 最终等级 = max(S, A)</p>
+    </div>
+    <div class="tk-card">
+      <h4>③ 定级口诀与流程</h4>
+      <p>「先定对象 · 再评 S/A · 取高者 · 专家审 · 报备案」</p>
+      <p style="margin-top:6px">依据 GB/T 22240《定级指南》。二级及以上须向公安机关备案，取得《备案证明》后才能开展等级测评。业务或 S/A 变化时须重新定级。</p>
+    </div>
+    <div class="tk-card">
+      <h4>④ 方案六要素口诀</h4>
+      <p>「一项依据两范围，三对对象四指标，五定方法六日程」</p>
+      <p style="margin-top:6px">六要素：项目概述 / 测评范围 / 测评对象 / 测评指标 / 测评方法 / 日程与人员。完整方案共9章：封面、目录、项目概述、测评依据、测评范围、测评对象、测评指标、测评方法、日程安排、人员分工、风险控制与附件。</p>
+    </div>
+    <div class="tk-card">
+      <h4>⑤ 高频丢分点</h4>
+      <ul>
+        <li>混淆 S 与 A —— S 看数据出事，A 看服务中断；</li>
+        <li>忘记「取高者」—— 最终等级 = max(S, A)；</li>
+        <li>测评依据只写「等保标准」，不写编号（须写 GB/T 22239-2019 等）；</li>
+        <li>对象清单用「若干」「一些」—— 必须具体到型号与台数；</li>
+        <li>认为一级系统也要强制测评（一级无需强制测评）；</li>
+        <li>定级对象写成某台服务器（应是承载独立业务的信息系统）。</li>
+      </ul>
+    </div>
+    <div class="tk-card">
+      <h4>⑥ 本项目速览</h4>
+      <ul>
+        <li>系统：政务服务中心综合管理平台，第三级（S3A3）；</li>
+        <li>功能：政务服务门户、事项管理、预约排号、排队叫号、综合评价、数据统计；</li>
+        <li>规模：约200个窗口、日均5000人次；</li>
+        <li>数据：公民身份信息、联系方式、办事记录等敏感信息；</li>
+        <li>测评依据：GB/T 22239-2019、GB/T 28448-2019、GB/T 28449-2018。</li>
+      </ul>
+    </div>
+  </aside>
+
+  <div id="toast"></div>
+</div>
+
+<script>
+// ============ 阶段定义 ============
+const STAGES = [
+  { name:"测评准备", color:"#4CC3FF" },
+  { name:"方案编制 · 定级攻坚", color:"#F5B93E" },
+  { name:"现场测评", color:"#A78BFA" },
+  { name:"报告编制与交付", color:"#3DDC97" }
+];
+
+// ============ 关卡数据 ============
+const STEPS = [
+{
+  id:"s0", stage:0, title:"第一步：读懂任务书",
+  scene:"周一早 8:30，你刚入职 XX 信息安全测评中心，邮箱弹出新任务：「XX市政务服务中心综合管理平台」等保测评项目已立项，任命你为项目经理。客户发来了《项目委托书》与《系统情况说明》：系统承载统一政务服务门户、事项管理、预约排号、排队叫号、综合评价、数据统计六大模块，约 200 个窗口、日均接待群众约 5000 人次，含公民身份信息、联系方式、办事记录等个人敏感信息。",
+  task:"作为项目经理，你拿到任务书后的第一步应该做什么？",
+  hint:"别急着订车票去现场。先做信息层面的功课——想一想：没有基本信息，后面怎么编制方案？",
+  expect:"确认项目基本信息（项目名称、委托单位、被测系统、安全保护等级、测评依据），并与客户沟通确认测评范围。",
+  groups:[["项目信息","委托单位","被测系统","基本信息","安全等级"],["范围","需求","沟通","对接","确认"],["保密协议","保密"]],
+  good:"优秀！项目经理接单第一步就是「读懂任务书」——确认项目名称、委托单位、被测系统、安全保护等级、测评依据这些基本信息，并与客户确认测评范围。信息不清就进场，是项目事故的开始。",
+  mid:"方向对了。除了你已经想到的，还要记得：接单后应先把项目基本信息确认清楚（名称、委托单位、被测系统、安全等级、测评依据），并与客户沟通明确测评范围，再谈后续动作。",
+  poor:"还差一点。想一想：没有信息的方案寸步难行。第一步应当是「读懂任务书」——确认项目基本信息（项目名称、委托单位、被测系统、安全保护等级、测评依据），并与客户沟通确认范围。",
+  teach:"接单清单：①项目名称 ②委托单位 ③被测系统名称 ④安全保护等级 ⑤测评依据（国标编号）⑥测评范围。确认清楚后才进入测评准备阶段：组建团队、签署保密协议、收集资料、准备工具。",
+  base:10, custom:null
+},
+{
+  id:"s1", stage:0, title:"测评依据：写出国标编号",
+  scene:"项目启动会上，客户信息安全负责人提问：「你们测评到底依据什么标准？拿什么来判定我们合不合规？」",
+  task:"请写出等保测评必须依据的两个核心国标编号。",
+  hint:"一个规定系统「应该做到什么」，一个规定测评「应该怎么测」。",
+  expect:"GB/T 22239-2019《网络安全等级保护基本要求》+ GB/T 28448-2019《测评要求》（还可补充 GB/T 28449 过程指南、GB/T 22240 定级指南）。",
+  groups:[["22239"],["28448"]],
+  bonus:[["28449"],["22240"]],
+  good:"完全正确！GB/T 22239-2019《网络安全等级保护基本要求》规定系统「应该做到什么」，是测评达标的根本依据；GB/T 28448-2019《测评要求》规定「怎么测」。两者是等保测评的两根支柱。",
+  mid:"基本正确。注意：测评依据必须写「标准编号 + 名称」，如 GB/T 22239-2019《信息安全技术 网络安全等级保护基本要求》、GB/T 28448-2019《测评要求》——不能只写「依据等保标准」，这是方案编制的高频扣分点。",
+  poor:"再想想。核心依据是两个国标：GB/T 22239-2019（基本要求，规定系统应做到什么）和 GB/T 28448-2019（测评要求，规定怎么测）；方案中还要补充 GB/T 28449-2018（过程指南）等。",
+  teach:"「1+N」标准体系：1 个核心 GB/T 22239-2019 + 4 个配套（GB/T 28448 测评要求、GB/T 28449 过程指南、GB/T 25070 设计要求、GB/T 36958 管理中心）+ 5 大扩展（云计算、移动互联、物联网、工业控制、大数据）。测评方案第二章「测评依据」必须逐条列明编号与名称。",
+  base:10, custom:null
+},
+{
+  id:"s2", stage:0, title:"组建项目团队",
+  scene:"项目立项完成，你需要组建项目组。机构里可调配的测评工程师：小王（网络方向）、小李（主机/数据库方向）、小赵（应用与漏洞测试）、小刘（安全管理方向），另有高级工程师老张可以压阵。",
+  task:"请列出：一个完整的测评项目组至少需要哪些角色？把你能想到的都写出来。",
+  hint:"想想方案六要素里「日程与人员」一章——项目经理之下，需要几组人、各管什么？",
+  expect:"项目经理（总体统筹）+ 技术组（物理/网络/安全设备/主机/数据库/应用）+ 管理组（制度/机构/人员/建设/运维）+ 测试组（漏洞扫描/配置核查）。",
+  groups:[["项目经理","项目总监","组长"],["网络","主机","数据库","应用"],["安全管理","制度","管理"],["测试","漏洞扫描","扫描"]],
+  good:"团队架构清晰！标准配置：项目总监（质量把关）+ 项目经理（总体协调、进度、质量）+ 技术组（物理/网络/安全设备/主机/数据库/应用）+ 管理组（制度/机构/人员/建设/运维）+ 测试组（漏洞扫描/配置核查）。角色齐了，分工才能到人。",
+  mid:"已经有雏形。记住一个原则：测评团队要「职责到人、分工明确」——至少包含项目经理、技术测评工程师（网络/主机/应用方向）与管理测评工程师（制度/人员方向），必要时设测试组负责漏洞扫描。",
+  poor:"别小看团队搭建——没有分工的测评，现场就会手忙脚乱。至少需要：项目经理（统筹）+ 技术组（网络/主机/应用）+ 管理组（制度/人员）+ 测试组（漏洞扫描）。",
+  teach:"参考分工：A 组技术（物理环境、网络设备、安全设备、主机、数据库、应用），B 组管理（管理制度、机构、人员、建设、运维），C 组测试（漏洞扫描、配置核查、结果分析），由项目总监与项目经理统筹。人员分工是测评方案第 8 章的内容。",
+  base:10, custom:null
+},
+{
+  id:"s3", stage:0, title:"进场前的合规准备",
+  scene:"团队组建完毕。机构质管部发来开工前检查单：「不完成合规准备，任何人不得进场作业。」",
+  task:"进场测评前，必须完成哪些准备事项？（至少写出 3 项）",
+  hint:"想想「授权」和「保密」——安全行业的第一课是什么？数据要留什么后手？",
+  expect:"①签署保密协议 ②明确授权范围（只测授权系统）③收集系统资料（拓扑图、资产清单、管理制度）④准备测评工具（扫描器、配置核查工具）⑤方案评审通过。",
+  groups:[["保密协议","保密"],["授权","委托","范围"],["资料","拓扑","资产"],["工具","准备"],["备份","方案","评审"]],
+  good:"很专业！进场前合规准备：①签署保密协议（对客户数据负责）②确认授权范围（只测授权系统，超范围即违规）③收集系统资料（拓扑图、资产清单、管理制度）④准备测评工具（扫描器、配置核查工具）⑤方案经机构评审通过后方可实施。",
+  mid:"提到了关键项。再补全：签保密协议、明确授权范围、收集系统资料与资产清单、准备工具，且测评方案应经过评审后才可实施。",
+  poor:"想一想：测评机构接触的是客户的敏感数据和核心系统。进场前必须：①签保密协议 ②明确授权范围 ③收集资料（拓扑/资产清单）④准备工具 ⑤方案评审。",
+  teach:"合规底线：依法测评（《网络安全法》《数据安全法》《个人信息保护法》+ 国标）、客户至上（授权范围内、窗口期内作业）、严谨细致（不模糊表述、不杜撰数据）。保密是测评的命脉，数据要留后手。",
+  base:10, custom:null
+},
+{
+  id:"s4", stage:1, title:"方案第一步 = 定级第一步",
+  scene:"准备工作就绪，进入方案编制阶段。客户提交了《定级报告》（初稿），但「安全保护等级」一栏还空着——定级结论需要你们协助确认，方案才能往下写。",
+  task:"编制测评方案的第一步是什么？同时，定级工作的第一步又是什么？",
+  hint:"2.2 讲了「方案编制六步法」，1.2 讲了定级口诀。两个「第一步」指向同一个东西。",
+  expect:"方案编制第一步 = 解读定级报告；定级第一步 = 确定定级对象。",
+  groups:[["定级报告","解读","阅读"],["定级对象","对象"]],
+  good:"一箭双雕！方案编制六步法的第一步是「解读定级报告」（了解系统名称、安全等级、业务描述）；而定级工作的第一步是「确定定级对象」。两者都指向同一个起点——先搞清楚「测/定的是什么」。",
+  mid:"思路对了一半。补充：方案编制第一步 = 解读定级报告；定级第一步 = 确定定级对象。定级对象是「承载独立业务的信息系统」，不是某台服务器。",
+  poor:"回到 1.2 和 2.2：方案编制六步法第一步是「解读定级报告」；定级第一步是「确定定级对象」——这是整条测评链的起点，也是最关键的一步。",
+  teach:"定级口诀：「先定对象 · 再评 S/A · 取高者 · 专家审 · 报备案」。本项目定级对象 = XX市政务服务中心综合管理平台（承载独立政务业务的信息系统，而非某一台服务器）。",
+  base:10, custom:null
+},
+{
+  id:"s5", stage:1, title:"定级三要素",
+  scene:"定级要严格按 GB/T 22240《定级指南》操作。质检部给你发来一张「定级三要素」检查单，要求你先默写出来再开工。",
+  task:"定级的三要素是什么？S 和 A 分别代表什么、各自看什么？",
+  hint:"口诀：「先定对象，再评 S/A」——S 看数据，A 看服务。",
+  expect:"三要素：①定级对象 ②业务信息安全等级 S（数据被泄露/篡改/破坏后的受害程度）③系统服务安全等级 A（服务中断或能力下降的受害范围）。",
+  groups:[["定级对象"],["业务信息安全","S"],["系统服务安全","A"]],
+  good:"完美！三要素：①定级对象；②业务信息安全等级 S——数据被泄露/篡改/破坏后的受害程度（S 看数据）；③系统服务安全等级 A——服务中断或能力下降的受害范围（A 看服务）。",
+  mid:"基本正确。把 S/A 的含义再精确一点：S = 业务信息安全，看「数据出事」的后果；A = 系统服务安全，看「服务中断」的后果。",
+  poor:"记住口诀「先定对象 · 再评 S/A · 取高者」：三要素 = 定级对象 + 业务信息安全等级 S + 系统服务安全等级 A。S 看数据、A 看服务，千万别张冠李戴——这是高频丢分点。",
+  teach:"S、A 各自按 GB/T 22240 分 1～5 级。最终等级 = max(S, A)，即「取高者」原则。这是定级中最核心、也最容易出错的规则，下一关开始实战演练。",
+  base:10, custom:null
+},
+{
+  id:"s6", stage:1, title:"评定业务信息安全等级 S",
+  scene:"【系统情况】本系统承载统一政务服务门户、事项管理、预约排号、排队叫号、综合评价、数据统计六大模块；约 200 个窗口、日均接待群众约 5000 人次；系统存储公民身份信息、联系方式、办事记录等大量个人敏感信息。",
+  task:"请评定该系统的业务信息安全等级 S（1~5 级），并说明理由。例如：S=3，因为……",
+  hint:"S 看「数据」——数据被泄露/篡改/破坏后，受害程度有多大？对照工具包②的 S 判定矩阵。",
+  expect:"S=3。理由：系统存储大量公民个人敏感信息，数据一旦泄露、篡改将严重损害社会秩序/公共利益（对应三级 S 判定）。",
+  groups:[["公民","个人","敏感","身份","信息"],["严重","公共利益","社会秩序","大量","全市"]],
+  good:"S=3 判定正确，理由也扎实！系统存储大量公民敏感信息，数据一旦被泄露、篡改、破坏，受害面覆盖全市群众，属于「严重损害社会秩序/公共利益」，对应三级 S 判定。",
+  mid:"等级判对了（S=3），但理由还可以更规范。规范表述：按 GB/T 22240，S 看数据出事的受害程度——本系统存有大量公民个人敏感信息，泄露/篡改将严重损害公共利益，故 S=3。",
+  poor:"等级偏了。对照工具包②矩阵：S=3 对应「严重损害社会秩序/公共利益」。本系统存储全市大量公民敏感信息，一旦泄露、篡改将严重损害公共利益——不是「损害公民/法人权益」的二级程度，应评为 S=3。",
+  teach:"S 判定思路：先看「数据」（不是服务）→ 再看受害程度 → 对照矩阵定级。仅损害公民/法人权益 → S=2；严重损害社会秩序/公共利益 → S=3；特别严重 → S=4。本系统含大量敏感个人信息与政务数据，故 S=3。",
+  base:10, custom:"S", expectedLevel:3
+},
+{
+  id:"s7", stage:1, title:"评定系统服务安全等级 A",
+  scene:"【继续评估】本系统支撑全市约 200 个政务服务窗口，日均服务群众约 5000 人次，是 XX 市政务服务「一网通办」的核心支撑系统。",
+  task:"请评定系统服务安全等级 A（1~5 级），并说明理由。例如：A=3，因为……",
+  hint:"A 看「服务」——服务中断/能力下降，受害范围有多大？对照工具包②的 A 判定矩阵。",
+  expect:"A=3。理由：政务服务一旦中断，将影响全市群众办事，属于「严重损害社会秩序」，对应三级 A 判定。",
+  groups:[["中断","停摆","无法办理","宕机","瘫痪"],["严重","社会秩序","政务","全市","窗口","群众"]],
+  good:"A=3 判定正确，理由到位！政务服务中断将影响全市约 200 个窗口、5000 人次的日常办事，属于「严重损害社会秩序」，对应三级 A 判定。",
+  mid:"等级判对了（A=3），理由再规范一点：按 GB/T 22240，A 看服务中断的受害范围——政务服务中断影响全市群众办事，属于严重损害社会秩序，故 A=3。",
+  poor:"等级偏了。对照矩阵：A=3 对应「严重损害社会秩序或损害国家安全」。本系统是全市政务「一网通办」的核心支撑，服务中断将导致全市窗口停摆、群众无法办事——应评为 A=3，而不是更低的等级。",
+  teach:"A 判定思路：先看「服务」（不是数据）→ 再看中断后的影响范围 → 对照矩阵定级。严重损害公民权益或损害社会秩序 → A=2；严重损害社会秩序 → A=3；特别严重损害社会秩序或严重损害国家安全 → A=4。本系统服务中断影响全市政务运转，故 A=3。",
+  base:10, custom:"A", expectedLevel:3
+},
+{
+  id:"s8", stage:1, title:"取高者：确定最终等级",
+  scene:"你已完成两步评定：业务信息安全等级 S=3，系统服务安全等级 A=3。现在要把定级结论正式写入《定级报告》。",
+  task:"请按「取高者」原则给出最终安全保护等级（按 S?A? 的格式写），并说明定级依据的标准。",
+  hint:"最终等级 = max(S, A)；定级依据的国标编号是 22240。",
+  expect:"第三级（S3A3），依据 GB/T 22240《信息安全技术 信息系统安全等级保护定级指南》；最终等级 = max(S,A) = max(3,3) = 3。",
+  groups:[["22240","定级指南"],["max","取高","较高","取较大"],["S3A3","三级","第三级"]],
+  good:"定级结论完全正确：第三级（S3A3），依据 GB/T 22240《定级指南》。最终等级 = max(S, A) = max(3, 3) = 3。写清 S/A 取值和依据标准，评审专家一眼就能看懂你的定级逻辑。",
+  mid:"等级对了（第三级），但还差两处：①按 S?A? 格式写明 S3A3；②说明定级依据是 GB/T 22240《定级指南》。这两处正是「只写等级不写依据」的高频扣分点。",
+  poor:"别急着交卷。最终等级 = max(S, A)（取高者）——本题 S=3、A=3，取高后应为第三级（S3A3）。同时必须写明依据：GB/T 22240《信息安全技术 信息系统安全等级保护定级指南》。",
+  teach:"「取高者」的意义在于防止低配防护：把三级定为二级，等于对国家关键系统「降级保护」，可能造成重大损失——「定级错一寸，防护偏一丈」。定级结果将直接决定后续建设、测评、监管的强度。",
+  base:10, custom:"LEVEL", expectedLevel:3
+},
+{
+  id:"s9", stage:1, title:"定级后的法定流程",
+  scene:"定级结论「第三级（S3A3）」初稿已出，客户负责人问：「等级定出来了，接下来还要走什么流程？什么时候才能正式开始测评？」",
+  task:"定出等级后，还必须完成哪些环节，才能正式开展等级测评？（至少写出 2 个环节）",
+  hint:"口诀的后半句：「…专家审 · 报备案」。",
+  expect:"专家评审 → 主管部门审批 → 公安机关备案（二级及以上，取得《备案证明》），备案后方可开展等级测评。",
+  groups:[["专家评审","专家"],["审批","主管部门"],["备案","公安机关","备案证明"]],
+  good:"完全正确！定级闭环：确定对象 → 评 S → 评 A → 取高者 → 专家评审 → 主管部门审批 → 公安机关备案（二级及以上须备案，取得《备案证明》）。备案是开展等级测评的前提！",
+  mid:"方向正确。补充完整：定级结果须经专家评审、主管部门审批，二级及以上向公安机关备案并取得《备案证明》，之后才能进入建设整改与等级测评环节。",
+  poor:"记住定级口诀的结尾：「专家审 · 报备案」。定级结果须经专家评审、主管部门审批，二级及以上向公安机关备案取得《备案证明》，才能正式开展等级测评。",
+  teach:"等保五步走闭环：定级 → 备案 → 建设整改 → 等级测评 → 监督检查。本课程训练的就是第 4 步「等级测评」；而第 1 步「定级」是它成立的前提。业务或 S/A 变化时须重新定级，不能一劳永逸。",
+  base:10, custom:null
+},
+{
+  id:"s10", stage:1, title:"方案六要素",
+  scene:"定级尘埃落定（第三级 S3A3）。现在正式编制《测评方案》。机构模板首页印着一句话：方案是测评工作的「施工蓝图」，并附上了核心框架口诀。",
+  task:"一份完整的等保测评方案包含哪六个核心要素？请默写出来。",
+  hint:"口诀：「一项依据两范围，三对对象四指标，五定方法六日程」。",
+  expect:"①项目概述 ②测评范围 ③测评对象 ④测评指标 ⑤测评方法 ⑥日程与人员。",
+  groups:[["项目概述","概述"],["测评范围","范围"],["测评对象","对象"],["测评指标","指标"],["测评方法","方法"],["日程","人员"]],
+  good:"六要素全中！①项目概述（背景、目的、依据）②测评范围（物理/网络/边界）③测评对象（设备/系统/人员/文档清单）④测评指标（对照 GB/T 22239 条款）⑤测评方法（访谈/核查/测试）⑥日程与人员。",
+  mid:"基本齐全。对照口诀自查：「一项依据两范围，三对对象四指标，五定方法六日程」——六要素 = 项目概述、测评范围、测评对象、测评指标、测评方法、日程与人员。",
+  poor:"用口诀背：「一项依据两范围，三对对象四指标，五定方法六日程」。六要素：项目概述、测评范围、测评对象、测评指标、测评方法、日程与人员。",
+  teach:"完整方案共 9 章：封面 / 目录 / 第1章 项目概述 / 第2章 测评依据 / 第3章 测评范围 / 第4章 测评对象 / 第5章 测评指标 / 第6章 测评方法 / 第7章 日程安排 / 第8章 人员分工 / 第9章 风险控制 + 附件。没有方案就去现场，等于没有图纸就盖房子。",
+  base:10, custom:null
+},
+{
+  id:"s11", stage:1, title:"界定测评范围",
+  scene:"【系统架构】本系统部署于 XX 市政务服务中心数据中心机房（主楼 5 楼），网络划分为四个区域：互联网边界区、核心交换区、服务器区、管理区；数据流从互联网入口经边界防火墙、核心交换机，到达 Web / 应用 / 数据库服务器。",
+  task:"本系统的测评范围应从哪三个维度来界定？请写出来。",
+  hint:"复习 2.1「要素二：测评范围」——三个维度，一个讲位置、一个讲区域、一个讲起点终点。",
+  expect:"①物理位置（数据中心机房主楼5楼）②网络区域（互联网边界区/核心交换区/服务器区/管理区）③系统边界（从互联网入口到数据库的全链路）。",
+  groups:[["物理","位置","机房"],["网络","区域"],["边界"]],
+  good:"范围界定清晰！三个维度：①物理位置（数据中心机房主楼 5 楼）②网络区域（互联网边界区/核心交换区/服务器区/管理区）③系统边界（从互联网入口到数据库的全链路）。边界清晰才能避免漏测与超范围测。",
+  mid:"基本正确。补充：测评范围三要素 = 物理位置、网络区域、系统边界。本系统 = 机房 5 楼 + 四大网络区域 + 互联网入口到数据库全链路。",
+  poor:"要素二「测评范围」三要素：物理位置（在哪里）、网络区域（哪些区）、系统边界（从哪到哪）。本系统 = 机房 5 楼 + 四大网络区域 + 互联网入口到数据库全链路。",
+  teach:"范围三原则：「应测尽测」（核心业务全纳入）、「边界清晰」（明确在/不在范围内，避免争议）、「合理裁剪」（不涉及领域可裁剪但须说明理由）。",
+  base:10, custom:null
+},
+{
+  id:"s12", stage:1, title:"选取测评对象",
+  scene:"【设备清单】边界防火墙 1 台、核心交换机 2 台（堆叠）、Web 服务器 3 台（同配置同应用）、应用服务器 2 台、数据库服务器 2 台（同配置）、堡垒机 1 台、日志审计系统 1 台、WAF 1 台、办公终端 50 台、打印机 10 台。",
+  task:"①测评对象选取的四大原则是什么？②Web 服务器 3 台应如何处理（抽几台、比例多少、为什么）？",
+  hint:"复习 2.1「要素三」四大原则；同质化设备抽样比例不低于多少？",
+  expect:"四大原则：应测尽测、关键性、代表性、抽样（同质化设备抽样不低于30%）。Web服务器3台→抽2台（66%），代表性抽样。",
+  groups:[["应测尽测"],["关键","核心","重要"],["代表"],["抽样","30%"],["2台","66%","两台"]],
+  good:"非常专业！四大原则：应测尽测、关键性、代表性、抽样（不低于 30%）。Web 服务器 3 台同质化 → 抽 2 台（66% > 30%）；数据库 2 台 → 抽 1 台（50%）；核心设备（防火墙/核心交换机/堡垒机/日志审计/WAF）100% 纳入；办公终端、打印机不纳入。",
+  mid:"原则方向对了。再精确：四大原则 = 应测尽测、关键性、代表性、抽样（≥30%）。本系统 Web 服务器 3 台 → 抽 2 台（66%），符合「同质化设备抽样不低于 30%」。",
+  poor:"复习 2.1 要素三：①应测尽测 ②关键性（核心设备必测）③代表性 ④抽样（同质化设备抽样 ≥30%）。本项目 Web 服务器 3 台同配置，抽 2 台（66%）即可代表整体。",
+  teach:"判定示范：核心交换机（网络核心）100%；数据库服务器（数据核心）100%；Web 服务器同质化抽 2 台（66%）；办公终端/打印机非核心不纳入。清单必须具体到「型号 + 台数」，禁止「若干」「一些」等模糊表述。",
+  base:10, custom:null
+},
+{
+  id:"s13", stage:1, title:"测评指标与裁剪",
+  scene:"打开 GB/T 22239-2019 三级「安全计算环境」章节：共 11 个子类、34 项要求。其中「可信验证」要求项，本系统未部署可信计算模块。",
+  task:"①测评指标从哪里来？②遇到不适用的指标，应该怎么处理（处理方式与要求）？",
+  hint:"指标是「按什么标准来检查」？不适用项能直接删掉吗？",
+  expect:"指标来源于 GB/T 22239 对应等级的安全通用要求项；逐条对照判定适用/不适用；不适用项可裁剪但必须逐条说明理由，禁止随意裁剪核心指标。",
+  groups:[["22239","标准","要求"],["适用","对照","逐条"],["不适用","裁剪"],["理由","说明"]],
+  good:"完全正确！测评指标直接来源于 GB/T 22239 对应等级的安全通用要求；对每个要求项逐条对照判定「适用/不适用」，不适用项可裁剪，但必须逐条说明具体理由。本系统 34 项中 33 项适用、1 项不适用（可信验证——未部署可信计算模块）。",
+  mid:"基本正确。补充关键约束：指标 = GB/T 22239 对应等级要求项；不适用项裁剪必须「逐条说明理由」，禁止随意裁剪核心指标。",
+  poor:"记住：测评指标 = 按 GB/T 22239 对应等级逐条对照选取；不适用项可以裁剪（如系统无无线网络，则不测「无线接入控制」），但必须逐条说明不适用理由，禁止随意裁剪核心指标。",
+  teach:"本系统三级安全计算环境：34 项要求，33 项适用，1 项不适用（可信验证）。裁剪三情形：①系统不涉及该技术领域 ②不存在该物理设施 ③不处理该类数据。理由须具体、有说服力。",
+  base:10, custom:null
+},
+{
+  id:"s14", stage:1, title:"测评方法：三种基本方法",
+  scene:"方案写到「测评方法」一章，需要说明：本项目将采用哪些方法完成测评。",
+  task:"等保测评的三种基本方法是什么？分别适用于什么场景？",
+  hint:"一个问人、一个看物、一个动手测。",
+  expect:"①访谈（与管理人员/运维人员交流，了解制度执行与人员配置）②核查（上机查看配置、查阅文档、实地检查）③测试（漏洞扫描、配置核查、功能验证）。",
+  groups:[["访谈"],["核查","查看","文档"],["测试","扫描","验证"]],
+  good:"三种方法全对！①访谈：与管理人员/运维人员面对面交流（制度执行、人员配置）②核查：上机查看配置、查阅文档、实地检查（技术配置、制度文档）③测试：用工具漏洞扫描、配置核查（脆弱性发现）。",
+  mid:"基本正确。规范表述：访谈（问人）、核查（看配置/查文档）、测试（用工具验证，如 Nessus 漏洞扫描、基线核查）。",
+  poor:"三种方法：访谈（与管理员交流）、核查（上机看配置、查文档）、测试（漏洞扫描/配置核查/功能验证）。示例：查密码策略——访谈问管理员，核查看 /etc/login.defs，测试用扫描工具。",
+  teach:"方法对应性：管理类 → 访谈 + 文档核查；技术类 → 核查 + 测试。工具示例：Nessus/OpenVAS 漏洞扫描、配置核查工具基线核查。本方案第 6 章三种方法均须说明对象与工具。",
+  base:10, custom:null
+},
+{
+  id:"s15", stage:2, title:"技术测评：五个层面",
+  scene:"方案评审通过，现场测评开始。A 组（技术组）进场，你需要在开工会上明确技术测评的覆盖范围。",
+  task:"等级测评中的「技术测评」覆盖哪几个安全层面？（共 5 个）",
+  hint:"从「物理环境」一路到「管理中心」，顺着系统架构想。",
+  expect:"安全物理环境、安全通信网络、安全区域边界、安全计算环境、安全管理中心。",
+  groups:[["物理"],["通信网络","网络"],["区域边界","边界"],["计算环境","主机","应用"],["管理中心","管理"]],
+  good:"技术五层面全对！安全物理环境、安全通信网络、安全区域边界、安全计算环境、安全管理中心。再补一层：管理测评 = 安全管理制度、安全管理机构、安全管理人员、安全建设管理、安全运维管理。",
+  mid:"基本正确。技术测评 = 物理环境 / 通信网络 / 区域边界 / 计算环境 / 管理中心；管理测评 = 制度 / 机构 / 人员 / 建设 / 运维。",
+  poor:"技术测评五层面：①安全物理环境（机房）②安全通信网络（网络架构/通信传输）③安全区域边界（边界防护/访问控制）④安全计算环境（主机/应用/数据）⑤安全管理中心（集中管控）。",
+  teach:"等保 2.0 三级安全通用要求共 10 个层面：技术 5 类（物理环境、通信网络、区域边界、计算环境、管理中心）+ 管理 5 类（制度、机构、人员、建设、运维）。本系统还叠加云扩展要求（部署于政务云场景时）。",
+  base:10, custom:null
+},
+{
+  id:"s16", stage:2, title:"现场测评的合规红线",
+  scene:"现场测评第 2 天，你收到一份违规通报：某测评员未经客户同意，在业务高峰期对核心数据库执行配置核查，还试图把客户数据库文件拷贝到个人 U 盘。",
+  task:"作为项目经理，你该如何处置？请写出现场测评必须遵守的合规要求（至少 3 条）。",
+  hint:"想想「授权、窗口期、备份、保密、留痕」这五个词。",
+  expect:"①授权范围内作业，超范围即违规 ②业务低峰期操作 ③配置变更前备份、可恢复 ④严格保密，数据不携带离场、报告脱敏 ⑤操作留日志、可追溯。",
+  groups:[["授权","同意","范围"],["低峰","窗口期","高峰"],["备份","恢复"],["保密","数据","U盘","离场","脱敏"],["日志","记录","留痕"]],
+  good:"处置专业！合规要点：①在授权范围内作业，超范围 = 违规 ②业务低峰期操作，避免影响业务 ③配置变更前先备份、可恢复 ④严格保密，数据不携带离场、报告脱敏 ⑤操作留日志。涉事行为应立即叫停、上报并按机构制度处理。",
+  mid:"方向正确。补全清单：授权范围内作业、业务低峰期操作、变更前备份、数据保密（不出场）、操作留痕可追溯。",
+  poor:"测评不是「想怎么测就怎么测」。至少遵守：授权范围内作业；业务低峰期操作；变更前备份可恢复；保密（不携带数据离场）；操作日志留痕。",
+  teach:"风险控制（方案第 9 章）：业务中断风险 → 低峰期作业；数据泄露风险 → 保密协议 + 数据不出场 + 报告脱敏；设备故障风险 → 操作前备份 + 留日志 + 紧急恢复；进度延误风险 → 提前确认时间 + 每日汇总 + 缓冲时间。",
+  base:10, custom:null
+},
+{
+  id:"s17", stage:3, title:"单项合规性判定",
+  scene:"现场测评结束，进入报告编制阶段。测评员小王交上来的记录表里，每条指标都写着「通过」或「不通过」。",
+  task:"这样的记录规范吗？对每一条测评指标，应该给出哪四种判定结果？",
+  hint:"想想「单项合规性判定」的规范口径——4 种。",
+  expect:"不规范。规范口径：符合 / 不符合 / 部分符合 / 不适用，逐条判定并附证据。",
+  groups:[["符合"],["不符合"],["部分符合"],["不适用"],["规范","口径","四种","证据"]],
+  good:"判断正确！单项判定应为四种：符合、不符合、部分符合、不适用。「通过/不通过」是口语化表达，报告必须使用规范口径。不适用项须对应方案中的裁剪说明（如可信验证）。",
+  mid:"提到了关键项。规范口径：符合 / 不符合 / 部分符合 / 不适用，四种判定，逐条记录、可追溯。",
+  poor:"不规范。单项合规性判定只有四种：符合、不符合、部分符合、不适用。每条指标都要有证据支撑（配置截图、访谈记录、测试报告）。",
+  teach:"报告的最小可追溯单元是「单项判定 + 证据」：每个判定都要有配置核查记录、截图、访谈纪要或扫描报告支撑。「每一个字都要可追溯」——严谨是测评的执业底线。",
+  base:10, custom:null
+},
+{
+  id:"s18", stage:3, title:"形成整体结论",
+  scene:"单项判定汇总完成：安全物理环境 10/10 符合，安全通信网络 2/2 符合，安全区域边界 5/6 符合（1 项不符合：边界防护策略放行过宽），安全计算环境 30/33 符合（3 项不符合），安全管理中心 3/4 符合……",
+  task:"有了所有单项判定后，如何形成测评报告的「整体结论」？请写出思路或步骤。",
+  hint:"从「单项」到「整体」，中间要做什么？直接抄明细是报告大忌。",
+  expect:"①分类统计（每类符合/不符合/部分符合数量与比例）②逐类分析薄弱环节 ③判断系统整体安全保护能力是否达到所定等级（第三级）要求 ④对差距项提出整改建议。",
+  groups:[["统计","汇总","分析","比例"],["整体","保护能力","达到"],["等级","第三级"],["整改","差距","建议"]],
+  good:"思路专业！整体结论 = 先分类统计（每类符合/不符合/部分符合数量与比例）→ 逐类分析薄弱环节 → 判断系统整体安全保护能力是否达到所定等级（第三级）要求 → 对差距项提出整改建议。",
+  mid:"基本正确。补充：整体结论要「先统计、再分析、后下结论」——统计各类符合情况，分析薄弱环节，判断是否达到所定等级要求，并提出整改建议。",
+  poor:"整体结论不是把单项结果抄一遍。步骤：①分类统计（各类符合/不符合/比例）②分析薄弱环节 ③判断整体保护能力是否达到所定等级（第三级）要求 ④列出整改项与建议。",
+  teach:"报告编制四步：单项合规性判定 → 整体结论 → 整改建议 → 审核交付。整改建议要具体可操作（如「收紧边界防火墙入站策略，仅允许指定源 IP 访问管理端口」），禁止「需加强防护」式空话。",
+  base:10, custom:null
+},
+{
+  id:"s19", stage:3, title:"报告交付：最后一公里",
+  scene:"测评报告初稿完成。质检部提醒你：还差「最后一公里」——报告还不能直接发给客户。",
+  task:"测评报告交付前，还必须完成哪些环节？（至少 2 项）并说明一份完整报告应包含哪些核心内容。",
+  hint:"想想 2.2 模板的 9 章结构和「三级审核」——编制、审核、谁批准？",
+  expect:"①报告三级审核（编制→审核→批准）②包含整改建议 ③交付客户 ④归档留存。核心内容：单项判定、整体结论、整改建议。",
+  groups:[["审核","批准","编制"],["整改建议","整改"],["交付","客户","提交"],["归档","存档"]],
+  good:"完美收官！交付前必须：①报告三级审核（编制 → 审核 → 批准）②整改建议写入报告 ③交付客户 ④归档留存。报告核心内容：项目概述、测评依据、范围对象、指标方法、日程人员、风险控制、单项判定、整体结论、整改建议。",
+  mid:"基本正确。补全：交付前要完成报告三级审核（编制-审核-批准），报告包含整改建议，交付客户并归档留存。",
+  poor:"差一步就前功尽弃！交付前：报告三级审核（编制 → 审核 → 批准）→ 交付客户 → 归档。报告须含：单项判定、整体结论、整改建议三大核心内容。",
+  teach:"至此，你完成了「接收任务 → 测评准备 → 方案编制（含定级）→ 现场测评 → 报告编制 → 交付」的完整闭环。等保五步走中，测评机构承担的是第 4 步「等级测评」；而第 1 步「准确定级」是这一切的前提。恭喜你，项目经理！",
+  base:10, custom:null
+}
+];
+
+</script>
+<script>
+// ============ 状态 ============
+let current = 0;
+let score = 0;
+let submitted = false;
+let records = {}; // idx -> {answer, stars, score, verdict, comment, teach, expect}
+const SAVE_KEY = "etcpm-save-v1";
+const $ = id => document.getElementById(id);
+
+// ============ 工具函数 ============
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function starsHtml(n){
+  let h="";
+  for(let i=1;i<=3;i++){ h += i<=n ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>' : '<svg class="off" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>'; }
+  return h;
+}
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2000);}
+function norm(s){return s.toLowerCase();}
+function groupRatio(groups, text){
+  let hit=0;
+  groups.forEach(g=>{ if(g.some(k=>text.includes(k))) hit++; });
+  return groups.length? hit/groups.length : 0;
+}
+const CN={一:1,二:2,三:3,四:4,五:5};
+function parseLevels(t){
+  let s=null,a=null,level=null;
+  const t0=t.replace(/[，。、：:；;　\s]/g,"");
+  const mSA=t0.match(/[sS][=＝]?\s*([1-5])[aA][=＝]?\s*([1-5])/);
+  if(mSA){s=+mSA[1];a=+mSA[2];level=Math.max(s,a);}
+  const mS=t0.match(/[sS][=＝]?\s*([1-5])/);
+  if(mS&&s===null)s=+mS[1];
+  const mA=t0.match(/[aA][=＝]?\s*([1-5])/);
+  if(mA&&a===null)a=+mA[1];
+  const mL=t0.match(/([1-5])\s*级/);
+  if(mL)level=+mL[1];
+  if(level===null&&s===null&&a===null){
+    const mn=t0.match(/(^|[^\d])([1-5])([^\d]|$)/);
+    if(mn)level=+mn[2];
+  }
+  const mcn=t0.match(/[一二三四五]级/);
+  if(mcn&&level===null)level=CN[mcn[0][0]];
+  return {s,a,level};
+}
+function confusionNote(custom, v){
+  if(custom==="S" && /服务|中断|停摆|宕机|瘫痪|无法办理/.test(v) && !/数据|泄露|篡改|破坏|被盗/.test(v)){
+    return "注意：你似乎在用「服务中断」来解释 S —— S 看数据、A 看服务，不要把两个要素搞混。";
+  }
+  if(custom==="A" && /数据|泄露|篡改|破坏|被盗/.test(v) && !/服务|中断|停摆|瘫痪|无法办理|停摆/.test(v)){
+    return "注意：你似乎在用「数据出事」来解释 A —— A 看服务、S 看数据，不要把两个要素搞混。";
+  }
+  return "";
+}
+
+// ============ 评分引擎 ============
+function evaluate(s, v){
+  const text=norm(v);
+  if(s.custom){
+    const p=parseLevels(v);
+    const lv = s.custom==="S" ? (p.s!==null?p.s:p.level) : s.custom==="A" ? (p.a!==null?p.a:p.level) : p.level;
+    const ok = lv===s.expectedLevel;
+    const ratio=groupRatio(s.groups,text);
+    const conf=confusionNote(s.custom,v);
+    let stars,score,verdict,comment;
+    if(lv===null||lv===undefined){
+      stars=1; score=Math.min(10,Math.round(3+3*ratio)); verdict="需要重读判定";
+      comment="没有读到明确的等级数字。请按「S=? 级 / A=? 级 / 第X级（S?A?）」的格式作答，并写出理由。"+(conf?" "+conf:"");
+    }else if(ok&&ratio>=0.6){
+      stars=3; score=Math.min(10,Math.round(6+4*ratio)); verdict="判定优秀"; comment=s.good+(conf?" "+conf:"");
+    }else if(ok){
+      stars=2; score=Math.min(10,Math.round(6+4*ratio)); verdict="判定良好"; comment=s.mid+(conf?" "+conf:"");
+    }else{
+      stars=1; score=Math.min(10,Math.round(3+3*ratio)); verdict="判定有误"; comment=s.poor+(conf?" "+conf:"");
+    }
+    return {stars,score,verdict,comment,teach:s.teach,expect:s.expect};
+  }
+  const ratio=groupRatio(s.groups,text);
+  const stars=ratio>=0.75?3:ratio>=0.5?2:1;
+  let score=Math.round(s.base*ratio);
+  if(s.bonus){
+    const bn=s.bonus.filter(g=>g.some(k=>text.includes(k))).length;
+    score=Math.min(s.base,score+bn);
+  }
+  const verdict=stars===3?"判定优秀":stars===2?"判定良好":"需加强";
+  const comment=stars===3?s.good:stars===2?s.mid:s.poor;
+  return {stars,score,verdict,comment,teach:s.teach,expect:s.expect};
+}
+
+// ============ 渲染 ============
+function currentStage(){return STEPS[current].stage;}
+function renderMap(){
+  const row=$("stageRow"); row.innerHTML="";
+  const cs=currentStage();
+  STAGES.forEach((st,si)=>{
+    const col=document.createElement("div");
+    col.className="stage-col"+(si===cs?" active":"");
+    const steps=STEPS.map((s,i)=>({s,i})).filter(x=>x.s.stage===si);
+    let dots="<div class='steps-dots'>";
+    steps.forEach(({i})=>{
+      let cls="step-dot";
+      if(records[i]){cls+=" done reviewable";}
+      else if(i===current){cls+=" cur";}
+      else if(i>current){cls+=" locked";}
+      dots+=`<div class="${cls}" data-idx="${i}" title="${esc(STEPS[i].title)}">${records[i]?"✓":(i+1)}</div>`;
+    });
+    dots+="</div>";
+    col.innerHTML=`<div class="st-name"><span class="st-dot" style="background:${st.color}"></span>${st.name}</div>${dots}`;
+    row.appendChild(col);
+  });
+  row.querySelectorAll(".step-dot.reviewable").forEach(d=>{
+    d.addEventListener("click",()=>openReview(+d.dataset.idx));
+  });
+}
+function renderStep(){
+  const s=STEPS[current];
+  $("scNum").textContent=current+1;
+  $("scTitle").textContent=s.title;
+  const tag=$("scStage"); tag.textContent=STAGES[s.stage].name; tag.className="tag tag-stage-"+s.stage;
+  $("scScene").textContent=s.scene;
+  $("scTask").textContent=s.task;
+  $("hintText").textContent=s.hint;
+  $("hintText").classList.remove("show");
+  $("answerInput").value="";
+  $("answerInput").disabled=false;
+  $("feedbackSlot").innerHTML="";
+  $("btnSubmit").disabled=false;
+  $("stageProg").textContent=`关卡 ${current+1} / ${STEPS.length}`;
+  $("stageChip").textContent="当前阶段："+STAGES[s.stage].name;
+  $("stageChip").style.display="inline-flex";
+  $("scoreVal").textContent=score;
+  renderMap();
+  $("answerInput").focus();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderFeedback(rec, readOnly){
+  const s=STEPS[current];
+  const cls=rec.stars===3?"good":rec.stars===2?"mid":"poor";
+  const bookIcon='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
+  $("feedbackSlot").innerHTML=`
+  <div class="feedback ${cls}">
+    <div class="fb-head">
+      <span class="stars">${starsHtml(rec.stars)}</span>
+      <span class="fb-verdict">${rec.verdict}</span>
+      <span class="fb-score">得分 <b>${rec.score}</b> / ${s.base}</span>
+    </div>
+    <div class="fb-comment">${esc(rec.comment)}
+      <span class="qa"><b>你的答案：</b>${esc(rec.answer)}</span>
+    </div>
+    <div class="teach-card"><div class="tc-lb">${bookIcon} 知识点讲解</div><p>${rec.teach}</p><p style="color:#8FA7C3;margin-top:6px">参考要点：${rec.expect}</p></div>
+    <div class="fb-next">
+      <button class="btn-ghost" id="btnRetry">重新作答</button>
+      <button class="btn-next" id="btnNext">${current===STEPS.length-1?"生成交付报告":"下一关 →"}</button>
+    </div>
+  </div>`;
+  $("btnNext").addEventListener("click",()=>{
+    if(current===STEPS.length-1){openReport();}else{current++;submitted=false;save();renderStep();}
+  });
+  const retry=$("btnRetry");
+  if(retry)retry.addEventListener("click",()=>{
+    score-=rec.score; records[current]=null; delete records[current]; submitted=false; save();
+    $("feedbackSlot").innerHTML=""; $("answerInput").value=rec.answer; $("answerInput").disabled=false; $("btnSubmit").disabled=false; $("scoreVal").textContent=score;
+    renderMap(); $("answerInput").focus();
+  });
+  if(readOnly){$("answerInput").disabled=true;$("btnSubmit").disabled=true;}
+  $("scoreVal").textContent=score;
+}
+
+// ============ 提交 ============
+function onSubmit(){
+  const v=$("answerInput").value.trim();
+  if(!v){toast("请先输入你的答案再提交");return;}
+  const s=STEPS[current];
+  const res=evaluate(s,v);
+  if(records[current])score-=records[current].score;
+  records[current]={answer:v,...res}; score+=res.score; submitted=true;
+  save();
+  $("answerInput").disabled=true; $("btnSubmit").disabled=true;
+  renderFeedback(records[current],false);
+}
+
+// ============ 复盘 ============
+function openReview(idx){
+  const r=records[idx]; if(!r)return;
+  const s=STEPS[idx];
+  $("reviewBody").innerHTML=`
+    <div class="rev-item">
+      <div class="ri-meta"><span class="stars">${starsHtml(r.stars)}</span><span class="fb-verdict" style="color:${r.stars===3?"#3DDC97":r.stars===2?"#F5B93E":"#F87171"}">${r.verdict}</span><span style="color:#8FA7C3;font-size:12px">得分 ${r.score}/${s.base}</span></div>
+      <div class="ri-q">第${idx+1}关 · ${s.title}</div>
+      <div class="ri-a"><b style="color:#4CC3FF">你的答案：</b>${esc(r.answer)}</div>
+      <div class="ri-f"><b style="color:#F5B93E">点评：</b>${esc(r.comment)}</div>
+      <div class="ri-f" style="margin-top:6px"><b style="color:#2DD4BF">要点：</b>${r.expect}</div>
+    </div>`;
+  $("reviewMask").classList.remove("hidden");
+}
+
+// ============ 报告 ============
+function rankInfo(){
+  const pct=score/(STEPS.length*10);
+  if(pct>=0.85)return {t:"金牌项目经理 · 等保测评专家",c:"#F5B93E",d:"你已完整掌握从接单、定级、编制方案到报告交付的全流程，具备独立带队开展等保测评的能力。定级环节的 S/A 判定逻辑清晰，标准依据引用规范——这是顶级测评项目经理的素质。"};
+  if(pct>=0.7)return {t:"银牌项目经理 · 测评骨干",c:"#C0CCDA",d:"你已经能独立走完测评全流程，多数关卡判定准确。建议重点回看 1~2 星关卡，把定级判定矩阵与方案六要素再巩固一遍，向金牌冲刺。"};
+  if(pct>=0.55)return {t:"铜牌项目经理 · 入门测评师",c:"#D98B4E",d:"全流程框架已建立，但部分关键判定还不够扎实。请用右上角「工具包」对照复习 S/A 矩阵、取高原则与方案六要素，然后重新挑战薄弱关卡。"};
+  return {t:"见习项目经理 · 继续深造",c:"#8FA7C3",d:"流程走通了，但知识点掌握还不牢固。建议先完整复习课件 1.1、1.2、2.1、2.2，再回来重新挑战——每一关都有知识点讲解，好好利用。"};
+}
+function openReport(){
+  const rk=rankInfo();
+  const projLv = records[8] ? esc(records[8].answer) : "第三级（S3A3）";
+  let rows="";
+  STEPS.forEach((s,i)=>{
+    const r=records[i]||{stars:0,score:0,answer:"未作答"};
+    rows+=`<tr><td>${i+1}</td><td>${s.title}</td><td class="st${r.stars}">${r.stars}星</td><td class="mono">${r.score}</td><td title="${esc(r.answer)}">${esc(r.answer.length>40?r.answer.slice(0,40)+"…":r.answer)}</td></tr>`;
+  });
+  const c3=Object.values(records).filter(r=>r&&r.stars===3).length;
+  const c2=Object.values(records).filter(r=>r&&r.stars===2).length;
+  const c1=Object.values(records).filter(r=>r&&r.stars===1).length;
+  $("reportBody").innerHTML=`
+    <div class="report-hero">
+      <span class="rh-badge">项目交付 · 通关结算</span>
+      <div class="rh-title">等保测评项目交付报告</div>
+      <div class="rh-sub">XX市政务服务中心综合管理平台 · 等级保护测评（第三级 S3A3）</div>
+      <div class="report-score">
+        <div class="rs-box g"><div class="n">${c3}</div><div class="l">三星关卡</div></div>
+        <div class="rs-box c"><div class="n">${c2}</div><div class="l">两星关卡</div></div>
+        <div class="rs-box p"><div class="n">${c1}</div><div class="l">一星关卡</div></div>
+        <div class="rs-box"><div class="n">${score}<span style="font-size:13px;color:#8FA7C3"> / 200</span></div><div class="l">总得分</div></div>
+      </div>
+      <div style="display:inline-block;margin-top:8px;padding:8px 22px;border:1px solid ${rk.c};border-radius:999px;color:${rk.c};font-weight:800;font-size:15px">${rk.t}</div>
+    </div>
+    <div class="rank-card">
+      <div class="rc-lb">项目经理评语</div>
+      <p>${rk.d}</p>
+    </div>
+    <h4>项目基本信息</h4>
+    <table class="kv-table">
+      <tr><td>项目名称</td><td>政务服务中心综合管理平台等保测评</td></tr>
+      <tr><td>委托单位</td><td>XX市政务服务管理局</td></tr>
+      <tr><td>被测系统</td><td>政务服务中心综合管理平台（六大业务模块）</td></tr>
+      <tr><td>安全保护等级</td><td>${projLv}</td></tr>
+      <tr><td>测评依据</td><td>GB/T 22239-2019、GB/T 28448-2019、GB/T 28449-2018</td></tr>
+      <tr><td>项目阶段</td><td>测评准备 → 方案编制 → 现场测评 → 报告编制（已闭环）</td></tr>
+    </table>
+    <h4>各关卡作答明细</h4>
+    <table class="report-table">
+      <tr><th>关</th><th>关卡名称</th><th>星级</th><th>得分</th><th>我的答案</th></tr>
+      ${rows}
+    </table>
+    <h4>知识要点回顾</h4>
+    <div class="teach-card">
+      <p>· 等保五步走：定级 → 备案 → 建设整改 → 等级测评 → 监督检查；测评机构承担第 4 步。</p>
+      <p>· 定级口诀：先定对象 · 再评 S/A · 取高者 · 专家审 · 报备案；S 看数据、A 看服务，最终等级 = max(S,A)。</p>
+      <p>· 测评四阶段：测评准备 → 方案编制 → 现场测评 → 报告编制。</p>
+      <p>· 方案六要素：项目概述、测评范围、测评对象、测评指标、测评方法、日程与人员。</p>
+      <p>· 对象四原则：应测尽测、关键性、代表性、抽样（≥30%）；方法三要素：访谈、核查、测试。</p>
+      <p>· 报告三核心：单项判定（符合/不符合/部分符合/不适用）、整体结论、整改建议；三级审核后交付。</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" id="btnCopyReport">复制报告文本</button>
+      <button class="btn-ghost" data-close="reportMask">关闭</button>
+      <button class="btn-reset" id="btnRestart">重新挑战</button>
+    </div>`;
+  $("reportMask").classList.remove("hidden");
+  $("btnCopyReport").addEventListener("click",copyReport);
+  $("btnRestart").addEventListener("click",resetGame);
+}
+function copyReport(){
+  const rk=rankInfo();
+  const c3=Object.values(records).filter(r=>r&&r.stars===3).length;
+  const c2=Object.values(records).filter(r=>r&&r.stars===2).length;
+  const c1=Object.values(records).filter(r=>r&&r.stars===1).length;
+  let lines=["【等保测评项目经理实战 · 交付报告】","项目：政务服务中心综合管理平台等保测评（第三级 S3A3）","","各关卡成绩："];
+  STEPS.forEach((s,i)=>{
+    const r=records[i]||{stars:0,score:0,answer:"未作答"};
+    lines.push(`${i+1}. ${s.title} — ${r.stars}星（${r.score}分）— ${r.answer}`);
+  });
+  lines.push("","总得分："+score+"/200","评级："+rk.t+"　三星关卡"+c3+"关 / 两星"+c2+"关 / 一星"+c1+"关");
+  const txt=lines.join("\n");
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(()=>toast("报告文本已复制到剪贴板")).catch(()=>fallbackCopy(txt));
+  }else{fallbackCopy(txt);}
+}
+function fallbackCopy(txt){
+  const ta=document.createElement("textarea");
+  ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+  document.body.appendChild(ta); ta.select();
+  try{document.execCommand("copy");toast("报告文本已复制到剪贴板");}catch(e){toast("复制失败，请手动选择文本");}
+  document.body.removeChild(ta);
+}
+
+// ============ 持久化 ============
+function save(){
+  try{localStorage.setItem(SAVE_KEY,JSON.stringify({current,score,submitted,records}));}catch(e){}
+}
+function loadSave(){
+  try{
+    const raw=localStorage.getItem(SAVE_KEY);
+    if(!raw)return false;
+    const d=JSON.parse(raw);
+    if(!d||typeof d.current!=="number")return false;
+    current=Math.min(d.current,STEPS.length-1); score=d.score||0; submitted=!!d.submitted; records=d.records||{};
+    return true;
+  }catch(e){return false;}
+}
+function resetGame(){
+  if(!confirm("确定要重新开始吗？当前进度与成绩将全部清除。"))return;
+  try{localStorage.removeItem(SAVE_KEY);}catch(e){}
+  current=0;score=0;submitted=false;records={};
+  $("reportMask").classList.add("hidden");$("reviewMask").classList.add("hidden");
+  renderStep();
+  toast("已重置，重新开始");
+}
+
+// ============ 事件绑定 ============
+function bind(){
+  $("btnStart").addEventListener("click",()=>{
+    $("screen-cover").classList.add("hidden");
+    $("screen-game").classList.remove("hidden");
+    renderStep();
+  });
+  $("btnHow").addEventListener("click",()=>$("coverHelp").classList.toggle("hidden"));
+  $("btnHint").addEventListener("click",()=>$("hintText").classList.toggle("show"));
+  $("btnSubmit").addEventListener("click",onSubmit);
+  $("answerInput").addEventListener("keydown",e=>{ if((e.ctrlKey||e.metaKey)&&e.key==="Enter")onSubmit(); });
+  $("btnReset").addEventListener("click",resetGame);
+  $("toolkitToggle").addEventListener("click",()=>$("toolkit").classList.toggle("hidden"));
+  $("toolkitClose").addEventListener("click",()=>$("toolkit").classList.add("hidden"));
+  document.querySelectorAll("[data-close]").forEach(b=>{
+    b.addEventListener("click",()=>$(b.dataset.close).classList.add("hidden"));
+  });
+  $("reviewMask").addEventListener("click",e=>{if(e.target===$("reviewMask"))$("reviewMask").classList.add("hidden");});
+  $("reportMask").addEventListener("click",e=>{if(e.target===$("reportMask"))$("reportMask").classList.add("hidden");});
+}
+document.addEventListener("DOMContentLoaded",()=>{
+  bind();
+  if(loadSave()){
+    $("screen-cover").classList.add("hidden");
+    $("screen-game").classList.remove("hidden");
+    renderStep();
+    if(submitted&&records[current]){renderFeedback(records[current],true);}
+  }
+});
+
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){
+    var start = document.getElementById('btnStart');
+    if(start) start.click();
+    setTimeout(function(){
+      current = 6;           // 跳到第 7 关：评定业务信息安全等级 S
+      submitted = false;
+      renderStep();
+      setTimeout(function(){
+        var inp = document.getElementById('answerInput');
+        inp.value = 'S=3，因为系统存储大量公民个人敏感信息，一旦泄露将严重损害公共利益';
+        document.getElementById('btnSubmit').click();
+      }, 300);
+    }, 400);
+  }, 300);
+});
+</script>
+</body>
+</html>

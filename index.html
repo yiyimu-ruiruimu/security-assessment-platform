@@ -702,6 +702,24 @@
     .quiz-btn.passed { background: linear-gradient(135deg, #2e7d32, #43a047); }
     .quiz-btn-note { margin-top: 6px; font-size: 0.8rem; color: #999; text-align: center; }
 
+    /* ===== 实践闯关按钮（右侧单元简介面板内） ===== */
+    .practice-btn {
+        display: block;
+        width: 100%;
+        margin-top: 14px;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #00796b, #00838f, #00acc1);
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 3px 8px rgba(0, 137, 123, 0.3);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .practice-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgba(0, 137, 123, 0.45); }
+
     /* ===== 测评浮层 ===== */
     .quiz-overlay {
         display: none;
@@ -786,7 +804,7 @@
     .km-svg .km-node:hover rect { fill: #e6dcf7; stroke: #5e35b1; }
     .km-svg .km-node text { font-size: 12.5px; font-weight: 700; fill: #4527a0; pointer-events: none; }
     .km-svg .km-node text.km-sub { font-size: 9.5px; font-weight: 400; fill: #777; }
-    .km-svg line.km-edge { stroke: #b39ddb; stroke-width: 1.6; }
+    .km-svg .km-edge { stroke: #b39ddb; stroke-width: 1.6; fill: none; }
     .km-popup-overlay {
         display: none; position: fixed; inset: 0; z-index: 10001; background: rgba(20, 24, 34, 0.5);
         align-items: center; justify-content: center; padding: 20px;
@@ -801,6 +819,42 @@
     .km-popup p { font-size: 0.93rem; color: #444; line-height: 1.85; }
     .km-popup-close { display: block; margin: 18px auto 0; border: none; background: #ede7f6; color: #5e35b1; padding: 8px 26px; border-radius: 20px; cursor: pointer; }
     .km-popup-close:hover { background: #e6dcf7; }
+
+    /* ===== 知识模块页：情景分析置顶 / 标准融入模块 / 模块导航 ===== */
+    .cat-group h3[data-kb-h3] { display: none; } /* 标题已进入模块面板头，原位置不再重复显示 */
+    .kb-scenario { background: #fffdf5; border: 1.5px solid #ffe082; border-radius: 14px; padding: 14px 18px 8px; margin: 14px 0 4px; }
+    .kb-scenario-head { display: flex; align-items: center; gap: 8px; font-weight: 700; color: #8d6e00; font-size: 1.02rem; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px dashed #ffe082; }
+    .kb-std-block { margin-top: 16px; background: #fff; border: 1.5px dashed #b26a00; border-radius: 12px; padding: 12px 14px; }
+    .kb-std-block-t { font-weight: 700; color: #8d5500; font-size: 0.92rem; margin-bottom: 10px; }
+    .kb-std-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .kb-std-btn { display: flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #b39ddb; border-radius: 20px; padding: 7px 14px; text-decoration: none; transition: all 0.18s ease; }
+    .kb-std-btn:hover { border-color: #5e35b1; background: #ede7f6; }
+    .kb-std-btn b { color: #4527a0; font-size: 0.86rem; }
+    .kb-std-btn span { color: #666; font-size: 0.8rem; }
+    .kb-std-btn i { color: #b26a00; font-size: 0.75rem; font-style: normal; }
+    .kb-mod-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 10px; margin: 14px 0; }
+    .kb-mod-card { display: flex; align-items: center; gap: 8px; background: #fff; border: 1.5px solid #d5c9f0; border-radius: 10px; padding: 9px 12px; cursor: pointer; text-align: left; transition: all 0.18s ease; font-size: 0.87rem; }
+    .kb-mod-card:hover { border-color: #9575cd; background: #f6f2fc; }
+    .kb-mod-card.active { border-color: #5e35b1; background: #ede7f6; box-shadow: 0 2px 8px rgba(94, 53, 177, 0.15); }
+    .kb-mod-no { flex: 0 0 22px; height: 22px; border-radius: 50%; background: #ede7f6; color: #5e35b1; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; }
+    .kb-mod-card.active .kb-mod-no { background: #5e35b1; color: #fff; }
+    .kb-mod-card.kb-ppt-mod { background: linear-gradient(135deg, #5e35b1, #7e57c2); border-color: #5e35b1; }
+    .kb-mod-card.kb-ppt-mod:hover { background: linear-gradient(135deg, #4527a0, #5e35b1); border-color: #4527a0; }
+    .kb-mod-card.kb-ppt-mod .kb-mod-no { background: rgba(255, 255, 255, 0.25); color: #fff; }
+    .kb-mod-card.kb-ppt-mod .kb-mod-name { color: #fff; }
+    .kb-ppt-dl { display: inline-flex; align-items: center; gap: 4px; align-self: stretch; border: 1.5px dashed #b39ddb; border-radius: 10px; padding: 4px 12px; color: #7e57c2; font-size: 0.78rem; font-weight: 600; text-decoration: none; background: #faf7ff; transition: all 0.18s ease; }
+    .kb-ppt-dl:hover { border-color: #5e35b1; background: #ede7f6; color: #4527a0; }
+    .kb-mod-name { color: #333; font-weight: 600; font-size: 0.85rem; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+    .kb-mod { display: none; }
+    .kb-mod.active { display: block; animation: fadeIn 0.3s ease; }
+    .kb-mod-head { display: flex; align-items: center; gap: 10px; font-size: 1.05rem; font-weight: 700; color: #4527a0; background: #f3eefb; border-left: 4px solid #5e35b1; border-radius: 8px; padding: 10px 14px; margin: 4px 0 14px; }
+    .kb-mod-num { background: #5e35b1; color: #fff; border-radius: 6px; font-size: 0.78rem; padding: 2px 8px; flex: 0 0 auto; }
+    /* 知识结构图中的"标准原文"节点（金色虚线框，显示完整标准名，点击直接打开 PDF） */
+    .km-svg .km-node.km-std rect { fill: #fff8e1; stroke: #b26a00; stroke-dasharray: 5 3; }
+    .km-svg .km-node.km-std:hover rect { fill: #ffecb3; stroke: #8d5500; }
+    .km-svg .km-node.km-std text { fill: #8d5500; }
+    .km-svg .km-node text.km-full { font-size: 10px; font-weight: 600; }
+
 </style>
 </head>
 <body>
@@ -912,7 +966,7 @@
                             <h3>🧭 使用指南</h3>
                             <div class="concept-box">
                                 <p>① 点击上方时间线或底部"下一任务"按钮切换任务，随时可点"🏠 返回首页"；</p>
-                                <p>② 任务页左侧为<strong>任务内容区</strong>，内容按类型分为三档，点击顶部按钮切换：<strong>📖 知识</strong>（情景分析、知识结构、概念、图表）、<strong>🧪 实验</strong>（实践任务与实验步骤）、<strong>🤖 AI 助学</strong>（AI 求助点速查与使用方法）；右侧为<strong>单元简介</strong>（学习目标、单元测评入口），始终直接显示；</p>
+                                <p>② 任务页左侧为<strong>任务内容区</strong>，内容按类型分为三档，点击顶部按钮切换：<strong>📖 知识</strong>（顶部为情景分析，其下是知识模块结构图，再往下按模块分块学习——点击结构图中的模块节点直达对应内容、点击金色标准节点直接打开标准原文 PDF；模块导航中的紫色 PPT 卡片点击后在新标签页在线翻页浏览课件，旁边的"⬇ 原文件"可下载可编辑的 PPT 源文件，相关标准原文附在关键概念模块内）、<strong>🧪 实验</strong>（实践任务与实验步骤）、<strong>🤖 AI 助学</strong>（AI 求助点速查与使用方法）；右侧为<strong>单元简介</strong>（学习目标、单元测评入口），始终直接显示；</p>
                                 <p>③ 遇到问题随时点击左上角"智能助教"或右下角 🛡️ 图标向等保小助教提问，或切到"🤖 AI 助学"查看本任务的提示词模板；</p>
                                 <p>④ 练习的"参考答案"默认折叠，先独立思考再展开对照；</p>
                                 <p>⑤ 每个任务遵循"情景分析 → 知识结构 → 知识学习 → 实践操作 → 单元测评"的节奏，前序成果是后续任务的重要输入；单元测评须获得 100 分方可通过，可重复测评。</p>
@@ -2351,6 +2405,8 @@
                         </div>
                         <button class="quiz-btn" data-quiz="2.2">📝 单元测评</button>
                         <div class="quiz-btn-note">知识 · 技能 · 素养 三维考查，100 分通过</div>
+                        <button class="practice-btn" id="btnPractice22">🎮 实践闯关 · 测评指挥官</button>
+                        <div class="quiz-btn-note">扮演测评项目经理，20 关走完等保测评全流程</div>
                     </div>
                 </div>
 
@@ -2562,6 +2618,7 @@
                         tabs.appendChild(btn);
                         const g = document.createElement('div');
                         g.className = 'cat-group';
+                        g.dataset.cat = def.key;
                         groupEls[def.key] = g;
                         groups[def.key].forEach(el => g.appendChild(el));
                     });
@@ -2634,6 +2691,261 @@
                         buildTabsFor(stageEl);
                     }
                 });
+            })();
+
+            // ===== 知识模块中枢：PPT 课件 + 标准原文 + 知识模块导航 =====
+            // 知识分类页重构为三段式：① 学习资源区（课件 PPT、标准原文，点击直接打开）
+            // ② 知识结构图（模块节点点击直达对应内容，标准节点直接打开 PDF）
+            // ③ 分模块内容面板（一次只显示一个模块，解决内容"散"的问题）
+            (function setupKnowledgeHubs() {
+                var STD_LIB = {
+                    '22239':    { code: 'GB/T 22239-2019', name: '基本要求', file: '国标文件/GBT22239-2019信息安全技术网络安全等级保护基本要求.pdf' },
+                    '28448':    { code: 'GB/T 28448-2019', name: '测评要求', file: '国标文件/GBT 28448-2019 信息安全技术 网络安全等级保护测评要求.pdf' },
+                    '22240':    { code: 'GB/T 22240-2020', name: '定级指南', file: '国标文件/GBT 22240-2020 信息安全技术 网络安全等级保护定级指南.pdf' },
+                    '20984':    { code: 'GB/T 20984-2022', name: '风险评估方法', file: '国标文件/GBT 20984-2022 信息安全技术 信息安全风险评估方法.pdf' },
+                    'cyberlaw': { code: '网络安全法', name: '法律条文', file: '国标文件/中华人民共和国网络安全法.pdf' },
+                    'datalaw':  { code: '数据安全法', name: '法律条文', file: '国标文件/中华人民共和国数据安全法.pdf' },
+                    'report':   { code: '测评报告模板', name: '2025版', file: '国标文件/网络安全等级保护测评报告模板（2025版）.pdf' }
+                };
+                var KB_RES = {
+                    '1.1': { ppts: ['1.1 等保2.0标准体系框架学习（理论版）.pptx'], stds: ['22239', '28448', '22240', '20984', 'cyberlaw', 'datalaw'] },
+                    '1.2': { ppts: ['1.2 安全等级识别与实践操作（理论版）.pptx'], stds: ['22240', '22239', '28448'] },
+                    '2.1': { ppts: ['2.1 测评方案结构学习（理论版）.pptx'], stds: ['28448', '22239'] },
+                    '2.2': { ppts: ['2.2 编制完整测评方案（理论版）.pptx'], stds: ['28448', '22239'] },
+                    '3':   { ppts: [], stds: ['22239', '28448'] },
+                    '4':   { ppts: [], stds: ['22239', '28448'] },
+                    '5':   { ppts: [], stds: ['22239', '28448'] },
+                    '6':   { ppts: [], stds: ['28448', '22239', 'report'] },
+                    '7':   { ppts: [], stds: ['22239', '28448'] },
+                    '8':   { ppts: [], stds: ['20984', '22239', 'datalaw'] }
+                };
+                // 知识结构图节点 → 模块标题关键词（点击节点激活对应模块面板）
+                var KM_LINKS = {
+                    '1.1': { sys: '五步走', std: '等级保护制度' },
+                    '1.2': { obj: '情景分析', s: '定级方法', a: '定级方法', mx: '等级判定', lv1: '等级判定', lv2: '等级判定', lv3: '等级判定', lv4: '等级判定', lv5: '等级判定', ba: '等级判定' },
+                    '2.1': { plan: '六要素', f1: '六要素', f2: '测评对象', f3: '裁剪', f4: '测评方法', f5: '六要素' },
+                    '2.2': { p1: '六步法', p2: '示范场景', p3: '六步法', p4: '第四阶段', p5: '第五阶段', p6: '9个章节' },
+                    '3':   { top: '情景分析', ph: '3.1', ph1: '3.1', ph2: '3.1', net: '3.2', net1: '3.2', net2: '3.2' },
+                    '4':   { top: '情景分析', b: '常用工具', b1: '常用工具', c: '常用工具', c1: '常用工具', c2: '常用工具', c3: '常用工具', m: '常用工具', m1: '常用工具' },
+                    '5':   { top: '情景分析', m1: '5.1', m2: '5.1', m3: '5.1', m4: '5.1', m5: '5.1', ev: '5.1' },
+                    '6':   { top: '情景分析', sg: '6.1', sg1: '6.1', sg2: '6.1', ov: '6.2', ov1: '6.2', ov2: '6.3' },
+                    '7':   { top: '情景分析', c: '责任共担', c1: '责任共担' },
+                    '8':   { top: '情景分析' }
+                };
+                // 特殊节点 → 直接打开文件（节点标签以 GB/T 开头的会自动按标准号匹配）
+                var KM_FILES = { '1.1': { law: 'cyberlaw' } };
+
+                var hubState = {};
+
+                // 各单元"标准原文"融入的目标模块（按标题关键词匹配）
+                var STD_TARGET = {
+                    '1.1': '等级保护制度', '1.2': '定级方法', '2.1': '关键概念：测评方案', '2.2': '六步法',
+                    '3': '3.1', '4': '常用工具', '5': '5.1', '6': '6.1', '7': '责任共担'
+                };
+
+                function stdBlockHtml(stds) {
+                    var h = '', n = 0;
+                    (stds || []).forEach(function (k) {
+                        var s = STD_LIB[k];
+                        if (!s) return;
+                        if (!n) h = '<div class="kb-std-block"><div class="kb-std-block-t">📚 相关标准原文 · 点击直接打开</div><div class="kb-std-list">';
+                        n++;
+                        h += '<a class="kb-std-btn" href="' + encodeURI(s.file) + '" target="_blank"><b>' + s.code + '</b><span>' + s.name + '</span><i>📄 打开原文</i></a>';
+                    });
+                    return n ? h + '</div></div>' : '';
+                }
+
+                function buildHub(unitKey, kg) {
+                    var res = KB_RES[unitKey] || { ppts: [], stds: [] };
+                    var kmBox = kg.querySelector(':scope > .km-box');
+
+                    // ---- 1. 按小标题把知识内容切成模块 ----
+                    var mods = [], cur = null;
+                    Array.prototype.forEach.call(kg.children, function (el) {
+                        if (el === kmBox) return; // 结构图单独处理
+                        var isHead = el.tagName === 'H3' ||
+                            (el.classList.contains('concept-box') && el.querySelector(':scope > .concept-title'));
+                        if (isHead) {
+                            var t = el.tagName === 'H3' ? el.textContent.trim()
+                                : el.querySelector(':scope > .concept-title').textContent.trim();
+                            cur = { title: t, els: [] };
+                            mods.push(cur);
+                        }
+                        if (!cur) { cur = { title: '📌 导读', els: [] }; mods.push(cur); }
+                        if (el.tagName === 'H3') el.setAttribute('data-kb-h3', '1'); // 标题进入面板头，不再单独展示
+                        cur.els.push(el);
+                    });
+                    if (!mods.length) return;
+
+                    // ---- 2. 情景分析不模块化：置顶常显（知识内容最上面） ----
+                    var scBlock = null, scTitle = '';
+                    for (var si = 0; si < mods.length; si++) {
+                        if (/情景分析|导读/.test(mods[si].title)) {
+                            var sm = mods.splice(si, 1)[0];
+                            scTitle = sm.title;
+                            scBlock = document.createElement('div');
+                            scBlock.className = 'kb-scenario';
+                            var scHead = document.createElement('div');
+                            scHead.className = 'kb-scenario-head';
+                            scHead.innerHTML = '<span>🔍</span><span>' + sm.title.replace(/^[^0-9A-Za-z\u4e00-\u9fa5]+/, '') + '</span>';
+                            scBlock.appendChild(scHead);
+                            sm.els.forEach(function (el) {
+                                if (el.getAttribute && el.getAttribute('data-kb-h3')) return;
+                                scBlock.appendChild(el);
+                            });
+                            if (sm.els[0] && sm.els[0].classList && sm.els[0].classList.contains('concept-box')) {
+                                var st1 = sm.els[0].querySelector(':scope > .concept-title');
+                                if (st1) st1.style.display = 'none';
+                            }
+                            break;
+                        }
+                    }
+                    if (scBlock) kg.insertBefore(scBlock, kg.firstChild);
+                    // 知识模块结构图紧随情景分析之下
+                    if (kmBox && kmBox.parentElement === kg) {
+                        kg.insertBefore(kmBox, scBlock ? scBlock.nextSibling : kg.firstChild);
+                    }
+
+                    // ---- 3. 只有情景分析的单元（如任务8）：标准原文直接挂到情景块 ----
+                    if (!mods.length) {
+                        if (scBlock) {
+                            var sb0 = stdBlockHtml(res.stds);
+                            if (sb0) scBlock.insertAdjacentHTML('beforeend', sb0);
+                        }
+                        hubState[unitKey] = { activate: null, mods: [], scenario: scBlock, scenarioTitle: scTitle };
+                        return;
+                    }
+
+                    // ---- 4. 模块导航：PPT 独立模块（点击直接打开课件）+ 知识模块卡 ----
+                    var nav = document.createElement('div');
+                    nav.className = 'kb-mod-nav';
+                    if (res.ppts.length) {
+                        var pLabel = res.ppts[0].replace(/（理论版）/, '').replace(/\.pptx$/, '');
+                        var pcard = document.createElement('button');
+                        pcard.type = 'button';
+                        pcard.className = 'kb-mod-card kb-ppt-mod';
+                        pcard.title = '点击在线浏览课件：' + pLabel;
+                        pcard.innerHTML = '<span class="kb-mod-no">📑</span><span class="kb-mod-name">' + pLabel + '</span>';
+                        pcard.addEventListener('click', function () {
+                            // 打开同名 PDF（浏览器原生翻页显示，与 pptx 同名伴生）
+                            res.ppts.forEach(function (p) {
+                                window.open(encodeURI('PPT/' + p.replace(/\.pptx$/, '') + '.pdf'), '_blank');
+                            });
+                            if (typeof trackOperation === 'function') trackOperation('在线浏览课件', pLabel);
+                        });
+                        nav.appendChild(pcard);
+                        // 小号"下载原文件"入口（pptx 源文件，供老师修改）
+                        var pdl = document.createElement('a');
+                        pdl.className = 'kb-ppt-dl';
+                        pdl.href = encodeURI('PPT/' + res.ppts[0]);
+                        pdl.download = res.ppts[0];
+                        pdl.title = '下载 PPT 源文件（可编辑）';
+                        pdl.innerHTML = '⬇ 原文件';
+                        nav.appendChild(pdl);
+                    }
+
+                    // ---- 5. 模块卡片 + 内容面板（标准原文融入目标模块） ----
+                    var wrap = document.createElement('div');
+                    wrap.className = 'kb-mods';
+                    var cards = [], panels = [];
+                    var tgtKw = STD_TARGET[unitKey] || '';
+                    var tgtIdx = -1;
+                    mods.forEach(function (m, i) { if (tgtIdx < 0 && tgtKw && m.title.indexOf(tgtKw) >= 0) tgtIdx = i; });
+                    if (tgtIdx < 0) tgtIdx = 0; // 找不到目标就融入第一个模块
+                    var stdHtml = stdBlockHtml(res.stds);
+                    mods.forEach(function (m, i) {
+                        var short = m.title.replace(/^[^0-9A-Za-z\u4e00-\u9fa5]+/, '');
+                        var card = document.createElement('button');
+                        card.type = 'button';
+                        card.className = 'kb-mod-card';
+                        card.title = m.title;
+                        card.innerHTML = '<span class="kb-mod-no">' + (i + 1) + '</span><span class="kb-mod-name">' + short + '</span>';
+                        nav.appendChild(card);
+                        cards.push(card);
+
+                        var panel = document.createElement('div');
+                        panel.className = 'kb-mod';
+                        var head = document.createElement('div');
+                        head.className = 'kb-mod-head';
+                        head.innerHTML = '<span class="kb-mod-num">' + ('0' + (i + 1)).slice(-2) + '</span><span>' + m.title + '</span>';
+                        panel.appendChild(head);
+                        m.els.forEach(function (el) {
+                            if (el.getAttribute && el.getAttribute('data-kb-h3')) return;
+                            panel.appendChild(el);
+                        });
+                        // 模块首个元素是概念框时，其内部标题与面板头重复，隐藏之
+                        if (m.els[0] && m.els[0].classList && m.els[0].classList.contains('concept-box')) {
+                            var t1 = m.els[0].querySelector(':scope > .concept-title');
+                            if (t1) t1.style.display = 'none';
+                        }
+                        // 标准原文融入本模块
+                        if (i === tgtIdx && stdHtml) panel.insertAdjacentHTML('beforeend', stdHtml);
+                        wrap.appendChild(panel);
+                        panels.push(panel);
+                    });
+                    function activate(i, scroll) {
+                        cards.forEach(function (c, j) { c.classList.toggle('active', j === i); });
+                        panels.forEach(function (p, j) { p.classList.toggle('active', j === i); });
+                        if (scroll) setTimeout(function () {
+                            panels[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 60);
+                    }
+                    cards.forEach(function (c, i) {
+                        c.addEventListener('click', function () {
+                            activate(i, false);
+                            if (typeof trackOperation === 'function') trackOperation('切换知识模块', mods[i].title);
+                        });
+                    });
+                    kg.appendChild(nav);
+                    kg.appendChild(wrap);
+                    activate(0, false);
+                    hubState[unitKey] = { activate: activate, mods: mods, scenario: scBlock, scenarioTitle: scTitle };
+                }
+
+                document.querySelectorAll('.task-stage').forEach(function (st) {
+                    if (st.id === 'homepage-stage') return;
+                    var subs = Array.prototype.slice.call(st.querySelectorAll(':scope > .substage'));
+                    var targets = subs.length ? subs : [st];
+                    targets.forEach(function (el) {
+                        var key = subs.length ? el.id.replace('substage', '') : el.id.replace('stage', '');
+                        var kg = el.querySelector(':scope > .cat-group[data-cat="knowledge"]');
+                        if (kg) buildHub(key, kg);
+                    });
+                });
+
+                // 供知识结构图点击调用；返回 true 表示已处理，不再弹默认讲解窗
+                window.kmNodeAction = function (unitKey, nodeId) {
+                    var d = window.KM_DATA && KM_DATA[unitKey];
+                    if (!d || !d.nodes[nodeId]) return false;
+                    var label = d.nodes[nodeId].label || '';
+                    // ① 标准节点 → 直接打开标准原文 PDF
+                    var m = label.match(/^GB\/T\s*(\d+)/);
+                    var stdKey = m ? m[1] : (KM_FILES[unitKey] && KM_FILES[unitKey][nodeId]);
+                    if (stdKey && STD_LIB[stdKey]) {
+                        var s = STD_LIB[stdKey];
+                        if (typeof trackOperation === 'function') trackOperation('打开标准原文', s.code + ' ' + s.name);
+                        window.open(encodeURI(s.file), '_blank');
+                        return true;
+                    }
+                    // ② 模块节点 → 激活对应模块面板并滚动到位；情景分析节点 → 滚动到顶部常显情景区
+                    var kw = KM_LINKS[unitKey] && KM_LINKS[unitKey][nodeId];
+                    if (kw && hubState[unitKey]) {
+                        var hs = hubState[unitKey];
+                        if (hs.scenarioTitle && hs.scenarioTitle.indexOf(kw) >= 0 && hs.scenario) {
+                            hs.scenario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (typeof trackOperation === 'function') trackOperation('知识结构图跳转', d.nodes[nodeId].label);
+                            return true;
+                        }
+                        var idx = -1;
+                        hs.mods.forEach(function (mod, i) { if (idx < 0 && mod.title.indexOf(kw) >= 0) idx = i; });
+                        if (idx >= 0 && hs.activate) {
+                            hs.activate(idx, true);
+                            if (typeof trackOperation === 'function') trackOperation('知识结构图跳转', d.nodes[nodeId].label);
+                            return true;
+                        }
+                    }
+                    return false; // 其余节点保留原"内容讲解"弹窗
+                };
             })();
 
             // 切换任务/子任务后，内容分类默认回到"知识"（不计入操作日志）
@@ -2785,6 +3097,24 @@
                     resetStageTabs(document.getElementById('stage' + main));
                 });
             });
+
+            // 实践闯关入口（任务2.2 右侧面板）
+            const btnPractice22 = document.getElementById('btnPractice22');
+            if (btnPractice22) {
+                btnPractice22.addEventListener('click', () => {
+                    if (typeof trackOperation === 'function') trackOperation('进入实践闯关', '测评指挥官 · 项目经理实战');
+                    window.location.href = encodeURI('实践测试/denbao-pm-game/index.html');
+                });
+            }
+
+            // 从实践闯关返回定位：#unit-2.2 直接切到对应任务/子任务
+            (function () {
+                const hm = location.hash.match(/^#unit-(\d+)\.(\d+)$/);
+                if (!hm) return;
+                goToStage(parseInt(hm[1], 10));
+                const sBtn = document.querySelector('.substage-btn[data-substage="' + hm[1] + '.' + hm[2] + '"]');
+                if (sBtn) sBtn.click();
+            })();
 
             updateProgress();
         });
@@ -3029,13 +3359,13 @@
     /* ================= 知识结构图数据（第一部分：1.1 / 1.2 / 2.1 / 2.2 / 任务3） ================= */
     var KM_DATA = {
     '1.1': { h: 300, nodes: {
-        law: { x:276, y:26,  label:'网络安全法', sub:'第21条 · 法律基石', info:'《网络安全法》第21条明确规定"国家实行网络安全等级保护制度"，这是等保2.0整个标准体系的法律基石，所有等级保护工作都由此展开。' },
-        sys:  { x:136, y:116, label:'等保2.0制度', sub:'定级→备案→建设→测评→自查', info:'等保2.0制度闭环共五个环节：定级、备案、建设整改、等级测评、监督检查，环环相扣。本课程主要训练的是"等级测评"环节的执业能力。' },
-        std:  { x:416, y:116, label:'标准体系 1+N', sub:'核心标准 + 配套标准', info:'"1+N"标准体系："1"是核心通用标准（基本要求/测评要求/定级指南），"N"是面向云计算、移动互联、物联网、工业控制等场景的配套扩展标准与指南。' },
-        g1:   { x:66,  y:206, label:'GB/T 22239', sub:'基本要求 · 做到什么', info:'《网络安全等级保护基本要求》：规定各等级系统"应该做到什么"，是建设整改和测评达标的根本依据。2019版就是"等保2.0"的标志性标准。' },
-        g2:   { x:206, y:206, label:'GB/T 28448', sub:'测评要求 · 怎么测', info:'《网络安全等级保护测评要求》：规定"怎么测"——测评方法（访谈/核查/测试）、测评对象与判定准则，测评人员案头必备。' },
-        g3:   { x:346, y:206, label:'GB/T 22240', sub:'定级指南 · 定几级', info:'《网络安全等级保护定级指南》：回答"定几级"——给出 S/A 两要素定级方法与操作流程。' },
-        g4:   { x:486, y:206, label:'GB/T 20984', sub:'风险评估 · 风险多大', info:'《信息安全技术 信息安全风险评估方法》：回答"风险有多大"，是任务8风险评估的方法论来源。' }
+        law: { x:276, y:32,  label:'网络安全法', sub:'第21条 · 法律基石', std:1, full:'中华人民共和国|网络安全法', info:'《网络安全法》第21条明确规定"国家实行网络安全等级保护制度"，这是等保2.0整个标准体系的法律基石，所有等级保护工作都由此展开。' },
+        sys:  { x:136, y:126, label:'等保2.0制度', sub:'定级→备案→建设→测评→自查', info:'等保2.0制度闭环共五个环节：定级、备案、建设整改、等级测评、监督检查，环环相扣。本课程主要训练的是"等级测评"环节的执业能力。' },
+        std:  { x:416, y:126, label:'标准体系 1+N', sub:'核心标准 + 配套标准', info:'"1+N"标准体系："1"是核心通用标准（基本要求/测评要求/定级指南），"N"是面向云计算、移动互联、物联网、工业控制等场景的配套扩展标准与指南。' },
+        g1:   { x:66,  y:216, label:'GB/T 22239-2019', sub:'基本要求 · 做到什么', std:1, full:'网络安全等级保护|基本要求', info:'《网络安全等级保护基本要求》：规定各等级系统"应该做到什么"，是建设整改和测评达标的根本依据。2019版就是"等保2.0"的标志性标准。' },
+        g2:   { x:206, y:216, label:'GB/T 28448-2019', sub:'测评要求 · 怎么测', std:1, full:'网络安全等级保护|测评要求', info:'《网络安全等级保护测评要求》：规定"怎么测"——测评方法（访谈/核查/测试）、测评对象与判定准则，测评人员案头必备。' },
+        g3:   { x:346, y:216, label:'GB/T 22240-2020', sub:'定级指南 · 定几级', std:1, full:'网络安全等级保护|定级指南', info:'《网络安全等级保护定级指南》：回答"定几级"——给出 S/A 两要素定级方法与操作流程。' },
+        g4:   { x:486, y:216, label:'GB/T 20984-2022', sub:'风险评估 · 风险多大', std:1, full:'信息安全风险|评估方法', info:'《信息安全技术 信息安全风险评估方法》：回答"风险有多大"，是任务8风险评估的方法论来源。' }
     }, edges: [
         // 法律基础：网络安法支撑制度与标准
         ['law','sys'],['law','std'],
@@ -3151,7 +3481,9 @@
     <script>
     /* ================= 知识结构图渲染 + 弹窗逻辑 ================= */
     (function () {
-        var NW = 128, NH = 52; // 节点宽高
+        var NW = 128, NH = 52; // 普通节点宽高
+        var SW = 134, SH = 58; // 标准节点宽高（显示完整标准名）
+        function isStdNode(n) { return !!(n && (n.std || /^GB\/T\s*\d+/.test(n.label || ''))); }
         function esc(s) { return String(s); }
         function renderKM() {
             document.querySelectorAll('.km-box').forEach(function (box) {
@@ -3165,7 +3497,7 @@
                     var f = d.nodes[e[0]], t = d.nodes[e[1]];
                     if (!f || !t) return;
                     var x1 = Math.max(20, Math.min(W - 20, f.x));
-                    var y1 = f.y + NH / 2, x2 = Math.max(20, Math.min(W - 20, t.x)), y2 = t.y - NH / 2;
+                    var y1 = f.y + (isStdNode(f) ? SH : NH) / 2, x2 = Math.max(20, Math.min(W - 20, t.x)), y2 = t.y - (isStdNode(t) ? SH : NH) / 2;
                     if (Math.abs(x1 - x2) < 6) { // 竖直线
                         svg += '<line class="km-edge" x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"></line>';
                     } else { // 三段折线
@@ -3173,18 +3505,29 @@
                         svg += '<polyline class="km-edge" fill="none" points="' + x1 + ',' + y1 + ' ' + x1 + ',' + my + ' ' + x2 + ',' + my + ' ' + x2 + ',' + y2 + '"></polyline>';
                     }
                 });
-                // 节点
+                // 节点（GB/T 开头的标准节点加 km-std 类，显示完整标准名，点击直接打开标准原文）
                 Object.keys(d.nodes).forEach(function (id) {
                     var n = d.nodes[id];
-                    var x = Math.max(NW / 2 + 4, Math.min(W - NW / 2 - 4, n.x)); // 防越界
-                    svg += '<g class="km-node" data-km-key="' + key + '" data-km-id="' + id + '">' +
-                        '<rect x="' + (x - NW / 2) + '" y="' + (n.y - NH / 2) + '" width="' + NW + '" height="' + NH + '" rx="8"></rect>' +
-                        '<text x="' + x + '" y="' + (n.y - 2) + '" text-anchor="middle">' + esc(n.label) + '</text>' +
-                        '<text class="km-sub" x="' + x + '" y="' + (n.y + 14) + '" text-anchor="middle">' + esc(n.sub) + '</text></g>';
+                    var std = isStdNode(n);
+                    var w = std ? SW : NW, hh = std ? SH : NH;
+                    var x = Math.max(w / 2 + 4, Math.min(W - w / 2 - 4, n.x)); // 防越界
+                    var cls = std ? 'km-node km-std' : 'km-node';
+                    svg += '<g class="' + cls + '" data-km-key="' + key + '" data-km-id="' + id + '">' +
+                        '<rect x="' + (x - w / 2) + '" y="' + (n.y - hh / 2) + '" width="' + w + '" height="' + hh + '" rx="8"></rect>';
+                    if (std && n.full) { // 标准节点：标准号 + 全称两行
+                        var ls = String(n.full).split('|');
+                        svg += '<text x="' + x + '" y="' + (n.y - 14) + '" text-anchor="middle" font-size="11">' + esc(n.label) + '</text>' +
+                            '<text class="km-full" x="' + x + '" y="' + (n.y + 2) + '" text-anchor="middle" font-size="10">' + esc(ls[0] || '') + '</text>' +
+                            '<text class="km-full" x="' + x + '" y="' + (n.y + 16) + '" text-anchor="middle" font-size="10">' + esc(ls[1] || '') + '</text>';
+                    } else {
+                        svg += '<text x="' + x + '" y="' + (n.y - 2) + '" text-anchor="middle">' + esc(n.label) + '</text>' +
+                            '<text class="km-sub" x="' + x + '" y="' + (n.y + 14) + '" text-anchor="middle">' + esc(n.sub) + '</text>';
+                    }
+                    svg += '</g>';
                 });
                 svg += '</svg>';
-                box.innerHTML = '<div class="km-title">🗺️ 知识结构</div>' +
-                    '<div class="km-note">点击任意知识点，查看内容讲解</div>' + svg;
+                box.innerHTML = '<div class="km-title">🗺️ 知识模块结构</div>' +
+                    '<div class="km-note">点击模块直达对应内容；金色虚线标准节点显示完整标准名，点击直接打开原文 PDF</div>' + svg;
             });
         }
         renderKM();
@@ -3203,7 +3546,12 @@
         }
         document.addEventListener('click', function (e) {
             var node = e.target.closest ? e.target.closest('.km-node') : null;
-            if (node) { openPop(node.getAttribute('data-km-key'), node.getAttribute('data-km-id')); return; }
+            if (node) {
+                // 优先走知识模块中枢：标准节点开原文、模块节点直达内容；其余弹讲解窗
+                if (window.kmNodeAction && window.kmNodeAction(node.getAttribute('data-km-key'), node.getAttribute('data-km-id'))) return;
+                openPop(node.getAttribute('data-km-key'), node.getAttribute('data-km-id'));
+                return;
+            }
             if (e.target === pop || e.target.id === 'kmPopClose') pop.classList.remove('open');
         });
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') pop.classList.remove('open'); });
