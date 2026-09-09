@@ -7,19 +7,29 @@
 
 | 文件 | 说明 |
 |---|---|
-| `index.html` / `main-page.html` | 登录拦截修正：未登录自动跳 `login.html`；右上角用户栏显示邮箱 + “教师后台/退出”；保留并完善全部行为记账调用点 |
-| `auth-utils.js`（**新增，原来缺失导致线上 404**） | 登录初始化、登出、考勤打卡、操作日志上报、管理员身份查询。本地打开自动降级不报错 |
+| `index.html` | 登录拦截 + 行为记账调用点；**测评整改**：单元测评按单元顺序串行解锁、每单元 10 题（知识3·技能4·素养3，满分100通过）、账号学习位置记忆（登录自动续学）、实践闯关统一入口横幅（时间线正下方） |
+| `auth-utils.js`（**新增，原来缺失导致线上 404**） | 登录初始化、登出、考勤打卡、操作日志上报、管理员身份查询。本地打开自动降级不报错。**学习进度层 v2**：`loadProgress/saveProgress/mergeProgress` 按账号（id/email 哈希）在 localStorage + 云端之间合并 quizPass/last/games |
 | `login.html`（**新增**） | 公开登录门户：学生登录/注册、教师后台入口、登录成功回跳原页面 |
 | `admin.html`（**新增**） | 教师日志后台：按 邮箱/事件类型/日期 筛选，分页表格，类型统计，CSV 导出 |
 | `netlify/functions/log.js` | 后端写日志 API（校验登录令牌后才写入，日志不可伪造） |
 | `netlify/functions/logs.js` | 后端查日志 API（仅 `ADMIN_EMAILS` 中的教师账号可查） |
+| `netlify/functions/progress.js`（**整改新增**） | 学习进度云端读写 API：GET/POST `/.netlify/functions/progress`，按登录账号 upsert 到 `user_progress.data`（JSONB） |
 | `netlify/functions/_shared/backend.js` | 共享逻辑（令牌校验 / Supabase REST / 时间归一化），**零 npm 依赖** |
 | `netlify.toml` | Netlify 构建配置（Functions 目录） |
-| `supabase-setup.sql` | 日志表建表脚本（在 Supabase SQL Editor 执行一次） |
+| `supabase-setup.sql` | 建表脚本：`user_logs`（日志）+ `user_progress`（账号进度），在 Supabase SQL Editor 执行一次 |
+| `实践测试/denbao-pm-game/index.html`（**整改新增**） | 实践闯关子项目：存档从旧 `etcpm-save-*` 迁移为账号进度 `games[caseId]`，云端+本地双写，登录后换设备可续玩；旧档首次进入自动导入 |
 
 日志表记录四类事件：`login`(账号登录)、`entry`(进入平台=考勤打卡，5分钟内去重)、`operation`(切换任务/分类/开始测评/测评通过等)、`logout`(登出)。
 
 ---
+
+### 本次一并上线的「测评与进度整改」速览（v2）
+
+1. **单元测评串行解锁**：10 个单元按 `1.1 → 1.2 → 2.1 → 2.2 → 3 → 4 → 5 → 6 → 7 → 8` 顺序解锁；前一单元**满分 100 通过**后下一单元测评按钮才可点。已通过单元可随时复习/重测，解锁状态不受影响。
+2. **每单元 10 题**：知识 3 题 + 技能 4 题 + 素养 3 题，每题 10 分，满分 100；旧版 6 题存档自动兼容（首次登录迁移，不丢历史）。
+3. **账号进度云端为主**：每个账号的 `quizPass`（测评通过）、`last`（学习位置）、`games`（闯关存档）保存在 Supabase `user_progress`，本地 localStorage 按账号哈希隔离做离线兜底，双端按时间戳合并；登录后换电脑/浏览器也能接上。
+4. **自动续学**：再次登录自动回到上次学到的任务/子任务，并弹出"已接续进度"提示条（可关闭/返回首页；同一账号每会话只续学一次，避免刷新反复跳转）。
+5. **实践闯关入口上移**：从任务 2.2 右侧面板移到任务 1-8 进度条正下方的统一横幅（首页与各任务页均可见），闯关进度按账号保存、可随时续玩。
 
 ## 二、部署步骤（按顺序执行，约 20 分钟）
 
@@ -27,7 +37,7 @@
 ```bash
 cd D:\信息安全测评实践教学平台
 git add -A
-git commit -m "新增账号注册登录与日志系统（Identity + Supabase + Functions）"
+git commit -m "账号日志 + 测评整改：串行解锁/10题题库/进度续学/闯关存档云端化"
 git push
 ```
 Netlify 检测到 GitHub 推送会自动构建部署（本次新增 Functions，首次部署时间会长一些）。
@@ -42,7 +52,7 @@ Netlify 检测到 GitHub 推送会自动构建部署（本次新增 Functions，
 
 ### 第 3 步：创建 Supabase 项目（免费）并建表
 1. 打开 https://supabase.com → **New project**（免费 Free 档即可，选一个海外区域）。
-2. 创建成功后进入 **SQL Editor**，粘贴 `supabase-setup.sql` 全部内容执行 → 生成 `user_logs` 表。
+2. 创建成功后进入 **SQL Editor**，粘贴 `supabase-setup.sql` 全部内容执行 → 生成 `user_logs`（操作日志）与 `user_progress`（账号学习进度，含测评通过/学习位置/闯关存档）两张表。
 3. 左侧 **Project Settings → API** 记录两个值：
    - `Project URL`（形如 `https://xxxx.supabase.co`）
    - `service_role` secret（**只可复制一次，妥善保存**）
@@ -64,7 +74,8 @@ Netlify 后台 → **Site configuration → Environment variables** → 新增�
 1. 打开 `https://wlxxaq.netlify.app/login.html` → 用学生邮箱注册 → 自动进入平台；
 2. 页面右上角应显示当前邮箱与“教师后台/退出”；
 3. 用教师邮箱（在 ADMIN_EMAILS 中）登录 `admin.html` → 能看到学生注册/进入/操作记录；
-4. 没配 Supabase 或没开 Identity 时页面不会报错，只是跳转/日志不生效——按上面步骤补齐即可。
+4. **验证进度续学**：完成任务 1.1 的单元测评（满分 100）→ 任务 1.2 测评按钮解锁；退出后用同一账号重新登录 → 应自动回到上次学习位置；换一台电脑登录 → 测评通过记录与闯关存档应仍在（云端生效）；
+5. 没配 Supabase 或没开 Identity 时页面不会报错，只是跳转/日志/云端进度不生效——按上面步骤补齐即可。
 
 ---
 
@@ -78,6 +89,8 @@ Netlify 后台 → **Site configuration → Environment variables** → 新增�
 ## 四、常见问题
 
 - **本地双击打开 html**：会跳过登录与日志（设计如此），部署到 Netlify 才生效。
+- **单元测评按钮显示 🔒 / 点不了**：测评按单元顺序串行解锁——先以 100 分通过上一单元的测评，下一单元测评按钮才会亮起；已通过单元显示“✅ 已通过 · 可复习”，随时可重测。
+- **换设备/浏览器后进度没回来**：确认使用**同一个已登录账号**访问（进度按账号 id 隔离并云端保存）；本地直接双击 html（file:// 或非 8888 端口的 localhost）属离线预览，不会读云端，属设计如此。
 - **`admin.html` 提示无权限**：把你邮箱加进 `ADMIN_EMAILS` 并重新部署。
 - **日志没写入**：检查 Netlify 环境变量是否配置且已重新部署；或访问 `/.netlify/functions/log` 看是否 500（返回 JSON 带 `server_not_configured` 即环境变量缺失）。
 - **想换主页**：Netlify 默认把仓库根 `index.html` 作为首页。本次已把最新教学版（原 main-page.html）同步为 `index.html`，两文件内容一致；**以后请只维护 `index.html`**，`main-page.html` 可自行删除以免改混。
@@ -85,7 +98,7 @@ Netlify 后台 → **Site configuration → Environment variables** → 新增�
 - **学生注册后登录提示"账号或密码错误"**:99% 是没点邮件里的确认链接。让对方去邮箱(可能含垃圾邮件夹)找 "Confirm your account" 或发件人为 Netlify 的邮件,点链接后再登录。
 - **邮件模板自定义/免确认开关**:Netlify 已移入 Pro 付费版,免费档在 Identity → Emails 只能看到 Pro 升级提示。详见下一节"可选升级"。
 
-## 六、可选升级:免费档下如何去掉邮箱确认步骤(无需升级 Pro)
+## 五、可选升级:免费档下如何去掉邮箱确认步骤(无需升级 Pro)
 
 **A. 教师批量邀请学生(适合教学班)**
 1. **Identity → Users → Invite users**；
@@ -99,8 +112,8 @@ Netlify 后台 → **Site configuration → Environment variables** → 新增�
 
 > 这两条都是**免费档可用**的功能,代码无需改动(External providers 配好后 Netlify Identity Widget 会自动出现对应按钮);仅在 Netlify 后台点几下即可启用。
 
-## 五、安全说明
+## 六、安全说明
 
 - 日志写入与查询全部经过 Netlify Functions 做身份校验，浏览器无法直连数据库伪造记录；
-- 日志表已启用行级安全（RLS）且无公开策略，即使 anon key 泄露也无法读取；
+- `user_logs` 与 `user_progress` 均已启用行级安全（RLS）且无公开策略，即使 anon key 泄露也无法读取；进度读写仅经 `/.netlify/functions/progress` 按登录账号 upsert；
 - `service_role` 密钥仅存于 Netlify 环境变量，不进入前端代码与 GitHub。

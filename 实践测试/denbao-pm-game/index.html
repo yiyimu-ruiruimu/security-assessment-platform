@@ -254,6 +254,9 @@ textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(76,195,255,.12
   *{animation:none!important;transition:none!important}
 }
 </style>
+<!-- 账号与进度：复用课程主平台 auth-utils.js（本地直接打开自动降级为匿名存档，不报错） -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="../../auth-utils.js"></script>
 </head>
 <body>
 <div id="app">
@@ -851,7 +854,6 @@ let score = 0;
 let submitted = false;
 let records = {}; // idx -> {answer, stars, score, verdict, comment, teach, expect}
 const $ = id => document.getElementById(id);
-function saveKey(){ return "etcpm-save-"+CASES[caseIdx].id; }
 
 // ============ 工具函数 ============
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
@@ -1234,23 +1236,90 @@ function fallbackCopy(txt){
   document.body.removeChild(ta);
 }
 
-// ============ 持久化 ============
-function save(){
-  try{localStorage.setItem(saveKey(),JSON.stringify({current,score,submitted,records,caseId:CASES[caseIdx].id}));}catch(e){}
-}
-function loadSave(){
-  try{
-    const raw=localStorage.getItem(saveKey());
-    if(!raw)return false;
-    const d=JSON.parse(raw);
-    if(!d||typeof d.current!=="number")return false;
-    if(d.caseId){
-      const idx=CASES.findIndex(c=>c.id===d.caseId);
-      if(idx>=0){ caseIdx=idx; STEPS=buildSteps(CASES[caseIdx]); }
+// ============ 持久化（整改新增：账号级 + 云端同步） ============
+// 闯关存档存于账号进度 p.games[caseId]，云端 Supabase 与本地互为兜底、按账号隔离，
+// 双端按 updatedAt 合并（auth-utils mergeProgress）。_pg 为本页最新合并进度镜像。
+let _pg = null;
+function readyProgress(cb) {
+  const go = function () {
+    if (typeof window.loadProgress === "function") {
+      window.loadProgress(true).then(function (p) { _pg = p || null; if (cb) cb(_pg); });
+    } else {
+      _pg = null; if (cb) cb(_pg);
     }
-    current=Math.min(d.current,STEPS.length-1); score=d.score||0; submitted=!!d.submitted; records=d.records||{};
+  };
+  if (typeof initIdentity === "function") initIdentity().then(go); else go();
+}
+function caseId() { return CASES[caseIdx] ? CASES[caseIdx].id : null; }
+function save() {
+  const cid = caseId(); if (!cid) return;
+  try {
+    if (typeof window.saveProgress !== "function") return;
+    window.saveProgress(function (p) {
+      if (!p.games) p.games = {};
+      p.games[cid] = { current: current, score: score || 0, submitted: !!submitted, records: records || {}, caseId: cid, updatedAt: Date.now() };
+      p.games.__last = { caseId: cid, updatedAt: Date.now() };   // 记住最近玩的案例，方便续玩
+      _pg = p;
+      return p;
+    });
+  } catch (e) { /* noop */ }
+}
+function removeCaseSave(cid) {
+  if (!cid || typeof window.saveProgress !== "function") return;
+  try {
+    window.saveProgress(function (p) {
+      if (p.games) {
+        if (p.games[cid]) delete p.games[cid];
+        if (p.games.__last && p.games.__last.caseId === cid) delete p.games.__last;
+      }
+      _pg = p;
+      return p;
+    });
+  } catch (e) { /* noop */ }
+}
+function pickLastCase() {
+  if (!_pg) return;
+  try {
+    const last = _pg.games && _pg.games.__last && _pg.games.__last.caseId;
+    if (!last) return;
+    const li = CASES.findIndex(c => c.id === last);
+    if (li >= 0 && li !== caseIdx) { caseIdx = li; STEPS = buildSteps(CASES[caseIdx]); }
+  } catch (e) { /* noop */ }
+}
+// 旧版 etcpm-save-* 本地存档一次性迁入账号进度（仅当账号侧无该案例存档时导入，避免覆盖云端）
+function migrateLegacyGameSaves() {
+  if (!_pg || typeof window.saveProgress !== "function") return;
+  try {
+    let changed = false;
+    CASES.forEach(function (c) {
+      let raw = null;
+      try { raw = localStorage.getItem("etcpm-save-" + c.id); } catch (e) { /* noop */ }
+      if (!raw) return;
+      let d = null;
+      try { d = JSON.parse(raw); } catch (e) { /* noop */ }
+      try { localStorage.removeItem("etcpm-save-" + c.id); } catch (e) { /* noop */ }
+      if (!d || typeof d.current !== "number") return;
+      if (!_pg.games) _pg.games = {};
+      if (_pg.games[c.id] && _pg.games[c.id].records) return;   // 已有账号存档，不覆盖
+      _pg.games[c.id] = { current: d.current, score: d.score || 0, submitted: !!d.submitted, records: d.records || {}, caseId: c.id, updatedAt: Date.now() };
+      changed = true;
+    });
+    if (changed) window.saveProgress(function (p) { return p; });
+  } catch (e) { /* noop */ }
+}
+// 读取当前所选案例的存档；无存档返回 false（调用方负责开新局）
+function loadSave() {
+  if (!_pg) return false;
+  try {
+    const cid = caseId(); if (!cid) return false;
+    const d = _pg.games && _pg.games[cid];
+    if (!d || typeof d.current !== "number") return false;
+    current = Math.min(d.current, STEPS.length - 1);
+    score = d.score || 0;
+    submitted = !!d.submitted;
+    records = d.records || {};
     return true;
-  }catch(e){return false;}
+  } catch (e) { return false; }
 }
 function updateProj(){
   const c=CASES[caseIdx];
@@ -1283,10 +1352,9 @@ function enterCase(){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 function resetGame(){
-  if(!confirm("确定要重新挑战吗？将切换到下一个新案例，当前案例的进度与成绩将清除。"))return;
-  try{localStorage.removeItem(saveKey());}catch(e){}
+  if(!confirm("确定要重新挑战吗？将清除当前案例的进度与成绩，并切换到下一个新案例。"))return;
+  removeCaseSave(caseId());
   caseIdx=(caseIdx+1)%CASES.length;
-  try{localStorage.removeItem(saveKey());}catch(e){}
   STEPS=buildSteps(CASES[caseIdx]);
   current=0;score=0;submitted=false;records={};
   $("reportMask").classList.add("hidden");$("reviewMask").classList.add("hidden");
@@ -1325,12 +1393,20 @@ function bind(){
 document.addEventListener("DOMContentLoaded",()=>{
   bind();
   updateCover();
-  if(loadSave()){
-    $("screen-cover").classList.add("hidden");
-    $("screen-game").classList.remove("hidden");
-    renderStep();
-    if(submitted&&records[current]){renderFeedback(records[current],true);}
-  }
+  // 等账号进度就绪（登录恢复/云端拉取/本地兜底）后，再决定从哪个案例续玩
+  readyProgress(()=>{
+    migrateLegacyGameSaves();   // 一次性导入旧版 etcpm-save-* 存档
+    pickLastCase();             // 回到最近在玩的案例
+    updateCover();              // 封面同步刷新为所选案例
+    // 用户已手动进入游戏则不再自动跳转（避免打断正在作答）
+    if (!$("screen-game").classList.contains("hidden")) return;
+    if(loadSave()){
+      $("screen-cover").classList.add("hidden");
+      $("screen-game").classList.remove("hidden");
+      renderStep();
+      if(submitted&&records[current]){renderFeedback(records[current],true);}
+    }
+  });
 });
 
 </script>

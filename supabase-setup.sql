@@ -31,3 +31,22 @@ alter table public.user_logs enable row level security;
 -- create view if not exists public.v_log_daily as
 --   select date(created_at) as day, event_type, count(*) as cnt
 --   from public.user_logs group by 1, 2;
+
+-- =====================================================================
+-- 【二、学习进度表 user_progress】（账号进度云端存取，配合
+--     /.netlify/functions/progress 使用；整改新增）
+-- 用途：每个账号保存——单元测评通过记录 quizPass、学习位置 last、
+--       实践闯关存档 games。登录后换设备/浏览器也能接上上次进度。
+-- 安全模型：与 user_logs 相同，仅后端 Functions 经 service_role 读写，
+--           已启用 RLS 且不建公开策略。
+-- =====================================================================
+
+create table if not exists public.user_progress (
+    user_id     text primary key,                 -- Netlify Identity 用户 id
+    email       text        not null default '',  -- 登录邮箱
+    data        jsonb       not null default '{}'::jsonb,  -- {v, updatedAt, quizPass, last, games}
+    updated_at  timestamptz not null default now()
+);
+
+alter table public.user_progress enable row level security;
+

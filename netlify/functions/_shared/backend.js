@@ -106,16 +106,20 @@ async function sbInsert(table, row) {
 }
 
 /* ---------- Supabase REST 查询 ---------- */
-async function sbSelect(table, filters) {
+async function sbSelect(table, filters, selectFields) {
     var url = requireEnv('SUPABASE_URL').replace(/\/+$/, '');
     var key = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
     if (!url || !key) throw new Error('SUPABASE_ENV_MISSING');
-    var parts = ['select=id,email,event_type,action,detail,ip,created_at', 'order=created_at.desc'];
+    var cols = selectFields || 'id,email,event_type,action,detail,ip,created_at';
+    var parts = ['select=' + encodeURIComponent(cols)];
     filters = filters || {};
+    if (filters.user_id) parts.push('user_id=eq.' + encodeURIComponent(filters.user_id));
     if (filters.email) parts.push('email=eq.' + encodeURIComponent(filters.email));
     if (filters.type) parts.push('event_type=eq.' + encodeURIComponent(filters.type));
     if (filters.from) parts.push('created_at=gte.' + encodeURIComponent(filters.from));
     if (filters.to) parts.push('created_at=lte.' + encodeURIComponent(filters.to));
+    if (filters.order) parts.push('order=' + encodeURIComponent(filters.order));
+    else if (!selectFields) parts.push('order=created_at.desc'); // 日志查询默认按时间倒序
     var limit = Math.min(parseInt(filters.limit || '200', 10) || 200, 500);
     var offset = parseInt(filters.offset || '0', 10) || 0;
     parts.push('limit=' + limit);
@@ -130,6 +134,29 @@ async function sbSelect(table, filters) {
     return await res.json();
 }
 
+/* ---------- Supabase REST 插入/更新（按 onConflict 字段 upsert） ---------- */
+async function sbUpsert(table, row, onConflict) {
+    var url = requireEnv('SUPABASE_URL').replace(/\/+$/, '');
+    var key = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
+    if (!url || !key) throw new Error('SUPABASE_ENV_MISSING');
+    var q = '/rest/v1/' + table + '?on_conflict=' + encodeURIComponent(onConflict);
+    var res = await fetch(url + q, {
+        method: 'POST',
+        headers: {
+            apikey: key,
+            Authorization: 'Bearer ' + key,
+            'Content-Type': 'application/json',
+            Prefer: 'resolution=merge-duplicates,return=minimal'
+        },
+        body: JSON.stringify(row)
+    });
+    if (!res.ok) {
+        var txt = await res.text().catch(function () { return ''; });
+        throw new Error('SUPABASE_UPSERT_' + res.status + '_' + txt.slice(0, 200));
+    }
+    return true;
+}
+
 module.exports = {
     requireEnv: requireEnv,
     verifyUser: verifyUser,
@@ -139,5 +166,6 @@ module.exports = {
     getClientIp: getClientIp,
     getClientUa: getClientUa,
     sbInsert: sbInsert,
-    sbSelect: sbSelect
+    sbSelect: sbSelect,
+    sbUpsert: sbUpsert
 };
