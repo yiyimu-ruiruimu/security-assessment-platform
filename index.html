@@ -47,45 +47,128 @@
     }
 
     .timeline {
-        display: flex;
-        justify-content: space-between;
-        background: #eef2f7;
-        padding: 15px 20px;
+        background: #f2f6fb;
+        padding: 16px 22px 18px;
         border-bottom: 1px solid #dde4ec;
         position: relative;
     }
 
+    .timeline-progress {
+        position: absolute;
+        height: 3px;
+        background: linear-gradient(90deg, #0d47a1, #42a5f5);
+        top: auto;
+        bottom: 12px;
+        left: 22px;
+        border-radius: 2px;
+        z-index: 1;
+        transition: width 0.5s ease;
+    }
+
+    .phase-bar {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        flex-wrap: nowrap;
+        gap: 12px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .phase-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 8px;
+        padding: 10px 16px 12px;
+        border: 1.5px dashed #9db9dd;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.6);
+        min-width: 0;
+    }
+
+    .phase-group + .phase-group {
+        margin-left: 0;
+    }
+
+    .phase-group.adv {
+        border-color: #7fc2b4;
+        background: rgba(230, 244, 239, 0.55);
+    }
+
+    .phase-title {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: #3f6aa8;
+        white-space: nowrap;
+        letter-spacing: 0.3px;
+    }
+
+    .phase-group.adv .phase-title {
+        color: #00695c;
+    }
+
+    .phase-items {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
     .timeline-item {
         text-align: center;
-        padding: 8px 10px;
+        padding: 7px 14px;
         border-radius: 20px;
         cursor: pointer;
         transition: all 0.3s;
         font-weight: 500;
         font-size: 0.9rem;
         position: relative;
-        z-index: 2;
+        background: #fff;
+        border: 1px solid #d4e0ee;
+        box-shadow: 0 1px 3px rgba(16, 42, 80, 0.08);
     }
 
     .timeline-item.active {
         background: #0d47a1;
+        border-color: #0d47a1;
         color: white;
         box-shadow: 0 3px 8px rgba(13, 71, 161, 0.3);
     }
 
     .timeline-item:hover:not(.active) {
         background: #d4e3f7;
+        border-color: #9db9dd;
     }
 
-    .timeline-progress {
-        position: absolute;
-        height: 4px;
+    .timeline-item.is-passed {
+        background: #e8f5e9;
+        border-color: #66bb6a;
+        color: #1b5e20;
+    }
+    .timeline-item.is-passed::before {
+        content: "✔";
+        margin-right: 4px;
+        color: #2e7d32;
+    }
+    .timeline-item.is-passed.active {
         background: #0d47a1;
-        top: 50%;
-        left: 30px;
-        transform: translateY(-50%);
-        z-index: 1;
-        transition: width 0.5s ease;
+        border-color: #0d47a1;
+        color: #fff;
+    }
+    .timeline-item.is-passed.active::before { color: #fff; }
+
+    @media (max-width: 1100px) {
+        .phase-bar { flex-wrap: wrap; justify-content: center; }
+        .phase-group { padding: 8px 12px; }
+        .timeline-item { font-size: 0.82rem; padding: 6px 10px; }
+    }
+
+    @media (max-width: 640px) {
+        .phase-group { width: 100%; }
+        .phase-items { justify-content: flex-start; }
     }
 
     .content {
@@ -318,6 +401,18 @@
     .info-table tr:hover {
         background: #e8f4ff;
     }
+
+    .info-table tr.phase-row td {
+        font-weight: 800;
+        text-align: center;
+        padding: 7px 10px;
+        color: #0d47a1;
+        background: #e3edfb;
+        border-bottom: 1px solid #c9d8ee;
+    }
+    .info-table tr.phase-row.field td { color: #00695c; background: #e0f2ef; border-bottom-color: #b7e0d8; }
+    .info-table tr.phase-row.report td { color: #6a4f1e; background: #f5edd8; border-bottom-color: #e3d3a6; }
+    .info-table tr.phase-row.adv td { color: #8e4b00; background: #fdeeda; border-bottom-color: #f0d3ab; }
 
     /* 参考答案折叠 */
     details.answer {
@@ -861,6 +956,10 @@
     .kb-mod-card.kb-ppt-mod .kb-mod-name { color: #fff; }
     .kb-ppt-dl { display: inline-flex; align-items: center; gap: 4px; align-self: stretch; border: 1.5px dashed #b39ddb; border-radius: 10px; padding: 4px 12px; color: #7e57c2; font-size: 0.78rem; font-weight: 600; text-decoration: none; background: #faf7ff; transition: all 0.18s ease; }
     .kb-ppt-dl:hover { border-color: #5e35b1; background: #ede7f6; color: #4527a0; }
+    /* 实验/实践任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
+    .table-dl { display: inline-flex; align-items: center; gap: 3px; border: 1.2px dashed #66bb6a; border-radius: 6px; padding: 1px 8px; margin: 0 2px; color: #2e7d32; font-size: 0.78em; font-weight: 600; text-decoration: none; background: #f1f8e9; transition: all 0.18s ease; vertical-align: baseline; white-space: nowrap; }
+    .table-dl:hover { border-color: #2e7d32; background: #c8e6c9; color: #1b5e20; }
+    .table-dl:active { transform: translateY(1px); }
     .kb-mod-name { color: #333; font-weight: 600; font-size: 0.85rem; line-height: 1.4; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
     .kb-mod { display: none; }
     .kb-mod.active { display: block; animation: fadeIn 0.3s ease; }
@@ -871,6 +970,13 @@
     .km-svg .km-node.km-std:hover rect { fill: #ffecb3; stroke: #8d5500; }
     .km-svg .km-node.km-std text { fill: #8d5500; }
     .km-svg .km-node text.km-full { font-size: 10px; font-weight: 600; }
+
+    /* 任务工具栏（4 大类进度条 + 闯关入口）：横跨左右两栏的全宽单栏，置于内容区上方；
+       首页隐藏（.content 带 home-mode 类时），任务页展示 */
+    .task-tools { margin-bottom: 16px; }
+    .container:has(> .content.home-mode) > .task-tools { display: none; }
+    .task-tools .timeline { border: 1px solid #dde4ec; border-radius: 12px; }
+    .task-tools .practice-gate { border: 2px dashed #00838f; border-radius: 12px; margin-top: 12px; }
 
 </style>
 </head>
@@ -929,32 +1035,55 @@
             <div class="subtitle">等保2.0测评全流程实战 · 以测促防 · 学中做、做中学</div>
         </header>
 
-        <div class="timeline">
-            <div class="timeline-progress" id="timelineProgress" style="width: 0%;"></div>
-            <div class="timeline-item" data-stage="1">任务1 等保认知</div>
-            <div class="timeline-item" data-stage="2">任务2 方案编制</div>
-            <div class="timeline-item" data-stage="3">任务3 物理与网络</div>
-            <div class="timeline-item" data-stage="4">任务4 边界与环境</div>
-            <div class="timeline-item" data-stage="5">任务5 安全管理</div>
-            <div class="timeline-item" data-stage="6">任务6 报告编制</div>
-            <div class="timeline-item" data-stage="7">任务7 扩展测评</div>
-            <div class="timeline-item" data-stage="8">任务8 风险评估</div>
-        </div>
-
-        <!-- 实践闯关统一入口（任务1-8进度条正下方；闯关进度按账号云端保存，可随时续关） -->
-        <div class="practice-gate" id="practiceGate">
-            <div class="practice-gate-text">
-                <div class="practice-gate-title">🎮 实践闯关 · 测评指挥官</div>
-                <div class="practice-gate-sub">扮演测评项目经理，用 20 关走完等保测评全流程 —— 每关都是一个真实项目决策场景，闯关进度自动保存，随时可回来继续。</div>
+        <!-- 任务工具栏（4 大类任务进度条 + 实践闯关入口）：横跨左右两栏的全宽单栏，所有任务页顶部展示，首页隐藏 -->
+        <div class="task-tools">
+            <div class="timeline">
+                <div class="timeline-progress"><div id="timelineProgress"></div></div>
+                <div class="phase-bar">
+                    <div class="phase-group">
+                        <div class="phase-title">① 测前准备</div>
+                        <div class="phase-items">
+                            <div class="timeline-item" data-stage="1">任务1 标准体系</div>
+                            <div class="timeline-item" data-stage="2">任务2 方案编制</div>
+                        </div>
+                    </div>
+                    <div class="phase-group">
+                        <div class="phase-title">② 现场核查实施</div>
+                        <div class="phase-items">
+                            <div class="timeline-item" data-stage="3">任务3 物理与网络</div>
+                            <div class="timeline-item" data-stage="4">任务4 边界与计算环境</div>
+                            <div class="timeline-item" data-stage="5">任务5 安全管理</div>
+                        </div>
+                    </div>
+                    <div class="phase-group">
+                        <div class="phase-title">③ 报告交付</div>
+                        <div class="phase-items">
+                            <div class="timeline-item" data-stage="6">任务6 报告编制</div>
+                            <div class="timeline-item" data-stage="7">任务7 扩展要求</div>
+                        </div>
+                    </div>
+                    <div class="phase-group adv">
+                        <div class="phase-title">④ 进阶与风险评估</div>
+                        <div class="phase-items">
+                            <div class="timeline-item" data-stage="8">任务8 风险评估</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button class="practice-gate-btn" id="btnPracticeGate">🚀 进入闯关</button>
+            <div id="practiceGate" class="practice-gate">
+                <div class="practice-gate-text">
+                    <div class="practice-gate-title">🎯 实践闯关：等保测评指挥官</div>
+                    <div class="practice-gate-sub">4 大关卡 · 34 步真实测评流程，闯过一关才能解锁下一关——学完一个任务，就来这里练手。</div>
+                </div>
+                <button class="practice-gate-btn" onclick="window.open('实践测试/denbao-pm-game/index.html','_blank')">进入实践闯关</button>
+            </div>
         </div>
 
         <div class="content home-mode">
             <div class="task-display">
 
                 <!-- 智能助教（所有任务通用） -->
-                <a href="https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544" class="info-link" target="_blank">智能助教（所有任务通用）</a>
+                <a href="https://yuanqi.tencent.com/webim/#/chat/PzdKHW?appid=2097199783704980544&experience=true" class="info-link" target="_blank">智能助教（所有任务通用）</a>
 
                 <!-- 首页：课程总览 -->
                 <div class="task-stage active" id="homepage-stage">
@@ -998,16 +1127,20 @@
                                 <p>⑤ 每个任务遵循"情景分析 → 知识结构 → 知识学习 → 实践操作 → 单元测评"的节奏，前序成果是后续任务的重要输入；单元测评每单元 10 题（知识3·技能4·素养3），须获得 100 分方可通过，且<strong>按单元顺序串行解锁</strong>——通过前一单元的测评后，下一单元的测评才会开启；已通过的单元可随时复习、重测，解锁状态不受影响。</p>
                             </div>
 
-                            <h3>🗺️ 八大任务路线图</h3>
+                            <h3>🗺️ 任务路线图（三大阶段 + 进阶与风险评估）</h3>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th>任务</th><th>名称</th><th>学时</th><th>核心产出</th></tr>
+                                    <tr class="phase-row"><td colspan="4">📖 阶段一 · 测前准备</td></tr>
                                     <tr><td>任务1</td><td>等保测评认知与标准体系</td><td>4</td><td>等级差异对照表</td></tr>
                                     <tr><td>任务2</td><td>测评方案编制</td><td>4</td><td>完整测评方案</td></tr>
+                                    <tr class="phase-row field"><td colspan="4">🔍 阶段二 · 现场核查实施</td></tr>
                                     <tr><td>任务3</td><td>安全物理环境与通信网络测评</td><td>4</td><td>物理/网络核查记录表</td></tr>
                                     <tr><td>任务4</td><td>安全区域边界与计算环境测评</td><td>10</td><td>各类核查记录表、漏洞分析表</td></tr>
                                     <tr><td>任务5</td><td>安全管理测评</td><td>4</td><td>安全管理测评汇总表</td></tr>
+                                    <tr class="phase-row report"><td colspan="4">📊 阶段三 · 报告交付</td></tr>
                                     <tr><td>任务6</td><td>等保测评报告编制</td><td>6</td><td>完整等保测评报告</td></tr>
+                                    <tr class="phase-row adv"><td colspan="4">🚀 进阶与风险评估（独立入口区）</td></tr>
                                     <tr><td>任务7</td><td>安全扩展要求测评</td><td>16</td><td>云/移动/物联网/工控记录表</td></tr>
                                     <tr><td>任务8</td><td>信息安全风险评估</td><td>12</td><td>风险评估报告</td></tr>
                                 </table>
@@ -1317,8 +1450,7 @@
 
                         <div class="practice-box">
                             <div class="concept-title">✏️ 实践任务（本任务必做）</div>
-                            <p><strong>任务1：查看测评项目信息。</strong>使用等保测评管理平台（JSecProbe或替代工具）查看一个三级测评项目，完成《测评项目信息认知记录表》（含项目名称、编号、委托单位、被测系统、安全保护等级、测评依据、各阶段进度等字段）。</p>
-                            <p><strong>任务2：识别等级差异。</strong>选取"安全计算环境-身份鉴别"指标，对比二级与三级差异，完成《等级差异对照表》。</p>
+                            <p><strong>任务1：查看测评项目信息。</strong>使用等保测评管理平台（JSecProbe或替代工具）查看一个三级测评项目，完成《测评项目信息认知记录表》<a class="table-dl" href="各类表格/测评项目信息认知记录表.xlsx" download title="下载《测评项目信息认知记录表》（Excel）">⬇ 下载表格</a>（含项目名称、编号、委托单位、被测系统、安全保护等级、测评依据、各阶段进度等字段）。</p>
                             <p><strong>分组安排：</strong>4-5人/组，分工协作，小组成果汇报与互评。</p>
                         </div>
 
@@ -1476,7 +1608,7 @@
                             <p><strong>主题：</strong>某市教育局"教育综合管理平台"系统定级为等保三级，部署于XX云。分析其测评范围和对象。</p>
                             <p><strong>系统架构：</strong>互联网边界防火墙1台 → 核心交换机2台（堆叠）→ 汇聚交换机2台；安全设备：WAF 1台、堡垒机1台、日志审计1套；应用服务器3台（Linux）；数据库服务器2台（Win + SQL Server）。</p>
                             <p><strong>讨论问题：</strong>①本次测评应覆盖哪些物理位置和网络区域？②哪些设备必须纳入测评对象？哪些可以抽样？抽样比例是多少？③初步列出测评对象清单。</p>
-                            <p><strong>成果形式：</strong>每组填写《测评对象初步分析表》→ 提交至学习通平台。</p>
+                            <p><strong>成果形式：</strong>每组填写《测评对象初步分析表》<a class="table-dl" href="各类表格/测评对象初步分析表.xlsx" download title="下载《测评对象初步分析表》（Excel）">⬇ 下载表格</a>→ 提交至学习通平台。</p>
                         </div>
 
                         <div class="lab-box">
@@ -1626,12 +1758,11 @@
                         </div>
 
                         <div class="practice-box">
-                            <div class="concept-title">✏️ 实践任务（个人独立完成，约45分钟课内+课后完善）</div>
-                            <p><strong>任务场景：</strong>某市教育局"教育综合管理平台"系统，定级为<strong>第三级</strong>，部署于XX云数据中心。互联网→WAF→防火墙→核心交换机→服务器区+管理区。</p>
-                            <p><strong>系统信息：</strong>主管部门XX市教育局；系统功能：学生学籍、教师信息、成绩管理、选课管理、素质评价、数据分析；含学生身份、家庭、成绩等敏感数据，涉及全市约50万中小学生。</p>
-                            <p><strong>设备清单：</strong>边界防火墙（华为USG6000，1台）、WAF（安恒，1台）、核心交换机（华为S12708，2台）、应用服务器（华为RH2288，3台）、数据库服务器（华为RH2288，2台）、堡垒机（齐治，1台）、日志审计系统（天融信，1台）、办公终端（联想，30台，非核心）。</p>
-                            <p><strong>任务内容：</strong>①选取测评对象并说明抽样理由；②确定测评指标并标注不适用项；③编制完整测评方案（电子文档 Word/WPS）。</p>
-                            <p><strong>提交：</strong>学习通平台 | <strong>预习：</strong>下一任务"安全物理环境与通信网络测评"</p>
+                            <div class="concept-title">✏️ 实践任务（方案结构分析，约45分钟课内完成）</div>
+                            <p><strong>任务说明：</strong>下载并阅读教师给定的"测评方案（脱敏版）"素材，结合前文「📑 完整方案的9个章节结构」，逐章定位素材中对应章节的页码位置与关键字段，<strong>填写《方案结构分析记录表》</strong>。</p>
+                            <p><strong>素材下载：</strong><a class="table-dl" href="各类表格/素材6：测评方案（脱敏版）——供“方案结构拆解”实践任务使用.docx" download title="下载教师给定案例：测评方案（脱敏版）Word">⬇ 下载测评方案（脱敏版）</a>　<strong style="margin-left:6px;">记录表下载：</strong><a class="table-dl" href="各类表格/方案结构分析记录表.xlsx" download title="下载《方案结构分析记录表》Excel">⬇ 下载方案结构分析记录表</a></p>
+                            <p><strong>分析维度：</strong>①九个章节（项目概述/测评依据/测评范围/测评对象/测评指标/测评方法/日程安排/人员分工/风险控制）的标题与起始页位置；②关键字段（定级依据编号、设备/对象清单、抽样理由、不适用项说明、日程与人员对应关系）的填写是否到位；③与前文「✅ 方案质量自检清单」10 项的对照结果；④格式规范与可读性。</p>
+                            <p><strong>成果形式：</strong>填写完整的《方案结构分析记录表》（含章节定位 / 关键字段 / 合理性点评 等列）→ 提交至学习通平台 | <strong>预习：</strong>下一任务"安全物理环境与通信网络测评"</p>
                         </div>
 
                         <div class="ai-tip-box">
@@ -2406,7 +2537,7 @@
                         </div>
                         <div class="concept-box">
                             <div class="concept-title">📝 学习通作业（唯一）</div>
-                            <p>依据"教育综合管理平台"场景，独立完善<strong>《测评对象初步分析表》</strong>并提交至学习通；<strong>扩展阅读（建议）：</strong>观看"测评方案编制流程"微课、预习2.2并阅读测评方案模板；情景分析、小组讨论、方案结构拆解等均为<strong>课堂练习</strong>（当堂完成）。</p>
+                            <p>依据"教育综合管理平台"场景，独立完善<strong>《测评对象初步分析表》</strong><a class="table-dl" href="各类表格/测评对象初步分析表.xlsx" download title="下载《测评对象初步分析表》（Excel）">⬇ 下载表格</a>并提交至学习通；<strong>扩展阅读（建议）：</strong>观看"测评方案编制流程"微课、预习2.2并阅读测评方案模板；情景分析、小组讨论、方案结构拆解等均为<strong>课堂练习</strong>（当堂完成）。</p>
                         </div>
                         <button class="quiz-btn" data-quiz="2.1">📝 单元测评</button>
                         <div class="quiz-btn-note">知识 · 技能 · 素养 三维考查，100 分通过</div>
@@ -2416,7 +2547,7 @@
                         <p><strong>学时：</strong>2学时（第2周）| <strong>形式：</strong>项目制作/实训室</p>
                         <div class="concept-box">
                             <div class="concept-title">🎯 学习目标</div>
-                            <p>能依据定级报告和系统架构正确选取测评对象并说明理由；能对照GB/T 22239准确选取适用指标；能参照模板独立编制完整测评方案；培养严谨细致规范的职业习惯。</p>
+                            <p>能对照 GB/T 22239 与「完整方案的9个章节结构」逐章拆解给定测评方案；能准确识别各章节的关键字段与填写要求；能判断方案结构的完整性与合理性并提出改进意见；培养严谨细致、依规依标分析文档的职业习惯。</p>
                         </div>
                         <div class="concept-box">
                             <div class="concept-title">🪜 六步法</div>
@@ -2424,10 +2555,10 @@
                         </div>
                         <div class="concept-box">
                             <div class="concept-title">📈 评价标准</div>
-                            <p>方案结构完整（30%）+ 指标选取合理（30%）+ 格式规范（20%）+ 严谨性（20%）。</p>
+                            <p>结构拆解准确（35%）+ 关键字段识别完整（30%）+ 合理性点评到位（20%）+ 表格填写规范（15%）。</p>
                         </div>
                         <div class="highlight">
-                            <p><strong>学习通作业（唯一）：</strong>依据"XX市教育局管理平台"给定素材，独立编制一份完整的等保测评方案（Word/WPS，九章节齐全，含范围、对象、指标、日程、人员等），提交前用十项质量自检清单核对，提交至学习通。<strong>扩展阅读（建议）：</strong>预习任务3"安全物理环境与通信网络测评"。<strong>课堂练习（不单独提交）：</strong>三问复习、情景分析、六步法跟练、课内方案框架制作。</p>
+                            <p><strong>学习通作业（唯一）：</strong>下载教师给定的"测评方案（脱敏版）"素材，参照「📑 完整方案的9个章节结构」逐章拆解，填写《方案结构分析记录表》（含章节定位 / 关键字段 / 合理性点评 等列），提交至学习通。<strong>扩展阅读（建议）：</strong>预习任务3"安全物理环境与通信网络测评"。<strong>课堂练习（不单独提交）：</strong>三问复习、情景分析、六步法跟练、方案结构拆解。</p>
                         </div>
                         <button class="quiz-btn" data-quiz="2.2">📝 单元测评</button>
                         <div class="quiz-btn-note">知识 · 技能 · 素养 三维考查，100 分通过</div>
@@ -2639,7 +2770,7 @@
                         btn.type = 'button';
                         btn.className = 'cat-tab';
                         btn.dataset.cat = def.key;
-                        btn.innerHTML = def.label + ' <span class="cat-count">' + groups[def.key].length + '</span>';
+                        btn.innerHTML = def.label;
                         tabs.appendChild(btn);
                         const g = document.createElement('div');
                         g.className = 'cat-group';
@@ -2746,7 +2877,7 @@
                 };
                 // 知识结构图节点 → 模块标题关键词（点击节点激活对应模块面板）
                 var KM_LINKS = {
-                    '1.1': { sys: '五步走', std: '等级保护制度' },
+                    '1.1': { what: '信息安全测评', sys: '等级保护制度', law: '等级保护制度', flow: '五步走', stage: '四个阶段', lv: '五级' },
                     '1.2': { obj: '情景分析', s: '定级方法', a: '定级方法', mx: '等级判定', lv1: '等级判定', lv2: '等级判定', lv3: '等级判定', lv4: '等级判定', lv5: '等级判定', ba: '等级判定' },
                     '2.1': { plan: '六要素', f1: '六要素', f2: '测评对象', f3: '裁剪', f4: '测评方法', f5: '六要素' },
                     '2.2': { p1: '六步法', p2: '示范场景', p3: '六步法', p4: '第四阶段', p5: '第五阶段', p6: '9个章节' },
@@ -2986,8 +3117,12 @@
             }
 
             function updateProgress() {
-                const progressWidth = (currentStage / (totalStages - 1)) * (document.querySelector('.timeline').offsetWidth - 60);
-                timelineProgress.style.width = Math.max(0, progressWidth) + 'px';
+                // 顶部细进度条：按当前任务位置推进（任务1-8 线性，stage8 即 100%）
+                var track = document.querySelector('.timeline');
+                if (!track) return;
+                var max = totalStages; // 8 个任务点
+                var pct = Math.max(0, Math.min(1, currentStage / max));
+                timelineProgress.style.width = (pct * (track.offsetWidth - 60)) + 'px';
             }
 
             /* ===== 学习位置记忆（整改新增）：切换任务/子任务时记录，下次登录自动接续 ===== */
@@ -3041,7 +3176,9 @@
                 if (btnHome) btnHome.style.display = '';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                const stageNumbers = Array.from(timelineItems).map(item => parseFloat(item.dataset.stage));
+                const stageNumbers = Array.from(timelineItems)
+                    .map(item => parseFloat(item.dataset.stage))
+                    .filter(n => !isNaN(n));
                 if (!stageNumbers.includes(stage)) return;
                 currentStage = stage;
 
@@ -3606,25 +3743,18 @@
     <script>
     /* ================= 知识结构图数据（第一部分：1.1 / 1.2 / 2.1 / 2.2 / 任务3） ================= */
     var KM_DATA = {
-    '1.1': { h: 300, nodes: {
-        law: { x:276, y:32,  label:'网络安全法', sub:'第21条 · 法律基石', std:1, full:'中华人民共和国|网络安全法', info:'《网络安全法》第21条明确规定"国家实行网络安全等级保护制度"，这是等保2.0整个标准体系的法律基石，所有等级保护工作都由此展开。' },
-        sys:  { x:136, y:126, label:'等保2.0制度', sub:'定级→备案→建设→测评→自查', info:'等保2.0制度闭环共五个环节：定级、备案、建设整改、等级测评、监督检查，环环相扣。本课程主要训练的是"等级测评"环节的执业能力。' },
-        std:  { x:416, y:126, label:'标准体系 1+N', sub:'核心标准 + 配套标准', info:'"1+N"标准体系："1"是核心通用标准（基本要求/测评要求/定级指南），"N"是面向云计算、移动互联、物联网、工业控制等场景的配套扩展标准与指南。' },
-        g1:   { x:66,  y:216, label:'GB/T 22239-2019', sub:'基本要求 · 做到什么', std:1, full:'网络安全等级保护|基本要求', info:'《网络安全等级保护基本要求》：规定各等级系统"应该做到什么"，是建设整改和测评达标的根本依据。2019版就是"等保2.0"的标志性标准。' },
-        g2:   { x:206, y:216, label:'GB/T 28448-2019', sub:'测评要求 · 怎么测', std:1, full:'网络安全等级保护|测评要求', info:'《网络安全等级保护测评要求》：规定"怎么测"——测评方法（访谈/核查/测试）、测评对象与判定准则，测评人员案头必备。' },
-        g3:   { x:346, y:216, label:'GB/T 22240-2020', sub:'定级指南 · 定几级', std:1, full:'网络安全等级保护|定级指南', info:'《网络安全等级保护定级指南》：回答"定几级"——给出 S/A 两要素定级方法与操作流程。' },
-        g4:   { x:486, y:216, label:'GB/T 20984-2022', sub:'风险评估 · 风险多大', std:1, full:'信息安全风险|评估方法', info:'《信息安全技术 信息安全风险评估方法》：回答"风险有多大"，是任务8风险评估的方法论来源。' }
+    '1.1': { h: 310, nodes: {
+        top:  { x:340, y:30,  label:'等保2.0核心知识', sub:'1.1 关键知识模块', info:'1.1 是"等保测评认知与标准体系"的理论起点：先弄清"什么是信息安全测评"，再理解"为什么必须做等保"，最后掌握"等保怎么落地、测评怎么开展、系统分几级"。下面 6 个模块就是本单元的关键知识内容，点击任一模块可直达对应讲解。' },
+        what: { x:110, y:110, label:'信息安全测评', sub:'四问 · 四目的', info:'信息安全测评就像"给系统做安全体检"：由专业测评机构依据国家标准，对信息系统的安全状况进行检查、测试与评价，回答四个问题——系统安全吗？漏洞在哪？差距多大？怎么整改？四个目的：摸清现状、发现隐患、量化差距、指导整改。' },
+        sys:  { x:340, y:110, label:'等级保护制度', sub:'分级保护 · 1.0→2.0', info:'《网络安全法》确立的网络安全等级保护制度，核心是"分等级保护、分等级监管"：不同重要程度的系统采用不同强度的防护要求，避免"一刀切"。2019 年进入"等保2.0"：保护对象从信息系统扩展到网络和信息系统（含云/移/物/工/大数据），标准体系变为"1+N"，核心理念由被动防御转向主动防御、动态防御。' },
+        law:  { x:570, y:110, label:'网络安全法', sub:'第21条 · 法律依据', std:1, info:'《中华人民共和国网络安全法》第二十一条明确规定"国家实行网络安全等级保护制度"，这是等保2.0全部工作的法律基石——网络运营者必须履行安全保护义务，违者承担法律责任。点击本节点可直接打开法律原文 PDF。' },
+        flow: { x:110, y:270, label:'五步走流程', sub:'定级·备案·整改·测评', info:'等保工作是一个闭环，共五步：① 定级（给系统定安全等级）→ ② 备案（到公安机关备案）→ ③ 建设整改（按等级配置防护）→ ④ 等级测评（本课程的核心环节）→ ⑤ 监督检查（形成管理闭环）。环环相扣，缺一不可。' },
+        stage:{ x:340, y:270, label:'测评四阶段', sub:'准备·方案·现场·报告', info:'等级测评本身分四个阶段：① 测评准备（项目启动、收集资料）→ ② 方案编制（对应任务2）→ ③ 现场测评（对应任务3~5、7）→ ④ 报告编制（对应任务6）。本课程任务2~8 正对应这些环节。' },
+        lv:   { x:570, y:270, label:'五级划分', sub:'一级~五级 · 测评周期', info:'等保2.0 把系统分为五级：一级用户自主保护（无需强制测评）、二级系统审计保护（每两年至少测评一次）、三级安全标记保护（每年至少一次，最常见的测评对象）、四级结构化保护（每半年至少一次）、五级访问验证保护（国家专控）。等级越高，要求越严、测评越频。' }
     }, edges: [
-        // 法律基础：网络安法支撑制度与标准
-        ['law','sys'],['law','std'],
-        // 制度依赖标准、标准支撑制度（双向互依）
-        ['sys','std'],['std','sys'],
-        // 制度五环节 → 对应标准（g1建设、g2测评、g3定级、g4风险）
-        ['sys','g3'],['sys','g1'],['sys','g2'],['sys','g4'],
-        // 标准体系 1+N 涵盖这四部核心/重要标准
-        ['std','g3'],['std','g1'],['std','g2'],['std','g4'],
-        // 定级结果决定建设与测评的指标基线
-        ['g3','g1'],['g3','g2']
+        // 以"等保2.0核心知识"为中枢，扇出到 1.1 的六个关键知识模块
+        ['top','what'],['top','sys'],['top','law'],
+        ['top','flow'],['top','stage'],['top','lv']
     ] },
     '1.2': { h: 490, nodes: {
         obj: { x:340, y:26,  label:'定级对象', sub:'先明确"给谁定级"', info:'定级对象是承载独立业务的信息系统（如某政务服务平台），而不是某台服务器或某个机房——先确定对象，定级才有意义。' },
@@ -3861,6 +3991,18 @@
                         btn.title = '开始本单元测评（共 10 题，满分 100 分通过）';
                     }
                 }
+            });
+            refreshStageMarks();
+        }
+
+        // ----- 顶部时间线任务点打勾：该任务全部子单元满分通过即标记 ✔ -----
+        var STAGE_UNITS = { 1: ['1.1', '1.2'], 2: ['2.1', '2.2'], 3: ['3'], 4: ['4'], 5: ['5'], 6: ['6'], 7: ['7'], 8: ['8'] };
+        function refreshStageMarks() {
+            document.querySelectorAll('.timeline-item[data-stage]').forEach(function (item) {
+                var s = parseInt(item.getAttribute('data-stage'), 10);
+                var units = STAGE_UNITS[s] || [];
+                var ok = units.length > 0 && units.every(function (u) { return passState(u); });
+                item.classList.toggle('is-passed', ok);
             });
         }
 
