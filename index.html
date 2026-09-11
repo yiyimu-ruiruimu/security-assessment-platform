@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>信息安全测评与风险评估实践教学平台 - 等保2.0测评全流程实战</title>
+<title>信息安全测评与风险评估技能教学平台 - 等保2.0测评全流程实战</title>
 <style>
     * {
         margin: 0;
@@ -475,7 +475,7 @@
         display: block;
     }
 
-    /* ===== 实验模块 ===== */
+    /* ===== 技能模块 ===== */
     .lab-box {
         background: #f5faff;
         border: 1px solid #c8ddf5;
@@ -710,7 +710,7 @@
         font-size: 0.95rem;
     }
 
-    /* ===== 内容分类切换（知识 / 实验 / AI助学） ===== */
+    /* ===== 内容分类切换（知识 / 技能 / 素养） ===== */
     .cat-tabs {
         display: flex;
         gap: 10px;
@@ -777,6 +777,151 @@
     }
     .ai-tip-box.flash { animation: flashTip 2.5s ease-out; }
 
+    /* ===== 素养培养案例（场景分析 + AI 点评） ===== */
+    .sy-wrap { margin-bottom: 22px; }
+    .sy-banner {
+        background: linear-gradient(135deg, #f6f0fe 0%, #efe4ff 100%);
+        border: 1px solid #d5c5f0;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 14px;
+    }
+    .sy-banner-title { font-weight: 700; color: #5e35b1; font-size: 1.05rem; margin-bottom: 4px; }
+    .sy-banner-note { font-size: 0.85rem; color: #777; line-height: 1.6; }
+    .sy-case {
+        background: #fff;
+        border: 1px solid #e4d9f5;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 6px rgba(94, 53, 177, 0.06);
+    }
+    .sy-case-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .sy-case-no { background: #5e35b1; color: #fff; border-radius: 10px; padding: 2px 10px; font-size: 0.78rem; font-weight: bold; }
+    .sy-comp { background: #fff3e0; color: #b26a00; border-radius: 10px; padding: 2px 10px; font-size: 0.78rem; font-weight: bold; }
+    .sy-case-title { font-weight: 700; color: #333; font-size: 1rem; }
+    .sy-scene {
+        background: #faf7ff;
+        border-left: 4px solid #b39ddb;
+        padding: 12px 14px;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.93rem;
+        color: #444;
+        margin-bottom: 12px;
+        line-height: 1.75;
+    }
+    .sy-q {
+        background: #f0f5ff;
+        border-left: 4px solid #5c8bd6;
+        padding: 10px 14px;
+        border-radius: 0 8px 8px 0;
+        font-size: 0.93rem;
+        color: #0d47a1;
+        margin-bottom: 12px;
+        line-height: 1.7;
+    }
+    .sy-answer {
+        width: 100%;
+        min-height: 110px;
+        border: 2px solid #d5c5f0;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 0.93rem;
+        font-family: inherit;
+        line-height: 1.7;
+        resize: vertical;
+        box-sizing: border-box;
+        background: #fdfcff;
+        color: #333;
+    }
+    .sy-answer:focus { outline: none; border-color: #7b1fa2; background: #fff; box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12); }
+    .sy-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; align-items: center; }
+    .sy-btn {
+        background: linear-gradient(135deg, #7b1fa2, #5e35b1);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 9px 18px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+    .sy-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(94, 53, 177, 0.35); }
+    .sy-btn-ghost {
+        background: #fff;
+        color: #5e35b1;
+        border: 2px solid #c9b3ec;
+        border-radius: 10px;
+        padding: 8px 16px;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+    }
+    .sy-btn-ghost:hover { border-color: #7b1fa2; background: #fbf7ff; }
+    .sy-draft-tip { font-size: 0.78rem; color: #999; margin-left: auto; }
+    .sy-result {
+        display: none;
+        margin-top: 14px;
+        border-top: 2px dashed #d5c5f0;
+        padding-top: 14px;
+        font-size: 0.92rem;
+        line-height: 1.75;
+        animation: fadeIn 0.4s ease;
+    }
+    .sy-result.show { display: block; }
+    .sy-result-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+    .sy-level { border-radius: 10px; padding: 3px 12px; font-size: 0.82rem; font-weight: bold; }
+    .sy-level-a { background: #e8f5e9; color: #2e7d32; }
+    .sy-level-b { background: #fff8e1; color: #b26a00; }
+    .sy-level-c { background: #fdecea; color: #c0392b; }
+    .sy-result p { margin-bottom: 6px; }
+    .sy-pts { margin: 4px 0 8px 0; padding-left: 0; list-style: none; }
+    .sy-pts li { padding: 3px 0 3px 22px; position: relative; }
+    .sy-pts li::before { position: absolute; left: 0; }
+    .sy-pts li.hit::before { content: "✅"; }
+    .sy-pts li.miss::before { content: "💡"; }
+    .sy-pts li.miss { color: #7a6a8f; }
+    .sy-pts .sy-pt-name { font-weight: 600; }
+    .sy-ref { margin-top: 10px; }
+    .sy-ref summary {
+        cursor: pointer;
+        font-size: 0.85rem;
+        color: #5e35b1;
+        font-weight: 600;
+        user-select: none;
+    }
+    .sy-ref-box {
+        background: #f6f2fd;
+        border: 1px dashed #c9b3ec;
+        border-radius: 8px;
+        padding: 10px 14px;
+        margin-top: 8px;
+        font-size: 0.85rem;
+        color: #555;
+        line-height: 1.7;
+    }
+    .sy-toast {
+        position: fixed;
+        left: 50%;
+        bottom: 40px;
+        transform: translateX(-50%) translateY(20px);
+        background: rgba(69, 39, 160, 0.92);
+        color: #fff;
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        z-index: 10002;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s ease;
+        max-width: 80vw;
+    }
+    .sy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
     /* ===== 单元测评按钮（右侧单元简介面板内） ===== */
     .quiz-btn {
         display: block;
@@ -803,7 +948,7 @@
     .quiz-btn.locked:hover { transform: none; box-shadow: none; }
     .quiz-btn-note { margin-top: 6px; font-size: 0.8rem; color: #999; text-align: center; }
 
-    /* ===== 实践闯关统一入口横幅（位于任务1-8时间线正下方，首页与任务页通用） ===== */
+    /* ===== 技能闯关统一入口横幅（位于任务1-8时间线正下方，首页与任务页通用） ===== */
     .practice-gate {
         display: flex;
         align-items: center;
@@ -956,7 +1101,7 @@
     .kb-mod-card.kb-ppt-mod .kb-mod-name { color: #fff; }
     .kb-ppt-dl { display: inline-flex; align-items: center; gap: 4px; align-self: stretch; border: 1.5px dashed #b39ddb; border-radius: 10px; padding: 4px 12px; color: #7e57c2; font-size: 0.78rem; font-weight: 600; text-decoration: none; background: #faf7ff; transition: all 0.18s ease; }
     .kb-ppt-dl:hover { border-color: #5e35b1; background: #ede7f6; color: #4527a0; }
-    /* 实验/实践任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
+    /* 技能任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
     .table-dl { display: inline-flex; align-items: center; gap: 3px; border: 1.2px dashed #66bb6a; border-radius: 6px; padding: 1px 8px; margin: 0 2px; color: #2e7d32; font-size: 0.78em; font-weight: 600; text-decoration: none; background: #f1f8e9; transition: all 0.18s ease; vertical-align: baseline; white-space: nowrap; }
     .table-dl:hover { border-color: #2e7d32; background: #c8e6c9; color: #1b5e20; }
     .table-dl:active { transform: translateY(1px); }
@@ -1031,11 +1176,11 @@
 
     <div class="container">
         <header>
-            <h1>信息安全测评与风险评估实践教学平台</h1>
+            <h1>信息安全测评与风险评估技能教学平台</h1>
             <div class="subtitle">等保2.0测评全流程实战 · 以测促防 · 学中做、做中学</div>
         </header>
 
-        <!-- 任务工具栏（4 大类任务进度条 + 实践闯关入口）：横跨左右两栏的全宽单栏，所有任务页顶部展示，首页隐藏 -->
+        <!-- 任务工具栏（4 大类任务进度条 + 技能闯关入口）：横跨左右两栏的全宽单栏，所有任务页顶部展示，首页隐藏 -->
         <div class="task-tools">
             <div class="timeline">
                 <div class="timeline-progress"><div id="timelineProgress"></div></div>
@@ -1072,10 +1217,10 @@
             </div>
             <div id="practiceGate" class="practice-gate">
                 <div class="practice-gate-text">
-                    <div class="practice-gate-title">🎯 实践闯关：等保测评指挥官</div>
+                    <div class="practice-gate-title">🎯 技能闯关：等保测评指挥官</div>
                     <div class="practice-gate-sub">4 大关卡 · 34 步真实测评流程，闯过一关才能解锁下一关——学完一个任务，就来这里练手。</div>
                 </div>
-                <button class="practice-gate-btn" onclick="window.open('实践测试/denbao-pm-game/index.html','_blank')">进入实践闯关</button>
+                <button class="practice-gate-btn" onclick="window.open('实践测试/denbao-pm-game/index.html','_blank')">进入技能闯关</button>
             </div>
         </div>
 
@@ -1121,10 +1266,10 @@
                             <h3>🧭 使用指南</h3>
                             <div class="concept-box">
                                 <p>① 点击上方时间线或底部"下一任务"按钮切换任务，随时可点"🏠 返回首页"；</p>
-                                <p>② 任务页左侧为<strong>任务内容区</strong>，内容按类型分为三档，点击顶部按钮切换：<strong>📖 知识</strong>（顶部为情景分析，其下是知识模块结构图，再往下按模块分块学习——点击结构图中的模块节点直达对应内容、点击金色标准节点直接打开标准原文 PDF；模块导航中的紫色 PPT 卡片点击后在新标签页在线翻页浏览课件，旁边的"⬇ 原文件"可下载可编辑的 PPT 源文件，相关标准原文附在关键概念模块内）、<strong>🧪 实验</strong>（实践任务与实验步骤）、<strong>🤖 AI 助学</strong>（AI 求助点速查与使用方法）；右侧为<strong>单元简介</strong>（学习目标、单元测评入口），始终直接显示；</p>
-                                <p>③ 遇到问题随时点击左上角"智能助教"或右下角 🛡️ 图标向等保小助教提问，或切到"🤖 AI 助学"查看本任务的提示词模板；</p>
+                                <p>② 任务页左侧为<strong>任务内容区</strong>，内容按类型分为三档，点击顶部按钮切换：<strong>📖 知识</strong>（顶部为情景分析，其下是知识模块结构图，再往下按模块分块学习——点击结构图中的模块节点直达对应内容、点击金色标准节点直接打开标准原文 PDF；模块导航中的紫色 PPT 卡片点击后在新标签页在线翻页浏览课件，旁边的"⬇ 原文件"可下载可编辑的 PPT 源文件，相关标准原文附在关键概念模块内）、<strong>🧪 技能</strong>（技能任务与技能步骤）、<strong>🌟 素养</strong>（素养培养案例——按场景分析作答后可获得 AI 即时点评，并附 AI 求助点速查与使用方法）；右侧为<strong>单元简介</strong>（学习目标、单元测评入口），始终直接显示；</p>
+                                <p>③ 遇到问题随时点击左上角"智能助教"或右下角 🛡️ 图标向等保小助教提问，或切到"🌟 素养"完成本任务的素养培养案例（写出你的分析后点击"AI 点评"即可获得针对性的点评与追问），并可查看提示词模板；</p>
                                 <p>④ 练习的"参考答案"默认折叠，先独立思考再展开对照；</p>
-                                <p>⑤ 每个任务遵循"情景分析 → 知识结构 → 知识学习 → 实践操作 → 单元测评"的节奏，前序成果是后续任务的重要输入；单元测评每单元 10 题（知识3·技能4·素养3），须获得 100 分方可通过，且<strong>按单元顺序串行解锁</strong>——通过前一单元的测评后，下一单元的测评才会开启；已通过的单元可随时复习、重测，解锁状态不受影响。</p>
+                                <p>⑤ 每个任务遵循"情景分析 → 知识结构 → 知识学习 → 技能操作 → 单元测评"的节奏，前序成果是后续任务的重要输入；单元测评每单元 10 题（知识3·技能4·素养3），须获得 100 分方可通过，且<strong>按单元顺序串行解锁</strong>——通过前一单元的测评后，下一单元的测评才会开启；已通过的单元可随时复习、重测，解锁状态不受影响。</p>
                             </div>
 
                             <h3>🗺️ 任务路线图（三大阶段 + 进阶与风险评估）</h3>
@@ -1146,7 +1291,7 @@
                                 </table>
                             </div>
 
-                            <button class="start-practice-btn" id="startPracticeBtn">🚀 开启测评实践之旅</button>
+                            <button class="start-practice-btn" id="startPracticeBtn">🚀 开启测评技能之旅</button>
                         </div>
                     </div>
                 </div>
@@ -1156,7 +1301,7 @@
                     <!-- 子任务切换按钮 -->
                     <div style="margin-bottom:15px;">
                         <button class="substage-btn active" data-substage="1.1">1.1 等保2.0标准体系框架学习</button>
-                        <button class="substage-btn" data-substage="1.2">1.2 安全等级识别与实践操作</button>
+                        <button class="substage-btn" data-substage="1.2">1.2 安全等级识别与技能操作</button>
                     </div>
 
                     <!-- 1.1 -->
@@ -1260,14 +1405,14 @@
                         </div>
                     </div>
 
-                    <!-- 🧪 上机之前：AI 使用方法论 + 实验 -->
+                    <!-- 🧪 上机之前：AI 使用方法论 + 技能 -->
                     <h3>🤖 上机之前：学会"用好 AI 助教"（全课程通用技能）</h3>
                     <div class="ai-tip-box">
                         <div class="ai-tip-title">为什么第一节课先学这个？</div>
-                        <p>本课程所有实验都<strong>允许并鼓励</strong>你向 AI 求助（页面左上角"智能助教"或右下角 🛡️ 图标，或任意 AI 工具）。但"会问"和"不会问"效率天差地别——<strong>问得越具体，答得越靠谱</strong>。先把方法学会，后面每个实验都能少走弯路。</p>
+                        <p>本课程所有技能都<strong>允许并鼓励</strong>你向 AI 求助（页面左上角"智能助教"或右下角 🛡️ 图标，或任意 AI 工具）。但"会问"和"不会问"效率天差地别——<strong>问得越具体，答得越靠谱</strong>。先把方法学会，后面每个技能都能少走弯路。</p>
                         <div class="concept-title">📐 AI 求助"四步问法"</div>
                         <ol style="margin-left:20px;line-height:1.9;">
-                            <li><strong>给背景</strong>：我在上什么课、做什么实验、用什么工具（课程名 + 实验名 + JSecProbe）；</li>
+                            <li><strong>给背景</strong>：我在上什么课、做什么技能、用什么工具（课程名 + 技能名 + JSecProbe）；</li>
                             <li><strong>说现象</strong>：具体看到什么——报错信息<strong>复制原文</strong>、界面显示了什么、卡在哪一步，而不是一句"用不了"；</li>
                             <li><strong>提要求</strong>：想让 AI 干什么——解释概念？给出排查步骤？帮我检查答案？举一个例子？</li>
                             <li><strong>再验证</strong>：把 AI 的回答拿到软件里<strong>实际验证</strong>，有出入就带着新现象继续追问，直到解决。</li>
@@ -1281,7 +1426,7 @@
                         </div>
                         <div class="prompt-tpl">
                             <span class="prompt-tpl-label">💬 万能提示词模板（复制后替换【】里的内容）：</span>
-                            我是一名学习《信息安全测评与风险评估》课程的高职学生，正在做【实验名称】（使用工具：JSecProbe / 【其他工具】）。<br>
+                            我是一名学习《信息安全测评与风险评估》课程的高职学生，正在做【技能名称】（使用工具：JSecProbe / 【其他工具】）。<br>
                             我遇到的问题是：【把现象或报错原文写在这里，越具体越好】。<br>
                             我已经尝试过：【1.…… 2.……】（如没有可写"还没尝试，不知从哪下手"）。<br>
                             请你：【解释原因 / 给出排查步骤 / 用通俗例子讲讲这个概念 / 帮我检查下面的答案：……】。
@@ -1295,8 +1440,8 @@
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验一：登录 JSecProbe 并认识主界面</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>独立启动并登录 JSecProbe 测评系统；能说出主界面左侧菜单的结构、以及每个模块对应测评工作的哪个环节。这是后续所有实验的"入场券"。</div>
+                        <div class="lab-head">🧪 技能一：登录 JSecProbe 并认识主界面</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>独立启动并登录 JSecProbe 测评系统；能说出主界面左侧菜单的结构、以及每个模块对应测评工作的哪个环节。这是后续所有技能的"入场券"。</div>
                         <ol class="step-list">
                             <li><strong>启动程序。</strong>双击桌面上的 JSecProbe 图标，等待加载完成。看到出现<strong>登录页面</strong>（有用户名、密码输入框和"登录"按钮）即启动成功。若本机没有安装，先向老师获取安装包（版本 V2.0.3）。</li>
                             <li><strong>输入账号密码登录。</strong>用户名 <code>admin</code>、密码 <code>admin123</code>，点击"登录"。教学环境可保持默认；想一想：真实工作环境为什么必须改密码？（提示：等保"身份鉴别"要求——这正是我们要测评别人的项）</li>
@@ -1316,31 +1461,31 @@
                             </table>
                         </div>
                         <ol class="step-list" style="counter-reset: step 3;">
-                            <li><strong>截图存证（养成习惯）。</strong>对登录页和主界面各截一张图，按"学号-姓名-实验1-界面名"命名，存入自己的实验文件夹。<strong>从本次实验起，每个关键操作都截图</strong>——实验报告的操作证据全靠它们。</li>
+                            <li><strong>截图存证（养成习惯）。</strong>对登录页和主界面各截一张图，按"学号-姓名-技能1-界面名"命名，存入自己的技能文件夹。<strong>从本次技能起，每个关键操作都截图</strong>——技能报告的操作证据全靠它们。</li>
                         </ol>
                         <div class="ai-tip-box">
                             <div class="ai-tip-title">🤖 遇到问题？先这样问 AI</div>
                             <p><strong>常见场景：</strong>双击图标后程序没反应 / 弹出报错窗口 / 提示缺少运行环境。</p>
                             <div class="prompt-tpl">
                                 <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                我在做《信息安全测评与风险评估》课程的实验，使用的软件是 JSecProbe V2.0.3，操作系统是【Windows 10/11】。双击桌面图标后【程序没反应 / 弹出报错，报错原文是：……】。请帮我按可能性从高到低排查，每一步告诉我具体在哪里、怎么操作。
+                                我在做《信息安全测评与风险评估》课程的技能，使用的软件是 JSecProbe V2.0.3，操作系统是【Windows 10/11】。双击桌面图标后【程序没反应 / 弹出报错，报错原文是：……】。请帮我按可能性从高到低排查，每一步告诉我具体在哪里、怎么操作。
                             </div>
                             <p style="font-size:0.88rem;color:#666;">问完记得按 AI 给的步骤实际试一遍，把新现象（成功/仍报错）告诉它继续追问——这就是"四步问法"里的"再验证"。</p>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 成功启动并登录 JSecProbe　☐ 能不看资料说出左侧各菜单的作用　☐ 登录页与主界面截图已保存
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验九：数据备份（放在第一个任务做，是刻意的）</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>找到 JSecProbe 的数据目录并完成一次手动备份。<strong>为什么现在就做？</strong>你的项目、资产、测评记录全都存在本地——机房电脑有还原卡、还多人共用，<strong>不备份 = 一学期成果随时清零</strong>。安全行业的第一课就是"数据要留后手"。</div>
+                        <div class="lab-head">🧪 技能九：数据备份（放在第一个任务做，是刻意的）</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>找到 JSecProbe 的数据目录并完成一次手动备份。<strong>为什么现在就做？</strong>你的项目、资产、测评记录全都存在本地——机房电脑有还原卡、还多人共用，<strong>不备份 = 一学期成果随时清零</strong>。安全行业的第一课就是"数据要留后手"。</div>
                         <ol class="step-list">
                             <li><strong>定位数据目录。</strong>JSecProbe 的所有项目数据都存放在 <code>JSecProbeData</code> 文件夹中：Windows 下位于 JSecProbe 安装目录内（文件资源管理器 → 进入安装盘 → 逐级找到安装文件夹）；macOS/Linux 在 <code>~/.JSecProbeData</code> 或安装目录下。</li>
                             <li><strong>手动备份一次。</strong>把整个 <code>JSecProbeData</code> 文件夹<strong>完整复制</strong>到你的 U 盘或个人网盘，命名为"JSecProbe备份-日期"。</li>
-                            <li><strong>了解自动备份（不必配置）。</strong>"系统设置"中支持配置备份周期与路径——真实机构都会开启，本实验只需知道入口在哪。</li>
-                            <li><strong>规定动作。</strong>从现在起，<strong>每次实验课下课前花 2 分钟</strong>重新备份一次。两个特别提醒：①卸载/重装 JSecProbe 前必须先备份，否则数据全丢；②建议使用 V2.0.3 及以上版本。</li>
+                            <li><strong>了解自动备份（不必配置）。</strong>"系统设置"中支持配置备份周期与路径——真实机构都会开启，本技能只需知道入口在哪。</li>
+                            <li><strong>规定动作。</strong>从现在起，<strong>每次技能课下课前花 2 分钟</strong>重新备份一次。两个特别提醒：①卸载/重装 JSecProbe 前必须先备份，否则数据全丢；②建议使用 V2.0.3 及以上版本。</li>
                         </ol>
                         <div class="ai-tip-box">
                             <div class="ai-tip-title">🤖 遇到问题？先这样问 AI</div>
@@ -1351,7 +1496,7 @@
                             </div>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 成功定位 JSecProbeData 目录　☐ 已完整复制到 U 盘/网盘　☐ 知道自动备份在"系统设置"里配置
                         </div>
                     </div>
@@ -1449,14 +1594,14 @@
                         </div>
 
                         <div class="practice-box">
-                            <div class="concept-title">✏️ 实践任务（本任务必做）</div>
+                            <div class="concept-title">✏️ 技能任务（本任务必做）</div>
                             <p><strong>任务1：查看测评项目信息。</strong>使用等保测评管理平台（JSecProbe或替代工具）查看一个三级测评项目，完成《测评项目信息认知记录表》<a class="table-dl" href="各类表格/测评项目信息认知记录表.xlsx" download title="下载《测评项目信息认知记录表》（Excel）">⬇ 下载表格</a>（含项目名称、编号、委托单位、被测系统、安全保护等级、测评依据、各阶段进度等字段）。</p>
                             <p><strong>分组安排：</strong>4-5人/组，分工协作，小组成果汇报与互评。</p>
                         </div>
 
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验二：创建测评项目——把"政务服务中心"项目立起来</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>在 JSecProbe 中独立创建一个三级测评项目，并且<strong>每个字段都能说清"为什么这样填"</strong>。这个项目将贯穿任务 2~6 的全部实验——它就是你在本课程的"主战场"。</div>
+                            <div class="lab-head">🧪 技能二：创建测评项目——把"政务服务中心"项目立起来</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>在 JSecProbe 中独立创建一个三级测评项目，并且<strong>每个字段都能说清"为什么这样填"</strong>。这个项目将贯穿任务 2~6 的全部技能——它就是你在本课程的"主战场"。</div>
                             <ol class="step-list">
                                 <li><strong>进入项目列表。</strong>点击左侧菜单"项目列表"→ 页面右上角"新建项目"，弹出项目信息填写对话框。</li>
                                 <li><strong>填写项目信息（先看懂"为什么"，再动手填）。</strong>不要照抄了事——对照下表最右列，逐项确认自己理解了再填：</li>
@@ -1486,7 +1631,7 @@
                                 </div>
                             </div>
                             <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
+                                <div class="lab-check-title">📋 技能记录自查</div>
                                 ☐ 项目创建成功且出现在列表中　☐ 7 个字段每个都能说出"为什么"　☐ 详情页截图已保存　☐ 完成二/三级测评项数量对比
                             </div>
                         </div>
@@ -1495,7 +1640,7 @@
                             <p><strong>📝 课后任务（作业分类说明）：</strong></p>
                             <p><strong>学习通作业（唯一）：</strong>任选一个本地系统（如学校教务系统），推测其安全等级，写出理由（不少于200字）。</p>
                             <p><strong>扩展阅读（建议）：</strong>阅读 GB/T 22240《信息安全技术 信息系统安全等级保护定级指南》。</p>
-                            <p><strong>课堂练习（当堂完成，不单独提交）：</strong>情景分析讨论、三系统定级小组讨论、《等级差异对照表》填写、平台实验二、单元 1.2 测评等均属课堂练习。</p>
+                            <p><strong>课堂练习（当堂完成，不单独提交）：</strong>情景分析讨论、三系统定级小组讨论、《等级差异对照表》填写、平台技能二、单元 1.2 测评等均属课堂练习。</p>
                             <p><strong>提交方式：</strong>学习通平台 | <strong>截止时间：</strong>下次课前</p>
                         </div>
                     </div>
@@ -1604,7 +1749,7 @@
                         </div>
 
                         <div class="practice-box">
-                            <div class="concept-title">✏️ 实践任务——小组讨论（20分钟）</div>
+                            <div class="concept-title">✏️ 技能任务——小组讨论（20分钟）</div>
                             <p><strong>主题：</strong>某市教育局"教育综合管理平台"系统定级为等保三级，部署于XX云。分析其测评范围和对象。</p>
                             <p><strong>系统架构：</strong>互联网边界防火墙1台 → 核心交换机2台（堆叠）→ 汇聚交换机2台；安全设备：WAF 1台、堡垒机1台、日志审计1套；应用服务器3台（Linux）；数据库服务器2台（Win + SQL Server）。</p>
                             <p><strong>讨论问题：</strong>①本次测评应覆盖哪些物理位置和网络区域？②哪些设备必须纳入测评对象？哪些可以抽样？抽样比例是多少？③初步列出测评对象清单。</p>
@@ -1612,8 +1757,8 @@
                         </div>
 
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验三：录入系统构成——给项目建立"资产底账"</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>为实验二创建的项目录入不少于 10 项资产，覆盖六大类；理解<strong>资产清单就是后面选取测评对象的"底账"</strong>——账不清，抽样和方案都是空中楼阁。</div>
+                            <div class="lab-head">🧪 技能三：录入系统构成——给项目建立"资产底账"</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>为技能二创建的项目录入不少于 10 项资产，覆盖六大类；理解<strong>资产清单就是后面选取测评对象的"底账"</strong>——账不清，抽样和方案都是空中楼阁。</div>
                             <ol class="step-list">
                                 <li><strong>进入模块、选定项目。</strong>点击左侧菜单"系统构成"，在顶部下拉框中选择"某市政务服务中心综合管理平台"。<strong>先确认项目选对了再录入</strong>——录到别的项目里等于白干。</li>
                                 <li><strong>按六大类依次添加资产。</strong>点击"添加资产"，每次录入一项、填完点"保存"。按下表的分类和要点录入（数量、型号可按模拟场景合理补全）：</li>
@@ -1642,7 +1787,7 @@
                                 </div>
                             </div>
                             <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
+                                <div class="lab-check-title">📋 技能记录自查</div>
                                 ☐ 资产录入在正确的项目下　☐ ≥10 项且覆盖六大类　☐ 每项的"关键配置"写的都是安全相关信息　☐ 资产清单已导出存档
                             </div>
                         </div>
@@ -1758,7 +1903,7 @@
                         </div>
 
                         <div class="practice-box">
-                            <div class="concept-title">✏️ 实践任务（方案结构分析，约45分钟课内完成）</div>
+                            <div class="concept-title">✏️ 技能任务（方案结构分析，约45分钟课内完成）</div>
                             <p><strong>任务说明：</strong>下载并阅读教师给定的"测评方案（脱敏版）"素材，结合前文「📑 完整方案的9个章节结构」，逐章定位素材中对应章节的页码位置与关键字段，<strong>填写《方案结构分析记录表》</strong>。</p>
                             <p><strong>素材下载：</strong><a class="table-dl" href="各类表格/素材6：测评方案（脱敏版）——供“方案结构拆解”实践任务使用.docx" download title="下载教师给定案例：测评方案（脱敏版）Word">⬇ 下载测评方案（脱敏版）</a>　<strong style="margin-left:6px;">记录表下载：</strong><a class="table-dl" href="各类表格/方案结构分析记录表.xlsx" download title="下载《方案结构分析记录表》Excel">⬇ 下载方案结构分析记录表</a></p>
                             <p><strong>分析维度：</strong>①九个章节（项目概述/测评依据/测评范围/测评对象/测评指标/测评方法/日程安排/人员分工/风险控制）的标题与起始页位置；②关键字段（定级依据编号、设备/对象清单、抽样理由、不适用项说明、日程与人员对应关系）的填写是否到位；③与前文「✅ 方案质量自检清单」10 项的对照结果；④格式规范与可读性。</p>
@@ -1827,7 +1972,7 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第3周，4学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第3周，4学时）</div>
                         <p><strong>①物理安全核查：</strong>使用模拟机房照片/3D模型，完成物理环境核查并填写《物理安全核查记录表》。</p>
                         <p><strong>②网络架构合规性检查：</strong>对照网络拓扑图逐项检查，填写《通信网络核查记录表》。</p>
                         <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
@@ -1835,8 +1980,8 @@
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.1：安全物理环境测评——把"机房十查"变成测评记录</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong>——本实验中，你在实验三录入的"机房信息"（门禁、消防、UPS……）就是你的证据。</div>
+                        <div class="lab-head">🧪 技能 4.1：安全物理环境测评——把"机房十查"变成测评记录</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong>——本技能中，你在技能三录入的"机房信息"（门禁、消防、UPS……）就是你的证据。</div>
                         <ol class="step-list">
                             <li><strong>进入测评页面。</strong>点击左侧菜单"项目详情"下的"现场核查"，顶部下拉框选择"某市政务服务中心综合管理平台"项目。</li>
                             <li><strong>找到控制类。</strong>在测评项树形结构中展开"安全物理环境"节点——10 个子类与上方"机房十查"一一对应，先对一遍再动手。</li>
@@ -1871,14 +2016,14 @@
                             <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>判定结果必须由你根据证据做出——让 AI"猜"一个符合不符合，等于伪造测评记录。</p>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 10 个子类全部有判定结果　☐ "部分符合/不符合"项都写了具体问题描述　☐ 整改建议说的是"怎么改"而不是"建议加强"　☐ 每项判定自己能说出证据来源
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做下面的拓扑图文档任务，再回来测评，顺序别颠倒。</div>
+                        <div class="lab-head">🧪 技能 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做下面的拓扑图文档任务，再回来测评，顺序别颠倒。</div>
                         <ol class="step-list">
                             <li><strong>先完成本任务下方的"拓扑图文档任务"</strong>（至少画出网络拓扑草图）。</li>
                             <li><strong>展开"安全通信网络"节点</strong>，逐项判定三个子类：网络架构（划区域了吗？关键设备冗余了吗？）、通信传输（传输过程加密校验了吗？）、可信验证。</li>
@@ -1886,7 +2031,7 @@
                             <li><strong>填写问题描述。</strong>模拟示例：网络架构e→不符合（核心交换机单台部署，无硬件冗余，存在单点故障）；通信传输b→不符合（管理终端到服务器的通信未采用密码技术保证保密性）。</li>
                         </ol>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 三个子类均有判定　☐ 判定时手边有拓扑图　☐ 不符合项的问题描述写到了"缺什么设备/什么技术"
                         </div>
                     </div>
@@ -1896,7 +2041,7 @@
                         <div class="lab-goal"><strong>任务目标：</strong>用 Visio（或 draw.io、亿图等工具）为"政务服务中心综合管理平台"绘制两张图。这两张图不是美术作业——业务流程图是<strong>理解系统、支撑定级和资产识别</strong>的依据；网络拓扑图是<strong>网络架构类测评项的判定证据</strong>，任务 4~6 的边界、主机、报告全部要用它。</div>
                         <ol class="step-list">
                             <li><strong>画业务流程图（泳道图）。</strong>先梳理系统主线业务（如：群众网上预约 → 政务中心排号受理 → 窗口办理 → 评价反馈 → 数据归档），按"角色/系统"分泳道，画清每一步数据流向。完成后自问：哪一步产生敏感数据？它经过哪些设备？——这就是后面风险评估的素材。</li>
-                            <li><strong>画网络拓扑图（分层画法）。</strong>从上到下分四层：互联网边界 → 安全设备区（防火墙、WAF）→ 核心层（核心交换机）→ 接入区（服务器区、管理区）。<strong>每个设备标注：名称、型号、数量、部署位置</strong>（对照实验三录的资产清单，别凭空发明设备）。</li>
+                            <li><strong>画网络拓扑图（分层画法）。</strong>从上到下分四层：互联网边界 → 安全设备区（防火墙、WAF）→ 核心层（核心交换机）→ 接入区（服务器区、管理区）。<strong>每个设备标注：名称、型号、数量、部署位置</strong>（对照技能三录的资产清单，别凭空发明设备）。</li>
                             <li><strong>自查三处易错点：</strong>① 有没有漏画安全设备（堡垒机、日志审计最容易漏）；② 有没有标出管理区与业务区的隔离边界；③ 无线接入点、运维终端接在哪——真实测评中这三处最常被测评师追问。</li>
                             <li><strong>导出保存</strong>为 PNG/PDF，连同源文件提交到学习通。</li>
                         </ol>
@@ -1949,7 +2094,7 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第4-6周，10学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第4-6周，10学时）</div>
                         <p>在模拟环境（虚拟化服务器、网络设备模拟环境、靶机）中完成：</p>
                         <ul style="margin-left:20px;">
                             <li>《主机核查记录表》（Windows/Linux 安全基线）</li>
@@ -1963,26 +2108,26 @@
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.3：安全区域边界测评——检查系统的"大门"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>完成"安全区域边界"控制类测评，覆盖 6 个子类：边界防护、访问控制、入侵防范、恶意代码和垃圾邮件防范、安全审计、可信验证。判定依据主要来自<strong>实验三录入的安全设备</strong>（防火墙、WAF 的部署位置与功能）和<strong>你画的拓扑图</strong>。</div>
+                        <div class="lab-head">🧪 技能 4.3：安全区域边界测评——检查系统的"大门"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全区域边界"控制类测评，覆盖 6 个子类：边界防护、访问控制、入侵防范、恶意代码和垃圾邮件防范、安全审计、可信验证。判定依据主要来自<strong>技能三录入的安全设备</strong>（防火墙、WAF 的部署位置与功能）和<strong>你画的拓扑图</strong>。</div>
                         <ol class="step-list">
                             <li><strong>展开"安全区域边界"节点</strong>，先通读 6 个子类的测评项，对照拓扑图定位每项"查的是哪个位置"（如边界防护→互联网出口、访问控制→防火墙策略）。</li>
                             <li><strong>逐项判定。</strong>参考模拟示例：边界防护a→符合（防火墙+WAF 部署于互联网边界）；访问控制e→部分符合（防火墙仅按 IP/端口过滤，未实现基于应用协议和应用内容的访问控制）。</li>
                             <li><strong>问题描述写"设备+差距"。</strong>网络类问题要落到具体设备："WAF 未开启 XX 防护策略"比"防护不到位"有价值一百倍。</li>
                         </ol>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 6 个子类均有判定　☐ 每个判定都能对应到拓扑图上的位置或设备
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.4：安全计算环境测评——工作量最大的"重头戏"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>完成"安全计算环境"控制类测评。它有 <strong>11 个子类</strong>（身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护），是十个控制类中最大的一个——真实项目里花在它身上的时间也最多。本实验的测评结论将直接喂给任务 8 的脆弱性识别。</div>
+                        <div class="lab-head">🧪 技能 4.4：安全计算环境测评——工作量最大的"重头戏"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全计算环境"控制类测评。它有 <strong>11 个子类</strong>（身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护），是十个控制类中最大的一个——真实项目里花在它身上的时间也最多。本技能的测评结论将直接喂给任务 8 的脆弱性识别。</div>
                         <ol class="step-list">
                             <li><strong>展开"安全计算环境"节点</strong>，先数一下子类数量，感受工作量；按"主机→数据库→应用"的顺序推进，别乱序。</li>
                             <li><strong>逐项判定，善用"证据迁移"。</strong>模拟示例：身份鉴别d→不符合（系统仅采用用户名口令认证，未采用双因素认证机制）；入侵防范f→部分符合（服务器未部署主机入侵检测）；数据备份恢复c→不符合（数据库服务器未实现热冗余，仅每日冷备）。</li>
-                            <li><strong>给每个"不符合"预贴标签。</strong>在实验记录里顺手标注：这条会不会成为任务 8 风险评估里的"脆弱性"？（如"未双因素认证"→高危脆弱性）。现在多想一步，任务 8 少熬一夜。</li>
+                            <li><strong>给每个"不符合"预贴标签。</strong>在技能记录里顺手标注：这条会不会成为任务 8 风险评估里的"脆弱性"？（如"未双因素认证"→高危脆弱性）。现在多想一步，任务 8 少熬一夜。</li>
                         </ol>
                         <div class="ai-tip-box">
                             <div class="ai-tip-title">🤖 测评项看不懂？这是本任务最高频的卡点</div>
@@ -1994,21 +2139,21 @@
                             <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>AI 只负责"翻译"标准和提供思路；<strong>"符合/不符合"的判定和证据必须由你给出</strong>——将来签字负责的是测评师，不是 AI。</p>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 11 个子类全部判定完毕　☐ 不符合项已预标注"是否为脆弱性"　☐ 完成至少一次"AI 翻译测评项"练习
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.5：安全管理中心测评——别漏了"总控室"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>完成"安全管理中心"控制类测评（系统管理、审计管理、安全管理、集中管控 4 个子类）。它是等保 2.0 新增的控制类，查的是"有没有一个统一的地方管设备、看日志、控权限"——实验三录的<strong>堡垒机（运维审计）和日志审计系统</strong>就是它的核心证据。</div>
+                        <div class="lab-head">🧪 技能 4.5：安全管理中心测评——别漏了"总控室"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全管理中心"控制类测评（系统管理、审计管理、安全管理、集中管控 4 个子类）。它是等保 2.0 新增的控制类，查的是"有没有一个统一的地方管设备、看日志、控权限"——技能三录的<strong>堡垒机（运维审计）和日志审计系统</strong>就是它的核心证据。</div>
                         <ol class="step-list">
                             <li><strong>展开"安全管理中心"节点</strong>，通读 4 个子类。</li>
                             <li><strong>对照资产清单判定。</strong>模拟思路：系统管理→符合（部署堡垒机实现集中运维）；集中管控→部分符合（部署日志审计系统，但未实现对安全事件的自动关联分析与告警）。</li>
-                            <li><strong>联动思考：</strong>如果系统没录堡垒机和日志审计，这一类几乎全不符合——回去实验三补资产，体会"资产底账不清，测评寸步难行"。</li>
+                            <li><strong>联动思考：</strong>如果系统没录堡垒机和日志审计，这一类几乎全不符合——回去技能三补资产，体会"资产底账不清，测评寸步难行"。</li>
                         </ol>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 4 个子类均有判定　☐ 理解了安全管理中心与堡垒机/日志审计的对应关系
                         </div>
                     </div>
@@ -2066,18 +2211,18 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第6-7周，4学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第6-7周，4学时）</div>
                         <p>①完成模拟制度文档包的核查；②开展角色扮演式人员访谈，填写《访谈记录表》；③汇总形成《安全管理测评汇总表》，提出初步改进建议。</p>
                         <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评师</strong>和<strong>被访谈人</strong>。</p>
                         <p><strong>评价标准：</strong>文档核查完整性（30%）+ 访谈记录与问题识别（40%）+ 建议可行性（20%）+ 合作态度（10%）。</p>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验 4.6~4.10：五大管理类测评——用"证据链"思维查制度</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>连续完成安全管理制度、安全管理机构、安全管理人员、安全建设管理、安全运维管理 5 个控制类的测评。管理类测评和技术类完全不同：<strong>看的不是设备，而是文档、记录、访谈</strong>——每项判定都要能答出"哪份制度/记录能证明"。</div>
+                        <div class="lab-head">🧪 技能 4.6~4.10：五大管理类测评——用"证据链"思维查制度</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>连续完成安全管理制度、安全管理机构、安全管理人员、安全建设管理、安全运维管理 5 个控制类的测评。管理类测评和技术类完全不同：<strong>看的不是设备，而是文档、记录、访谈</strong>——每项判定都要能答出"哪份制度/记录能证明"。</div>
                         <ol class="step-list">
                             <li><strong>先建"证据—控制类"对照意识。</strong>五个控制类对应的证据形态：制度类→制度汇编与发布记录；机构类→岗位职责文件、任命文件；人员类→培训记录、保密协议、离职手续单；建设类→定级备案证明、测评合同、验收报告；运维类→巡检记录、备份记录、应急预案与演练记录。</li>
-                            <li><strong>依次展开 5 个节点，逐项判定。</strong>每个控制类操作方法与实验 4.1 相同（四档判定 + 问题描述 + 整改建议），但判定依据从"设备配置"换成"制度文档"。</li>
+                            <li><strong>依次展开 5 个节点，逐项判定。</strong>每个控制类操作方法与技能 4.1 相同（四档判定 + 问题描述 + 整改建议），但判定依据从"设备配置"换成"制度文档"。</li>
                             <li><strong>用"证据链"标准要求自己：</strong>比如判"安全运维管理—备份与恢复管理"为符合，就应能列出证据：备份管理制度 + 备份执行记录 + 恢复演练报告。三者缺一，最多"部分符合"。</li>
                         </ol>
                         <div class="table-container">
@@ -2099,14 +2244,14 @@
                             </div>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 5 个控制类（共 37 个子类）全部判定　☐ 抽 5 项自测：能否答出"判定依据是哪份证据"　☐ 没有出现无理由的"不适用"
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验七：查看知识库——测评师的"随身手册"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>学会用 JSecProbe 内置知识库现场查资料。它模拟的是真实测评师手边的标准汇编和知识库——<strong>没人能背下等保全部条款，会用工具查才是真本事</strong>。本实验同时为 5.2 模拟访谈做"备课"。</div>
+                        <div class="lab-head">🧪 技能七：查看知识库——测评师的"随身手册"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>学会用 JSecProbe 内置知识库现场查资料。它模拟的是真实测评师手边的标准汇编和知识库——<strong>没人能背下等保全部条款，会用工具查才是真本事</strong>。本技能同时为 5.2 模拟访谈做"备课"。</div>
                         <ol class="step-list">
                             <li><strong>进入知识库模块。</strong>点击左侧菜单"知识库"，浏览四大分类：等保2.0标准解读、各安全控制点测评方法、常见问题处理、工具操作指南。</li>
                             <li><strong>定向检索。</strong>在搜索框输入关键词（如"防火墙配置核查"），阅读一条知识条目，注意它的结构：<strong>标题 → 相关标准 → 测评方法与操作步骤</strong>——这个结构值得你抄进自己的核查笔记。</li>
@@ -2121,7 +2266,7 @@
                             <p style="font-size:0.88rem;color:#666;">访谈提纲先自己拟初稿，再让 AI 补漏——顺序反了就变成"AI 访谈、你念稿"。</p>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 能在 1 分钟内定位到指定知识分类　☐ 摘出了 3 个访谈问题　☐ 体会到了"查库"和"问 AI"各自适用的场景
                         </div>
                     </div>
@@ -2163,7 +2308,7 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第7-8周，6学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第7-8周，6学时）</div>
                         <p>①完成单项结论判定练习；②汇总分析形成整体结论草稿；③依据前序项目记录，<strong>独立编制一份完整等保测评报告</strong>（含单项结论、整体结论、整改建议）。</p>
                         <p><strong>组织方式：</strong>个人独立完成；小组互评后教师终评。</p>
                         <p><strong>评价标准：</strong>报告结构完整性（25%）+ 结论判定准确性（25%）+ 整改建议可行性（25%）+ 格式与表述规范性（25%）。</p>
@@ -2171,8 +2316,8 @@
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验五：自动化核查——机器查一遍，人来定结论</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>体验 JSecProbe 的自动化核查（机器自动检查设备配置），并理解人机分工：<strong>机器负责"跑命令、比基线"，人负责"看结果、下判定"</strong>——这正对应 6.1 单项测评结论判定的两种来源：自动化证据 + 人工证据。</div>
+                        <div class="lab-head">🧪 技能五：自动化核查——机器查一遍，人来定结论</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>体验 JSecProbe 的自动化核查（机器自动检查设备配置），并理解人机分工：<strong>机器负责"跑命令、比基线"，人负责"看结果、下判定"</strong>——这正对应 6.1 单项测评结论判定的两种来源：自动化证据 + 人工证据。</div>
                         <ol class="step-list">
                             <li><strong>进入"自动化核查"功能</strong>，选择你的项目，勾选目标设备（如 Web 服务器 01）。</li>
                             <li><strong>执行核查。</strong>点击"开始核查"，观察进度：系统正在对设备逐条执行检查命令并比对安全基线。</li>
@@ -2187,14 +2332,14 @@
                             </div>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 至少对 1 台设备执行了核查　☐ 能读懂结果报告并通过/失败含义　☐ 结果已关联测评项　☐ 对至少 1 个失败项做了人工复核
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验六：AI 辅助分析——智能测评的正确打开方式</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>体验 JSecProbe 的 AI 分析功能（文件分析 / 命令结果分析 / 截图分析三种类型），理解 6.2 "系统整体结论"的辅助形成方式，并建立职业认知：<strong>AI 分析结果仅供参考，最终结论由测评人员确认并负责</strong>。</div>
+                        <div class="lab-head">🧪 技能六：AI 辅助分析——智能测评的正确打开方式</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>体验 JSecProbe 的 AI 分析功能（文件分析 / 命令结果分析 / 截图分析三种类型），理解 6.2 "系统整体结论"的辅助形成方式，并建立职业认知：<strong>AI 分析结果仅供参考，最终结论由测评人员确认并负责</strong>。</div>
                         <ol class="step-list">
                             <li><strong>前提确认：</strong>该功能需配置 AI API Key（如 DeepSeek 或 OpenAI）；未配置则跳过，由教师演示。</li>
                             <li><strong>选分析类型并上传素材。</strong>三选一：①文件分析——上传一份配置文件（如防火墙策略文件）；②命令结果分析——粘贴一条命令的执行输出；③截图分析——上传系统配置界面截图。</li>
@@ -2202,8 +2347,8 @@
                             <li><strong>关联测评项。</strong>将分析结论关联到对应测评项；关联前先自问：我同意这个结论吗？不同意就以我的证据为准。</li>
                         </ol>
                         <div class="ai-tip-box">
-                            <div class="ai-tip-title">🤖 这是全课程最需要"清醒"的实验</div>
-                            <p>本实验本身就在用 AI 做测评——正好把任务 1 学的 AI 红线用在刀刃上：</p>
+                            <div class="ai-tip-title">🤖 这是全课程最需要"清醒"的技能</div>
+                            <p>本技能本身就在用 AI 做测评——正好把任务 1 学的 AI 红线用在刀刃上：</p>
                             <ul style="margin-left:20px;line-height:1.9;">
                                 <li><strong>交叉验证：</strong>AI 说"不符合"，你要能指出它依据的是哪条配置；说不出依据的结论不敢采信；</li>
                                 <li><strong>留痕：</strong>把 AI 分析结论截图存档并标注"AI 辅助，已人工复核"——这本身就是规范工作习惯；</li>
@@ -2211,14 +2356,14 @@
                             </ul>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                            <div class="lab-check-title">📋 技能记录自查</div>
                             ☐ 完成 1 次 AI 分析（或观看演示）　☐ 结论关联测评项前做了自己的判断　☐ 分析结果已截图留痕
                         </div>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验八：报告生成——一学期成果的"验收仪式"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>用 JSecProbe 自动生成等保测评报告并导出。它会汇总你任务 2~6 的全部数据（项目信息、资产、10 个控制类的测评记录、核查结果）——<strong>报告质量 = 前期数据质量</strong>，这一步是给前面每一步打分。</div>
+                        <div class="lab-head">🧪 技能八：报告生成——一学期成果的"验收仪式"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>用 JSecProbe 自动生成等保测评报告并导出。它会汇总你任务 2~6 的全部数据（项目信息、资产、10 个控制类的测评记录、核查结果）——<strong>报告质量 = 前期数据质量</strong>，这一步是给前面每一步打分。</div>
                         <ol class="step-list">
                             <li><strong>生成前自检（重要）。</strong>确认：10 个控制类都有测评记录；资产清单完整；自动化核查结果已关联。数据有洞，报告就有洞。</li>
                             <li><strong>进入"报告生成"功能</strong>，选择项目和报告类型——选"等保测评总结分析报告"（另有问题清单、整改建议等类型，可对比生成）。</li>
@@ -2234,8 +2379,8 @@
                             <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>报告主体必须来自系统生成的真实数据。让 AI 凭空编报告 = 伪造测评记录，真实项目里要负法律责任。</p>
                         </div>
                         <div class="lab-check">
-                            <div class="lab-check-title">📋 实验记录自查</div>
-                            ☐ 生成前完成了数据自检　☐ 报告四大部分齐全　☐ 成功导出 Word/PDF　☐ 能说清报告每章的数据来自哪个实验
+                            <div class="lab-check-title">📋 技能记录自查</div>
+                            ☐ 生成前完成了数据自检　☐ 报告四大部分齐全　☐ 成功导出 Word/PDF　☐ 能说清报告每章的数据来自哪个技能
                         </div>
                     </div>
 
@@ -2267,15 +2412,15 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第10-13周，16学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第10-13周，16学时）</div>
                         <p>依托云计算模拟平台、移动互联/物联网/工控模拟环境，完成四个扩展领域的测评，各提交一份《测评记录表》（云计算/移动互联/物联网/工控各一份）。</p>
                         <p><strong>组织方式：</strong>4-5人/组，四个子项滚动进行。</p>
                         <p><strong>评价标准：</strong>操作规范性（25%）+ 记录表完整性（25%）+ 风险识别准确度（30%）+ 职业素养（20%）。</p>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验：四大领域架构认知——先弄清"系统长什么样"，再谈安全</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>云计算、移动互联、物联网、工控四个领域的学习方法完全相同：<strong>先认知架构，再核查配置</strong>——连系统由哪些部件组成、数据怎么流动都说不清，安全核查就无从下手。本实验为四个子领域各产出一张<strong>简易架构图 + 一段"数据流向"文字说明</strong>，这是后续检测记录的证据底座。</div>
+                        <div class="lab-head">🧪 技能：四大领域架构认知——先弄清"系统长什么样"，再谈安全</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>云计算、移动互联、物联网、工控四个领域的学习方法完全相同：<strong>先认知架构，再核查配置</strong>——连系统由哪些部件组成、数据怎么流动都说不清，安全核查就无从下手。本技能为四个子领域各产出一张<strong>简易架构图 + 一段"数据流向"文字说明</strong>，这是后续检测记录的证据底座。</div>
                         <ol class="step-list">
                             <li><strong>每个领域先回答"架构三问"：</strong>① 系统由哪些组件构成？② 数据从哪里流到哪里？③ 信任边界在哪里（哪一侧是我们管的，哪一侧是别人管的）？下表是四个领域的"三问"参考答案骨架，先自己查资料填，再对照：</li>
                         </ol>
@@ -2314,7 +2459,7 @@
                         <ol class="step-list">
                             <li><strong>定范围。</strong>从上一步的架构图取核查对象——每个领域至少选 3 个组件（如云：管理平台 + 一台租户虚拟机 + 一份快照；工控：一台 PLC + 一台上位机 + 生产网边界）。</li>
                             <li><strong>逐项核查并记录证据。</strong>每个核查项三列：<strong>核查方法（查配置/访谈/查看截图）→ 核查结果 → 证据（配置截图或文字记录）</strong>。没证据的核查项不算做完。</li>
-                            <li><strong>判定并给出结论。</strong>沿用实验 4.1 的四档判定（符合/部分符合/不符合/不适用），"不适用"必须写理由。</li>
+                            <li><strong>判定并给出结论。</strong>沿用技能 4.1 的四档判定（符合/部分符合/不符合/不适用），"不适用"必须写理由。</li>
                             <li><strong>汇总成表。</strong>四个领域各一份记录表，统一表头：核查对象、核查项、方法、结果、证据、判定、问题描述与整改建议。</li>
                         </ol>
                         <div class="table-container">
@@ -2393,17 +2538,17 @@
                     </div>
 
                     <div class="practice-box">
-                        <div class="concept-title">✏️ 实践任务（第14-16周，12学时）</div>
+                        <div class="concept-title">✏️ 技能任务（第14-16周，12学时）</div>
                         <p>以前序任务中测评过的模拟系统为对象，完整走一遍风险评估流程：资产清单 → 威胁识别表 → 脆弱性分析表 → 风险计算表 → 风险评估报告。</p>
                         <p><strong>组织方式：</strong>项目制作/实训室，小组协作+个人成果。</p>
                         <p><strong>📌 期末提醒：</strong>第17周综合复习（系统梳理核心知识点与实操技能）后参加期末考核。</p>
                     </div>
 
                     <div class="lab-box">
-                        <div class="lab-head">🧪 实验（结合实验三）：资产识别与 CIA 赋值——给"底账"贴上"价签"</div>
-                        <div class="lab-goal"><strong>实验目标：</strong>风险评估的第一步。<strong>不需要重新录入资产</strong>——直接复用 JSecProbe 实验三建立的资产清单，在此基础上为每项资产完成 CIA 三性赋值。体会两件事：① 资产的价值不是"这台服务器值多少钱"，而是<strong>"它出事，业务损失多大"</strong>；② 同一台服务器，三性赋值往往不同（如公开网站可用性高、保密性低）。</div>
+                        <div class="lab-head">🧪 技能（结合技能三）：资产识别与 CIA 赋值——给"底账"贴上"价签"</div>
+                        <div class="lab-goal"><strong>技能目标：</strong>风险评估的第一步。<strong>不需要重新录入资产</strong>——直接复用 JSecProbe 技能三建立的资产清单，在此基础上为每项资产完成 CIA 三性赋值。体会两件事：① 资产的价值不是"这台服务器值多少钱"，而是<strong>"它出事，业务损失多大"</strong>；② 同一台服务器，三性赋值往往不同（如公开网站可用性高、保密性低）。</div>
                         <ol class="step-list">
-                            <li><strong>导出资产底账。</strong>登录 JSecProbe 打开"政务服务中心综合管理平台"项目，将实验三录入的系统构成清单整理为《资产识别表》（可用表格工具重排），补充三列：<strong>资产归属 / 责任部门 / 备注</strong>。</li>
+                            <li><strong>导出资产底账。</strong>登录 JSecProbe 打开"政务服务中心综合管理平台"项目，将技能三录入的系统构成清单整理为《资产识别表》（可用表格工具重排），补充三列：<strong>资产归属 / 责任部门 / 备注</strong>。</li>
                             <li><strong>逐项 CIA 赋值。</strong>对每项资产的保密性 C、完整性 I、可用性 A 分别按 1~5 打分，依据是"受损后的业务影响"，参考下表：</li>
                         </ol>
                         <div class="table-container">
@@ -2429,13 +2574,13 @@
                         </div>
                         <div class="lab-check">
                             <div class="lab-check-title">📋 交付自查</div>
-                            ☐ 资产来自实验三清单（未凭空新增）　☐ 每项资产有 C/I/A 三个分值　☐ 每个分值能说出业务影响依据　☐ 关键资产（≥4 级）已标出
+                            ☐ 资产来自技能三清单（未凭空新增）　☐ 每项资产有 C/I/A 三个分值　☐ 每个分值能说出业务影响依据　☐ 关键资产（≥4 级）已标出
                         </div>
                     </div>
 
                     <div class="lab-box">
                         <div class="lab-head">📄 文档任务链：从威胁识别到风险评估报告（8.2 → 8.5）</div>
-                        <div class="lab-goal"><strong>任务目标：</strong>四个子任务是一条流水线，前一步的表就是后一步的输入，<strong>顺序不能乱</strong>：威胁识别表 + 脆弱性分析表 → 风险计算表 → 风险评估报告。所有素材都来自前序任务的成果（实验三资产清单、任务 4 的扫描与核查记录），这正是"以测促评"的体现。</div>
+                        <div class="lab-goal"><strong>任务目标：</strong>四个子任务是一条流水线，前一步的表就是后一步的输入，<strong>顺序不能乱</strong>：威胁识别表 + 脆弱性分析表 → 风险计算表 → 风险评估报告。所有素材都来自前序任务的成果（技能三资产清单、任务 4 的扫描与核查记录），这正是"以测促评"的体现。</div>
                         <ol class="step-list">
                             <li><strong>8.2 威胁识别与赋值。</strong>针对关键资产，从<strong>威胁源（谁）× 威胁行为（怎么搞）</strong>两个维度列表：威胁源包括环境因素（断电、火灾、水灾）、人为无意（误操作）、人为有意（病毒、黑客、内部恶意人员）。每条威胁按<strong>出现频率</strong>赋值（5=很可能每年发生 / 3=可能 / 1=罕见），并写明判断依据（如"系统暴露于互联网 → 漏洞扫描类威胁赋 5"）。</li>
                             <li><strong>8.3 脆弱性识别与赋值。</strong>直接翻任务 4 的成果：<strong>漏洞扫描报告里的漏洞 + 核查记录里的"不符合"项</strong>，逐条整理成脆弱性清单，按严重程度赋值（5=可直接被利用导致严重后果 / 3=需一定条件 / 1=影响轻微）。每条脆弱性必须写"证据来源"（哪份报告/哪条记录）。</li>
@@ -2463,7 +2608,7 @@
                                 <span class="prompt-tpl-label">💬 提示词模板（报告润色）：</span>
                                 以下是我写的风险评估报告"风险处置建议"部分：【粘贴草稿】。请检查：① 建议是否与风险等级匹配（高风险的建议是否够"硬"）；② 是否存在空话（如"加强管理"这类没有动作的建议）；③ 语言是否像正式的评估报告。指出问题即可，不要整段替我重写。
                             </div>
-                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>让 AI 直接生成整套风险评估表格 = 期末最可能挂科的实验。评估的判断过程才是考核核心。</p>
+                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>让 AI 直接生成整套风险评估表格 = 期末最可能挂科的技能。评估的判断过程才是考核核心。</p>
                         </div>
                         <div class="lab-check">
                             <div class="lab-check-title">📋 交付自查</div>
@@ -2493,14 +2638,14 @@
                         </div>
                         <div class="concept-box">
                             <div class="concept-title">📝 学习通作业（唯一）</div>
-                            <p>绘制<strong>标准体系思维导图</strong>（含 1+N 体系、五级概览），提交至学习通。情景讨论、快问快答、实践任务1、平台实验一、单元测评等均为<strong>课堂练习</strong>；扩展阅读为《网络安全法》第二、三章相关条款摘录。</p>
+                            <p>绘制<strong>标准体系思维导图</strong>（含 1+N 体系、五级概览），提交至学习通。情景讨论、快问快答、技能任务1、平台技能一、单元测评等均为<strong>课堂练习</strong>；扩展阅读为《网络安全法》第二、三章相关条款摘录。</p>
                         </div>
                         <button class="quiz-btn" data-quiz="1.1">📝 单元测评</button>
                         <div class="quiz-btn-note">知识 · 技能 · 素养 三维考查，100 分通过</div>
                     </div>
                     <div class="exp-substage" id="exp-substage1.2">
-                        <h2>任务1.2 安全等级识别与实践</h2>
-                        <p><strong>学时：</strong>2学时（第1周）| <strong>形式：</strong>实验/实训室</p>
+                        <h2>任务1.2 安全等级识别与技能</h2>
+                        <p><strong>学时：</strong>2学时（第1周）| <strong>形式：</strong>技能/实训室</p>
                         <div class="concept-box">
                             <div class="concept-title">🎯 学习目标</div>
                             <p>能使用管理平台查看项目信息，识别等级差异；能对照标准判断不同等级测评指标的差异。</p>
@@ -2562,14 +2707,14 @@
                         </div>
                         <button class="quiz-btn" data-quiz="2.2">📝 单元测评</button>
                         <div class="quiz-btn-note">知识 · 技能 · 素养 三维考查，100 分通过</div>
-                        <div class="quiz-btn-note" style="color:#00838f;">🎮 本任务配套的"实践闯关 · 测评指挥官"已移至页面顶部进度条正下方，随时可进入（闯关进度按账号保存）</div>
+                        <div class="quiz-btn-note" style="color:#00838f;">🎮 本任务配套的"技能闯关 · 测评指挥官"已移至页面顶部进度条正下方，随时可进入（闯关进度按账号保存）</div>
                     </div>
                 </div>
 
                 <!-- 任务3说明 -->
                 <div class="exp-stage" id="exp-stage3">
                     <h2>任务3 物理环境与通信网络核查</h2>
-                    <p><strong>学时：</strong>4学时（第3周）| <strong>形式：</strong>实验/实训室</p>
+                    <p><strong>学时：</strong>4学时（第3周）| <strong>形式：</strong>技能/实训室</p>
                     <div class="concept-box">
                         <div class="concept-title">🎯 能力目标</div>
                         <p>能够依据GB/T 22239对物理环境和通信网络进行核查；能够规范填写测评记录表；具备现场核查与证据采集能力。</p>
@@ -2593,7 +2738,7 @@
                 <!-- 任务4说明 -->
                 <div class="exp-stage" id="exp-stage4">
                     <h2>任务4 区域边界与计算环境核查</h2>
-                    <p><strong>学时：</strong>10学时（第4-6周）| <strong>形式：</strong>实验/实训室</p>
+                    <p><strong>学时：</strong>10学时（第4-6周）| <strong>形式：</strong>技能/实训室</p>
                     <div class="concept-box">
                         <div class="concept-title">🎯 能力目标</div>
                         <p>能够对网络设备、安全设备、主机、数据库及应用系统进行安全配置核查与合规性测评；能够使用配置核查工具和漏洞扫描工具；具备工匠精神与责任意识。</p>
@@ -2617,7 +2762,7 @@
                 <!-- 任务5说明 -->
                 <div class="exp-stage" id="exp-stage5">
                     <h2>任务5 安全管理体系核查</h2>
-                    <p><strong>学时：</strong>4学时（第6-7周）| <strong>形式：</strong>实验+角色扮演/实训室</p>
+                    <p><strong>学时：</strong>4学时（第6-7周）| <strong>形式：</strong>技能+角色扮演/实训室</p>
                     <div class="concept-box">
                         <div class="concept-title">🎯 能力目标</div>
                         <p>掌握安全管理测评方法与证据采集技巧；能够进行人员访谈并记录关键信息；具备沟通协作能力与法治意识。</p>
@@ -2640,7 +2785,7 @@
 
                 <!-- 任务6说明 -->
                 <div class="exp-stage" id="exp-stage6">
-                    <h2>任务6 测评报告编制实践</h2>
+                    <h2>任务6 测评报告编制技能</h2>
                     <p><strong>学时：</strong>6学时（第7-8周）| <strong>形式：</strong>讲授+项目制作/实训室</p>
                     <div class="concept-box">
                         <div class="concept-title">🎯 能力目标</div>
@@ -2665,7 +2810,7 @@
                 <!-- 任务7说明 -->
                 <div class="exp-stage" id="exp-stage7">
                     <h2>任务7 安全扩展要求测评</h2>
-                    <p><strong>学时：</strong>16学时（第10-13周）| <strong>形式：</strong>讲授+实验/各模拟平台</p>
+                    <p><strong>学时：</strong>16学时（第10-13周）| <strong>形式：</strong>讲授+技能/各模拟平台</p>
                     <div class="concept-box">
                         <div class="concept-title">🎯 能力目标</div>
                         <p>能够依据GB/T 22239扩展要求对云计算、移动互联、物联网、工业控制系统进行安全测评；能够使用各模拟平台工具；具备新技术领域的安全视野与责任意识。</p>
@@ -2726,14 +2871,14 @@
             let currentStage = 0; // 0 = 首页
             const totalStages = timelineItems.length;
 
-            // ===== 内容分类切换：知识 / 实验 / AI 助学 =====
+            // ===== 内容分类切换：知识 / 技能 / 素养 =====
             // 每个任务（或子任务）页面的左侧内容按类型分为三组，通过顶部按钮切换；
             // 右侧说明面板为"单元简介"，始终直接显示。
             (function setupCategoryTabs() {
                 const CAT_DEFS = [
                     { key: 'knowledge', label: '📖 知识' },
-                    { key: 'lab', label: '🧪 实验' },
-                    { key: 'ai', label: '🤖 AI 助学' }
+                    { key: 'lab', label: '🧪 技能' },
+                    { key: 'ai', label: '🌟 素养' }
                 ];
 
                 // 内容块的分类规则
@@ -2741,7 +2886,7 @@
                     if (el.classList.contains('lab-box')) return 'lab';
                     if (el.classList.contains('ai-tip-box')) return 'ai';
                     if (el.classList.contains('coming-soon')) return 'lab';
-                    if (el.classList.contains('practice-box') && /实践任务/.test(el.textContent.slice(0, 80))) return 'lab';
+                    if (el.classList.contains('practice-box') && /技能任务/.test(el.textContent.slice(0, 80))) return 'lab';
                     return 'knowledge';
                 }
 
@@ -2795,16 +2940,16 @@
                         }
                     });
 
-                    // AI 助学组：自动生成"AI 求助点速查"索引（指向各实验内的 AI 求助框）
+                    // 素养组：自动生成"AI 求助点速查"索引（指向各技能内的 AI 求助框）
                     let tipCount = 0;
                     groups.lab.forEach(lab => {
-                        const labName = (lab.querySelector('.lab-head') || lab.querySelector('.concept-title') || { textContent: '实验' }).textContent.trim();
+                        const labName = (lab.querySelector('.lab-head') || lab.querySelector('.concept-title') || { textContent: '技能' }).textContent.trim();
                         lab.querySelectorAll('.ai-tip-box').forEach(tip => {
                             if (tipCount === 0) {
                                 const idx = document.createElement('div');
                                 idx.className = 'ai-index';
                                 idx.innerHTML = '<div class="ai-index-title">🤖 本任务 AI 求助点速查</div>' +
-                                    '<div class="ai-index-note">点击任意条目，自动切换到"实验"分类并定位到对应的 AI 求助框。</div>';
+                                    '<div class="ai-index-note">点击任意条目，自动切换到"技能"分类并定位到对应的 AI 求助框。</div>';
                                 groupEls.ai.appendChild(idx);
                             }
                             tipCount++;
@@ -2846,6 +2991,500 @@
                     } else {
                         buildTabsFor(stageEl);
                     }
+                });
+            })();
+
+            // ===== 素养培养案例（场景分析 + AI 点评） =====
+            // 每个任务按其知识点涉及的素养数量配备对应数量的场景案例；
+            // 学生阅读场景 → 写下分析 → "AI 点评"基于素养观察点做覆盖式即时点评，
+            // 也可"深度点评"组装提示词交给等保小助教（腾讯元器）逐句分析。
+            var SUYANG_CASES = {
+                '1.1': {
+                    title: '任务1.1 等保2.0标准体系框架学习',
+                    cases: [
+                        {
+                            id: 's11a', comp: '家国情怀 · 国家安全意识',
+                            title: '「等保就是走形式？」——一次宿舍卧谈引发的争论',
+                            scene: '宿舍夜谈时，学计算机的室友说：“等级保护就是有关部门搞形式主义，企业花钱买个‘牌照’而已，真出了事也没什么用。”另一位同学附和：新闻里的数据泄露事件没有一件是靠等保挡住的。你知道下周就要学习《网络安全法》和等保 2.0 标准体系，此刻你打算怎么回应？',
+                            question: '请结合国家网络安全形势与等级保护制度的设计初衷，说说你会如何回应室友？回应要既有事实依据，又能体现你对这项制度的理解与认同。',
+                            points: [
+                                { label: '国家安全视角', hint: '想一想：等保保护的是不是单个企业？关键信息基础设施一旦失守，影响的是谁？', kws: ['国家安全', '关键信息基础设施', '网络强国', '总体国家安全', '国家战略', '数据泄露', '攻击', '威胁', '国计民生'] },
+                                { label: '制度价值理解', hint: '想一想：等保到底是“买牌照”，还是“以标准促防护”？它给系统的安全能力带来了什么？', kws: ['以测促防', '防线', '底线', '防护能力', '安全水平', '合规', '制度', '要求', '体系', '保障', '提升'] },
+                                { label: '事实与理性表达', hint: '想一想：能不能举出具体案例或数据来支撑你的观点，而不是情绪化反驳？', kws: ['案例', '数据', '新闻', '事实', '例如', '比如', '举例', '统计', '报告', '勒索'] },
+                                { label: '职业认同与担当', hint: '想一想：作为未来的安全从业者，这项制度与你的职业价值有什么关系？', kws: ['使命', '责任', '职业', '安全行业', '从业人员', '守护', '保障', '价值', '我们'] }
+                            ]
+                        },
+                        {
+                            id: 's11b', comp: '法律意识',
+                            title: '「小公司内网系统不用备案？」——老板的法律盲区',
+                            scene: '你在某测评机构实习，跟随师傅拜访一家做社区团购的小公司。老板听说要做等级保护，摆摆手：“我们就十几个人用的内网订货系统，又不对公众开放，定什么级、备什么案？从来没部门来查过。”师傅让你先分析一下老板的说法错在哪里。',
+                            question: '请依据《网络安全法》关于等级保护制度的条款精神，分析老板说法中的法律认识误区，并说明该公司若拒不履行定级备案义务可能面临什么后果。',
+                            points: [
+                                { label: '法律义务的普适性', hint: '想一想：《网络安全法》第二十一条规定的安全保护义务，是只针对大企业吗？', kws: ['网络安全法', '第二十一条', '法定义务', '义务', '网络运营者', '所有', '必须', '应当', '履行'] },
+                                { label: '定级备案要求', hint: '想一想：不对公众开放的内部系统，就完全排除在定级备案之外吗？等级如何确定？', kws: ['定级', '备案', '公安机关', '二级', '等级', '分级', '保护', '内网'] },
+                                { label: '违法后果', hint: '想一想：不履行网络安全保护义务，监管部门可以采取哪些措施？', kws: ['处罚', '罚款', '责令改正', '警告', '法律责任', '违法', '监管', '处罚措施'] },
+                                { label: '合规建议与沟通', hint: '想一想：面对客户的法律盲区，是指责他，还是帮他算清合规账？', kws: ['建议', '合规', '风险', '说明', '解释', '沟通', '帮助', '提醒'] }
+                            ]
+                        },
+                        {
+                            id: 's11c', comp: '标准规范意识',
+                            title: '「凭经验就够了」——学长的一句“过来人”忠告',
+                            scene: '实习时带你的学长说：“标准条文又厚又绕，实际做项目没人真去翻 GB/T 28448，凭经验判断就行，客户也不懂。”你想了想课上学的“1+N”标准体系，对这句话产生了疑问。',
+                            question: '请分析“凭经验、不依据标准”的测评做法可能带来哪些问题？并说明标准体系对测评工作的实际意义。',
+                            points: [
+                                { label: '判定依据意识', hint: '想一想：测评报告里的“符合/不符合”，判定依据应该是经验还是标准条款？', kws: ['依据', '标准', '条文', 'GB/T', '28448', '22239', '测评指标', '对照', '逐条'] },
+                                { label: '质量与风险后果', hint: '想一想：脱离标准判定，出现漏测误判时，责任由谁承担？', kws: ['争议', '投诉', '责任', '漏测', '误判', '风险', '质量', '纠纷', '报告'] },
+                                { label: '标准体系的价值', hint: '想一想：为什么全国测评机构要遵循同一套标准？统一尺度意味着什么？', kws: ['统一', '尺度', '可比', '规范', '一致', '权威', '1+N', '体系', '公信力'] }
+                            ]
+                        }
+                    ]
+                },
+                '1.2': {
+                    title: '任务1.2 安全等级识别与技能操作',
+                    cases: [
+                        {
+                            id: 's12a', comp: '责任意识',
+                            title: '「就定二级吧」——客户的一个“小要求”',
+                            scene: '小组为“政务服务中心综合管理平台”做定级练习时，有同学提出：“这个系统就定二级吧，三级测评项目多、费用高，案例里也没写清楚服务人群规模。”你注意到材料里提到该系统面向全区群众办理各类政务服务。',
+                            question: '请分析“图省事定低级”的做法有什么危害？作为参与定级的人员，你认为正确的做法是什么？',
+                            points: [
+                                { label: '定级要素运用', hint: '想一想：定级依据的是费用，还是“受侵害客体+危害程度”两要素？', kws: ['受侵害客体', '公民', '法人', '公共利益', '社会秩序', '国家安全', '危害程度', '严重损害', '业务信息', '系统服务'] },
+                                { label: '责任与后果意识', hint: '想一想：定级过低导致防护不足，一旦发生安全事件，谁承担责任？', kws: ['责任', '保护不足', '防护', '风险', '危害', '后果', '安全事件', '失职'] },
+                                { label: '实事求是处理', hint: '想一想：材料信息不清时，正确的动作是迁就成本，还是核实求证？', kws: ['核实', '调查', '证据', '材料', '依据', '如实', '客观', '重新', '梳理'] }
+                            ]
+                        },
+                        {
+                            id: 's12b', comp: '严谨求实',
+                            title: '「差不多先定上」——定级材料缺项时的选择',
+                            scene: '定级作业提交前 20 分钟，你们组发现“业务信息安全保护等级”和“系统服务安全保护等级”两栏还空着——大家对业务信息丢失后“侵害客体是谁”争执不下。组长说：“差不多得了，都填二级，先交作业再说。”',
+                            question: '请分析“差不多”心态在定级工作中的隐患，并给出你们组此时更严谨的处理办法。',
+                            points: [
+                                { label: '定级严谨性', hint: '想一想：定级结论会影响后续哪些工作？它容得下“差不多”吗？', kws: ['逐项', '分析', '依据', '定级要素', '流程', '核对', '准确', '审查', '影响'] },
+                                { label: '分歧的正确处理', hint: '想一想：争执不下时，是和稀泥，还是回到标准原文找依据？', kws: ['讨论', '查标准', '咨询', '求证', '材料', '重新梳理', '证据', '请教', '原文'] },
+                                { label: '职业习惯养成', hint: '想一想：测评行业中“差不多”会酿成什么？该养成什么习惯？', kws: ['习惯', '养成', '记录', '留痕', '复核', '流程', '规范', '大忌'] }
+                            ]
+                        }
+                    ]
+                },
+                '2.1': {
+                    title: '任务2.1 测评方案结构学习',
+                    cases: [
+                        {
+                            id: 's21a', comp: '保密意识',
+                            title: '一份方案引发的“泄密风波”',
+                            scene: '为了方便小组周末讨论，你把某单位测评方案的电子版（含网络拓扑图、IP 地址、安全设备部署位置、联系人手机号）发进了 30 人的班级 QQ 群，还上传到了一个公开的网盘分享链接。',
+                            question: '请分析这一行为可能造成哪些危害？作为测评项目组成员，正确的做法应当是什么？',
+                            points: [
+                                { label: '敏感信息识别', hint: '想一想：方案里的拓扑、IP、人员信息，对攻击者意味着什么？', kws: ['拓扑', 'IP', '敏感', '涉密', '个人信息', '泄露', '资产', '部署', '联系人'] },
+                                { label: '泄露后果评估', hint: '想一想：信息进入公开群和网盘后，还能收得回来吗？会被谁利用？', kws: ['攻击', '利用', '爬取', '风险', '危害', '扩散', '不可控', '安全事件', '收回'] },
+                                { label: '正确保密做法', hint: '想一想：小组讨论一定要用原始方案吗？知悉范围如何控制？', kws: ['脱敏', '授权', '最小', '范围', '权限', '删除', '撤回', '加密', '内部', '合规'] }
+                            ]
+                        },
+                        {
+                            id: 's21b', comp: '规范意识',
+                            title: '「套模板五分钟搞定」——方案的“复制粘贴病”',
+                            scene: '编制测评方案练习时，你发现上一届学长做的医院项目方案结构几乎一样。同组同学提议：“直接套模板，把单位名一改、日期一改就交，五分钟搞定。”你翻到方案的“测评对象”章节，发现里面写的是病房呼叫系统和 PACS 影像系统。',
+                            question: '请分析“只改名不改编”的套模板做法错在哪里，并说明测评方案中哪些内容必须结合本项目实际情况重新确定。',
+                            points: [
+                                { label: '模板复用的边界', hint: '想一想：模板能借的是“结构”还是“内容”？哪些内容必须逐项核对？', kws: ['结构', '框架', '复用', '内容', '实际情况', '逐项', '核对', '修改', '删减', '适配'] },
+                                { label: '方案关键要素', hint: '想一想：测评对象、指标裁剪、测评方法这些要素，换了项目还能照抄吗？', kws: ['测评对象', '范围', '指标', '裁剪', '方法', '人员', '工具', '系统构成', '资产'] },
+                                { label: '后果意识', hint: '想一想：方案里出现“病房呼叫系统”，后面会闹出什么笑话、造成什么后果？', kws: ['错误', '张冠李戴', '返工', '无效', '质量', '失实', '误导', '评审'] }
+                            ]
+                        }
+                    ]
+                },
+                '2.2': {
+                    title: '任务2.2 编制完整测评方案',
+                    cases: [
+                        {
+                            id: 's22a', comp: '诚信意识',
+                            title: '「买一份方案交差」——期末周的诱惑',
+                            scene: '期末周，你们组要提交完整测评方案。有同学在群里发了个链接：“网上有现成的等保测评方案，30 块一份，改改名字就能交，老师一个班几十份根本看不过来。”',
+                            question: '请从课程考核诚信与职业风险两个层面，分析购买方案代交的行为，并说明如果确实时间紧张，哪些做法才是可接受的。',
+                            points: [
+                                { label: '学术诚信底线', hint: '想一想：购买代交在课程考核中属于什么性质的行为？', kws: ['抄袭', '作弊', '诚信', '代写', '独立', '原创', '考核', '违纪', '处分'] },
+                                { label: '职业风险推演', hint: '想一想：这门课混过去了，走上真实测评岗位时会暴露什么？', kws: ['能力', '胜任', '实际工作', '法律', '责任', '后果', '执业', '信任', '岗位'] },
+                                { label: '合理求助的边界', hint: '想一想：请教、讨论、参考公开资料和“买一份交差”之间的界线在哪里？', kws: ['请教', '讨论', '参考', '公开资料', '模板', '标注', '引用', '求助', 'AI 辅助', '学习'] }
+                            ]
+                        },
+                        {
+                            id: 's22b', comp: '团队协作',
+                            title: '「划水」的组员与全包的你',
+                            scene: '小组编制测评方案分工后，负责“测评方法与工具”章节的同学一直说“在写了在写了”，直到截止前两天才承认基本没动。你能力强，自己重写这一章只要一个晚上。组长问你怎么办。',
+                            question: '请分析“你全包”和“让他挂科”之外更好的处理方式，并说明团队协作中如何避免这种情况再次发生。',
+                            points: [
+                                { label: '沟通与责任界定', hint: '想一想：先做什么？直接全包，还是先了解原因、明确责任？', kws: ['沟通', '了解原因', '提醒', '责任', '明确', '分工', '督促', '反馈'] },
+                                { label: '协作机制建设', hint: '想一想：怎么让“最后两天才发现没写”不再发生？', kws: ['节点', '检查', '里程碑', '进度', '透明', '互相', '备份', '确认', '排期'] },
+                                { label: '共同成长导向', hint: '想一想：团队的目标是“交作业”还是“每个人都学会”？', kws: ['帮助', '辅导', '讲解', '一起', '成长', '团队', '目标', '补上'] }
+                            ]
+                        }
+                    ]
+                },
+                '3': {
+                    title: '任务3 物理与网络核查',
+                    cases: [
+                        {
+                            id: 's3a', comp: '严谨求实 · 证据意识',
+                            title: '「记录坏了，你先写符合」——现场核查的第一道考验',
+                            scene: '机房核查时你要查看机房出入登记记录，陪同的运维人员说：“登记本是纸质的经常丢，门禁系统记录也导不出来，你就先写‘符合’吧，我们回头补一份给你。”',
+                            question: '请分析为什么不能按他说的“先写符合”？你应当如何处理才能既坚持原则又不失分寸？',
+                            points: [
+                                { label: '证据链原则', hint: '想一想：“符合”的判定依据是口头承诺，还是客观证据？', kws: ['证据', '依据', '客观', '事实', '判定', '采信', '存疑', '不能', '没有'] },
+                                { label: '规范处理方式', hint: '想一想：确实取不到证据时，测评记录应该怎么写？', kws: ['记录', '说明', '不符合', '部分符合', '备注', '标注', '复核', '改期', '情况说明'] },
+                                { label: '原则与分寸并存', hint: '想一想：怎样既不迁就对方，又不把现场关系搞僵？', kws: ['礼貌', '解释', '标准', '坚持', '立场', '专业', '说明理由', '规则'] }
+                            ]
+                        },
+                        {
+                            id: 's3b', comp: '职业操守',
+                            title: '「都是熟人，高抬贵手」——老关系户的暗示',
+                            scene: '核查安全管理制度时，被测评单位的信息中心主任半开玩笑地说：“咱们合作这么多年了，那几条不合规的你少记两条，年底续约我都跟你们老板打好招呼了。”',
+                            question: '请分析如果你照做了，对客户、测评机构和你个人分别意味着什么？你的正确做法是什么？',
+                            points: [
+                                { label: '职业底线意识', hint: '想一想：测评结论可以被“关系”和利益改写吗？', kws: ['拒绝', '底线', '如实', '真实', '违规', '失实', '原则', '独立', '客观'] },
+                                { label: '连锁危害推演', hint: '想一想：隐瞒的不符合项会带来什么连锁后果？', kws: ['风险', '隐患', '整改', '事故', '责任', '机构', '资质', '信誉', '法律'] },
+                                { label: '得体的应对路径', hint: '想一想：是私下妥协、硬顶，还是走机构的正规流程？', kws: ['说明', '标准', '流程', '回避', '上报', '记录', '报告', '机构', '制度'] }
+                            ]
+                        }
+                    ]
+                },
+                '4': {
+                    title: '任务4 边界与计算环境测评',
+                    cases: [
+                        {
+                            id: 's4a', comp: '批判性思维 · AI 使用伦理',
+                            title: 'AI 判定与你的手工核对不一致时',
+                            scene: '使用 JSecProbe 的 AI 辅助分析功能核查服务器配置时，AI 给出“身份鉴别项符合”的建议，但你手工核对的截图显示该服务器 root 远程登录未禁用、口令策略也不满足要求。提交记录前，同组同学说：“AI 比你专业，以 AI 为准吧。”',
+                            question: '请分析“以 AI 为准”的说法问题在哪，并说明测评人员与 AI 之间正确的分工关系。',
+                            points: [
+                                { label: '人机分工认知', hint: '想一想：机器负责什么？最终判定权和责任在谁？', kws: ['人', '最终', '判定权', '责任', '辅助', '参考', '工具', '复核', '不能代替'] },
+                                { label: '核实与溯源', hint: '想一想：两个结论冲突时，应该相信哪边的证据？要不要再验证一次？', kws: ['证据', '截图', '核对', '验证', '回查', '重新', '依据', '配置', '原文'] },
+                                { label: '批判性使用 AI', hint: '想一想：AI 会不会出错？它的结论需要交叉验证吗？', kws: ['局限', '误差', '幻觉', '不轻信', '质疑', '交叉', '验证', '红线', '边界'] }
+                            ]
+                        },
+                        {
+                            id: 's4b', comp: '耐心细致 · 全覆盖意识',
+                            title: '「跳着测，省时间」——计算环境的“缩水”风险',
+                            scene: '安全计算环境有 11 个子类、测评项上百条。核查到下午四点，同组同学提议：“服务器配置都差不多，测一台代表机就代表全部吧，剩下的跳过，反正抽查不出来。”你想起任务 4 的定位是“工作量最大的重头戏”。',
+                            question: '请分析“代表机=全部”“跳着测”的做法对测评结论可靠性的影响，并给出既保证覆盖又提高效率的可行办法。',
+                            points: [
+                                { label: '覆盖度意识', hint: '想一想：只测一台，结论能代表全部吗？漏掉的部分谁兜底？', kws: ['全覆盖', '逐台', '抽样', '代表', '遗漏', '漏测', '偏差', '结论', '风险'] },
+                                { label: '规范抽样意识', hint: '想一想：如果确实要抽样，报告里必须交代什么？', kws: ['抽样', '规则', '同类', '说明', '备注', '记录', '依据', '明确', '范围'] },
+                                { label: '效率提升方法', hint: '想一想：除了砍覆盖，还有什么办法能又快又稳？', kws: ['自动化', '工具', '批量', '核查', '分组', '模板', '复用', '计划', '分工'] }
+                            ]
+                        }
+                    ]
+                },
+                '5': {
+                    title: '任务5 安全管理测评',
+                    cases: [
+                        {
+                            id: 's5a', comp: '沟通表达',
+                            title: '紧张的安全管理员与“问不出”的访谈',
+                            scene: '访谈安全管理员时，对方一问三不知，只会说“这个是外包公司弄的”“我是新来的不清楚”。访谈 40 分钟毫无收获，记录几乎空白。同组建议：“干脆按制度文档写了算，访谈走过场。”',
+                            question: '请分析“走过场”的问题，并说明你会如何设计与实施这次访谈（准备、提问技巧、记录）。',
+                            points: [
+                                { label: '访谈的证据价值', hint: '想一想：访谈在管理类测评中验证的是什么？制度写了就等于做了吗？', kws: ['访谈', '执行', '落地', '核实', '佐证', '证据', '真实', '制度'] },
+                                { label: '提问与准备技巧', hint: '想一想：开放式问题、具体化追问、提前发提纲、更换访谈对象，哪些用得上？', kws: ['开放式', '具体', '场景', '举例', '最近', '逐条', '引导', '换人', '提前', '提纲'] },
+                                { label: '记录规范', hint: '想一想：访谈记录怎样才算规范的证据？', kws: ['记录', '如实', '签字', '确认', '整理', '要点', '留痕'] }
+                            ]
+                        },
+                        {
+                            id: 's5b', comp: '服务意识',
+                            title: '「你们就是来找茬的」——被误解的测评',
+                            scene: '整改沟通会上，被测评单位的信息主管情绪激动：“你们出的报告 30 多条不符合，领导都找我谈话了！你们测评就是来找茬、卡我们脖子的！”现场气氛紧张。',
+                            question: '请分析如何理解“以测促防”的服务定位，并说明你会如何回应这位主管、如何让后续整改沟通更顺畅。',
+                            points: [
+                                { label: '服务定位认知', hint: '想一想：测评的初心是“挑毛病”还是“帮客户看清风险”？', kws: ['以测促防', '帮助', '改进', '防线', '价值', '共同', '安全', '服务', '初心'] },
+                                { label: '回应与共情技巧', hint: '想一想：先安抚情绪再讲道理，还是直接甩标准？判定的客观性怎么讲清楚？', kws: ['共情', '理解', '解释', '依据', '标准', '客观', '协商', '耐心', '倾听'] },
+                                { label: '整改支持行动', hint: '想一想：报告之外，还能给客户什么实际帮助？', kws: ['整改', '建议', '方案', '优先级', '辅导', '跟踪', '可行性', '配合'] }
+                            ]
+                        }
+                    ]
+                },
+                '6': {
+                    title: '任务6 测评报告编制',
+                    cases: [
+                        {
+                            id: 's6a', comp: '诚信与责任',
+                            title: '「改成符合，客户要拿去投标」——报告定稿前的最后压力',
+                            scene: '测评报告定稿前，项目经理转达客户要求：“把 6 条‘部分符合’都改成‘符合’，客户要拿这份报告去投标，不能有瑕疵。改动很小，没人会查到。”',
+                            question: '请分析修改判定结论涉及的法律与职业风险，并说明你的应对步骤。',
+                            points: [
+                                { label: '法律后果认知', hint: '想一想：出具失实测评报告，机构和签字人员要承担什么？', kws: ['虚假', '失实', '法律', '责任', '取消', '资质', '处罚', '投标', '违法', '弄虚作假'] },
+                                { label: '职业底线', hint: '想一想：判定结论可以被商业利益改写吗？', kws: ['拒绝', '底线', '如实', '原则', '不能', '独立', '客观', '真实', '证据'] },
+                                { label: '应对路径', hint: '想一想：私下改、硬顶，还是按机构流程上报并留痕？', kws: ['上报', '机构', '沟通', '说明', '留痕', '记录', '申诉', '制度', '流程'] }
+                            ]
+                        },
+                        {
+                            id: 's6b', comp: '保密意识 · 数据安全',
+                            title: '把报告喂给公共 AI 的“高效”润色',
+                            scene: '报告初稿文字粗糙，你想让它更专业，于是把报告整章（含客户单位名称、系统名称、IP 段、漏洞明细）粘贴到某个免费公共 AI 网页工具里“帮忙润色”。同组同学提醒你这可能有风险，你觉得“又没人看得到”。',
+                            question: '请分析向公共 AI 工具提交客户敏感信息的风险，并说明在必须使用 AI 辅助时的正确做法。',
+                            points: [
+                                { label: '风险识别', hint: '想一想：公共 AI 工具的隐私条款里，输入的内容可能被如何处理？', kws: ['敏感', '泄露', '公开', '上传', '第三方', '隐私', '条款', '留存', '滥用', '数据'] },
+                                { label: '脱敏处理', hint: '想一想：交给 AI 之前，哪些信息必须先抹掉？', kws: ['脱敏', '匿名', '代替', '删除', '遮蔽', '示例', '化名', '占位'] },
+                                { label: '合规边界', hint: '想一想：机构保密制度和客户授权，允许这样做吗？', kws: ['制度', '授权', '同意', '审批', '机构', '红线', '规定', '保密协议'] }
+                            ]
+                        }
+                    ]
+                },
+                '7': {
+                    title: '任务7 扩展要求测评',
+                    cases: [
+                        {
+                            id: 's7a', comp: '终身学习',
+                            title: '「学不完的新技术」——云计算时代的本领恐慌',
+                            scene: '学习扩展要求（云计算、移动互联、物联网、工控）时，你发现每个领域的安全架构和扩展指标都不一样，标准还隔几年就修订。你有点沮丧：“刚学会的东西就过时了，这行是不是要一直被‘追着跑’？”',
+                            question: '请分析安全行业“知识快速迭代”的特点对从业者意味着什么，并制定你自己的持续学习策略。',
+                            points: [
+                                { label: '行业特性认知', hint: '想一想：快速迭代是安全行业的例外，还是常态？为什么？', kws: ['常态', '迭代', '更新', '变化', '快速', '演进', '攻防', '对抗'] },
+                                { label: '学习方法构建', hint: '想一想：跟踪标准、关注资讯、以原理不变应万变，你的学习体系怎么搭？', kws: ['标准', '跟踪', '关注', '社区', '资讯', '证书', '体系', '原理', '基础'] },
+                                { label: '心态调适', hint: '想一想：本领恐慌怎么化解？规划、基础、长期主义？', kws: ['恐慌', '焦虑', '规划', '成长', '长期', '习惯', '扎实', '沉淀'] }
+                            ]
+                        },
+                        {
+                            id: 's7b', comp: '创新意识',
+                            title: '从“人肉逐项”到“人机协同”——一次效率革命的机会',
+                            scene: '实习时你发现师傅们仍在用 Excel 手工逐项核对几百条测评指标，一做就是一周。你想到课上用过的自动化核查和 AI 辅助分析，忍不住想：“要是我来设计流程，能不能又快又稳？”',
+                            question: '请提出你的创新改进思路，并说明在引入自动化/AI 时必须守住哪些底线，才能让创新真正安全落地。',
+                            points: [
+                                { label: '创新思路落地', hint: '想一想：自动化核查、脚本、批量比对、流程模板，具体怎么组合？', kws: ['自动化', '工具', '脚本', '批量', '模板', '流程', '协同', '平台', '优化'] },
+                                { label: '守住底线', hint: '想一想：机器跑得再快，哪一步必须留给人？判定权放不放？', kws: ['人工', '复核', '抽查', '验证', '责任', '判定', '红线', '监督', '不能'] },
+                                { label: '稳妥推进', hint: '想一想：直接全面铺开，还是先小范围试点对比效果？', kws: ['试点', '评估', '风险', '逐步', '验证', '质量', '对比', '反馈'] }
+                            ]
+                        }
+                    ]
+                },
+                '8': {
+                    title: '任务8 风险评估',
+                    cases: [
+                        {
+                            id: 's8a', comp: '独立判断 · 批判性思维',
+                            title: '「老师看不出来的」——AI 代做的风险评估表格',
+                            scene: '风险评估要产出威胁识别表、脆弱性分析表、风险计算表。有同学把情景素材直接丢给 AI，五分钟生成一整套表格，还劝你：“判断依据随便编两句就行，老师又看不出来。”',
+                            question: '请分析“AI 代做全套表格”为什么被课程列为红线，以及你应如何正确借助 AI 完成这次评估作业。',
+                            points: [
+                                { label: '红线的原因', hint: '想一想：这门课考核的是“表格”还是“判断过程”？', kws: ['判断', '过程', '核心', '考核', '能力', '替代', '思考', '分析', '空心'] },
+                                { label: 'AI 的正确用法', hint: '想一想：查资料、解释概念、校对格式可以吗？赋值判断呢？', kws: ['辅助', '解释', '查资料', '启发', '校对', '格式', '建议', '讨论', '边界', '不能代替'] },
+                                { label: '失实的代价', hint: '想一想：AI 生成的赋值若脱离情景实际，结论会怎样？', kws: ['失真', '错误', '风险', '无效', '误导', '不实', '漏洞', '隐患'] }
+                            ]
+                        },
+                        {
+                            id: 's8b', comp: '职业道德',
+                            title: '「把风险写低一点」——结论栏里的良心',
+                            scene: '风险评估报告结论将直接影响客户今年的整改预算。客户安全负责人私下找到你：“高风险改成中风险吧，预算审批太麻烦了，明年我们一定改。”你算了算，改成中风险确实能帮客户省下一大笔钱。',
+                            question: '请分析风险等级结论被“人为调低”后的连锁后果，并说明你的职业立场与处理方式。',
+                            points: [
+                                { label: '客观公正立场', hint: '想一想：风险等级是“商量出来的”，还是“算出来的”？', kws: ['客观', '如实', '依据', '计算', '数据', '不能', '独立', '真实', '方法'] },
+                                { label: '连锁后果推演', hint: '想一想：等级调低 → 整改不足 → 隐患留存，出了事谁担责？', kws: ['整改', '防护', '风险', '隐患', '事故', '责任', '误导', '决策', '预算'] },
+                                { label: '得体的处理方式', hint: '想一想：不篡改结论的前提下，能不能帮客户想别的办法？', kws: ['解释', '依据', '沟通', '上报', '原则', '分寸', '建议', '分期', '替代'] }
+                            ]
+                        }
+                    ]
+                }
+            };
+
+            (function setupSuyangCases() {
+                function taskKeyOf(el) {
+                    var id = el.id || '';
+                    if (id.indexOf('substage') === 0) return id.slice(8);
+                    if (id.indexOf('stage') === 0) return id.slice(5);
+                    return '';
+                }
+                function userTag() {
+                    try {
+                        var u = (window.identity && typeof window.identity.currentUser === 'function') ? window.identity.currentUser() : null;
+                        var id = u ? (u.id || u.email || '') : '';
+                        if (!id) return 'anon';
+                        var h = 5381;
+                        for (var i = 0; i < id.length; i++) h = ((h << 5) + h + id.charCodeAt(i)) >>> 0;
+                        return (h >>> 0).toString(36);
+                    } catch (e) { return 'anon'; }
+                }
+                function syKey(id) { return 'isec_sy_v1_' + userTag() + '_' + id; }
+                function norm(t) { return String(t || '').toLowerCase().replace(/\s+/g, ''); }
+                function esc(t) {
+                    return String(t == null ? '' : t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                }
+                function toast(msg) {
+                    var t = document.getElementById('sy-toast');
+                    if (!t) {
+                        t = document.createElement('div');
+                        t.id = 'sy-toast';
+                        t.className = 'sy-toast';
+                        document.body.appendChild(t);
+                    }
+                    t.textContent = msg;
+                    t.classList.add('show');
+                    clearTimeout(t._tm);
+                    t._tm = setTimeout(function () { t.classList.remove('show'); }, 3200);
+                }
+                function copyText(text, done) {
+                    function legacy() {
+                        var ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        try { document.execCommand('copy'); } catch (e) { /* noop */ }
+                        document.body.removeChild(ta);
+                        done();
+                    }
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(done, legacy);
+                    } else { legacy(); }
+                }
+                function openAssistant() {
+                    var panel = document.getElementById('db-assistant-panel');
+                    var trigger = document.getElementById('db-assistant-trigger');
+                    if (panel && trigger && !panel.classList.contains('open')) trigger.click();
+                }
+
+                // AI 即时点评：基于素养观察点关键词覆盖度生成结构化反馈
+                function analyze(caseData, answer) {
+                    var nAns = norm(answer);
+                    var len = answer.replace(/\s/g, '').length;
+                    var hits = [], misses = [];
+                    caseData.points.forEach(function (p) {
+                        var ok = p.kws.some(function (k) { return nAns.indexOf(norm(k)) !== -1; });
+                        (ok ? hits : misses).push(p);
+                    });
+                    var total = caseData.points.length;
+                    var cover = total ? hits.length / total : 0;
+                    var level, levelCls, levelText;
+                    if (len < 30) {
+                        level = 'c'; levelCls = 'sy-level-c'; levelText = '回答太简短，先展开再点评';
+                    } else if (cover >= 0.75 && len >= 80) {
+                        level = 'a'; levelCls = 'sy-level-a'; levelText = '素养表现优秀';
+                    } else if (cover >= 0.45) {
+                        level = 'b'; levelCls = 'sy-level-b'; levelText = '素养表现良好，仍有提升空间';
+                    } else {
+                        level = 'c'; levelCls = 'sy-level-c'; levelText = '有待提升，建议重新梳理场景';
+                    }
+                    var html = '<div class="sy-result-head">' +
+                        '<span class="sy-level ' + levelCls + '">📊 ' + levelText + '</span>' +
+                        '<span style="font-size:0.82rem;color:#888;">观察点覆盖 ' + hits.length + '/' + total + ' · ' + len + ' 字</span>' +
+                        '</div>';
+                    if (len < 30) {
+                        html += '<p>✍️ 你的回答还不到 30 字。素养分析贵在“把场景想透、把做法说具体”——建议按“识别问题 → 分析依据 → 给出做法”三步重新组织，写 100 字以上再点评。</p>';
+                    }
+                    if (hits.length) {
+                        html += '<p>✅ <strong>已体现的素养要点：</strong></p><ul class="sy-pts">' +
+                            hits.map(function (p) { return '<li class="hit"><span class="sy-pt-name">' + esc(p.label) + '</span></li>'; }).join('') + '</ul>';
+                    }
+                    if (misses.length) {
+                        html += '<p>💡 <strong>建议进一步思考（点击“深度点评”可获得更细致的启发）：</strong></p><ul class="sy-pts">' +
+                            misses.map(function (p) { return '<li class="miss"><span class="sy-pt-name">' + esc(p.label) + '</span>——' + esc(p.hint) + '</li>'; }).join('') + '</ul>';
+                    }
+                    if (level !== 'c' || len >= 30) {
+                        html += '<p>🔍 <strong>深化追问：</strong>试着把你的结论落实到具体行动上——如果是你本人处在场景中，第一步会做什么？对方不配合时又怎么办？</p>';
+                    }
+                    html += '<p style="font-size:0.8rem;color:#999;">以上为 AI 基于素养观察点的自动点评。点击「🛡️ 深度点评」可把场景与你的回答交给等保小助教，获得逐句分析。</p>';
+                    return html;
+                }
+
+                // 组装深度点评提示词
+                function buildPrompt(caseData, unitTitle, answer) {
+                    var pts = caseData.points.map(function (p, i) { return (i + 1) + '. ' + p.label + '：' + p.hint; }).join('\n');
+                    return '【素养培养案例 · 场景分析】' + unitTitle + '\n' +
+                        '【案例】《' + caseData.title + '》（考察素养：' + caseData.comp + '）\n' +
+                        '【场景】' + caseData.scene + '\n' +
+                        '【问题】' + caseData.question + '\n' +
+                        '【素养观察点】\n' + pts + '\n' +
+                        '【我的回答】\n' + (answer || '（还没有作答）') + '\n\n' +
+                        '请你作为《信息安全测评与风险评估》课程的素养导师点评我的回答：' +
+                        '① 肯定我回答中已经体现的素养要点；② 指出遗漏的观察点，给我启发式提示（先不要直接给标准答案）；' +
+                        '③ 结合等保测评职业情境给出具体的改进建议；④ 用一句话总结我在该素养上的成长方向。';
+                }
+
+                function buildCaseEl(caseData, idx, unitTitle) {
+                    var el = document.createElement('div');
+                    el.className = 'sy-case';
+                    el.innerHTML =
+                        '<div class="sy-case-head">' +
+                        '<span class="sy-case-no">案例 ' + (idx + 1) + '</span>' +
+                        '<span class="sy-comp">素养：' + esc(caseData.comp) + '</span>' +
+                        '<span class="sy-case-title">' + esc(caseData.title) + '</span>' +
+                        '</div>' +
+                        '<div class="sy-scene"><strong>🎬 场景：</strong>' + esc(caseData.scene) + '</div>' +
+                        '<div class="sy-q"><strong>❓ 请分析：</strong>' + esc(caseData.question) + '</div>' +
+                        '<textarea class="sy-answer" placeholder="结合场景写出你的分析（识别问题 → 分析依据 → 给出做法，建议 100 字以上）。答案会自动保存在本机，换电脑请先复制备份。"></textarea>' +
+                        '<div class="sy-actions">' +
+                        '<button type="button" class="sy-btn">🤖 AI 点评我的答案</button>' +
+                        '<button type="button" class="sy-btn-ghost">🛡️ 深度点评（等保小助教）</button>' +
+                        '<span class="sy-draft-tip"></span>' +
+                        '</div>' +
+                        '<div class="sy-result"></div>' +
+                        '<details class="sy-ref"><summary>👀 偷看一下：本案例考察哪些素养观察点？</summary>' +
+                        '<div class="sy-ref-box">' + caseData.points.map(function (p) { return '· <strong>' + esc(p.label) + '</strong>：' + esc(p.hint); }).join('<br>') + '</div>' +
+                        '</details>';
+
+                    var ta = el.querySelector('.sy-answer');
+                    var result = el.querySelector('.sy-result');
+                    var draftTip = el.querySelector('.sy-draft-tip');
+                    var btnAI = el.querySelectorAll('.sy-actions button')[0];
+                    var btnDeep = el.querySelectorAll('.sy-actions button')[1];
+
+                    // 载入本地草稿
+                    try {
+                        var saved = localStorage.getItem(syKey(caseData.id));
+                        if (saved) {
+                            ta.value = saved;
+                            draftTip.textContent = '已恢复上次草稿';
+                        }
+                    } catch (e) { /* noop */ }
+
+                    var saveTm = null;
+                    ta.addEventListener('input', function () {
+                        draftTip.textContent = '草稿保存中…';
+                        clearTimeout(saveTm);
+                        saveTm = setTimeout(function () {
+                            try { localStorage.setItem(syKey(caseData.id), ta.value); } catch (e) { /* noop */ }
+                            draftTip.textContent = '草稿已自动保存';
+                        }, 600);
+                    });
+
+                    btnAI.addEventListener('click', function () {
+                        var ans = ta.value.trim();
+                        result.innerHTML = analyze(caseData, ans);
+                        result.classList.add('show');
+                        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        if (typeof trackOperation === 'function') trackOperation('素养案例AI点评', caseData.comp + ' · ' + caseData.title);
+                    });
+
+                    btnDeep.addEventListener('click', function () {
+                        var ans = ta.value.trim();
+                        if (!ans) { toast('请先写下你的分析，再请等保小助教深度点评～'); ta.focus(); return; }
+                        copyText(buildPrompt(caseData, unitTitle, ans), function () {
+                            openAssistant();
+                            toast('提示词已复制 ✓ 请在等保小助教对话框中粘贴发送');
+                        });
+                        if (typeof trackOperation === 'function') trackOperation('素养案例深度点评', caseData.comp + ' · ' + caseData.title);
+                    });
+
+                    return el;
+                }
+
+                document.querySelectorAll('.task-stage').forEach(function (stageEl) {
+                    if (stageEl.id === 'homepage-stage') return;
+                    var substages = stageEl.querySelectorAll('.substage');
+                    var containers = substages.length ? substages : [stageEl];
+                    containers.forEach(function (container) {
+                        var unit = SUYANG_CASES[taskKeyOf(container)];
+                        if (!unit) return;
+                        var aiGroup = container.querySelector('.cat-group[data-cat="ai"]');
+                        if (!aiGroup) return;
+                        var wrap = document.createElement('div');
+                        wrap.className = 'sy-wrap';
+                        wrap.innerHTML =
+                            '<div class="sy-banner">' +
+                            '<div class="sy-banner-title">🌟 素养培养案例 · 场景分析</div>' +
+                            '<div class="sy-banner-note">本任务知识点涉及 <strong>' + unit.cases.length + ' 项核心素养</strong>，每项素养对应一个真实工作场景。先读场景、独立写下你的分析，再点击「AI 点评」获得即时反馈；也可以请等保小助教深度点评。作答会按账号自动保存草稿。</div>' +
+                            '</div>';
+                        unit.cases.forEach(function (c, i) { wrap.appendChild(buildCaseEl(c, i, unit.title)); });
+                        aiGroup.insertBefore(wrap, aiGroup.firstChild);
+                    });
                 });
             })();
 
@@ -3219,7 +3858,7 @@
                 resetStageTabs(document.getElementById('stage' + currentStage));
 
                 // 6. 按钮文本
-                btnNext.textContent = currentStage === totalStages ? '实践之旅结束' : '下一任务';
+                btnNext.textContent = currentStage === totalStages ? '技能之旅结束' : '下一任务';
                 updateProgress();
 
                 // 7. 记录学习位置（含默认激活的子任务），用于下次登录自动接续；回首页(stage 0)不覆盖
@@ -3233,7 +3872,7 @@
                 });
             });
 
-            // 首页"开启实践之旅"
+            // 首页"开启技能之旅"
             const startBtn = document.getElementById('startPracticeBtn');
             if (startBtn) {
                 startBtn.addEventListener('click', () => goToStage(1));
@@ -3262,7 +3901,7 @@
                     return;
                 }
                 if (currentStage === totalStages) {
-                    alert('🎉 本次实践之旅结束！恭喜你完成信息安全测评与风险评估全部8个任务的学习～');
+                    alert('🎉 本次技能之旅结束！恭喜你完成信息安全测评与风险评估全部8个任务的学习～');
                     return;
                 }
                 goToStage(currentStage + 1);
@@ -3292,16 +3931,16 @@
                 });
             });
 
-            // 实践闯关统一入口（顶部时间线下方横幅）
+            // 技能闯关统一入口（顶部时间线下方横幅）
             const btnPracticeGate = document.getElementById('btnPracticeGate');
             if (btnPracticeGate) {
                 btnPracticeGate.addEventListener('click', () => {
-                    if (typeof trackOperation === 'function') trackOperation('进入实践闯关', '测评指挥官 · 项目经理实战');
+                    if (typeof trackOperation === 'function') trackOperation('进入技能闯关', '测评指挥官 · 项目经理实战');
                     window.location.href = encodeURI('实践测试/denbao-pm-game/index.html');
                 });
             }
 
-            // 从实践闯关返回定位：#unit-2.2 直接切到对应任务/子任务
+            // 从技能闯关返回定位：#unit-2.2 直接切到对应任务/子任务
             (function () {
                 const hm = location.hash.match(/^#unit-(\d+)\.(\d+)$/);
                 if (!hm) return;
@@ -3348,7 +3987,7 @@
                 } catch (e) { /* noop */ }
             }
             function resumeLastPosition() {
-                // 从实践闯关返回（#unit-x.y）：以 URL 定位优先，不做自动续学
+                // 从技能闯关返回（#unit-x.y）：以 URL 定位优先，不做自动续学
                 if (location.hash && location.hash.indexOf('#unit-') === 0) return;
                 var who = 'guest';
                 try { who = (typeof accountTag === 'function' && accountTag()) || 'guest'; } catch (e) { /* noop */ }
@@ -4251,7 +4890,7 @@
             if (total === 100) p += '<p>🎉 <strong>满分达成！</strong>本单元的知识、技能与素养三个维度全部达标，说明你既能"记得住"，也能"做得出"，还"站得正"。</p>';
             else p += '<p>本次得分 <strong>' + total + '</strong> 分（答错 ' + wrongN + ' 题）。距离 100 分通过还差 ' + (100 - total) + ' 分——请针对薄弱维度复习后重新测评。</p>';
             p += '<p><strong>📖 知识维度（' + k + ' 分）：</strong>' + (k === 100 ? '基本概念与标准体系掌握扎实，继续保持。' : (k >= 70 ? '大部分概念已掌握，但仍有细节遗漏，建议回到"知识"页重看相关概念框。' : '概念性错误较多，建议从头梳理本单元知识结构，再重新作答。')) + '</p>';
-            p += '<p><strong>🛠️ 技能维度（' + s + ' 分）：</strong>' + (s === 100 ? '操作与分析类判断全部正确，方法运用得当。' : (s >= 70 ? '实操方法基本掌握，个别场景的处置流程还需巩固，建议重做"实验"页对应步骤。' : '操作层面的判断偏差较大，建议对照实验步骤重新演练关键场景。')) + '</p>';
+            p += '<p><strong>🛠️ 技能维度（' + s + ' 分）：</strong>' + (s === 100 ? '操作与分析类判断全部正确，方法运用得当。' : (s >= 70 ? '实操方法基本掌握，个别场景的处置流程还需巩固，建议重做"技能"页对应步骤。' : '操作层面的判断偏差较大，建议对照技能步骤重新演练关键场景。')) + '</p>';
             p += '<p><strong>🌱 素养维度（' + qz + ' 分）：</strong>' + (qz === 100 ? '情景判断全部正确，已具备测评从业者的职业操守与责任意识。' : '情景分析出现偏差——建议重温本单元"情景分析"案例，体会其中的职业判断与责任意识。') + '</p>';
             return p;
         }
