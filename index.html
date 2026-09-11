@@ -1105,8 +1105,10 @@
     .kb-mod-card.kb-ppt-mod:hover { background: linear-gradient(135deg, #4527a0, #5e35b1); border-color: #4527a0; }
     .kb-mod-card.kb-ppt-mod .kb-mod-no { background: rgba(255, 255, 255, 0.25); color: #fff; }
     .kb-mod-card.kb-ppt-mod .kb-mod-name { color: #fff; }
-    .kb-ppt-dl { display: inline-flex; align-items: center; gap: 4px; align-self: stretch; border: 1.5px dashed #b39ddb; border-radius: 10px; padding: 4px 12px; color: #7e57c2; font-size: 0.78rem; font-weight: 600; text-decoration: none; background: #faf7ff; transition: all 0.18s ease; }
-    .kb-ppt-dl:hover { border-color: #5e35b1; background: #ede7f6; color: #4527a0; }
+    /* PPT 课件徽章（白底紫字，让"这是 PPT"一眼可见） */
+    .kb-ppt-badge { display: inline-block; background: #fff; color: #5e35b1; font-size: 0.68rem; font-weight: 800; padding: 1px 6px; border-radius: 4px; margin-right: 4px; letter-spacing: 0.5px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); vertical-align: middle; line-height: 1.4; }
+    .kb-ppt-title { display: inline; vertical-align: middle; }
+    /* （旧"⬇ 原文件"小按钮样式保留但不再使用，避免将来误用） */
     /* 技能任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
     .table-dl { display: inline-flex; align-items: center; gap: 3px; border: 1.2px dashed #66bb6a; border-radius: 6px; padding: 1px 8px; margin: 0 2px; color: #2e7d32; font-size: 0.78em; font-weight: 600; text-decoration: none; background: #f1f8e9; transition: all 0.18s ease; vertical-align: baseline; white-space: nowrap; }
     .table-dl:hover { border-color: #2e7d32; background: #c8e6c9; color: #1b5e20; }
@@ -1963,8 +1965,7 @@
                                 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材1：《安全物理环境测评检查表模板》.docx" download title="下载《安全物理环境测评检查表模板》">⬇ 素材1：《安全物理环境测评检查表模板》</a>
                                 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 素材2：《安全物理环境测评记录表模板》</a>
                                 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材3：案例导入素材——机房现场照片描述.docx" download title="下载《机房现场照片描述》">⬇ 素材3：案例导入素材——机房现场照片描述</a>
-                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材4：课堂讨论问题清单.docx" download title="下载《课堂讨论问题清单》">⬇ 素材4：课堂讨论问题清单</a>
-                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材5：板书思维导图设计.docx" download title="下载《板书思维导图设计》">⬇ 素材5：板书思维导图设计</a>
+                                <!-- （按老师要求：课堂讨论问题清单、板书思维导图设计属于课堂组织辅助素材，已从技能清单移除） -->
                             </div>
                         </div>
 
@@ -4017,7 +4018,12 @@ var SUYANG_CASES = {
                         pcard.type = 'button';
                         pcard.className = 'kb-mod-card kb-ppt-mod';
                         pcard.title = '点击在线浏览课件：' + pLabel;
-                        pcard.innerHTML = '<span class="kb-mod-no">📑</span><span class="kb-mod-name">' + pLabel + '</span>';
+                        pcard.innerHTML =
+                            '<span class="kb-mod-no">📑</span>' +
+                            '<span class="kb-mod-name">' +
+                              '<span class="kb-ppt-badge">PPT</span>' +
+                              '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                            '</span>';
                         pcard.addEventListener('click', function () {
                             // 打开同名 PDF（浏览器原生翻页显示，与 pptx 同名伴生）
                             res.ppts.forEach(function (p) {
@@ -4026,14 +4032,7 @@ var SUYANG_CASES = {
                             if (typeof trackOperation === 'function') trackOperation('在线浏览课件', pLabel);
                         });
                         nav.appendChild(pcard);
-                        // 小号"下载原文件"入口（pptx 源文件，供老师修改）
-                        var pdl = document.createElement('a');
-                        pdl.className = 'kb-ppt-dl';
-                        pdl.href = encodeURI('PPT/' + res.ppts[0]);
-                        pdl.download = res.ppts[0];
-                        pdl.title = '下载 PPT 源文件（可编辑）';
-                        pdl.innerHTML = '⬇ 原文件';
-                        nav.appendChild(pdl);
+                        // （按老师要求：去掉"⬇ 原文件"小按钮，只保留 PPT 在线浏览入口）
                     }
 
                     // ---- 5. 模块卡片 + 内容面板（标准原文融入目标模块） ----
@@ -4139,6 +4138,26 @@ var SUYANG_CASES = {
                     return false; // 其余节点保留原"内容讲解"弹窗
                 };
             })();
+
+// ===== 配套表格与素材归入技能分类 =====
+// 按老师要求：原本位于知识区（cat-group[knowledge]）的 .kb-st-tables 汇总块，
+// 运行时统一迁移到同一子任务的 🧪技能 lab-box（cat-group[lab]）末尾，
+// 视觉上与 PPT 课件（紫色）区分。
+(function migrateTablesToLab() {
+    document.querySelectorAll('.substage').forEach(function (sub) {
+        // buildTabsFor 把所有内容块搬到 cat-group 里，所以要跨层找
+        var tbl = sub.querySelector('.cat-group[data-cat="knowledge"] .kb-st-tables')
+                  || sub.querySelector(':scope > .kb-st-tables');
+        var lab = sub.querySelector('.cat-group[data-cat="lab"] .lab-box')
+                  || sub.querySelector(':scope > .lab-box');
+        if (tbl && lab) {
+            // 标题微调：去掉"配套"二字，强调技能属性
+            var t = tbl.querySelector('.kb-st-title');
+            if (t) t.textContent = '🧰 技能用配套表格与素材（点击下载）';
+            lab.appendChild(tbl);
+        }
+    });
+})();
 
             // 切换任务/子任务后，内容分类默认回到"知识"（不计入操作日志）
             function resetStageTabs(stageEl) {
