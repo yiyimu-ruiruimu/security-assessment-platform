@@ -17,6 +17,9 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
+# Office 临时锁文件
+~*
+
 # 编辑器
 .vscode/
 .idea/

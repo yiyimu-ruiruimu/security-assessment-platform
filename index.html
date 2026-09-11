@@ -1086,6 +1086,10 @@
     .kb-std-block { margin-top: 16px; background: #fff; border: 1.5px dashed #b26a00; border-radius: 12px; padding: 12px 14px; }
     .kb-std-block-t { font-weight: 700; color: #8d5500; font-size: 0.92rem; margin-bottom: 10px; }
     .kb-std-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    /* 子任务配套表格下载区（绿色，区别于橙色"标准原文"块） */
+    .kb-st-tables { margin-top: 14px; background: #fff; border: 1.5px dashed #66bb6a; border-radius: 12px; padding: 12px 14px; }
+    .kb-st-title { font-weight: 700; color: #2e7d32; font-size: 0.92rem; margin-bottom: 10px; }
+    .kb-st-list { display: flex; flex-wrap: wrap; gap: 8px; }
     .kb-std-btn { display: flex; align-items: center; gap: 6px; background: #fff; border: 1.5px solid #b39ddb; border-radius: 20px; padding: 7px 14px; text-decoration: none; transition: all 0.18s ease; }
     .kb-std-btn:hover { border-color: #5e35b1; background: #ede7f6; }
     .kb-std-btn b { color: #4527a0; font-size: 0.86rem; }
@@ -1940,249 +1944,522 @@
 
                 <!-- ================= 任务3：安全物理环境与通信网络测评 ================= -->
                 <div class="task-stage" id="stage3">
-                    <h3>🔍 情景分析</h3>
-                    <div class="highlight">
-                        <p><strong>问题导入：</strong>测评方案编好了，测评团队进入现场。第一站从哪里开始？——先看"<strong>房子</strong>"（机房物理环境）和"<strong>马路</strong>"（通信网络）：机房选址安全吗？门禁严不严？防火防水做了吗？网络划分了区域吗？数据传输加密了吗？</p>
+                    <!-- 子任务切换按钮 -->
+                    <div style="margin-bottom:15px;">
+                        <button class="substage-btn active" data-substage="3.1">3.1 物理安全核查</button>
+                        <button class="substage-btn" data-substage="3.2">3.2 网络架构合规性检查</button>
                     </div>
 
-                    <div class="km-box" data-km="3"></div>
-
-                    <div class="concept-box">
-                        <div class="concept-title">🏠 3.1 物理安全核查（机房"十查"）</div>
-                        <p>依据 GB/T 22239 对机房进行<strong>10个子类</strong>核查：</p>
-                        <div class="table-container">
-                            <table class="info-table">
-                                <tr><th>序号</th><th>核查子类</th><th>通俗理解</th></tr>
-                                <tr><td>1</td><td>物理位置选择</td><td>机房别建在地震带/水灾区/污染源旁</td></tr>
-                                <tr><td>2</td><td>物理访问控制</td><td>门禁、监控、专人值守，防尾随</td></tr>
-                                <tr><td>3</td><td>防盗窃和防破坏</td><td>设备上锁、标识、固定安装</td></tr>
-                                <tr><td>4</td><td>防雷击</td><td>避雷装置、接地</td></tr>
-                                <tr><td>5</td><td>防火</td><td>灭火器、火灾报警、防火材料</td></tr>
-                                <tr><td>6</td><td>防水和防潮</td><td>防渗漏、除湿装置</td></tr>
-                                <tr><td>7</td><td>防静电</td><td>防静电地板、接地</td></tr>
-                                <tr><td>8</td><td>温湿度控制</td><td>精密空调，温湿度记录</td></tr>
-                                <tr><td>9</td><td>电力供应</td><td>UPS、备用发电机</td></tr>
-                                <tr><td>10</td><td>电磁防护</td><td>屏蔽、线缆隔离</td></tr>
-                            </table>
+                    <!-- 3.1 物理安全核查 -->
+                    <div class="substage active" id="substage3.1">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>测评方案编好了，测评团队进入现场。第一站从哪里开始？——先看"<strong>房子</strong>"（机房物理环境）：机房选址安全吗？门禁严不严？防火防水做了吗？电磁防护到位吗？</p>
                         </div>
-                        <p><strong>核查方法：</strong>现场核查法 + 检查表法 + 对照判断法（对照 GB/T 22239 逐项判断符合/不符合）。</p>
-                    </div>
 
-                    <div class="concept-box">
-                        <div class="concept-title">🌐 3.2 网络架构合规性检查</div>
-                        <p>依据标准检查网络架构与通信传输：网络是否<strong>划分了不同区域</strong>（互联网区/核心业务区/管理区）？重要区域是否<strong>技术隔离</strong>（防火墙/VLAN）？关键设备是否有<strong>硬件冗余</strong>（三级要求）？通信传输是否采用<strong>校验技术/密码技术</strong>保证完整性和保密性（三级要求）？</p>
-                    </div>
-
-                    <div class="practice-box">
-                        <div class="concept-title">✏️ 技能任务（第3周，4学时）</div>
-                        <p><strong>①物理安全核查：</strong>使用模拟机房照片/3D模型，完成物理环境核查并填写《物理安全核查记录表》。</p>
-                        <p><strong>②网络架构合规性检查：</strong>对照网络拓扑图逐项检查，填写《通信网络核查记录表》。</p>
-                        <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
-                        <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
-                    </div>
-
-                    <div class="lab-box">
-                        <div class="lab-head">🧪 技能 4.1：安全物理环境测评——把"机房十查"变成测评记录</div>
-                        <div class="lab-goal"><strong>技能目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong>——本技能中，你在技能三录入的"机房信息"（门禁、消防、UPS……）就是你的证据。</div>
-                        <ol class="step-list">
-                            <li><strong>进入测评页面。</strong>点击左侧菜单"项目详情"下的"现场核查"，顶部下拉框选择"某市政务服务中心综合管理平台"项目。</li>
-                            <li><strong>找到控制类。</strong>在测评项树形结构中展开"安全物理环境"节点——10 个子类与上方"机房十查"一一对应，先对一遍再动手。</li>
-                            <li><strong>逐项判定。</strong>每个测评项四选一：<span class="badge badge-green">符合</span> / <span class="badge badge-orange">部分符合</span> / <span class="badge badge-red">不符合</span> / <span class="badge badge-blue">不适用</span>。判定前先自问：<strong>"我看到什么信息才敢这么判？"</strong>没依据就翻资产清单里的机房描述。</li>
-                            <li><strong>写问题描述与整改建议。</strong>凡选"部分符合 / 不符合"的项，必须填写两栏：问题描述写<strong>现状与差距</strong>，整改建议写<strong>怎么改</strong>。</li>
-                            <li><strong>随手保存。</strong>系统自动记录测评进度，养成"做一项、存一项"的习惯。</li>
-                        </ol>
-                        <div class="table-container">
-                            <table class="info-table">
-                                <tr><th>判定</th><th>什么意思</th><th>证据要求</th></tr>
-                                <tr><td>符合</td><td>要求全部做到</td><td>资产信息/照片能直接证明</td></tr>
-                                <tr><td>部分符合</td><td>做了一半，有差距</td><td>必须写清"做到哪、差在哪"</td></tr>
-                                <tr><td>不符合</td><td>完全没做</td><td>必须写具体问题，不能只写"不满足"</td></tr>
-                                <tr><td>不适用</td><td>系统不涉及</td><td>必须写理由（如"系统自建机房，无租赁机柜"）</td></tr>
-                            </table>
-                        </div>
-                        <div class="table-container">
-                            <table class="info-table">
-                                <tr><th>测评项</th><th>模拟判定</th><th>问题描述（合格写法示范）</th></tr>
-                                <tr><td>物理访问控制</td><td>符合</td><td>——</td></tr>
-                                <tr><td>防火</td><td>部分符合</td><td>机房仅配备干粉灭火器，未配置气体灭火系统，不满足重要机房灭火介质要求</td></tr>
-                                <tr><td>电力供应</td><td>不符合</td><td>机房为单路市电供电，未配置冗余电力线路，存在单点故障风险</td></tr>
-                            </table>
-                        </div>
-                        <div class="ai-tip-box">
-                            <div class="ai-tip-title">🤖 遇到问题？先这样问 AI</div>
-                            <p><strong>最常见卡点：</strong>看不懂某条测评要求"到底在查什么"；整改建议不知道怎么写才算合格。先自己写一版，再让 AI 当质检员：</p>
-                            <div class="prompt-tpl">
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                等保三级"安全物理环境"中有测评要求：【粘贴测评项原文】。请用通俗语言解释：①这条要求实际在防什么风险；②现场测评时应该查看哪些证据（照片/记录/配置）；③如果判定为"部分符合"，问题描述和整改建议一般怎么写才算具体。请举一个"模糊的坏写法"和一个"具体的好写法"对比给我看。
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>判定结果必须由你根据证据做出——让 AI"猜"一个符合不符合，等于伪造测评记录。</p>
-                        </div>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 技能记录自查</div>
-                            ☐ 10 个子类全部有判定结果　☐ "部分符合/不符合"项都写了具体问题描述　☐ 整改建议说的是"怎么改"而不是"建议加强"　☐ 每项判定自己能说出证据来源
-                        </div>
-                    </div>
-
-                    <div class="lab-box">
-                        <div class="lab-head">🧪 技能 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
-                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做下面的拓扑图文档任务，再回来测评，顺序别颠倒。</div>
-                        <ol class="step-list">
-                            <li><strong>先完成本任务下方的"拓扑图文档任务"</strong>（至少画出网络拓扑草图）。</li>
-                            <li><strong>展开"安全通信网络"节点</strong>，逐项判定三个子类：网络架构（划区域了吗？关键设备冗余了吗？）、通信传输（传输过程加密校验了吗？）、可信验证。</li>
-                            <li><strong>对照拓扑图找证据：</strong>三级系统要求关键设备硬件冗余——看看你画的图里，核心交换机是 1 台还是 2 台？答案在拓扑图上一目了然，这就是"图是证据"的含义。</li>
-                            <li><strong>填写问题描述。</strong>模拟示例：网络架构e→不符合（核心交换机单台部署，无硬件冗余，存在单点故障）；通信传输b→不符合（管理终端到服务器的通信未采用密码技术保证保密性）。</li>
-                        </ol>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 技能记录自查</div>
-                            ☐ 三个子类均有判定　☐ 判定时手边有拓扑图　☐ 不符合项的问题描述写到了"缺什么设备/什么技术"
-                        </div>
-                    </div>
-
-                    <div class="lab-box">
-                        <div class="lab-head">📄 文档任务：绘制业务流程图与网络拓扑图——测评师的"看家图"</div>
-                        <div class="lab-goal"><strong>任务目标：</strong>用 Visio（或 draw.io、亿图等工具）为"政务服务中心综合管理平台"绘制两张图。这两张图不是美术作业——业务流程图是<strong>理解系统、支撑定级和资产识别</strong>的依据；网络拓扑图是<strong>网络架构类测评项的判定证据</strong>，任务 4~6 的边界、主机、报告全部要用它。</div>
-                        <ol class="step-list">
-                            <li><strong>画业务流程图（泳道图）。</strong>先梳理系统主线业务（如：群众网上预约 → 政务中心排号受理 → 窗口办理 → 评价反馈 → 数据归档），按"角色/系统"分泳道，画清每一步数据流向。完成后自问：哪一步产生敏感数据？它经过哪些设备？——这就是后面风险评估的素材。</li>
-                            <li><strong>画网络拓扑图（分层画法）。</strong>从上到下分四层：互联网边界 → 安全设备区（防火墙、WAF）→ 核心层（核心交换机）→ 接入区（服务器区、管理区）。<strong>每个设备标注：名称、型号、数量、部署位置</strong>（对照技能三录的资产清单，别凭空发明设备）。</li>
-                            <li><strong>自查三处易错点：</strong>① 有没有漏画安全设备（堡垒机、日志审计最容易漏）；② 有没有标出管理区与业务区的隔离边界；③ 无线接入点、运维终端接在哪——真实测评中这三处最常被测评师追问。</li>
-                            <li><strong>导出保存</strong>为 PNG/PDF，连同源文件提交到学习通。</li>
-                        </ol>
-                        <div class="ai-tip-box">
-                            <div class="ai-tip-title">🤖 画图时，AI 这样用才加分</div>
-                            <p>AI 看不到你脑子里的系统，所以<strong>图必须自己画</strong>；但 AI 特别擅长当"挑漏的评审员"和"画法教练"：</p>
-                            <div class="prompt-tpl">
-                                <span class="prompt-tpl-label">💬 提示词模板（画前问）：</span>
-                                我要为等保三级的"某市政务服务中心综合管理平台"画网络拓扑图，系统资产包括：边界防火墙1台、WAF 1台、核心交换机2台（堆叠）、Web服务器3台、应用服务器2台、数据库服务器2台、堡垒机1台、日志审计1台。请给我一份分层画法建议（每层放什么、怎么连线），并提醒等保测评中最容易被测评师挑毛病的 5 个画图易错点。
-                            </div>
-                            <div class="prompt-tpl">
-                                <span class="prompt-tpl-label">💬 提示词模板（画完查）：</span>
-                                我画好了拓扑图，设备连接关系如下：【用文字描述你的图，如"互联网→WAF→防火墙→核心交换机→服务器区/管理区"】。请扮演等保测评师，指出这张图在架构上可能被判"不符合"的薄弱点，以及图本身遗漏的要素（如日志审计位置、带外管理、无线接入）。
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材1：《安全物理环境测评检查表模板》.docx" download title="下载《安全物理环境测评检查表模板》">⬇ 素材1：《安全物理环境测评检查表模板》</a>
+                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 素材2：《安全物理环境测评记录表模板》</a>
+                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材3：案例导入素材——机房现场照片描述.docx" download title="下载《机房现场照片描述》">⬇ 素材3：案例导入素材——机房现场照片描述</a>
+                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材4：课堂讨论问题清单.docx" download title="下载《课堂讨论问题清单》">⬇ 素材4：课堂讨论问题清单</a>
+                                <a class="table-dl" href="各类表格/3.1 物理安全核查/素材5：板书思维导图设计.docx" download title="下载《板书思维导图设计》">⬇ 素材5：板书思维导图设计</a>
                             </div>
                         </div>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 交付自查</div>
-                            ☐ 业务流程图含泳道与数据流向　☐ 拓扑图四层结构完整、设备标注齐全　☐ 与资产清单一一对应　☐ 挑过一次"AI 评审员"的毛病
+
+                        <div class="km-box" data-km="3.1"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🏠 3.1 物理安全核查（机房"十查"）</div>
+                            <p>依据 GB/T 22239 对机房进行<strong>10个子类</strong>核查：</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>序号</th><th>核查子类</th><th>通俗理解</th></tr>
+                                    <tr><td>1</td><td>物理位置选择</td><td>机房别建在地震带/水灾区/污染源旁</td></tr>
+                                    <tr><td>2</td><td>物理访问控制</td><td>门禁、监控、专人值守，防尾随</td></tr>
+                                    <tr><td>3</td><td>防盗窃和防破坏</td><td>设备上锁、标识、固定安装</td></tr>
+                                    <tr><td>4</td><td>防雷击</td><td>避雷装置、接地</td></tr>
+                                    <tr><td>5</td><td>防火</td><td>灭火器、火灾报警、防火材料</td></tr>
+                                    <tr><td>6</td><td>防水和防潮</td><td>防渗漏、除湿装置</td></tr>
+                                    <tr><td>7</td><td>防静电</td><td>防静电地板、接地</td></tr>
+                                    <tr><td>8</td><td>温湿度控制</td><td>精密空调，温湿度记录</td></tr>
+                                    <tr><td>9</td><td>电力供应</td><td>UPS、备用发电机</td></tr>
+                                    <tr><td>10</td><td>电磁防护</td><td>屏蔽、线缆隔离</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>核查方法：</strong>现场核查法 + 检查表法 + 对照判断法（对照 GB/T 22239 逐项判断符合/不符合）。</p>
                         </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（3.1，2学时）</div>
+                            <p><strong>①物理安全核查：</strong>使用模拟机房照片/3D模型，完成物理环境核查并填写《安全物理环境测评记录表》（<a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
+                            <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能 4.1：安全物理环境测评——把"机房十查"变成测评记录</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong>——本技能中，你在技能三录入的"机房信息"（门禁、消防、UPS……）就是你的证据。</div>
+                            <ol class="step-list">
+                                <li><strong>进入测评页面。</strong>点击左侧菜单"项目详情"下的"现场核查"，顶部下拉框选择"某市政务服务中心综合管理平台"项目。</li>
+                                <li><strong>找到控制类。</strong>在测评项树形结构中展开"安全物理环境"节点——10 个子类与上方"机房十查"一一对应，先对一遍再动手。</li>
+                                <li><strong>逐项判定。</strong>每个测评项四选一：<span class="badge badge-green">符合</span> / <span class="badge badge-orange">部分符合</span> / <span class="badge badge-red">不符合</span> / <span class="badge badge-blue">不适用</span>。判定前先自问：<strong>"我看到什么信息才敢这么判？"</strong>没依据就翻资产清单里的机房描述。</li>
+                                <li><strong>写问题描述与整改建议。</strong>凡选"部分符合 / 不符合"的项，必须填写两栏：问题描述写<strong>现状与差距</strong>，整改建议写<strong>怎么改</strong>。</li>
+                                <li><strong>随手保存。</strong>系统自动记录测评进度，养成"做一项、存一项"的习惯。</li>
+                            </ol>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>判定</th><th>什么意思</th><th>证据要求</th></tr>
+                                    <tr><td>符合</td><td>要求全部做到</td><td>资产信息/照片能直接证明</td></tr>
+                                    <tr><td>部分符合</td><td>做了一半，有差距</td><td>必须写清"做到哪、差在哪"</td></tr>
+                                    <tr><td>不符合</td><td>完全没做</td><td>必须写具体问题，不能只写"不满足"</td></tr>
+                                    <tr><td>不适用</td><td>系统不涉及</td><td>必须写理由（如"系统自建机房，无租赁机柜"）</td></tr>
+                                </table>
+                            </div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>测评项</th><th>模拟判定</th><th>问题描述（合格写法示范）</th></tr>
+                                    <tr><td>物理访问控制</td><td>符合</td><td>——</td></tr>
+                                    <tr><td>防火</td><td>部分符合</td><td>机房仅配备干粉灭火器，未配置气体灭火系统，不满足重要机房灭火介质要求</td></tr>
+                                    <tr><td>电力供应</td><td>不符合</td><td>机房为单路市电供电，未配置冗余电力线路，存在单点故障风险</td></tr>
+                                </table>
+                            </div>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 遇到问题？先这样问 AI</div>
+                                <p><strong>最常见卡点：</strong>看不懂某条测评要求"到底在查什么"；整改建议不知道怎么写才算合格。先自己写一版，再让 AI 当质检员：</p>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    等保三级"安全物理环境"中有测评要求：【粘贴测评项原文】。请用通俗语言解释：①这条要求实际在防什么风险；②现场测评时应该查看哪些证据（照片/记录/配置）；③如果判定为"部分符合"，问题描述和整改建议一般怎么写才算具体。请举一个"模糊的坏写法"和一个"具体的好写法"对比给我看。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>判定结果必须由你根据证据做出——让 AI「猜」一个符合不符合，等于伪造测评记录。</p>
+                            </div>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 10 个子类全部有判定结果　☐ 「部分符合/不符合」项都写了具体问题描述　☐ 整改建议说的是「怎么改」而不是「建议加强」　☐ 每项判定自己能说出证据来源
+                            </div>
+                        </div>
+
+                        <div class="coming-soon">🔒 本子任务配套的核查素材包、记录表模板与讲解视频将陆续上线</div>
                     </div>
 
-                    <div class="coming-soon">🔒 本任务配套的核查素材包、记录表模板与讲解视频将陆续上线</div>
+                    <!-- 3.2 网络架构合规性检查 -->
+                    <div class="substage" id="substage3.2">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>机房"十查"看完了，接下来检查系统内部的"<strong>马路</strong>"——通信网络。网络是否<strong>划分了不同区域</strong>？重要区域是否<strong>技术隔离</strong>？关键设备是否有<strong>硬件冗余</strong>（三级要求）？数据传输加密了吗？——本子任务重点解决"网络架构与通信传输"两个维度。</p>
+                        </div>
+
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材1：XX企业园区网拓扑图（含问题）.docx" download title="下载《XX企业园区网拓扑图（含问题）》">⬇ 素材1：XX企业园区网拓扑图（含问题）</a>
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 素材2：安全通信网络测评记录表（模板）</a>
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材3：模拟设备配置文件.docx" download title="下载《模拟设备配置文件》">⬇ 素材3：模拟设备配置文件</a>
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材4：参考答案（部分）.docx" download title="下载《参考答案（部分）》">⬇ 素材4：参考答案（部分）</a>
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材4：课后作业——网络架构合规性分析.docx" download title="下载《课后作业——网络架构合规性分析》">⬇ 素材4：课后作业——网络架构合规性分析</a>
+                                <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材5：教师演示用检查表（快速参考）.docx" download title="下载《教师演示用检查表（快速参考）》">⬇ 素材5：教师演示用检查表（快速参考）</a>
+                            </div>
+                        </div>
+
+                        <div class="km-box" data-km="3.2"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🌐 3.2 网络架构合规性检查</div>
+                            <p>依据标准检查网络架构与通信传输：网络是否<strong>划分了不同区域</strong>（互联网区/核心业务区/管理区）？重要区域是否<strong>技术隔离</strong>（防火墙/VLAN）？关键设备是否有<strong>硬件冗余</strong>（三级要求）？通信传输是否采用<strong>校验技术/密码技术</strong>保证完整性和保密性（三级要求）？</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（3.2，2学时）</div>
+                            <p><strong>②网络架构合规性检查：</strong>对照网络拓扑图逐项检查，填写《安全通信网络测评记录表》（<a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
+                            <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做下面的拓扑图文档任务，再回来测评，顺序别颠倒。</div>
+                            <ol class="step-list">
+                                <li><strong>先完成本子任务下方的"拓扑图文档任务"</strong>（至少画出网络拓扑草图）。</li>
+                                <li><strong>展开"安全通信网络"节点</strong>，逐项判定三个子类：网络架构（划区域了吗？关键设备冗余了吗？）、通信传输（传输过程加密校验了吗？）、可信验证。</li>
+                                <li><strong>对照拓扑图找证据：</strong>三级系统要求关键设备硬件冗余——看看你画的图里，核心交换机是 1 台还是 2 台？答案在拓扑图上一目了然，这就是"图是证据"的含义。</li>
+                                <li><strong>填写问题描述。</strong>模拟示例：网络架构e→不符合（核心交换机单台部署，无硬件冗余，存在单点故障）；通信传输b→不符合（管理终端到服务器的通信未采用密码技术保证保密性）。</li>
+                            </ol>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 三个子类均有判定　☐ 判定时手边有拓扑图　☐ 不符合项的问题描述写到了「缺什么设备/什么技术」
+                            </div>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">📄 文档任务：绘制业务流程图与网络拓扑图——测评师的"看家图"</div>
+                            <div class="lab-goal"><strong>任务目标：</strong>用 Visio（或 draw.io、亿图等工具）为"政务服务中心综合管理平台"绘制两张图。这两张图不是美术作业——业务流程图是<strong>理解系统、支撑定级和资产识别</strong>的依据；网络拓扑图是<strong>网络架构类测评项的判定证据</strong>，任务 4~6 的边界、主机、报告全部要用它。</div>
+                            <ol class="step-list">
+                                <li><strong>画业务流程图（泳道图）。</strong>先梳理系统主线业务（如：群众网上预约 → 政务中心排号受理 → 窗口办理 → 评价反馈 → 数据归档），按"角色/系统"分泳道，画清每一步数据流向。完成后自问：哪一步产生敏感数据？它经过哪些设备？——这就是后面风险评估的素材。</li>
+                                <li><strong>画网络拓扑图（分层画法）。</strong>从上到下分四层：互联网边界 → 安全设备区（防火墙、WAF）→ 核心层（核心交换机）→ 接入区（服务器区、管理区）。<strong>每个设备标注：名称、型号、数量、部署位置</strong>（对照技能三录的资产清单，别凭空发明设备）。</li>
+                                <li><strong>自查三处易错点：</strong>① 有没有漏画安全设备（堡垒机、日志审计最容易漏）；② 有没有标出管理区与业务区的隔离边界；③ 无线接入点、运维终端接在哪——真实测评中这三处最常被测评师追问。</li>
+                                <li><strong>导出保存</strong>为 PNG/PDF，连同源文件提交到学习通。</li>
+                            </ol>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 画图时，AI 这样用才加分</div>
+                                <p>AI 看不到你脑子里的系统，所以<strong>图必须自己画</strong>；但 AI 特别擅长当"挑漏的评审员"和"画法教练"：</p>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板（画前问）：</span>
+                                    我要为等保三级的"某市政务服务中心综合管理平台"画网络拓扑图，系统资产包括：边界防火墙1台、WAF 1台、核心交换机2台（堆叠）、Web服务器3台、应用服务器2台、数据库服务器2台、堡垒机1台、日志审计1台。请给我一份分层画法建议（每层放什么、怎么连线），并提醒等保测评中最容易被测评师挑毛病的 5 个画图易错点。
+                                </div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板（画完查）：</span>
+                                    我画好了拓扑图，设备连接关系如下：【用文字描述你的图，如"互联网→WAF→防火墙→核心交换机→服务器区/管理区"】。请扮演等保测评师，指出这张图在架构上可能被判"不符合"的薄弱点，以及图本身遗漏的要素（如日志审计位置、带外管理、无线接入）。
+                                </div>
+                            </div>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 业务流程图含泳道与数据流向　☐ 拓扑图四层结构完整、设备标注齐全　☐ 与资产清单一一对应　☐ 挑过一次"AI 评审员"的毛病
+                            </div>
+                        </div>
+
+                        <div class="coming-soon">🔒 本子任务配套的网络架构案例与讲解视频将陆续上线</div>
+                    </div>
                 </div>
 
-                <!-- ================= 任务4：安全区域边界与计算环境测评 ================= -->
+<!-- ================= 任务4：安全区域边界与计算环境测评 ================= -->
                 <div class="task-stage" id="stage4">
-                    <h3>🔍 情景分析</h3>
-                    <div class="highlight">
-                        <p><strong>问题导入：</strong>"房子"和"马路"查完了，接下来检查"<strong>大门</strong>"（区域边界：防火墙、入侵防范、恶意代码防范、安全审计）和每个"<strong>房间</strong>"（计算环境：主机、数据库、应用系统）。这是整个课程中<strong>学时最多（10学时）</strong>的硬核实操任务。</p>
+                    <!-- 子任务切换按钮 -->
+                    <div style="margin-bottom:15px;">
+                        <button class="substage-btn active" data-substage="4.1">4.1 主机安全基线核查</button>
+                        <button class="substage-btn" data-substage="4.2">4.2 网络设备配置核查</button>
+                        <button class="substage-btn" data-substage="4.3">4.3 数据库安全配置核查</button>
+                        <button class="substage-btn" data-substage="4.4">4.4 应用系统安全功能验证</button>
+                        <button class="substage-btn" data-substage="4.5">4.5 漏洞扫描与结果分析</button>
                     </div>
 
-                    <div class="km-box" data-km="4"></div>
-
-                    <div class="table-container">
-                        <table class="info-table">
-                            <tr><th>子任务</th><th>内容</th><th>你要学会</th></tr>
-                            <tr><td><strong>4.1 主机安全基线核查</strong></td><td>Windows / Linux 安全基线</td><td>口令策略、登录失败处理、审计日志、补丁更新等核查方法</td></tr>
-                            <tr><td><strong>4.2 网络设备配置核查</strong></td><td>路由器、交换机、防火墙</td><td>配置备份查看、策略核查、思科/华为设备检查方法</td></tr>
-                            <tr><td><strong>4.3 数据库安全配置核查</strong></td><td>MySQL / SQL Server</td><td>账户权限、口令强度、日志审计等核查方法</td></tr>
-                            <tr><td><strong>4.4 应用系统安全功能验证</strong></td><td>身份鉴别、访问控制等</td><td>登录功能、权限控制、会话超时的人工验证</td></tr>
-                            <tr><td><strong>4.5 漏洞扫描与结果分析</strong></td><td>Nessus / OpenVAS</td><td>使用扫描工具、正确解读漏洞报告（高中低危）</td></tr>
-                        </table>
-                    </div>
-
-                    <div class="concept-box">
-                        <div class="concept-title">🧰 常用工具</div>
-                        <p><strong>配置核查：</strong>基线核查工具（Windows/Linux/数据库基线比对）</p>
-                        <p><strong>漏洞扫描：</strong>Nessus、OpenVAS（扫描前必须与客户确认，避免影响业务！）</p>
-                        <p><strong>核查思路：</strong>工具核查法 + 基线比对法 + 漏洞验证法（扫描出的漏洞要人工验证，避免误报）</p>
-                    </div>
-
-                    <div class="practice-box">
-                        <div class="concept-title">✏️ 技能任务（第4-6周，10学时）</div>
-                        <p>在模拟环境（虚拟化服务器、网络设备模拟环境、靶机）中完成：</p>
-                        <ul style="margin-left:20px;">
-                            <li>《主机核查记录表》（Windows/Linux 安全基线）</li>
-                            <li>《网络设备核查记录表》（路由器、防火墙配置）</li>
-                            <li>《数据库核查记录表》（MySQL/SQL Server）</li>
-                            <li>《应用系统核查记录表》（身份鉴别、访问控制验证）</li>
-                            <li>《漏洞分析表》（扫描+解读）</li>
-                        </ul>
-                        <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
-                        <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
-                    </div>
-
-                    <div class="lab-box">
-                        <div class="lab-head">🧪 技能 4.3：安全区域边界测评——检查系统的"大门"</div>
-                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全区域边界"控制类测评，覆盖 6 个子类：边界防护、访问控制、入侵防范、恶意代码和垃圾邮件防范、安全审计、可信验证。判定依据主要来自<strong>技能三录入的安全设备</strong>（防火墙、WAF 的部署位置与功能）和<strong>你画的拓扑图</strong>。</div>
-                        <ol class="step-list">
-                            <li><strong>展开"安全区域边界"节点</strong>，先通读 6 个子类的测评项，对照拓扑图定位每项"查的是哪个位置"（如边界防护→互联网出口、访问控制→防火墙策略）。</li>
-                            <li><strong>逐项判定。</strong>参考模拟示例：边界防护a→符合（防火墙+WAF 部署于互联网边界）；访问控制e→部分符合（防火墙仅按 IP/端口过滤，未实现基于应用协议和应用内容的访问控制）。</li>
-                            <li><strong>问题描述写"设备+差距"。</strong>网络类问题要落到具体设备："WAF 未开启 XX 防护策略"比"防护不到位"有价值一百倍。</li>
-                        </ol>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 技能记录自查</div>
-                            ☐ 6 个子类均有判定　☐ 每个判定都能对应到拓扑图上的位置或设备
+                    <!-- 4.1 主机安全基线核查 -->
+                    <div class="substage active" id="substage4.1">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>房子查完了、马路查完了，现在进入"房间"。第一类房间是<strong>主机</strong>——所有业务跑在它上面。Windows / Linux 服务器的口令策略、登录失败处理、审计日志、补丁更新是<strong>等保测评中最容易丢分的点</strong>——也是<strong>工作量最大</strong>的点。</p>
                         </div>
-                    </div>
 
-                    <div class="lab-box">
-                        <div class="lab-head">🧪 技能 4.4：安全计算环境测评——工作量最大的"重头戏"</div>
-                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全计算环境"控制类测评。它有 <strong>11 个子类</strong>（身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护），是十个控制类中最大的一个——真实项目里花在它身上的时间也最多。本技能的测评结论将直接喂给任务 8 的脆弱性识别。</div>
-                        <ol class="step-list">
-                            <li><strong>展开"安全计算环境"节点</strong>，先数一下子类数量，感受工作量；按"主机→数据库→应用"的顺序推进，别乱序。</li>
-                            <li><strong>逐项判定，善用"证据迁移"。</strong>模拟示例：身份鉴别d→不符合（系统仅采用用户名口令认证，未采用双因素认证机制）；入侵防范f→部分符合（服务器未部署主机入侵检测）；数据备份恢复c→不符合（数据库服务器未实现热冗余，仅每日冷备）。</li>
-                            <li><strong>给每个"不符合"预贴标签。</strong>在技能记录里顺手标注：这条会不会成为任务 8 风险评估里的"脆弱性"？（如"未双因素认证"→高危脆弱性）。现在多想一步，任务 8 少熬一夜。</li>
-                        </ol>
-                        <div class="ai-tip-box">
-                            <div class="ai-tip-title">🤖 测评项看不懂？这是本任务最高频的卡点</div>
-                            <p>计算环境的测评项术语最密集。正确姿势：把测评项原文<strong>连同你已知的系统情况</strong>一起给 AI，问"这条在查什么、看什么证据"：</p>
-                            <div class="prompt-tpl">
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                等保三级"安全计算环境"的测评要求原文是：【粘贴测评项原文】。被测系统情况：Linux 服务器 + SQL Server 数据库 + Tomcat 应用。请解释：①这条要求防的是什么风险（举一个真实安全事件的例子）；②现场应该访谈/核查/测试什么才能拿到证据；③对应的整改措施一般有哪些。
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 素材1：实践任务——主机安全测评记录表</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材2：Windows配置核查检查表（快速参考）.docx" download title="下载《Windows 配置核查检查表》">⬇ 素材2：Windows 配置核查检查表（快速参考）</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材3：Linux配置核查检查表（快速参考）.docx" download title="下载《Linux 配置核查检查表》">⬇ 素材3：Linux 配置核查检查表（快速参考）</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材4：课后作业——主机安全基线分析.docx" download title="下载《课后作业——主机安全基线分析》">⬇ 素材4：课后作业——主机安全基线分析</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材5：教师演示用——配置核查工具快速参考.docx" download title="下载《配置核查工具快速参考》">⬇ 素材5：教师演示用——配置核查工具快速参考</a>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>AI 只负责"翻译"标准和提供思路；<strong>"符合/不符合"的判定和证据必须由你给出</strong>——将来签字负责的是测评师，不是 AI。</p>
                         </div>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 技能记录自查</div>
-                            ☐ 11 个子类全部判定完毕　☐ 不符合项已预标注"是否为脆弱性"　☐ 完成至少一次"AI 翻译测评项"练习
-                        </div>
-                    </div>
 
-                    <div class="lab-box">
-                        <div class="lab-head">🧪 技能 4.5：安全管理中心测评——别漏了"总控室"</div>
-                        <div class="lab-goal"><strong>技能目标：</strong>完成"安全管理中心"控制类测评（系统管理、审计管理、安全管理、集中管控 4 个子类）。它是等保 2.0 新增的控制类，查的是"有没有一个统一的地方管设备、看日志、控权限"——技能三录的<strong>堡垒机（运维审计）和日志审计系统</strong>就是它的核心证据。</div>
-                        <ol class="step-list">
-                            <li><strong>展开"安全管理中心"节点</strong>，通读 4 个子类。</li>
-                            <li><strong>对照资产清单判定。</strong>模拟思路：系统管理→符合（部署堡垒机实现集中运维）；集中管控→部分符合（部署日志审计系统，但未实现对安全事件的自动关联分析与告警）。</li>
-                            <li><strong>联动思考：</strong>如果系统没录堡垒机和日志审计，这一类几乎全不符合——回去技能三补资产，体会"资产底账不清，测评寸步难行"。</li>
-                        </ol>
-                        <div class="lab-check">
-                            <div class="lab-check-title">📋 技能记录自查</div>
-                            ☐ 4 个子类均有判定　☐ 理解了安全管理中心与堡垒机/日志审计的对应关系
-                        </div>
-                    </div>
+                        <div class="km-box" data-km="4.1"></div>
 
-                    <div class="lab-box">
-                        <div class="lab-head">🖥️ 补充上机：西普平台实操清单（10.11.0.70）</div>
-                        <div class="lab-goal"><strong>说明：</strong>JSecProbe 完成的是"测评流程"演练；以下上机在<strong>西普平台（10.11.0.70）</strong>进行，练的是"真机核查"的手感——两套环境互补，一边学"怎么判"，一边练"怎么查"。</div>
-                        <div class="table-container">
-                            <table class="info-table">
-                                <tr><th>实操项目</th><th>平台</th><th>练什么</th></tr>
-                                <tr><td>Windows / Linux 安全基线核查</td><td>西普</td><td>口令策略、账户锁定、日志审计等具体核查命令与配置位置</td></tr>
-                                <tr><td>MySQL / SQL Server 安全配置核查</td><td>西普</td><td>账户权限、口令强度、日志配置的检查方法</td></tr>
-                                <tr><td>PKI/CA、Apache / Tomcat / IIS 安全配置</td><td>西普</td><td>应用与中间件的安全功能验证</td></tr>
-                                <tr><td>WVS Web 应用扫描</td><td>西普</td><td>漏洞扫描实操与扫描报告解读（高中低危）</td></tr>
-                            </table>
-                        </div>
-                        <div class="ai-tip-box">
-                            <div class="ai-tip-title">🤖 核查命令记不住？让 AI 当"随身教练"</div>
-                            <div class="prompt-tpl">
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                我在做等保测评的主机基线核查，系统是【Windows Server / CentOS / MySQL 8】。请给我一张"检查项—检查命令/操作路径—合格标准"对照表（如口令策略、登录失败处理、审计日志），并说明每条命令输出里要重点看什么。
+                        <div class="concept-box">
+                            <div class="concept-title">🖥️ 4.1 主机安全基线核查</div>
+                            <p>依据 <strong>CIS Benchmark / 等保基本要求</strong>，对 Windows / Linux 服务器进行基线核查：</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>核查维度</th><th>Windows 重点项</th><th>Linux 重点项</th></tr>
+                                    <tr><td>身份鉴别</td><td>口令复杂度、最短长度、定期更换、双因素</td><td>/etc/login.defs、PAM 配置、SSH 双因素</td></tr>
+                                    <tr><td>访问控制</td><td>禁用 Guest、共享账号清理、文件 ACL</td><td>sudo 权限、文件权限 644/755、禁用 root 直登</td></tr>
+                                    <tr><td>安全审计</td><td>登录日志、对象访问日志、策略变更日志（≥6 个月）</td><td>/var/log/secure、/var/log/auth.log、auditd 规则</td></tr>
+                                    <tr><td>入侵防范</td><td>Windows Defender、补丁更新、关闭 SMBv1</td><td>SELinux/AppArmor、内核补丁、关闭不必要的服务</td></tr>
+                                    <tr><td>恶意代码防范</td><td>统一防病毒客户端、特征库自动更新</td><td>ClamAV、定时扫描</td></tr>
+                                    <tr><td>数据备份恢复</td><td>系统盘备份策略、异地备份、恢复演练</td><td>crontab 备份、rsync 推送、restore 测试</td></tr>
+                                </table>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。</p>
+                            <p><strong>核查方法：</strong>工具核查法（基线核查工具自动比对）+ 人工核查法（命令回显 + 配置文件核查）+ 文档查阅（备份策略与演练记录）。</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（4.1，2学时）</div>
+                            <p><strong>主机安全基线核查：</strong>在模拟服务器环境（Windows Server 2019 + CentOS 7）上完成基线核查，填写《主机安全测评记录表》（<a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
+                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能：主机基线核查——一台服务器一条不漏</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>掌握主机安全基线核查的完整流程：<strong>选取核查项 → 选择命令/工具 → 记录结果 → 判定结论</strong>。重点体会"一台服务器不能代表全部"——同业务的多台服务器必须每台都做。</div>
+                            <ol class="step-list">
+                                <li><strong>建立核查清单。</strong>从上方"Windows 重点项"/"Linux 重点项"中各选 8 项作为本次核查范围，每项明确"命令/操作路径"+"合格标准"。</li>
+                                <li><strong>现场核查命令回显。</strong>Windows 用 <code>secpol.msc</code> / <code>gpresult /r</code> / <code>auditpol /get</code>；Linux 用 <code>cat /etc/login.defs</code> / <code>auditctl -l</code> / <code>last -f /var/log/btmp</code>。每条命令的输出<strong>截图保存</strong>，作为证据。</li>
+                                <li><strong>判定与问题描述。</strong>每项给出"符合/部分符合/不符合/不适用"，部分符合/不符合的写清楚"做到哪、差在哪"。</li>
+                                <li><strong>逐台服务器重复。</strong>不要"测一台代表全部"——同业务多台服务器都要做；测评结论必须覆盖全部被测主机。</li>
+                            </ol>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 核查命令记不住？让 AI 当"随身教练"</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    我在做等保测评的主机基线核查，系统是【Windows Server 2019 / CentOS 7 / Ubuntu 20】。请给我一张"检查项—检查命令/操作路径—合格标准"对照表（如口令策略、登录失败处理、审计日志），并说明每条命令输出里要重点看什么。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。</p>
+                            </div>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 8 项核查全部有命令回显截图　☐ 每台被测主机都有独立记录　☐ 不符合项写到了"差在哪"　☐ 没有出现"以一台代表全部"
+                            </div>
                         </div>
                     </div>
 
-                    <div class="coming-soon">🔒 本任务配套的靶机环境、核查工具包与讲解视频将陆续上线</div>
+                    <!-- 4.2 网络设备配置核查 -->
+                    <div class="substage" id="substage4.2">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>主机查完了，回头看"马路上的设备"——路由器、交换机、防火墙。这一类核查全部依赖<strong>设备配置文件</strong>，取证难度大、造假空间大，是测评师"练眼光"的关键环节。</p>
+                        </div>
+
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材1：案例导入文字材料.docx" download title="下载《案例导入文字材料》">⬇ 素材1：案例导入文字材料</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置文件（含合规项与不合规项）.docx" download title="下载《防火墙配置文件》">⬇ 素材2：实践任务1——防火墙配置文件</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 素材3：实践任务——《网络设备安全测评记录表》</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置片段.docx" download title="下载《交换机配置片段》">⬇ 素材4：实践任务2——交换机配置片段</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材5：快速检查表（教师参考）.docx" download title="下载《快速检查表（教师参考）》">⬇ 素材5：快速检查表（教师参考）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材6：参考答案.docx" download title="下载《参考答案》">⬇ 素材6：参考答案</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材6：课后作业.docx" download title="下载《课后作业》">⬇ 素材6：课后作业</a>
+                            </div>
+                        </div>
+
+                        <div class="km-box" data-km="4.2"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🔌 4.2 网络设备配置核查</div>
+                            <p>路由器、交换机、防火墙的<strong>当前在线配置</strong>是核心证据：</p>
+                            <ul style="margin-left:20px;">
+                                <li><strong>路由器：</strong>路由策略、SNMPv3 替代 v2c、登录失败锁定、Console/SSH 口令强度</li>
+                                <li><strong>交换机：</strong>端口安全（关闭未用端口）、VLAN 划分（管理 VLAN 隔离）、ACL、STP 安全</li>
+                                <li><strong>防火墙：</strong>策略最小化（默认拒绝、按需放通）、出入站日志、HA 配置、WAF 联动</li>
+                            </ul>
+                            <p><strong>核查取证方法：</strong><code>show running-config</code> / <code>display current-configuration</code> 命令回显 + TFTP/USB 导出配置文件 + 时间戳截图。<strong>不要相信口头介绍——现场导出当前配置为准</strong>。</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（4.2，2学时）</div>
+                            <p><strong>网络设备配置核查：</strong>在模拟路由器、交换机、防火墙环境上导出当前配置，对照核查清单逐项判定，填写《网络设备安全测评记录表》（<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
+                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能 4.3：安全区域边界测评——检查系统的"大门"</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>完成"安全区域边界"控制类测评，覆盖 6 个子类：边界防护、访问控制、入侵防范、恶意代码和垃圾邮件防范、安全审计、可信验证。判定依据主要来自<strong>技能三录入的安全设备</strong>（防火墙、WAF 的部署位置与功能）和<strong>你画的拓扑图</strong>。</div>
+                            <ol class="step-list">
+                                <li><strong>展开"安全区域边界"节点</strong>，先通读 6 个子类的测评项，对照拓扑图定位每项"查的是哪个位置"（如边界防护→互联网出口、访问控制→防火墙策略）。</li>
+                                <li><strong>逐项判定。</strong>参考模拟示例：边界防护a→符合（防火墙+WAF 部署于互联网边界）；访问控制e→部分符合（防火墙仅按 IP/端口过滤，未实现基于应用协议和应用内容的访问控制）。</li>
+                                <li><strong>问题描述写"设备+差距"。</strong>网络类问题要落到具体设备："WAF 未开启 XX 防护策略"比"防护不到位"有价值一百倍。</li>
+                            </ol>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 6 个子类均有判定　☐ 每个判定都能对应到拓扑图上的位置或设备
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4.3 数据库安全配置核查 -->
+                    <div class="substage" id="substage4.3">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>主机和网络设备查完了，最敏感的一类资产——<strong>数据库</strong>。账号权限怎么配？口令强度够不够？日志保留多久？备份能不能恢复？——这一子任务直接关系到"<strong>敏感数据是否真的安全</strong>"。</p>
+                        </div>
+
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材1：实践任务——MySQL配置核查清单.docx" download title="下载《MySQL 配置核查清单》">⬇ 素材1：实践任务——MySQL 配置核查清单</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材2：实践任务——《数据库安全测评记录表》.docx" download title="下载《数据库安全测评记录表》">⬇ 素材2：实践任务——《数据库安全测评记录表》</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材3：实践任务——SQL Server配置核查清单.docx" download title="下载《SQL Server 配置核查清单》">⬇ 素材3：实践任务——SQL Server 配置核查清单</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材4：教师演示用——数据库核查快速命令参考.docx" download title="下载《数据库核查快速命令参考》">⬇ 素材4：教师演示用——数据库核查快速命令参考</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材5：课后作业——数据库安全合规性分析.docx" download title="下载《课后作业——数据库安全合规性分析》">⬇ 素材5：课后作业——数据库安全合规性分析</a>
+                            </div>
+                        </div>
+
+                        <div class="km-box" data-km="4.3"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🗄️ 4.3 数据库安全配置核查</div>
+                            <p>MySQL / SQL Server / Oracle 数据库的<strong>账户权限、口令策略、审计日志、备份策略</strong>是核查重点：</p>
+                            <ul style="margin-left:20px;">
+                                <li><strong>账户权限：</strong>禁用默认账户（root/sa）、撤销 PUBLIC 不必要权限、应用账户只授所需库表（最小权限）</li>
+                                <li><strong>口令策略：</strong>复杂度 ≥3 类字符、最短 8 位、定期更换、历史密码不能重复</li>
+                                <li><strong>审计日志：</strong>登录日志、DDL 日志、权限变更日志、慢查询日志——留存 ≥6 个月、防篡改</li>
+                                <li><strong>备份与恢复：</strong>每日冷备 + 异地备份 + 热冗余 + 定期恢复演练——备份文件本身要加密</li>
+                            </ul>
+                            <p><strong>核查取证：</strong><code>SHOW GRANTS</code> / <code>SELECT * FROM mysql.user</code> / <code>sp_helplogins</code> 等命令回显 + 日志文件导出 + 备份策略文件查阅。<strong>导出含个人信息的字段时要最小化脱敏</strong>。</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（4.3，2学时）</div>
+                            <p><strong>数据库安全配置核查：</strong>在 MySQL 8 / SQL Server 2019 模拟环境上完成账户权限与日志核查，填写《数据库安全测评记录表》（<a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材2：实践任务——《数据库安全测评记录表》.docx" download title="下载《数据库安全测评记录表》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
+                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能：数据库账户权限核查——最小化的边界在哪</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>掌握数据库账户权限核查的命令与判定逻辑。重点：<strong>"小权限"≠"无权限"</strong>——业务账户只需它要的 SELECT/INSERT/UPDATE，不必拥有 DROP 或 GRANT OPTION。</div>
+                            <ol class="step-list">
+                                <li><strong>导出账户清单。</strong>MySQL：<code>SELECT user, host, authentication_string FROM mysql.user;</code>；SQL Server：<code>SELECT name, type_desc FROM sys.server_principals;</code>。导出时仅保留必要字段（用户名/主机/权限），<strong>不要导出真实业务数据</strong>。</li>
+                                <li><strong>逐账户核查权限。</strong>MySQL：<code>SHOW GRANTS FOR '业务账户'@'%';</code>；SQL Server：<code>sp_helprotect</code>。判"最小权限"：<strong>多于业务实际需要的权限就标"部分符合"</strong>，写清楚"多了哪个权限"。</li>
+                                <li><strong>检查默认账户。</strong>root/sa 是否允许远程登录、口令强度、是否配置了登录失败处理。</li>
+                                <li><strong>审计日志配置核查。</strong>MySQL：<code>SHOW VARIABLES LIKE 'general_log%';</code> / <code>SHOW VARIABLES LIKE 'log_bin';</code>；SQL Server：查看 SQL Server Audit 配置。</li>
+                            </ol>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 数据库核查时 AI 这样用</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    我在做等保测评的数据库核查，数据库是【MySQL 8.0 / SQL Server 2019】。请按等保三级"安全计算环境"要求给我一份不少于 10 项的核查清单，每项注明：用哪条命令核查、合格标准是什么、常见的不符合写法是什么样。
+                                </div>
+                            </div>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 全部账户权限有截图证据　☐ 没有导出真实业务数据　☐ 默认账户的禁用/加固已说明　☐ 审计日志配置已逐项核验
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4.4 应用系统安全功能验证 -->
+                    <div class="substage" id="substage4.4">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>底层查完了（主机、网络设备、数据库），现在到最前端的"应用"——用户在浏览器里点点点能体验到的一切。<strong>身份鉴别、访问控制、会话超时、剩余信息保护</strong>……这些"看得见的安全"是等保的硬指标。</p>
+                        </div>
+
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材1：案例导入文字材料.docx" download title="下载《案例导入文字材料》">⬇ 素材1：案例导入文字材料</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《应用系统安全测评记录表》">⬇ 素材2：实践任务——《应用系统安全测评记录表》</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材3：模拟测试用例——身份鉴别验证.docx" download title="下载《模拟测试用例——身份鉴别验证》">⬇ 素材3：模拟测试用例——身份鉴别验证</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材4：模拟测试用例——访问控制验证.docx" download title="下载《模拟测试用例——访问控制验证》">⬇ 素材4：模拟测试用例——访问控制验证</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材5：模拟应用系统（简易OA）预设缺陷清单.docx" download title="下载《简易 OA 预设缺陷清单》">⬇ 素材5：模拟应用系统（简易 OA）预设缺陷清单</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材6：课后作业——越权漏洞分析.docx" download title="下载《课后作业——越权漏洞分析》">⬇ 素材6：课后作业——越权漏洞分析</a>
+                            </div>
+                        </div>
+
+                        <div class="km-box" data-km="4.4"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">📱 4.4 应用系统安全功能验证</div>
+                            <p>应用层 10 项安全功能<strong>人工验证</strong>为主：</p>
+                            <ul style="margin-left:20px;">
+                                <li><strong>身份鉴别：</strong>口令复杂度、登录失败锁定、双因素认证（重要系统）</li>
+                                <li><strong>访问控制：</strong>按角色授权、垂直越权测试（低权限访问高权限功能）、水平越权测试（A 账户访问 B 账户数据）</li>
+                                <li><strong>安全审计：</strong>登录日志、权限变更日志、关键操作日志完整且防篡改</li>
+                                <li><strong>会话管理：</strong>空闲超时自动退出、并发会话限制、登录后强制修改初始密码</li>
+                                <li><strong>剩余信息保护：</strong>退出后清理临时文件、内存中的敏感数据、Cookie 标记 HttpOnly/Secure</li>
+                            </ul>
+                            <p><strong>核查方法：</strong>工具核查法（BurpSuite 测越权）+ 测试用例法（按"模拟测试用例"逐项验证）+ 文档查阅（开发文档、安全设计说明）。</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（4.4，2学时）</div>
+                            <p><strong>应用系统安全功能验证：</strong>在简易 OA 模拟系统上完成身份鉴别、访问控制、会话超时等测试，填写《应用系统安全测评记录表》（<a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《应用系统安全测评记录表》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
+                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能 4.4：安全计算环境测评——工作量最大的"重头戏"</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>完成"安全计算环境"控制类测评。它有 <strong>11 个子类</strong>（身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护），是十个控制类中最大的一个——真实项目里花在它身上的时间也最多。本技能的测评结论将直接喂给任务 8 的脆弱性识别。</div>
+                            <ol class="step-list">
+                                <li><strong>展开"安全计算环境"节点</strong>，先数一下子类数量，感受工作量；按"主机→数据库→应用"的顺序推进，别乱序。</li>
+                                <li><strong>逐项判定，善用"证据迁移"。</strong>模拟示例：身份鉴别d→不符合（系统仅采用用户名口令认证，未采用双因素认证机制）；入侵防范f→部分符合（服务器未部署主机入侵检测）；数据备份恢复c→不符合（数据库服务器未实现热冗余，仅每日冷备）。</li>
+                                <li><strong>给每个"不符合"预贴标签。</strong>在技能记录里顺手标注：这条会不会成为任务 8 风险评估里的"脆弱性"？（如"未双因素认证"→高危脆弱性）。现在多想一步，任务 8 少熬一夜。</li>
+                            </ol>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 测评项看不懂？这是本任务最高频的卡点</div>
+                                <p>计算环境的测评项术语最密集。正确姿势：把测评项原文<strong>连同你已知的系统情况</strong>一起给 AI，问"这条在查什么、看什么证据"：</p>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    等保三级"安全计算环境"的测评要求原文是：【粘贴测评项原文】。被测系统情况：Linux 服务器 + SQL Server 数据库 + Tomcat 应用。请解释：①这条要求防的是什么风险（举一个真实安全事件的例子）；②现场应该访谈/核查/测试什么才能拿到证据；③对应的整改措施一般有哪些。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>AI 只负责"翻译"标准和提供思路；<strong>"符合/不符合"的判定和证据必须由你给出</strong>——将来签字负责的是测评师，不是 AI。</p>
+                            </div>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 11 个子类全部判定完毕　☐ 不符合项已预标注"是否为脆弱性"　☐ 完成至少一次"AI 翻译测评项"练习
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4.5 漏洞扫描与结果分析 -->
+                    <div class="substage" id="substage4.5">
+                        <h3>🔍 情景分析</h3>
+                        <div class="highlight">
+                            <p><strong>问题导入：</strong>人工核查全部完成后，用<strong>自动化漏洞扫描</strong>补一遍盲点。Nessus / OpenVAS 等工具会扫出大量"高危"——但"扫描报告"≠"真实风险"。本子任务学<strong>扫描工具的正确使用 + 结果的客观解读</strong>。</p>
+                        </div>
+
+                        <div class="kb-st-tables">
+                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
+                            <div class="kb-st-list">
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材1：模拟漏洞扫描报告（用于实践任务2）.docx" download title="下载《模拟漏洞扫描报告》">⬇ 素材1：模拟漏洞扫描报告（用于实践任务2）</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 素材2：漏洞扫描结果分析表</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材3：OpenVAS快速操作手册.docx" download title="下载《OpenVAS 快速操作手册》">⬇ 素材3：OpenVAS 快速操作手册</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材4：Nessus与OpenVAS对比（选型参考）.docx" download title="下载《Nessus 与 OpenVAS 对比》">⬇ 素材4：Nessus 与 OpenVAS 对比（选型参考）</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材5：教师演示用——Nessus扫描结果快速解读卡.docx" download title="下载《Nessus 扫描结果快速解读卡》">⬇ 素材5：教师演示用——Nessus 扫描结果快速解读卡</a>
+                            </div>
+                        </div>
+
+                        <div class="km-box" data-km="4.5"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🔍 4.5 漏洞扫描与结果分析</div>
+                            <p>工具核查是人工核查的<strong>补充</strong>，不是替代：</p>
+                            <ul style="margin-left:20px;">
+                                <li><strong>工具选择：</strong>Nessus（综合漏洞库，商用）、OpenVAS（开源免费）；Web 应用用 AWVS / BurpSuite</li>
+                                <li><strong>扫描前必做：</strong>客户书面授权（避免影响业务）；选择扫描窗口期；确定扫描范围（IP 段、端口）</li>
+                                <li><strong>结果解读：</strong>"高危"标签≠真高危——每个高危必须人工复测；区分"已验证高危/中危/低危/误报"四档</li>
+                                <li><strong>风险等级 = 漏洞危害 × 资产重要性</strong>：数据库的高危比个人 PC 的高危严重得多</li>
+                            </ul>
+                            <p><strong>核查方法：</strong>工具核查法（Nessus / OpenVAS）+ 漏洞验证法（人工复测去误报）+ 风险矩阵法（结合资产 CIA 赋值）。</p>
+                        </div>
+
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 技能任务（4.5，2学时）</div>
+                            <p><strong>漏洞扫描与结果分析：</strong>使用 Nessus / OpenVAS 对模拟靶机进行漏洞扫描，<strong>逐条人工复测高危项</strong>，填写《漏洞扫描结果分析表》（<a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 下载表格</a>）。</p>
+                            <p><strong>组织方式：</strong>4人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
+                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 技能 4.5：安全管理中心测评——别漏了"总控室"</div>
+                            <div class="lab-goal"><strong>技能目标：</strong>完成"安全管理中心"控制类测评（系统管理、审计管理、安全管理、集中管控 4 个子类）。它是等保 2.0 新增的控制类，查的是"有没有一个统一的地方管设备、看日志、控权限"——技能三录的<strong>堡垒机（运维审计）和日志审计系统</strong>就是它的核心证据。</div>
+                            <ol class="step-list">
+                                <li><strong>展开"安全管理中心"节点</strong>，通读 4 个子类。</li>
+                                <li><strong>对照资产清单判定。</strong>模拟思路：系统管理→符合（部署堡垒机实现集中运维）；集中管控→部分符合（部署日志审计系统，但未实现对安全事件的自动关联分析与告警）。</li>
+                                <li><strong>联动思考：</strong>如果系统没录堡垒机和日志审计，这一类几乎全不符合——回去技能三补资产，体会"资产底账不清，测评寸步难行"。</li>
+                            </ol>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 技能记录自查</div>
+                                ☐ 4 个子类均有判定　☐ 理解了安全管理中心与堡垒机/日志审计的对应关系
+                            </div>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🖥️ 补充上机：西普平台实操清单（10.11.0.70）</div>
+                            <div class="lab-goal"><strong>说明：</strong>JSecProbe 完成的是"测评流程"演练；以下上机在<strong>西普平台（10.11.0.70）</strong>进行，练的是"真机核查"的手感——两套环境互补，一边学"怎么判"，一边练"怎么查"。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>实操项目</th><th>平台</th><th>练什么</th></tr>
+                                    <tr><td>Windows / Linux 安全基线核查</td><td>西普</td><td>口令策略、账户锁定、日志审计等具体核查命令与配置位置</td></tr>
+                                    <tr><td>MySQL / SQL Server 安全配置核查</td><td>西普</td><td>账户权限、口令强度、日志配置的检查方法</td></tr>
+                                    <tr><td>PKI/CA、Apache / Tomcat / IIS 安全配置</td><td>西普</td><td>应用与中间件的安全功能验证</td></tr>
+                                    <tr><td>WVS Web 应用扫描</td><td>西普</td><td>漏洞扫描实操与扫描报告解读（高中低危）</td></tr>
+                                </table>
+                            </div>
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 核查命令记不住？让 AI 当"随身教练"</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    我在做等保测评的主机基线核查，系统是【Windows Server / CentOS / MySQL 8】。请给我一张"检查项—检查命令/操作路径—合格标准"对照表（如口令策略、登录失败处理、审计日志），并说明每条命令输出里要重点看什么。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。</p>
+                            </div>
+                        </div>
+
+                        <div class="coming-soon">🔒 本任务配套的靶机环境、核查工具包与讲解视频将陆续上线</div>
+                    </div>
                 </div>
 
                 <!-- ================= 任务5：安全管理测评 ================= -->
@@ -3122,11 +3399,11 @@ var SUYANG_CASES = {
                         }
                     ]
                 },
-                '3': {
-                    title: '任务3 物理与网络核查',
+                '3.1': {
+                    title: '任务3.1 物理安全核查',
                     cases: [
                         {
-                            id: 's3a', comp: '严谨求实 · 证据意识',
+                            id: 's31a', comp: '严谨求实 · 证据意识',
                             title: '「记录坏了，你先写符合」——现场核查的第一道考验',
                             scene: '机房核查时你要查看机房出入登记记录，陪同的运维人员说："登记本是纸质的经常丢，门禁系统记录也导不出来，你就先写「符合」吧，我们回头补一份给你。"',
                             question: '请分析为什么不能按他说的"先写符合"？你应当如何处理才能既坚持原则又不失分寸？',
@@ -3135,9 +3412,14 @@ var SUYANG_CASES = {
                                 { label: '规范处理方式', method: '取不到证据时应记录"部分符合"或"不适用"，注明原因，必要时改期补充核查。', kws: ['记录', '说明', '不符合', '部分符合', '备注', '标注', '复核', '改期', '情况说明'] },
                                 { label: '原则与分寸并存', method: '礼貌说明测评取证规则，请对方协调提供——现场不要硬顶，但结论不能含糊。', kws: ['礼貌', '解释', '标准', '坚持', '立场', '专业', '说明理由', '规则'] }
                             ]
-                        },
+                        }
+                    ]
+                },
+                '3.2': {
+                    title: '任务3.2 网络架构合规性检查',
+                    cases: [
                         {
-                            id: 's3b', comp: '职业操守',
+                            id: 's32a', comp: '职业操守',
                             title: '「都是熟人，高抬贵手」——老关系户的暗示',
                             scene: '核查安全管理制度时，被测评单位的信息中心主任半开玩笑地说："咱们合作这么多年了，那几条不合规的你少记两条，年底续约我都跟你们老板打好招呼了。"',
                             question: '请分析如果你照做了，对客户、测评机构和你个人分别意味着什么？你的正确做法是什么？',
@@ -3149,29 +3431,82 @@ var SUYANG_CASES = {
                         }
                     ]
                 },
-                '4': {
-                    title: '任务4 边界与计算环境测评',
+                '4.1': {
+                    title: '任务4.1 主机安全基线核查',
                     cases: [
                         {
-                            id: 's4a', comp: '批判性思维 · AI 使用伦理',
+                            id: 's41a', comp: '耐心细致 · 全覆盖意识',
+                            title: '「跳着测，省时间」——主机基线的"缩水"风险',
+                            scene: '主机安全基线有 11 个子类、几十条测评项。核查到下午四点，同组同学提议："Windows 服务器都装了同一套镜像，测一台代表机就代表全部吧，剩下的跳过，反正抽查不出来。"',
+                            question: '请分析"代表机=全部""跳着测"的做法对测评结论可靠性的影响，并给出既保证覆盖又提高效率的可行办法。',
+                            points: [
+                                { label: '覆盖度意识', method: '一台服务器不能代表全部——漏测的部分就是结论的盲区。', kws: ['全覆盖', '逐台', '抽样', '代表', '遗漏', '漏测', '偏差', '结论', '风险'] },
+                                { label: '规范抽样意识', method: '抽样必须按既定抽样规则（同类、比例、覆盖关键资产），报告里注明抽样方法和依据。', kws: ['抽样', '规则', '同类', '说明', '备注', '记录', '依据', '明确', '范围'] },
+                                { label: '效率提升方法', method: '用自动化脚本批量核查 + 模板复用 + 分工并行——比砍覆盖更有效率。', kws: ['自动化', '工具', '批量', '核查', '分组', '模板', '复用', '计划', '分工'] }
+                            ]
+                        }
+                    ]
+                },
+                '4.2': {
+                    title: '任务4.2 网络设备配置核查',
+                    cases: [
+                        {
+                            id: 's42a', comp: '严谨求实 · 证据意识',
+                            title: '「配置文件改回默认给你看」——网络设备核查的"造假"陷阱',
+                            scene: '核查边界防火墙时你要求导出当前配置，运维工程师说："刚升级完系统，现在配置是默认的没什么可看的，要看你登录账号我帮你查历史。"你想起任务3画拓扑图时对方提供的防火墙策略文件很完整。',
+                            question: '请分析这种"升级后默认"说法可能隐藏的问题，并说明核查网络设备配置时如何确保拿到真实证据。',
+                            points: [
+                                { label: '证据时效性意识', method: '配置核查必须看当前在线运行的配置——历史记录无法证明"现在"是否安全。', kws: ['当前', '在线', '运行', '配置', '证据', '时效', '现状'] },
+                                { label: '取证规范', method: '现场导出配置应双人复核、附时间戳截图或导出命令回显，避免被改回默认。', kws: ['导出', '命令', '截图', '时间戳', '双人', '复核', '回显', '原始'] },
+                                { label: '前后证据矛盾排查', method: '与任务3 拓扑图、策略文件交叉比对——前后矛盾就当场追问，避免"现场版"与"档案版"两张皮。', kws: ['比对', '交叉', '矛盾', '追问', '档案', '策略', '文件'] }
+                            ]
+                        }
+                    ]
+                },
+                '4.3': {
+                    title: '任务4.3 数据库安全配置核查',
+                    cases: [
+                        {
+                            id: 's43a', comp: '隐私保护 · 敏感数据意识',
+                            title: '「随便导出几百条看看」——核查中拿到真实数据怎么办',
+                            scene: '核查 MySQL 数据库账户与口令策略，导出 user 表查看账号配置。你注意到表里有几千条用户的姓名、手机号、身份证号字段（D同业务真实数据），同组同学说："反正只是看看，又不外传，导出来对照账号方便。"',
+                            question: '请分析"为方便核查而导出真实个人信息"这一行为的合规风险，并给出既满足核查需要又最小化敏感数据暴露的做法。',
+                            points: [
+                                { label: '最小必要原则', method: '核查要的是"账号配置"——不需真实用户数据；脱敏或仅导出账号列即可。', kws: ['最小', '必要', '脱敏', '匿名', '字段', '选择', '导出'] },
+                                { label: '法律合规风险', method: '《个人信息保护法》要求处理个人信息有合法目的——为核查一次性导出大量个人信息，本身就可能违规。', kws: ['个保法', '合规', '个人信息', '合法', '目的', '法律', '违规', '责任'] },
+                                { label: '现场处置规范', method: '在客户监督下导出 → 立即脱敏 → 核查完销毁；不可把含真实数据文件带出机房。', kws: ['监督', '销毁', '删除', '现场', '不可', '导出', '脱敏'] }
+                            ]
+                        }
+                    ]
+                },
+                '4.4': {
+                    title: '任务4.4 应用系统安全功能验证',
+                    cases: [
+                        {
+                            id: 's44a', comp: '批判性思维 · AI 使用伦理',
                             title: 'AI 判定与你的手工核对不一致时',
-                            scene: '使用 JSecProbe 的 AI 辅助分析功能核查服务器配置时，AI 给出"身份鉴别项符合"的建议，但你手工核对的截图显示该服务器 root 远程登录未禁用、口令策略也不满足要求。提交记录前，同组同学说："AI 比你专业，以 AI 为准吧。"',
+                            scene: '使用 JSecProbe 的 AI 辅助分析功能核查应用系统配置时，AI 给出"身份鉴别项符合"的建议，但你自己手工核对的截图显示该应用 root 远程登录未禁用、口令策略也不满足要求。提交记录前，同组同学说："AI 比你专业，以 AI 为准吧。"',
                             question: '请分析"以 AI 为准"的说法问题在哪，并说明测评人员与 AI 之间正确的分工关系。',
                             points: [
                                 { label: '人机分工认知', method: 'AI 是辅助工具，最终判定权和报告责任在人——结论必须人工复核，AI 不能替你签报告。', kws: ['人', '最终', '判定权', '责任', '辅助', '参考', '工具', '复核', '不能代替'] },
                                 { label: '核实与溯源', method: '截图显示配置不满足要求，就以截图为准；必要时再现场核查一次，不留疑点。', kws: ['证据', '截图', '核对', '验证', '回查', '重新', '依据', '配置', '原文'] },
                                 { label: '批判性使用 AI', method: 'AI 也会出错、会有幻觉——结论必须以现场证据为准，不能直接"以 AI 为准"。', kws: ['局限', '误差', '幻觉', '不轻信', '质疑', '交叉', '验证', '红线', '边界'] }
                             ]
-                        },
+                        }
+                    ]
+                },
+                '4.5': {
+                    title: '任务4.5 漏洞扫描与结果分析',
+                    cases: [
                         {
-                            id: 's4b', comp: '耐心细致 · 全覆盖意识',
-                            title: '「跳着测，省时间」——计算环境的"缩水"风险',
-                            scene: '安全计算环境有 11 个子类、测评项上百条。核查到下午四点，同组同学提议："服务器配置都差不多，测一台代表机就代表全部吧，剩下的跳过，反正抽查不出来。"你想起任务 4 的定位是"工作量最大的重头戏"。',
-                            question: '请分析"代表机=全部""跳着测"的做法对测评结论可靠性的影响，并给出既保证覆盖又提高效率的可行办法。',
+                            id: 's45a', comp: '客观公正 · 不夸大不缩小',
+                            title: '「高危漏洞 50 个，写报告里吓吓客户」——扫描结果的解读陷阱',
+                            scene: 'Nessus 扫描完毕，报告里"高危"项 50 多条。销售经理很高兴："这么多高危，正好写进报告让客户买单整改！"你看了几条高危详情，发现其中 12 条是误报（如某补丁号实际已打过但补丁库未更新），8 条是低版本 OpenVAS 误识别为高风险。',
+                            question: '请分析"扫描结果照单全收、不做人工验证"的危害，并说明漏洞报告的正确形成方式。',
                             points: [
-                                { label: '覆盖度意识', method: '一台服务器不能代表全部——漏测的部分就是结论的盲区。', kws: ['全覆盖', '逐台', '抽样', '代表', '遗漏', '漏测', '偏差', '结论', '风险'] },
-                                { label: '规范抽样意识', method: '抽样必须按既定抽样规则（同类、比例、覆盖关键资产），报告里注明抽样方法和依据。', kws: ['抽样', '规则', '同类', '说明', '备注', '记录', '依据', '明确', '范围'] },
-                                { label: '效率提升方法', method: '用自动化脚本批量核查 + 模板复用 + 分工并行——比砍覆盖更有效率。', kws: ['自动化', '工具', '批量', '核查', '分组', '模板', '复用', '计划', '分工'] }
+                                { label: '漏洞验证必要意识', method: '扫描结果只是"疑似"，每个高危必须现场复测——避免误报扰乱客户整改方向。', kws: ['误报', '疑似', '验证', '复测', '复核', '人工', '筛选'] },
+                                { label: '客观中立的报告原则', method: '报告要列实际验证后的真实风险，不能"凑数"夸大——失实的报告反噬机构信誉。', kws: ['客观', '中立', '失实', '夸大', '信誉', '报告', '真实'] },
+                                { label: '结论与建议', method: '区分"已验证高危/中危/低危/误报"四档，整改建议按"已验证风险"提——别把误报也算成整改项。', kws: ['分档', '四档', '已验证', '风险', '建议', '整改', '分级'] }
                             ]
                         }
                     ]
@@ -3559,8 +3894,13 @@ var SUYANG_CASES = {
                     '1.2': { ppts: ['1.2 安全等级识别与实践操作（理论版）.pptx'], stds: ['22240', '22239', '28448'] },
                     '2.1': { ppts: ['2.1 测评方案结构学习（理论版）.pptx'], stds: ['28448', '22239'] },
                     '2.2': { ppts: ['2.2 编制完整测评方案（理论版）.pptx'], stds: ['28448', '22239'] },
-                    '3':   { ppts: [], stds: ['22239', '28448'] },
-                    '4':   { ppts: [], stds: ['22239', '28448'] },
+                    '3.1': { ppts: ['3.1 物理安全核查.pptx'], stds: ['22239', '28448'] },
+                    '3.2': { ppts: ['3.2 网络架构合规性检查.pptx'], stds: ['22239', '28448'] },
+                    '4.1': { ppts: ['4.1 主机安全基线核查.pptx'], stds: ['22239', '28448'] },
+                    '4.2': { ppts: ['4.2 网络设备配置核查.pptx'], stds: ['22239', '28448'] },
+                    '4.3': { ppts: ['4.3 数据库安全配置核查.pptx'], stds: ['22239', '28448'] },
+                    '4.4': { ppts: ['4.4 应用系统安全功能验证.pptx'], stds: ['22239', '28448'] },
+                    '4.5': { ppts: ['4.5 漏洞扫描与结果分析.pptx'], stds: ['22239', '28448'] },
                     '5':   { ppts: [], stds: ['22239', '28448'] },
                     '6':   { ppts: [], stds: ['28448', '22239', 'report'] },
                     '7':   { ppts: [], stds: ['22239', '28448'] },
@@ -3572,8 +3912,13 @@ var SUYANG_CASES = {
                     '1.2': { obj: '情景分析', s: '定级方法', a: '定级方法', mx: '等级判定', lv1: '等级判定', lv2: '等级判定', lv3: '等级判定', lv4: '等级判定', lv5: '等级判定', ba: '等级判定' },
                     '2.1': { plan: '六要素', f1: '六要素', f2: '测评对象', f3: '裁剪', f4: '测评方法', f5: '六要素' },
                     '2.2': { p1: '六步法', p2: '示范场景', p3: '六步法', p4: '第四阶段', p5: '第五阶段', p6: '9个章节' },
-                    '3':   { top: '情景分析', ph: '3.1', ph1: '3.1', ph2: '3.1', net: '3.2', net1: '3.2', net2: '3.2' },
-                    '4':   { top: '情景分析', b: '常用工具', b1: '常用工具', c: '常用工具', c1: '常用工具', c2: '常用工具', c3: '常用工具', m: '常用工具', m1: '常用工具' },
+                    '3.1': { top: '情景分析', ph: '3.1 物理安全核查', ph1: '3.1 物理安全核查', ph2: '3.1 物理安全核查' },
+                    '3.2': { top: '情景分析', net: '3.2 网络架构合规性检查', net1: '3.2 网络架构合规性检查', net2: '3.2 网络架构合规性检查' },
+                    '4.1': { top: '情景分析', ph: '4.1 主机安全基线核查', ph1: '4.1 主机安全基线核查', ph2: '4.1 主机安全基线核查' },
+                    '4.2': { top: '情景分析', ne: '4.2 网络设备配置核查', ne1: '4.2 网络设备配置核查', ne2: '4.2 网络设备配置核查' },
+                    '4.3': { top: '情景分析', db: '4.3 数据库安全配置核查', db1: '4.3 数据库安全配置核查', db2: '4.3 数据库安全配置核查' },
+                    '4.4': { top: '情景分析', ap: '4.4 应用系统安全功能验证', ap1: '4.4 应用系统安全功能验证', ap2: '4.4 应用系统安全功能验证' },
+                    '4.5': { top: '情景分析', vl: '4.5 漏洞扫描与结果分析', vl1: '4.5 漏洞扫描与结果分析', vl2: '4.5 漏洞扫描与结果分析' },
                     '5':   { top: '情景分析', m1: '5.1', m2: '5.1', m3: '5.1', m4: '5.1', m5: '5.1', ev: '5.1' },
                     '6':   { top: '情景分析', sg: '6.1', sg1: '6.1', sg2: '6.1', ov: '6.2', ov1: '6.2', ov2: '6.3' },
                     '7':   { top: '情景分析', c: '责任共担', c1: '责任共担' },
@@ -3587,7 +3932,7 @@ var SUYANG_CASES = {
                 // 各单元"标准原文"融入的目标模块（按标题关键词匹配）
                 var STD_TARGET = {
                     '1.1': '等级保护制度', '1.2': '定级方法', '2.1': '关键概念：测评方案', '2.2': '六步法',
-                    '3': '3.1', '4': '常用工具', '5': '5.1', '6': '6.1', '7': '责任共担'
+                    '3.1': '3.1 物理安全核查', '3.2': '3.2 网络架构合规性检查', '4.1': '4.1 主机安全基线核查', '4.2': '4.2 网络设备配置核查', '4.3': '4.3 数据库安全配置核查', '4.4': '4.4 应用系统安全功能验证', '4.5': '4.5 漏洞扫描与结果分析', '5': '5.1', '6': '6.1', '7': '责任共担'
                 };
 
                 function stdBlockHtml(stds) {
@@ -4484,30 +4829,52 @@ var SUYANG_CASES = {
         p5: { x:340, y:170, label:'⑤ 确定指标', sub:'通用要求 + 裁剪', info:'第五步：通用要求+扩展要求逐条对照，标注适用性与裁剪理由，形成《测评指标表》。' },
         p6: { x:140, y:170, label:'⑥ 日程分工', sub:'时间节点 / 人员安排', info:'第六步：编制现场作业与报告编制的日程安排、人员分工，最终形成完整方案文档。' }
     }, edges: [['p1','p2'],['p2','p3'],['p3','p4'],['p4','p5'],['p5','p6']] },
-    '3': { h: 310, nodes: {
-        top: { x:276, y:26,  label:'物理与网络', sub:'系统的"房子"和"马路"', info:'把系统比作一座房子：物理环境是"房子"本身，通信网络是连接外界的"马路"。本任务先查这两项基础。' },
-        ph:  { x:136, y:126, label:'安全物理环境', sub:'机房 · 场地 · 设施', info:'安全物理环境：机房场地的选址、门禁、防火防水、温湿度控制、电力供应等物理层面防护。' },
-        net: { x:416, y:126, label:'安全通信网络', sub:'架构 · 传输', info:'安全通信网络：网络架构合理性与通信传输的保密性、完整性——数据在"马路"上跑得安全吗。' },
-        ph1: { x:66,  y:226, label:'物理访问控制', sub:'门禁 · 监控 · 防盗', info:'物理访问控制：门禁、视频监控、防盗报警——控制谁能进入机房，出事能追溯到人。' },
-        ph2: { x:196, y:226, label:'防火防水温控', sub:'环境风险防护', info:'防火、防水、防潮、温湿度控制：火灾自动报警、气体灭火、精密空调——保障设备持续安全运行。' },
-        net1:{ x:346, y:226, label:'网络架构', sub:'区域划分 · 冗余', info:'网络架构核查：区域划分是否合理（办公/服务/管理分区）、关键链路是否冗余。' },
-        net2:{ x:476, y:226, label:'通信传输', sub:'加密 · 完整性', info:'通信传输安全：管理数据与鉴别信息传输加密（如 HTTPS/SSH），防窃听、防篡改。' }
-    }, edges: [['top','ph'],['top','net'],['ph','ph1'],['ph','ph2'],['net','net1'],['net','net2']] }
+    '3.1': { h: 250, nodes: {
+        top: { x:340, y:30,  label:'物理安全核查', sub:'3.1 机房"十查"', info:'物理安全是测评的第一站——按 GB/T 22239 "安全物理环境"对机房进行 10 个子类核查：物理位置选择、物理访问控制、防盗窃防破坏、防雷击、防火、防水防潮、防静电、温湿度控制、电力供应、电磁防护。' },
+        ph:  { x:170, y:110, label:'机房"十查"', sub:'10 个子类逐项判定', info:'机房"十查"：以《安全物理环境测评检查表》逐项对照判定（符合/部分符合/不符合/不适用），每一项都要给出证据（照片、记录、配置）。' },
+        ph1: { x:90,  y:210, label:'位置与门禁', sub:'选址 · 访问控制 · 防盗', info:'物理位置选择 + 物理访问控制 + 防盗窃防破坏——3 个子类聚焦"谁能进机房、设备安不安全"。' },
+        ph2: { x:250, y:210, label:'环境与电力', sub:'防火·防水·温湿度·电力', info:'防雷击 + 防火 + 防水防潮 + 防静电 + 温湿度控制 + 电力供应 + 电磁防护——7 个子类聚焦"机房环境能不能撑住"。' }
+    }, edges: [['top','ph'],['ph','ph1'],['ph','ph2']] },
+    '3.2': { h: 250, nodes: {
+        top: { x:340, y:30,  label:'网络架构合规', sub:'3.2 区域划分与传输', info:'通信网络是连接机房各设备的"马路"——按 GB/T 22239 "安全通信网络"核查网络架构、通信传输、可信验证三个子类。重点：三级系统要求关键设备硬件冗余、传输采用密码技术保证保密性。' },
+        net: { x:170, y:110, label:'网络架构 + 传输', sub:'3 子类 · 有图有依据', info:'网络架构（区域划分、关键设备冗余）+ 通信传输（完整性、保密性、可信验证）——3 个子类。判定时必须对着拓扑图找证据。' },
+        net1:{ x:90,  y:210, label:'网络架构', sub:'分区 · 冗余 · 边界', info:'网络架构：划分不同网络区域、分配地址；重要区域技术隔离；三级要求关键设备硬件冗余。判定证据看拓扑图。' },
+        net2:{ x:250, y:210, label:'通信传输', sub:'校验 · 加密 · 可信验证', info:'通信传输：采用校验技术或密码技术保证数据完整性；三级要求对传输加密保证保密性；可信验证验证系统引导程序。' }
+    }, edges: [['top','net'],['net','net1'],['net','net2']] }
     };
     </script>
     <script>
     /* ================= 知识结构图数据（第二部分：任务4 / 5 / 6 / 7 / 8） ================= */
-    KM_DATA['4'] = { h: 310, nodes: {
-        top:{ x:276, y:26,  label:'边界与计算环境', sub:'"大门"和"房间"', info:'区域边界是系统的"大门"，计算环境是每个"房间"——这是整个课程学时最多（10学时）的硬核实操任务。' },
-        b:  { x:76,  y:126, label:'区域边界', sub:'防火墙 · 入侵防范', info:'区域边界防护：防火墙访问控制、入侵检测与防御、恶意代码防范、边界安全审计。' },
-        c:  { x:276, y:126, label:'计算环境', sub:'主机 · 数据库 · 应用', info:'计算环境安全：主机、数据库、应用系统的身份鉴别、访问控制、安全审计、入侵防范、数据保护。' },
-        m:  { x:476, y:126, label:'安全管理中心', sub:'集中管控 · 审计', info:'安全管理中心：对全网实施集中管控——统一策略下发、集中审计、统一监测（三级及以上系统的要求）。' },
-        b1: { x:76,  y:226, label:'边界防护', sub:'访问控制 · 恶意代码', info:'边界防护核查：防火墙策略是否最小化、入侵检测是否启用并告警、恶意代码库是否及时更新。' },
-        c1: { x:166, y:226, label:'身份鉴别', sub:'口令 · 双因素', info:'身份鉴别：口令复杂度与更换周期、登录失败处理、重要系统的双因素认证。' },
-        c2: { x:296, y:226, label:'访问控制', sub:'最小权限', info:'访问控制：按最小权限原则分配账号权限，杜绝共享账号与越权操作。' },
-        c3: { x:426, y:226, label:'安全审计', sub:'日志留存≥6个月', info:'安全审计：日志覆盖面与保留期限（不少于6个月），审计记录本身要防篡改、防删除。' },
-        m1: { x:556, y:226, label:'集中管控', sub:'统一入口 · 留痕', info:'集中管控：通过运维堡垒机/统一管理平台实现统一入口、统一授权、全程留痕。' }
-    }, edges: [['top','b'],['top','c'],['top','m'],['b','b1'],['c','c1'],['c','c2'],['c','c3'],['m','m1']] };
+    KM_DATA['4.1'] = { h: 250, nodes: {
+        top:{ x:340, y:30,  label:'主机安全基线', sub:'4.1 服务器的"基本功"', info:'主机安全基线是等保测评中工作量最大的一类。Windows/Linux 服务器的口令策略、登录失败处理、审计日志、补丁更新、入侵防范等是核查重点——一项一台，逐台判定。' },
+        ph:  { x:170, y:110, label:'主机基线核查', sub:'OS · 11 个子类', info:'以主机操作系统基线为准（如 CIS Benchmark），逐条核查：身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护。' },
+        ph1: { x:90,  y:210, label:'身份与访问', sub:'口令 · 权限 · 审计', info:'身份鉴别（口令复杂度、双因素）+ 访问控制（最小权限、共享账号）+ 安全审计（日志留存 ≥6 个月、防篡改）。' },
+        ph2: { x:250, y:210, label:'入侵与数据', sub:'入侵防范 · 备份恢复', info:'入侵防范（补丁、HIDS）+ 恶意代码防范 + 数据完整性/保密性 + 数据备份恢复（热备/冷备/演练）。' }
+    }, edges: [['top','ph'],['ph','ph1'],['ph','ph2']] };
+    KM_DATA['4.2'] = { h: 250, nodes: {
+        top:{ x:340, y:30,  label:'网络设备配置', sub:'4.2 路由器/交换机/防火墙', info:'网络设备配置核查覆盖路由器、交换机、防火墙——设备配置依赖手工核对、命令回显、配置文件导出。每一项配置都要有"当前在线配置"作为证据，避免被改回默认。' },
+        ne:  { x:170, y:110, label:'设备配置核查', sub:'路由·交换·防火墙', info:'路由器（路由策略、SNMPv3、口令强度）+ 交换机（端口安全、VLAN 划分、ACL）+ 防火墙（最小化策略、入侵防御联动）。每一类设备都有专属核查清单。' },
+        ne1: { x:90,  y:210, label:'边界防护', sub:'防火墙 · ACL · 区域隔离', info:'边界防护：防火墙策略是否最小化、ACL 是否覆盖管理口与业务口、互联网边界是否有 WAF。判定要看当前配置文件，不是听口头介绍。' },
+        ne2: { x:250, y:210, label:'访问控制', sub:'SNMP · AAA · 登录失败', info:'访问控制：SNMPv3 替代 v2c、AAA 集中认证、登录失败锁定、Console/SSH 登录口令强度——避免设备本身被攻击者接管。' }
+    }, edges: [['top','ne'],['ne','ne1'],['ne','ne2']] };
+    KM_DATA['4.3'] = { h: 250, nodes: {
+        top:{ x:340, y:30,  label:'数据库安全配置', sub:'4.3 MySQL · SQL Server · Oracle', info:'数据库是敏感数据的"金库"——核查重点：账户权限（最小化、无空口令）、口令强度、日志审计（登录日志、慢查询日志）、备份策略（热备/冷备/异地）。导出数据时严守最小必要原则。' },
+        db:  { x:170, y:110, label:'数据库基线核查', sub:'账户 · 权限 · 日志', info:'账户权限（最小化、禁用过期账户）+ 口令策略（复杂度、定期更换）+ 日志审计（登录、DDL、慢查询）+ 备份与恢复（每日冷备、热冗余、定期演练）。' },
+        db1: { x:90,  y:210, label:'账户与权限', sub:'最小化 · 无空口令', info:'账户权限：禁用默认账户、撤销不必要的 PUBLIC 权限、应用账户只授所需库表权限；口令复杂度+定期更换+历史密码不能重复。' },
+        db2: { x:250, y:210, label:'审计与备份', sub:'日志留存 ≥6 月', info:'审计日志：登录、DDL、权限变更、慢查询必须留存 ≥6 个月；备份：每日冷备+热冗余+定期恢复演练——备份文件也要加密保存。' }
+    }, edges: [['top','db'],['db','db1'],['db','db2']] };
+    KM_DATA['4.4'] = { h: 250, nodes: {
+        top:{ x:340, y:30,  label:'应用系统安全', sub:'4.4 身份鉴别 · 访问控制 · 会话', info:'应用系统安全功能验证：身份鉴别（密码复杂度、登录失败处理、双因素）、访问控制（按角色授权、无越权）、安全审计（关键操作日志）、会话超时（自动退出）、剩余信息保护（退出后清理临时数据）。' },
+        ap:  { x:170, y:110, label:'应用功能验证', sub:'10 项安全功能', info:'身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护——10 项中身份鉴别+访问控制+会话管理是高频卡点。' },
+        ap1: { x:90,  y:210, label:'登录与会话', sub:'口令 · 失败 · 超时', info:'登录：口令复杂度、登录失败锁定、可信验证、双因素认证；会话：空闲超时自动退出、并发会话限制、登录后强制修改初始密码。' },
+        ap2: { x:250, y:210, label:'授权与审计', sub:'最小权限 · 操作留痕', info:'授权：按角色分配权限、无共享账号、垂直越权与水平越权测试；审计：登录、权限变更、关键操作日志完整且防篡改。' }
+    }, edges: [['top','ap'],['ap','ap1'],['ap','ap2']] };
+    KM_DATA['4.5'] = { h: 250, nodes: {
+        top:{ x:340, y:30,  label:'漏洞扫描与结果分析', sub:'4.5 Nessus · OpenVAS · 解读', info:'漏洞扫描是发现"技术脆弱性"的高效手段——但"高危"标签不等于"真高危"。扫描前必须客户书面授权；扫描结果必须人工复测去误报；最终风险等级 = 漏洞危害 × 资产重要性。' },
+        vl:  { x:170, y:110, label:'漏洞扫描流程', sub:'授权 · 扫描 · 复测 · 解读', info:'流程：① 客户书面授权（避免影响业务）→ ② 选择工具（Nessus/OpenVAS）→ ③ 全量/抽样扫描 → ④ 人工复测每个"高危" → ⑤ 出具漏洞分析表。' },
+        vl1: { x:90,  y:210, label:'工具与场景', sub:'主机·Web·工控', info:'工具选择：主机/网络基线用 Nessus；Web 应用用 AWVS/Burp；工控慎用主动扫描（可能影响生产）；不同场景对应不同工具，避免一刀切。' },
+        vl2: { x:250, y:210, label:'结果分析', sub:'复测 · 风险分级', info:'结果分析：每个高危必须现场复测；区分"已验证高危/中危/低危/误报"四档；结合资产 CIA 赋值算风险等级——失实的报告反噬机构信誉。' }
+    }, edges: [['top','vl'],['vl','vl1'],['vl','vl2']] };
     KM_DATA['5'] = { h: 300, nodes: {
         top:{ x:276, y:26,  label:'安全管理体系', sub:'制度·机构·人员·建设·运维', info:'管理是"软件中的软件"：制度、机构、人员、建设、运维五大类。多数安全事件与"人"和"管理"有关。' },
         m1: { x:66,  y:126, label:'制度管理', sub:'文件体系 · 发布修订', info:'安全管理制度：制度体系（总体方针 + 管理制度 + 操作规程 + 记录表单）及其发布、评审、修订流程。' },
