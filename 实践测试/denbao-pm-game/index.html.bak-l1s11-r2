@@ -907,49 +907,6 @@ const DOCS = {
 <p>本次清单为单位三级核心业务系统全覆盖资产，涵盖网络转发设备、业务服务设备、数据存储设备、安全防护设备、办公终端及辅助外设六大类。所有设备均为系统专属运行设备，状态正常、长期在线，无闲置、停用、外借设备，全面支撑单位核心业务运转及日常办公工作。</p>
 <p style="color:#8A6D1F;font-size:11.5px">※ 张工批注：设备清单是选取测评对象的核心依据——注意哪些该测、哪些不该测、哪些可以抽样。</p>`
   },
-  guocheng: {
-    name:"《测评过程指南要点（GB/T 28449-2018）》",
-    meta:"张工整理 · 标准学习参考",
-    icon:"📘",
-    html:`
-<div class="pv-badge">标准规范 · 学习参考（张工整理，非标准原文）</div>
-<h2>GB/T 28449-2018《信息安全技术 网络安全等级保护测评过程指南》要点摘要</h2>
-<p class="paper-sub">本材料为学习摘要，按课程教学口径整理</p>
-<h3>一、标准定位</h3>
-<p>GB/T 28449-2018 回答的问题是「<b>测评活动怎么组织、流程怎么走</b>」：从接到项目到交付报告，全过程怎么安排、每个阶段产出什么。四份核心标准分工如下：</p>
-<table>
-<tr><th>标准</th><th>回答的问题</th></tr>
-<tr><td>GB/T 22240-2020《定级指南》</td><td>系统定几级——定级对象识别、S/A 赋值</td></tr>
-<tr><td>GB/T 22239-2019《基本要求》</td><td>要做到什么——各级安全要求（测评指标来源）</td></tr>
-<tr><td>GB/T 28448-2019《测评要求》</td><td>怎么测——测评方法与单项判定尺度</td></tr>
-<tr><td><b>GB/T 28449-2018《过程指南》</b></td><td><b>流程怎么走——测评活动的组织与实施过程</b></td></tr>
-</table>
-<h3>二、测评流程四阶段</h3>
-<p>本标准把等级测评活动划分为四个阶段：</p>
-<table>
-<tr><th>阶段</th><th>主要工作</th><th>关键产出</th></tr>
-<tr><td>① 测评准备</td><td>项目启动、信息收集与分析、工具与表单准备</td><td>项目计划、信息采集表</td></tr>
-<tr><td>② 方案编制</td><td>确定测评对象、测评指标、测评实施计划与人员分工</td><td>《测评方案》</td></tr>
-<tr><td>③ 现场测评</td><td>访谈、核查、测试，采集证据并双方确认</td><td>测评记录与证据</td></tr>
-<tr><td>④ 分析与报告编制</td><td>单项判定、整体结论评价、报告编制与评审交付</td><td>《测评报告》</td></tr>
-</table>
-<h3>三、测评对象选取原则（方案编制阶段核心工作）</h3>
-<p>依据本标准及行业质控规范，测评对象按四条原则选取：</p>
-<p>· <b>应测尽测</b>——标准明确要求纳入的对象一律纳入，不能漏测关键资产；</p>
-<p>· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测评，按关键性原则不可抽样；</p>
-<p>· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表；</p>
-<p>· <b>抽样</b>——同类设备、同质化配置，可抽样测评。</p>
-<h3>四、抽样适用边界（行业统一共识）</h3>
-<p>抽样不是「想抽就抽」，适用边界如下：</p>
-<table>
-<tr><th>规则</th><th>说明</th></tr>
-<tr><td>少量关键业务资产不适用抽样</td><td>Web 服务器、应用服务器、数据库服务器等承载核心业务与重要数据的设备，台数再少也必须 100% 全测</td></tr>
-<tr><td>抽样仅适用于批量同构非核心资产</td><td>同型号、同配置、同版本、同功能的批量设备（如大规模办公终端），才谈得上抽样</td></tr>
-<tr><td>单类网络设备数量≤10 台必须全测</td><td>无论是否同配置，必须 100% 全测、禁止抽样（行业质控规范）</td></tr>
-<tr><td>抽样比例不低于 30%</td><td>且同类至少抽 2 台，比例与数量须在方案中明示</td></tr>
-</table>
-<p style="color:#8A6D1F;font-size:11.5px">※ 张工批注：第 11 关《测评对象选取表》的判定依据就是这份标准的第三、四部分——先判断设备在不在定级边界内、承不承载核心业务，再决定全部纳入 / 抽样 / 不纳入，并逐项写明理由。抽样的本质是「用代表性换取效率」，只对「批量、同构、非核心」三条件同时满足的资产成立。</p>`
-  },
   bushu: {
     name:"《系统部署与配置确认单》",
     meta:"运维单位：市大数据发展局 · 2026-09-10",
@@ -1396,85 +1353,67 @@ const LEVELS = [
       {
         "id": "L1S11",
         "title": "六步法④ 选取测评对象",
-        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。本关挑战：对照 📁 材料库中的《网络拓扑与设备清单》与《测评过程指南要点（GB/T 28449-2018）》，在《测评对象选取表》里为每一类设备做出「全部纳入 / 抽样 / 不纳入」的决定，并逐项写明理由。这是方案编制的核心关卡：每一项决定都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用——这一关，见真功夫。",
+        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。这是方案编制的核心关卡：每一项「纳入 / 抽样 / 排除」的决定，都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用——这一关，见真功夫。",
         "taskLb": "张 工 提 示",
-        "task": "【测评对象选取四原则】\n· <b>应测尽测</b>——标准（GB/T 28448-2019）明确要求纳入的对象一律纳入，不能漏测关键资产。\n· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测，按关键性原则不可抽样。\n· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表。\n· <b>抽样（≥30%）</b>——同类设备、同质化配置，可抽样测评。\n\n先尝试基于知识进行挑战，若没有思路，可点击下面的三色卡，这是我给你的三个锦囊。",
-        "docs": ["dengji", "tuopu", "guocheng"],
-        "hint": "对照《网络拓扑与设备清单》与《测评过程指南要点》（材料库均已发放）逐类判断：哪些设备承载核心业务或重要数据（数量又少）？接入交换机注意看清单里它的作用描述——「支撑系统整体组网连通」，属系统组网核心组成部分，而且合规规则明确：单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样。办公终端和打印机在不在定级边界内？记住行业共识：少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
-        "expect": "①不是所有设备都测——纳入与否看三点：是否在定级边界内、是否承载业务数据、标准是否要求；②行业共识：少量关键业务资产不适用抽样——Web 服务器（3 台）、应用服务器（2 台）、数据库服务器（2 台）承载核心业务与重要数据，全部 100% 测评；接入交换机 9 台虽为同规格批量设备，但清单明确其「支撑系统整体组网连通」、属系统组网核心组成部分，且合规规则「单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测，禁止抽样」——全部纳入 100% 测评；③办公终端（60 台）本次不纳入，但若用于运维被测系统或承载其数据则必须纳入，按主机安全要求测；④表格每一项决定都必须写明理由。",
+        "task": "【测评对象选取四原则】\n· <b>应测尽测</b>——标准（GB/T 28448-2019）明确要求纳入的对象一律纳入，不能漏测关键资产。\n· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测，按关键性原则不可抽样。\n· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表。\n· <b>抽样（≥30%）</b>——按代表性原则抽样，比例与数量须在方案中明示，比例不低于 30%、同类至少 2 台。\n\n先尝试基于知识进行挑战，若没有思路，可点击下面的三色卡，这是我给你的三个锦囊。",
+        "docs": ["dengji", "tuopu"],
+        "hint": "先把《系统定级报告》（看定级边界与定级对象）和《网络拓扑与设备清单》翻出来对照：哪些设备在被测系统的边界内、承载业务？同类同配置的设备有几台？办公终端和打印机在不在范围内？",
+        "expect": "①不是所有设备都测——纳入与否看三点：是否在定级边界内、是否承载业务数据、标准是否要求；②可抽样的是同类同配置同功能同版本的批量设备（Web 3 台、数据库 2 台），抽样比例不低于 30%；③办公终端（60 台）本次不纳入，但若用于运维被测系统或承载其数据则必须纳入，按主机安全要求测；④表格每一项决定都必须写明理由。",
         "aiGuide": "AI 可按抽样规则给出选取建议、算好抽样比例，也能示范「结论 + 理由」的标准写法；但它给的是通用示范，替代不了你对现场的判断。",
-        "mustManual": "哪些设备承载核心业务（关键性）、哪些可抽样、哪些排除——这三类判断只能由测评师结合被测系统的实际情况（定级边界、设备清单、承载的业务与数据）做出；「全部都测」和「随便抽几台」都过不了方案评审。另外要考虑行业统一共识：少量（10台以内）关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
-        "quality": "熟悉测评标准和行业共识，既要应测尽测、不漏测关键资产，也要替客户算成本、不为无关设备买单。用专业的态度专业的描述呈现专业的成果，所有表单禁止使用口语化简称，统一采用专业术语，减少歧义。",
+        "mustManual": "哪些设备承载核心业务（关键性）、哪些可抽样、哪些排除——这三类判断只能由测评师做；「全部都测」和「随便抽几台」都过不了方案评审。",
+        "quality": "对象选取见专业功底——既要应测尽测、不漏测关键资产，也要替客户算成本、不为无关设备买单。敢做取舍，也担得起取舍的责任。",
         "materialRef": "《网络拓扑与设备清单》",
         "reasonHint": "为什么纳入、为什么抽样、为什么排除",
-        "webSampleWrong": "Web 服务器（3 台）按「同质设备抽样」只抽 1 台：只看到「同配置同应用」就对关键业务资产套用抽样，违反行业共识——<b>少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产</b>（GB/T 28449-2018《测评过程指南》及行业质控规范）。典型后果：评审判「测评对象选取不当、漏测关键资产」→ 本项抽样被退回、要求对 Web 服务器 <b>100% 测评后重新测评</b>；本次《测评方案》被打回、整改后再提交；客户需再付一轮测评费、测评周期顺延；若带着缺陷出具报告，最终结论可能由「通过」降为「基本符合 / 不通过」，测评机构还可能被质控通报。",
+        "webSampleWrong": "Web 服务器（3 台）只抽 1 台：抽样比例仅 ≈33%（贴边 30%），低于「同类至少 2 台」的稳健样本要求，评审会判「抽样代表性不足」。典型后果：本项抽样被退回、要求扩大样本后<b>重新测评</b>；本次《测评方案》被打回、整改后再提交；客户需再付一轮测评费、测评周期顺延；最终结论也可能由「通过」降为「基本符合 / 不通过」。",
         "type": "table",
         "table": {
           "headers": ["对象选取决策", "我的决定与理由"],
           "rows": [
             {
-              "label": "防火墙 / 核心交换机 / 堡垒机 / WAF / 日志审计",
-              "groups": [["全部","100","必测","应测尽测","全测"]],
-              "reason": [["关键","核心","边界防护","网络核心","运维审计","应测尽测","三级","标准","要求","审计","防护","数量少"]],
-              "placeholder": "这些设备怎么测？理由是什么？",
-              "expect": "全部纳入，100% 测评（边界防护/网络核心/运维审计关键设备，应测尽测，数量少且关键不可抽样）",
-              "stdShort": "全部纳入，100% 测评",
-              "stdReason": "边界防护 / 网络核心 / 运维审计等关键设备，应测尽测原则；数量少且关键、不可抽样",
+              "label": "防火墙 / 交换机 / 堡垒机 / WAF / 日志审计",
+              "groups": [["全部","100","必测","应测尽测"]],
+              "reason": [["关键","核心","边界防护","网络核心","运维审计","应测尽测","三级","标准","要求","审计","防护"]],
+              "placeholder": "这些关键设备怎么测？理由是什么？",
+              "expect": "全部纳入，100% 测评（边界防护/网络核心/运维审计关键设备，三级必须测）",
               "good": "关键设备应测尽测——必须写出「为什么不能抽样」。"
             },
             {
-              "label": "接入交换机（9 台，同规格统一固件）",
-              "groups": [["全部","100","必测","应测尽测","全测"]],
-              "reason": [["组网","连通","核心组成","支撑","≤10","10 台","10台","禁止抽样","不可抽样","不能抽样","不抽样","网络设备","应测尽测","合规"]],
-              "placeholder": "这九台怎么测？理由是什么？",
-              "expect": "全部纳入，100% 测评（清单明确其支撑系统整体组网连通，属系统组网核心组成部分；合规规则：单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测，禁止抽样）",
-              "stdShort": "全部纳入，100% 测评",
-              "stdReason": "清单明确其「支撑系统整体组网连通」，属系统组网核心组成部分；且合规规则「单类网络设备≤10 台必须 100% 全测、禁止抽样」",
-              "good": "单类网络设备≤10 台必须 100% 全测、禁止抽样——组网核心组成部分应测尽测。"
-            },
-            {
               "label": "Web 服务器（3 台，同配置同应用）",
-              "groups": [["全部","100","必测","应测尽测","全测"]],
-              "reason": [["关键","核心","业务","承载","对外","不抽样","不能抽","不可抽样","重要","少量"]],
-              "placeholder": "这三台怎么测？理由是什么？",
-              "expect": "全部纳入，100% 测评（对外提供核心业务服务，少量关键业务资产不适用抽样——行业共识）",
-              "stdShort": "全部纳入，100% 测评",
-              "stdReason": "对外提供核心业务服务，少量关键业务资产不适用抽样（行业共识）",
-              "good": "少量关键业务资产不适用抽样——不能只看「同质」就抽样。"
-            },
-            {
-              "label": "应用服务器（2 台，业务核心）",
-              "groups": [["全部","100","必测","应测尽测","全测"]],
-              "reason": [["业务","核心","关键","承载","不抽样","不能抽","不可抽样","重要"]],
-              "placeholder": "业务核心设备怎么处理？理由是什么？",
-              "expect": "全部纳入，100% 测评（承载核心业务，按关键性原则不可抽样）",
-              "stdShort": "全部纳入，100% 测评",
-              "stdReason": "承载核心业务功能，按关键性原则不可抽样",
-              "good": "业务核心不抽样——关键性原则。"
+              "nums": [2],
+              "groups": [["抽样","抽"],["66","%"]],
+              "reason": [["同配置","同类型","同质","同类","同版本","相同","一致","批量","比例","不低于"]],
+              "placeholder": "抽几台？比例是多少？理由是什么？",
+              "expect": "抽 2 台（66%，≥30% 抽样要求；3 台同质化设备按抽样原则处理）",
+              "good": "抽 2 台 = 66%，远超 30% 底线，理由充分。"
             },
             {
               "label": "数据库服务器（2 台，同配置）",
-              "groups": [["全部","100","必测","应测尽测","全测"]],
-              "reason": [["数据","重要","核心","关键","承载","不抽样","不能抽","不可抽样","少量"]],
-              "placeholder": "这两台怎么测？理由是什么？",
-              "expect": "全部纳入，100% 测评（承载重要业务数据，少量关键业务资产不适用抽样）",
-              "stdShort": "全部纳入，100% 测评",
-              "stdReason": "承载重要业务数据，少量关键业务资产不适用抽样",
-              "good": "重要数据承载设备不抽样——行业共识。"
+              "nums": [1],
+              "groups": [["抽样","抽"],["50","%"]],
+              "reason": [["同配置","同类型","同质","同类","相同","一致","比例","不低于"]],
+              "placeholder": "抽几台？比例是多少？理由是什么？",
+              "expect": "抽 1 台（50%，≥30%；同质化设备抽样）",
+              "good": "抽 1 台 = 50%，满足抽样要求。"
+            },
+            {
+              "label": "应用服务器（2 台，业务核心）",
+              "groups": [["全部","100","必测"]],
+              "reason": [["业务","核心","关键","承载","不抽样","不能抽","不可抽样","重要"]],
+              "placeholder": "业务核心设备怎么处理？理由是什么？",
+              "expect": "全部纳入，100% 测评（承载核心业务，按关键性原则不可抽样）",
+              "good": "业务核心不抽样——关键性原则。"
             },
             {
               "label": "办公终端（60 台）/ 打印机（12 台）",
               "groups": [["不纳入","不测","不用测","无需测","不需要测","不进入","不属于","不列入","排除","非核心"]],
               "reason": [["非核心","非信息系统","不在","边界","不承载","办公","范围","无关","不涉及"]],
               "placeholder": "这些设备测不测？理由是什么？",
-              "expect": "不纳入（办公终端非核心设备且不在定级边界内；打印机非信息系统设备）",
-              "stdShort": "不纳入",
-              "stdReason": "办公终端非核心设备且不在定级边界内；打印机非信息系统设备",
+              "expect": "不纳入（办公终端非核心设备；打印机非信息系统设备）",
               "good": "正确排除非核心资产，并说明排除依据。"
             }
           ]
         },
-        "teach": "对象选取标准答案依据：①国家标准——GB/T 28449-2018《信息安全技术 网络安全等级保护测评过程指南》（测评对象选取、抽样适用边界的核心国标），配套 GB/T 22239-2019《基本要求》作为安全核查基准；②行业实操规范——测评机构质控规范、公安网安对测评报告与方案的审查要点，行业统一共识：少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产；且单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样。据此：防火墙/核心交换机/堡垒机/WAF/日志审计、Web（3 台）、应用（2 台）、数据库（2 台）全部 100% 测评；接入交换机（9 台，同规格统一固件）虽是批量同构设备，但清单明确其支撑系统整体组网连通、属系统组网核心组成部分，且 9 台≤10 台触发全测硬规则——全部纳入 100% 测评；办公终端（60 台）与打印机（12 台）不纳入。核心要求：每一项「纳入 / 抽样 / 排除」的决定，都必须给出具体、可追溯的理由。",
+        "teach": "对象选取四原则：①应测尽测——标准要求的对象都纳入；②关键性——承载核心业务/重要数据的 100% 测（如应用服务器全测、关键设备不抽样）；③代表性——同类设备选最有代表性的；④抽样——同质化配置（同类型/同配置/同功能/同版本）可抽样，比例不低于 30%。核心要求：每一个「纳入 / 抽样 / 排除」的决定，都必须给出具体、可追溯的理由。",
         "base": 5
       },
       {
@@ -2493,7 +2432,6 @@ let records = {};                 // idx -> {answer/stars/score/...}
 let matUnlocked = {};             // docId -> true
 let guideRead = {};               // stepId -> {ai,manual,quality} 三色卡阅读状态
 let qaState = {};                 // stepIdx -> [{answer,done,quality,coaching,coachMode,awaitRevise,revising}] 问答题作答状态
-let stepFails = {};               // stepId -> {fail:连续未达5分次数, unlocked:标准答案是否已解锁}（仅在一次挑战内累计；「重新挑战本关」/「重置本关」即清零，从第一次作答重新计数）
 let attemptsMem = {};             // levelIdx -> [{score,max,pct,date}] 闯关历史（未登录时的内存兜底）
 let unlockedLevelIdx = 0;
 const $ = id => document.getElementById(id);
@@ -2588,7 +2526,7 @@ function unlockDocs(ids){
 }
 function renderMatDrawer(){
   const list=$("matList"); if(!list)return;
-  const order=["weituo","xitong","dengji","tuopu","guocheng","bushu","jifang","loudong"];
+  const order=["weituo","xitong","dengji","tuopu","jifang","loudong"];
   let html="";
   order.forEach(function(id){
     const d=DOCS[id]; if(!d)return;
@@ -2638,14 +2576,13 @@ function renderGuideBar(s){
     .filter(function(d){ return d[1] && String(d[1]).trim(); });
   if (!defs.length){ bar.innerHTML = ""; bar.classList.add("hide"); return; }
   const rd = guideRead[s.id] || {};
-  // 全关卡统一：三色卡是「三个锦囊」，与作答区无先后、无解锁关系
   bar.innerHTML = defs.map(function(d){
     const isRead = !!rd[d[0]];
     return '<div class="guide-card '+d[0]+(isRead?" gd-read":" gd-collapsed")+'" data-k="'+d[0]+'">'+
       '<div class="gd-lb">'+GUIDE_ICONS[d[0]]+names[d[0]]+
         '<span class="gd-state '+(isRead?"read":"unread")+'">'+(isRead?"✓ 已读":"未读")+'</span></div>'+
       '<div class="gd-txt">'+esc(d[1])+'</div>'+
-      (isRead?"":'<div class="gd-fold">👀 锦囊 · 点击卡片展开阅读，不影响作答</div>')+
+      (isRead?"":'<div class="gd-fold">👀 点击卡片展开阅读，读完计入作答解锁进度</div>')+
     '</div>';
   }).join("");
   bar.classList.remove("hide");
@@ -2665,6 +2602,12 @@ function renderGuideBar(s){
     });
   });
 }
+function gateNeed(s){
+  const rd = guideRead[s.id] || {};
+  const defs = [["ai",s.aiGuide],["manual",s.mustManual],["quality",s.quality]]
+    .filter(function(d){ return d[1] && String(d[1]).trim(); });
+  return { defs: defs, ready: defs.every(function(d){ return !!rd[d[0]]; }) };
+}
 // 表格双按钮组控制（L1S11 重写后才有 AI 辅助）；其他关卡只用到 btnTableSubmit 时按通用逻辑走
 function showTableBtns(show){
   const r=$("tableBtnRow"); if(!r) return;
@@ -2674,12 +2617,35 @@ function lockTableBtns(lock){
   const r=$("tableBtnRow"); if(!r) return;
   r.querySelectorAll("button").forEach(function(b){ b.disabled=!!lock; });
 }
-// 全关卡统一：三色卡是「三个锦囊」，与作答区之间不再有解锁关系。
-// gateApply 只负责收掉历史遗留的门控提示条，不再锁定/解锁任何作答控件；
-// 作答控件的可编辑性由 renderStep / renderFeedback(readOnly) 各自管理。
 function gateApply(s){
-  const bar = $("gateBar");
-  if (bar){ bar.classList.add("hidden"); bar.innerHTML = ""; }
+  const bar = $("gateBar"); if (!bar) return;
+  const g = gateNeed(s);
+  if (submitted || g.defs.length === 0){ bar.classList.add("hidden"); return; }
+  if (g.ready){ bar.classList.add("hidden"); }
+  else{
+    const names = {ai:"AI 可以帮你", manual:"必须人工判断", quality:"行业素养要求"};
+    const rd = guideRead[s.id] || {};
+    const readN = g.defs.filter(function(d){ return !!rd[d[0]]; }).length;
+    bar.classList.remove("hidden");
+    bar.innerHTML = "🔒 作答区已锁定：引导卡已读 <b>"+readN+" / "+g.defs.length+"</b>。请依次点击查看「"+
+      g.defs.map(function(d){ return names[d[0]]; }).join("」「")+"」，三张全部阅读完后开放作答。";
+  }
+  const lock = !g.ready;
+  if (s.type === "table"){
+    lockTableBtns(lock);
+    $("tableSlot").querySelectorAll(".tcell").forEach(function(i){ i.disabled = lock; });
+  } else if (s.type === "qaTable"){
+    // 复合关：引导卡未读完时，问答题与表格一并锁定
+    lockTableBtns(lock);
+    const qs = $("qaSlot");
+    if (qs) qs.querySelectorAll(".qa-input,.qa-ai,.qa-submit,.qa-submit-ai,.qa-next-step,.qa-coach-done,.qa-need,.qa-none,.qa-copy-submit").forEach(function(i){ i.disabled = lock; });
+    $("tableSlot").querySelectorAll(".tcell").forEach(function(i){ i.disabled = lock; });
+  } else if (s.type === "plan"){
+    const b = $("btnPlanGen"); if (b) b.disabled = lock;
+  } else {
+    const a = $("answerInput"); if (a) a.disabled = lock;
+    const b = $("btnSubmit"); if (b) b.disabled = lock;
+  }
 }
 function renderMap(){
   const row = $("stageRow");
@@ -2739,17 +2705,7 @@ function redoStep(i){
   toast("已重置本关，开始重新闯关");
 }
 
-// 清零某关的连续挑战计数（内存 + 存档双清）：
-// 「重新挑战本关」「重置本关」后都调用它——重新挑战 = 全新一轮，从第一次作答开始计数，
-// 计数与「标准答案」解锁状态一并归零（后续 save() 会把内存值整体写回存档）。
-function clearStepFailCount(id){
-  if (!id) return;
-  delete stepFails[id];
-  const slot = saveSlot();
-  if (slot && slot.stepFails && slot.stepFails[id]) { delete slot.stepFails[id]; }
-}
-
-// 重置本关（当前关卡按钮入口）：作答/得分清空 + 挑战计数归零 + 三色卡恢复待读（内存与存档同清）
+// 重置本关（当前关卡按钮入口）：作答/得分清空 + 三色卡恢复待读（内存与存档同清）
 function resetCurrentStep(){
   const s = STEPS[current];
   if (!s) return;
@@ -2758,9 +2714,8 @@ function resetCurrentStep(){
   // 若 saveProgress 不可用，则直接改存档兜底
   const slot = saveSlot();
   if (slot && slot.guideRead && s.id) delete slot.guideRead[s.id];
-  clearStepFailCount(s.id);
   redoStep(current);
-  toast("本关已重置：作答已清空，挑战计数归零，三色卡恢复待读");
+  toast("本关已重置：作答已清空，三色卡恢复待读");
 }
 
 // ============ 问答题引擎（AI 代答 / 人工修正 / 三步引导） ============
@@ -3150,21 +3105,12 @@ function evaluateTable(s, values){
     }else{
       ok = r.any ? r.groups.some(g=>g.some(k=>t.includes(k))) : r.groups.every(g=>g.some(k=>t.includes(k)));
     }
-    let partial=false, reasonMissing=true;
+    let partial=false;
     if(ok && r.reason && r.reason.length){
       const hasReason = r.reason.some(g=>g.some(k=>t.includes(k)));
       if(!hasReason) partial=true;
-      // 区分「完全没写理由」与「写了理由但不到位/错误」：
-      // 答案中含有「因为/由于/依据/按/基于/是/为/所以/故」之类的理由性表述，
-      // 或者纯中文长度≥6 字符（去掉数字与单位），视为「用户写了一段理由」
-      // ——即便该段理由没有命中正确的 reason 关键词，也属于「理由不到位/错误」，
-      // 而非「缺少理由」。
-      const REASON_MARKERS = /因为|由于|依据|按|基于|是|为|所以|故|故而|因此/;
-      const stripped = v.replace(/\d+\s*台/g, "").replace(/\d+/g, "").replace(/[\s,，。.;；:：()（）\-—_/、]/g, "");
-      const hasReasonText = REASON_MARKERS.test(v) || stripped.length >= 6;
-      reasonMissing = !hasReasonText;
     }
-    return {label:r.label, answer:v, ok, partial, reasonMissing, expect:r.expect, good:r.good, reason:r.reason, groups:r.groups, stdShort:r.stdShort||"", stdReason:r.stdReason||""};
+    return {label:r.label, answer:v, ok, partial, expect:r.expect, good:r.good};
   });
   let pts=0;
   detail.forEach(d=>{ pts += d.ok ? (d.partial?1:2) : 0; });
@@ -3194,7 +3140,7 @@ function evaluateTable(s, values){
 }
 function onSubmitTable(){
   const s=STEPS[current];
-  // 三色卡与作答区已解绑（纯锦囊），提交不再做引导卡门槛检查
+  if(!gateNeed(s).ready){toast("请先点击查看全部三张引导卡，阅读完成后才能作答");return;}
   if(s.type==="qaTable" && !qaAllDone(s)){toast("请先完成本关前置的三问（每问都要给出结论和理由），再填写表格");return;}
   const inputs=[...document.querySelectorAll(".tcell")];
   if(inputs.length===0)return;
@@ -3238,116 +3184,45 @@ function onSubmitTable(){
       stars, score, verdict, comment,
       ratio, full:res.full, part:res.part, wrong:res.wrong,
       teach:s.teach, expect:s.expect,
-      answer:qaLine+"表格："+res.detail.map(d=>d.label+"="+(d.answer||"—")+(d.partial?(d.reasonMissing?"（缺理由）":"（理由不到位）"):"")).join("；")
+      answer:qaLine+"表格："+res.detail.map(d=>d.label+"="+(d.answer||"—")+(d.partial?"（缺理由）":"")).join("；")
     };
   }else{
     rec={type:"table",...res};
   }
-  // ===== L1S11 专项：检测 Web 服务器抽样数（AI 辅助按同质抽样故意埋错），写入 rec =====
+  // ===== L1S11 专项：检测 Web 服务器抽样数（AI 辅助故意埋 1 台），写入 rec =====
   if(s.id==="L1S11"){
     const webIdx = s.table.rows.findIndex(r => /Web 服务器/.test(r.label));
     const webAnswer = webIdx>=0 ? (values[webIdx]||"").trim() : "";
     // 解析所有「N 台」模式：避免 30%、30 个等周边数字误判
     const webInstances = [...webAnswer.matchAll(/(\d+)\s*台/g)].map(m => Number(m[1]));
-    const webWrong = webInstances.length>0 && webInstances.some(n => n < 3); // 关键业务资产不应抽样：只要出现「抽 N 台」（N<3 台总量）即判误
-    const dbIdx = s.table.rows.findIndex(r => /数据库服务器/.test(r.label));
-    const dbAnswer = dbIdx>=0 ? (values[dbIdx]||"").trim() : "";
-    const dbInstances = [...dbAnswer.matchAll(/(\d+)\s*台/g)].map(m => Number(m[1]));
-    const dbWrong = dbInstances.length>0 && dbInstances.some(n => n < 2);
-    // 接入交换机（9 台）埋错检测：合规规则「单类网络设备≤10 台必须 100% 全测、禁止抽样」——
-    // 出现「抽 N 台」（N<9）即判误；正确写法（如「9 台全部纳入」中的 9 台）不会触发
-    const swIdx = s.table.rows.findIndex(r => /接入交换机/.test(r.label));
-    const swAnswer = swIdx>=0 ? (values[swIdx]||"").trim() : "";
-    const swInstances = [...swAnswer.matchAll(/(\d+)\s*台/g)].map(m => Number(m[1]));
-    const swWrong = swInstances.length>0 && swInstances.some(n => n < 9);
-    // ===== 逐项判定：合格 / 待完善 / 不合格 =====
-// 「缺少理由」与「用词不专业」「理由过于笼统」都判为「待完善」
-// 笼统词集合：仅命中「关键/核心/重要/数量少/少量」而无具体证据，理由只是同义反复、不足以服众
-    const COLLOQUIAL = ["吧","呗","啥","咋","嗯","哦","噢","大概","差不多","随便","我觉得","我感觉","我认为","反正","搞","弄一下","一堆","好几台","挺多","看看","测测","就行","得了","个把","无所谓","应该可以","应该没问题"];
-    const VAGUE = ["关键","核心","重要","数量少","少量"];
-    const rowGrades = res.detail.map(function(d){
-      const ans = d.answer || "";
-      const hit = ans ? COLLOQUIAL.filter(function(w){ return ans.indexOf(w) >= 0; }) : [];
-      // 收集本次答案在 reason 关键词里的实际命中词
-      const t = norm(ans);
-      const hitReasonWords = [];
-      ((d.reason||[])).forEach(function(g){
-        g.forEach(function(k){
-          if(t.indexOf(k) >= 0 && hitReasonWords.indexOf(k) < 0) hitReasonWords.push(k);
-        });
-      });
-      const onlyVague = hitReasonWords.length>0 && hitReasonWords.every(function(w){ return VAGUE.indexOf(w) >= 0; });
-      let g = "合格", why = "";
-      if(!d.ok){ g = "不合格"; why = "结论不正确"; }
-      else if(d.partial){
-        // 区分「完全没写理由」与「写了理由但不到位/错误」
-        if(d.reasonMissing){
-          g = "待完善"; why = "缺少理由——结论正确，但未填写理由（评审看不到依据，方案会被退回）";
-        }else{
-          g = "待完善"; why = "理由不到位或错误——答案里写了理由，但理由的关键词与标准答案不匹配或理由本身不正确，请对照下方标准答案重新论证";
-        }
-      }
-      else if(onlyVague){ g = "待完善"; why = "理由过于笼统（仅命中"+hitReasonWords.join("、")+"），缺少具体证据（业务影响 / 数据重要性 / 合规规则等）"; }
-      else if(hit.length){ g = "待完善"; why = "用词不专业（"+hit.join("、")+"）"; }
-      return { label:d.label, answer:ans, grade:g, why:why, stdShort:d.stdShort||"", stdReason:d.stdReason||"" };
-    });
-    rowGrades.forEach(function(rg, i){
-      res.detail[i].grade = rg.grade;
-      res.detail[i].gWhy = rg.why;
-    });
-    // 重新计分：合格 2 分 / 待完善 1 分 / 不合格 0 分（6 项满分 12 分 → 折算 5 分）
-    const maxPts = rowGrades.length*2;
-    const gotPts = rowGrades.reduce(function(a,r){ return a+(r.grade==="合格"?2:(r.grade==="待完善"?1:0)); }, 0);
-    const ratio = maxPts ? gotPts/maxPts : 0;
-    rec.ratio = ratio;
-    rec.stars = ratio>=0.9 ? 3 : (ratio>=0.5 ? 2 : 1);
-    rec.score = Math.round(5*ratio);
-    const okCount = rowGrades.filter(function(r){ return r.grade==="合格"; }).length;
-    const partialCount = rowGrades.filter(function(r){ return r.grade==="待完善"; }).length;
-    const wrongCount = rowGrades.filter(function(r){ return r.grade==="不合格"; }).length;
-    // 判定档位（本关 base=5）：5 分 合格；3~4 分 待完善；<3 分 不合格
-    let grade;
-    if(rec.score>=5) grade="合格";
-    else if(rec.score>=3) grade="待完善";
-    else grade="不合格";
-    rec.verdict = grade;
-    // 标准答案解锁：达到 4 分（待完善及以上），或连续 3 次提交成绩都没有超过 3 分
-    // （计数只在本轮挑战内累计；点「重新挑战本关」/「重置本关」即清零，从第一次作答重新计数）
-    let st = stepFails["L1S11"];
-    if (typeof st === "number") st = { fail: st, unlocked: false }; // 旧档兼容：数字/旧对象迁移
-    if (!st || typeof st !== "object") st = { fail: 0, unlocked: false };
-    if (rec.score >= 4) { st = { fail: 0, unlocked: true }; }
-    else { const nf = (st.fail||0)+1; st = { fail: nf, unlocked: !!st.unlocked || nf>=3 }; }
-    stepFails["L1S11"] = st;
-    const unlocked = !!st.unlocked;
+    const webOnlyOne = webInstances.length>0 && webInstances.every(n => n === 1);
+    const partialCount = res.part||0;
+    const okCount = res.full||0;
+    const wrongCount = res.wrong||0;
+    // 合理性档位：完全合理 / 部分合理 / 不合理（与现有评级对齐）
+    let reasonable;
+    if (res.stars===3) reasonable="完全合理";
+    else if (res.part>0 || res.stars===2) reasonable="部分合理";
+    else reasonable="需调整";
     rec.s11 = {
-      webWrong, webAnswer, dbWrong, dbAnswer, swWrong, swAnswer,
-      okCount, partialCount, wrongCount, rowGrades,
-      grade, failStreak: st.fail, unlocked,
+      webWrong: webOnlyOne,
+      webAnswer,
+      okCount, partialCount, wrongCount,
+      reasonable,
       signNeeded: true // 进入下一关需签字确认对本关决策负责
     };
-    // 反馈文案：只给判定结论 + 逐项判定（表格另渲染）+「拿这份结果去测评的后果」
-    // 不出现标准答案、答案解析与知识点讲解——那些只在「查看标准答案」按钮解锁后展示
-    const tailMap = {
-      "合格": "拿着这份《测评对象选取表》去做现场测评：测评对象覆盖完整、抽样与排除都能给出依据，方案能一次过评审，现场工作量与客户报价也对得上——这是可以直接进入下一步的版本。",
-      "待完善": "若拿着这份选取表去现场测评：评审会先把方案退回——缺理由、理由不到位或用词不规范的格子证明不了选取依据，机构要重新补充论证；现场还可能因为对象边界不清而漏测、重复测，工期与费用都要重算。",
-      "不合格": "若拿着这份选取表去现场测评：关键资产被漏测、抽样依据不成立，报告在方案评审和公安网安检查环节都会被判「测评对象选取不当」，必须全量补测并重新出具方案与报告，返工成本由项目组和客户共同承担。"
-    };
-    let sComment = "本关判定：<b>"+grade+"</b>（得分 "+rec.score+" / 5）。本次共 "+rowGrades.length+" 项：合格 "+okCount+" 项、待完善 "+partialCount+" 项、不合格 "+wrongCount+" 项。";
-    if(grade==="合格"){
-      sComment += "<br>判定全部到位，可以进入下一关；也可点「查看标准答案」对照一遍。";
+    // 评语：根据合理性 + 是否 web 抽样不足 输出不同点评
+    let sComment="";
+    if(webOnlyOne){
+      sComment = "<b>「Web 服务器（3 台）」抽样结论存在代表性不足风险</b>，请结合后果再做最终判断；其余"+(s.table.rows.length-1)+"格按标准判断。";
+    }else if(reasonable==="完全合理"){
+      sComment = "结论 + 理由全部到位，对象选取四原则运用恰当。";
+    }else if(reasonable==="部分合理"){
+      sComment = "整体方向正确，但还有"+partialCount+"格未写理由，判定为「<b>部分合理</b>」——理由是评审通过的硬要求，缺则只能算部分得分。";
     }else{
-      sComment += "<br><b>本关方案会被评审退回——请按下方逐项判定修改后重新提交。</b>";
+      sComment = "整体判定为「<b>需调整</b>」——"+wrongCount+"格与四原则不匹配，建议回看材料与三色卡重新梳理。";
     }
-    sComment += "<br>"+tailMap[grade];
-    if(unlocked && grade!=="合格"){
-      if(rec.score >= 4){
-        sComment += "<br><b style='color:#F5B96A'>成绩已达 "+rec.score+" 分（"+grade+"），下方「查看标准答案」按钮已解锁——可对照标准答案与逐项解析，把待完善项改到合格后再进下一关。</b>";
-      } else {
-        sComment += "<br><b style='color:#F5B96A'>已连续 "+st.fail+" 次提交成绩未超过 3 分，下方「查看标准答案」按钮已解锁——可对照标准答案与逐项解析，修改后重交。</b>";
-      }
-    }
-    rec.comment = sComment;
+    rec.comment = (rec.comment||"") + "<br>" + sComment;
   }
   records[current]=rec;
   score+=rec.score;
@@ -3387,21 +3262,12 @@ function showAlert(opts){
   document.body.appendChild(mask);
   function close(){ if(mask.parentNode) mask.parentNode.removeChild(mask); }
   mask.querySelector("#abCancel").addEventListener("click", function(){ close(); if(opts.onCancel) opts.onCancel(); });
-  mask.querySelector("#abOk").addEventListener("click", function(){
-    // 关键：先取出输入框的值再关闭弹窗——close() 会移除节点，若先关闭，onOk 里将读不到签署姓名
-    const signEl = mask.querySelector("#abSignName");
-    const signVal = signEl ? signEl.value : null;
-    close();
-    if(opts.onOk) opts.onOk(signVal);
-  });
+  mask.querySelector("#abOk").addEventListener("click", function(){ close(); if(opts.onOk) opts.onOk(); });
   return close;
 }
 function fillAiWebSample(){
-  // AI 辅助：只按「同质设备可抽样」作答——不考虑 GB/T 28449-2018 测评过程指南与行业实操规范中的
-  // 「少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产」共识，
-  // 也不掌握「单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样」的合规规则。
-  // 因此 AI 会对 Web（3 台同配置）、数据库（2 台同配置）这类关键资产套用抽样，
-  // 也会对接入交换机（9 台，清单明确支撑系统整体组网连通、≤10 台应全测）给出「抽 3 台」——这正是 AI 会犯错的地方。
+  // AI 辅助：根据每行 expect / groups 自动填表；Web 服务器行（label 含"Web 服务器"）故意写 "1" 台——
+  // 这是埋错点，等学生点「提交答案」后会触发 webSampleWrong 后果说明。
   const s = STEPS[current];
   const inputs = [...document.querySelectorAll(".tcell")];
   s.table.rows.forEach((r, ri)=>{
@@ -3410,17 +3276,16 @@ function fillAiWebSample(){
     if(!cell) return;
     let fill = "";
     if(/Web 服务器/.test(r.label)){
-      fill = "采用抽样方式，依据同质设备抽样原则抽取 1 台（3 台同配置同应用，按 30% 底线抽样），比例与数量在方案中明示。";
-    } else if(/接入交换机/.test(r.label)){
-      fill = "抽样 3 台（≈33%，≥30%）。理由：9 台同规格、统一固件的批量同构设备，按同质设备抽样原则抽取，比例不低于 30%。";
-    } else if(/数据库服务器/.test(r.label)){
-      fill = "抽样 1 台（50%）。理由：2 台同配置同质化数据库服务器，按同质设备抽样原则抽取，比例不低于 30%。";
-    } else if(/应用服务器/.test(r.label)){
-      fill = "全部纳入，100% 测评。理由：业务核心设备，承载核心业务功能，全部测评。";
-    } else if(/办公终端/.test(r.label)){
-      fill = "不纳入。理由：办公终端、打印机均非承载被测系统核心业务/重要数据的设备，且不在定级边界内，标准不要求其纳入。";
+      fill = "采用抽样方式，依据代表性原则抽取 1 台（同类同质化设备，按 30% 底线抽样），但仅抽 1 台代表性略显不足，未覆盖全部典型配置；建议扩大抽样规模以满足稳健样本要求。";
     } else {
-      fill = "全部纳入，100% 测评。理由：边界防护/网络核心/运维审计等关键业务，标准明确要求 100% 测评，应测尽测原则。";
+      // 按 expect 反推结论 + 理由；非抽样行直接取 expect 的结论短语 + 加入理由模板
+      const exp = r.expect || "";
+      let reason = "";
+      if(/应测尽测|全部纳入|全部|100/.test(exp)) reason = "理由：承载边界防护/网络核心/运维审计等关键业务，标准明确要求 100% 测评，应测尽测原则。";
+      else if(/抽样 1/.test(exp)) reason = "理由：2 台同质化数据库服务器，按 ≥30% / 同类至少 1 台比例，抽样 1 台（50%），同类条件 + 代表性 + 比例三要素齐全。";
+      else if(/抽样 2/.test(exp)) reason = "理由：3 台同配置 Web 服务器，按 ≥30% 比例抽样 2 台（66%），同类条件 + 代表性 + 数量明示三要素齐全。";
+      else if(/不纳入|排除/.test(exp)) reason = "理由：办公终端、打印机均非承载被测系统核心业务/重要数据的设备，且不在定级边界内，标准不要求其纳入。";
+      fill = (exp.split("（")[0] || "（按标准判断）") + "。" + reason;
     }
     cell.value = fill;
   });
@@ -3430,94 +3295,44 @@ function onAiHelp(){
     kind:"warn",
     title:"🔒 涉密警告 · AI 辅助使用须知",
     html:"<b>委托单位文件涉密，请勿上传外网！</b><br>本「AI 辅助」演示仅在<b>本机浏览器内</b>用本地预设答案填充表格——不会上传任何委托单位材料至外网。<br><br>⚠️ AI 答案只是<b>示范写法</b>，必须由你逐条核对现场实际情况后再用，不能直接对外出具。",
-    listHtml:"<li>严禁把《测评方案》、客户系统截图、IP/口令等任何客户敏感信息粘贴进公网 AI 工具；</li><li>AI 只按「同质设备可抽样」作答，不掌握行业共识——<b>少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产</b>，也不掌握合规规则——<b>单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样</b>，因此它给出的抽样结论（包括对接入交换机这类组网核心设备的「抽 3 台」建议）需要你复核、修正后才能签字定稿；</li><li>本演示使用的填表示范是按行业规范表达的，不代表该方案已经定稿——决定权与担责主体仍是项目经理（你）。</li>",
+    listHtml:"<li>严禁把《测评方案》、客户系统截图、IP/口令等任何客户敏感信息粘贴进公网 AI 工具；</li><li>AI 给的「结论 + 理由」存在代表性弱点（如抽样偏少），需要你复核、修正后才能签字定稿；</li><li>本演示使用的填表示范是按行业规范表达的，不代表该方案已经定稿——决定权与担责主体仍是项目经理（你）。</li>",
     okText:"我已知晓风险，使用 AI 辅助填表",
     cancelText:"取消",
     onOk: fillAiWebSample
   });
 }
 function showZhZhangGongRemind(s11){
-  // 张工三点提醒：带教师傅口吻的问句，只提问、不给结论与后果（折叠面板）
-  return '<details class="zg-remind"><summary style="cursor:pointer;list-style:none"><b style="color:var(--cyan)">📋 张工提醒：可按下面的提示进行自查（点击展开）</b></summary>'+
+  // 张工三点提醒：所有 L1S11 都展示（无论得分高低），折叠面板
+  const wrong = s11 && s11.webWrong;
+  const webTail = wrong
+    ? '<div class="ab-list" style="background:rgba(248,113,113,.08);border:1px dashed rgba(248,113,113,.45);border-radius:8px;padding:8px 12px;margin:8px 0 0"><b style="color:#F87171">★ Web 服务器抽样 1 台的具体后果：</b><br>'+(STEPS[current].webSampleWrong||"")+'</div>'
+    : '';
+  return '<details class="zg-remind"><summary style="cursor:pointer;list-style:none"><b style="color:var(--cyan)">📋 张工提醒 · 本关决策质量自检（点击展开）</b></summary>'+
     '<div style="padding:10px 0 4px;color:#C6D8EC;font-size:13.5px;line-height:1.9">'+
-      
+      '请你按下述三点自检本关决策：'+
       '<ol style="margin:8px 0 8px 24px;padding:0">'+
-        '<li>你做出的「纳入 / 抽样 / 排除」的决定，是否基于《系统定级报告》《网络拓扑与设备清单》等客观材料？</li>'+
-        '<li>你是否把应测尽测、关键性、代表性、抽样（≥30%）这四个原则逐条过了一遍，而不是凭设备类别拍脑袋？</li>'+
-        '<li>你是否用行业术语把「为什么这么定」写清楚了（结论 + 理由），没有口语化简称、没有含糊表述？</li>'+
+        '<li><b>判断是否以被测系统的实际情况为依据</b>——所有「纳入 / 抽样 / 排除」的决定必须能在《系统定级报告》《网络拓扑与设备清单》中找到对应设备与依据；脱离现场实际的口头判断评审会被退回。</li>'+
+        '<li><b>是否严格按四原则判断</b>——应测尽测、关键性、代表性、抽样（≥30%）四个原则一项都不能少；「全凭类别拍脑袋」「漏掉关键性」「抽样数贴边 30%」都会让方案过不了评审。</li>'+
+        '<li><b>是否使用行业术语，并遵守相关规范</b>——每一条决定都要写明具体理由（GB/T 28448-2019 / GB/T 28449-2018 / 定级报告条款），结论 + 理由缺一不可；只写结论一律判为「部分正确」。</li>'+
       '</ol>'+
-    '</div></details>';
+    '</div>'+webTail+'</details>';
 }
 function showL1S11Verdict(rec){
-  // L1S11 反馈卡中的操作区：重新挑战 / 查看标准答案 / 进入下一关（需 5 分）
-  // 标准答案按钮解锁条件：达到 4 分（待完善及以上），或连续 3 次提交成绩都没有超过 3 分
+  // L1S11 反馈卡中的"重新挑战 / 进入下一关"区
   const s11 = rec.s11 || {};
-  const wrong = !!(s11.webWrong || s11.dbWrong || s11.swWrong);
-  const passed = (rec.score||0) >= 5;
-  const unlocked = !!s11.unlocked;
+  const wrong = !!s11.webWrong;
   const verdictBadge = wrong
     ? '<span class="badge" style="background:rgba(248,113,113,.18);color:#F87171;border:1px solid rgba(248,113,113,.45);padding:3px 10px;border-radius:999px;font-size:12px">⚠️ 抽样风险预警</span>'
     : '<span class="badge" style="background:rgba(61,220,151,.18);color:var(--green);border:1px solid rgba(61,220,151,.45);padding:3px 10px;border-radius:999px;font-size:12px">✓ 抽样符合规范</span>';
-  const stdBtn = unlocked
-    ? '<button class="btn-ghost2" id="btnS11Std">📖 查看标准答案</button>'
-    : '<button class="btn-ghost2" id="btnS11Std" disabled style="opacity:.45;cursor:not-allowed" title="达到 4 分（待完善及以上），或连续 3 次提交成绩都未超过 3 分后解锁">🔒 查看标准答案（需 4 分 / 连续 3 次未超 3 分）</button>';
-  const nextBtn = passed
-    ? '<button class="btn-submit" id="btnS11Next">进入下一关 →</button>'
-    : '<button class="btn-submit" id="btnS11Next" disabled style="opacity:.45;cursor:not-allowed" title="本关需达到 5 分（合格）才能进入下一关">🔒 进入下一关（需 5 分）</button>';
-  return verdictBadge+
-    '<div class="s11-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;justify-content:flex-end">'+
-      '<button class="btn-ghost2" id="btnS11Redo">↩️ 重新挑战本关</button>'+
-      stdBtn+
-      nextBtn+
-    '</div>'+
-    (passed?'':'<div style="width:100%;text-align:right;color:#8FA7C3;font-size:12.5px;margin-top:4px">🔒 达到 5 分（合格）后才可进入下一关——当前 '+rec.score+' 分，请点「重新挑战本关」修改后重新提交</div>')+
-    (unlocked?'':'<div style="width:100%;text-align:right;color:#8FA7C3;font-size:12.5px;margin-top:2px">🔒 达到 4 分（待完善及以上），或连续 3 次提交成绩都未超过 3 分，才可查看标准答案</div>');
-}
-function s11StdAnswerPanel(rec){
-  // 默认隐藏，点「📖 查看标准答案」按钮才展开
-  // 内容只有两样：①带标准答案的表格（结论 + 理由，无其它解释）②对最后一次提交的逐项文字解析
-  const s = STEPS[current] || {};
-  const rows = ((s.table && s.table.rows) || []).filter(function(r){ return r.editable !== false; });
-  const tbl = '<table class="tbl-result" style="margin-top:8px"><thead><tr><th>对象选取决策</th><th>标准答案</th><th>选取理由</th></tr></thead><tbody>'+
-    rows.map(function(r){
-      return '<tr><td>'+esc(r.label)+'</td><td class="std" style="font-size:13px;color:#DCE8F5;font-weight:800;white-space:nowrap">'+esc(r.stdShort||"")+'</td><td class="std" style="font-size:12.5px;color:#C6D8EC;font-weight:500">'+esc(r.stdReason||"")+'</td></tr>';
-    }).join('')+'</tbody></table>';
-  const detail = rec.detail || [];
-  const grades = (rec.s11 && rec.s11.rowGrades) || [];
-  let ana = '<ol style="margin:6px 0 6px 24px;padding:0">';
-  detail.forEach(function(d, i){
-    const g = grades[i] || { grade:"待核对", why:"" };
-    const mine = d.answer ? esc(d.answer) : "（未填写）";
-    let txt = "";
-    if(g.grade === "合格"){
-      txt = "结论与理由都到位，符合本项判定要求。";
-    }else if(String(g.why).indexOf("缺少理由") >= 0){
-      txt = "结论正确，但<b>没有写明判断理由</b>——选取决定必须能追溯到标准条款与设备清单事实，需补上「为什么这么定」。标准答案："+esc(d.expect);
-    }else if(String(g.why).indexOf("理由不到位或错误") >= 0){
-      txt = "结论正确——这一格的大方向你判断对了，<b>但理由没有说到点上（不到位或错误）</b>：要么没落到标准答案要求的关键依据（业务承载 / 数据重要性 / 合规规则 / 定级边界等），要么写了与结论相矛盾或与事实不符的说辞。理由不是「有写就行」，必须写明决定所依据的标准条款与清单事实；测评方案是要过评审的，理由站不住脚，结论一样会被退回。请对照标准答案重新论证这一格的理由。标准答案："+esc(d.expect);
-    }else if(String(g.why).indexOf("理由过于笼统") >= 0){
-      txt = "结论正确，但<b>理由过于笼统</b>——只写了「"+esc(g.why.replace(/^理由过于笼统（仅命中/,"").replace(/）.+/,""))+"」这类泛化表述，没有落到具体依据（业务影响、数据重要性、合规规则等），评审无法据此判断取舍是否成立，属「写得不专业」而非「结论错」。标准答案："+esc(d.expect);
-    }else if(g.grade === "待完善"){
-      txt = "结论正确，但<b>"+esc(g.why)+"</b>——表单须统一使用专业术语、避免歧义。标准答案："+esc(d.expect);
-    }else{
-      txt = "结论不正确。标准答案："+esc(d.expect);
-    }
-    ana += '<li style="margin:6px 0"><b>'+esc(d.label)+'</b>　判定：<b style="color:'+(g.grade==="合格"?"var(--green)":(g.grade==="待完善"?"var(--amber)":"var(--red)"))+'">'+g.grade+'</b><br>你的填写：'+mine+'<br>解析：'+txt+'</li>';
-  });
-  ana += '</ol>';
-  return '<div class="s11-std-wrap hidden" id="s11StdPanel" style="margin-top:14px;padding:12px 14px;background:rgba(245,185,62,.06);border:1px dashed rgba(245,185,62,.45);border-radius:10px">'+
-    '<div style="font-weight:800;color:#F5B96A;font-size:13.5px">📖 标准答案 · 《测评对象选取表》</div>'+
-    tbl+
-    '<div style="font-weight:800;color:#F5B96A;font-size:13.5px;margin-top:12px">🔍 对你最后一次提交答案的逐项解析</div>'+
-    '<div style="color:#C6D8EC;font-size:13.5px;line-height:1.9">'+ana+'</div>'+
+  return '<div class="s11-actions" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;justify-content:flex-end">'+
+    '<button class="btn-ghost2" id="btnS11Redo">↩️ 重新挑战本关</button>'+
+    '<button class="btn-submit" id="btnS11Next">进入下一关 →</button>'+
   '</div>';
 }
 function redoL1S11(){
-  // 重新挑战：清除本关作答记录、得分，并清零连续挑战计数
-  // ——重新按「第一次作答」开始计数，标准答案按钮也回到未解锁态
+  // 重置 L1S11：清除作答、records、score、input 内容
   if(records[current]) score -= (records[current].score||0);
   delete records[current]; submitted=false;
-  clearStepFailCount("L1S11");
   save();
   updateProj();
   const ts=$("tableSlot");
@@ -3525,7 +3340,7 @@ function redoL1S11(){
   showTableBtns(true);
   lockTableBtns(false);
   $("feedbackSlot").innerHTML="";
-  toast("已重置：《测评对象选取表》已清空，挑战计数已归零，重新从第一次作答开始");
+  toast("已重置：《测评对象选取表》所有格已清空，可以重新填写");
 }
 function nextStepAfterSign(s11Name){
   // 签字后进入下一关
@@ -3547,9 +3362,6 @@ function nextStepAfterSign(s11Name){
   }
 }
 function confirmGoNextL1S11(){
-  // 只有达到 5 分（合格）才能进入下一关
-  const rec = records[current];
-  if(rec && (rec.score||0) < 5){ toast("本关需达到 5 分（合格）才能进入下一关，请点「重新挑战本关」修订后重新提交"); return; }
   showAlert({
     kind:"confirm",
     title:"✍️ 签字确认 · 本关决策责任",
@@ -3558,8 +3370,8 @@ function confirmGoNextL1S11(){
     extraHtml:'<div class="ab-sign"><input id="abSignName" maxlength="20" placeholder="请输入你的姓名进行签署"></div>',
     okText:"签署并进入下一关",
     cancelText:"返回修改决策",
-    onOk: function(signVal){
-      const n = signVal || "";
+    onOk: function(){
+      const n = (document.getElementById("abSignName")||{}).value || "";
       if(!n.trim()){ toast("请先输入你的姓名再签字"); confirmGoNextL1S11(); return; }
       nextStepAfterSign(n.trim());
     }
@@ -3579,7 +3391,7 @@ function recText(i){
     parts.push("<b>◆ 前置三问作答：</b><br>"+r.qa.map((x,k)=>(k+1)+"）"+esc(x.q)+"<br>　作答（"+(QA_SRC[x.quality]||"已作答")+"）："+esc(x.answer||"—")).join("<br>"));
   }
   if(r.detail){
-    const lines=r.detail.map(d=>d.label+"："+(d.answer&&d.answer.trim()?esc(d.answer):"—")+(d.partial?(d.reasonMissing?"（缺理由）":"（理由不到位）"):""));
+    const lines=r.detail.map(d=>d.label+"："+(d.answer&&d.answer.trim()?esc(d.answer):"—")+(d.partial?"（缺理由）":""));
     if(lines.length)parts.push(lines.join("<br>"));
   }
   if(parts.length)return parts.join("<br>");
@@ -3652,11 +3464,11 @@ function planStdCh7(){
   '<p><span class="pk">人员分工：</span>项目经理（总体协调、进度与质量控制）；A 组（技术：物理环境、网络/安全设备、主机、数据库、应用系统）；B 组（管理：制度/机构/人员/建设/运维五类核查与访谈）；C 组（测试：漏洞扫描、配置核查、结果分析）。</p>';
 }
 function planObjTable(){
-  let rows=[["核心交换机","2 台（同型号同配置，双机冗余）","是","100% 测评（网络核心，承载全网数据转发，少量关键资产不适用抽样）"],
-  ["接入交换机","9 台（同规格统一固件，分层部署）","是","100% 测评（清单明确支撑系统整体组网连通，属系统组网核心组成部分；单类网络设备≤10 台必须 100% 全测、禁止抽样）"],
-  ["Web 服务器","3 台（同配置，负载均衡集群）","是","100% 测评（对外提供核心业务服务，少量关键业务资产不适用抽样）"],
+  let rows=[["核心交换机","2 台（同型号同配置，双机冗余）","是","100% 测评（网络核心，承载全网数据转发）"],
+  ["接入交换机","9 台（同规格统一固件，分层部署）","是","100% 测评（全网组网核心基础设备）"],
+  ["Web 服务器","3 台（同配置，负载均衡集群）","是","抽 2 台（66%，≥30%）"],
   ["应用服务器","2 台（双节点冗余）","是","100% 测评（业务核心）"],
-  ["数据库服务器","2 台（主备实时同步）","是","100% 测评（承载重要业务数据，少量关键业务资产不适用抽样）"],
+  ["数据库服务器","2 台（主备实时同步）","是","抽 1 台（50%，≥30%）"],
   ["边界防火墙","1 台（互联网唯一出口）","是","100% 测评（边界防护核心）"],
   ["Web 应用防护系统（WAF）","1 台","是","100% 测评（Web 防护）"],
   ["运维审计系统（堡垒机）","1 台","是","100% 测评（运维审计核心）"],
@@ -3723,6 +3535,7 @@ function buildPlanDoc(){
 }
 function onGenPlan(){
   const s=STEPS[current];
+  if(!gateNeed(s).ready){toast("请先点击查看全部三张引导卡，阅读完成后才能生成方案");return;}
   const docHtml=buildPlanDoc();
   $("planTitle").textContent="📑 测评方案 · 政务服务中心综合管理平台（V1.0）";
   $("planBody").innerHTML='<div class="paper">'+docHtml+'</div>';
@@ -3770,6 +3583,7 @@ function onSignPlan(){
   const name=($("signName").value||"").trim();
   if(!name){toast("请输入姓名后再签署");$("signName").focus();return;}
   const s=STEPS[current];
+  if(!gateNeed(s).ready){toast("请先点击查看全部三张引导卡，阅读完成后才能生成方案");return;}
   // 评分：其他已作答步骤中 ≥2 星的比例（兼容自由选关的乱序作答）
   let done=0, total=0;
   for(let i=0;i<STEPS.length;i++){
@@ -3900,30 +3714,17 @@ function renderFeedback(rec, readOnly){
   renderMap();
   const cls=rec.stars===3?"good":rec.stars===2?"mid":"poor";
   const bookIcon='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
-  const isS11 = (s.id==="L1S11");
   let cellHtml="";
   if(rec.detail){
-    if(isS11){
-      // L1S11：只给逐项判定（合格 / 待完善 / 不合格），不出现「标准答案」列
-      cellHtml=`<table class="tbl-result"><thead><tr><th>表格栏位</th><th>我的填写</th><th>判定</th></tr></thead><tbody>`+
-        rec.detail.map(d=>{
-          const g = d.grade || (d.ok?(d.partial?"待完善":"合格"):"不合格");
-          const cls = g==="合格"?"ok":(g==="待完善"?"part":"no");
-          const why = d.gWhy ? '<br><span style="color:#8FA7C3;font-size:11.5px">'+esc(d.gWhy)+'</span>' : '';
-          return `<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${cls}">${g}${why}</td></tr>`;
-        }).join("")+
-        `</tbody></table>`;
-    }else{
-      cellHtml=`<table class="tbl-result"><thead><tr><th>表格栏位</th><th>我的填写</th><th>判定</th><th>标准答案</th></tr></thead><tbody>`+
-        rec.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓ 正确":(d.partial?"△ 部分正确":"✗ 修正")}</td><td class="std">${esc(d.expect)}${d.good?"<br><span style='color:#6B8FA8'>"+esc(d.good)+"</span>":""}</td></tr>`).join("")+
-        `</tbody></table>`;
-    }
+    cellHtml=`<table class="tbl-result"><thead><tr><th>表格栏位</th><th>我的填写</th><th>判定</th><th>标准答案</th></tr></thead><tbody>`+
+      rec.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓ 正确":(d.partial?"△ 部分正确":"✗ 修正")}</td><td class="std">${esc(d.expect)}${d.good?"<br><span style='color:#6B8FA8'>"+esc(d.good)+"</span>":""}</td></tr>`).join("")+
+      `</tbody></table>`;
   }
   const planBtn = (s.type==="plan") ? '<button class="btn-ghost2" id="btnPlanRe">📑 查看方案</button>' : '';
-  // L1S11 专项：comment 走 HTML；标准答案默认隐藏，靠「查看标准答案」按钮（满足解锁条件才可点）展开
-  const s11Std = (isS11 && rec.s11 && rec.s11.unlocked) ? s11StdAnswerPanel(rec) : '';
+  // L1S11 专项：把 comment 渲染为 HTML（包含张工三点提醒 + web 后果），其余关卡继续走 esc
+  const isS11 = (s.id==="L1S11");
   const commentHtml = isS11
-    ? '<div class="fb-comment-s11">'+rec.comment+'</div>'+ cellHtml + showZhZhangGongRemind(rec.s11) + showL1S11Verdict(rec) + s11Std
+    ? '<div class="fb-comment-s11">'+rec.comment+'</div>'+ showZhZhangGongRemind(rec.s11) + showL1S11Verdict(rec)
     : esc(rec.comment)+(rec.detail?"":"<span class=\"qa\"><b>你的回答：</b>"+esc(rec.answer)+"</span>");
   // L1S11 反馈卡底部按钮组：自定义「重新挑战 / 进入下一关」，不再出现通用「下一步」
   const nextBar = isS11
@@ -3943,20 +3744,15 @@ function renderFeedback(rec, readOnly){
     </div>
     <div class="fb-comment">${commentHtml}
     </div>
-    ${isS11?'':cellHtml}
-    ${isS11?'':'<div class="teach-card"><div class="tc-lb">'+bookIcon+' 知识点讲解</div><p>'+rec.teach+'</p><p style="color:#8FA7C3;margin-top:6px">参考要点：'+rec.expect+'</p></div>'}
+    ${cellHtml}
+    <div class="teach-card"><div class="tc-lb">${bookIcon} 知识点讲解</div><p>${rec.teach}</p><p style="color:#8FA7C3;margin-top:6px">参考要点：${rec.expect}</p></div>
     ${nextBar}
   </div>`;
   // L1S11 按钮事件
   if(isS11){
-    const r=$("btnS11Redo"), n=$("btnS11Next"), sb=$("btnS11Std");
+    const r=$("btnS11Redo"), n=$("btnS11Next");
     if(r) r.addEventListener("click", redoL1S11);
     if(n) n.addEventListener("click", confirmGoNextL1S11);
-    if(sb && !sb.disabled) sb.addEventListener("click", function(){
-      const p=$("s11StdPanel"); if(!p) return;
-      p.classList.toggle("hidden");
-      sb.textContent = p.classList.contains("hidden") ? "📖 查看标准答案" : "📖 收起标准答案";
-    });
   }
   const btnNext=$("btnNext");
   if(btnNext) btnNext.addEventListener("click",()=>{
@@ -4015,6 +3811,7 @@ function onSubmit(){
   const v=$("answerInput").value.trim();
   if(!v){toast("请先输入你的答案再提交");return;}
   const s=STEPS[current];
+  if(!gateNeed(s).ready){toast("请先点击查看全部三张引导卡，阅读完成后才能作答");return;}
   const res=evaluate(s,v);
   if(records[current])score-=records[current].score;
   records[current]={answer:v,...res}; score+=res.score; submitted=true;
@@ -4353,7 +4150,6 @@ function save() {
       slot.lastLevelIdx = levelIdx;
       slot.docs = Object.keys(matUnlocked);
       slot.guideRead = guideRead;
-      slot.stepFails = stepFails;
       slot.updatedAt = Date.now();
       _pg = p;
       return p;
@@ -4389,16 +4185,6 @@ function loadSave() {
       slot.docs.forEach(function(id){ matUnlocked[id]=true; });
     }
     if (slot && slot.guideRead) guideRead = slot.guideRead;
-    if (slot && slot.stepFails && typeof slot.stepFails === "object") {
-      stepFails = slot.stepFails;
-      // 旧档兼容：数字型 / 旧的 {fail,fix} 计数统一迁移为 {fail, unlocked}
-      (function(){
-        const v = stepFails["L1S11"];
-        if (typeof v === "number") stepFails["L1S11"] = { fail: v, unlocked: false };
-        else if (v && typeof v === "object" && typeof v.unlocked !== "boolean")
-          stepFails["L1S11"] = { fail: v.fail || 0, unlocked: !!v.unlocked || (v.fail||0) >= 3 || (v.fix||0) >= 2 };
-      })();
-    }
     if (!lv || typeof lv.current !== "number") return false;
     current = Math.min(lv.current, STEPS.length - 1);
     score = lv.score || 0;
@@ -4542,7 +4328,7 @@ function enterCase(){
   goLevel(target);
 }
 // 重新挑战 / 重新闯关时，把该关所有步骤的三色卡已读状态与问答作答进度一并清空，
-// 让三色卡回到"未读 + 折叠"的初始状态（纯记录翻阅状态，不影响作答权限）。
+// 让三色卡回到"未读 + 折叠"的初始状态，必须重新点击阅读后才能作答。
 function clearStepGate(li){
   const lv = LEVELS[li];
   if (!lv) return;

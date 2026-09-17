@@ -907,49 +907,6 @@ const DOCS = {
 <p>本次清单为单位三级核心业务系统全覆盖资产，涵盖网络转发设备、业务服务设备、数据存储设备、安全防护设备、办公终端及辅助外设六大类。所有设备均为系统专属运行设备，状态正常、长期在线，无闲置、停用、外借设备，全面支撑单位核心业务运转及日常办公工作。</p>
 <p style="color:#8A6D1F;font-size:11.5px">※ 张工批注：设备清单是选取测评对象的核心依据——注意哪些该测、哪些不该测、哪些可以抽样。</p>`
   },
-  guocheng: {
-    name:"《测评过程指南要点（GB/T 28449-2018）》",
-    meta:"张工整理 · 标准学习参考",
-    icon:"📘",
-    html:`
-<div class="pv-badge">标准规范 · 学习参考（张工整理，非标准原文）</div>
-<h2>GB/T 28449-2018《信息安全技术 网络安全等级保护测评过程指南》要点摘要</h2>
-<p class="paper-sub">本材料为学习摘要，按课程教学口径整理</p>
-<h3>一、标准定位</h3>
-<p>GB/T 28449-2018 回答的问题是「<b>测评活动怎么组织、流程怎么走</b>」：从接到项目到交付报告，全过程怎么安排、每个阶段产出什么。四份核心标准分工如下：</p>
-<table>
-<tr><th>标准</th><th>回答的问题</th></tr>
-<tr><td>GB/T 22240-2020《定级指南》</td><td>系统定几级——定级对象识别、S/A 赋值</td></tr>
-<tr><td>GB/T 22239-2019《基本要求》</td><td>要做到什么——各级安全要求（测评指标来源）</td></tr>
-<tr><td>GB/T 28448-2019《测评要求》</td><td>怎么测——测评方法与单项判定尺度</td></tr>
-<tr><td><b>GB/T 28449-2018《过程指南》</b></td><td><b>流程怎么走——测评活动的组织与实施过程</b></td></tr>
-</table>
-<h3>二、测评流程四阶段</h3>
-<p>本标准把等级测评活动划分为四个阶段：</p>
-<table>
-<tr><th>阶段</th><th>主要工作</th><th>关键产出</th></tr>
-<tr><td>① 测评准备</td><td>项目启动、信息收集与分析、工具与表单准备</td><td>项目计划、信息采集表</td></tr>
-<tr><td>② 方案编制</td><td>确定测评对象、测评指标、测评实施计划与人员分工</td><td>《测评方案》</td></tr>
-<tr><td>③ 现场测评</td><td>访谈、核查、测试，采集证据并双方确认</td><td>测评记录与证据</td></tr>
-<tr><td>④ 分析与报告编制</td><td>单项判定、整体结论评价、报告编制与评审交付</td><td>《测评报告》</td></tr>
-</table>
-<h3>三、测评对象选取原则（方案编制阶段核心工作）</h3>
-<p>依据本标准及行业质控规范，测评对象按四条原则选取：</p>
-<p>· <b>应测尽测</b>——标准明确要求纳入的对象一律纳入，不能漏测关键资产；</p>
-<p>· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测评，按关键性原则不可抽样；</p>
-<p>· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表；</p>
-<p>· <b>抽样</b>——同类设备、同质化配置，可抽样测评。</p>
-<h3>四、抽样适用边界（行业统一共识）</h3>
-<p>抽样不是「想抽就抽」，适用边界如下：</p>
-<table>
-<tr><th>规则</th><th>说明</th></tr>
-<tr><td>少量关键业务资产不适用抽样</td><td>Web 服务器、应用服务器、数据库服务器等承载核心业务与重要数据的设备，台数再少也必须 100% 全测</td></tr>
-<tr><td>抽样仅适用于批量同构非核心资产</td><td>同型号、同配置、同版本、同功能的批量设备（如大规模办公终端），才谈得上抽样</td></tr>
-<tr><td>单类网络设备数量≤10 台必须全测</td><td>无论是否同配置，必须 100% 全测、禁止抽样（行业质控规范）</td></tr>
-<tr><td>抽样比例不低于 30%</td><td>且同类至少抽 2 台，比例与数量须在方案中明示</td></tr>
-</table>
-<p style="color:#8A6D1F;font-size:11.5px">※ 张工批注：第 11 关《测评对象选取表》的判定依据就是这份标准的第三、四部分——先判断设备在不在定级边界内、承不承载核心业务，再决定全部纳入 / 抽样 / 不纳入，并逐项写明理由。抽样的本质是「用代表性换取效率」，只对「批量、同构、非核心」三条件同时满足的资产成立。</p>`
-  },
   bushu: {
     name:"《系统部署与配置确认单》",
     meta:"运维单位：市大数据发展局 · 2026-09-10",
@@ -1396,14 +1353,14 @@ const LEVELS = [
       {
         "id": "L1S11",
         "title": "六步法④ 选取测评对象",
-        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。本关挑战：对照 📁 材料库中的《网络拓扑与设备清单》与《测评过程指南要点（GB/T 28449-2018）》，在《测评对象选取表》里为每一类设备做出「全部纳入 / 抽样 / 不纳入」的决定，并逐项写明理由。这是方案编制的核心关卡：每一项决定都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用——这一关，见真功夫。",
+        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。本关挑战：对照 📁 材料库中的《网络拓扑与设备清单》，在《测评对象选取表》里为每一类设备做出「全部纳入 / 抽样 / 不纳入」的决定，并逐项写明理由。这是方案编制的核心关卡：每一项决定都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用——这一关，见真功夫。",
         "taskLb": "张 工 提 示",
         "task": "【测评对象选取四原则】\n· <b>应测尽测</b>——标准（GB/T 28448-2019）明确要求纳入的对象一律纳入，不能漏测关键资产。\n· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测，按关键性原则不可抽样。\n· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表。\n· <b>抽样（≥30%）</b>——同类设备、同质化配置，可抽样测评。\n\n先尝试基于知识进行挑战，若没有思路，可点击下面的三色卡，这是我给你的三个锦囊。",
-        "docs": ["dengji", "tuopu", "guocheng"],
-        "hint": "对照《网络拓扑与设备清单》与《测评过程指南要点》（材料库均已发放）逐类判断：哪些设备承载核心业务或重要数据（数量又少）？接入交换机注意看清单里它的作用描述——「支撑系统整体组网连通」，属系统组网核心组成部分，而且合规规则明确：单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样。办公终端和打印机在不在定级边界内？记住行业共识：少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
+        "docs": ["dengji", "tuopu"],
+        "hint": "对照《网络拓扑与设备清单》逐类判断：哪些设备承载核心业务或重要数据（数量又少）？接入交换机注意看清单里它的作用描述——「支撑系统整体组网连通」，属系统组网核心组成部分，而且合规规则明确：单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样。办公终端和打印机在不在定级边界内？记住行业共识：少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
         "expect": "①不是所有设备都测——纳入与否看三点：是否在定级边界内、是否承载业务数据、标准是否要求；②行业共识：少量关键业务资产不适用抽样——Web 服务器（3 台）、应用服务器（2 台）、数据库服务器（2 台）承载核心业务与重要数据，全部 100% 测评；接入交换机 9 台虽为同规格批量设备，但清单明确其「支撑系统整体组网连通」、属系统组网核心组成部分，且合规规则「单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测，禁止抽样」——全部纳入 100% 测评；③办公终端（60 台）本次不纳入，但若用于运维被测系统或承载其数据则必须纳入，按主机安全要求测；④表格每一项决定都必须写明理由。",
         "aiGuide": "AI 可按抽样规则给出选取建议、算好抽样比例，也能示范「结论 + 理由」的标准写法；但它给的是通用示范，替代不了你对现场的判断。",
-        "mustManual": "哪些设备承载核心业务（关键性）、哪些可抽样、哪些排除——这三类判断只能由测评师结合被测系统的实际情况（定级边界、设备清单、承载的业务与数据）做出；「全部都测」和「随便抽几台」都过不了方案评审。另外要考虑行业统一共识：少量（10台以内）关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
+        "mustManual": "哪些设备承载核心业务（关键性）、哪些可抽样、哪些排除——这三类判断只能由测评师结合被测系统的实际情况（定级边界、设备清单、承载的业务与数据）做出；「全部都测」和「随便抽几台」都过不了方案评审。",
         "quality": "熟悉测评标准和行业共识，既要应测尽测、不漏测关键资产，也要替客户算成本、不为无关设备买单。用专业的态度专业的描述呈现专业的成果，所有表单禁止使用口语化简称，统一采用专业术语，减少歧义。",
         "materialRef": "《网络拓扑与设备清单》",
         "reasonHint": "为什么纳入、为什么抽样、为什么排除",
@@ -2588,7 +2545,7 @@ function unlockDocs(ids){
 }
 function renderMatDrawer(){
   const list=$("matList"); if(!list)return;
-  const order=["weituo","xitong","dengji","tuopu","guocheng","bushu","jifang","loudong"];
+  const order=["weituo","xitong","dengji","tuopu","jifang","loudong"];
   let html="";
   order.forEach(function(id){
     const d=DOCS[id]; if(!d)return;
@@ -3150,21 +3107,12 @@ function evaluateTable(s, values){
     }else{
       ok = r.any ? r.groups.some(g=>g.some(k=>t.includes(k))) : r.groups.every(g=>g.some(k=>t.includes(k)));
     }
-    let partial=false, reasonMissing=true;
+    let partial=false;
     if(ok && r.reason && r.reason.length){
       const hasReason = r.reason.some(g=>g.some(k=>t.includes(k)));
       if(!hasReason) partial=true;
-      // 区分「完全没写理由」与「写了理由但不到位/错误」：
-      // 答案中含有「因为/由于/依据/按/基于/是/为/所以/故」之类的理由性表述，
-      // 或者纯中文长度≥6 字符（去掉数字与单位），视为「用户写了一段理由」
-      // ——即便该段理由没有命中正确的 reason 关键词，也属于「理由不到位/错误」，
-      // 而非「缺少理由」。
-      const REASON_MARKERS = /因为|由于|依据|按|基于|是|为|所以|故|故而|因此/;
-      const stripped = v.replace(/\d+\s*台/g, "").replace(/\d+/g, "").replace(/[\s,，。.;；:：()（）\-—_/、]/g, "");
-      const hasReasonText = REASON_MARKERS.test(v) || stripped.length >= 6;
-      reasonMissing = !hasReasonText;
     }
-    return {label:r.label, answer:v, ok, partial, reasonMissing, expect:r.expect, good:r.good, reason:r.reason, groups:r.groups, stdShort:r.stdShort||"", stdReason:r.stdReason||""};
+    return {label:r.label, answer:v, ok, partial, expect:r.expect, good:r.good, reason:r.reason, groups:r.groups, stdShort:r.stdShort||"", stdReason:r.stdReason||""};
   });
   let pts=0;
   detail.forEach(d=>{ pts += d.ok ? (d.partial?1:2) : 0; });
@@ -3238,7 +3186,7 @@ function onSubmitTable(){
       stars, score, verdict, comment,
       ratio, full:res.full, part:res.part, wrong:res.wrong,
       teach:s.teach, expect:s.expect,
-      answer:qaLine+"表格："+res.detail.map(d=>d.label+"="+(d.answer||"—")+(d.partial?(d.reasonMissing?"（缺理由）":"（理由不到位）"):"")).join("；")
+      answer:qaLine+"表格："+res.detail.map(d=>d.label+"="+(d.answer||"—")+(d.partial?"（缺理由）":"")).join("；")
     };
   }else{
     rec={type:"table",...res};
@@ -3279,14 +3227,7 @@ function onSubmitTable(){
       const onlyVague = hitReasonWords.length>0 && hitReasonWords.every(function(w){ return VAGUE.indexOf(w) >= 0; });
       let g = "合格", why = "";
       if(!d.ok){ g = "不合格"; why = "结论不正确"; }
-      else if(d.partial){
-        // 区分「完全没写理由」与「写了理由但不到位/错误」
-        if(d.reasonMissing){
-          g = "待完善"; why = "缺少理由——结论正确，但未填写理由（评审看不到依据，方案会被退回）";
-        }else{
-          g = "待完善"; why = "理由不到位或错误——答案里写了理由，但理由的关键词与标准答案不匹配或理由本身不正确，请对照下方标准答案重新论证";
-        }
-      }
+      else if(d.partial){ g = "待完善"; why = "缺少理由"; }
       else if(onlyVague){ g = "待完善"; why = "理由过于笼统（仅命中"+hitReasonWords.join("、")+"），缺少具体证据（业务影响 / 数据重要性 / 合规规则等）"; }
       else if(hit.length){ g = "待完善"; why = "用词不专业（"+hit.join("、")+"）"; }
       return { label:d.label, answer:ans, grade:g, why:why, stdShort:d.stdShort||"", stdReason:d.stdReason||"" };
@@ -3330,7 +3271,7 @@ function onSubmitTable(){
     // 不出现标准答案、答案解析与知识点讲解——那些只在「查看标准答案」按钮解锁后展示
     const tailMap = {
       "合格": "拿着这份《测评对象选取表》去做现场测评：测评对象覆盖完整、抽样与排除都能给出依据，方案能一次过评审，现场工作量与客户报价也对得上——这是可以直接进入下一步的版本。",
-      "待完善": "若拿着这份选取表去现场测评：评审会先把方案退回——缺理由、理由不到位或用词不规范的格子证明不了选取依据，机构要重新补充论证；现场还可能因为对象边界不清而漏测、重复测，工期与费用都要重算。",
+      "待完善": "若拿着这份选取表去现场测评：评审会先把方案退回——缺理由或用词不规范的格子证明不了选取依据，机构要重新补充论证；现场还可能因为对象边界不清而漏测、重复测，工期与费用都要重算。",
       "不合格": "若拿着这份选取表去现场测评：关键资产被漏测、抽样依据不成立，报告在方案评审和公安网安检查环节都会被判「测评对象选取不当」，必须全量补测并重新出具方案与报告，返工成本由项目组和客户共同承担。"
     };
     let sComment = "本关判定：<b>"+grade+"</b>（得分 "+rec.score+" / 5）。本次共 "+rowGrades.length+" 项：合格 "+okCount+" 项、待完善 "+partialCount+" 项、不合格 "+wrongCount+" 项。";
@@ -3440,9 +3381,9 @@ function showZhZhangGongRemind(s11){
   // 张工三点提醒：带教师傅口吻的问句，只提问、不给结论与后果（折叠面板）
   return '<details class="zg-remind"><summary style="cursor:pointer;list-style:none"><b style="color:var(--cyan)">📋 张工提醒：可按下面的提示进行自查（点击展开）</b></summary>'+
     '<div style="padding:10px 0 4px;color:#C6D8EC;font-size:13.5px;line-height:1.9">'+
-      
+      '我不给你结论，你自己回答一下：'+
       '<ol style="margin:8px 0 8px 24px;padding:0">'+
-        '<li>你做出的「纳入 / 抽样 / 排除」的决定，是否基于《系统定级报告》《网络拓扑与设备清单》等客观材料？</li>'+
+        '<li>你是否把每一项「纳入 / 抽样 / 排除」的决定，都能在《系统定级报告》《网络拓扑与设备清单》里指到具体的设备和依据？</li>'+
         '<li>你是否把应测尽测、关键性、代表性、抽样（≥30%）这四个原则逐条过了一遍，而不是凭设备类别拍脑袋？</li>'+
         '<li>你是否用行业术语把「为什么这么定」写清楚了（结论 + 理由），没有口语化简称、没有含糊表述？</li>'+
       '</ol>'+
@@ -3493,8 +3434,6 @@ function s11StdAnswerPanel(rec){
       txt = "结论与理由都到位，符合本项判定要求。";
     }else if(String(g.why).indexOf("缺少理由") >= 0){
       txt = "结论正确，但<b>没有写明判断理由</b>——选取决定必须能追溯到标准条款与设备清单事实，需补上「为什么这么定」。标准答案："+esc(d.expect);
-    }else if(String(g.why).indexOf("理由不到位或错误") >= 0){
-      txt = "结论正确——这一格的大方向你判断对了，<b>但理由没有说到点上（不到位或错误）</b>：要么没落到标准答案要求的关键依据（业务承载 / 数据重要性 / 合规规则 / 定级边界等），要么写了与结论相矛盾或与事实不符的说辞。理由不是「有写就行」，必须写明决定所依据的标准条款与清单事实；测评方案是要过评审的，理由站不住脚，结论一样会被退回。请对照标准答案重新论证这一格的理由。标准答案："+esc(d.expect);
     }else if(String(g.why).indexOf("理由过于笼统") >= 0){
       txt = "结论正确，但<b>理由过于笼统</b>——只写了「"+esc(g.why.replace(/^理由过于笼统（仅命中/,"").replace(/）.+/,""))+"」这类泛化表述，没有落到具体依据（业务影响、数据重要性、合规规则等），评审无法据此判断取舍是否成立，属「写得不专业」而非「结论错」。标准答案："+esc(d.expect);
     }else if(g.grade === "待完善"){
@@ -3579,7 +3518,7 @@ function recText(i){
     parts.push("<b>◆ 前置三问作答：</b><br>"+r.qa.map((x,k)=>(k+1)+"）"+esc(x.q)+"<br>　作答（"+(QA_SRC[x.quality]||"已作答")+"）："+esc(x.answer||"—")).join("<br>"));
   }
   if(r.detail){
-    const lines=r.detail.map(d=>d.label+"："+(d.answer&&d.answer.trim()?esc(d.answer):"—")+(d.partial?(d.reasonMissing?"（缺理由）":"（理由不到位）"):""));
+    const lines=r.detail.map(d=>d.label+"："+(d.answer&&d.answer.trim()?esc(d.answer):"—")+(d.partial?"（缺理由）":""));
     if(lines.length)parts.push(lines.join("<br>"));
   }
   if(parts.length)return parts.join("<br>");

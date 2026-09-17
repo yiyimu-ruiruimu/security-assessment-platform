@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>在线互动答题 - 信息安全测评与风险评估实践教学平台</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
+    body { background: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; }
+    header { max-width: 860px; margin: 0 auto 16px; background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%); color: #fff; padding: 20px 28px; border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    header h1 { font-size: 1.3rem; font-weight: 600; }
+    header .sub { font-size: 0.88rem; opacity: .9; margin-top: 3px; font-weight: 300; }
+    .topbar { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; }
+    .topbar a { color: #fff; text-decoration: none; background: rgba(255,255,255,0.16); padding: 6px 14px; border-radius: 8px; }
+    .topbar a:hover { background: rgba(255,255,255,0.28); }
+    .card { max-width: 860px; margin: 0 auto 16px; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,.06); padding: 20px 24px; }
+    .msg { display: none; margin-bottom: 16px; padding: 12px 16px; border-radius: 8px; font-size: 0.95rem; }
+    .msg.info { background: #e8f4fd; color: #0c447c; border: 1px solid #b5d4f4; }
+    .msg.err { background: #fdecea; color: #a93226; border: 1px solid #f5c6c2; }
+    .msg.ok { background: #eef9ee; color: #1e7e34; border: 1px solid #c8e6c9; }
+    .btn { border: none; border-radius: 8px; padding: 9px 20px; font-size: 0.92rem; cursor: pointer; transition: all .2s; }
+    .btn-primary { background: #0d47a1; color: #fff; }
+    .btn-primary:hover { background: #0b3d8a; }
+    .btn-outline { background: #fff; color: #1565c0; border: 1px solid #1565c0; }
+    .btn-outline:hover { background: #eef4fd; }
+    .btn:disabled { opacity: .5; cursor: not-allowed; }
+    .muted { color: #95a5b6; }
+    .center { text-align: center; }
+    /* 题组列表 */
+    .qlist { display: flex; flex-direction: column; gap: 10px; }
+    .qitem { display: flex; align-items: center; justify-content: space-between; gap: 12px; border: 1px solid #dde4ec; border-radius: 10px; padding: 14px 18px; cursor: pointer; transition: all .15s; }
+    .qitem:hover { border-color: #1565c0; background: #f4f8fe; }
+    .qitem .t { font-weight: 600; color: #1a3c6e; }
+    .qitem .s { font-size: 0.8rem; color: #95a5b6; margin-top: 2px; }
+    /* 题目 */
+    .qcard { border: 1px solid #e3e9f1; border-radius: 10px; padding: 16px 18px; margin-bottom: 14px; }
+    .qcard .qtitle { font-weight: 600; color: #1a3c6e; margin-bottom: 10px; }
+    .qcard .qtitle .qn { display: inline-block; background: #0d47a1; color: #fff; font-size: .78rem; border-radius: 6px; padding: 1px 8px; margin-right: 8px; }
+    .opt { display: flex; align-items: flex-start; gap: 10px; border: 1px solid #dfe6ee; border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; cursor: pointer; transition: all .12s; }
+    .opt:hover { border-color: #1565c0; background: #f4f8fe; }
+    .opt.sel { border-color: #0d47a1; background: #e8f1fd; }
+    .opt input { margin-top: 5px; }
+    .opt .ol { font-weight: 700; color: #1565c0; }
+    .actions { display: flex; gap: 12px; margin-top: 16px; flex-wrap: wrap; }
+    .done-box { background: #eef9ee; border: 1px solid #c8e6c9; border-radius: 10px; padding: 16px 20px; margin-top: 14px; font-size: .95rem; }
+    .back-link { display: inline-block; margin-bottom: 12px; color: #1565c0; text-decoration: none; font-size: .9rem; }
+    .back-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<header>
+    <div>
+        <h1>在线互动答题</h1>
+        <div class="sub">信息安全测评与风险评估实践教学平台 · 课堂即时选择题</div>
+    </div>
+    <div class="topbar">
+        <span id="barEmail" style="opacity:.95;"></span>
+        <a href="index.html">返回平台</a>
+        <a href="#" onclick="logout();return false;" style="background:rgba(229,62,62,.75);">退出</a>
+    </div>
+</header>
+
+<div class="card" id="stateCard">
+    <div class="msg" id="msgBox"></div>
+    <div id="guestView" style="text-align:center; padding:18px 0;">
+        <p style="font-size:1.05rem; color:#2c3e50;">请先登录账号后再参与答题</p>
+        <p class="muted" style="margin:8px 0 18px; font-size:.9rem;">答题记录与你的账号绑定，老师可在后台查看答题情况</p>
+        <button class="btn btn-primary" onclick="doLogin()">账号登录</button>
+    </div>
+    <div id="mainView" style="display:none;">
+        <div id="quizListView">
+            <h3 style="color:#0c447c; margin-bottom:6px;">进行中的答题</h3>
+            <p class="muted" style="font-size:.85rem; margin-bottom:14px;">点击进入作答。老师关闭答题后列表即不再显示；已提交可以重新进入修改并再次提交（以最后一次为准）。</p>
+            <div class="qlist" id="qlist"><p class="muted center" style="padding:24px 0;">暂无进行中的答题</p></div>
+        </div>
+        <div id="quizPlayView" style="display:none;">
+            <a href="#" class="back-link" onclick="showList();return false;">← 返回答题列表</a>
+            <h3 id="quizTitle" style="color:#0c447c;"></h3>
+            <p class="muted" style="font-size:.85rem; margin-bottom:14px;">共 <span id="qCount">0</span> 题 · 选择答案后点击「提交作答」</p>
+            <div id="qwrap"></div>
+            <div class="actions">
+                <button class="btn btn-primary" id="btnSubmit" onclick="submitAnswers()">提交作答</button>
+            </div>
+            <div id="doneBox" class="done-box" style="display:none;"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="auth-utils.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    var currentQuiz = null;      // { quiz_id, title, status, questions }
+    var myPicks = {};            // qid -> 'A'/'B'...
+    var submitted = false;
+
+    function $(id) { return document.getElementById(id); }
+    function onReady(cb) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', cb); else cb(); }
+
+    function showMsg(kind, text) {
+        var m = $('msgBox');
+        m.className = 'msg ' + kind;
+        m.textContent = text;
+        m.style.display = 'block';
+    }
+    function clearMsg() { $('msgBox').style.display = 'none'; }
+
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+
+    function doLogin() {
+        if (typeof netlifyIdentity === 'undefined') { showMsg('err', '登录组件未加载：请先部署到 Netlify 并开启 Identity 服务。'); return; }
+        netlifyIdentity.open('login');
+    }
+
+    function currentUser() {
+        try { if (typeof netlifyIdentity !== 'undefined') return netlifyIdentity.currentUser() || null; } catch (e) { /* noop */ }
+        return null;
+    }
+
+    function getToken() {
+        var u = currentUser();
+        try { if (u && u.token && u.token.access_token) return u.token.access_token; } catch (e) { /* noop */ }
+        return null;
+    }
+
+    /* ---------- quiz 云函数 GET ---------- */
+    function apiGet(params) {
+        var token = getToken();
+        if (!token) return Promise.reject(new Error('NO_TOKEN'));
+        var qs = [];
+        Object.keys(params || {}).forEach(function (k) { qs.push(k + '=' + encodeURIComponent(params[k])); });
+        return fetch('/.netlify/functions/quiz' + (qs.length ? '?' + qs.join('&') : ''), {
+            headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function (r) {
+            if (r.status === 401) return Promise.reject(new Error('NO_USER'));
+            if (!r.ok) return r.json().catch(function () { return {}; }).then(function (b) {
+                return Promise.reject(new Error(b.hint || b.error || ('HTTP_' + r.status)));
+            });
+            return r.json();
+        });
+    }
+
+    /* ---------- quiz 云函数 POST ---------- */
+    function apiPost(body) {
+        var token = getToken();
+        if (!token) return Promise.reject(new Error('NO_TOKEN'));
+        return fetch('/.netlify/functions/quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify(body)
+        }).then(function (r) {
+            if (r.status === 401) return Promise.reject(new Error('NO_USER'));
+            return r.json().then(function (b) {
+                if (!r.ok || !b.ok) return Promise.reject(new Error(b.hint || b.error || ('HTTP_' + r.status)));
+                return b;
+            });
+        });
+    }
+
+    /* ---------- 列表 ---------- */
+    function loadList() {
+        $('qlist').innerHTML = '<p class="muted center" style="padding:24px 0;">加载中……</p>';
+        apiGet({ list: 1 }).then(function (data) {
+            var rows = data.rows || [];
+            if (!rows.length) {
+                $('qlist').innerHTML = '<p class="muted center" style="padding:24px 0;">暂无进行中的答题，请等老师开启</p>';
+                return;
+            }
+            var html = '';
+            rows.forEach(function (r) {
+                html += '<div class="qitem" onclick="openQuiz(\'' + esc(r.quiz_id) + '\')">'
+                    + '<div><div class="t">' + esc(r.title || r.quiz_id) + '</div>'
+                    + '<div class="s">ID：' + esc(r.quiz_id) + '</div></div>'
+                    + '<span style="color:#1565c0; font-weight:600; white-space:nowrap;">进入作答 →</span>'
+                    + '</div>';
+            });
+            $('qlist').innerHTML = html;
+        }).catch(function (err) {
+            $('qlist').innerHTML = '';
+            showMsg('err', '加载失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    /* ---------- 打开题组 ---------- */
+    function openQuiz(quizId) {
+        clearMsg();
+        apiGet({ quiz: quizId }).then(function (data) {
+            var qz = data.quiz || {};
+            if (qz.status !== 'open') { showMsg('info', '该答题已关闭，暂不能作答。'); return; }
+            currentQuiz = qz;
+            myPicks = {};
+            submitted = false;
+            $('doneBox').style.display = 'none';
+            // 若已提交过，回显本人作答
+            apiGet({ mine: quizId }).then(function (m) {
+                (m.rows || []).forEach(function (r) { myPicks[r.question_id] = r.answer; });
+                renderQuiz(true);
+            }).catch(function () { renderQuiz(false); });
+        }).catch(function (err) {
+            showMsg('err', '加载题目失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function renderQuiz(hasOld) {
+        var qs = (currentQuiz && currentQuiz.questions) || [];
+        $('quizTitle').textContent = currentQuiz.title || currentQuiz.quiz_id;
+        $('qCount').textContent = qs.length;
+        var html = '';
+        qs.forEach(function (q, i) {
+            var letter = String.fromCharCode(65 + i);
+            html += '<div class="qcard"><div class="qtitle"><span class="qn">' + letter + '</span>' + esc(q.q) + '</div>';
+            (q.opts || []).forEach(function (o, j) {
+                var ol = String.fromCharCode(65 + j);
+                var sel = myPicks[q.id] === ol ? ' sel' : '';
+                html += '<label class="opt' + sel + '" data-qid="' + esc(q.id) + '" data-ans="' + ol + '">'
+                    + '<input type="radio" name="q_' + esc(q.id) + '" value="' + ol + '"' + (myPicks[q.id] === ol ? ' checked' : '') + '>'
+                    + '<span><span class="ol">' + ol + '.</span> ' + esc(o) + '</span></label>';
+            });
+            html += '</div>';
+        });
+        $('qwrap').innerHTML = html;
+        Array.prototype.forEach.call($('qwrap').querySelectorAll('.opt'), function (el) {
+            el.addEventListener('click', function () {
+                var qid = el.getAttribute('data-qid');
+                myPicks[qid] = el.getAttribute('data-ans');
+                Array.prototype.forEach.call($('qwrap').querySelectorAll('.opt[data-qid="' + qid + '"]'), function (x) { x.classList.remove('sel'); });
+                el.classList.add('sel');
+                el.querySelector('input').checked = true;
+            });
+        });
+        $('quizListView').style.display = 'none';
+        $('quizPlayView').style.display = 'block';
+        window.scrollTo({ top: 0 });
+        if (hasOld && Object.keys(myPicks).length) {
+            var box = $('doneBox');
+            box.style.display = 'block';
+            box.innerHTML = '你此前已提交过作答，已回显你的答案（青色高亮）。修改后可再次提交，<b>以最后一次提交为准</b>。';
+        }
+    }
+
+    function submitAnswers() {
+        if (!currentQuiz) return;
+        var qs = currentQuiz.questions || [];
+        var unanswered = qs.filter(function (q) { return !myPicks[q.id]; });
+        if (unanswered.length) {
+            showMsg('err', '还有 ' + unanswered.length + ' 题未作答，请完成全部题目后再提交。');
+            return;
+        }
+        $('btnSubmit').disabled = true;
+        var answers = qs.map(function (q) { return { question_id: q.id, answer: myPicks[q.id] }; });
+        apiPost({ op: 'submit', quiz_id: currentQuiz.quiz_id, answers: answers }).then(function (b) {
+            $('btnSubmit').disabled = false;
+            submitted = true;
+            clearMsg();
+            var box = $('doneBox');
+            box.style.display = 'block';
+            box.innerHTML = '✅ 提交成功！已提交 ' + b.saved + ' 题作答，老师端即可看到你的答案。如需修改，可直接调整选项后再次提交（以最后一次为准）。';
+            if (typeof trackOperation === 'function') {
+                trackOperation('提交互动答题', currentQuiz.quiz_id + '（' + b.saved + ' 题）');
+            }
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }).catch(function (err) {
+            $('btnSubmit').disabled = false;
+            showMsg('err', '提交失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function showList() {
+        $('quizPlayView').style.display = 'none';
+        $('quizListView').style.display = 'block';
+        currentQuiz = null;
+        clearMsg();
+        loadList();
+    }
+
+    /* ---------- 登录态切换 ---------- */
+    function checkAccess() {
+        var u = currentUser();
+        if (!u) {
+            $('guestView').style.display = 'block';
+            $('mainView').style.display = 'none';
+            $('barEmail').textContent = '';
+            return;
+        }
+        $('barEmail').textContent = u.email;
+        $('guestView').style.display = 'none';
+        $('mainView').style.display = 'block';
+        clearMsg();
+        var qid = new URLSearchParams(location.search).get('quiz');
+        if (qid) openQuiz(qid); else showList();
+    }
+
+    onReady(function () {
+        if (typeof netlifyIdentity === 'undefined') {
+            showMsg('err', '当前为本地预览模式：在线答题需部署到 Netlify 并开启 Identity 服务后可用。');
+            $('guestView').style.display = 'block';
+            return;
+        }
+        netlifyIdentity.on('login', checkAccess);
+        netlifyIdentity.on('logout', function () {
+            $('mainView').style.display = 'none';
+            $('guestView').style.display = 'block';
+            $('barEmail').textContent = '';
+        });
+        checkAccess();
+    });
+
+    window.doLogin = doLogin;
+    window.openQuiz = openQuiz;
+    window.showList = showList;
+    window.submitAnswers = submitAnswers;
+})();
+</script>
+</body>
+</html>

@@ -116,6 +116,8 @@ async function sbSelect(table, filters, selectFields) {
     if (filters.user_id) parts.push('user_id=eq.' + encodeURIComponent(filters.user_id));
     if (filters.email) parts.push('email=eq.' + encodeURIComponent(filters.email));
     if (filters.type) parts.push('event_type=eq.' + encodeURIComponent(filters.type));
+    if (filters.quiz_id) parts.push('quiz_id=eq.' + encodeURIComponent(filters.quiz_id));
+    if (filters.status) parts.push('status=eq.' + encodeURIComponent(filters.status));
     if (filters.from) parts.push('created_at=gte.' + encodeURIComponent(filters.from));
     if (filters.to) parts.push('created_at=lte.' + encodeURIComponent(filters.to));
     if (filters.order) parts.push('order=' + encodeURIComponent(filters.order));
@@ -157,6 +159,28 @@ async function sbUpsert(table, row, onConflict) {
     return true;
 }
 
+/* ---------- Supabase REST 删除（按 eq 条件，键值对全部 AND） ---------- */
+async function sbDelete(table, filters) {
+    var url = requireEnv('SUPABASE_URL').replace(/\/+$/, '');
+    var key = requireEnv('SUPABASE_SERVICE_ROLE_KEY');
+    if (!url || !key) throw new Error('SUPABASE_ENV_MISSING');
+    var parts = [];
+    filters = filters || {};
+    Object.keys(filters).forEach(function (k) {
+        parts.push(encodeURIComponent(k) + '=eq.' + encodeURIComponent(filters[k]));
+    });
+    if (!parts.length) throw new Error('SB_DELETE_NO_FILTER'); // 防误删全表
+    var res = await fetch(url + '/rest/v1/' + table + '?' + parts.join('&'), {
+        method: 'DELETE',
+        headers: { apikey: key, Authorization: 'Bearer ' + key, Prefer: 'return=minimal' }
+    });
+    if (!res.ok) {
+        var txt = await res.text().catch(function () { return ''; });
+        throw new Error('SUPABASE_DELETE_' + res.status + '_' + txt.slice(0, 200));
+    }
+    return true;
+}
+
 module.exports = {
     requireEnv: requireEnv,
     verifyUser: verifyUser,
@@ -167,5 +191,6 @@ module.exports = {
     getClientUa: getClientUa,
     sbInsert: sbInsert,
     sbSelect: sbSelect,
-    sbUpsert: sbUpsert
+    sbUpsert: sbUpsert,
+    sbDelete: sbDelete
 };

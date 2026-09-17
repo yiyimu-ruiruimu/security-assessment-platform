@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1280px; height:720px; overflow:hidden; background:#F2F4F7; font-family:"STXingkai","华文行楷","STKaiti","KaiTi",cursive; position:relative; }
+  .deco { position:absolute; border-radius:50%; background:#E3E7EC; }
+  .d1 { width:150px; height:150px; left:-45px; bottom:-55px; }
+  .d2 { width:70px; height:70px; right:36px; top:38px; background:#E9EDF1; }
+  .d3 { width:26px; height:26px; right:150px; top:96px; background:#DEE3E9; }
+
+  /* blackboard */
+  .frame { position:absolute; left:53px; top:60px; width:816px; height:552px;
+           background:linear-gradient(135deg,#A5713F,#8B5A30); border-radius:16px;
+           box-shadow:0 10px 24px rgba(60,60,70,.18); }
+  .board { position:absolute; left:21px; top:21px; width:774px; height:510px;
+           background:radial-gradient(ellipse at 30% 25%, #37524B 0%, #2E4640 55%, #293F3A 100%);
+           border-radius:8px; }
+  .chalk1 { position:absolute; left:300px; top:620px; width:52px; height:11px; background:#FBFBF6; border-radius:5px; box-shadow:0 2px 3px rgba(0,0,0,.15); }
+  .chalk2 { position:absolute; left:390px; top:621px; width:40px; height:10px; background:#FFE9A8; border-radius:5px; box-shadow:0 2px 3px rgba(0,0,0,.15); }
+  .eraser { position:absolute; left:500px; top:613px; width:86px; height:20px; background:#5B6470; border-radius:4px 4px 3px 3px; box-shadow:0 2px 3px rgba(0,0,0,.2); }
+
+  .lines { position:absolute; left:116px; top:81px; width:700px; height:510px;
+           display:flex; flex-direction:column; justify-content:center; gap:44px; }
+  .ln { white-space:nowrap; color:#F7F5EC; font-size:31px; line-height:1.2; }
+  .ln b { color:#FFE9A8; font-size:43px; font-weight:700; margin-right:14px; }
+  .ln .dash { color:#C9CDBF; margin-right:14px; }
+
+  .teacher { position:absolute; left:824px; top:58px; height:576px; }
+</style>
+</head>
+<body>
+  <div class="deco d1"></div><div class="deco d2"></div><div class="deco d3"></div>
+
+  <div class="frame"><div class="board"></div></div>
+  <div class="chalk1"></div><div class="chalk2"></div><div class="eraser"></div>
+
+  <div class="lines">
+    <div class="ln" id="l1"><b>有依据</b><span class="dash">——</span>每项决定写明材料出处与理由</div>
+    <div class="ln" id="l2"><b>有分寸</b><span class="dash">——</span>借 AI 提效，答案逐条核查</div>
+    <div class="ln" id="l3"><b>有担当</b><span class="dash">——</span>为团队负责、为客户负责</div>
+  </div>
+
+  <img class="teacher" src="teacher_alpha.png">
+</body>
+</html>

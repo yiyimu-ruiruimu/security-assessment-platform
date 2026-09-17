@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>日志管理后台 - 信息安全测评与风险评估实践教学平台</title>
+<title>教学管理后台 - 信息安全测评与风险评估实践教学平台</title>
 <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
     body { background: #f5f7fa; color: #333; line-height: 1.6; padding: 20px; }
@@ -44,13 +44,39 @@
     .email-cell { color: #1565c0; word-break: break-all; }
     .detail-cell { max-width: 340px; word-break: break-all; }
     .muted { color: #95a5b6; }
+    /* ===== 互动答题卡片 ===== */
+    .qtab-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .qtab { border: 1px solid #cfd8e3; background: #fff; color: #1565c0; border-radius: 8px; padding: 8px 20px; font-size: .9rem; cursor: pointer; }
+    .qtab.on { background: #0d47a1; color: #fff; border-color: #0d47a1; }
+    .qpane { display: none; }
+    .qpane.on { display: block; }
+    .qedit-item { border: 1px solid #e3e9f1; border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+    .qedit-item .qhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .qedit-item .qhead .qn { font-weight: 700; color: #0c447c; }
+    .qedit-item .qhead .del { border: none; background: #fdecea; color: #a93226; border-radius: 6px; padding: 3px 12px; cursor: pointer; font-size: .82rem; }
+    .qedit-item input[type=text], .qedit-item textarea { border: 1px solid #cfd8e3; border-radius: 8px; padding: 8px 10px; font-size: .9rem; width: 100%; }
+    .opt-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+    .opt-row .ol { font-weight: 700; color: #1565c0; width: 22px; text-align: center; }
+    .opt-row select { border: 1px solid #cfd8e3; border-radius: 8px; padding: 7px 8px; font-size: .88rem; }
+    .opt-row .add-opt { border: none; background: #e8f4fd; color: #1565c0; border-radius: 6px; padding: 7px 12px; cursor: pointer; font-size: .84rem; white-space: nowrap; }
+    .qstat-card { border: 1px solid #e3e9f1; border-radius: 10px; padding: 14px 18px; margin-bottom: 12px; }
+    .qstat-card .qt { font-weight: 600; color: #1a3c6e; margin-bottom: 10px; }
+    .qstat-card .qt .tag { display: inline-block; font-size: .74rem; border-radius: 12px; padding: 1px 10px; margin-left: 8px; font-weight: 400; }
+    .bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .bar-row .bl { font-weight: 700; color: #1565c0; width: 22px; }
+    .bar-row .btrack { flex: 1; background: #eef1f5; border-radius: 8px; height: 26px; position: relative; overflow: hidden; }
+    .bar-row .bfill { height: 100%; background: linear-gradient(90deg, #4d8fd1, #1565c0); border-radius: 8px; min-width: 0; transition: width .4s; }
+    .bar-row .bfill.right { background: linear-gradient(90deg, #57b26a, #2e7d32); }
+    .bar-row .btxt { position: absolute; left: 10px; top: 0; line-height: 26px; font-size: .84rem; color: #21313f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 92%; }
+    .bar-row .bpct { width: 110px; text-align: right; font-size: .88rem; color: #0c447c; font-weight: 600; white-space: nowrap; }
+    .qsum { background: #f0f6ff; border: 1px solid #cfe1f7; border-radius: 10px; padding: 10px 16px; margin-bottom: 14px; font-size: .92rem; color: #0c447c; }
 </style>
 </head>
 <body>
 <header>
     <div>
-        <h1>日志管理后台</h1>
-        <div class="sub">信息安全测评与风险评估实践教学平台 · 学生考勤与操作记录</div>
+        <h1>教学管理后台</h1>
+        <div class="sub">信息安全测评与风险评估实践教学平台 · 学生日志 · 互动答题统计</div>
     </div>
     <div class="topbar" id="topbar">
         <span id="barEmail" style="opacity:0.95;"></span>
@@ -114,6 +140,57 @@
         </div>
     </div>
 </div>
+
+<!-- ============ 互动答题 · 在线选择题（教师端） ============ -->
+<div class="card" id="quizCard" style="display:none;">
+    <h3 style="color:#0c447c; margin-bottom:4px;">🎯 互动答题 · 在线选择题</h3>
+    <p class="muted" style="font-size:.85rem; margin-bottom:14px;">在这里出题并开放作答，学生登录平台后在「在线互动答题」页作答；下方可实时查看每题各选项的作答比例与学生明细。</p>
+    <div class="qtab-bar">
+        <button class="qtab on" id="qtabEdit" onclick="qSwitch('edit')">📝 出题与管理</button>
+        <button class="qtab" id="qtabStat" onclick="qSwitch('stat')">📊 答题统计</button>
+    </div>
+
+    <!-- 出题与管理 -->
+    <div class="qpane on" id="qpaneEdit">
+        <div class="filters" style="margin-bottom:12px;">
+            <div class="f-item"><label>载入已有题组（可编辑/开关）</label>
+                <select id="qLoadSel" style="min-width:220px;"><option value="">— 选择题组 —</option></select>
+            </div>
+            <div class="f-item"><button class="btn btn-outline" onclick="qLoadSelected()">载入编辑</button></div>
+            <div class="f-item"><button class="btn btn-outline" onclick="qNewForm()">新建空白题组</button></div>
+        </div>
+        <div class="f-item" style="margin-bottom:12px;">
+            <label>题组 ID（字母/数字/横线，如 quiz-20260915-01）</label>
+            <input id="qId" type="text" style="min-width:240px;" placeholder="quiz-20260915-01">
+        </div>
+        <div class="f-item" style="margin-bottom:12px;">
+            <label>题组标题（学生可见）</label>
+            <input id="qTitle" type="text" style="min-width:320px;" placeholder="如：任务3 现场核查 · 课堂互动">
+        </div>
+        <div id="qEditor"></div>
+        <div class="actions" style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+            <button class="btn btn-outline" onclick="qAddQuestion()">＋ 添加题目</button>
+            <button class="btn btn-primary" onclick="qSave('open')">💾 保存并开放作答</button>
+            <button class="btn btn-outline" onclick="qSave('closed')">保存并关闭作答</button>
+            <button class="btn btn-outline" onclick="qCopyLink()">🔗 复制学生答题链接</button>
+        </div>
+        <p class="muted" style="font-size:.8rem; margin-top:10px;">说明：学生重复提交以最后一次为准；「关闭作答」后学生端即不可再提交（已收到的作答保留，统计仍可查看）。</p>
+    </div>
+
+    <!-- 答题统计 -->
+    <div class="qpane" id="qpaneStat">
+        <div class="filters" style="margin-bottom:12px;">
+            <div class="f-item"><label>选择题组</label>
+                <select id="qStatSel" style="min-width:220px;"><option value="">— 选择题组 —</option></select>
+            </div>
+            <div class="f-item"><button class="btn btn-primary" onclick="qStat()">查看统计</button></div>
+            <div class="f-item"><label style="font-size:.8rem; color:#6b7a8d;"><input type="checkbox" id="qAuto" onchange="qAutoToggle()"> 自动刷新（10 秒）</label></div>
+            <div class="f-item"><button class="btn btn-outline" onclick="qExportCsv()">导出明细 CSV</button></div>
+        </div>
+        <div id="qStatArea"><p class="muted center" style="padding:24px 0;">选择题组后点击「查看统计」</p></div>
+    </div>
+</div>
+
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="auth-utils.js"></script>
@@ -302,11 +379,14 @@
             if (info.admin) {
                 $('deniedView').style.display = 'none';
                 $('mainView').style.display = 'block';
+                $('quizCard').style.display = 'block';
                 clearMsg();
                 search(0);
+                if (window.qInit) window.qInit();
             } else {
                 $('deniedView').style.display = 'block';
                 $('mainView').style.display = 'none';
+                $('quizCard').style.display = 'none';
             }
         }).catch(function () {
             showMsg('err', '身份校验失败，请刷新重试。');
@@ -323,6 +403,7 @@
         netlifyIdentity.on('logout', function () {
             $('mainView').style.display = 'none';
             $('deniedView').style.display = 'none';
+            $('quizCard').style.display = 'none';
             $('guestView').style.display = 'block';
             $('barEmail').textContent = '';
         });
@@ -332,6 +413,353 @@
     window.doLogin = doLogin;
     window.search = search;
     window.exportCsv = exportCsv;
+})();
+</script>
+
+<script>
+/* ================= 互动答题 · 教师端逻辑 ================= */
+(function () {
+    'use strict';
+
+    var qData = [];            // 编辑中的题目 [{q, opts:[], ans:0}]
+    var qStatus = 'open';      // 编辑中题组当前状态
+    var qListCache = [];       // 题组列表缓存
+    var lastStats = null;      // 最近一次统计结果（导出用）
+    var autoTimer = null;
+    var LETTERS = 'ABCDEF';
+
+    function $(id) { return document.getElementById(id); }
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function msg(kind, text) { // 复用主脚本的消息条
+        var m = $('msgBox');
+        m.className = 'msg ' + kind;
+        m.textContent = text;
+        m.style.display = 'block';
+        if (kind === 'ok' || kind === 'info') setTimeout(function () { m.style.display = 'none'; }, 4000);
+    }
+
+    function getToken() {
+        try {
+            var u = netlifyIdentity.currentUser();
+            if (u && u.token && u.token.access_token) return u.token.access_token;
+        } catch (e) { /* noop */ }
+        return null;
+    }
+
+    function apiGet(params) {
+        var token = getToken();
+        if (!token) return Promise.reject(new Error('未登录'));
+        var qs = [];
+        Object.keys(params || {}).forEach(function (k) { qs.push(k + '=' + encodeURIComponent(params[k])); });
+        return fetch('/.netlify/functions/quiz' + (qs.length ? '?' + qs.join('&') : ''), {
+            headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function (r) {
+            return r.json().then(function (b) {
+                if (!r.ok) return Promise.reject(new Error(b.hint || b.error || ('HTTP_' + r.status)));
+                return b;
+            });
+        });
+    }
+
+    function apiPost(body) {
+        var token = getToken();
+        if (!token) return Promise.reject(new Error('未登录'));
+        return fetch('/.netlify/functions/quiz', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+            body: JSON.stringify(body)
+        }).then(function (r) {
+            return r.json().then(function (b) {
+                if (!r.ok || !b.ok) return Promise.reject(new Error(b.hint || b.error || ('HTTP_' + r.status)));
+                return b;
+            });
+        });
+    }
+
+    /* ---------- 初始化：拉题组列表 ---------- */
+    function qInit() {
+        apiGet({ list: 1 }).then(function (data) {
+            qListCache = data.rows || [];
+            var optHtml = '<option value="">— 选择题组 —</option>';
+            qListCache.forEach(function (r) {
+                var label = r.title + '（' + r.count + '题 · ' + (r.status === 'open' ? '开放中' : '已关闭') + '）';
+                optHtml += '<option value="' + esc(r.quiz_id) + '">' + esc(label) + '</option>';
+            });
+            $('qLoadSel').innerHTML = optHtml;
+            $('qStatSel').innerHTML = optHtml;
+        }).catch(function (err) {
+            msg('err', '题组列表加载失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function qSwitch(tab) {
+        var edit = tab === 'edit';
+        $('qtabEdit').className = 'qtab' + (edit ? ' on' : '');
+        $('qtabStat').className = 'qtab' + (!edit ? ' on' : '');
+        $('qpaneEdit').className = 'qpane' + (edit ? ' on' : '');
+        $('qpaneStat').className = 'qpane' + (!edit ? ' on' : '');
+        if (!edit) qInit();
+    }
+
+    /* ---------- 编辑器 ---------- */
+    function suggestId() {
+        var d = new Date();
+        function p(n) { return String(n).padStart(2, '0'); }
+        return 'quiz-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '-' + p(d.getHours()) + p(d.getMinutes());
+    }
+
+    function qNewForm() {
+        $('qId').value = suggestId();
+        $('qTitle').value = '';
+        qStatus = 'open';
+        qData = [{ q: '', opts: ['', '', '', ''], ans: 0 }];
+        renderEditor();
+        msg('info', '已新建空白题组，填写题干与选项后保存。');
+    }
+
+    function qAddQuestion() {
+        if (qData.length >= 30) { msg('err', '单题组最多 30 题。'); return; }
+        collectEditor();
+        qData.push({ q: '', opts: ['', '', '', ''], ans: 0 });
+        renderEditor();
+    }
+
+    function collectEditor() {
+        var items = $('qEditor').querySelectorAll('.qedit-item');
+        qData.forEach(function (qd, i) {
+            var it = items[i];
+            if (!it) return;
+            var ta = it.querySelector('textarea');
+            qd.q = ta ? ta.value : qd.q;
+            var optInputs = it.querySelectorAll('.opt-row input[type=text]');
+            qd.opts = [];
+            for (var j = 0; j < optInputs.length; j++) qd.opts.push(optInputs[j].value);
+            var sel = it.querySelector('.opt-row select');
+            qd.ans = sel ? parseInt(sel.value, 10) : 0;
+        });
+    }
+
+    function renderEditor() {
+        var html = '';
+        qData.forEach(function (qd, i) {
+            html += '<div class="qedit-item" data-idx="' + i + '">'
+                + '<div class="qhead"><span class="qn">第 ' + (i + 1) + ' 题</span>'
+                + '<button class="del" onclick="qDelQuestion(' + i + ')">删除本题</button></div>'
+                + '<textarea rows="2" placeholder="题干，如：安全通信网络属于哪类安全指标？">' + esc(qd.q) + '</textarea>';
+            var n = Math.max(qd.opts.length, 2);
+            var opts = qd.opts.slice(0, n);
+            while (opts.length < n) opts.push('');
+            var letters = '';
+            for (var j = 0; j < opts.length; j++) letters += '<option value="' + j + '"' + (qd.ans === j ? ' selected' : '') + '>' + LETTERS[j] + '</option>';
+            opts.forEach(function (o, j) {
+                html += '<div class="opt-row"><span class="ol">' + LETTERS[j] + '</span>'
+                    + '<input type="text" value="' + esc(o) + '" placeholder="选项 ' + LETTERS[j] + ' 内容">'
+                    + (j === opts.length - 1 && opts.length < 6 ? '<button class="add-opt" onclick="qAddOption(' + i + ')">＋选项</button>' : '')
+                    + '</div>';
+            });
+            html += '<div class="opt-row" style="margin-top:10px;"><span style="font-size:.84rem;color:#6b7a8d;">正确答案</span>'
+                + '<select onchange="qMarkAns(' + i + ', this.value)">' + letters + '</select>'
+                + '<span style="font-size:.8rem;color:#95a5b6;">（统计中标绿显示）</span></div>'
+                + '</div>';
+        });
+        $('qEditor').innerHTML = html || '<p class="muted" style="padding:12px 0;">暂无题目，点击「＋ 添加题目」开始出题。</p>';
+    }
+
+    function qAddOption(idx) {
+        collectEditor();
+        if ((qData[idx].opts || []).length >= 6) return;
+        qData[idx].opts.push('');
+        renderEditor();
+    }
+
+    function qDelQuestion(idx) {
+        collectEditor();
+        if (qData.length <= 1) { msg('err', '至少保留一道题目。'); return; }
+        qData.splice(idx, 1);
+        renderEditor();
+    }
+
+    function qMarkAns(idx, val) {
+        qData[idx].ans = parseInt(val, 10) || 0;
+    }
+
+    function qSave(status) {
+        collectEditor();
+        var quizId = $('qId').value.trim();
+        var title = $('qTitle').value.trim();
+        if (!/^[A-Za-z0-9_-]{2,64}$/.test(quizId)) { msg('err', '题组 ID 不合法：仅限字母/数字/横线/下划线，2-64 位。'); return; }
+        if (!qData.length) { msg('err', '请至少添加一道题目。'); return; }
+        for (var i = 0; i < qData.length; i++) {
+            if (!qData[i].q.trim()) { msg('err', '第 ' + (i + 1) + ' 题题干为空。'); return; }
+            var nonEmpty = qData[i].opts.filter(function (o) { return o.trim(); });
+            if (nonEmpty.length < 2) { msg('err', '第 ' + (i + 1) + ' 题至少需要两个非空选项。'); return; }
+        }
+        apiPost({
+            op: 'save',
+            quiz_id: quizId,
+            title: title,
+            status: status,
+            questions: qData.map(function (qd, i) {
+                var opts = qd.opts.map(function (o) { return o.trim(); }).filter(Boolean);
+                return { id: 'q' + (i + 1), q: qd.q.trim(), opts: opts, ans: Math.min(qd.ans, opts.length - 1) };
+            })
+        }).then(function (b) {
+            qStatus = status;
+            msg('ok', '题组「' + quizId + '」已保存（' + b.count + ' 题），当前状态：' + (status === 'open' ? '开放作答' : '已关闭') + '。');
+            qInit();
+        }).catch(function (err) {
+            msg('err', '保存失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function qLoadSelected() {
+        var id = $('qLoadSel').value;
+        if (!id) { msg('info', '请先在下拉框选择题组。'); return; }
+        apiGet({ quiz: id }).then(function (data) {
+            var qz = data.quiz || {};
+            $('qId').value = qz.quiz_id || id;
+            $('qTitle').value = qz.title || '';
+            qStatus = qz.status || 'open';
+            qData = (qz.questions || []).map(function (x) {
+                return { q: x.q || '', opts: (x.opts || []).slice(), ans: Math.max(0, LETTERS.indexOf(x.ans || 'A')) };
+            });
+            if (!qData.length) qData = [{ q: '', opts: ['', '', '', ''], ans: 0 }];
+            renderEditor();
+            msg('info', '已载入「' + (qz.title || id) + '」（' + (qz.status === 'open' ? '开放中' : '已关闭') + '），修改后保存即更新。');
+        }).catch(function (err) {
+            msg('err', '载入失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function qCopyLink() {
+        var quizId = $('qId').value.trim();
+        if (!quizId) { msg('err', '请先填写题组 ID。'); return; }
+        var url = location.origin + location.pathname.replace(/admin\.html.*$/, '') + 'quiz-live.html?quiz=' + encodeURIComponent(quizId);
+        var done = function () { msg('ok', '学生答题链接已复制：' + url); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(url).then(done, function () { msg('info', '复制链接：' + url); });
+        } else {
+            msg('info', '复制链接：' + url);
+        }
+    }
+
+    /* ---------- 统计 ---------- */
+    function qStat() {
+        var id = $('qStatSel').value;
+        if (!id) { msg('info', '请先选择题组。'); return; }
+        apiGet({ stats: id }).then(function (data) {
+            lastStats = data;
+            renderStats(data);
+        }).catch(function (err) {
+            $('qStatArea').innerHTML = '';
+            msg('err', '统计加载失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    function renderStats(data) {
+        var qz = data.quiz || {};
+        var html = '<div class="qsum">题组：<b>' + esc(qz.title || qz.quiz_id) + '</b>（' + qz.quiz_id + '）· 状态：'
+            + (qz.status === 'open' ? '<b style="color:#2e7d32">开放作答中</b>' : '<b style="color:#a93226">已关闭</b>')
+            + ' · 参与：<b>' + data.respondents + '</b> 人 · 作答记录：<b>' + data.submissions + '</b> 条 · 刷新时间：' + new Date().toLocaleTimeString('zh-CN', { hour12: false }) + '</div>';
+        (data.stats || []).forEach(function (s, i) {
+            html += '<div class="qstat-card"><div class="qt">第 ' + (i + 1) + ' 题 · ' + esc(s.q)
+                + '<span class="tag" style="background:#eef9ee;color:#1e7e34;">正确答案 ' + esc(s.ans || '—') + ' · 已答 ' + s.total + ' 人</span></div>';
+            Object.keys(s.options).forEach(function (letter) {
+                var o = s.options[letter];
+                var right = letter === s.ans;
+                var optText = (s.opts && s.opts[letter.charCodeAt(0) - 65]) || '';
+                html += '<div class="bar-row"><span class="bl">' + letter + '</span>'
+                    + '<div class="btrack"><div class="bfill' + (right ? ' right' : '') + '" style="width:' + Math.max(o.pct, o.count ? 2 : 0) + '%"></div>'
+                    + '<span class="btxt">' + esc(optText) + '</span></div>'
+                    + '<span class="bpct">' + o.count + ' 人 · ' + o.pct + '%</span></div>';
+            });
+            html += '</div>';
+        });
+        // 明细表
+        if ((data.detail || []).length) {
+            html += '<h4 style="color:#0c447c; margin:16px 0 8px;">学生作答明细</h4><table><thead><tr><th>邮箱</th>';
+            (data.stats || []).forEach(function (s, i) { html += '<th>第' + (i + 1) + '题</th>'; });
+            html += '<th>正确</th><th>提交时间</th></tr></thead><tbody>';
+            data.detail.forEach(function (d) {
+                html += '<tr><td class="email-cell">' + esc(d.email || '-') + '</td>';
+                (data.stats || []).forEach(function (s) {
+                    var a = d.answers[s.id] || '—';
+                    var ok = a === s.ans;
+                    html += '<td style="color:' + (a === '—' ? '#95a5b6' : ok ? '#1e7e34' : '#a93226') + ';font-weight:' + (ok ? '700' : '400') + '">' + esc(a) + '</td>';
+                });
+                html += '<td>' + d.correct + ' / ' + (data.stats || []).length + '</td>'
+                    + '<td style="white-space:nowrap;">' + esc(fmtTime(d.at)) + '</td></tr>';
+            });
+            html += '</tbody></table>';
+        } else {
+            html += '<p class="muted center" style="padding:16px 0;">还没有学生提交作答</p>';
+        }
+        $('qStatArea').innerHTML = html;
+    }
+
+    function fmtTime(iso) {
+        if (!iso) return '-';
+        try { return new Date(iso).toLocaleString('zh-CN', { hour12: false }); } catch (e) { return iso; }
+    }
+
+    function qAutoToggle() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        if ($('qAuto').checked) {
+            autoTimer = setInterval(function () {
+                if ($('qStatSel').value && $('qpaneStat').className.indexOf('on') !== -1) qStat();
+            }, 10000);
+            msg('info', '已开启自动刷新：每 10 秒拉取一次最新统计。');
+        }
+    }
+
+    function qExportCsv() {
+        if (!lastStats || !lastStats.detail || !lastStats.detail.length) { msg('info', '暂无可导出的明细数据，请先查看统计。'); return; }
+        var stats = lastStats.stats || [];
+        var head = ['邮箱'];
+        stats.forEach(function (s, i) { head.push('第' + (i + 1) + '题'); });
+        head.push('正确题数', '总题数', '提交时间');
+        var lines = lastStats.detail.map(function (d) {
+            var row = [d.email];
+            stats.forEach(function (s) { row.push(d.answers[s.id] || ''); });
+            row.push(d.correct, stats.length, fmtTime(d.at));
+            return row.map(function (v) {
+                var s = String(v == null ? '' : v);
+                return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+            }).join(',');
+        });
+        var csv = '\ufeff' + head.join(',') + '\n' + lines.join('\n');
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = '互动答题明细_' + (lastStats.quiz && lastStats.quiz.quiz_id || 'quiz') + '.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(a.href);
+        msg('ok', '已导出 ' + lastStats.detail.length + ' 名学生的作答明细。');
+    }
+
+    window.qInit = qInit;
+    window.qSwitch = qSwitch;
+    window.qNewForm = qNewForm;
+    window.qAddQuestion = qAddQuestion;
+    window.qAddOption = qAddOption;
+    window.qDelQuestion = qDelQuestion;
+    window.qMarkAns = qMarkAns;
+    window.qSave = qSave;
+    window.qLoadSelected = qLoadSelected;
+    window.qCopyLink = qCopyLink;
+    window.qStat = qStat;
+    window.qAutoToggle = qAutoToggle;
+    window.qExportCsv = qExportCsv;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        qNewForm();   // 默认给一个可编辑的空白表单
+    });
 })();
 </script>
 </body>

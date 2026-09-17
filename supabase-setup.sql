@@ -50,3 +50,41 @@ create table if not exists public.user_progress (
 
 alter table public.user_progress enable row level security;
 
+
+-- =====================================================================
+-- 【三、互动答题（在线选择题 + 教师端统计）】
+--     配合 /.netlify/functions/quiz、quiz-live.html（学生作答）、
+--     admin.html（教师出题与统计）使用。
+-- 安全模型：与前两表相同，仅后端 Functions 经 service_role 读写，
+--           已启用 RLS 且不建公开策略。
+-- =====================================================================
+
+-- 1) 题组表：教师保存的一套选择题（含正确答案，仅教师端可见）
+create table if not exists public.quiz_questions (
+    quiz_id     text primary key,                 -- 题组标识，如 quiz-20260915-01
+    title       text        not null default '',  -- 题组标题，如「任务3 课堂互动」
+    status      text        not null default 'open',   -- open=开放作答 / closed=关闭
+    questions   jsonb       not null default '[]'::jsonb, -- [{id,q,opts:[A..D文案],ans:'A'}]
+    updated_by  text        not null default '',  -- 最后编辑的管理员邮箱
+    updated_at  timestamptz not null default now()
+);
+
+-- 2) 作答表：每个学生每道题一行（重复提交覆盖：先删后插）
+create table if not exists public.quiz_answers (
+    id          bigint generated always as identity primary key,
+    quiz_id     text        not null,             -- 所属题组
+    question_id text        not null,             -- 题目 id（题组内唯一，如 q1）
+    user_id     text        not null default '',  -- Netlify Identity 用户 id
+    email       text        not null default '',  -- 学生邮箱
+    answer      text        not null default '',  -- 学生所选选项 A/B/C/D
+    is_correct  boolean     not null default false,
+    created_at  timestamptz not null default now()
+);
+
+-- 3) 查询索引（按题组查、按人查）
+create index if not exists idx_quiz_answers_quiz   on public.quiz_answers (quiz_id, created_at desc);
+create index if not exists idx_quiz_answers_user   on public.quiz_answers (user_id, quiz_id);
+
+-- 4) 行级安全：不建公开策略 = 浏览器/anon 直连一律拒绝
+alter table public.quiz_questions enable row level security;
+alter table public.quiz_answers   enable row level security;
