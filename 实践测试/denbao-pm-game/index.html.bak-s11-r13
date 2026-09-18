@@ -915,7 +915,6 @@ const DOCS = {
 <div class="pv-badge">标准规范 · 学习参考（张工整理，非标准原文）</div>
 <h2>GB/T 28449-2018《信息安全技术 网络安全等级保护测评过程指南》要点摘要</h2>
 <p class="paper-sub">本材料为学习摘要，按课程教学口径整理</p>
-<a href="standards/GBT28449-2018.pdf" target="_blank" rel="noopener" style="display:inline-block;margin:6px 0 14px;padding:8px 16px;background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.45);border-radius:7px;color:#4F9CF9;text-decoration:none;font-size:13.5px;font-weight:600">📄 查看标准原文 PDF（GB/T 28449-2018）</a>
 <h3>一、标准定位</h3>
 <p>GB/T 28449-2018 回答的问题是「<b>测评活动怎么组织、流程怎么走</b>」：从接到项目到交付报告，全过程怎么安排、每个阶段产出什么。四份核心标准分工如下：</p>
 <table>
@@ -2603,7 +2602,6 @@ function renderMatDrawer(){
   const stds=[
     {n:"GB/T 22239-2019 网络安全等级保护基本要求", f:"standards/GBT22239-2019.pdf", d:"定「做到什么」——测评指标选取的直接依据"},
     {n:"GB/T 28448-2019 网络安全等级保护测评要求", f:"standards/GBT28448-2019.pdf", d:"定「怎么测」——测评实施与判定的依据"},
-    {n:"GB/T 28449-2018 网络安全等级保护测评过程指南", f:"standards/GBT28449-2018.pdf", d:"定「流程怎么走」——测评活动组织与实施过程（第 11 关选取测评对象的国标依据）"},
     {n:"GB/T 22240-2020 网络安全等级保护定级指南", f:"standards/GBT22240-2020.pdf", d:"定级对象识别、S/A 赋值方法"},
     {n:"GB/T 20984-2022 信息安全风险评估方法", f:"standards/GBT20984-2022.pdf", d:"资产/威胁/脆弱性识别与风险计算"},
     {n:"《中华人民共和国网络安全法》", f:"standards/cybersecurity-law.pdf", d:"第二十一条：等级保护制度的法律依据"},
