@@ -1995,39 +1995,68 @@
                             </div>
                         </div>
 
-                        <div class="km-box" data-km="3.1"></div>
-
+                        <!-- 模块 1：为什么查 -->
                         <div class="concept-box">
-                            <div class="concept-title">🏠 3.1 物理安全核查（机房"十查"）</div>
-                            <p>依据 GB/T 22239 对机房进行<strong>10个子类</strong>核查：</p>
+                            <div class="concept-title">🔍 1. 为什么查——物理安全是测评的"第一站"</div>
+                            <p>房子出事，再多软件防护都白搭——这是物理安全核查的<strong>根本理由</strong>。物理环境一旦出问题（机房进水、火灾、断电、盗窃），上层所有网络、主机、应用层面的防护<strong>全部失效</strong>，所以等保测评必须先"看房子"。</p>
+                            <p><strong>三类高风险场景：</strong></p>
+                            <ul>
+                                <li><strong>环境灾害：</strong>地震、洪水、雷击、火灾——选址不当或防护缺位会直接摧毁机房。</li>
+                                <li><strong>人为破坏：</strong>盗窃、误操作、尾随进入——门禁松散的机房约等于"不设防"。</li>
+                                <li><strong>电磁泄漏：</strong>屏蔽不到位，涉密信息可通过电磁辐射被截获。</li>
+                            </ul>
+                            <p><strong>法律 / 标准依据：</strong>《网络安全法》第二十一条要求"采取必要的物理和环境安全措施"；<strong>GB/T 22239-2019</strong> "安全物理环境"控制点是等保测评的<strong>强制项</strong>；<strong>GB/T 28448-2019</strong> 给出物理安全测评的具体方法。打开右侧"标准原文"即可查看。</p>
+                            <p><strong>与其他子任务的关系：</strong>3.1 是"地基"，3.2 是"马路"，4.* 是"房间"——物理不达标则后续测评要打回重来。</p>
+                        </div>
+
+                        <!-- 模块 2：查什么 -->
+                        <div class="concept-box">
+                            <div class="concept-title">📋 2. 查什么——机房"十查"对应 GB/T 22239 十个子类</div>
+                            <p>依据 GB/T 22239 "安全物理环境"，对机房进行 <strong>10 个子类</strong>核查：</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>序号</th><th>核查子类</th><th>通俗理解</th></tr>
-                                    <tr><td>1</td><td>物理位置选择</td><td>机房别建在地震带/水灾区/污染源旁</td></tr>
-                                    <tr><td>2</td><td>物理访问控制</td><td>门禁、监控、专人值守，防尾随</td></tr>
-                                    <tr><td>3</td><td>防盗窃和防破坏</td><td>设备上锁、标识、固定安装</td></tr>
-                                    <tr><td>4</td><td>防雷击</td><td>避雷装置、接地</td></tr>
-                                    <tr><td>5</td><td>防火</td><td>灭火器、火灾报警、防火材料</td></tr>
-                                    <tr><td>6</td><td>防水和防潮</td><td>防渗漏、除湿装置</td></tr>
-                                    <tr><td>7</td><td>防静电</td><td>防静电地板、接地</td></tr>
-                                    <tr><td>8</td><td>温湿度控制</td><td>精密空调，温湿度记录</td></tr>
-                                    <tr><td>9</td><td>电力供应</td><td>UPS、备用发电机</td></tr>
-                                    <tr><td>10</td><td>电磁防护</td><td>屏蔽、线缆隔离</td></tr>
+                                    <tr><th>序号</th><th>核查子类</th><th>通俗理解</th><th>现场看什么</th></tr>
+                                    <tr><td>1</td><td>物理位置选择</td><td>机房别建在地震带/水灾区/污染源旁</td><td>选址报告、勘察记录</td></tr>
+                                    <tr><td>2</td><td>物理访问控制</td><td>门禁、监控、专人值守，防尾随</td><td>门禁系统、监控录像、出入登记</td></tr>
+                                    <tr><td>3</td><td>防盗窃和防破坏</td><td>设备上锁、标识、固定安装</td><td>设备固定方式、铭牌、监控覆盖</td></tr>
+                                    <tr><td>4</td><td>防雷击</td><td>避雷装置、接地</td><td>避雷针/带、接地电阻测试报告</td></tr>
+                                    <tr><td>5</td><td>防火</td><td>灭火器、火灾报警、防火材料</td><td>灭火器有效期、烟感、温感</td></tr>
+                                    <tr><td>6</td><td>防水和防潮</td><td>防渗漏、除湿装置</td><td>门窗防水、除湿机运行记录</td></tr>
+                                    <tr><td>7</td><td>防静电</td><td>防静电地板、接地</td><td>防静电地板、腕带、接地线</td></tr>
+                                    <tr><td>8</td><td>温湿度控制</td><td>精密空调，温湿度记录</td><td>空调运行、温湿度日志</td></tr>
+                                    <tr><td>9</td><td>电力供应</td><td>UPS、备用发电机</td><td>UPS 状态、续航、发电机试车记录</td></tr>
+                                    <tr><td>10</td><td>电磁防护</td><td>屏蔽、线缆隔离</td><td>屏蔽机房、线缆桥架、与强电距离</td></tr>
                                 </table>
                             </div>
-                            <p><strong>核查方法：</strong>现场核查法 + 检查表法 + 对照判断法（对照 GB/T 22239 逐项判断符合/不符合）。</p>
+                            <p>👉 拿表逐项打勾即可：<a class="table-dl" href="各类表格/3.1 物理安全核查/素材1：《安全物理环境测评检查表模板》.docx" download title="下载《安全物理环境测评检查表模板》">⬇ 下载《安全物理环境测评检查表模板》</a></p>
                         </div>
 
+                        <!-- 模块 3：怎么查 -->
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 3. 怎么查——"看问查测"四步法</div>
+                            <p>物理安全核查遵循"<strong>看问查测</strong>"四步法：</p>
+                            <ol>
+                                <li><strong>看：</strong>肉眼观察环境（门禁、监控、消防、温湿度、电力、防水）。</li>
+                                <li><strong>问：</strong>访谈运维人员（值守、巡检、应急流程、最近一次的事件）。</li>
+                                <li><strong>查：</strong>查记录（出入登记、温湿度日志、消防检查卡、UPS 放电记录）。</li>
+                                <li><strong>测：</strong>仪表测量（接地电阻、电磁辐射、防水渗漏）。</li>
+                            </ol>
+                            <p><strong>判定标准：</strong>每项判定四选一——`符合` / `部分符合` / `不符合` / `不适用`，每项判定都要能指出证据来源。</p>
+                            <p><strong>记录产出：</strong>填写 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 《安全物理环境测评记录表模板》</a>，"部分符合/不符合"项必须写清问题描述 + 整改建议。</p>
+                        </div>
+
+                        <!-- 练习任务：归入"知识"分类（substage 直接子节点才能被 classify 识别） -->
                         <div class="practice-box">
-                            <div class="concept-title">✏️ 实验任务（3.1，2学时）</div>
-                            <p><strong>①物理安全核查：</strong>使用模拟机房照片/3D模型，完成物理环境核查并填写《安全物理环境测评记录表》（<a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
+                            <div class="concept-title">✏️ 练习任务（3.1，2学时）：给素材填表</div>
+                            <p><strong>①物理安全核查：</strong>使用 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材3：案例导入素材——机房现场照片描述.docx" download title="下载《机房现场照片描述》">⬇ 素材3：机房现场照片描述</a> 作为虚拟现场，3-4 人/组分工（<strong>测评工程师 + 记录员</strong>），对照 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材1：《安全物理环境测评检查表模板》.docx" download title="下载《安全物理环境测评检查表模板》">⬇ 素材1：检查表模板</a> 逐项核查，填写 <a class="table-dl" href="各类表格/3.1 物理安全核查/素材2：《安全物理环境测评记录表模板》.docx" download title="下载《安全物理环境测评记录表模板》">⬇ 素材2：记录表模板</a>。</p>
                             <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
+                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
                         </div>
 
+                        <!-- 实验：归入"实验"分类 -->
                         <div class="lab-box">
                             <div class="lab-head">🧪 实验 4.1：安全物理环境测评——把"机房十查"变成测评记录</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong>——本实验中，你在实验三录入的"机房信息"（门禁、消防、UPS……）就是你的证据。</div>
+                            <div class="lab-goal"><strong>实验目标：</strong>在 JSecProbe 的"现场核查"中，独立完成"安全物理环境"控制类的逐项测评。关键不是点鼠标，而是学会测评行业最核心的动作：<strong>每一项判定都要能说出"依据什么证据"</strong></div>
                             <ol class="step-list">
                                 <li><strong>进入测评页面。</strong>点击左侧菜单"项目详情"下的"现场核查"，顶部下拉框选择"某市政务服务中心综合管理平台"项目。</li>
                                 <li><strong>找到控制类。</strong>在测评项树形结构中展开"安全物理环境"节点——10 个子类与上方"机房十查"一一对应，先对一遍再动手。</li>
@@ -2065,6 +2094,24 @@
                                 <div class="lab-check-title">📋 实验记录自查</div>
                                 ☐ 10 个子类全部有判定结果　☐ 「部分符合/不符合」项都写了具体问题描述　☐ 整改建议说的是「怎么改」而不是「建议加强」　☐ 每项判定自己能说出证据来源
                             </div>
+                            <!-- 实验报告要求 -->
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li>报告文件名：<code>学号_姓名_实验4.1_安全物理环境测评.docx</code></li>
+                                    <li>字数：不少于 1500 字（含截图说明）</li>
+                                    <li>必含 5 项内容：
+                                        <ol type="①" style="margin:2px 0 6px 20px;">
+                                            <li><strong>实验目的</strong>（结合 3.1 三个知识模块，简述为什么物理安全是测评"第一站"）</li>
+                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、机房信息资产清单）</li>
+                                            <li><strong>实验过程</strong>（操作截图 + 关键动作说明）</li>
+                                            <li><strong>实验结果</strong>（10 个子类判定表 + 不符合项的问题描述与整改建议）</li>
+                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"证据链"意识的变化）</li>
+                                        </ol>
+                                    </li>
+                                    <li>提交方式：学习通 → 任务 3.1 → 作业区</li>
+                                </ol>
+                            </div>
                         </div>
 
                         <div class="coming-soon">🔒 本子任务配套的核查素材包、记录表模板与讲解视频将陆续上线</div>
@@ -2089,43 +2136,73 @@
                             </div>
                         </div>
 
-                        <div class="km-box" data-km="3.2"></div>
-
+                        <!-- 模块 1：为什么查 -->
                         <div class="concept-box">
-                            <div class="concept-title">🌐 3.2 网络架构合规性检查</div>
-                            <p>依据标准检查网络架构与通信传输：网络是否<strong>划分了不同区域</strong>（互联网区/核心业务区/管理区）？重要区域是否<strong>技术隔离</strong>（防火墙/VLAN）？关键设备是否有<strong>硬件冗余</strong>（三级要求）？通信传输是否采用<strong>校验技术/密码技术</strong>保证完整性和保密性（三级要求）？</p>
+                            <div class="concept-title">🔍 1. 为什么查——网络是系统的"骨架"</div>
+                            <p>网络架构是信息系统的<strong>骨架</strong>。主机安全、应用安全、数据安全都跑在网络上，骨架不合规，房间再加固也支撑不住。3.2 核查的本质是：<strong>看系统是否把"好房子"和"坏马路"分开</strong>。</p>
+                            <p><strong>三类高风险场景：</strong></p>
+                            <ul>
+                                <li><strong>区域未隔离 → 横向移动：</strong>办公区一台 PC 中毒 → 横扫服务器区。</li>
+                                <li><strong>关键设备单点 → 业务全停：</strong>核心交换机单台部署 → 一旦故障业务停摆。</li>
+                                <li><strong>传输不加密 → 数据窃听：</strong>管理终端到服务器明文传输 → 账号口令被截获。</li>
+                            </ul>
+                            <p><strong>三级特殊要求：</strong>（区别于二级）关键网络设备<strong>硬件冗余</strong>；通信传输采用<strong>密码技术</strong>保证保密性；通信设备<strong>可信验证</strong>。</p>
+                            <p><strong>法律 / 标准依据：</strong><strong>GB/T 22239-2019</strong> "安全通信网络"是等保测评必查控制点；<strong>GB/T 28448-2019</strong> 给出网络架构测评的具体方法。打开右侧"标准原文"即可查看。</p>
+                            <p><strong>与其他子任务的关系：</strong>3.2 是"马路"，4.* 是在"马路"上跑的"车辆"。网络不通畅，后续测评项都无法验证。</p>
                         </div>
 
-                        <div class="practice-box">
-                            <div class="concept-title">✏️ 实验任务（3.2，2学时）</div>
-                            <p><strong>②网络架构合规性检查：</strong>对照网络拓扑图逐项检查，填写《安全通信网络测评记录表》（<a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>3-4人/组，分别扮演<strong>测评工程师</strong>和<strong>记录员</strong>，使用模拟素材进行核查。</p>
-                            <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
-                        </div>
-
-                        <div class="lab-box">
-                            <div class="lab-head">🧪 实验 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做下面的拓扑图文档任务，再回来测评，顺序别颠倒。</div>
-                            <ol class="step-list">
-                                <li><strong>先完成本子任务下方的"拓扑图文档任务"</strong>（至少画出网络拓扑草图）。</li>
-                                <li><strong>展开"安全通信网络"节点</strong>，逐项判定三个子类：网络架构（划区域了吗？关键设备冗余了吗？）、通信传输（传输过程加密校验了吗？）、可信验证。</li>
-                                <li><strong>对照拓扑图找证据：</strong>三级系统要求关键设备硬件冗余——看看你画的图里，核心交换机是 1 台还是 2 台？答案在拓扑图上一目了然，这就是"图是证据"的含义。</li>
-                                <li><strong>填写问题描述。</strong>模拟示例：网络架构e→不符合（核心交换机单台部署，无硬件冗余，存在单点故障）；通信传输b→不符合（管理终端到服务器的通信未采用密码技术保证保密性）。</li>
-                            </ol>
-                            <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
-                                ☐ 三个子类均有判定　☐ 判定时手边有拓扑图　☐ 不符合项的问题描述写到了「缺什么设备/什么技术」
+                        <!-- 模块 2：查什么 -->
+                        <div class="concept-box">
+                            <div class="concept-title">📋 2. 查什么——3 个子类对照 GB/T 22239</div>
+                            <p>依据 GB/T 22239 "安全通信网络"，对网络架构进行 <strong>3 个子类</strong>核查：</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>子类</th><th>关键测评项</th><th>适用级别</th><th>现场找证据</th></tr>
+                                    <tr><td rowspan="2">网络架构</td><td>划分互联网区/核心业务区/管理区，并按业务需要划分安全区域</td><td>二级 + 三级</td><td>网络拓扑图、设备清单</td></tr>
+                                    <tr><td>应提供通信设备的硬件冗余，保证系统的可用性</td><td><strong>仅三级</strong></td><td>拓扑图看核心交换机是否 ≥2 台</td></tr>
+                                    <tr><td rowspan="2">通信传输</td><td>采用校验技术或密码技术保证通信过程中数据的完整性</td><td>二级 + 三级</td><td>设备配置、协议分析</td></tr>
+                                    <tr><td>采用密码技术保证通信过程中数据的保密性</td><td><strong>仅三级</strong></td><td>SSH/TLS/HTTPS 是否启用</td></tr>
+                                    <tr><td>可信验证</td><td>基于可信根对通信设备的系统引导程序、系统程序、重要配置参数和通信应用程序进行可信验证</td><td><strong>仅三级</strong></td><td>设备配置、可信验证机制</td></tr>
+                                </table>
                             </div>
+                            <p>👉 拿表对照：<a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 下载《安全通信网络测评记录表（模板）》</a></p>
                         </div>
 
-                        <div class="lab-box">
-                            <div class="lab-head">📄 文档任务：绘制业务流程图与网络拓扑图——测评师的"看家图"</div>
+                        <!-- 模块 3：怎么查 -->
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 3. 怎么查——"两图一配置"</div>
+                            <p>网络架构合规性核查遵循"<strong>两图一配置</strong>"思路：</p>
+                            <ol>
+                                <li><strong>看拓扑图——网络架构怎么查：</strong>画/对照拓扑图 → 区域划分是否清晰？关键设备（核心交换机、边界防火墙）是否冗余？三级要求 ≥2 台。互联网区/业务区/管理区之间是否有隔离设备？</li>
+                                <li><strong>查配置文件——通信传输怎么查：</strong>导出当前在线配置（不是历史截图）→ 看 SSH/TLS/HTTPS 是否启用 → 看是否启用完整性校验（HMAC、IPsec）→ 必要时 Wireshark 抓包验证。</li>
+                                <li><strong>可信验证（三级）：</strong>看设备是否配置可信启动、可信验证机制。</li>
+                                <li><strong>判定 + 记录：</strong>每项四选一判定 + 写问题描述 + 整改建议，填写《安全通信网络测评记录表》。</li>
+                            </ol>
+                            <p><strong>需要用到的素材（点击下载）：</strong></p>
+                            <ul>
+                                <li><a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材1：XX企业园区网拓扑图（含问题）.docx" download title="下载《XX企业园区网拓扑图（含问题）》">⬇ 素材1：XX企业园区网拓扑图（含问题）</a></li>
+                                <li><a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材3：模拟设备配置文件.docx" download title="下载《模拟设备配置文件》">⬇ 素材3：模拟设备配置文件</a></li>
+                                <li><a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 素材2：安全通信网络测评记录表（模板）</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- 练习任务 1：归入"知识"分类 -->
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 练习任务（3.2，2学时）：给拓扑图与配置填表</div>
+                            <p><strong>②网络架构合规性检查：</strong>对照 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材1：XX企业园区网拓扑图（含问题）.docx" download title="下载《XX企业园区网拓扑图（含问题）》">⬇ 素材1：拓扑图（含问题）</a> 和 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材3：模拟设备配置文件.docx" download title="下载《模拟设备配置文件》">⬇ 素材3：设备配置</a> 逐项检查，3-4 人/组分工（<strong>测评工程师 + 记录员</strong>），填写 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 素材2：测评记录表</a>。然后画出区域划分清晰的拓扑图。</p>
+                            <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
+                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
+                        </div>
+
+                        <!-- 练习任务 2：文档任务（绘图），归入"知识"分类（标题里没有"实验任务"字样） -->
+                        <div class="practice-box">
+                            <div class="concept-title">✏️ 练习任务（选做）：绘制业务流程图与网络拓扑图——测评师的"看家图"</div>
                             <div class="lab-goal"><strong>任务目标：</strong>用 Visio（或 draw.io、亿图等工具）为"政务服务中心综合管理平台"绘制两张图。这两张图不是美术作业——业务流程图是<strong>理解系统、支撑定级和资产识别</strong>的依据；网络拓扑图是<strong>网络架构类测评项的判定证据</strong>，任务 4~6 的边界、主机、报告全部要用它。</div>
                             <ol class="step-list">
                                 <li><strong>画业务流程图（泳道图）。</strong>先梳理系统主线业务（如：群众网上预约 → 政务中心排号受理 → 窗口办理 → 评价反馈 → 数据归档），按"角色/系统"分泳道，画清每一步数据流向。完成后自问：哪一步产生敏感数据？它经过哪些设备？——这就是后面风险评估的素材。</li>
                                 <li><strong>画网络拓扑图（分层画法）。</strong>从上到下分四层：互联网边界 → 安全设备区（防火墙、WAF）→ 核心层（核心交换机）→ 接入区（服务器区、管理区）。<strong>每个设备标注：名称、型号、数量、部署位置</strong>（对照实验三录的资产清单，别凭空发明设备）。</li>
                                 <li><strong>自查三处易错点：</strong>① 有没有漏画安全设备（堡垒机、日志审计最容易漏）；② 有没有标出管理区与业务区的隔离边界；③ 无线接入点、运维终端接在哪——真实测评中这三处最常被测评师追问。</li>
-                                <li><strong>导出保存</strong>为 PNG/PDF，连同源文件提交到学习通。</li>
+                                <li><strong>导出保存</strong>为 PNG/PDF，连同源文件提交到学习通（实验报告附件）。</li>
                             </ol>
                             <div class="ai-tip-box">
                                 <div class="ai-tip-title">🤖 画图时，AI 这样用才加分</div>
@@ -2142,6 +2219,41 @@
                             <div class="lab-check">
                                 <div class="lab-check-title">📋 交付自查</div>
                                 ☐ 业务流程图含泳道与数据流向　☐ 拓扑图四层结构完整、设备标注齐全　☐ 与资产清单一一对应　☐ 挑过一次"AI 评审员"的毛病
+                            </div>
+                        </div>
+
+                        <!-- 实验：基于 JSecProbe，归入"实验"分类 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验 4.2：安全通信网络测评——有拓扑图才有底气判定</div>
+                            <div class="lab-goal"><strong>实验目标：</strong>完成"安全通信网络"控制类测评（网络架构、通信传输、可信验证三个子类），体会<strong>网络类测评项的判定完全依赖拓扑图和设备配置</strong>——所以先做完上面的"画图练习任务"，再回来测评，顺序别颠倒。</div>
+                            <ol class="step-list">
+                                <li><strong>先完成本子任务下方的"拓扑图文档任务"</strong>（至少画出网络拓扑草图）。</li>
+                                <li><strong>展开"安全通信网络"节点</strong>，逐项判定三个子类：网络架构（划区域了吗？关键设备冗余了吗？）、通信传输（传输过程加密校验了吗？）、可信验证。</li>
+                                <li><strong>对照拓扑图找证据：</strong>三级系统要求关键设备硬件冗余——看看你画的图里，核心交换机是 1 台还是 2 台？答案在拓扑图上一目了然，这就是"图是证据"的含义。</li>
+                                <li><strong>填写问题描述。</strong>模拟示例：网络架构e→不符合（核心交换机单台部署，无硬件冗余，存在单点故障）；通信传输b→不符合（管理终端到服务器的通信未采用密码技术保证保密性）。</li>
+                            </ol>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 实验记录自查</div>
+                                ☐ 三个子类均有判定　☐ 判定时手边有拓扑图　☐ 不符合项的问题描述写到了「缺什么设备/什么技术」
+                            </div>
+                            <!-- 实验报告要求 -->
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li>报告文件名：<code>学号_姓名_实验4.2_安全通信网络测评.docx</code></li>
+                                    <li>字数：不少于 1500 字（含截图说明）</li>
+                                    <li>必含 5 项内容：
+                                        <ol type="①" style="margin:2px 0 6px 20px;">
+                                            <li><strong>实验目的</strong>（结合 3.2 三个知识模块，简述为什么网络架构是系统的"骨架"）</li>
+                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、网络拓扑资产清单）</li>
+                                            <li><strong>实验过程</strong>（4 步操作截图 + 每步关键动作说明）</li>
+                                            <li><strong>实验结果</strong>（3 个子类判定表 + 不符合项的问题描述与整改建议）</li>
+                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"两图一配置"对网络测评的意义）</li>
+                                        </ol>
+                                    </li>
+                                    <li><strong>必交附件：</strong>业务流程图（PNG/PDF）+ 网络拓扑图（PNG/PDF）——即上方"画图练习任务"的成果</li>
+                                    <li>提交方式：学习通 → 任务 3.2 → 作业区</li>
+                                </ol>
                             </div>
                         </div>
 
@@ -3019,26 +3131,60 @@
 
                 <!-- 任务3说明 -->
                 <div class="exp-stage" id="exp-stage3">
-                    <h2>任务3 物理环境与通信网络核查</h2>
-                    <p><strong>学时：</strong>4学时（第3周）| <strong>形式：</strong>实验/实训室</p>
-                    <div class="concept-box">
-                        <div class="concept-title">🎯 能力目标</div>
-                        <p>能够依据GB/T 22239对物理环境和通信网络进行核查；能够规范填写测评记录表；具备现场核查与证据采集能力。</p>
+                    <div class="exp-substage active" id="exp-substage3.1">
+                        <h2>任务3.1 物理安全核查</h2>
+                        <p><strong>学时：</strong>2学时（第3周）| <strong>形式：</strong>实验/实训室</p>
+                        <div class="concept-box">
+                            <div class="concept-title">🎯 能力目标</div>
+                            <p>能够依据 GB/T 22239 对机房物理环境进行核查；能够规范填写《安全物理环境测评记录表》；具备现场核查与证据采集能力。</p>
+                        </div>
+                        <div class="concept-box">
+                            <div class="concept-title">📖 专业知识</div>
+                            <p>物理环境 10 个子类测评指标（物理位置选择、物理访问控制、防盗窃和防破坏、防雷击、防火、防水和防潮、防静电、温湿度控制、电力供应、电磁防护）、记录表填写规范。</p>
+                        </div>
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 工作方法</div>
+                            <p>"看问查测"四步法：现场核查法、检查表法、对照判断法。</p>
+                        </div>
+                        <div class="highlight">
+                            <p><strong>学习成果：</strong>《安全物理环境测评记录表》一份（含 10 个子类判定与问题描述）。</p>
+                            <p><strong>评价：</strong>核查完整性 40% + 问题描述 30% + 记录规范 30%。</p>
+                        </div>
+                        <div class="highlight" style="border-left-color:#e65100;background:#fff8e1;">
+                            <p style="font-weight:700;color:#e65100;margin-bottom:6px;">📝 课后作业</p>
+                            <p><strong>3.1 基于 JSecProbe 的实验</strong></p>
+                            <p style="font-size:0.9rem;color:#555;">在 JSecProbe「现场核查」中完成"安全物理环境"控制类逐项测评，撰写实验报告（不少于 1500 字，含操作截图与判定依据），<strong>通过学习通提交</strong>。</p>
+                        </div>
+                        <button class="quiz-btn" data-quiz="3">📝 单元测评</button>
+                        <div class="quiz-btn-note">知识 · 实验 · 素养 三维考查，100 分通过</div>
                     </div>
-                    <div class="concept-box">
-                        <div class="concept-title">📖 专业知识</div>
-                        <p>物理环境10个子类测评指标、通信网络测评指标、记录表填写规范。</p>
+                    <div class="exp-substage" id="exp-substage3.2">
+                        <h2>任务3.2 网络架构合规性检查</h2>
+                        <p><strong>学时：</strong>2学时（第3周）| <strong>形式：</strong>实验/实训室</p>
+                        <div class="concept-box">
+                            <div class="concept-title">🎯 能力目标</div>
+                            <p>能够依据 GB/T 22239 对通信网络进行核查；能够借助拓扑图与设备配置判定网络架构与通信传输合规性；能够规范填写《安全通信网络测评记录表》。</p>
+                        </div>
+                        <div class="concept-box">
+                            <div class="concept-title">📖 专业知识</div>
+                            <p>安全通信网络 3 个子类（网络架构、通信传输、可信验证）测评指标；三级系统的硬件冗余与密码技术要求。</p>
+                        </div>
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 工作方法</div>
+                            <p>"两图一配置"核查思路：拓扑图对照法、配置核查法、协议分析方法。</p>
+                        </div>
+                        <div class="highlight">
+                            <p><strong>学习成果：</strong>业务流程图 + 网络拓扑图 +《安全通信网络测评记录表》一份。</p>
+                            <p><strong>评价：</strong>核查完整性 40% + 问题描述 30% + 记录规范 30%。</p>
+                        </div>
+                        <div class="highlight" style="border-left-color:#e65100;background:#fff8e1;">
+                            <p style="font-weight:700;color:#e65100;margin-bottom:6px;">📝 课后作业</p>
+                            <p><strong>素材4：课后作业——网络架构合规性分析</strong> <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材4：课后作业——网络架构合规性分析.docx" download title="下载《课后作业——网络架构合规性分析》">⬇ 下载作业文档</a></p>
+                            <p style="font-size:0.9rem;color:#555;">完成《网络架构合规性分析》（含业务流程图、网络拓扑图与合规性分析），<strong>通过学习通提交</strong>。</p>
+                        </div>
+                        <button class="quiz-btn" data-quiz="3">📝 单元测评</button>
+                        <div class="quiz-btn-note">知识 · 实验 · 素养 三维考查，100 分通过</div>
                     </div>
-                    <div class="concept-box">
-                        <div class="concept-title">🛠️ 工作方法</div>
-                        <p>现场核查法、检查表法、对照判断法。</p>
-                    </div>
-                    <div class="highlight">
-                        <p><strong>学习成果：</strong>①物理安全核查记录表；②网络架构合规性检查记录表。</p>
-                        <p><strong>评价：</strong>核查完整性40% + 问题描述30% + 记录规范30%。</p>
-                    </div>
-                    <button class="quiz-btn" data-quiz="3">📝 单元测评</button>
-                    <div class="quiz-btn-note">知识 · 实验 · 素养 三维考查，100 分通过</div>
                 </div>
 
                 <!-- 任务4说明 -->
@@ -3959,7 +4105,7 @@ var SUYANG_CASES = {
                 // 各单元"标准原文"融入的目标模块（按标题关键词匹配）
                 var STD_TARGET = {
                     '1.1': '等级保护制度', '1.2': '定级方法', '2.1': '关键概念：测评方案', '2.2': '六步法',
-                    '3.1': '3.1 物理安全核查', '3.2': '3.2 网络架构合规性检查', '4.1': '4.1 主机安全基线核查', '4.2': '4.2 网络设备配置核查', '4.3': '4.3 数据库安全配置核查', '4.4': '4.4 应用系统安全功能验证', '4.5': '4.5 漏洞扫描与结果分析', '5': '5.1', '6': '6.1', '7': '责任共担'
+                    '3.1': '为什么查', '3.2': '为什么查', '4.1': '4.1 主机安全基线核查', '4.2': '4.2 网络设备配置核查', '4.3': '4.3 数据库安全配置核查', '4.4': '4.4 应用系统安全功能验证', '4.5': '4.5 漏洞扫描与结果分析', '5': '5.1', '6': '6.1', '7': '责任共担'
                 };
 
                 function stdBlockHtml(stds) {
@@ -4053,7 +4199,7 @@ var SUYANG_CASES = {
                         pcard.addEventListener('click', function () {
                             // 打开同名 PDF（浏览器原生翻页显示，与 pptx 同名伴生）
                             res.ppts.forEach(function (p) {
-                                window.open(encodeURI('PPT/' + p.replace(/\.pptx$/, '') + '.pdf'), '_blank');
+                                window.open(encodeURI('PPT/' + p), '_blank');
                             });
                             if (typeof trackOperation === 'function') trackOperation('在线浏览课件', pLabel);
                         });
@@ -4282,8 +4428,8 @@ var SUYANG_CASES = {
                     exp.classList.toggle('active', expId === currentStage);
                 });
 
-                // 4. 含子任务的页面：默认激活第一个子任务
-                if (currentStage === 1 || currentStage === 2) {
+                // 4. 含子任务的页面：默认激活第一个子任务（任务1/2/3 均适用）
+                if (document.querySelector('.substage-btn[data-substage="' + currentStage + '.1"]')) {
                     const prefix = currentStage;
                     document.querySelectorAll('.substage-btn[data-substage^="' + prefix + '."]').forEach(btn => btn.classList.remove('active'));
                     const firstBtn = document.querySelector('.substage-btn[data-substage="' + prefix + '.1"]');

@@ -4323,6 +4323,15 @@ function finishLevel(){
   const pct = Math.min(100, Math.round(score*100/max));
   recordAttempt(pct);
   showLvlDone(pct);
+  // 同步上报一条教师日志（仅登录账号下有效，本地预览静默）
+  try {
+    if (typeof window.trackOperation === 'function') {
+      const lv = LEVELS[levelIdx] || {};
+      const lvName = lv.id || lv.name || ('level_' + levelIdx);
+      const passed = pct >= 80;
+      window.trackOperation('技能闯关完成', `case=${SAVE_KEY} level=${lvName} score=${score}/${max} pct=${pct}% pass=${passed}`);
+    }
+  } catch (e) { /* noop */ }
 }
 function showLvlDone(pct){
   const lv = LEVELS[levelIdx];

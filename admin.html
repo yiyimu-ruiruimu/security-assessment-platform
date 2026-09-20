@@ -191,6 +191,43 @@
     </div>
 </div>
 
+<!-- ============ 技能闯关 · 学生进度 ============ -->
+<div class="card" id="gameCard" style="display:none;">
+    <h3 style="color:#0c447c; margin-bottom:4px;">🎮 技能闯关 · 学生进度</h3>
+    <p class="muted" style="font-size:.85rem; margin-bottom:14px;">汇总每位学生在「测评指挥官」等实践闯关中的通关情况。关卡 ≥80 分（满分 100）计为通过；数据来自云端 user_progress（自动按账号保存，换设备也能接上）。</p>
+    <div class="filters">
+        <div class="f-item"><label>学生邮箱</label><input id="gEmail" type="text" placeholder="完整或留空查全部"></div>
+        <div class="f-item"><label>闯关 case</label>
+            <select id="gCaseSel" style="min-width:180px;"><option value="">全部</option></select>
+        </div>
+        <div class="f-item"><label>每页</label>
+            <select id="gLimit">
+                <option value="50">50</option>
+                <option value="100" selected>100</option>
+                <option value="200">200</option>
+            </select>
+        </div>
+        <div class="f-item"><button class="btn btn-primary" onclick="gSearch(0)">查询</button></div>
+        <div class="f-item"><button class="btn btn-outline" onclick="gExportCsv()">导出 CSV</button></div>
+    </div>
+    <div class="stat">
+        <span id="gStatInfo">加载中……</span>
+        <span id="gStatBadge"></span>
+    </div>
+    <table>
+        <thead>
+            <tr><th style="width:200px;">邮箱</th><th>闯关 case</th><th style="width:80px;">已通关</th><th style="width:80px;">最高分</th><th style="width:80px;">总尝试</th><th style="width:150px;">最近尝试</th><th style="width:150px;">最后更新</th></tr>
+        </thead>
+        <tbody id="gTbody">
+            <tr><td colspan="7" class="empty">加载中……</td></tr>
+        </tbody>
+    </table>
+    <div class="pager">
+        <button class="btn btn-outline" id="gBtnPrev" onclick="gSearch(gCurrentPage - 1)">上一页</button>
+        <button class="btn btn-outline" id="gBtnNext" onclick="gSearch(gCurrentPage + 1)">下一页</button>
+    </div>
+</div>
+
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="auth-utils.js"></script>
@@ -380,13 +417,16 @@
                 $('deniedView').style.display = 'none';
                 $('mainView').style.display = 'block';
                 $('quizCard').style.display = 'block';
+                $('gameCard').style.display = 'block';
                 clearMsg();
                 search(0);
                 if (window.qInit) window.qInit();
+                if (window.gSearch) window.gSearch(0);
             } else {
                 $('deniedView').style.display = 'block';
                 $('mainView').style.display = 'none';
                 $('quizCard').style.display = 'none';
+                $('gameCard').style.display = 'none';
             }
         }).catch(function () {
             showMsg('err', '身份校验失败，请刷新重试。');
@@ -404,6 +444,7 @@
             $('mainView').style.display = 'none';
             $('deniedView').style.display = 'none';
             $('quizCard').style.display = 'none';
+            $('gameCard').style.display = 'none';
             $('guestView').style.display = 'block';
             $('barEmail').textContent = '';
         });
@@ -760,6 +801,172 @@
     document.addEventListener('DOMContentLoaded', function () {
         qNewForm();   // 默认给一个可编辑的空白表单
     });
+})();
+</script>
+
+<script>
+/* ================= 技能闯关 · 教师统计 ================= */
+(function () {
+    'use strict';
+
+    var gCurrentPage = 0;
+    var gCurrentRows = [];
+    var gBusy = false;
+    var gCaseCache = [];
+
+    function $(id) { return document.getElementById(id); }
+    function esc(s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    }
+    function fmtTime(iso) {
+        if (!iso) return '-';
+        try {
+            var d = new Date(iso);
+            if (isNaN(d.getTime())) return '-';
+            return d.toLocaleString('zh-CN', { hour12: false });
+        } catch (e) { return iso; }
+    }
+
+    function getToken() {
+        try {
+            var u = netlifyIdentity.currentUser();
+            if (u && u.token && u.token.access_token) return u.token.access_token;
+        } catch (e) { /* noop */ }
+        return null;
+    }
+
+    function gApi(params) {
+        var token = getToken();
+        if (!token) return Promise.reject(new Error('NO_TOKEN'));
+        var qs = [];
+        Object.keys(params || {}).forEach(function (k) { qs.push(k + '=' + encodeURIComponent(params[k])); });
+        return fetch('/.netlify/functions/progress-list' + (qs.length ? '?' + qs.join('&') : ''), {
+            headers: { 'Authorization': 'Bearer ' + token }
+        }).then(function (r) {
+            return r.json().then(function (b) {
+                if (!r.ok) return Promise.reject(new Error(b.hint || b.error || ('HTTP_' + r.status)));
+                return b;
+            });
+        });
+    }
+
+    function gFillCaseSelect(rows) {
+        var sel = $('gCaseSel');
+        var seen = {};
+        gCaseCache.forEach(function (c) { seen[c] = 1; });
+        (rows || []).forEach(function (r) { if (r && r.case_id && !seen[r.case_id]) { gCaseCache.push(r.case_id); seen[r.case_id] = 1; } });
+        var cur = sel.value;
+        var html = '<option value="">全部</option>';
+        gCaseCache.slice().sort().forEach(function (c) {
+            html += '<option value="' + esc(c) + '">' + esc(c) + '</option>';
+        });
+        sel.innerHTML = html;
+        if (cur) sel.value = cur;
+    }
+
+    function gFilterByCase(rows) {
+        var c = $('gCaseSel').value;
+        if (!c) return rows;
+        return rows.filter(function (r) { return r && r.case_id === c; });
+    }
+
+    function gRender(rows) {
+        var tb = $('gTbody');
+        var filtered = gFilterByCase(rows);
+        gCurrentRows = filtered;
+        if (!filtered.length) {
+            tb.innerHTML = '<tr><td colspan="7" class="empty">暂无数据（可调整筛选条件）</td></tr>';
+            $('gStatBadge').innerHTML = '';
+            return;
+        }
+        var html = '';
+        filtered.forEach(function (r) {
+            var best = Number(r.best_pct || 0);
+            html += '<tr>'
+                + '<td class="email-cell">' + esc(r.email || '-') + '</td>'
+                + '<td>' + esc(r.case_id || '-') + '</td>'
+                + '<td style="text-align:center;">' + esc(r.passed_levels || 0) + '</td>'
+                + '<td style="text-align:center;color:' + (best >= 80 ? '#1e7e34' : '#a93226') + ';font-weight:700;">' + esc(best + '%') + '</td>'
+                + '<td style="text-align:center;">' + esc(r.total_attempts || 0) + '</td>'
+                + '<td style="white-space:nowrap;">' + esc(fmtTime(r.last_attempt_at)) + '</td>'
+                + '<td style="white-space:nowrap;">' + esc(fmtTime(r.updated_at)) + '</td>'
+                + '</tr>';
+        });
+        tb.innerHTML = html;
+
+        var total = filtered.length;
+        var pass = filtered.filter(function (r) { return Number(r.best_pct || 0) >= 80; }).length;
+        var sumAttempts = filtered.reduce(function (s, r) { return s + Number(r.total_attempts || 0); }, 0);
+        $('gStatBadge').innerHTML =
+            '<span class="b b-entry" style="margin-right:4px;">学生 ' + total + '</span>'
+            + '<span class="b b-operation" style="margin-right:4px;">通关(≥80分) ' + pass + '</span>'
+            + '<span class="b b-other">总尝试 ' + sumAttempts + '</span>';
+    }
+
+    function gSearch(page) {
+        if (gBusy) return;
+        var em = $('gEmail').value.trim();
+        gBusy = true;
+        $('gStatInfo').textContent = '查询中……';
+        gApi({ email: em }).then(function (data) {
+            gBusy = false;
+            gCurrentPage = page;
+            gFillCaseSelect(data.rows || []);
+            gRender(data.rows || []);
+            $('gStatInfo').textContent = '拉取 ' + (data.rows || []).length + ' 条记录（按最近尝试时间排序）';
+        }).catch(function (err) {
+            gBusy = false;
+            gRender([]);
+            $('gStatInfo').textContent = '';
+            var msg = (err && err.message) || '未知错误';
+            if (msg.indexOf('403') !== -1 || msg.indexOf('forbidden') !== -1) {
+                $('gTbody').innerHTML = '<tr><td colspan="7" class="empty" style="color:#a93226;">无访问权限：当前账号不是教师管理员。</td></tr>';
+            } else {
+                $('gTbody').innerHTML = '<tr><td colspan="7" class="empty" style="color:#a93226;">查询失败：' + esc(msg) + '</td></tr>';
+            }
+        });
+    }
+
+    function gExportCsv() {
+        var em = $('gEmail').value.trim();
+        gApi({ email: em }).then(function (data) {
+            var rows = gFilterByCase(data.rows || []);
+            if (!rows.length) { alert('当前筛选条件下没有可导出的数据。'); return; }
+            var head = ['邮箱', '闯关 case', '已通关(≥80分)', '最高分', '总尝试', '最近尝试', '最后更新'];
+            var lines = rows.map(function (r) {
+                return [
+                    r.email || '',
+                    r.case_id || '',
+                    r.passed_levels || 0,
+                    (Number(r.best_pct || 0)) + '%',
+                    r.total_attempts || 0,
+                    fmtTime(r.last_attempt_at),
+                    fmtTime(r.updated_at)
+                ].map(function (v) {
+                    var s = String(v == null ? '' : v);
+                    return /[",\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+                }).join(',');
+            });
+            var csv = '\ufeff' + head.join(',') + '\n' + lines.join('\n');
+            var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            var d = new Date();
+            var stamp = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+            a.download = '技能闯关_' + stamp + '.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(a.href);
+        }).catch(function (err) {
+            alert('导出失败：' + (err && err.message || '未知错误'));
+        });
+    }
+
+    window.gSearch = gSearch;
+    window.gExportCsv = gExportCsv;
 })();
 </script>
 </body>
