@@ -618,6 +618,7 @@ textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(76,195,255,.12
           <div class="answer-row" id="answerRow">
             <textarea id="answerInput" placeholder="在这里向张工说出你的思路，例如：我认为第一步应该先……"></textarea>
             <button class="btn-submit" id="btnSubmit">提交作答</button>
+            <button class="btn-ghost2 hidden" id="btnAiHelpText" style="flex:none;align-self:flex-end" title="累计提交 3 次答案后解锁">🤖 AI 辅助</button>
           </div>
           <div class="btn-row hidden" id="tableBtnRow" style="margin-top:14px">
             <button class="btn-submit" id="btnTableSubmit" style="flex:1">提交答案</button>
@@ -1397,15 +1398,15 @@ const LEVELS = [
       {
         "id": "L1S11",
         "title": "六步法④ 选取测评对象",
-        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。本关挑战：对照 📁 材料库中的《网络拓扑与设备清单》与《测评过程指南要点（GB/T 28449-2018）》，在《测评对象选取表》里为每一类设备做出「全部纳入 / 抽样 / 不纳入」的决定，并逐项写明理由。这是方案编制的核心关卡：每一项决定都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用——这一关，见真功夫。",
+        "scene": "张工：项目动态更新——范围已定，项目现在到达第 11 关：六步法第四步——选取测评对象。本关挑战：对照 📁 材料库中的《网络拓扑与设备清单》与《测评过程指南要点（GB/T 28449-2018）》，在《测评对象选取表》里为每一类设备做出「全部纳入 / 抽样 / 不纳入」的决定，并逐项写明理由。这是方案编制的核心关卡：每一项决定都会写进方案第四章《测评对象》、对外具有契约效力，也直接决定现场测评的工作量与客户的费用。",
         "taskLb": "张 工 提 示",
         "task": "【测评对象选取四原则】\n· <b>应测尽测</b>——标准（GB/T 28448-2019）明确要求纳入的对象一律纳入，不能漏测关键资产。\n· <b>关键性</b>——承载被测系统核心业务功能或重要数据的设备必须 100% 测，按关键性原则不可抽样。\n· <b>代表性</b>——同类同配置同功能同版本的批量设备，挑最具典型配置的若干台作为代表。\n· <b>抽样（≥30%）</b>——同类设备、同质化配置，可抽样测评。\n\n先尝试基于知识进行挑战，若没有思路，可点击下面的三色卡，这是我给你的三个锦囊。",
         "docs": ["dengji", "tuopu", "guocheng"],
         "hint": "对照《网络拓扑与设备清单》与《测评过程指南要点》（材料库均已发放）逐类判断：哪些设备承载核心业务或重要数据（数量又少）？接入交换机注意看清单里它的作用描述——「支撑系统整体组网连通」，属系统组网核心组成部分，而且合规规则明确：单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样。办公终端和打印机在不在定级边界内？记住行业共识：少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
         "expect": "①不是所有设备都测——纳入与否看三点：是否在定级边界内、是否承载业务数据、标准是否要求；②行业共识：少量关键业务资产不适用抽样——Web 服务器（3 台）、应用服务器（2 台）、数据库服务器（2 台）承载核心业务与重要数据，全部 100% 测评；接入交换机 9 台虽为同规格批量设备，但清单明确其「支撑系统整体组网连通」、属系统组网核心组成部分，且合规规则「单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测，禁止抽样」——全部纳入 100% 测评；③办公终端（60 台）本次不纳入，但若用于运维被测系统或承载其数据则必须纳入，按主机安全要求测；④表格每一项决定都必须写明理由。",
         "aiGuide": "AI 可按抽样规则给出选取建议、算好抽样比例，也能示范「结论 + 理由」的标准写法；但它给的是通用示范，替代不了你对现场的判断。",
-        "mustManual": "哪些设备承载核心业务（关键性）、哪些可抽样、哪些排除——这三类判断只能由测评师结合被测系统的实际情况（定级边界、设备清单、承载的业务与数据）做出；「全部都测」和「随便抽几台」都过不了方案评审。另外要考虑行业统一共识：少量（10台以内）关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
-        "quality": "熟悉测评标准和行业共识，既要应测尽测、不漏测关键资产，也要替客户算成本、不为无关设备买单。用专业的态度专业的描述呈现专业的成果，所有表单禁止使用口语化简称，统一采用专业术语，减少歧义。",
+        "mustManual": "测评对象判断只能由测评师结合被测系统的实际情况（定级边界、设备清单、承载的业务与数据）做出；另外要考虑行业统一共识：少量（10台以内）关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产。",
+        "quality": "熟练掌握等保测评规范，精准识别系统资产边界，规避主备、虚拟化等架构下的漏测风险；不受主观意识干扰，设备选取依据可追溯，文档表述严谨规范；对团队、客户负责，认真严谨，设备选取决策可自查、可复核，愿意对自身判断承担责任。",
         "materialRef": "《网络拓扑与设备清单》",
         "reasonHint": "为什么纳入、为什么抽样、为什么排除",
         "webSampleWrong": "Web 服务器（3 台）按「同质设备抽样」只抽 1 台：只看到「同配置同应用」就对关键业务资产套用抽样，违反行业共识——<b>少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产</b>（GB/T 28449-2018《测评过程指南》及行业质控规范）。典型后果：评审判「测评对象选取不当、漏测关键资产」→ 本项抽样被退回、要求对 Web 服务器 <b>100% 测评后重新测评</b>；本次《测评方案》被打回、整改后再提交；客户需再付一轮测评费、测评周期顺延；若带着缺陷出具报告，最终结论可能由「通过」降为「基本符合 / 不通过」，测评机构还可能被质控通报。",
@@ -2495,6 +2496,7 @@ let matUnlocked = {};             // docId -> true
 let guideRead = {};               // stepId -> {ai,manual,quality} 三色卡阅读状态
 let qaState = {};                 // stepIdx -> [{answer,done,quality,coaching,coachMode,awaitRevise,revising}] 问答题作答状态
 let stepFails = {};               // stepId -> {fail:连续未达5分次数, unlocked:标准答案是否已解锁}（仅在一次挑战内累计；「重新挑战本关」/「重置本关」即清零，从第一次作答重新计数）
+let stepAi = {};                  // stepId -> {submits:累计提交次数, aiUsed:是否已用过AI辅助, stdUnlocked:标准答案是否已解锁}（挑战一除11/16关外的AI辅助门控；计数跨「重新作答」累计，重置整个大挑战才清零）
 let attemptsMem = {};             // levelIdx -> [{score,max,pct,date}] 闯关历史（未登录时的内存兜底）
 let unlockedLevelIdx = 0;
 const $ = id => document.getElementById(id);
@@ -2751,6 +2753,92 @@ function clearStepFailCount(id){
   if (slot && slot.stepFails && slot.stepFails[id]) { delete slot.stepFails[id]; }
 }
 
+// ============ 挑战一（除 L1S11 / L1S16 外）AI 辅助门控 ============
+// 规则：① 累计提交 3 次答案后「🤖 AI 辅助」按钮才可点击；
+//      ② 点击「AI 辅助」并提交答案后，「标准答案」才展示——此前反馈里只保留
+//        判定结果（星级/得分/逐项判定）与修改提示，不出标准答案列与知识点参考要点。
+// 计数口径：每次成功提交（文字作答 / 表格 / qaTable 前置三问的每一问）累计 +1，
+// 跨「重新作答」不清零；重置整个大挑战（clearStepGate）才一并清零。
+function aiGateStep(s){
+  return levelIdx === 0 && !!s && !!s.id && s.id !== "L1S11" && s.id !== "L1S16";
+}
+function aiStateOf(s){
+  if (!s || !s.id) return null;
+  if (!stepAi[s.id]) stepAi[s.id] = { submits: 0, aiUsed: false, stdUnlocked: false };
+  return stepAi[s.id];
+}
+function aiSubmitsOf(s){
+  const st = stepAi[s.id];
+  return st ? (st.submits || 0) : 0;
+}
+function aiCountSubmit(s){
+  if (!aiGateStep(s)) return;
+  const st = aiStateOf(s);
+  st.submits = (st.submits || 0) + 1;
+  // 用过 AI 辅助之后的提交：解锁标准答案（含刷新后复盘）
+  if (st.aiUsed) st.stdUnlocked = true;
+}
+function aiMarkAiUsed(s){
+  if (!aiGateStep(s)) return;
+  aiStateOf(s).aiUsed = true;
+}
+function aiStdUnlocked(s){
+  if (!aiGateStep(s)) return true;
+  const st = stepAi[s.id];
+  return !!(st && st.stdUnlocked);
+}
+function aiUnlockedAiBtn(s){
+  return aiSubmitsOf(s) >= 3;
+}
+// 同步 AI 辅助按钮（表格关 btnAiHelp / 文字关 btnAiHelpText）的显示与可用状态
+// 注意：提交按钮处于锁定态（如 qaTable 提交后整表锁定）时，AI 按钮同样保持锁定
+function syncAiButtons(){
+  const s = STEPS[current];
+  if (!s) return;
+  const gate = aiGateStep(s);
+  const tb = $("btnAiHelp");
+  if (tb){
+    if (s.id === "L1S11"){
+      tb.classList.remove("hidden");
+      tb.disabled = false;
+      tb.textContent = "🤖 AI 辅助";
+      tb.title = "";
+    } else if (gate && (s.type === "table" || s.type === "qaTable")){
+      tb.classList.remove("hidden");
+      const locked = ($("btnTableSubmit") && $("btnTableSubmit").disabled);
+      if (aiUnlockedAiBtn(s) && !locked){
+        tb.disabled = false;
+        tb.textContent = "🤖 AI 辅助";
+        tb.title = "AI 已按标准口径给出参考填法，请核对后提交";
+      } else {
+        tb.disabled = true;
+        tb.textContent = "🤖 AI 辅助（" + aiSubmitsOf(s) + "/3）";
+        tb.title = locked ? "本关已提交，点「重新作答」后可继续使用" : "累计提交 3 次答案后解锁（当前已提交 " + aiSubmitsOf(s) + " 次）";
+      }
+    } else {
+      tb.classList.add("hidden");
+    }
+  }
+  const tx = $("btnAiHelpText");
+  if (tx){
+    if (gate && !s.type){
+      tx.classList.remove("hidden");
+      const locked = ($("btnSubmit") && $("btnSubmit").disabled);
+      if (aiUnlockedAiBtn(s) && !locked){
+        tx.disabled = false;
+        tx.textContent = "🤖 AI 辅助";
+        tx.title = "AI 已按标准口径给出参考作答，请核对后提交";
+      } else {
+        tx.disabled = true;
+        tx.textContent = "🤖 AI 辅助（" + aiSubmitsOf(s) + "/3）";
+        tx.title = locked ? "本关已提交，点「重新作答」后可继续使用" : "累计提交 3 次答案后解锁（当前已提交 " + aiSubmitsOf(s) + " 次）";
+      }
+    } else {
+      tx.classList.add("hidden");
+    }
+  }
+}
+
 // 重置本关（当前关卡按钮入口）：作答/得分清空 + 挑战计数归零 + 三色卡恢复待读（内存与存档同清）
 function resetCurrentStep(){
   const s = STEPS[current];
@@ -2845,6 +2933,14 @@ function qaCardHtml(item, i, st){
   const isDone = !!st.done;
   const ro = !!st.readonly;
   const noAi = !!item.noAi;   // 该问不提供 AI 代答，须独立作答
+  // AI 辅助门控（挑战一除 11/16 关）：累计提交 3 次答案后才可用「AI 代答」
+  const s0 = STEPS[current];
+  const aiGate = aiGateStep(s0) && !aiUnlockedAiBtn(s0);
+  const aiBtnHtml = function(label){
+    return aiGate
+      ? '<button class="qa-ai" disabled title="累计提交 3 次答案后解锁（当前已提交 ' + aiSubmitsOf(s0) + ' 次）">' + label + '（' + aiSubmitsOf(s0) + '/3）</button>'
+      : '<button class="qa-ai" data-qi="' + i + '">' + label + '</button>';
+  };
   let h = '<div class="qa-card' + (isDone ? " done" : "") + '" data-qi="' + i + '">';
   h += '<div class="qa-head"><span class="qa-no">第 ' + (i + 1) + ' 问</span><span class="qa-title">' + esc(item.q) + '</span></div>';
   h += '<div class="qa-body">';
@@ -2861,10 +2957,10 @@ function qaCardHtml(item, i, st){
            '<button class="qa-none" data-qi="' + i + '">✅ 不需要，直接提交</button></div></div>';
     } else if (st.revising){
       h += '<div class="qa-btns"><button class="qa-submit-ai" data-qi="' + i + '">📤 提交修正后的答案</button>' +
-           (noAi ? "" : '<button class="qa-ai" data-qi="' + i + '">🤖 让 AI 重新代答</button>') + '</div>';
+           (noAi ? "" : aiBtnHtml("🤖 让 AI 重新代答")) + '</div>';
     } else {
       h += '<div class="qa-btns">' +
-           (noAi ? "" : '<button class="qa-ai" data-qi="' + i + '">🤖 AI 代答</button>') +
+           (noAi ? "" : aiBtnHtml("🤖 AI 代答")) +
            '<button class="qa-submit" data-qi="' + i + '">📤 提交我的答案</button></div>';
     }
   }
@@ -2939,6 +3035,7 @@ function renderQA(s){
   let intro = '<b>作答方式：</b>';
   if (aiNos.length) intro += '第 ' + aiNos.join("、") + ' 问可以点「🤖 AI 代答」看一份示范答案，但 AI 给的答案必须由你逐条核对、必要时修正后才能提交——<b>' + esc(s.aiCheckHint || "答案要点必须与本关材料对齐") + '</b>。';
   if (noAiNos.length) intro += '第 ' + noAiNos.join("、") + ' 问<b>不提供 AI 代答</b>——请自己判断、独立作答，答完会给出点评与逐步引导。';
+  if (aiGateStep(s)) intro += '<br>📋 <b>本关门控</b>：累计提交 3 次答案后「🤖 AI 代答 / AI 辅助」才可点击；使用 AI 辅助并提交答案后，才会展示标准答案与知识点讲解——此前只给判定结果与修改提示。';
   html += '<div class="qa-intro">' + intro + '</div>';
   s.qa.forEach(function(item, i){
     const st = list[i] || { answer: "", done: false };
@@ -3030,6 +3127,7 @@ function refreshQa(s){
     ts.classList.remove("hidden");
     showTableBtns(true);
     lockTableBtns(false);
+    syncAiButtons();   // 每问提交后同步 AI 辅助按钮的计数文字与可用状态
   }
   gateApply(s);
 }
@@ -3040,6 +3138,7 @@ function onQaAi(i){
   const slot = $("qaSlot");
   const ta = slot.querySelector('.qa-input[data-qi="' + i + '"]');
   if (!ta) return;
+  aiMarkAiUsed(s);   // 使用过 AI 代答：本关后续提交即解锁「标准答案」展示
   const btn = slot.querySelector('.qa-ai[data-qi="' + i + '"]');
   if (btn){ btn.disabled = true; btn.textContent = "🤖 AI 正在作答…"; }
   list[i].answer = "";
@@ -3060,6 +3159,7 @@ function onQaSubmitAi(i, revised){
   const ta = slot.querySelector('.qa-input[data-qi="' + i + '"]');
   if (ta) list[i].answer = ta.value;
   if (!(list[i].answer || "").trim()){ toast("答案不能为空"); return; }
+  aiCountSubmit(s);   // 每次提交（AI 代答 / 修正提交）也计入累计提交次数
   list[i].done = true;
   list[i].quality = revised ? "ai-fix" : "ai";
   list[i].awaitRevise = false;
@@ -3077,6 +3177,7 @@ function onQaSubmitSelf(i){
   const ta = slot.querySelector('.qa-input[data-qi="' + i + '"]');
   const v = ((ta ? ta.value : list[i].answer) || "").trim();
   if (!v){ toast("请先写下你的答案再提交"); if (ta) ta.focus(); return; }
+  aiCountSubmit(s);   // 每次提交（含改对 / 进入引导）都计入累计提交次数
   const wasCoaching = (list[i].coaching || 0) > 0;
   if (!list[i].firstAnswer) list[i].firstAnswer = v;
   list[i].answer = v;
@@ -3107,6 +3208,7 @@ function onQaCopySubmit(i){
   const cp = slot.querySelector('.qa-copy-in[data-qi="' + i + '"]');
   const v = ((cp ? cp.value : list[i].copyAnswer) || "").trim();
   if (!v){ toast("请先把标准答案抄写或复述一遍，再点提交"); if (cp) cp.focus(); return; }
+  aiCountSubmit(s);   // 抄写提交同样计入累计提交次数
   list[i].copyAnswer = v;
   const r = evalQA(item, v);
   if (r.ok || v.length >= 30){
@@ -3354,6 +3456,7 @@ function onSubmitTable(){
   records[current]=rec;
   score+=rec.score;
   submitted=true;
+  aiCountSubmit(s);
   save();
   updateProj();
   // 关键策略：L1S11（普通 table 重写后的形态）允许学生修改后再提交，不锁定表格输入；
@@ -3375,6 +3478,7 @@ function onSubmitTable(){
     }
     lockTableBtns(false);
   }
+  syncAiButtons();
   renderFeedback(records[current],false);
 }
 
@@ -3438,15 +3542,62 @@ function fillAiWebSample(){
     cell.value = fill;
   });
 }
+// 通用 AI 辅助填充（挑战一除 11/16 关外的表格关 / 文字关）：
+// 表格关按每行 expect（标准口径）填充；文字关把 expect 写入作答框。
+// 仅作示范填法——真实项目中 AI 可能漏掉行业共识与合规细则，仍需测评师复核。
+function fillAiGeneric(){
+  const s = STEPS[current];
+  if (!aiGateStep(s)) return;
+  aiMarkAiUsed(s);
+  if (s.type === "table" || s.type === "qaTable"){
+    // 注意：.tcell 只包含可编辑行，行号必须按 data-r 精确定位（不可编辑行渲染为纯文本、没有 input）
+    s.table.rows.forEach(function(r, ri){
+      if (r.editable === false) return;
+      const cell = document.querySelector('.tcell[data-r="' + ri + '"]');
+      if (!cell) return;
+      cell.value = r.expect || "";
+      cell.dispatchEvent(new Event("input", {bubbles:true}));
+    });
+    toast("AI 已按标准口径填好表格——请逐项核对后点「提交答案」");
+  } else {
+    const ta = $("answerInput");
+    if (!ta) return;
+    ta.value = s.expect || "";
+    ta.disabled = false;
+    $("btnSubmit").disabled = false;
+    ta.focus();
+    toast("AI 已给出参考作答——请核对后点「提交作答」（提交后展示标准答案与知识点讲解）");
+  }
+  syncAiButtons();
+}
 function onAiHelp(){
+  const s = STEPS[current];
+  if (s.id === "L1S11"){
+    // 第 11 关：沿用「仅接入交换机埋错」的专属演示
+    showAlert({
+      kind:"warn",
+      title:"🔒 涉密警告 · AI 辅助使用须知",
+      html:"<b>委托单位文件涉密，请勿上传外网！</b><br>本「AI 辅助」演示仅在<b>本机浏览器内</b>用本地预设答案填充表格——不会上传任何委托单位材料至外网。<br><br>⚠️ AI 答案只是<b>示范写法</b>，必须由你逐条核对现场实际情况后再用，不能直接对外出具。",
+      listHtml:"<li>严禁把《测评方案》、客户系统截图、IP/口令等任何客户敏感信息粘贴进公网 AI 工具；</li><li>本轮 AI 已掌握「<b>少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产</b>」的行业共识（Web/应用/数据库/边界防护类关键设备都给出 100% 测评的正确写法），但对<b>合规规则</b>「<b>单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样</b>」仍有遗漏——对接入交换机（9 台）这种数量虽少但属「组网核心组成部分」的设备，仍按同质抽样原则给出「抽 3 台」的错误结论，需要你复核、修正后才能签字定稿；</li><li>本演示使用的填表示范是按行业规范表达的，不代表该方案已经定稿——决定权与担责主体仍是项目经理（你）。</li>",
+      okText:"我已知晓风险，使用 AI 辅助填表",
+      cancelText:"取消",
+      onOk: fillAiWebSample
+    });
+    return;
+  }
+  if (!aiGateStep(s)) return;
+  if (!aiUnlockedAiBtn(s)){
+    toast("AI 辅助尚未解锁：累计提交 3 次答案后可用（当前已提交 " + aiSubmitsOf(s) + " 次）");
+    return;
+  }
   showAlert({
     kind:"warn",
     title:"🔒 涉密警告 · AI 辅助使用须知",
-    html:"<b>委托单位文件涉密，请勿上传外网！</b><br>本「AI 辅助」演示仅在<b>本机浏览器内</b>用本地预设答案填充表格——不会上传任何委托单位材料至外网。<br><br>⚠️ AI 答案只是<b>示范写法</b>，必须由你逐条核对现场实际情况后再用，不能直接对外出具。",
-    listHtml:"<li>严禁把《测评方案》、客户系统截图、IP/口令等任何客户敏感信息粘贴进公网 AI 工具；</li><li>本轮 AI 已掌握「<b>少量关键业务资产不适用抽样，抽样仅适用于批量同构非核心资产</b>」的行业共识（Web/应用/数据库/边界防护类关键设备都给出 100% 测评的正确写法），但对<b>合规规则</b>「<b>单类网络设备数量≤10 台，无论是否同配置，必须 100% 全测、禁止抽样</b>」仍有遗漏——对接入交换机（9 台）这种数量虽少但属「组网核心组成部分」的设备，仍按同质抽样原则给出「抽 3 台」的错误结论，需要你复核、修正后才能签字定稿；</li><li>本演示使用的填表示范是按行业规范表达的，不代表该方案已经定稿——决定权与担责主体仍是项目经理（你）。</li>",
-    okText:"我已知晓风险，使用 AI 辅助填表",
+    html:"<b>委托单位文件涉密，请勿上传外网！</b><br>本「AI 辅助」演示仅在<b>本机浏览器内</b>用本地预设答案填充作答——不会上传任何委托单位材料至外网。<br><br>⚠️ AI 答案只是<b>示范写法</b>，必须由你逐条核对现场实际情况后再用，不能直接对外出具。",
+    listHtml:"<li>严禁把《测评方案》、客户系统截图、IP/口令等任何客户敏感信息粘贴进公网 AI 工具；</li><li>AI 按<b>标准口径</b>给出参考填法——真实项目中 AI 可能漏掉行业共识与合规细则，必须由你逐条复核、修正后才能定稿；</li><li>使用 AI 辅助并提交答案后，本关「标准答案与知识点讲解」才会展示——决定权与担责主体仍是项目经理（你）。</li>",
+    okText:"我已知晓风险，使用 AI 辅助填答",
     cancelText:"取消",
-    onOk: fillAiWebSample
+    onOk: fillAiGeneric
   });
 }
 function showZhZhangGongRemind(s11){
@@ -3877,6 +4028,7 @@ function renderStep(){
     $("answerRow").classList.add("hidden");
     showTableBtns(true);
     lockTableBtns(false);
+    syncAiButtons();
   }else if(s.type==="qaTable"){
     // 三问 + 填表复合关：先答完三问，才解锁下方表格
     $("planSlot").classList.add("hidden");
@@ -3889,6 +4041,7 @@ function renderStep(){
     $("tableSlot").classList[unlock?"remove":"add"]("hidden");
     showTableBtns(!!unlock);
     lockTableBtns(false);
+    syncAiButtons();
   }else if(s.type==="plan"){
     $("qaSlot").classList.add("hidden");
     $("tableSlot").classList.add("hidden");
@@ -3904,6 +4057,7 @@ function renderStep(){
     $("answerInput").value="";
     $("answerInput").disabled=false;
     $("btnSubmit").disabled=false;
+    syncAiButtons();
   }
   renderMap();
   gateApply(s);
@@ -3918,6 +4072,9 @@ function renderFeedback(rec, readOnly){
   const cls=rec.stars===3?"good":rec.stars===2?"mid":"poor";
   const bookIcon='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>';
   const isS11 = (s.id==="L1S11");
+  // 挑战一（除 11/16 关）AI 辅助门控：未「用 AI + 提交」前，标准答案一律隐藏
+  const stdLocked = aiGateStep(s) && !aiStdUnlocked(s);
+  const stdLockCell = '<span style="color:#8FA7C3;font-size:12px">🔒 使用「🤖 AI 辅助」并提交后展示</span>';
   let cellHtml="";
   if(rec.detail){
     if(isS11){
@@ -3932,16 +4089,19 @@ function renderFeedback(rec, readOnly){
         `</tbody></table>`;
     }else{
       cellHtml=`<table class="tbl-result"><thead><tr><th>表格栏位</th><th>我的填写</th><th>判定</th><th>标准答案</th></tr></thead><tbody>`+
-        rec.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓ 正确":(d.partial?"△ 部分正确":"✗ 修正")}</td><td class="std">${esc(d.expect)}${d.good?"<br><span style='color:#6B8FA8'>"+esc(d.good)+"</span>":""}</td></tr>`).join("")+
+        rec.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓ 正确":(d.partial?"△ 部分正确":"✗ 修正")}</td><td class="std">${stdLocked?stdLockCell:(esc(d.expect)+(d.good?"<br><span style='color:#6B8FA8'>"+esc(d.good)+"</span>":""))}</td></tr>`).join("")+
         `</tbody></table>`;
     }
   }
   const planBtn = (s.type==="plan") ? '<button class="btn-ghost2" id="btnPlanRe">📑 查看方案</button>' : '';
   // L1S11 专项：comment 走 HTML；标准答案默认隐藏，靠「查看标准答案」按钮（满足解锁条件才可点）展开
   const s11Std = (isS11 && rec.s11 && rec.s11.unlocked) ? s11StdAnswerPanel(rec) : '';
+  // 低分评语（s.poor）本身往往就是标准答案口径——未解锁前不展示，只给修改提示；
+  // 优秀（s.good）/ 良好（s.mid）评语属鼓励与方向性提示，保持展示
+  const poorLockedHint = '🔒 <b>修改提示</b>：这次的思路还没到位——请回到 📁 材料库重读相关材料，点「需要提示」或展开三色卡锦囊，结合上方判定结果修改后重新提交。<br><span style="color:#8FA7C3">标准答案与知识点讲解已锁定：累计提交 3 次后可用「🤖 AI 辅助」，使用 AI 辅助并提交答案后即解锁。</span>';
   const commentHtml = isS11
     ? '<div class="fb-comment-s11">'+rec.comment+'</div>'+ cellHtml + showZhZhangGongRemind(rec.s11) + showL1S11Verdict(rec) + s11Std
-    : esc(rec.comment)+(rec.detail?"":"<span class=\"qa\"><b>你的回答：</b>"+esc(rec.answer)+"</span>");
+    : (stdLocked && rec.stars===1 ? poorLockedHint : esc(rec.comment))+(rec.detail?"":"<span class=\"qa\"><b>你的回答：</b>"+esc(rec.answer)+"</span>");
   // L1S11 反馈卡底部按钮组：自定义「重新挑战 / 进入下一关」，不再出现通用「下一步」
   const nextBar = isS11
     ? ''
@@ -3961,7 +4121,9 @@ function renderFeedback(rec, readOnly){
     <div class="fb-comment">${commentHtml}
     </div>
     ${isS11?'':cellHtml}
-    ${isS11?'':'<div class="teach-card"><div class="tc-lb">'+bookIcon+' 知识点讲解</div><p>'+rec.teach+'</p><p style="color:#8FA7C3;margin-top:6px">参考要点：'+rec.expect+'</p></div>'}
+    ${isS11?'':(stdLocked
+      ? '<div class="teach-card"><div class="tc-lb">'+bookIcon+' 知识点讲解</div><p style="color:#8FA7C3">🔒 标准答案与知识点讲解已锁定——请先按上方判定结果与修改提示订正；累计提交 3 次后可点「🤖 AI 辅助」（当前已提交 '+aiSubmitsOf(s)+' 次），使用 AI 辅助并提交答案后即解锁。</p></div>'
+      : '<div class="teach-card"><div class="tc-lb">'+bookIcon+' 知识点讲解</div><p>'+rec.teach+'</p><p style="color:#8FA7C3;margin-top:6px">参考要点：'+rec.expect+'</p></div>')}
     ${nextBar}
   </div>`;
   // L1S11 按钮事件
@@ -4018,6 +4180,7 @@ function renderFeedback(rec, readOnly){
     $("scoreVal").textContent=score;
     renderMap();
     gateApply(s);
+    syncAiButtons();
   });
   if(readOnly){
     $("answerInput").disabled=true;$("btnSubmit").disabled=true;lockTableBtns(true);
@@ -4035,9 +4198,11 @@ function onSubmit(){
   const res=evaluate(s,v);
   if(records[current])score-=records[current].score;
   records[current]={answer:v,...res}; score+=res.score; submitted=true;
+  aiCountSubmit(s);
   save();
   updateProj();
   $("answerInput").disabled=true; $("btnSubmit").disabled=true;
+  syncAiButtons();
   renderFeedback(records[current],false);
 }
 
@@ -4045,10 +4210,12 @@ function onSubmit(){
 function openReview(idx){
   const r=records[idx]; if(!r)return;
   const s=STEPS[idx];
+  // 挑战一（除 11/16 关）AI 辅助门控：未「用 AI + 提交」前，复盘里同样不展示标准答案
+  const stdLockedR = aiGateStep(s) && !aiStdUnlocked(s);
   let cells="";
   if(r.detail){
     cells=`<table class="tbl-result" style="margin-top:8px"><thead><tr><th>表格栏位</th><th>我的填写</th><th>判定</th><th>标准答案</th></tr></thead><tbody>`+
-      r.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓":(d.partial?"△ 部分正确":"✗")}</td><td class="std">${esc(d.expect)}</td></tr>`).join("")+
+      r.detail.map(d=>`<tr><td>${esc(d.label)}</td><td class="my-ans">${esc(d.answer||"—")}</td><td class="${d.ok?"ok":(d.partial?"part":"no")}">${d.ok?"✓":(d.partial?"△ 部分正确":"✗")}</td><td class="std">${stdLockedR?'<span style="color:#8FA7C3;font-size:12px">🔒 使用「🤖 AI 辅助」并提交后展示</span>':esc(d.expect)}</td></tr>`).join("")+
       `</tbody></table>`;
   }
   let qaBlock="";
@@ -4063,8 +4230,8 @@ function openReview(idx){
       <div class="ri-q">第${idx+1}关 · ${s.title}</div>
       ${qaBlock}
       ${cells||`<div class="ri-a"><b style="color:#4CC3FF">你的答案：</b>${esc(r.answer)}</div>`}
-      <div class="ri-f"><b style="color:#F5B93E">张工点评：</b>${esc(r.comment)}</div>
-      <div class="ri-f" style="margin-top:6px"><b style="color:#2DD4BF">要点：</b>${r.expect}</div>
+      <div class="ri-f"><b style="color:#F5B93E">张工点评：</b>${(stdLockedR && r.stars===1)?'<span style="color:#8FA7C3">🔒 修改提示：这次的思路还没到位——请结合判定结果、三色卡锦囊与材料库修改后重新挑战；使用「🤖 AI 辅助」并提交后解锁标准答案。</span>':esc(r.comment)}</div>
+      <div class="ri-f" style="margin-top:6px"><b style="color:#2DD4BF">要点：</b>${stdLockedR?'<span style="color:#8FA7C3">🔒 使用「🤖 AI 辅助」并提交后展示</span>':r.expect}</div>
     </div>
     <div class="modal-actions">
       <button class="btn-ghost" id="btnRevClose">关闭</button>
@@ -4371,6 +4538,7 @@ function save() {
       slot.docs = Object.keys(matUnlocked);
       slot.guideRead = guideRead;
       slot.stepFails = stepFails;
+      slot.stepAi = stepAi;
       slot.updatedAt = Date.now();
       _pg = p;
       return p;
@@ -4416,6 +4584,7 @@ function loadSave() {
           stepFails["L1S11"] = { fail: v.fail || 0, unlocked: !!v.unlocked || (v.fail||0) >= 3 || (v.fix||0) >= 2 };
       })();
     }
+    if (slot && slot.stepAi && typeof slot.stepAi === "object") stepAi = slot.stepAi;
     if (!lv || typeof lv.current !== "number") return false;
     current = Math.min(lv.current, STEPS.length - 1);
     score = lv.score || 0;
@@ -4565,8 +4734,8 @@ function clearStepGate(li){
   if (!lv) return;
   const ids = {};
   (lv.steps || []).forEach(function(s){ if (s && s.id) ids[s.id] = 1; });
-  // 内存：清掉该关所有步骤的三色卡已读记录
-  Object.keys(ids).forEach(function(k){ delete guideRead[k]; });
+  // 内存：清掉该关所有步骤的三色卡已读记录与 AI 辅助门控计数
+  Object.keys(ids).forEach(function(k){ delete guideRead[k]; delete stepAi[k]; });
   if (li === levelIdx) qaState = {};
   // 存档：同步清除，避免刷新后又被读回来
   if (typeof window.saveProgress === "function"){
@@ -4575,6 +4744,9 @@ function clearStepGate(li){
         const s = p && p.games && p.games[SAVE_KEY];
         if (s && s.guideRead){
           Object.keys(s.guideRead).forEach(function(k){ if (ids[k]) delete s.guideRead[k]; });
+        }
+        if (s && s.stepAi){
+          Object.keys(s.stepAi).forEach(function(k){ if (ids[k]) delete s.stepAi[k]; });
         }
         return p;
       });
@@ -4651,6 +4823,8 @@ function bind(){
   $("btnTableSubmit").addEventListener("click", onSubmitTable);
   const aiBtn = $("btnAiHelp");
   if (aiBtn) aiBtn.addEventListener("click", onAiHelp);
+  const aiTxtBtn = $("btnAiHelpText");
+  if (aiTxtBtn) aiTxtBtn.addEventListener("click", onAiHelp);
   $("answerInput").addEventListener("keydown", function(e){ if ((e.ctrlKey || e.metaKey) && e.key === "Enter") onSubmit(); });
   $("btnReset").addEventListener("click", resetGame);
   $("btnMat").addEventListener("click", function(){
