@@ -1130,6 +1130,21 @@
     /* PPT 课件徽章（白底紫字，让"这是 PPT"一眼可见） */
     .kb-ppt-badge { display: inline-block; background: #fff; color: #5e35b1; font-size: 0.68rem; font-weight: 800; padding: 1px 6px; border-radius: 4px; margin-right: 4px; letter-spacing: 0.5px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); vertical-align: middle; line-height: 1.4; }
     .kb-ppt-title { display: inline; vertical-align: middle; }
+    /* PPT 课件"暂未开放"标签 */
+    .kb-ppt-status { display: inline-block; margin-left: 6px; padding: 0 6px; background: rgba(255,255,255,0.85); color: #b71c1c; font-size: 0.7rem; font-weight: 700; border-radius: 4px; vertical-align: middle; letter-spacing: 0.5px; }
+    /* PPT 课件卡片"已下线"视觉态：灰度 + 不可点 */
+    .kb-mod-card.kb-ppt-mod.kb-ppt-mod--disabled {
+        filter: grayscale(0.55);
+        opacity: 0.78;
+        cursor: not-allowed;
+        box-shadow: inset 0 0 0 1px rgba(0,0,0,0.18);
+    }
+    .kb-mod-card.kb-ppt-mod.kb-ppt-mod--disabled:hover {
+        filter: grayscale(0.55);
+        opacity: 0.85;
+        background: linear-gradient(135deg, #5e35b1, #7e57c2);
+        border-color: #5e35b1;
+    }
     /* （旧"⬇ 原文件"小按钮样式保留但不再使用，避免将来误用） */
     /* 实验任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
     .table-dl { display: inline-flex; align-items: center; gap: 3px; border: 1.2px dashed #66bb6a; border-radius: 6px; padding: 1px 8px; margin: 0 2px; color: #2e7d32; font-size: 0.78em; font-weight: 600; text-decoration: none; background: #f1f8e9; transition: all 0.18s ease; vertical-align: baseline; white-space: nowrap; }
@@ -4188,20 +4203,23 @@ var SUYANG_CASES = {
                         var pLabel = res.ppts[0].replace(/（理论版）/, '').replace(/\.pptx$/, '');
                         var pcard = document.createElement('button');
                         pcard.type = 'button';
-                        pcard.className = 'kb-mod-card kb-ppt-mod';
-                        pcard.title = '点击在线浏览课件：' + pLabel;
+                        pcard.className = 'kb-mod-card kb-ppt-mod kb-ppt-mod--disabled';
+                        pcard.setAttribute('aria-disabled', 'true');
+                        pcard.title = '课件暂未提供在线浏览，请联系任课教师获取：' + pLabel;
                         pcard.innerHTML =
                             '<span class="kb-mod-no">📑</span>' +
                             '<span class="kb-mod-name">' +
                               '<span class="kb-ppt-badge">PPT</span>' +
                               '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                              '<span class="kb-ppt-status">暂未开放</span>' +
                             '</span>';
-                        pcard.addEventListener('click', function () {
-                            // 打开同名 PDF（浏览器原生翻页显示，与 pptx 同名伴生）
-                            res.ppts.forEach(function (p) {
-                                window.open(encodeURI('PPT/' + p), '_blank');
-                            });
-                            if (typeof trackOperation === 'function') trackOperation('在线浏览课件', pLabel);
+                        pcard.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            // 课件下载入口已下线：不再打开 window.open / 跳转
+                            if (typeof trackOperation === 'function') {
+                                trackOperation('尝试访问课件（已下线）', pLabel);
+                            }
+                            alert('「' + pLabel + '」课件暂未提供在线浏览，请联系任课教师获取。');
                         });
                         nav.appendChild(pcard);
                         // （按老师要求：去掉"⬇ 原文件"小按钮，只保留 PPT 在线浏览入口）
