@@ -17,6 +17,10 @@ __pycache__/
 Thumbs.db
 desktop.ini
 
+# 开发过程备份（不进仓库、不部署）
+*.bak
+*.bak-*
+
 # Office 临时锁文件
 ~*
 
