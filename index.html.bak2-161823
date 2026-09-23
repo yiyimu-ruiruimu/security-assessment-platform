@@ -2297,13 +2297,14 @@
                         <div class="kb-st-tables">
                             <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
                             <div class="kb-st-list">
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 素材1：实践任务——主机安全测评记录表（纸面版）</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 素材1：实践任务——主机安全测评记录表</a>
                                 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材2：Windows配置核查检查表（快速参考）.docx" download title="下载《Windows 配置核查检查表》">⬇ 素材2：Windows 配置核查检查表（快速参考）</a>
                                 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材3：Linux配置核查检查表（快速参考）.docx" download title="下载《Linux 配置核查检查表》">⬇ 素材3：Linux 配置核查检查表（快速参考）</a>
                                 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材4：课后作业——主机安全基线分析.docx" download title="下载《课后作业——主机安全基线分析》">⬇ 素材4：课后作业——主机安全基线分析</a>
                                 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材5：教师演示用——配置核查工具快速参考.docx" download title="下载《配置核查工具快速参考》">⬇ 素材5：教师演示用——配置核查工具快速参考</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：西普平台实验选取清单与操作能力对照（课堂实验用）</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download title="下载《等保测评实验记录表（西普平台）》">⬇ 素材7：等保测评实验记录表（西普平台）</a>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;margin-top:10px;">🧪 上机实验专用素材——《西普平台实验选取清单》（素材6）与《等保测评实验记录表（西普平台）》（素材7）——已整理到「<strong>🧪 实验</strong>」页，请切换到实验页下载。</p>
                         </div>
 
                         <!-- 模块 1：为什么查 -->
@@ -2355,98 +2356,66 @@
                             <p><strong>判定原则：</strong>每项判定四选一（<code>符合</code> / <code>部分符合</code> / <code>不符合</code> / <code>不适用</code>），"部分符合 / 不符合"必须写清"做到哪、差在哪"。</p>
                             <p><strong>必踩雷区：</strong>"测一台代表全部"是行业大忌——同业务多台服务器必须<strong>每台都做</strong>，测评结论必须覆盖全部被测主机。</p>
                         </div>
-                            <p style="background:#eaf6fd;border-left:4px solid #0288d1;padding:8px 12px;border-radius:6px;font-size:0.92rem;">👉 以上是"方法层"的知识。<strong>本轮要做的 4 个实验、实验项目清单、操作步骤与提交要求，已全部整理到「🧪 实验」页</strong>，请点击上方「🧪 实验」切换到实验页查看。</p>
 
-                        <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
-
-                        <!-- 【实验 1/6】做什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实（虚拟化）主机上完成 <strong>4 个基线核查实验</strong>（Windows 线 2 个 + Linux 线 2 个），把前面知识模块里的"纸面检查表"变成<strong>有真实证据支撑</strong>的《等保测评实验记录表》。<strong>课内完成、当场提交。</strong></div>
-
-                            <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
+                        <!-- 课堂实验环境：西普实验平台（课内完成） -->
+                        <div class="concept-box" style="border-left:4px solid #0288d1;background:#eaf6fd;">
+                            <div class="concept-title">🖥️ 课堂实验环境：西普实验平台（4 个实验，课内完成）</div>
+                            <p>本轮 4.1 的实验由"纸面填表"改为<strong>西普实验平台真机核查</strong>：在真实（虚拟化）Windows / Linux 主机上完成"<strong>选取核查项 → 操作取证 → 基线比对 → 合规判定 → 填写记录表</strong>"的完整闭环。</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th style="width:120px;">项目</th><th>内容</th></tr>
+                                    <tr><th>项目</th><th>内容</th></tr>
                                     <tr><td>平台网址</td><td><code>http://10.11.0.70</code>（校园网内访问）</td></tr>
                                     <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
                                     <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>；例：学号 <code>234234</code> → 密码 <code>2342341q2w</code></td></tr>
                                     <tr><td>实验路径</td><td>登录后进入「<strong>操作系统安全</strong>」方向 → 选择本轮实验 → 预约 / 开始实验 → 进入虚拟机操作</td></tr>
+                                    <tr><td>完成要求</td><td>本轮共完成 <strong>4 个实验</strong>：Windows 线 2 个 + Linux 线 2 个，<strong>课内完成</strong>，逐项取证并填写《等保测评实验记录表》</td></tr>
                                 </table>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
-
-                            <p style="margin:14px 0 6px;"><strong>▍2. 本次任务清单——4 步闭环</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:230px;">产出什么</th></tr>
-                                    <tr><td><strong>① 选</strong></td><td>从 Windows 线 W1~W4 中选 <strong>2 个</strong>、Linux 线 L1~L4 中选 <strong>2 个</strong>（清单见下一节）</td><td>确定 4 个实验编号（推荐 <strong>W1 + W2 + L1 + L2</strong>）</td></tr>
-                                    <tr><td><strong>② 做</strong></td><td>在平台虚拟机内定位配置项 → 执行核查操作 → 逐条截图取证</td><td>每个实验 3 张关键截图，共 <strong>12 张</strong></td></tr>
-                                    <tr><td><strong>③ 填</strong></td><td>把真实回显抄进《等保测评实验记录表》，逐项做四档合规判定</td><td>填好的记录表（<strong>12 条核查项</strong>）</td></tr>
-                                    <tr><td><strong>④ 交</strong></td><td>截图打包 + 记录表，课内提交至学习通</td><td>截图 zip + 记录表 docx</td></tr>
-                                </table>
-                            </div>
-
-                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
-                            <p>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download title="下载《等保测评实验记录表（西普平台）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：实验选取清单与操作能力对照</a>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 素材1：主机安全测评记录表（纸面版，选做对照）</a>
-                            </p>
-                            <p style="font-size:0.88rem;color:#666;">记录表已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 4 个实验对应的 12 条</strong>（未选实验的行留空或整行删除）；判定拿不准时，回看知识模块里的"三法合一"判定原则。</p>
+                            <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；如账号无法登录、实验环境打不开，按"现象 + 报错原文"描述后举手求助，别反复试错浪费时间。</p>
                         </div>
 
-                        <!-- 【实验 2/6】选什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📋 二、选什么——实验项目清单（Windows 选 2 个 + Linux 选 2 个）</div>
-                            <div class="lab-goal">从西普平台「<strong>操作系统安全</strong>」方向选取实验：<strong>Windows 线选 2 个、Linux 线选 2 个，共 4 个</strong>；两条线合起来要覆盖"<strong>身份鉴别 + 安全审计 + 访问控制 + 入侵防范</strong>"四个维度。推荐组合 <strong>W1 + W2 + L1 + L2</strong>——口令与审计是等保测评最高频的丢分点，证据最好取、判定最典型。</div>
-
-                            <p style="margin:14px 0 6px;"><strong>① Windows 线（从 W1~W4 中选 2 个）</strong></p>
+                        <!-- 应具备的操作能力 -->
+                        <div class="concept-box">
+                            <div class="concept-title">🎯 本轮应具备的操作能力（4 项，对应课程标准 NL3）</div>
+                            <p>课程标准学习任务 4 的能力要求是"<strong>能够使用配置核查工具对 Windows 和 Linux 系统进行安全配置核查与基线比对，填写测评记录表</strong>"。落到本轮上机，需具备 4 项可操作、可考核的能力：</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>编号</th><th>对应平台实验<br>（西普「操作系统安全」）</th><th>实验要做的事</th><th>覆盖维度 / 依据</th><th>记录表<br>对应核查项</th><th>关键操作（考察点）</th></tr>
-                                    <tr><td><strong>W1</strong></td><td><strong>用户账户与口令安全配置</strong><br><span style="color:#888;font-size:0.85rem;">（账户策略 / 账户锁定策略）</span></td><td>查看并配置口令复杂度、最小长度、有效期、历史，以及登录失败锁定阈值</td><td>身份鉴别<br>8.1.4.1 a) / b)</td><td>第 1~3 条</td><td><code>secpol.msc</code> → 账户策略、账户锁定策略；<code>net accounts</code>；<code>net user</code></td></tr>
-                                    <tr><td><strong>W2</strong></td><td><strong>系统安全审计与日志管理</strong><br><span style="color:#888;font-size:0.85rem;">（审核策略 / 事件日志）</span></td><td>启用登录、对象访问、策略变更审计（成功 + 失败），检查安全日志留存与保护</td><td>安全审计<br>8.1.4.3 a) ~ c)</td><td>第 4~6 条</td><td><code>secpol.msc</code> → 审核策略；<code>auditpol /get /category:*</code>；事件查看器 → 安全日志 → 属性</td></tr>
-                                    <tr><td><strong>W3</strong></td><td><strong>共享资源与服务端口安全</strong><br><span style="color:#888;font-size:0.85rem;">（默认共享 / 服务 / 端口）</span></td><td>检查默认共享、Guest 与多余账户、非必要服务与 445 等高危端口暴露</td><td>访问控制 8.1.4.2<br>入侵防范 8.1.4.4</td><td>第 7~9 条</td><td><code>net share</code>；<code>services.msc</code>；<code>netstat -ano | findstr LISTENING</code></td></tr>
-                                    <tr><td><strong>W4</strong></td><td><strong>文件系统权限与访问控制</strong><br><span style="color:#888;font-size:0.85rem;">（NTFS 权限）</span></td><td>查看关键目录 NTFS 权限，检查是否存在 Everyone 可写等过度授权</td><td>访问控制<br>8.1.4.2</td><td>第 10~12 条</td><td>文件属性 → 安全 → 高级；<code>icacls</code>；<code>Get-Acl</code></td></tr>
-                                </table>
-                            </div>
-
-                            <p style="margin:18px 0 6px;"><strong>② Linux 线（从 L1~L4 中选 2 个）</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th>编号</th><th>对应平台实验<br>（西普「操作系统安全」）</th><th>实验要做的事</th><th>覆盖维度 / 依据</th><th>记录表<br>对应核查项</th><th>关键操作（考察点）</th></tr>
-                                    <tr><td><strong>L1</strong></td><td><strong>用户账户与口令策略配置</strong><br><span style="color:#888;font-size:0.85rem;">（login.defs / pwquality / shadow）</span></td><td>查看口令有效期、最小长度、空口令账户与登录失败处理</td><td>身份鉴别<br>8.1.4.1 a) / b)</td><td>第 13~15 条</td><td><code>cat /etc/login.defs</code>；<code>cat /etc/security/pwquality.conf</code>；<code>awk -F: '($2=="")' /etc/shadow</code></td></tr>
-                                    <tr><td><strong>L2</strong></td><td><strong>系统日志与审计配置</strong><br><span style="color:#888;font-size:0.85rem;">（rsyslog / auditd）</span></td><td>查看审计服务状态、日志内容与日志留存、权限保护</td><td>安全审计<br>8.1.4.3 a) ~ c)</td><td>第 16~18 条</td><td><code>systemctl status rsyslog auditd</code>；<code>cat /var/log/secure</code>；<code>auditctl -l</code>；<code>cat /etc/logrotate.conf</code></td></tr>
-                                    <tr><td><strong>L3</strong></td><td><strong>服务与端口最小化</strong><br><span style="color:#888;font-size:0.85rem;">（服务管理 / 开放端口 / 补丁）</span></td><td>检查开放端口与非必要服务（telnet / ftp），落实最小化安装与补丁更新</td><td>入侵防范<br>8.1.4.4</td><td>第 19~21 条</td><td><code>ss -tlnp</code>；<code>systemctl list-unit-files --type=service --state=enabled</code>；<code>rpm -qa --last</code></td></tr>
-                                    <tr><td><strong>L4</strong></td><td><strong>文件权限与 SSH 安全配置</strong><br><span style="color:#888;font-size:0.85rem;">（关键文件权限 / sshd_config）</span></td><td>检查关键文件权限（644 / 600）与 SSH 关键安全参数</td><td>访问控制 8.1.4.2<br>身份鉴别 8.1.4.1 b)</td><td>第 22~24 条</td><td><code>ls -l /etc/passwd /etc/shadow</code>；<code>grep -E "PermitRootLogin|Protocol|MaxAuthTries" /etc/ssh/sshd_config</code></td></tr>
-                                </table>
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;">说明：上表实验名称按西普平台「操作系统安全」课程目录的通行叫法书写；若平台实际目录名称不同，<strong>以"实验要做的事"和"关键操作（考察点）"为准</strong>，选同类实验即可。平台内找不到同名实验时，按关键词搜索：<code>口令 / 密码策略 / 账户锁定</code> → W1；<code>日志 / 审计</code> → W2；<code>共享 / 服务 / 端口</code> → W3；<code>文件权限 / NTFS</code> → W4；Linux 同理（<code>login.defs</code>、<code>rsyslog</code>、<code>端口</code>、<code>sshd</code>）。完整对照表见 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download>⬇ 素材6</a>。</p>
-                        </div>
-
-                        <!-- 【实验 3/6】需要什么能力 -->
-                        <div class="lab-box">
-                            <div class="lab-head">🎯 三、需要什么能力——应具备的操作能力</div>
-                            <div class="lab-goal">课程标准学习任务 4 的能力要求是"<strong>能够使用配置核查工具对 Windows 和 Linux 系统进行安全配置核查与基线比对，填写测评记录表</strong>"。落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:42px;">#</th><th style="width:150px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:130px;">在哪个环节练</th></tr>
-                                    <tr><td>①</td><td><strong>平台操作能力</strong></td><td>能独立登录西普平台、进入「操作系统安全」实验、启动虚拟机并提交实验结果；知道实验计时 / 次数限制；遇到环境打不开能规范描述现象并求助</td><td>4 个实验全程</td></tr>
-                                    <tr><td>②</td><td><strong>基线核查操作能力</strong></td><td>能在 Windows 图形界面（<code>secpol.msc</code> / 计算机管理 / 事件查看器）与 Linux 配置文件命令（<code>cat /etc/login.defs</code>、<code>grep sshd_config</code>、<code>ss -tlnp</code>）两条路径上，<strong>定位并读取</strong>口令策略、账户权限、审计日志、服务端口四类配置项</td><td>实验②「做」</td></tr>
-                                    <tr><td>③</td><td><strong>证据取证能力</strong></td><td>对每一条核查项都能取到<strong>可追溯的证据</strong>：配置界面 / 命令回显截图 + 截图编号，做到"谁说符合，证据在哪"</td><td>实验②「做」</td></tr>
-                                    <tr><td>④</td><td><strong>判定与记录能力</strong></td><td>能对照 GB/T 22239-2019（8.1.4 安全计算环境）逐项判定"符合 / 部分符合 / 不符合 / 不适用"，把"做到哪、差在哪"写清，规范填写《等保测评实验记录表》</td><td>实验③「填」</td></tr>
+                                    <tr><th>#</th><th>操作能力</th><th>具体表现（做到什么算达标）</th></tr>
+                                    <tr><td>①</td><td><strong>平台操作能力</strong></td><td>能独立登录西普平台、进入「操作系统安全」实验、启动虚拟机并提交实验结果；知道实验计时 / 次数限制；遇到环境打不开能规范描述现象并求助</td></tr>
+                                    <tr><td>②</td><td><strong>基线核查操作能力</strong></td><td>能在 Windows 图形界面（<code>secpol.msc</code> / 计算机管理 / 事件查看器）与 Linux 配置文件命令（<code>cat /etc/login.defs</code>、<code>grep sshd_config</code>、<code>ss -tlnp</code>）两条路径上，<strong>定位并读取</strong>口令策略、账户权限、审计日志、服务端口四类配置项</td></tr>
+                                    <tr><td>③</td><td><strong>证据取证能力</strong></td><td>对每一条核查项都能取到<strong>可追溯的证据</strong>：配置界面 / 命令回显截图 + 截图编号，做到"谁说符合，证据在哪"</td></tr>
+                                    <tr><td>④</td><td><strong>判定与记录能力</strong></td><td>能对照 GB/T 22239-2019（8.1.4 安全计算环境）逐项判定"符合 / 部分符合 / 不符合 / 不适用"，把"做到哪、差在哪"写清，规范填写《等保测评实验记录表》</td></tr>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- 【实验 4/6】实验目标 -->
-                        <div class="lab-box">
-                            <div class="lab-head">🎯 四、学到什么——实验目标与达标判据</div>
-                            <div class="lab-goal"><strong>总目标：</strong>在西普平台真实（虚拟化）主机上走通"<strong>选取核查项 → 平台操作取证 → 基线比对 → 合规判定 → 填写记录表</strong>"的完整闭环，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。</div>
+                        <!-- 实验项目选取 -->
+                        <div class="concept-box">
+                            <div class="concept-title">📋 实验项目选取——Windows / Linux 各选 2 个</div>
+                            <p>从西普平台「<strong>操作系统安全</strong>」方向的实验项目中，按下表选取与 4.1 主机安全基线核查 <strong>6 个维度</strong>相匹配的项目。<strong>Windows 线选 2 个、Linux 线选 2 个，共 4 个</strong>；四条线合起来应覆盖"身份鉴别 + 安全审计 + 访问控制 + 入侵防范"。建议优先选 W1、L1，再各选 1 个。</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th style="width:56px;">编号</th><th>实验目标</th><th>达标判据</th></tr>
+                                    <tr><th>线 / 编号</th><th>平台实验项目</th><th>对应核查维度</th><th>GB/T 22239 依据</th><th>关键操作（考察点）</th></tr>
+                                    <tr><td>Windows 线<br>（选 2 个）</td><td>W1 Windows 账户与口令安全配置</td><td>身份鉴别</td><td>8.1.4.1 a) / b)</td><td><code>secpol.msc</code> → 账户策略、账户锁定策略；<code>net accounts</code></td></tr>
+                                    <tr><td></td><td>W2 Windows 安全审计与日志配置</td><td>安全审计</td><td>8.1.4.3</td><td><code>secpol.msc</code> → 审核策略；<code>auditpol /get /category:*</code>；事件查看器 → 安全日志</td></tr>
+                                    <tr><td></td><td>W3 Windows 共享与端口服务安全</td><td>访问控制 / 入侵防范</td><td>8.1.4.2 / 8.1.4.4</td><td><code>net share</code>；<code>netstat -ano</code>；服务管理器</td></tr>
+                                    <tr><td></td><td>W4 Windows 文件系统与权限安全</td><td>访问控制</td><td>8.1.4.2</td><td>文件属性 → 安全 → 高级；<code>icacls</code></td></tr>
+                                    <tr><td>Linux 线<br>（选 2 个）</td><td>L1 Linux 账户与口令安全配置</td><td>身份鉴别</td><td>8.1.4.1 a) / b)</td><td><code>cat /etc/login.defs</code>；<code>cat /etc/security/pwquality.conf</code>；<code>cat /etc/shadow</code></td></tr>
+                                    <tr><td></td><td>L2 Linux 日志与审计配置</td><td>安全审计</td><td>8.1.4.3</td><td><code>systemctl status rsyslog auditd</code>；<code>cat /var/log/secure</code>；<code>auditctl -l</code></td></tr>
+                                    <tr><td></td><td>L3 Linux 服务与端口最小化</td><td>入侵防范</td><td>8.1.4.4</td><td><code>ss -tlnp</code>；<code>systemctl list-unit-files --type=service --state=enabled</code></td></tr>
+                                    <tr><td></td><td>L4 Linux 文件权限与 SSH 安全配置</td><td>访问控制 / 身份鉴别</td><td>8.1.4.2 / 8.1.4.1 b)</td><td><code>ls -l /etc/passwd /etc/shadow</code>；<code>grep -E "PermitRootLogin|Protocol" /etc/ssh/sshd_config</code></td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.88rem;color:#666;">说明：上表实验名称与西普平台「操作系统安全」课程目录对应；若平台实际目录名称略有差异，以"关键操作（考察点）"列为准选择同类实验。完整对照表见 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download>⬇ 素材6</a>。</p>
+                        </div>
+
+                        <!-- 实验目标 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 实验目标</div>
+                            <div class="lab-goal"><strong>总目标：</strong>在西普平台真实（虚拟化）主机上完成"<strong>选取核查项 → 平台操作取证 → 基线比对 → 合规判定 → 填写记录表</strong>"的完整闭环，把前面三个知识模块里的"纸面检查表"变成<strong>有真实证据支撑</strong>的《等保测评实验记录表》。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>编号</th><th>实验目标</th><th>达标判据</th></tr>
                                     <tr><td>W1</td><td>掌握本地安全策略中口令复杂度、长度、最长期限、历史与账户锁定阈值的查看与配置，能判定是否满足三级要求</td><td>"实测结果"给出具体值（如最小长度 = 8）；"符合性判定"给出四档结论</td></tr>
                                     <tr><td>W2</td><td>掌握审核策略的启用（登录 / 对象访问 / 策略变更，成功 + 失败）与事件日志留存设置，能验证"日志可查、留存满足"</td><td>"实测结果"列出已启用的审核类别；"问题描述"写清未开启的项</td></tr>
                                     <tr><td>W3</td><td>掌握默认共享、Guest / 多余账户、445 等非必要端口与服务的检查，能识别"高危端口暴露"风险</td><td>"实测结果"给出端口 / 共享清单；"整改建议"给出关闭或限制的具体做法</td></tr>
@@ -2457,16 +2426,15 @@
                                     <tr><td>L4</td><td>掌握关键文件权限（644 / 600）、<code>/etc/ssh/sshd_config</code> 关键参数的查看与判定</td><td>"实测结果"给出文件权限与 SSH 参数值；"符合性判定"给出结论</td></tr>
                                 </table>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;">上表 8 条目标与你所选 4 个实验一一对应：选了哪 4 个，就重点达成对应的 4 条判据。</p>
                         </div>
 
-                        <!-- 【实验 5/6】怎么做 -->
+                        <!-- 实验步骤 -->
                         <div class="lab-box">
-                            <div class="lab-head">🛠️ 五、怎么做——实验步骤</div>
+                            <div class="lab-head">🧪 实验步骤：4 个实验，逐一取证（课内完成）</div>
                             <ol class="step-list">
-                                <li><strong>登录与环境准备。</strong>浏览器打开 <code>http://10.11.0.70</code>，用 <strong>11 位学号</strong>登录（密码 = 学号 + <code>1q2w</code>，例：<code>2342341q2w</code>）；进入「<strong>操作系统安全</strong>」方向，确认本轮 4 个实验（Windows 2 个 + Linux 2 个）已选修 / 预约。</li>
-                                <li><strong>建立核查清单。</strong>打开 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download>⬇《等保测评实验记录表》（素材7）</a>。记录表已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 4 个实验对应的 12 条</strong>（未选实验的行留空或整行删除）。先对照上一节的实验项目清单，确认每一条核查项归哪个实验（纸面版见 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download>⬇ 素材1</a>，可作对照）。</li>
-                                <li><strong>逐个实验操作取证。</strong>按选定的 4 个实验逐一进入环境（建议 W 线 2 个 → L 线 2 个）：先在<strong>图形界面 / 配置文件</strong>中定位核查项，再执行核查操作取回显，<strong>每条核查项截 1 张图</strong>，命名与记录表"截图编号"一致（如 <code>W1-01.png</code>、<code>L3-02.png</code>）。</li>
+                                <li><strong>登录与环境准备。</strong>浏览器打开 <code>http://10.11.0.70</code>，用 <strong>11 位学号</strong>登录（密码 = 学号 + <code>1q2w</code>，例：<code>2342341q2w</code>）；进入「操作系统安全」方向，确认本轮 4 个实验（Windows 2 个 + Linux 2 个）已选修 / 预约。</li>
+                                <li><strong>建立核查清单。</strong>打开 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download>⬇《等保测评实验记录表》（素材7）</a>，先通读已预填的 12 条核查项与"基线要求（期望值）"，明确每个实验要取哪些证据（纸面版《主机安全测评记录表》见素材1，可作对照）。</li>
+                                <li><strong>逐个实验操作取证。</strong>按 W1 → W2 → L1 → L2 顺序进入实验环境：先在<strong>图形界面 / 配置文件</strong>中定位核查项，再执行核查命令取回显，<strong>每条核查项截 1 张图</strong>，命名与记录表"截图编号"一致（如 <code>W1-01.png</code>）。</li>
                                 <li><strong>填写实测结果。</strong>把真实回显抄进"实测结果"列——必须写具体值（如 <code>PASS_MIN_LEN=6</code>），不能直接写"符合 / 不符合"。</li>
                                 <li><strong>基线比对与判定。</strong>拿"实测结果"对比"基线要求"，逐项四选一判定（<code>符合</code> / <code>部分符合</code> / <code>不符合</code> / <code>不适用</code>）；部分符合 / 不符合必须写清"做到哪、差在哪"。</li>
                                 <li><strong>问题描述与整改建议。</strong>对不符合项写"问题描述 + 整改建议"；整改建议要落到具体位置（如"<code>secpol.msc</code> → 账户策略 → 最小长度改 8"）。</li>
@@ -2480,23 +2448,20 @@
                                 </div>
                                 <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。环境打不开时，把报错原文粘贴给 AI 让它排错。</p>
                             </div>
-                        </div>
-
-                        <!-- 【实验 6/6】交什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📑 六、交什么——成果与提交要求</div>
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
-                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li><strong>操作截图包</strong>——4 个实验的关键截图共 <strong>12 张</strong>（每实验 3 张），须含命令回显或配置界面，按 <code>W1-01.png</code> 方式命名并与记录表"截图编号"一一对应；打包为 <code>学号_姓名_实验4.1_截图.zip</code></li>
-                                    <li><strong>《等保测评实验记录表》</strong>——12 条核查项全填（实测结果 + 四档判定 + 问题描述 + 整改建议），含"核查小结 + 优先整改项"；命名 <code>学号_姓名_实验4.1_等保测评实验记录表.docx</code></li>
-                                    <li><strong>平台登录与实验列表截图</strong>——证明本人在平台上完成了所选实验（含个人信息、实验名称、完成状态），并入截图包</li>
-                                </ol>
-                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.1 → 作业区（<strong>课内完成并提交</strong>）</p>
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 实验记录自查</div>
+                                ☐ 4 个实验（Win 2 + Linux 2）全部完成　☐ 12 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写到了"差在哪"　☐ 没有"以一台代表全部"
                             </div>
-                            <div class="lab-check" style="margin-top:14px;">
-                                <div class="lab-check-title">📋 提交前自查</div>
-                                ☐ 4 个实验（Win 2 + Linux 2）全部完成　☐ 所选 4 个实验的 12 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写清了"差在哪"　☐ 核查小结给了四档统计与优先整改项　☐ 没有"以一台代表全部"
+                            <!-- 实验提交要求 -->
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 课堂实验提交要求（课内完成，当场提交）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li>提交物一：<strong>4 个实验的操作截图</strong>，按 <code>W1-01.png</code> 方式命名，与记录表"截图编号"一一对应</li>
+                                    <li>提交物二：<strong>《等保测评实验记录表》（西普平台）</strong>，文件名 <code>学号_姓名_实验4.1_等保测评实验记录表.docx</code></li>
+                                    <li>打包命名：截图打包为 <code>学号_姓名_实验4.1_截图.zip</code></li>
+                                    <li>必含内容：① 平台登录与实验列表截图；② 每个实验的关键操作截图（含命令回显）；③ 12 条核查项的实测结果与四档判定；④ 核查小结与优先整改项</li>
+                                    <li>提交方式：学习通 → 任务 4.1 → 作业区（<strong>课内完成并提交</strong>）</li>
+                                </ol>
                             </div>
                         </div>
 
