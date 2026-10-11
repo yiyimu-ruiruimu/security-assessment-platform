@@ -424,6 +424,79 @@
         background: #e8f4ff;
     }
 
+    /* 4.2 记录表案例：可折叠卡片 + 命令高亮 + 固定列宽（作用域限定，不影响其他页面） */
+    .rb-case {
+        margin-top: 14px;
+        background: #f1f8e9;
+        border: 1.5px dashed #66bb6a;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .rb-case-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        padding: 9px 12px;
+        background: #e3f2d9;
+    }
+    .rb-case-ttl {
+        flex: 1 1 240px;
+        font-weight: 700;
+        color: #2e7d32;
+        font-size: 0.92rem;
+        line-height: 1.55;
+        margin: 0;
+    }
+    .rb-case-act { display: flex; align-items: center; gap: 8px; flex: 0 0 auto; }
+    .rb-case-btn {
+        border: 1.2px solid #66bb6a;
+        background: #fff;
+        color: #2e7d32;
+        border-radius: 6px;
+        padding: 3px 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        line-height: 1.6;
+        text-decoration: none;
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: background .18s ease;
+    }
+    .rb-case-btn:hover { background: #dff0d8; }
+    .rb-case-btn.rb-dl { border-style: dashed; background: #f1f8e9; }
+    .rb-case-body { padding: 12px; }
+    .rb-case.is-folded .rb-case-body { display: none; }
+    .rb-case code {
+        font-family: Consolas, "Courier New", monospace;
+        background: #eef3f8;
+        color: #0d47a1;
+        padding: 0 3px;
+        border-radius: 3px;
+        font-size: 0.95em;
+    }
+    .rb-tbl {
+        table-layout: fixed;
+        width: 100%;
+        min-width: 820px;
+    }
+    .rb-tbl th { font-size: 0.78rem; padding: 8px 6px; white-space: nowrap; }
+    .rb-tbl td { font-size: 0.78rem; line-height: 1.55; padding: 7px 6px; overflow-wrap: break-word; }
+    .rb-tbl td:nth-child(1),
+    .rb-tbl td:nth-child(2),
+    .rb-tbl td:nth-child(3) { white-space: nowrap; }
+    .rb-tbl td:nth-child(3) { font-weight: 700; }
+
+    .rb-case .info-table td:nth-child(3) { font-weight: 700; }
+    .rb-case .info-table th:nth-child(1) { width: 8.5%; min-width: 74px; }
+    .rb-case .info-table th:nth-child(2) { width: 10%; min-width: 88px; }
+    .rb-case .info-table th:nth-child(3) { width: 9.5%; min-width: 62px; }
+    .rb-case .info-table th:nth-child(4) { width: 28%; }
+    .rb-case .info-table th:nth-child(5) { width: 22%; }
+    .rb-case .info-table th:nth-child(6) { width: 22%; }
+    .rb-case .info-table td:nth-child(3) { white-space: nowrap; }
+
     .info-table tr.phase-row td {
         font-weight: 800;
         text-align: center;
@@ -515,6 +588,74 @@
         border-radius: 6px;
         padding: 8px 12px;
         margin-bottom: 12px;
+    }
+
+    /* ===== 实验模块折叠面板（长内容任务用，如任务 4.1） ===== */
+    .lab-acc-bar {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 0 0 16px;
+        padding: 9px 14px;
+        background: #eef6ff;
+        border: 1px dashed #90b8e8;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: #35577f;
+    }
+    .lab-acc-tip { flex: 1 1 auto; }
+    .lab-acc-cnt {
+        font-weight: 700;
+        color: #0d47a1;
+        background: #fff;
+        border: 1px solid #c8ddf5;
+        border-radius: 20px;
+        padding: 2px 12px;
+        white-space: nowrap;
+    }
+    .lab-acc-btn {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid #9dbde3;
+        background: #fff;
+        color: #0d47a1;
+        border-radius: 6px;
+        padding: 4px 12px;
+        white-space: nowrap;
+        transition: background 0.15s;
+    }
+    .lab-acc-btn:hover { background: #dbe9fb; }
+
+    .lab-box.lab-acc > .lab-acc-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.15s;
+    }
+    .lab-box.lab-acc > .lab-acc-head::after {
+        content: '▾';
+        margin-left: auto;
+        font-size: 1rem;
+        line-height: 1;
+        transition: transform 0.2s ease;
+    }
+    .lab-box.lab-acc > .lab-acc-head:hover { background: #d3e6fb; }
+    .lab-box.lab-acc > .lab-acc-head:focus-visible {
+        outline: 2px solid #0d47a1;
+        outline-offset: 2px;
+    }
+    /* 收起态：只留标题条 */
+    .lab-box.lab-acc.is-collapsed { padding: 10px 14px; }
+    .lab-box.lab-acc.is-collapsed > .lab-acc-head { margin-bottom: 0; background: #eaf3fd; }
+    .lab-box.lab-acc.is-collapsed > .lab-acc-head::after { transform: rotate(-90deg); }
+    .lab-box.lab-acc.is-collapsed > *:not(.lab-acc-head) { display: none; }
+
+    @media print {
+        .lab-acc-bar { display: none !important; }
+        .lab-box.lab-acc.is-collapsed > *:not(.lab-acc-head) { display: block !important; }
     }
 
     .lab-goal {
@@ -810,6 +951,8 @@
     }
     .sy-banner-title { font-weight: 700; color: #5e35b1; font-size: 1.05rem; margin-bottom: 4px; }
     .sy-banner-note { font-size: 0.85rem; color: #777; line-height: 1.6; }
+    /* 素养案例：真实事件的"延伸查证"提示条 */
+    .sy-ref-note { font-size: 0.82rem; line-height: 1.7; color: #8d5500; background: #fffdf5; border: 1px dashed #ffca28; border-radius: 8px; padding: 7px 11px; margin: 8px 0; }
     .sy-case {
         background: #fff;
         border: 1px solid #e4d9f5;
@@ -1145,6 +1288,9 @@
         background: linear-gradient(135deg, #5e35b1, #7e57c2);
         border-color: #5e35b1;
     }
+    /* 课件卡为 <a> 链接时（任务4 PDF 已上线）：去下划线，状态标变绿 */
+    a.kb-mod-card { text-decoration: none; color: inherit; }
+    .kb-ppt-status--open { color: #1b5e20; }
     /* （旧"⬇ 原文件"小按钮样式保留但不再使用，避免将来误用） */
     /* 实验任务里的表格下载徽章（绿色虚线，跟 PPT 下载区分） */
     .table-dl { display: inline-flex; align-items: center; gap: 3px; border: 1.2px dashed #66bb6a; border-radius: 6px; padding: 1px 8px; margin: 0 2px; color: #2e7d32; font-size: 0.78em; font-weight: 600; text-decoration: none; background: #f1f8e9; transition: all 0.18s ease; vertical-align: baseline; white-space: nowrap; }
@@ -2204,7 +2350,7 @@
                         <!-- 练习任务 1：归入"知识"分类 -->
                         <div class="practice-box">
                             <div class="concept-title">✏️ 练习任务（3.2，2学时）：给拓扑图与配置填表</div>
-                            <p><strong>②网络架构合规性检查：</strong>对照 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材1：XX企业园区网拓扑图（含问题）.docx" download title="下载《XX企业园区网拓扑图（含问题）》">⬇ 素材1：拓扑图（含问题）</a> 和 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材3：模拟设备配置文件.docx" download title="下载《模拟设备配置文件》">⬇ 素材3：设备配置</a> 逐项检查，3-4 人/组分工（<strong>测评工程师 + 记录员</strong>），填写 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 素材2：测评记录表</a>。然后画出区域划分清晰的拓扑图。</p>
+                            <p><strong>②网络架构合规性检查：</strong>对照 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材1：XX企业园区网拓扑图（含问题）.docx" download title="下载《XX企业园区网拓扑图（含问题）》">⬇ 素材1：拓扑图（含问题）</a> 逐项检查，1人/组分工（<strong>测评工程师 + 记录员</strong>），填写 <a class="table-dl" href="各类表格/3.2 网络架构合规性检查/素材2：安全通信网络测评记录表（模板）.docx" download title="下载《安全通信网络测评记录表（模板）》">⬇ 素材2：测评记录表</a>。然后画出区域划分清晰的拓扑图。</p>
                             <p><strong>评价标准：</strong>核查完整性（40%）+ 问题描述准确性（30%）+ 记录规范性（30%）。</p>
                             <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
                         </div>
@@ -2357,90 +2503,100 @@
                         </div>
                             <p style="background:#eaf6fd;border-left:4px solid #0288d1;padding:8px 12px;border-radius:6px;font-size:0.92rem;">👉 以上是"方法层"的知识。<strong>本轮要做的 4 个实验、实验项目清单、操作步骤与提交要求，已全部整理到「🧪 实验」页</strong>，请点击上方「🧪 实验」切换到实验页查看。</p>
 
+                        
                         <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
-                        <!-- 【实验 1/6】做什么 -->
+                        <!-- 【实验 1/5】做什么 -->
                         <div class="lab-box">
                             <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实（虚拟化）主机上完成 <strong>4 个基线核查实验</strong>（Windows 线 2 个 + Linux 线 2 个），把前面知识模块里的"纸面检查表"变成<strong>有真实证据支撑</strong>的《等保测评实验记录表》。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实（虚拟化）主机上完成 <strong>2 个基线核查实验</strong>（Windows 线 1 个 + Linux 线 1 个），走通"<strong>查 → 判 → 交</strong>"三步闭环，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。<strong>课内完成、当场提交。</strong></div>
 
                             <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th style="width:120px;">项目</th><th>内容</th></tr>
-                                    <tr><td>平台网址</td><td><code>http://10.11.0.70</code>（校园网内访问）</td></tr>
+                                    <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
                                     <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
-                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>；例：学号 <code>234234</code> → 密码 <code>2342341q2w</code></td></tr>
-                                    <tr><td>实验路径</td><td>登录后进入「<strong>操作系统安全</strong>」方向 → 选择本轮实验 → 预约 / 开始实验 → 进入虚拟机操作</td></tr>
+                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
+                                    <tr><td>实验路径</td><td>登录后进入「<strong>主机设备基线核查</strong>」→「<strong>Windows 系统安全评测 / Linux 系统安全评测</strong>」→ 选择本轮实验 → 预约 / 开始实验 → 进入虚拟机操作</td></tr>
+                                    <tr><td>本环节只用两份素材</td><td><strong>素材6</strong>（实验选取清单与操作能力对照）+ <strong>素材7</strong>（等保测评实验记录表），其余素材均属知识页，<strong>实验环节不要使用</strong></td></tr>
                                 </table>
                             </div>
                             <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 本次任务清单——4 步闭环</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:230px;">产出什么</th></tr>
-                                    <tr><td><strong>① 选</strong></td><td>从 Windows 线 W1~W4 中选 <strong>2 个</strong>、Linux 线 L1~L4 中选 <strong>2 个</strong>（清单见下一节）</td><td>确定 4 个实验编号（推荐 <strong>W1 + W2 + L1 + L2</strong>）</td></tr>
-                                    <tr><td><strong>② 做</strong></td><td>在平台虚拟机内定位配置项 → 执行核查操作 → 逐条截图取证</td><td>每个实验 3 张关键截图，共 <strong>12 张</strong></td></tr>
-                                    <tr><td><strong>③ 填</strong></td><td>把真实回显抄进《等保测评实验记录表》，逐项做四档合规判定</td><td>填好的记录表（<strong>12 条核查项</strong>）</td></tr>
-                                    <tr><td><strong>④ 交</strong></td><td>截图打包 + 记录表，课内提交至学习通</td><td>截图 zip + 记录表 docx</td></tr>
-                                </table>
+                            <p style="margin:14px 0 6px;"><strong>▍2. 实验素材——按这个顺序使用</strong></p>
+                            <div style="background:#e8f5e9;border-left:4px solid #43a047;padding:10px 14px;border-radius:6px;margin-bottom:10px;">
+                                <p style="margin:0 0 8px;font-weight:700;color:#1b5e20;">📌 先看素材6 → 再看素材7</p>
+                                <ol style="margin:0 0 0 20px;line-height:1.9;">
+                                    <li><strong>第一步 · 看素材6</strong>（<em>西普平台实验选取清单与操作能力对照</em>）——先对照它<strong>确定要做哪 2 个实验</strong>，看清每个实验"要做的事"和"关键操作（考察点）"，再上平台动手。</li>
+                                    <li><strong>第二步 · 看素材7</strong>（<em>等保测评实验记录表（西普平台）</em>）——带着记录表去做实验，边核查边把实测结果填进去，<strong>就知道该取哪些证据、该填哪几条</strong>。</li>
+                                </ol>
                             </div>
-
-                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
                             <p>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：实验选取清单与操作能力对照 · 先看</a>
                                 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download title="下载《等保测评实验记录表（西普平台）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：实验选取清单与操作能力对照</a>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download title="下载《主机安全测评记录表》">⬇ 素材1：主机安全测评记录表（纸面版，选做对照）</a>
                             </p>
-                            <p style="font-size:0.88rem;color:#666;">记录表已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 4 个实验对应的 12 条</strong>（未选实验的行留空或整行删除）；判定拿不准时，回看知识模块里的"三法合一"判定原则。</p>
+                            <p style="font-size:0.88rem;color:#666;">记录表（素材7）已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 2 个实验对应的 6 条</strong>（未选实验的行留空或整行删除）；判定拿不准时，回看知识模块里的"三法合一"判定原则。</p>
                         </div>
 
-                        <!-- 【实验 2/6】选什么 -->
+                        <!-- 【实验 2/5】选什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">📋 二、选什么——实验项目清单（Windows 选 2 个 + Linux 选 2 个）</div>
-                            <div class="lab-goal">从西普平台「<strong>操作系统安全</strong>」方向选取实验：<strong>Windows 线选 2 个、Linux 线选 2 个，共 4 个</strong>；两条线合起来要覆盖"<strong>身份鉴别 + 安全审计 + 访问控制 + 入侵防范</strong>"四个维度。推荐组合 <strong>W1 + W2 + L1 + L2</strong>——口令与审计是等保测评最高频的丢分点，证据最好取、判定最典型。</div>
+                            <div class="lab-head">📋 二、选什么——实验项目清单（Windows 选 1 个 + Linux 选 1 个）</div>
+                            <div class="lab-goal">从西普平台「<strong>主机设备基线核查</strong>」→「<strong>Windows 系统安全评测 / Linux 系统安全评测</strong>」目录下选取实验：<strong>Windows 线选 1 个、Linux 线选 1 个，共 2 个</strong>。下表内容与 <strong>素材6</strong> 一致，请对照素材6 确认后，在平台内按实验名称找到对应实验。推荐组合 <strong>W1 + L1</strong>——口令策略与认证是等保测评最高频的丢分点，证据最好取、判定最典型。</div>
 
-                            <p style="margin:14px 0 6px;"><strong>① Windows 线（从 W1~W4 中选 2 个）</strong></p>
+                            <p style="margin:14px 0 6px;"><strong>① Windows 线（从 W1~W4 中选 1 个）</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>编号</th><th>对应平台实验<br>（西普「操作系统安全」）</th><th>实验要做的事</th><th>覆盖维度 / 依据</th><th>记录表<br>对应核查项</th><th>关键操作（考察点）</th></tr>
-                                    <tr><td><strong>W1</strong></td><td><strong>用户账户与口令安全配置</strong><br><span style="color:#888;font-size:0.85rem;">（账户策略 / 账户锁定策略）</span></td><td>查看并配置口令复杂度、最小长度、有效期、历史，以及登录失败锁定阈值</td><td>身份鉴别<br>8.1.4.1 a) / b)</td><td>第 1~3 条</td><td><code>secpol.msc</code> → 账户策略、账户锁定策略；<code>net accounts</code>；<code>net user</code></td></tr>
-                                    <tr><td><strong>W2</strong></td><td><strong>系统安全审计与日志管理</strong><br><span style="color:#888;font-size:0.85rem;">（审核策略 / 事件日志）</span></td><td>启用登录、对象访问、策略变更审计（成功 + 失败），检查安全日志留存与保护</td><td>安全审计<br>8.1.4.3 a) ~ c)</td><td>第 4~6 条</td><td><code>secpol.msc</code> → 审核策略；<code>auditpol /get /category:*</code>；事件查看器 → 安全日志 → 属性</td></tr>
-                                    <tr><td><strong>W3</strong></td><td><strong>共享资源与服务端口安全</strong><br><span style="color:#888;font-size:0.85rem;">（默认共享 / 服务 / 端口）</span></td><td>检查默认共享、Guest 与多余账户、非必要服务与 445 等高危端口暴露</td><td>访问控制 8.1.4.2<br>入侵防范 8.1.4.4</td><td>第 7~9 条</td><td><code>net share</code>；<code>services.msc</code>；<code>netstat -ano | findstr LISTENING</code></td></tr>
-                                    <tr><td><strong>W4</strong></td><td><strong>文件系统权限与访问控制</strong><br><span style="color:#888;font-size:0.85rem;">（NTFS 权限）</span></td><td>查看关键目录 NTFS 权限，检查是否存在 Everyone 可写等过度授权</td><td>访问控制<br>8.1.4.2</td><td>第 10~12 条</td><td>文件属性 → 安全 → 高级；<code>icacls</code>；<code>Get-Acl</code></td></tr>
+                                    <tr><th>编号</th><th>对应平台实验<br>（西普真实目录）</th><th>你要查什么</th><th>覆盖条款</th><th>关键操作（考察点）</th></tr>
+                                    <tr><td><strong>W1</strong></td><td><strong>Windows 系统安全评测 → Windows 身份鉴别</strong></td><td>口令复杂度、最小长度、有效期、历史，以及账户锁定阈值</td><td>8.1.4.1 a) / b)</td><td><code>secpol.msc</code> → 账户策略、账户锁定策略；<code>net accounts</code>；<code>net user</code></td></tr>
+                                    <tr><td><strong>W2</strong></td><td><strong>Windows 系统安全评测 → Windows 安全审计</strong></td><td>审核策略（登录 / 对象访问 / 策略变更，成功 + 失败）、安全日志留存</td><td>8.1.4.3 a) ~ c)</td><td><code>secpol.msc</code> → 审核策略；<code>auditpol /get /category:*</code>；事件查看器 → 安全日志 → 属性</td></tr>
+                                    <tr><td><strong>W3</strong></td><td><strong>Windows 系统安全评测 → Windows 入侵防范</strong></td><td>默认共享、Guest 与多余账户、非必要服务、445 等高危端口</td><td>8.1.4.4</td><td><code>net share</code>；<code>services.msc</code>；<code>netstat -ano | findstr LISTENING</code></td></tr>
+                                    <tr><td><strong>W4</strong></td><td><strong>Windows 系统安全评测 → Windows 访问控制</strong></td><td>用户权限分配、关键目录 NTFS 权限（是否 Everyone 可写）</td><td>8.1.4.2</td><td><code>secpol.msc</code> → 本地策略 → 用户权限分配；<code>icacls</code>；文件属性 → 安全 → 高级</td></tr>
                                 </table>
                             </div>
 
-                            <p style="margin:18px 0 6px;"><strong>② Linux 线（从 L1~L4 中选 2 个）</strong></p>
+                            <p style="margin:18px 0 6px;"><strong>② Linux 线（从 L1~L4 中选 1 个）</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>编号</th><th>对应平台实验<br>（西普「操作系统安全」）</th><th>实验要做的事</th><th>覆盖维度 / 依据</th><th>记录表<br>对应核查项</th><th>关键操作（考察点）</th></tr>
-                                    <tr><td><strong>L1</strong></td><td><strong>用户账户与口令策略配置</strong><br><span style="color:#888;font-size:0.85rem;">（login.defs / pwquality / shadow）</span></td><td>查看口令有效期、最小长度、空口令账户与登录失败处理</td><td>身份鉴别<br>8.1.4.1 a) / b)</td><td>第 13~15 条</td><td><code>cat /etc/login.defs</code>；<code>cat /etc/security/pwquality.conf</code>；<code>awk -F: '($2=="")' /etc/shadow</code></td></tr>
-                                    <tr><td><strong>L2</strong></td><td><strong>系统日志与审计配置</strong><br><span style="color:#888;font-size:0.85rem;">（rsyslog / auditd）</span></td><td>查看审计服务状态、日志内容与日志留存、权限保护</td><td>安全审计<br>8.1.4.3 a) ~ c)</td><td>第 16~18 条</td><td><code>systemctl status rsyslog auditd</code>；<code>cat /var/log/secure</code>；<code>auditctl -l</code>；<code>cat /etc/logrotate.conf</code></td></tr>
-                                    <tr><td><strong>L3</strong></td><td><strong>服务与端口最小化</strong><br><span style="color:#888;font-size:0.85rem;">（服务管理 / 开放端口 / 补丁）</span></td><td>检查开放端口与非必要服务（telnet / ftp），落实最小化安装与补丁更新</td><td>入侵防范<br>8.1.4.4</td><td>第 19~21 条</td><td><code>ss -tlnp</code>；<code>systemctl list-unit-files --type=service --state=enabled</code>；<code>rpm -qa --last</code></td></tr>
-                                    <tr><td><strong>L4</strong></td><td><strong>文件权限与 SSH 安全配置</strong><br><span style="color:#888;font-size:0.85rem;">（关键文件权限 / sshd_config）</span></td><td>检查关键文件权限（644 / 600）与 SSH 关键安全参数</td><td>访问控制 8.1.4.2<br>身份鉴别 8.1.4.1 b)</td><td>第 22~24 条</td><td><code>ls -l /etc/passwd /etc/shadow</code>；<code>grep -E "PermitRootLogin|Protocol|MaxAuthTries" /etc/ssh/sshd_config</code></td></tr>
+                                    <tr><th>编号</th><th>对应平台实验<br>（西普真实目录）</th><th>你要查什么</th><th>覆盖条款</th><th>关键操作（考察点）</th></tr>
+                                    <tr><td><strong>L1</strong></td><td><strong>Linux 系统安全评测 → 认证人工检查</strong></td><td>login.defs、pwquality.conf、system-auth、空口令 / 弱口令账户</td><td>8.1.4.1 a) / b)</td><td><code>cat /etc/login.defs</code>；<code>cat /etc/security/pwquality.conf</code>；<code>cat /etc/pam.d/system-auth</code>；<code>awk -F: '($2=="")' /etc/shadow</code></td></tr>
+                                    <tr><td><strong>L2</strong></td><td><strong>Linux 系统安全评测 → 安全审计漏洞人工检查</strong></td><td>rsyslog / auditd 状态、<code>/var/log/secure</code>、audit 规则、日志留存</td><td>8.1.4.3 a) ~ c)</td><td><code>systemctl status rsyslog auditd</code>；<code>cat /var/log/secure</code>；<code>auditctl -l</code>；<code>cat /etc/logrotate.conf</code></td></tr>
+                                    <tr><td><strong>L3</strong></td><td><strong>Linux 系统安全评测 → 系统人工检查</strong></td><td>开放端口与非必要服务、系统补丁与已知漏洞</td><td>8.1.4.4</td><td><code>ss -tlnp</code>；<code>systemctl list-unit-files --type=service --state=enabled</code>；<code>rpm -qa --last</code>；<code>yum check-update</code></td></tr>
+                                    <tr><td><strong>L4</strong></td><td><strong>Linux 系统安全评测 → 账号人工检查</strong></td><td>账户最小化、sudo 权限、关键文件权限</td><td>8.1.4.2 / 8.1.4.1 b)</td><td><code>cat /etc/passwd</code>；<code>cat /etc/sudoers</code>；<code>getent group wheel</code>；<code>ls -l /etc/passwd /etc/shadow /etc/group</code></td></tr>
                                 </table>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;">说明：上表实验名称按西普平台「操作系统安全」课程目录的通行叫法书写；若平台实际目录名称不同，<strong>以"实验要做的事"和"关键操作（考察点）"为准</strong>，选同类实验即可。平台内找不到同名实验时，按关键词搜索：<code>口令 / 密码策略 / 账户锁定</code> → W1；<code>日志 / 审计</code> → W2；<code>共享 / 服务 / 端口</code> → W3；<code>文件权限 / NTFS</code> → W4；Linux 同理（<code>login.defs</code>、<code>rsyslog</code>、<code>端口</code>、<code>sshd</code>）。完整对照表见 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download>⬇ 素材6</a>。</p>
+                            <p style="font-size:0.88rem;color:#666;">说明：上表"对应平台实验"列直接引用西普平台"主机设备基线核查"→"Windows/Linux 系统安全评测"目录下的实验名称；学生在平台内按该名称找到实验即可。Linux 目录下的"<strong>漏洞扫描工具使用</strong>"属于工具操作类实验，不是等保基线核查内容，<strong>本轮不选</strong>。</p>
                         </div>
 
-                        <!-- 【实验 3/6】需要什么能力 -->
+                        <!-- 【实验 3/5】怎么做 + 待完成任务 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 三、需要什么能力——应具备的操作能力</div>
-                            <div class="lab-goal">课程标准学习任务 4 的能力要求是"<strong>能够使用配置核查工具对 Windows 和 Linux 系统进行安全配置核查与基线比对，填写测评记录表</strong>"。落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
+                            <div class="lab-head">🎯 三、怎么做——操作能力要求与待完成任务</div>
+                            <div class="lab-goal">课程标准学习任务 4 的能力要求是"<strong>能够使用配置核查工具对 Windows 和 Linux 系统进行安全配置核查与基线比对，填写测评记录表</strong>"。落到本轮上机，需具备以下 4 项操作能力，并完成下方 4 项待完成任务。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 应具备的操作能力</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th style="width:42px;">#</th><th style="width:150px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:130px;">在哪个环节练</th></tr>
-                                    <tr><td>①</td><td><strong>平台操作能力</strong></td><td>能独立登录西普平台、进入「操作系统安全」实验、启动虚拟机并提交实验结果；知道实验计时 / 次数限制；遇到环境打不开能规范描述现象并求助</td><td>4 个实验全程</td></tr>
-                                    <tr><td>②</td><td><strong>基线核查操作能力</strong></td><td>能在 Windows 图形界面（<code>secpol.msc</code> / 计算机管理 / 事件查看器）与 Linux 配置文件命令（<code>cat /etc/login.defs</code>、<code>grep sshd_config</code>、<code>ss -tlnp</code>）两条路径上，<strong>定位并读取</strong>口令策略、账户权限、审计日志、服务端口四类配置项</td><td>实验②「做」</td></tr>
-                                    <tr><td>③</td><td><strong>证据取证能力</strong></td><td>对每一条核查项都能取到<strong>可追溯的证据</strong>：配置界面 / 命令回显截图 + 截图编号，做到"谁说符合，证据在哪"</td><td>实验②「做」</td></tr>
-                                    <tr><td>④</td><td><strong>判定与记录能力</strong></td><td>能对照 GB/T 22239-2019（8.1.4 安全计算环境）逐项判定"符合 / 部分符合 / 不符合 / 不适用"，把"做到哪、差在哪"写清，规范填写《等保测评实验记录表》</td><td>实验③「填」</td></tr>
+                                    <tr><td>①</td><td><strong>平台操作能力</strong></td><td>能独立登录西普平台、进入「主机设备基线核查」→「Windows/Linux 系统安全评测」实验、启动虚拟机并提交实验结果；知道实验计时 / 次数限制；遇到环境打不开能规范描述现象并求助</td><td>2 个实验全程</td></tr>
+                                    <tr><td>②</td><td><strong>基线核查操作能力</strong></td><td>能在 Windows 图形界面（<code>secpol.msc</code> / 计算机管理 / 事件查看器）与 Linux 配置文件命令（<code>cat /etc/login.defs</code>、<code>grep sshd_config</code>、<code>ss -tlnp</code>）两条路径上，<strong>定位并读取</strong>口令策略、账户权限、审计日志、服务端口四类配置项</td><td>待完成任务②</td></tr>
+                                    <tr><td>③</td><td><strong>证据取证能力</strong></td><td>对每一条核查项都能取到<strong>可追溯的证据</strong>：配置界面 / 命令回显截图 + 截图编号，做到"谁说符合，证据在哪"</td><td>待完成任务②</td></tr>
+                                    <tr><td>④</td><td><strong>判定与记录能力</strong></td><td>能对照 GB/T 22239-2019（8.1.4 安全计算环境）逐项判定"符合 / 部分符合 / 不符合 / 不适用"，把"做到哪、差在哪"写清，规范填写《等保测评实验记录表》（素材7）</td><td>待完成任务③</td></tr>
+                                </table>
+                            </div>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 待完成的实验任务（4 项）</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:64px;">任务</th><th>具体要求</th><th style="width:220px;">产出</th></tr>
+                                    <tr><td><strong>① 选实验</strong></td><td>对照<strong>素材6</strong>，从 Windows 线 W1~W4 选 <strong>1 个</strong>、Linux 线 L1~L4 选 <strong>1 个</strong>（推荐 W1 + L1），在平台内找到并启动实验</td><td>确定 2 个实验编号</td></tr>
+                                    <tr><td><strong>② 做核查、取证</strong></td><td>在虚拟机内定位配置项 → 执行核查操作 → <strong>每条核查项至少留 1 张截图</strong>（须含命令回显或配置界面），截图文件名与"截图编号"一致（如 <code>W1-01.png</code>）</td><td>带命令回显的证据截图</td></tr>
+                                    <tr><td><strong>③ 填记录表、做判定</strong></td><td>打开<strong>素材7</strong>，把所选 2 个实验对应的 <strong>6 条</strong>核查项填写完整：实测结果（具体值）+ <strong>四档判定</strong> + 问题描述 + 整改建议，并写"核查小结 + 优先整改项"</td><td>填好的记录表（6 条）</td></tr>
+                                    <tr><td><strong>④ 提交成果</strong></td><td>截图打包 + 记录表，按下方第五节要求命名并课内提交</td><td>截图包 + 记录表</td></tr>
                                 </table>
                             </div>
                         </div>
 
-                        <!-- 【实验 4/6】实验目标 -->
+                        <!-- 【实验 4/5】学到什么 -->
                         <div class="lab-box">
                             <div class="lab-head">🎯 四、学到什么——实验目标与达标判据</div>
                             <div class="lab-goal"><strong>总目标：</strong>在西普平台真实（虚拟化）主机上走通"<strong>选取核查项 → 平台操作取证 → 基线比对 → 合规判定 → 填写记录表</strong>"的完整闭环，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。</div>
@@ -2449,54 +2605,32 @@
                                     <tr><th style="width:56px;">编号</th><th>实验目标</th><th>达标判据</th></tr>
                                     <tr><td>W1</td><td>掌握本地安全策略中口令复杂度、长度、最长期限、历史与账户锁定阈值的查看与配置，能判定是否满足三级要求</td><td>"实测结果"给出具体值（如最小长度 = 8）；"符合性判定"给出四档结论</td></tr>
                                     <tr><td>W2</td><td>掌握审核策略的启用（登录 / 对象访问 / 策略变更，成功 + 失败）与事件日志留存设置，能验证"日志可查、留存满足"</td><td>"实测结果"列出已启用的审核类别；"问题描述"写清未开启的项</td></tr>
-                                    <tr><td>W3</td><td>掌握默认共享、Guest / 多余账户、445 等非必要端口与服务的检查，能识别"高危端口暴露"风险</td><td>"实测结果"给出端口 / 共享清单；"整改建议"给出关闭或限制的具体做法</td></tr>
-                                    <tr><td>W4</td><td>掌握 NTFS 权限查看与最小权限检查，能判定是否存在 Everyone 可写等过度授权</td><td>"实测结果"给出目录权限清单；"问题描述"点明过度授权的对象</td></tr>
-                                    <tr><td>L1</td><td>掌握 <code>/etc/login.defs</code>、<code>/etc/security/pwquality.conf</code>、<code>/etc/shadow</code> 的查看，能判定口令有效期、最小长度、空口令账户是否合规</td><td>"实测结果"抄录关键参数值；"符合性判定"逐项四档</td></tr>
+                                    <tr><td>W3</td><td>掌握默认共享、Guest / 多余账户、445 等非必要端口与服务的检查与关闭，能识别"高危端口暴露"风险</td><td>"实测结果"给出端口 / 共享清单；"整改建议"给出关闭或限制的具体做法</td></tr>
+                                    <tr><td>W4</td><td>掌握用户权限分配与 NTFS 权限查看，能判定是否存在 Everyone 可写等过度授权</td><td>"实测结果"给出权限清单；"问题描述"点明过度授权的对象</td></tr>
+                                    <tr><td>L1</td><td>掌握 <code>/etc/login.defs</code>、<code>/etc/security/pwquality.conf</code>、<code>/etc/pam.d/system-auth</code>、<code>/etc/shadow</code> 的查看，能判定口令策略与登录失败处理是否合规</td><td>"实测结果"抄录关键参数值；"符合性判定"逐项四档</td></tr>
                                     <tr><td>L2</td><td>掌握 rsyslog / auditd 服务状态、<code>/var/log/secure</code> 与 audit 规则的查看，能判定"审计是否开启、日志能否追溯"</td><td>"实测结果"给出服务状态与日志样例；"问题描述"写清缺失的审计项</td></tr>
                                     <tr><td>L3</td><td>掌握开放端口与非必要服务（telnet / ftp 等）的检查与关闭，能判定"最小化安装"落实情况</td><td>"实测结果"给出开放端口清单；"整改建议"给出停用服务命令</td></tr>
-                                    <tr><td>L4</td><td>掌握关键文件权限（644 / 600）、<code>/etc/ssh/sshd_config</code> 关键参数的查看与判定</td><td>"实测结果"给出文件权限与 SSH 参数值；"符合性判定"给出结论</td></tr>
+                                    <tr><td>L4</td><td>掌握账户最小化、sudo 权限、关键文件权限的查看与判定</td><td>"实测结果"给出账户列表与权限值；"符合性判定"给出结论</td></tr>
                                 </table>
                             </div>
-                            <p style="font-size:0.88rem;color:#666;">上表 8 条目标与你所选 4 个实验一一对应：选了哪 4 个，就重点达成对应的 4 条判据。</p>
+                            <p style="font-size:0.88rem;color:#666;">上表 8 条目标与你所选 2 个实验一一对应：选了哪 2 个，就重点达成对应的 2 条判据。</p>
                         </div>
 
-                        <!-- 【实验 5/6】怎么做 -->
+                        <!-- 【实验 5/5】交什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🛠️ 五、怎么做——实验步骤</div>
-                            <ol class="step-list">
-                                <li><strong>登录与环境准备。</strong>浏览器打开 <code>http://10.11.0.70</code>，用 <strong>11 位学号</strong>登录（密码 = 学号 + <code>1q2w</code>，例：<code>2342341q2w</code>）；进入「<strong>操作系统安全</strong>」方向，确认本轮 4 个实验（Windows 2 个 + Linux 2 个）已选修 / 预约。</li>
-                                <li><strong>建立核查清单。</strong>打开 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download>⬇《等保测评实验记录表》（素材7）</a>。记录表已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 4 个实验对应的 12 条</strong>（未选实验的行留空或整行删除）。先对照上一节的实验项目清单，确认每一条核查项归哪个实验（纸面版见 <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材1：实践任务——主机安全测评记录表.docx" download>⬇ 素材1</a>，可作对照）。</li>
-                                <li><strong>逐个实验操作取证。</strong>按选定的 4 个实验逐一进入环境（建议 W 线 2 个 → L 线 2 个）：先在<strong>图形界面 / 配置文件</strong>中定位核查项，再执行核查操作取回显，<strong>每条核查项截 1 张图</strong>，命名与记录表"截图编号"一致（如 <code>W1-01.png</code>、<code>L3-02.png</code>）。</li>
-                                <li><strong>填写实测结果。</strong>把真实回显抄进"实测结果"列——必须写具体值（如 <code>PASS_MIN_LEN=6</code>），不能直接写"符合 / 不符合"。</li>
-                                <li><strong>基线比对与判定。</strong>拿"实测结果"对比"基线要求"，逐项四选一判定（<code>符合</code> / <code>部分符合</code> / <code>不符合</code> / <code>不适用</code>）；部分符合 / 不符合必须写清"做到哪、差在哪"。</li>
-                                <li><strong>问题描述与整改建议。</strong>对不符合项写"问题描述 + 整改建议"；整改建议要落到具体位置（如"<code>secpol.msc</code> → 账户策略 → 最小长度改 8"）。</li>
-                                <li><strong>小结与提交。</strong>完成"核查小结"（符合 / 部分符合 / 不符合 / 不适用各几项 + 优先整改项），课内当场提交：4 个实验截图 + 填好的记录表。</li>
-                            </ol>
-                            <div class="ai-tip-box">
-                                <div class="ai-tip-title">🤖 命令记不住 / 环境打不开？让 AI 当"随身教练"</div>
-                                <div class="prompt-tpl">
-                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                    我在西普实验平台上做等保测评的主机基线核查，系统是【Windows Server / CentOS 7】。请给我一张"核查项—操作路径或命令—合格标准—输出里重点看什么"对照表（口令策略、账户锁定、审计日志、开放端口），每条一行。
-                                </div>
-                                <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。环境打不开时，把报错原文粘贴给 AI 让它排错。</p>
-                            </div>
-                        </div>
-
-                        <!-- 【实验 6/6】交什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📑 六、交什么——成果与提交要求</div>
+                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
                             <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
                                 <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li><strong>操作截图包</strong>——4 个实验的关键截图共 <strong>12 张</strong>（每实验 3 张），须含命令回显或配置界面，按 <code>W1-01.png</code> 方式命名并与记录表"截图编号"一一对应；打包为 <code>学号_姓名_实验4.1_截图.zip</code></li>
-                                    <li><strong>《等保测评实验记录表》</strong>——12 条核查项全填（实测结果 + 四档判定 + 问题描述 + 整改建议），含"核查小结 + 优先整改项"；命名 <code>学号_姓名_实验4.1_等保测评实验记录表.docx</code></li>
+                                    <li><strong>操作截图包</strong>——2 个实验的关键截图（每条核查项至少 1 张），须含命令回显或配置界面，按 <code>W1-01.png</code> 方式命名并与记录表"截图编号"一一对应；打包后与记录表一并提交</li>
+                                    <li><strong>《等保测评实验记录表》（素材7）</strong>——所选 2 个实验对应的 6 条核查项全填（实测结果 + 四档判定 + 问题描述 + 整改建议），含"核查小结 + 优先整改项"；按 <strong>班级 + 学号 + 姓名 + 4.1 实验</strong> 命名</li>
                                     <li><strong>平台登录与实验列表截图</strong>——证明本人在平台上完成了所选实验（含个人信息、实验名称、完成状态），并入截图包</li>
                                 </ol>
                                 <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.1 → 作业区（<strong>课内完成并提交</strong>）</p>
                             </div>
                             <div class="lab-check" style="margin-top:14px;">
                                 <div class="lab-check-title">📋 提交前自查</div>
-                                ☐ 4 个实验（Win 2 + Linux 2）全部完成　☐ 所选 4 个实验的 12 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写清了"差在哪"　☐ 核查小结给了四档统计与优先整改项　☐ 没有"以一台代表全部"
+                                ☐ 已按"先看素材6、再看素材7"的顺序使用素材　☐ 只用了素材6 和素材7（未误用知识页素材）　☐ 2 个实验（Windows 1 + Linux 1）全部完成　☐ 所选 2 个实验的 6 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写清了"差在哪"　☐ 核查小结给了四档统计与优先整改项　☐ 没有"以一台代表全部"
                             </div>
                         </div>
 
@@ -2514,12 +2648,14 @@
                             <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
                             <div class="kb-st-list">
                                 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材1：案例导入文字材料.docx" download title="下载《案例导入文字材料》">⬇ 素材1：案例导入文字材料</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置文件（含合规项与不合规项）.docx" download title="下载《防火墙配置文件》">⬇ 素材2：实践任务1——防火墙配置文件</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2：防火墙配置导出（华为 USG6650E）</a>
                                 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 素材3：实践任务——《网络设备安全测评记录表》</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置片段.docx" download title="下载《交换机配置片段》">⬇ 素材4：实践任务2——交换机配置片段</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4：交换机配置导出（华为 S5720-28X-SI）</a>
                                 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材5：快速检查表（教师参考）.docx" download title="下载《快速检查表（教师参考）》">⬇ 素材5：快速检查表（教师参考）</a>
                                 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材6：参考答案.docx" download title="下载《参考答案》">⬇ 素材6：参考答案</a>
                                 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材6：课后作业.docx" download title="下载《课后作业》">⬇ 素材6：课后作业</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7：实践任务3——路由器配置导出（华为 AR6120）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8：案例——测评记录表填写范例（防火墙 FW-01）</a>
                             </div>
                         </div>
 
@@ -2553,7 +2689,7 @@
                                     <tr><td>出入站日志、HA 配置、WAF 联动</td><td>logging host / hrp standby-device</td><td>三级</td></tr>
                                 </table>
                             </div>
-                            <p><strong>检查素材下载：</strong><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置文件（含合规项与不合规项）.docx" download title="下载《防火墙配置文件》">⬇ 防火墙配置文件</a>、<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置片段.docx" download title="下载《交换机配置片段》">⬇ 交换机配置片段</a></p>
+                            <p><strong>配置导出素材下载（全华为系典型型号，三台设备各一份）：</strong><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 路由器配置导出（AR6120）</a>、<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 交换机配置导出（S5720-28X-SI）</a>、<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 防火墙配置导出（USG6650E）</a></p>
                         </div>
 
                         <!-- 模块 3：怎么查 -->
@@ -2574,47 +2710,215 @@
                             <p><strong>判定原则：</strong>"不符合"必须能精确到<strong>具体配置行 / 缺失项</strong>（如："防火墙策略 rule 15 允许 any→any"），不可写"配置不当"。</p>
                             <p><strong>必踩雷区：</strong>① 不接受历史截图——可能已回滚；② 不接受口头描述——必须现场导出；③ 多台同类设备必须每台都看——一台加固不等于全部。</p>
                             <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 《网络设备安全测评记录表》</a></p>
+<div class="rb-case" id="rbCase42">
+                                <div class="rb-case-head">
+                                    <p class="rb-case-ttl">📄 案例：基于导出配置的测评记录表（以防火墙 FW-01 / 华为 USG6650E 为例）</p>
+                                    <span class="rb-case-act">
+                                        <a class="rb-case-btn rb-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》Word 版">⬇ 下载表格（Word）</a>
+                                        <button type="button" class="rb-case-btn rb-toggle" aria-expanded="true" aria-controls="rbCase42Body" onclick="rbCaseToggle(this)">折叠 ▴</button>
+                                    </span>
+                                </div>
+                                <div class="rb-case-body" id="rbCase42Body">
+                                    <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">数据来源：素材2 的 <code>display current-configuration</code> 回显。<strong>照着回显逐行对照</strong>，把 9 条指标全部填满——下面这份就是标准答案的写法，"不符合"必须落到具体配置行和原值上。表格较宽时可左右滑动。</p>
+                                    <div class="table-container">
+                                        <table class="info-table rb-tbl">
+                                            <colgroup><col style="width:9.5%"><col style="width:12%"><col style="width:8%"><col style="width:29%"><col style="width:20.75%"><col style="width:20.75%"></colgroup>
+                                            <tr><th>测评指标编号</th><th>测评指标名称</th><th>测评结果</th><th>问题描述（落到具体配置行）</th><th>风险分析</th><th>整改建议</th></tr>
+                                            <tr><td>8.1.4.1 a)</td><td>身份标识与鉴别</td><td>不符合</td><td>password-policy 中 <code>password min-length 6</code>（低于 8 位）；<code>password complexity-check disable</code>（未启用复杂度校验）；<code>password expire 180</code>（超过 90 天）</td><td>口令强度不足，可被字典暴破；攻击者一旦拿到管理权限即可改写安全策略、开放后门端口</td><td>改 <code>min-length 8</code>；<code>complexity-check enable</code>；<code>expire 90</code>；强制高危口令一次性改密</td></tr>
+                                            <tr><td>8.1.4.1 b)</td><td>登录失败处理</td><td>不符合</td><td><code>local-user admin failed-times 8 lock-times 10</code>：连续失败 8 次才锁定，锁定仅 10 分钟</td><td>在线爆破窗口过大，10 分钟后可继续尝试，慢速字典长期有效</td><td><code>failed-times 5</code>；<code>lock-times 15</code>；并开启登录失败告警日志</td></tr>
+                                            <tr><td>8.1.4.1 c)</td><td>远程管理加密</td><td>部分符合</td><td><code>stelnet server enable</code>、<code>http secure-server enable</code> 已开；但同时存在 <code>telnet server enable</code> 与 <code>http server enable</code></td><td>明文管理流量可被同链路嗅探，管理口令与配置命令直接泄露</td><td><code>undo telnet server enable</code>；<code>undo http server enable</code>；仅保留 stelnet + HTTPS</td></tr>
+                                            <tr><td>8.1.4.2 b)</td><td>默认账户管理</td><td>不符合</td><td>出厂默认账号 <code>admin</code> 未重命名，且 service-type 含 ssh/http/https，可远程登录</td><td>攻击者无需信息收集即可直接对 admin 发起定向爆破，攻击成本显著降低</td><td>重命名为专用运维账号（如 <code>opr_fw01</code>）并同步改口令；删除或禁用无用账号</td></tr>
+                                            <tr><td>8.1.4.2 d)</td><td>最小权限</td><td>部分符合</td><td><code>audit</code>（level 5）已独立 ✅；但 <code>admin</code> 为 <code>privilege level 15</code>，同时具备配置修改与审计查看权限</td><td>管理员与审计员职责未分离，管理员可删除或篡改自身操作记录，审计形同虚设</td><td>admin 降为 level 3；新建独立审计员账号（level 5）交审计岗，实现"配置—审计"分离</td></tr>
+                                            <tr><td>8.1.4.3 a)</td><td>安全审计启用</td><td>符合</td><td><code>info-center enable</code> 已开启，日志功能处于生效状态</td><td>—（本项无风险）</td><td>保持；建议再将日志外发 syslog 服务器集中留存</td></tr>
+                                            <tr><td>8.1.4.3 c)</td><td>审计记录保护</td><td>不符合</td><td><code>info-center logfile save-time 30</code>，设备本地日志仅保存 30 天</td><td>攻击行为发生 30 天后本地无可查记录，取证链断裂，不满足等保留存要求</td><td><code>save-time 180</code>；配置 <code>info-center loghost</code> 远程日志，防止本地日志被清除</td></tr>
+                                            <tr><td>8.1.4.4 b)</td><td>关闭不需要的服务</td><td>不符合</td><td><code>telnet server enable</code>、<code>http server enable</code> 已开启；<code>snmp-agent sys-info version v2c</code>，<code>community read</code> 为 public</td><td>明文协议可被嗅探；SNMPv2c 团体字明文传输，攻击者可读取路由表与安全策略，甚至改写配置</td><td>关闭 Telnet 与 HTTP；SNMP 升级 v3（认证+加密），删除 public/private 团体字</td></tr>
+                                            <tr><td>8.1.4.4 c)</td><td>管理终端限制</td><td>不符合</td><td><code>acl number 2000</code> 下 <code>rule 5 permit source any</code>，管理面 ACL 放通任意源 IP</td><td>管理界面暴露于全部可达网段，可被持续爆破或利用设备管理面漏洞</td><td>ACL 2000 改为仅放通运维网段 <code>10.10.20.0/24</code>，并在公网接口屏蔽 22/23/8443</td></tr>
+                                        </table>
+                                    </div>
+                                    <p style="font-size:0.85rem;color:#8a6d00;margin:8px 0 0;">⚠️ 上面是"讲解示范"。交换机（S1）和路由器（R1）两张表请你自己对着素材4、素材7 独立填完——同一套填法，换个设备而已。Word 版可下载后打印手填或电子填写。</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="practice-box">
-                            <div class="concept-title">✏️ 练习任务（4.2，2学时）：给素材填表</div>
-                            <p><strong>网络设备配置核查：</strong>在模拟路由器、交换机、防火墙环境上导出当前配置，对照核查清单逐项判定，填写《网络设备安全测评记录表》（<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>4 人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
-                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
-                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
-                        </div>
+<!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
+                        <!-- 【实验 1/5】做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验 4.3：安全区域边界测评——检查系统的"大门"</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>完成"安全区域边界"控制类测评，覆盖 6 个子类：边界防护、访问控制、入侵防范、恶意代码和垃圾邮件防范、安全审计、可信验证。判定依据主要来自<strong>实验三录入的安全设备</strong>（防火墙、WAF 的部署位置与功能）和<strong>你画的拓扑图</strong>。</div>
-                            <ol class="step-list">
-                                <li><strong>展开"安全区域边界"节点</strong>，先通读 6 个子类的测评项，对照拓扑图定位每项"查的是哪个位置"（如边界防护→互联网出口、访问控制→防火墙策略）。</li>
-                                <li><strong>逐项判定。</strong>参考模拟示例：边界防护a→符合（防火墙+WAF 部署于互联网边界）；访问控制e→部分符合（防火墙仅按 IP/端口过滤，未实现基于应用协议和应用内容的访问控制）。</li>
-                                <li><strong>问题描述写"设备+差距"。</strong>网络类问题要落到具体设备："WAF 未开启 XX 防护策略"比"防护不到位"有价值一百倍。</li>
-                            </ol>
-                            <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
-                                ☐ 6 个子类均有判定　☐ 每个判定都能对应到拓扑图上的位置或设备
+                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>拿 <strong>三份真实设备配置</strong>（华为 <strong>防火墙 USG6650E / 交换机 S5720 / 路由器 AR6120</strong>）练手，走通"<strong>查 → 导 → 录 → 判</strong>"四步主线——按 8 个要点逐段读配置、把可疑行标出来，再逐条对照基线做四档判定。<strong>课内完成、当场提交。</strong></div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 实验环境与素材</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:130px;">项目</th><th>内容</th></tr>
+                                    <tr><td>实验性质</td><td>基于<strong>真实设备配置导出文件</strong>的离线核查（配置源文件由素材提供，无需登录真机）</td></tr>
+                                    <tr><td>被测设备（3 台）</td><td>① 出口防火墙 华为 <strong>USG6650E</strong>（FW-01）　② 核心交换机 华为 <strong>S5720-28X-SI</strong>　③ 出口路由器 华为 <strong>AR6120</strong></td></tr>
+                                    <tr><td>导出命令</td><td>华为设备统一使用 <code>display current-configuration</code></td></tr>
+                                    <tr><td>判定工具</td><td>录入核查结果、做四档判定、导出记录表可使用 <strong>JSecProbe</strong>（也可借助 AI 辅助判定）</td></tr>
+                                    <tr><td>核心素材</td><td>素材2（防火墙配置）、素材4（交换机配置）、素材7（路由器配置）、素材3（记录表）、素材8（填写范例）</td></tr>
+                                </table>
                             </div>
-                            <!-- 实验报告要求 -->
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
-                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li>报告文件名：<code>学号_姓名_实验4.2_网络设备配置核查.docx</code></li>
-                                    <li>字数：不少于 1500 字（含截图说明）</li>
-                                    <li>必含 5 项内容：
-                                        <ol type="①" style="margin:2px 0 6px 20px;">
-                                            <li><strong>实验目的</strong>（结合 4.2 三个知识模块，简述为什么配置文件是唯一可信证据）</li>
-                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、被测网络设备清单）</li>
-                                            <li><strong>实验过程</strong>（每类设备操作截图 + 配置回显 + 判定依据）</li>
-                                            <li><strong>实验结果</strong>（三类设备判定表 + 不符合项定位到具体配置行 / 缺失项）</li>
-                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"现场导出当前配置"对取证可信度的意义）</li>
-                                        </ol>
-                                    </li>
-                                    <li>提交方式：学习通 → 任务 4.2 → 作业区</li>
-                                </ol>
+
+                            <p style="margin:14px 0 6px;"><strong>▍2. 实验流程主线——四步走</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
+                                    <tr><td><strong>① 查</strong></td><td>按 <strong>8 个要点</strong>逐段读配置，把可疑行标出来</td><td>标出可疑行的配置清单</td></tr>
+                                    <tr><td><strong>② 导</strong></td><td>导出配置信息（通过命令）</td><td>完整配置导出回显</td></tr>
+                                    <tr><td><strong>③ 录</strong></td><td>把可疑行的配置原文抄进记录表，注明段落或行号</td><td>实测配置原文摘录</td></tr>
+                                    <tr><td><strong>④ 判</strong></td><td>逐条做四档判定，写清"做到哪、差在哪"</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.88rem;color:#666;">最后两步（录、判）可借助 JSecProbe 完成。</p>
+
+                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 素材3：网络设备安全测评记录表 · 必填</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2：防火墙配置导出（USG6650E）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4：交换机配置导出（S5720）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7：路由器配置导出（AR6120）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8：测评记录表填写范例（防火墙 FW-01）</a>
+                            </p>
+                        </div>
+
+                        <!-- 【实验 2/5】按哪 8 个要点查 -->
+                        <div class="lab-box">
+                            <div class="lab-head">📋 二、查什么——按这 8 个要点逐条对照</div>
+                            <div class="lab-goal">读配置不是通读全文，而是<strong>带着 8 个要点去"找茬"</strong>。每读一条，先问：这条对应哪个要点？合规线是多少？当前配置差在哪？</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:56px;">#</th><th style="width:110px;">要点</th><th style="width:110px;">依据条款</th><th>合规要求（合格线）</th></tr>
+                                    <tr><td>1</td><td><strong>密码策略</strong></td><td>8.1.4.1 a)</td><td>长度 ≥ 8，复杂度已启用，有效期 ≤ 90 天</td></tr>
+                                    <tr><td>2</td><td><strong>登录策略</strong></td><td>8.1.4.1 b)</td><td>失败锁定阈值 ≤ 5 次，锁定时间 ≥ 15 分钟</td></tr>
+                                    <tr><td>3</td><td><strong>管理方式</strong></td><td>8.1.4.1 c)</td><td>仅使用 SSH，仅使用 HTTPS</td></tr>
+                                    <tr><td>4</td><td><strong>账户管理</strong></td><td>8.1.4.2 b)</td><td>默认账户重命名 / 删除，默认口令已修改</td></tr>
+                                    <tr><td>5</td><td><strong>权限分离</strong></td><td>8.1.4.2 d)</td><td>不同管理员不同权限，遵循最小权限原则</td></tr>
+                                    <tr><td>6</td><td><strong>审计日志</strong></td><td>8.1.4.3</td><td>日志启用且内容完整，保存期限 ≥ 6 个月</td></tr>
+                                    <tr><td>7</td><td><strong>服务端口</strong></td><td>8.1.4.4 b)</td><td>已关闭不必要的服务和端口</td></tr>
+                                    <tr><td>8</td><td><strong>管理限制</strong></td><td>8.1.4.4 c)</td><td>使用 ACL 策略限制管理 IP 来源</td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.9rem;color:#8a6d00;">📌 这 8 个要点对应记录表里的 9 条测评指标（审计拆成"启用"与"记录保护"两条），逐条填满即为完成。</p>
+                        </div>
+
+                        <!-- 【实验 3/5】三台设备 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 三、练什么——三台被测设备（各一份配置导出）</div>
+                            <div class="lab-goal">三台设备必须<strong>各看一遍</strong>——<strong>一台加固不等于全部</strong>。每台设备对照 8 个要点逐项核查，重点核查项见下表：</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="white-space:nowrap;">编号</th><th style="white-space:nowrap;">设备类型</th><th style="white-space:nowrap;">典型型号</th><th style="white-space:nowrap;">导出命令</th><th style="white-space:nowrap;">配置素材</th><th>重点核查项</th></tr>
+                                    <tr><td><strong>R1</strong></td><td>出口路由器</td><td>华为 AR6120</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7</a></td><td>登录失败处理、Telnet 明文管理、SNMPv2c / 私有团体字、公网口管理协议可达性、ACL 2001 放通 any</td></tr>
+                                    <tr><td><strong>S1</strong></td><td>核心交换机</td><td>华为 S5720-28X-SI-AC</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4</a></td><td>空闲端口未 shutdown、管理 / 办公 VLAN 无访问控制、默认账号 huawei、SNMPv2c、日志仅 60 天</td></tr>
+                                    <tr><td><strong>F1</strong></td><td>出口防火墙</td><td>华为 USG6650E</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2</a></td><td>密码策略与有效期、失败锁定阈值、any→any 安全策略、管理面 ACL、日志留存 180 天</td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.9rem;color:#8a6d00;">⚠️ F1（防火墙）已给出完整填写范例（素材8 及下方"查-示例"），本任务的产出重点放在 <strong>R1、S1 两张记录表</strong>上。</p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍查-示例：某企业出口防火墙 FW-01 配置导出（教学模拟）</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">数据来源：素材2 的 <code>display current-configuration</code> 回显。<strong>照着回显逐行对照</strong>，把 9 条指标全部填满——"不符合"必须落到具体配置行和原值上。</p>
+                            <div style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px 14px;font-family:Consolas,Monaco,monospace;font-size:0.84rem;line-height:1.7;color:#24292f;overflow-x:auto;white-space:pre;"># ===== 某企业出口防火墙 FW-01 配置导出（教学模拟） =====
+# 设备型号：华为 USG6650E    系统版本：V600R007C20SPC500
+# 管理地址：10.10.10.1       导出时间：2025-03-18 10:23:41
+#
+ sysname FW-01
+#
+ password-policy
+  password min-length 6
+  password complexity-check disable
+  password expire 180
+#
+ aaa
+  local-user admin password irreversible-cipher %^%#7Kd2mQ~8Z...
+  local-user admin privilege level 15
+  local-user admin service-type ssh http https
+  local-user admin failed-times 8 lock-times 10
+  local-user audit password irreversible-cipher %^%#Lp3vRt~5W...
+  local-user audit privilege level 5
+  local-user audit service-type ssh
+#
+ snmp-agent
+  snmp-agent sys-info version v2c
+  snmp-agent community read cipher %^%#public%^%#
+#
+ info-center enable
+  info-center logfile save-time 30
+#
+ security-policy
+  rule name permit_any_any
+   source-zone any
+   destination-zone any
+  action permit
+#
+ acl number 2000
+  rule 5 permit source any
+#
+ telnet server enable
+ http server enable
+ http secure-server enable
+ stelnet server enable
+#
+ ike proposal 10
+  authentication-method pre-share
+  encryption-algorithm aes-256
+  dh group14
+#
+return</div>
+
+                            <p style="margin:16px 0 6px;"><strong>▍对照结果（第 1 条已示范，其余请自己填）</strong></p>
+                            <div class="table-container">
+                                <table class="info-table rb-tbl">
+                                    <colgroup><col style="width:11%"><col style="width:14%"><col style="width:9%"><col style="width:66%"></colgroup>
+                                    <tr><th>测评指标编号</th><th>测评指标名称</th><th>测评结果</th><th>问题描述（落到具体配置行）</th></tr>
+                                    <tr><td>8.1.4.1 a)</td><td>身份标识与鉴别（密码策略：长度≥8，复杂度启用，有效期≤90天）</td><td><strong>不符合</strong></td><td><code>password min-length 6</code>（低于 8 位）；<code>password complexity-check disable</code>（未启用复杂度校验）；<code>password expire 180</code>（超过 90 天）</td></tr>
+                                    <tr><td>8.1.4.1 b)</td><td>登录失败处理（失败锁定阈值≤5次，锁定时间≥15分钟）</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.1 c)</td><td>远程管理加密（仅使用 SSH，仅使用 HTTPS）</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.2 b)</td><td>默认账户管理</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.2 d)</td><td>最小权限（不同管理员不同权限，遵循最小权限原则）</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.3 a)</td><td>安全审计启用</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.3 c)</td><td>审计记录保护（内容完整，保存期限≥6个月）</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.4 b)</td><td>关闭不需要的服务</td><td></td><td></td></tr>
+                                    <tr><td>8.1.4.4 c)</td><td>管理终端限制（使用 ACL 策略限制管理 IP 来源）</td><td></td><td></td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.85rem;color:#8a6d00;margin:8px 0 0;">⚠️ 完整填写范例（含风险分析、整改建议）见 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8</a>，也可在知识页"案例"块内查看对照表。</p>
+                        </div>
+
+                        <!-- 【实验 4/5】需要什么能力 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 四、需要什么能力——应具备的操作能力</div>
+                            <div class="lab-goal">落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:42px;">#</th><th style="width:160px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:120px;">在哪个环节练</th></tr>
+                                    <tr><td>①</td><td><strong>配置读取能力</strong></td><td>能读懂华为 <code>display current-configuration</code> 的段落结构，快速定位 password-policy、aaa、snmp-agent、security-policy 等关键配置块</td><td>实验①「查」</td></tr>
+                                    <tr><td>②</td><td><strong>逐行比对能力</strong></td><td>能对照 8 个要点的合格线，逐行找出不合规配置，并说明"差在哪一条、差多少"</td><td>实验①「查」</td></tr>
+                                    <tr><td>③</td><td><strong>证据摘录能力</strong></td><td>能把可疑行的<strong>配置原文</strong>抄进记录表，注明段落或行号，做到结论可追溯</td><td>实验②「录」</td></tr>
+                                    <tr><td>④</td><td><strong>判定与整改能力</strong></td><td>能做四档判定，并写出<strong>可以直接下发</strong>的整改命令（如 <code>undo telnet server enable</code>）</td><td>实验③「判」</td></tr>
+                                </table>
                             </div>
                         </div>
+
+                        <!-- 【实验 5/5】交什么 -->
+                        <div class="lab-box">
+                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 课堂作业（需提交）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li><strong>选择素材4 或素材7</strong>，参考<strong>素材8</strong>，完成对相应网络设备的测评记录，并撰写实验报告</li>
+                                    <li>实验报告<strong>必须包含</strong>：实测配置、<strong>网络设备安全测评记录表</strong>、实验收获</li>
+                                    <li>报告命名：<code>班级+学号+姓名+实验4.2</code></li>
+                                </ol>
+                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.2 → 作业区（<strong>课内完成并提交</strong>）</p>
+                            </div>
+                            <div class="lab-check" style="margin-top:14px;">
+                                <div class="lab-check-title">📋 提交前自查</div>
+                                ☐ 三台设备都看过（R1 / S1 / F1）　☐ 8 个要点逐条对照过　☐ 不符合项落到了具体配置行和原值　☐ 整改建议给出可直接下发的命令　☐ 记录表 + 实验报告齐备　☐ 命名符合"班级+学号+姓名+实验4.2"
+                            </div>
+                        </div>
+
+                        
+
                     </div>
 
                     <!-- 4.3 数据库安全配置核查 -->
@@ -2689,53 +2993,117 @@
                             <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材2：实践任务——《数据库安全测评记录表》.docx" download title="下载《数据库安全测评记录表》">⬇ 《数据库安全测评记录表》</a></p>
                         </div>
 
-                        <div class="practice-box">
-                            <div class="concept-title">✏️ 练习任务（4.3，2学时）：给素材填表</div>
-                            <p><strong>数据库安全配置核查：</strong>在 MySQL 8 / SQL Server 2019 模拟环境上完成账户权限与日志核查，填写《数据库安全测评记录表》（<a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材2：实践任务——《数据库安全测评记录表》.docx" download title="下载《数据库安全测评记录表》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>4 人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
-                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
-                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
+                        <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
+
+                        <!-- 【实验 1/5】做什么 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实数据库上完成 <strong>MySQL 线与 SQL Server 线各选 1~2 个实验</strong>，走通"<strong>选 → 查 → 录 → 判 → 交</strong>"五步闭环，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。<strong>课内完成、当场提交。</strong></div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:120px;">项目</th><th>内容</th></tr>
+                                    <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
+                                    <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
+                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
+                                    <tr><td>实验路径</td><td>登录后进入「<strong>数据库设备基线核查</strong>」→「<strong>MySQL 安全配置核查 / SQL Server 安全配置核查</strong>」→ 选择本轮实验 → 预约 / 开始实验 → 进入数据库实例操作</td></tr>
+                                    <tr><td>判定工具</td><td>录入核查结果、做四档判定、导出记录表可使用 <strong>JSecProbe</strong>（也可借助 AI 辅助判定）</td></tr>
+                                </table>
+                            </div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍2. 实验流程主线——上机五步</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
+                                    <tr><td><strong>① 选</strong></td><td>MySQL 线与 SQL Server 线各选 1~2 个实验，<strong>先看清库的版本、实例名和端口</strong>，再动手</td><td>确定实验编号</td></tr>
+                                    <tr><td><strong>② 查</strong></td><td>在真实库上跑核查命令，逐条截图留证——<strong>回显里要能看到命令本身和真实返回值</strong></td><td>带命令回显的证据截图</td></tr>
+                                    <tr><td><strong>③ 录</strong></td><td>把回显里的<strong>真实值</strong>抄进 JSecProbe「现场核查」或 AI 工具——<strong>抄参数值，不抄结论</strong>，如 <code>default_password_lifetime=0</code></td><td>实测参数值</td></tr>
+                                    <tr><td><strong>④ 判</strong></td><td>对照基线做四档判定，写清"做到哪、差在哪"——<strong>一条判定配一张回显截图</strong>，编号与记录表对应</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
+                                    <tr><td><strong>⑤ 交</strong></td><td>导出《数据库安全测评记录表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>记录表 docx + 截图包</td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只在平台实验库上操作，<strong>不做删库、改密等破坏性动作</strong>；② 截图只交作业、不外传。</p>
+
+                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材7：等保测评实验记录表（西普平台·数据库安全配置核查）.docx" download title="下载《等保测评实验记录表（西普平台·数据库安全配置核查）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材8：AI 辅助合规判定案例（示范 · 数据库安全配置核查）.docx" download title="下载《AI 辅助合规判定案例（示范）》">⬇ 素材8：AI 辅助合规判定案例（示范）</a>
+                            </p>
                         </div>
 
+                        <!-- 【实验 2/5】选什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验：数据库账户权限核查——最小化的边界在哪</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>掌握数据库账户权限核查的命令与判定逻辑。重点：<strong>"小权限"≠"无权限"</strong>——业务账户只需它要的 SELECT/INSERT/UPDATE，不必拥有 DROP 或 GRANT OPTION。</div>
-                            <ol class="step-list">
-                                <li><strong>导出账户清单。</strong>MySQL：<code>SELECT user, host, authentication_string FROM mysql.user;</code>；SQL Server：<code>SELECT name, type_desc FROM sys.server_principals;</code>。导出时仅保留必要字段（用户名/主机/权限），<strong>不要导出真实业务数据</strong>。</li>
-                                <li><strong>逐账户核查权限。</strong>MySQL：<code>SHOW GRANTS FOR '业务账户'@'%';</code>；SQL Server：<code>sp_helprotect</code>。判"最小权限"：<strong>多于业务实际需要的权限就标"部分符合"</strong>，写清楚"多了哪个权限"。</li>
-                                <li><strong>检查默认账户。</strong>root/sa 是否允许远程登录、口令强度、是否配置了登录失败处理。</li>
-                                <li><strong>审计日志配置核查。</strong>MySQL：<code>SHOW VARIABLES LIKE 'general_log%';</code> / <code>SHOW VARIABLES LIKE 'log_bin';</code>；SQL Server：查看 SQL Server Audit 配置。</li>
-                            </ol>
-                            <div class="ai-tip-box">
-                                <div class="ai-tip-title">🤖 数据库核查时 AI 这样用</div>
-                                <div class="prompt-tpl">
-                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                    我在做等保测评的数据库核查，数据库是【MySQL 8.0 / SQL Server 2019】。请按等保三级"安全计算环境"要求给我一份不少于 10 项的核查清单，每项注明：用哪条命令核查、合格标准是什么、常见的不符合写法是什么样。
-                                </div>
+                            <div class="lab-head">📋 二、选什么——西普平台实验清单（MySQL 线 + SQL Server 线）</div>
+                            <div class="lab-goal">从西普平台「<strong>数据库设备基线核查</strong>」目录下选取实验：推荐 <strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）——口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要查什么</th><th style="width:180px;">覆盖维度</th></tr>
+                                    <tr><td><strong>M1</strong></td><td><strong>MySQL 安全配置核查 → 口令策略与账户：</strong>validate_password 插件、密码有效期、空口令与匿名账户</td><td>8.1.4.1 / 8.1.4.2</td></tr>
+                                    <tr><td><strong>M2</strong></td><td><strong>MySQL 安全配置核查 → 权限与网络：</strong>root 是否允许远程、用户权限、bind-address、端口、SSL</td><td>8.1.4.2 / 8.1.4.4 / 8.1.4.7</td></tr>
+                                    <tr><td><strong>M3</strong></td><td><strong>MySQL 安全配置核查 → 审计与日志：</strong>审计插件状态、general_log、日志留存与保护</td><td>8.1.4.3</td></tr>
+                                    <tr><td><strong>S1</strong></td><td><strong>SQL Server 安全配置核查 → 登录与账户：</strong>审核级别、SA 账户状态、空口令账户</td><td>8.1.4.1 / 8.1.4.2</td></tr>
+                                    <tr><td><strong>S2</strong></td><td><strong>SQL Server 安全配置核查 → 审计与权限：</strong>服务器审计是否启用、登录审计规范、危险存储过程</td><td>8.1.4.3 / 8.1.4.4</td></tr>
+                                    <tr><td><strong>S3</strong></td><td><strong>SQL Server 安全配置核查 → 加密与备份：</strong>TDE 加密状态、连接加密、备份与异地备份</td><td>8.1.4.7 / 8.1.4.8 / 8.1.4.9</td></tr>
+                                    <tr><td style="background:#fff8e1;"><strong>推荐</strong></td><td style="background:#fff8e1;"><strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）：口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度</td><td style="background:#fff8e1;">课内完成</td></tr>
+                                </table>
                             </div>
-                            <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
-                                ☐ 全部账户权限有截图证据　☐ 没有导出真实业务数据　☐ 默认账户的禁用/加固已说明　☐ 审计日志配置已逐项核验
-                            </div>
-                            <!-- 实验报告要求 -->
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
-                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li>报告文件名：<code>学号_姓名_实验4.3_数据库安全配置核查.docx</code></li>
-                                    <li>字数：不少于 1500 字（含截图说明）</li>
-                                    <li>必含 5 项内容：
-                                        <ol type="①" style="margin:2px 0 6px 20px;">
-                                            <li><strong>实验目的</strong>（结合 4.3 三个知识模块，简述为什么数据库核查关系到敏感数据真实安全）</li>
-                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、被测数据库清单）</li>
-                                            <li><strong>实验过程</strong>（账户权限命令回显 + 审计日志核查 + 备份策略核查的截图与说明）</li>
-                                            <li><strong>实验结果</strong>（4 个子类判定表 + 不符合项的问题描述与整改建议；隐私脱敏说明）</li>
-                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"最小权限"和"备份可恢复"两个理念）</li>
-                                        </ol>
-                                    </li>
-                                    <li>提交方式：学习通 → 任务 4.3 → 作业区</li>
-                                </ol>
+                            <p style="font-size:0.88rem;color:#666;">说明：上表"西普平台实验"列引用西普平台"数据库设备基线核查"目录下的实验名称；学生在平台内按该名称找到实验即可。若平台内网访问不到、实验名与上表略有出入，以「<strong>你要查什么</strong>」和覆盖维度为准，在平台内按关键词（如 <strong>validate_password</strong>、审计、TDE）搜索。</p>
+                        </div>
+
+                        <!-- 【实验 3/5】需要什么能力 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 三、需要什么能力——应具备的操作能力</div>
+                            <div class="lab-goal">落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:42px;">#</th><th style="width:160px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:120px;">在哪个环节练</th></tr>
+                                    <tr><td>①</td><td><strong>平台与客户端操作能力</strong></td><td>能独立登录西普平台、进入数据库核查实验、连接 MySQL / SQL Server 客户端并执行查询</td><td>2 个实验全程</td></tr>
+                                    <tr><td>②</td><td><strong>数据库核查命令能力</strong></td><td>能写出并执行账户、口令、权限、审计四类核查命令（<code>SELECT user,host FROM mysql.user</code>、<code>SHOW VARIABLES LIKE 'validate_password%'</code>、<code>SHOW PLUGINS LIKE 'audit_log'</code>、<code>EXEC xp_loginconfig 'audit level'</code> 等）</td><td>实验②「查」</td></tr>
+                                    <tr><td>③</td><td><strong>证据摘录能力</strong></td><td>能把回显里的<strong>真实参数值</strong>（而非结论）抄进记录表 / JSecProbe，如 <code>default_password_lifetime=0</code></td><td>实验③「录」</td></tr>
+                                    <tr><td>④</td><td><strong>判定与整改能力</strong></td><td>能做四档判定，并写出<strong>可直接执行的 SQL 或配置修改建议</strong>（如 <code>SET GLOBAL default_password_lifetime = 90;</code>）</td><td>实验④「判」</td></tr>
+                                </table>
                             </div>
                         </div>
+
+                        <!-- 【实验 4/5】实验目标 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 四、学到什么——实验目标与达标判据</div>
+                            <div class="lab-goal"><strong>总目标：</strong>在西普平台真实数据库上走通"<strong>选实验 → 跑命令取证 → 抄录真实值 → 基线比对判定 → 导出记录表</strong>"的完整闭环，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。</div>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:56px;">编号</th><th>实验目标</th><th>达标判据</th></tr>
+                                    <tr><td>M1</td><td>掌握 MySQL 口令策略与账户核查：validate_password 插件状态、密码有效期、空口令 / 匿名账户</td><td>"实测结果"给出插件状态与参数值；"符合性判定"逐项四档</td></tr>
+                                    <tr><td>M2</td><td>掌握 MySQL 权限与网络核查：root 远程登录、用户权限、bind-address、端口、SSL</td><td>"实测结果"给出权限清单与监听地址；"整改建议"给出回收权限 / 改绑内网 IP 的语句</td></tr>
+                                    <tr><td>M3</td><td>掌握 MySQL 审计与日志核查：审计插件状态、general_log、日志留存与保护</td><td>"实测结果"给出审计配置项；"问题描述"写清缺失的审计项</td></tr>
+                                    <tr><td>S1</td><td>掌握 SQL Server 登录与账户核查：审核级别、SA 账户状态、空口令账户</td><td>"实测结果"给出账户状态；"符合性判定"给出结论</td></tr>
+                                    <tr><td>S2</td><td>掌握 SQL Server 审计与权限核查：服务器审计是否启用、登录审计规范、危险存储过程</td><td>"实测结果"给出审计启用状态；"整改建议"给出启用/禁用语句</td></tr>
+                                    <tr><td>S3</td><td>掌握 SQL Server 加密与备份核查：TDE 加密状态、连接加密、备份与异地备份</td><td>"实测结果"给出加密与备份策略；"问题描述"点明差距</td></tr>
+                                </table>
+                            </div>
+                            <p style="font-size:0.88rem;color:#666;">上表 6 条目标与你所选实验一一对应：选了哪几个，就重点达成对应的几条判据。</p>
+                        </div>
+
+                        <!-- 【实验 5/5】交什么 -->
+                        <div class="lab-box">
+                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li><strong>操作截图包</strong>——所选实验的关键截图（每条核查项至少 1 张），须含<strong>命令本身和真实返回值</strong>，与记录表"截图编号"一一对应</li>
+                                    <li><strong>《数据库安全测评记录表》</strong>——所选实验对应的核查项全填（实测结果 + 四档判定 + 问题描述 + 整改建议），含"核查小结 + 优先整改项"；按班级 + 学号 + 姓名 + 4.3 实验命名</li>
+                                    <li><strong>平台登录与实验列表截图</strong>——证明本人在平台上完成了所选实验（含个人信息、实验名称、完成状态），并入截图包</li>
+                                </ol>
+                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.3 → 作业区（<strong>课内完成并提交</strong>）</p>
+                            </div>
+                            <div class="lab-check" style="margin-top:14px;">
+                                <div class="lab-check-title">📋 提交前自查</div>
+                                ☐ 所选实验全部完成　☐ 每条核查项都有回显截图且编号对应　☐ 抄录的是参数值而非结论　☐ 不符合项写清了"差在哪"　☐ 整改建议给出可直接执行的 SQL　☐ 未做删库 / 改密等破坏性动作　☐ 截图未外传
+                            </div>
+                        </div>
+
+                        
+
                     </div>
 
                     <!-- 4.4 应用系统安全功能验证 -->
@@ -2963,7 +3331,7 @@
                         <div class="lab-box">
                             <div class="lab-head">🖥️ 补充上机：西普平台实操清单（10.11.0.70）</div>
                             <div class="lab-goal"><strong>说明：</strong>JSecProbe 完成的是"测评流程"演练；以下上机在<strong>西普平台（10.11.0.70）</strong>进行，练的是"真机核查"的手感——两套环境互补，一边学"怎么判"，一边练"怎么查"。</div>
-                            <p style="background:#eaf6fd;border-left:4px solid #0288d1;border-radius:6px;padding:8px 12px;font-size:0.9rem;line-height:1.8;margin:8px 0;"><strong>平台入口：</strong><code>http://10.11.0.70</code>　<strong>账号：</strong>本人 11 位学号　<strong>密码：</strong>学号 + <code>1q2w</code>（例：学号 234234 → 密码 <code>2342341q2w</code>）</p>
+                            <p style="background:#eaf6fd;border-left:4px solid #0288d1;border-radius:6px;padding:8px 12px;font-size:0.9rem;line-height:1.8;margin:8px 0;"><strong>平台入口：</strong><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>　<strong>账号：</strong>本人 11 位学号　<strong>密码：</strong>学号 + <code>1q2w</code>（例：学号 234234 → 密码 <code>2342341q2w</code>）</p>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th>实操项目</th><th>平台</th><th>练什么</th></tr>
@@ -3804,6 +4172,8 @@
                             btn.addEventListener('click', function() {
                                 activate('lab');
                                 setTimeout(function() {
+                                    // 目标所在的实验块若处于收起状态，先展开，避免滚到一个空块
+                                    if (typeof window.__labExpandFor === 'function') window.__labExpandFor(tip);
                                     tip.scrollIntoView({ behavior: 'smooth', block: 'center' });
                                     tip.classList.remove('flash');
                                     void tip.offsetWidth;
@@ -3834,6 +4204,106 @@
                     } else {
                         buildTabsFor(stageEl);
                     }
+                });
+            })();
+
+            // ===== 实验模块折叠面板 =====
+            // 内容特别长的任务（如任务 4.1 的实验页共 5 大块、多处长表格）改成"点标题展开 / 收起"，
+            // 默认只展开第一块，避免学生一进页面就要下滑很久。
+            // 需要给其他任务也加上时，把子任务编号加进 ENABLE 数组即可（如 '4.5'）。
+            (function setupLabAccordion() {
+                var ENABLE = ['4.1', '4.2', '4.3'];
+                var SUBSTAGE_PREFIX = 'substage';
+
+                function isOpen(box) { return !box.classList.contains('is-collapsed'); }
+
+                // 取直接子元素中带指定 class 的第一个（不走 :scope，兼容旧浏览器内核）
+                function firstDirect(parent, cls) {
+                    for (var i = 0; i < parent.children.length; i++) {
+                        if (parent.children[i].classList.contains(cls)) return parent.children[i];
+                    }
+                    return null;
+                }
+
+                window.__labExpandFor = function (el) {
+                    if (!el || !el.closest) return;
+                    var box = el.closest('.lab-box.is-collapsed');
+                    if (!box) return;
+                    var head = firstDirect(box, 'lab-acc-head');
+                    if (head && head.__labSetOpen) head.__labSetOpen(true, true);
+                };
+
+                document.querySelectorAll('.substage').forEach(function (sub) {
+                    var taskId = sub.id.indexOf(SUBSTAGE_PREFIX) === 0 ? sub.id.slice(SUBSTAGE_PREFIX.length) : sub.id;
+                    if (ENABLE.indexOf(taskId) < 0) return;
+
+                    var grp = null;
+                    for (var gi = 0; gi < sub.children.length; gi++) {
+                        var cg = sub.children[gi];
+                        if (cg.classList.contains('cat-group') && cg.getAttribute('data-cat') === 'lab') { grp = cg; break; }
+                    }
+                    if (!grp) return;
+
+                    var boxes = Array.prototype.filter.call(grp.children, function (c) {
+                        return c.classList.contains('lab-box') && firstDirect(c, 'lab-head');
+                    });
+                    if (boxes.length < 2) return;
+
+                    var bar = document.createElement('div');
+                    bar.className = 'lab-acc-bar';
+                    bar.innerHTML =
+                        '<span class="lab-acc-tip">💡 点击任意一块的蓝色标题即可展开 / 收起，默认展开第一块</span>' +
+                        '<span class="lab-acc-cnt"></span>' +
+                        '<button type="button" class="lab-acc-btn" data-act="toggle">📤 全部展开</button>';
+
+                    function syncBar() {
+                        var open = boxes.filter(isOpen).length;
+                        bar.querySelector('.lab-acc-cnt').textContent = '已展开 ' + open + ' / ' + boxes.length;
+                        bar.querySelector('[data-act="toggle"]').textContent = (open === boxes.length) ? '📥 全部收起' : '📤 全部展开';
+                    }
+
+                    boxes.forEach(function (box, i) {
+                        var head = firstDirect(box, 'lab-head');
+                        box.classList.add('lab-acc');
+                        head.classList.add('lab-acc-head');
+                        head.setAttribute('role', 'button');
+                        head.setAttribute('tabindex', '0');
+                        head.title = '点击展开 / 收起本块内容';
+
+                        function setOpen(open, silent) {
+                            box.classList.toggle('is-collapsed', !open);
+                            head.setAttribute('aria-expanded', open ? 'true' : 'false');
+                            syncBar();
+                            if (!silent && typeof trackOperation === 'function') {
+                                var name = head.textContent.replace(/^[^一-龥]+/, '').trim().slice(0, 20);
+                                trackOperation(open ? '展开实验模块' : '收起实验模块', name);
+                            }
+                        }
+                        head.__labSetOpen = setOpen;
+                        setOpen(i === 0, true);   // 默认展开第一块，其余收起
+
+                        head.addEventListener('click', function () { setOpen(!isOpen(box)); });
+                        head.addEventListener('keydown', function (e) {
+                            if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                                e.preventDefault();
+                                setOpen(!isOpen(box));
+                            }
+                        });
+                    });
+
+                    grp.insertBefore(bar, grp.firstChild);
+                    syncBar();
+
+                    bar.querySelector('[data-act="toggle"]').addEventListener('click', function () {
+                        var target = boxes.filter(isOpen).length !== boxes.length;
+                        boxes.forEach(function (b) {
+                            var h = firstDirect(b, 'lab-acc-head');
+                            if (h && h.__labSetOpen) h.__labSetOpen(target, true);
+                        });
+                        if (typeof trackOperation === 'function') {
+                            trackOperation(target ? '展开全部实验模块' : '收起全部实验模块', taskId);
+                        }
+                    });
                 });
             })();
 
@@ -3999,15 +4469,30 @@ var SUYANG_CASES = {
                     title: '任务4.1 主机安全基线核查',
                     cases: [
                         {
-                            id: 's41a', comp: '耐心细致 · 全覆盖意识',
-                            title: '「跳着测，省时间」——主机基线的"缩水"风险',
-                            scene: '主机安全基线有 11 个子类、几十条测评项。核查到下午四点，同组同学提议："Windows 服务器都装了同一套镜像，测一台代表机就代表全部吧，剩下的跳过，反正抽查不出来。"',
-                            question: '请分析"代表机=全部""跳着测"的做法对测评结论可靠性的影响，并给出既保证覆盖又提高效率的可行办法。',
+                            id: 's41a', comp: '严谨求实 · 敬畏生命的社会责任感',
+                            title: '「补丁两个字，等了 59 天」——WannaCry 与被取消的一万九千次门诊',
+                            scene: '2017 年 5 月 12 日，WannaCry 勒索病毒一天内席卷全球上百个国家。它并没有用什么神秘的新漏洞：微软早在 3 月 14 日就发布了 MS17-010 安全公告并提供了补丁，距离病毒爆发相隔 59 天。受冲击最重的英国 NHS（国民保健署）事后由英国审计署（NAO）复盘：英格兰 236 家医院信托中至少 80 家受影响；NHS England 确认已取消的门诊与手术超过 6900 例，实际估计接近 2 万例；5 个地区的急诊不得不把病人转往别处。复盘结论很直白——所有受影响的机构都在使用已经过期或没有打补丁的操作系统，而这些本可以通过更好的补丁管理拦住。\n回到你的场景：某单位主机安全基线核查中，你发现 3 台服务器的关键补丁长期未安装。对方运维说：「这么多年都没出事，这条就写成建议吧，别写不符合了。」',
+                            question: '请结合 WannaCry 事件回答两点：①「补丁管理」这条最不起眼的基线项，为什么偏偏关系着整个业务的生死？②如果你是主测人员，怎样把这条「不符合」写成客户愿意连夜整改的话，而不是一张随手丢在桌上的清单？',
                             points: [
-                                { label: '覆盖度意识', method: '一台服务器不能代表全部——漏测的部分就是结论的盲区。', kws: ['全覆盖', '逐台', '抽样', '代表', '遗漏', '漏测', '偏差', '结论', '风险'] },
-                                { label: '规范抽样意识', method: '抽样必须按既定抽样规则（同类、比例、覆盖关键资产），报告里注明抽样方法和依据。', kws: ['抽样', '规则', '同类', '说明', '备注', '记录', '依据', '明确', '范围'] },
-                                { label: '效率提升方法', method: '用自动化脚本批量核查 + 模板复用 + 分工并行——比砍覆盖更有效率。', kws: ['自动化', '工具', '批量', '核查', '分组', '模板', '复用', '计划', '分工'] }
-                            ]
+                                { label: '技术归因：杀手不是未知漏洞，是拖延', method: 'WannaCry 不是被未知漏洞打穿的，而是被已知的、且补丁早就提供的漏洞打穿的——真正致命的是「补丁给了，但 59 天没人装」。核查时要盯的是补丁安装的时效与台账，不是有没有装这几个字。', kws: ['补丁', '59天', 'MS17-010', '已知漏洞', '未安装', '过期系统', '停止支持', '拖延', '时效', '台账', 'Windows XP', '滞后'] },
+                                { label: '把技术项翻译成人的代价', method: '写「存在被勒索攻击风险」，没人会动；写成「同等条件下，英国 NHS 曾有近两万次门诊被取消」，负责人才会跳起来——测评不是抄条款，是让人听得懂自己处在什么处境里。', kws: ['门诊', '手术', '取消', '看病', '患者', '病床', '停诊', '业务中断', '代价', '听得懂', '影响', '损失', '转院', '感受'] },
+                                { label: '由一台看到一整套', method: '从「这一台没打补丁」看到「整个单位缺少补丁管理机制」：隔离受影响端口做临时止血 → 排补丁上线窗口 → 建立长期补丁台账与周期复核，这才是测评该促成的闭环。', kws: ['闭环', '临时', '端口', '隔离', '止血', '排期', '窗口', '台账', '机制', '周期', '复核', '流程', '长期'] },
+                                { label: '立场：不为敌，但也不替人抹平', method: '写「不符合」不是跟客户过不去，是替可能被波及的用户踩刹车。话说得可以得体、方法中肯给足，但结论本身不能因为人情被抹掉——这是职业分工给的底气。', kws: ['不符合', '部分符合', '如实', '证据', '坚持', '分寸', '沟通', '底线', '不能改', '抹掉', '抹平'] }
+                            ],
+                            ref: 'WannaCry 勒索病毒 / MS17-010 永恒之蓝 / NAO（英国审计署）NHS 网络攻击调查报告 / kill switch（终止开关）'
+                        },
+                        {
+                            id: 's41b', comp: '科学精神 · 求真求证与终身学习',
+                            title: '「她手写了 400 多页推导」——一位女院士与 MD5 的退场',
+                            scene: '哈希算法你可能每天都在用：网站上你的口令被变成一串摘要存起来、下载的文件用校验值比对有没有被改过、证书签名……上世纪 90 年代，MD5 和 SHA-1 几乎是全球所有系统的标配。中国科学院院士、清华大学教授王小云带领团队花了整整十年攻克它们——据公开报道，破解 MD5 时她是手写推导，写了 400 多页纸、几百个方程，推导了两三个月才得到结果。2004 年她在国际密码大会上公布了对 MD5 等算法的攻击路径与完整验证，第二年又同团队攻破了被称为「白宫密码」的 SHA-1。这一成果直接推动了全球新一代哈希函数标准的制定进程；此后她没有去参与新国际标准的设计，而是转而主持设计我国自己的哈希算法标准 SM3。她说：「密码为国家服务，国家利益是放在第一位的。」\n回到你的场景：核查某业务系统时，你发现它仍在用 MD5 存储用户口令摘要、仍在签发 SHA-1 签名的证书。开发人员说：「 MD5 虽然上了年纪，但只是理论上不安全，我们这边从来没出过事。」',
+                            question: '请回答两点：①「理论上被攻破」到「实际上必须换」之间到底隔着多远？②今天写在标准里的算法，明天可能作废——作为测评人员，你打算怎样跟踪标准与算法的迭代，以免拿着一把旧尺子去量新房子？',
+                            points: [
+                                { label: '求真本身就是目的', method: '科学家的价值不是让谁难堪，而是把「大家都以为很安全」的东西论证清楚：她说出来，产业界才会去换；没人去做这种坐冷板凳的事，所有人会一直睡在幻觉里。', kws: ['求真', '证明', '验证', '公开', '揭示', '十年', '四百多页', '冷板凳', '坚持', '严谨', '推理'] },
+                                { label: '从实验室到标准的传导链', method: '理论突破 → 算法退役 → 标准修订 → 测评依据更新：你今天背的标准条文里，其实藏着某位研究者十年前的推导结果。理解这条链，才能理解标准为什么会改。', kws: ['标准', '修订', '退役', '更新', 'GB/T', '依据', '迭代', '替代', 'MD5', 'SHA-1', 'SM3', '演进'] },
+                                { label: '把「理论上」当作业前台', method: '理论上被攻破，往往就是实际被大规模利用的前奏：攻击者永远比补丁勤快，等真实攻击出现了再改，代价由用户先付。', kws: ['提前', '预防', '滞后', '风险', '迁移', '替换', '升级', '加固', '代价', '窗口', '前奏'] },
+                                { label: '跟踪是岗位要求，不是加分项', method: '算法在退役，标准在更新，后量子密码已经在路上——信息安全这行，「终身学习」不是一句漂亮的口号，而是岗位说明书里的硬条款。', kws: ['跟踪', '关注', '学习', '更新', '知识体系', '后量子', '持续', '习惯', '积累', '主动'] }
+                            ],
+                            ref: '王小云（中国科学院院士）/ MD5 碰撞 / SHA-1 / SM3 杂凑算法 / GB/T 22239-2019 身份鉴别与口令存储要求'
                         }
                     ]
                 },
@@ -4015,15 +4500,30 @@ var SUYANG_CASES = {
                     title: '任务4.2 网络设备配置核查',
                     cases: [
                         {
-                            id: 's42a', comp: '严谨求实 · 证据意识',
-                            title: '「配置文件改回默认给你看」——网络设备核查的"造假"陷阱',
-                            scene: '核查边界防火墙时你要求导出当前配置，运维工程师说："刚升级完系统，现在配置是默认的没什么可看的，要看你登录账号我帮你查历史。"你想起任务3画拓扑图时对方提供的防火墙策略文件很完整。',
-                            question: '请分析这种"升级后默认"说法可能隐藏的问题，并说明核查网络设备配置时如何确保拿到真实证据。',
+                            id: 's42a', comp: '工匠精神 · 敬畏每一条配置',
+                            title: '「临时开一下」——躺了两年的那条放行规则',
+                            scene: '2019 年，美国第一资本银行（Capital One）披露重大数据泄露：约 1 亿美国公民、600 万加拿大公民的信用卡申请数据被窃取。据事后披露，起点不是什么未知漏洞，而是运行在云上的一个 Web 应用防火墙配置不当（普遍认为攻击者借此发起了对云平台元数据服务的请求，拿到了云的临时凭据），而这套凭据背后的角色又权限过大，能大量列出并读取存储的数据。事件还有另一个细节：真正发现这件事的是一名外部安全研究人员，通过企业的漏洞报告渠道上报后才被确认。\n回到你的场景：核查某单位边界访问控制策略时，你发现第 3 条写着 permit ip any any，运维解释：「这是当年调试时开的，回头就删。」你翻了变更记录——这条规则已经躺了两年。',
+                            question: '请结合上述事件回答两点：①为什么说「配置核查」与「漏洞扫描」同等重要？②如果你是主测人员，怎样写这条「临时规则」，才能让客户真正把隐患消掉（提示：给管理层听得懂的账，给运维能直接照着做的动作）。',
                             points: [
-                                { label: '证据时效性意识', method: '配置核查必须看当前在线运行的配置——历史记录无法证明"现在"是否安全。', kws: ['当前', '在线', '运行', '配置', '证据', '时效', '现状'] },
-                                { label: '取证规范', method: '现场导出配置应双人复核、附时间戳截图或导出命令回显，避免被改回默认。', kws: ['导出', '命令', '截图', '时间戳', '双人', '复核', '回显', '原始'] },
-                                { label: '前后证据矛盾排查', method: '与任务3 拓扑图、策略文件交叉比对——前后矛盾就当场追问，避免"现场版"与"档案版"两张皮。', kws: ['比对', '交叉', '矛盾', '追问', '档案', '策略', '文件'] }
-                            ]
+                                { label: '配置就是防线本身', method: '攻击者不一定需要 0day：一条 any any 的放行规则，等于把你所有边界防护的努力一笔勾销。设备买得再贵，策略写歪了也是白买。', kws: ['any', '放行', '策略', '规则', '边界', '最小', '默认拒绝', '收敛', '配置', '访问控制'] },
+                                { label: '规则要有生命周期', method: '临时规则必须带审批、带有效期、带到期回收机制：没有生命周期管理的「临时」，最后都会变成永久漏洞。', kws: ['临时', '审批', '有效期', '回收', '变更', '台账', '定期', '清理', '复核', '过期', '流程'] },
+                                { label: '权限过大才是放大器', method: '防火墙/代理这类组件本身的权限该只够干它的活——权限给多了，一次小小的配置错误就放大成全量数据暴露（最小权限原则）。', kws: ['权限', '最小', '角色', '凭据', '过度', '多余', '限制', '隔离', '分段', '收紧'] },
+                                { label: '整改要写成两种语言', method: '一份报告两套说法：给管理层写「影响范围、罚款与声誉损失」，给运维写「删哪条、改成什么、怎么写回退」。只写策略配置不合理，第二周还是这样。', kws: ['整改', '具体', '命令', '步骤', '验证', '清单', '风险', '量化', '沟通', '成本', '管理层', '回退'] }
+                            ],
+                            ref: 'Capital One 数据泄露事件 / SSRF（服务端请求伪造）/ 云平台实例元数据服务 / 最小权限原则'
+                        },
+                        {
+                            id: 's42b', comp: '德才兼备 · 技术向善',
+                            title: '「几十万台摄像头把半个互联网打趴下」——Mirai 与一门落到歪处的才华',
+                            scene: '2016 年 10 月 21 日，美国 DNS 服务商 Dyn 遭大规模 DDoS 攻击，Twitter、Reddit、Netflix、GitHub、PayPal 等一众知名服务在美国和欧洲多地长时间打不开。流量来自 Mirai 僵尸网络——它的手法说穿了并不高明：扫描互联网上还在用出厂默认用户名口令的摄像头、路由器、录像机，把它们一个个拉进自己的队伍（据安全厂商测量，规模达数十万台）。值得一提的是，据公开报道，Mirai 的作者是几位年轻人，最初写出来只为打击游戏服务器的竞争对手；后来随着源代码被公开，数以千计的衍生版本至今仍在活动。2017 年，相关被告认罪。\n回到你的场景：核查一台楼栋交换机时，你发现它还在用出厂用户名和 SNMP 默认团体名。厂商实施人员说：「这十几年不都这么装的吗？」',
+                            question: '请从「技术能力」与「价值选择」两条线谈这个事件：①为什么「技术很强」从来不等于「可以放心」？②作为未来的测评人员，你打算靠什么让自己手里的技术始终落在正当的一侧（请给出具体的边界与程序，不要只喊口号）。',
+                            points: [
+                                { label: '能力与价值观不能缺一边', method: '同样的技术，转身就能用来害人——能力决定你能做什么，价值观决定你做什么。这行从不缺聪明人，缺的是用得其所的聪明人。', kws: ['价值观', '底线', '能力', '技术', '向善', '选择', '边界', '目的', '正当', '良知'] },
+                                { label: '默认凭据是头号家常菜', method: '出厂账号、初始密码、SNMP 默认团体名（public/private）是最容易被搬走的钥匙：清点 → 改名 → 强制改成强口令 → 定期复核，是可以立刻做的事。', kws: ['默认口令', '出厂', '初始凭据', '弱口令', 'SNMP', '团体名', '改名', '禁用', '强制', '清点'] },
+                                { label: '你的设备也是别人的台阶', method: '今天的受害者可能就是明天的加害者：把自己管着的设备管好（固件升级、关闭无用服务），也是在替别人挡刀——网络安全是连带责任。', kws: ['连累', '他人', '责任', '共同', '连带', '固件', '升级', '关闭', '服务', '减少', '公共'] },
+                                { label: '边界写在手上，不是嘴上', method: '任何测试动作都要有明确书面授权与范围；遇到超出授权的事当场停下、询问、上报，绝不擅自扩大——「我是为了安全」不是越界的理由。', kws: ['授权', '范围', '书面', '审批', '上报', '留痕', '擅自', '边界', '停下', '同意'] }
+                            ],
+                            ref: 'Mirai 僵尸网络 / 2016 Dyn DNS 攻击 / IoT 设备默认凭据 / DDoS 攻击'
                         }
                     ]
                 },
@@ -4031,15 +4531,30 @@ var SUYANG_CASES = {
                     title: '任务4.3 数据库安全配置核查',
                     cases: [
                         {
-                            id: 's43a', comp: '隐私保护 · 敏感数据意识',
-                            title: '「随便导出几百条看看」——核查中拿到真实数据怎么办',
-                            scene: '核查 MySQL 数据库账户与口令策略，导出 user 表查看账号配置。你注意到表里有几千条用户的姓名、手机号、身份证号字段（D同业务真实数据），同组同学说："反正只是看看，又不外传，导出来对照账号方便。"',
-                            question: '请分析"为方便核查而导出真实个人信息"这一行为的合规风险，并给出既满足核查需要又最小化敏感数据暴露的做法。',
+                            id: 's43a', comp: '合规自觉 · 以身作则的数据敬畏',
+                            title: '「为了核查方便，导点数据回去慢慢看」——你自己也是个人信息处理者',
+                            scene: '明天你要进机房核查一台 MySQL 数据库：需要验证账号策略、口令复杂度、权限分配、审计日志是否开启。这个库里有几百万条真实用户记录（姓名、手机号、身份证号、住址），客户只给了一小时窗口，陪同人员说：「你们自己导吧，需要什么都行。」同行的同学觉得：「反正我们自己看看又不外传，导回去对着账号慢慢查更方便。」',
+                            question: '请为这次核查设计一套数据处理方案（不要空谈原则，要具体到动作）：核查至少需要索取哪些数据、在客户现场如何操作、核查结束后样本如何处置、以及这一整套过程如何在报告中留痕说明。特别要注意一点：测评人员同样受法律约束，你不是豁免者。',
                             points: [
-                                { label: '最小必要原则', method: '核查要的是"账号配置"——不需真实用户数据；脱敏或仅导出账号列即可。', kws: ['最小', '必要', '脱敏', '匿名', '字段', '选择', '导出'] },
-                                { label: '法律合规风险', method: '《个人信息保护法》要求处理个人信息有合法目的——为核查一次性导出大量个人信息，本身就可能违规。', kws: ['个保法', '合规', '个人信息', '合法', '目的', '法律', '违规', '责任'] },
-                                { label: '现场处置规范', method: '在客户监督下导出 → 立即脱敏 → 核查完销毁；不可把含真实数据文件带出机房。', kws: ['监督', '销毁', '删除', '现场', '不可', '导出', '脱敏'] }
-                            ]
+                                { label: '最小必要：只要配置状态', method: '核查要的是账号策略、权限、审计开关这些「配置状态」，不是数据本身——能只查账号表/权限表就别碰业务明细表，能用元数据和配置文件核对就别碰用户数据。', kws: ['最小', '必要', '脱敏', '抽样', '元数据', '账号表', '权限', '不需要', '导出', '只查'] },
+                                { label: '现场操作与销毁证据', method: '在客户监督 + 双人见证下操作，执行的命令/SQL 留痕；核查完毕立即删除或当面移交，最好有一份「已清理」的书面确认。', kws: ['监督', '见证', '签字', '留痕', '记录', '删除', '销毁', '移交', '清理', '确认', '当场'] },
+                                { label: '法律主体意识', method: '《个人信息保护法》对处理行为有明确目的、最小范围、安全保障等要求；测评人员也是个人信息处理者，同样需要客户内部的授权/审批，不是执法人员、没有豁免权。', kws: ['个保法', '个人信息保护法', '处理者', '目的', '范围', '安全义务', '审批', '授权', '合规', '法律'] },
+                                { label: '替代方案往往不止一个', method: '优先选项应该是：在测试环境复现配置、用构造的样例数据验证、让客户截图或提供配置输出——「导出真实数据」很少是唯一解。', kws: ['测试环境', '构造数据', '样例', '截图', '配置输出', '替代', '复现', '优先', '方案', '选择'] }
+                            ],
+                            ref: '《中华人民共和国个人信息保护法》最小必要原则 / 数据脱敏 / 测评现场数据管理'
+                        },
+                        {
+                            id: 's43b', comp: '长期主义 · 数据守护的耐心与警觉',
+                            title: '「潜伏四年才被发现」——喜达屋预订库与 3.39 亿条客人记录',
+                            scene: '2018 年，万豪国际集团披露旗下喜达屋（Starwood）的预订数据库遭未授权访问。据英国信息监管机构（ICO）的处罚通报与后来美国联邦贸易委员会的起诉材料：攻击者在 2014 年 7 月就已进入该系统，直到 2018 年 9 月才被发现，潜伏约四年；涉及客人记录约 3.39 亿条，其中包含约 525 万个未加密的护照号码。后续处置方面，ICO 于 2020 年最终处以 1840 万英镑罚款；2024 年万豪又与美国 50 个州及 FTC 达成 5200 万美元的和解。监管机构列出的失效项读起来像一张核查清单：缺乏适当的口令控制、访问控制与网络分段，未及时修补老旧系统，未充分记录与监控网络环境，未部署足够的多因素认证。\n回到你的场景：你在核查某业务数据库时发现 sa 这类超级账号仍在启用且从未改名、数据库审计未开启、备份也未加密。',
+                            question: '请回答两点：①数据库层面的「账号权限、审计日志、加密存储、备份管理」，如何决定一次入侵是「当天就被发现」还是「潜伏四年无人知晓」？②如果预算只够先做三件事，你选哪三条，理由是什么？',
+                            points: [
+                                { label: '先看不看得见，再谈防御', method: '没有日志、没有异常告警，入侵就是静音的：先把「能看见」的能力装上（开启数据库审计、日志外送、异常访问告警），事件的发现时间才能从四年压到四分钟。', kws: ['审计', '日志', '告警', '监控', '静音', '看不见', '留痕', '追溯', '发现', '检测', '外送'] },
+                                { label: '账号与权限收敛', method: 'sa、root 这类超级账号必须禁用或改名，按最小必要原则建角色，把管理、审计、业务权限分开，横向移动的空间才会变小。', kws: ['sa', 'root', '超级账号', '禁用', '改名', '分权', '最小', '角色', '回收', '限制', '横向'] },
+                                { label: '数据本体与可恢复', method: '敏感字段加密或脱敏存储，备份介质加密并做恢复演练——备份的意义不是「拷了一份」，而是出事时能干净完整地恢复回来。', kws: ['加密', '脱敏', '备份', '介质', '恢复', '演练', '密钥', '字段', '验证', '完整性'] },
+                                { label: '整改要排序：先堵口，再装眼', method: '先堵能被直接拿下的口子（超级账号、默认口令、未修补组件），再装看得见的能力（审计与监控），最后做撑得住的措施（加密、备份、多因素）——顺序错了，钱花在大门玻璃上。', kws: ['优先级', '排序', '顺序', '先', '第一步', '立即', '分期', '风险', '整改', '预算'] }
+                            ],
+                            ref: 'Marriott / Starwood 数据泄露事件 / ICO 处罚决定 / FTC 起诉与和解 / 数据库审计配置'
                         }
                     ]
                 },
@@ -4047,15 +4562,30 @@ var SUYANG_CASES = {
                     title: '任务4.4 应用系统安全功能验证',
                     cases: [
                         {
-                            id: 's44a', comp: '批判性思维 · AI 使用伦理',
-                            title: 'AI 判定与你的手工核对不一致时',
-                            scene: '使用 JSecProbe 的 AI 辅助分析功能核查应用系统配置时，AI 给出"身份鉴别项符合"的建议，但你自己手工核对的截图显示该应用 root 远程登录未禁用、口令策略也不满足要求。提交记录前，同组同学说："AI 比你专业，以 AI 为准吧。"',
-                            question: '请分析"以 AI 为准"的说法问题在哪，并说明测评人员与 AI 之间正确的分工关系。',
+                            id: 's44a', comp: '系统思维 · 看见功能的两面性',
+                            title: '「用来记录日志的东西，成了最大的后门」——Log4Shell 的反转',
+                            scene: '2021 年底，一个几乎人人在用、专门用来「记录日志」的 Java 组件 Apache Log4j2 出了大问题（CVE-2021-44228，危害评级满分 10 分）。机理其实不难理解：为了让日志把变量展开得好看一点，组件会把日志里形如 ${jndi:…} 的字符串当作查询去执行——如果这条字符串能来自外部输入（比如用户名、请求头），攻击者就可以让它去访问外部服务器、加载远程代码，从而控制整台服务器。更值得琢磨的两点是：①漏洞在 2021 年 11 月 24 日被私下报告给 Apache，12 月 9 日细节与利用代码公开后，全球出现大范围扫描与利用尝试，而很多单位连夜追问的第一个问题竟然是「我们到底有没有用到它」——它经常嵌套在别人打好的包里，深达三四层；②第一个补丁并不彻底，Apache 随后又相继发布了 2.16.0、2.17.0、2.17.1。',
+                            question: '请以「应用系统的日志审计功能」为例分析：①一个本来用于保障安全的「安全功能」，在什么条件下会反过来成为攻击入口？②作为测评人员验证「安全功能是否有效」时，除了确认「功能有没有开启」，还应当验证哪些东西？',
                             points: [
-                                { label: '人机分工认知', method: 'AI 是辅助工具，最终判定权和报告责任在人——结论必须人工复核，AI 不能替你签报告。', kws: ['人', '最终', '判定权', '责任', '辅助', '参考', '工具', '复核', '不能代替'] },
-                                { label: '核实与溯源', method: '截图显示配置不满足要求，就以截图为准；必要时再现场核查一次，不留疑点。', kws: ['证据', '截图', '核对', '验证', '回查', '重新', '依据', '配置', '原文'] },
-                                { label: '批判性使用 AI', method: 'AI 也会出错、会有幻觉——结论必须以现场证据为准，不能直接"以 AI 为准"。', kws: ['局限', '误差', '幻觉', '不轻信', '质疑', '交叉', '验证', '红线', '边界'] }
-                            ]
+                                { label: '所有处理输入的功能都有反面', method: '日志、导入导出、搜索、在线预览、报错回显——凡是「把外部数据带进内部语境」的地方，都可能被反向利用；信任边界画在哪儿，决定了它是盾还是洞。', kws: ['外部输入', '解析', '展开', '变量', '注入', '拼接', '信任边界', '内部', '外部', '回显', '加载'] },
+                                { label: '验证不止「开了没有」', method: '除了功能是否开启，还要验证处理对象的边界（能否传入恶意串）、依赖组件版本、出错时的响应是否泄露信息——「配了」不等于「生效了」。', kws: ['边界', '版本', '组件', '依赖', '嵌套', '测试', '构造', '响应', '配置', '生效', '参数'] },
+                                { label: '先回答「我们有没有用到」', method: '一个组件嵌套在框架里、框架嵌套在厂商打好的包里——排查资产与依赖清单（含传递依赖）是整改的第一步，也是最容易糊弄的一步。', kws: ['清单', '资产', '依赖', '嵌套', '厂商', '版本', '摸清', '全景', 'SBOM', '传递依赖'] },
+                                { label: '第一个补丁往往不是最后一个', method: '2.15.0 修漏 → 2.16.0 → 2.17.0 → 2.17.1：整改闭环的终点是「升级到能涵盖全部相关 CVE 的版本」，并且要回头再看几次公告。', kws: ['补丁', '首个补丁', '追加', '升级', '二次', '2.17.1', '公告', '复核', '版本', '完整'] }
+                            ],
+                            ref: 'CVE-2021-44228 / Log4Shell / CNVD-2021-95914 / 传递依赖与 SBOM（软件物料清单）'
+                        },
+                        {
+                            id: 's44b', comp: '求真务实 · AI 素养与主体责任',
+                            title: '「AI 说符合，你的截图说不符合」——把 AI 用成放大镜还是挡箭牌',
+                            scene: '用 AI 辅助分析核查某应用系统的身份鉴别项时，AI 给出「符合」的建议，但你手工核对的截图显示：root 远程登录未禁用、口令策略也不满足要求。此时面前有两条路：A. 把截图和标准条目一起喂给 AI，让它帮忙逐条对照、列出差异点、生成还需要去现场补取的证据清单；B. 干脆以 AI 的结论为准，把自己这一段删掉——反正 AI 说得头头是道，还挺显得专业。',
+                            question: '请回答两点：①这两条路的本质差别在哪里（想想谁在为结论负责）？②设计一套你自己的「人机协作流程」：哪些环节可以交给 AI 提效，哪些环节必须自己完成并签字负责，以及如何验证 AI 给出的每一条断言。',
+                            points: [
+                                { label: '判定权与签字人必须在你身上', method: 'AI 再强也只是工具：报告要你签字，责任就追到你——结论不能由别人（或别的什么）替你出具，这是职业底线不是习惯偏好。', kws: ['签字', '责任', '判定权', '转移', '不能', '最终', '由人', '负责', '替你', '自己做'] },
+                                { label: 'AI 输出必须可验证', method: '模型会一本正经地说错：任何人给出的标准条款号、命令、CVE 编号都要回到标准原文/官方来源核实——查不出来的一句话，就不该出现在报告里。', kws: ['幻觉', '核实', '原文', '官方', '验证', '引用', '条款', '编号', '出处', '查证'] },
+                                { label: '高杠杆用法：让 AI 出主意', method: '适合交给它的是：整理对照表、生成补证清单、写核查脚本草稿、把不懂的概念讲一遍；不适合交给它的是：替你下结论、替你判断客户的整改是否到位。', kws: ['清单', '对照', '脚本', '草稿', '解释', '整理', '启发', '辅助', '用它', '建议'] },
+                                { label: '先有基本功，再谈提效', method: '先练出「没有 AI 也能做完一整遍」的本事，再让 AI 帮你提速：顺序反了，就会变成离开 AI 就不会干活的空心人。', kws: ['基本功', '手工', '练习', '沉淀', '独立', '能力', '依赖', '替我思考', '顺序', '先'] }
+                            ],
+                            ref: 'AI 幻觉（Hallucination）/ JSecProbe AI 辅助判定 / 大模型辅助测评的边界'
                         }
                     ]
                 },
@@ -4063,15 +4593,30 @@ var SUYANG_CASES = {
                     title: '任务4.5 漏洞扫描与结果分析',
                     cases: [
                         {
-                            id: 's45a', comp: '客观公正 · 不夸大不缩小',
-                            title: '「高危漏洞 50 个，写报告里吓吓客户」——扫描结果的解读陷阱',
-                            scene: 'Nessus 扫描完毕，报告里"高危"项 50 多条。销售经理很高兴："这么多高危，正好写进报告让客户买单整改！"你看了几条高危详情，发现其中 12 条是误报（如某补丁号实际已打过但补丁库未更新），8 条是低版本 OpenVAS 误识别为高风险。',
-                            question: '请分析"扫描结果照单全收、不做人工验证"的危害，并说明漏洞报告的正确形成方式。',
+                            id: 's45a', comp: '专业清醒 · 「准确」重于「多」与「少」',
+                            title: '「公开后第二天就被偷了」——心脏滴血与 900 个社保号',
+                            scene: '2014 年 4 月，OpenSSL 的「心脏滴血」（Heartbleed，CVE-2014-0160）被公开：一个源于代码实现阶段的缺陷，能让攻击者远程读取服务器内存中的数据片段——私钥、会话凭证、用户信息都可能在其间。真正让人后背发凉的是速度：漏洞公开后，加拿大税务局（CRA）虽随即关闭了对外网站，但据该机构与警方通报，攻击者仍在 4 月 8 日一个约六小时的窗口里拿走了约 900 名纳税人的社会保险号（SIN）；几天后加拿大警方逮捕了一名 19 岁嫌疑人。\n回到你的场景：某系统扫描结果里有 50 多条「高危」。你逐条核下来发现：12 条是补丁版本识别错误（补丁实际已打）、8 条是扫描器版本老旧导致的误判，真正必须连夜处理的只有 6 条。此刻销售希望「多写点，客户才会买单整改」，实施同事希望「少写点，别搞得太难看」。',
+                            question: '请结合心脏滴血事件回答：①漏洞报告的价值为什么取决于「准确」而不是「多」或「少」？②如果你是主测人员，怎样组织这份报告的分档与优先级（包括：每条判定要留哪些依据、给管理层的三句话、给运维的执行清单）？',
                             points: [
-                                { label: '漏洞验证必要意识', method: '扫描结果只是"疑似"，每个高危必须现场复测——避免误报扰乱客户整改方向。', kws: ['误报', '疑似', '验证', '复测', '复核', '人工', '筛选'] },
-                                { label: '客观中立的报告原则', method: '报告要列实际验证后的真实风险，不能"凑数"夸大——失实的报告反噬机构信誉。', kws: ['客观', '中立', '失实', '夸大', '信誉', '报告', '真实'] },
-                                { label: '结论与建议', method: '区分"已验证高危/中危/低危/误报"四档，整改建议按"已验证风险"提——别把误报也算成整改项。', kws: ['分档', '四档', '已验证', '风险', '建议', '整改', '分级'] }
-                            ]
+                                { label: '扫描给的是「疑似」，人要的才是结论', method: '扫描器的输出只算线索：定稿前必须逐条复测核对（补丁号、版本、端口、实际利用条件），误报要剔除并说明剔除依据，不能照抄进报告。', kws: ['误报', '疑似', '复测', '核对', '剔除', '依据', '验证', '人工', '补丁号', '版本'] },
+                                { label: '漏洞公开后的窗口就是生命线', method: '报告第一行该写「先做什么」：哪些 IP、哪几条、怎么临时缓解（关端口/下线/防火墙放规则），而不是从第一条编号念到最后一条——时间窗口按小时算。', kws: ['窗口', '应急', '抢时间', '先做什么', '优先', '临时', '隔离', '下线', '缓解', '顺序', '小时'] },
+                                { label: '一份报告，两种语言', method: '给管理层三句话：影响多大、波及哪些业务、不整改的后果；给运维一份清单：补丁号、配置修改、验证方法。同一份报告，读者不同写法就要不同。', kws: ['摘要', '管理层', '三句话', '清单', '运维', '补丁号', '命令', '验证', '方法', '分层', '对象'] },
+                                { label: '既不夸大，也不淡化', method: '夸大是自损信誉，淡化是替客户埋雷；只有经得起复核、且让人看得出你为什么这么判的结论，才签得下去。', kws: ['客观', '中立', '真实', '信誉', '埋雷', '留痕', '复核', '不夸大', '不缩小', '证据'] }
+                            ],
+                            ref: 'CVE-2014-0160 Heartbleed / 加拿大税务局（CRA）数据泄露通报 / 漏洞验证与误报识别'
+                        },
+                        {
+                            id: 's45b', comp: '科技伦理 · 公共安全与职业立场',
+                            title: '「我发现了一个漏洞，现在怎么办」——漏洞披露的伦理岔路',
+                            scene: '你在一个练习用的测试环境里意外发现：某在用系统存在一个严重缺陷，而且利用起来并不困难。你查资料后得知，业界围绕「漏洞该怎么处理」争论多年：有人主张「限时披露」（先私下告知厂商并约定修复期限，到期未修才公开，以此倒逼厂商出补丁）；有人认为「发现即公开」最有利于用户知情；也有人认为漏洞信息本身就是危险品，应当严格管制。在我国，2021 年施行的《网络产品安全漏洞管理规定》已对漏洞的发布、修补、报送等作出了规范。',
+                            question: '请分析这起伦理冲突并给出你的行动方案：①从「用户安全 / 厂商利益 / 研究者价值 / 公共秩序」多方角度权衡，有没有两全其美的解法？②列出你作为发现者会采取的行动顺序（向谁报告、证据如何留存、对外如何沟通、哪些事绝对不做）；③说说这与我们做漏洞扫描、整改跟踪之间的职业关联。',
+                            points: [
+                                { label: '权衡，而不是喊口号', method: '这不是简单的「公开还是保密」：公开早了可能被滥用、晚了可能让防护长期裸奔——成熟的判断是在多个受损方之间找支点，而不是站在道德高地上喊一句「为了用户」。', kws: ['权衡', '多方', '用户', '厂商', '期限', '知情', '缓冲', '过渡', '既', '研究', '取舍'] },
+                                { label: '走正规渠道', method: '向厂商 SRC、本单位信息化部门、CNVD/CNCERT 等平台报告，不把可被当作武器的细节扩散出去——渠道本身就是为「两边兼顾」设计的。', kws: ['CNVD', 'CNCERT', 'SRC', '厂商', '渠道', '报告', '上报', '规范', '内部', '平台', '规定'] },
+                                { label: '发现不等于拥有', method: '不下载数据、不改数据、不留后门、不在未授权范围内横向试探，只保留足以证明问题存在的证据——「我是为了安全」从来不是越界的理由。', kws: ['授权', '范围', '下载', '后门', '横向', '停下', '保留证据', '必要', '书面', '审批'] },
+                                { label: '我们站在防御那一侧', method: '做漏洞扫描的目的是更早把隐患揪出来、帮对方补上——「以测促防」这个立场，决定了我们用什么样的手段、在什么范围内停下来。', kws: ['以测促防', '防御', '保护', '立场', '底线', '守护', '帮助', '整改', '用户优先'] }
+                            ],
+                            ref: '《网络产品安全漏洞管理规定》/ CNVD 国家信息安全漏洞共享平台 / 负责任披露 / 限时披露'
                         }
                     ]
                 },
@@ -4358,8 +4903,9 @@ var SUYANG_CASES = {
                         '<span class="sy-comp">素养：' + esc(caseData.comp) + '</span>' +
                         '<span class="sy-case-title">' + esc(caseData.title) + '</span>' +
                         '</div>' +
-                        '<div class="sy-scene"><strong>🎬 场景：</strong>' + esc(caseData.scene) + '</div>' +
-                        '<div class="sy-q"><strong>❓ 请分析：</strong>' + esc(caseData.question) + '</div>' +
+                        '<div class="sy-scene"><strong>🎬 场景：</strong>' + esc(caseData.scene).replace(/\n/g, '<br>') + '</div>' +
+                        (caseData.ref ? '<div class="sy-ref-note">🔎 <strong>延伸查证（建议自己动手搜一搜，别只读我写的）：</strong>' + esc(caseData.ref) + '</div>' : '') +
+                        '<div class="sy-q"><strong>❓ 请分析：</strong>' + esc(caseData.question).replace(/\n/g, '<br>') + '</div>' +
                         '<textarea class="sy-answer" placeholder="结合场景写出你的真实想法（识别问题 → 分析依据 → 给出具体做法）。答案会自动保存在本机，换电脑请先复制备份。"></textarea>' +
                         '<div class="sy-actions">' +
                         '<button type="button" class="sy-btn">🤖 AI 点评我的答案</button>' +
@@ -4368,7 +4914,7 @@ var SUYANG_CASES = {
                         '</div>' +
                         '<div class="sy-result"></div>' +
                         '<details class="sy-ref"><summary>👀 偷看一下：本案例考察哪些素养观察点？</summary>' +
-                        '<div class="sy-ref-box">' + caseData.points.map(function (p) { return '· <strong>' + esc(p.label) + '</strong>：' + esc(p.hint); }).join('<br>') + '</div>' +
+                        '<div class="sy-ref-box">' + caseData.points.map(function (p) { return '· <strong>' + esc(p.label) + '</strong>：' + esc(p.hint || p.method || ''); }).join('<br>') + '</div>' +
                         '</details>';
 
                     var ta = el.querySelector('.sy-answer');
@@ -4431,7 +4977,7 @@ var SUYANG_CASES = {
                         wrap.innerHTML =
                             '<div class="sy-banner">' +
                             '<div class="sy-banner-title">🌟 素养培养案例 · 场景分析</div>' +
-                            '<div class="sy-banner-note">本任务知识点涉及 <strong>' + unit.cases.length + ' 项核心素养</strong>，每项素养配了一个真实工作场景。先认真读场景、独立写下你的真实想法，再点「AI 点评」获得老师式的即时反馈；想深入的话也可以请等保小助教深度点评。作答会按账号自动保存草稿。</div>' +
+                            '<div class="sy-banner-note">本任务提炼出 <strong>' + unit.cases.length + ' 项核心素养</strong>，每项配一个真实场景：素材取自公开报道的网络安全事件、行业经典案例、领域内代表性人物的真实事迹，或需要你亲手设计的具体方案。做法建议：先读懂场景 → 顺着「延伸查证」自己搜一搜背景资料 → 独立写下你的真实判断 → 再点「AI 点评」获得老师式的即时反馈；想更深入可以请等保小助教深度点评。作答会按账号自动保存草稿。</div>' +
                             '</div>';
                         unit.cases.forEach(function (c, i) { wrap.appendChild(buildCaseEl(c, i, unit.title)); });
                         aiGroup.insertBefore(wrap, aiGroup.firstChild);
@@ -4577,28 +5123,52 @@ var SUYANG_CASES = {
                     nav.className = 'kb-mod-nav';
                     if (res.ppts.length) {
                         var pLabel = res.ppts[0].replace(/（理论版）/, '').replace(/\.pptx$/, '');
-                        var pcard = document.createElement('button');
-                        pcard.type = 'button';
-                        pcard.className = 'kb-mod-card kb-ppt-mod kb-ppt-mod--disabled';
-                        pcard.setAttribute('aria-disabled', 'true');
-                        pcard.title = '课件暂未提供在线浏览，请联系任课教师获取：' + pLabel;
-                        pcard.innerHTML =
-                            '<span class="kb-mod-no">📑</span>' +
-                            '<span class="kb-mod-name">' +
-                              '<span class="kb-ppt-badge">PPT</span>' +
-                              '<span class="kb-ppt-title">' + pLabel + '</span>' +
-                              '<span class="kb-ppt-status">暂未开放</span>' +
-                            '</span>';
-                        pcard.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            // 课件下载入口已下线：不再打开 window.open / 跳转
-                            if (typeof trackOperation === 'function') {
-                                trackOperation('尝试访问课件（已下线）', pLabel);
-                            }
-                            alert('「' + pLabel + '」课件暂未提供在线浏览，请联系任课教师获取。');
-                        });
+                        var pcard;
+                        if (/^4\./.test(unitKey)) {
+                            // 任务4：课件 PDF 已上线，点击直接打开（PPT/同名.pdf）
+                            var pdfFile = 'PPT/' + res.ppts[0].replace(/\.pptx$/, '.pdf');
+                            pcard = document.createElement('a');
+                            pcard.className = 'kb-mod-card kb-ppt-mod';
+                            pcard.href = encodeURI(pdfFile);
+                            pcard.target = '_blank';
+                            pcard.rel = 'noopener';
+                            pcard.title = '点击打开 PDF 课件：' + pLabel;
+                            pcard.innerHTML =
+                                '<span class="kb-mod-no">📑</span>' +
+                                '<span class="kb-mod-name">' +
+                                  '<span class="kb-ppt-badge">PDF</span>' +
+                                  '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                                  '<span class="kb-ppt-status kb-ppt-status--open">点击打开</span>' +
+                                '</span>';
+                            pcard.addEventListener('click', function () {
+                                if (typeof trackOperation === 'function') {
+                                    trackOperation('打开课件PDF', pLabel);
+                                }
+                            });
+                        } else {
+                            pcard = document.createElement('button');
+                            pcard.type = 'button';
+                            pcard.className = 'kb-mod-card kb-ppt-mod kb-ppt-mod--disabled';
+                            pcard.setAttribute('aria-disabled', 'true');
+                            pcard.title = '课件暂未提供在线浏览，请联系任课教师获取：' + pLabel;
+                            pcard.innerHTML =
+                                '<span class="kb-mod-no">📑</span>' +
+                                '<span class="kb-mod-name">' +
+                                  '<span class="kb-ppt-badge">PPT</span>' +
+                                  '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                                  '<span class="kb-ppt-status">暂未开放</span>' +
+                                '</span>';
+                            pcard.addEventListener('click', function (e) {
+                                e.preventDefault();
+                                // 课件下载入口已下线：不再打开 window.open / 跳转
+                                if (typeof trackOperation === 'function') {
+                                    trackOperation('尝试访问课件（已下线）', pLabel);
+                                }
+                                alert('「' + pLabel + '」课件暂未提供在线浏览，请联系任课教师获取。');
+                            });
+                        }
                         nav.appendChild(pcard);
-                        // （按老师要求：去掉"⬇ 原文件"小按钮，只保留 PPT 在线浏览入口）
+                        // （按老师要求：去掉"⬇ 原文件"小按钮，只保留课件入口）
                     }
 
                     // ---- 5. 模块卡片 + 内容面板（标准原文融入目标模块） ----
@@ -4711,9 +5281,12 @@ var SUYANG_CASES = {
 // 视觉上与 PPT 课件（紫色）区分。
 (function migrateTablesToLab() {
     document.querySelectorAll('.substage').forEach(function (sub) {
+        var taskId = sub.id.replace('substage', '');
         // buildTabsFor 把所有内容块搬到 cat-group 里，所以要跨层找
         var tbl = sub.querySelector('.cat-group[data-cat="knowledge"] .kb-st-tables')
                   || sub.querySelector(':scope > .kb-st-tables');
+        // 4.1 / 4.2 / 4.3 实验模块不展示该汇总块（其核心素材已在实验模块第一节单独列出）
+        if (taskId === '4.1' || taskId === '4.2' || taskId === '4.3') { if (tbl) tbl.remove(); return; }
         var lab = sub.querySelector('.cat-group[data-cat="lab"] .lab-box')
                   || sub.querySelector(':scope > .lab-box');
         if (tbl && lab) {
@@ -6032,5 +6605,19 @@ var SUYANG_CASES = {
     })();
     </script>
     <!-- ===== 等保小助教（智能助教悬浮组件） 结束 ===== -->
+
+    <!-- ===== 4.2 记录表案例：折叠切换（独立小函数，不动既有脚本） ===== -->
+    <script>
+    function rbCaseToggle(btn) {
+        var box = document.getElementById('rbCase42');
+        if (!box) { return; }
+        var folded = box.classList.toggle('is-folded');
+        btn.textContent = folded ? '展开 ▾' : '折叠 ▴';
+        btn.setAttribute('aria-expanded', folded ? 'false' : 'true');
+        if (typeof trackOperation === 'function') {
+            trackOperation(folded ? '折叠测评记录表案例' : '展开测评记录表案例', '4.2 网络设备配置核查');
+        }
+    }
+    </script>
 </body>
 </html>
