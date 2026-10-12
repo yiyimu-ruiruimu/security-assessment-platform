@@ -2506,10 +2506,10 @@
                         
                         <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
-                        <!-- 【实验 1/5】做什么 -->
+                        <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实（虚拟化）主机上完成 <strong>2 个基线核查实验</strong>（Windows 线 1 个 + Linux 线 1 个），走通"<strong>查 → 判 → 交</strong>"三步闭环，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实（虚拟化）主机上完成 <strong>2 个基线核查实验</strong>（Windows 线 1 个 + Linux 线 1 个），走通"<strong>查 → 判 → 交</strong>"三步，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。<strong>课内完成、当场提交。</strong></div>
 
                             <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
                             <div class="table-container">
@@ -2519,106 +2519,65 @@
                                     <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
                                     <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
                                     <tr><td>实验路径</td><td>登录后进入「<strong>主机设备基线核查</strong>」→「<strong>Windows 系统安全评测 / Linux 系统安全评测</strong>」→ 选择本轮实验 → 预约 / 开始实验 → 进入虚拟机操作</td></tr>
-                                    <tr><td>本环节只用两份素材</td><td><strong>素材6</strong>（实验选取清单与操作能力对照）+ <strong>素材7</strong>（等保测评实验记录表），其余素材均属知识页，<strong>实验环节不要使用</strong></td></tr>
                                 </table>
                             </div>
                             <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 实验素材——按这个顺序使用</strong></p>
-                            <div style="background:#e8f5e9;border-left:4px solid #43a047;padding:10px 14px;border-radius:6px;margin-bottom:10px;">
-                                <p style="margin:0 0 8px;font-weight:700;color:#1b5e20;">📌 先看素材6 → 再看素材7</p>
-                                <ol style="margin:0 0 0 20px;line-height:1.9;">
-                                    <li><strong>第一步 · 看素材6</strong>（<em>西普平台实验选取清单与操作能力对照</em>）——先对照它<strong>确定要做哪 2 个实验</strong>，看清每个实验"要做的事"和"关键操作（考察点）"，再上平台动手。</li>
-                                    <li><strong>第二步 · 看素材7</strong>（<em>等保测评实验记录表（西普平台）</em>）——带着记录表去做实验，边核查边把实测结果填进去，<strong>就知道该取哪些证据、该填哪几条</strong>。</li>
-                                </ol>
-                            </div>
-                            <p>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：实验选取清单与操作能力对照 · 先看</a>
-                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download title="下载《等保测评实验记录表（西普平台）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
-                            </p>
-                            <p style="font-size:0.88rem;color:#666;">记录表（素材7）已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 2 个实验对应的 6 条</strong>（未选实验的行留空或整行删除）；判定拿不准时，回看知识模块里的"三法合一"判定原则。</p>
-                        </div>
-
-                        <!-- 【实验 2/5】选什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📋 二、选什么——实验项目清单（Windows 选 1 个 + Linux 选 1 个）</div>
-                            <div class="lab-goal">从西普平台「<strong>主机设备基线核查</strong>」→「<strong>Windows 系统安全评测 / Linux 系统安全评测</strong>」目录下选取实验：<strong>Windows 线选 1 个、Linux 线选 1 个，共 2 个</strong>。下表内容与 <strong>素材6</strong> 一致，请对照素材6 确认后，在平台内按实验名称找到对应实验。推荐组合 <strong>W1 + L1</strong>——口令策略与认证是等保测评最高频的丢分点，证据最好取、判定最典型。</div>
-
-                            <p style="margin:14px 0 6px;"><strong>① Windows 线（从 W1~W4 中选 1 个）</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——Windows 选 1 个 + Linux 选 1 个</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>Windows 系统安全评测 / Linux 系统安全评测</strong>」目录下各选 1 个，共 2 个；下表与<strong>素材6</strong> 一致，对照素材6 确认后在平台内按实验名称找到实验。<strong>推荐组合 W1 + L1</strong>——口令策略与认证是等保测评最高频的丢分点，证据最好取、判定最典型。</p>
+                            <p style="margin:12px 0 6px;"><strong>① Windows 线（W1~W4 中选 1 个）</strong></p>
+                            <table class="info-table">
                                     <tr><th>编号</th><th>对应平台实验<br>（西普真实目录）</th><th>你要查什么</th><th>覆盖条款</th><th>关键操作（考察点）</th></tr>
                                     <tr><td><strong>W1</strong></td><td><strong>Windows 系统安全评测 → Windows 身份鉴别</strong></td><td>口令复杂度、最小长度、有效期、历史，以及账户锁定阈值</td><td>8.1.4.1 a) / b)</td><td><code>secpol.msc</code> → 账户策略、账户锁定策略；<code>net accounts</code>；<code>net user</code></td></tr>
                                     <tr><td><strong>W2</strong></td><td><strong>Windows 系统安全评测 → Windows 安全审计</strong></td><td>审核策略（登录 / 对象访问 / 策略变更，成功 + 失败）、安全日志留存</td><td>8.1.4.3 a) ~ c)</td><td><code>secpol.msc</code> → 审核策略；<code>auditpol /get /category:*</code>；事件查看器 → 安全日志 → 属性</td></tr>
                                     <tr><td><strong>W3</strong></td><td><strong>Windows 系统安全评测 → Windows 入侵防范</strong></td><td>默认共享、Guest 与多余账户、非必要服务、445 等高危端口</td><td>8.1.4.4</td><td><code>net share</code>；<code>services.msc</code>；<code>netstat -ano | findstr LISTENING</code></td></tr>
                                     <tr><td><strong>W4</strong></td><td><strong>Windows 系统安全评测 → Windows 访问控制</strong></td><td>用户权限分配、关键目录 NTFS 权限（是否 Everyone 可写）</td><td>8.1.4.2</td><td><code>secpol.msc</code> → 本地策略 → 用户权限分配；<code>icacls</code>；文件属性 → 安全 → 高级</td></tr>
                                 </table>
-                            </div>
-
-                            <p style="margin:18px 0 6px;"><strong>② Linux 线（从 L1~L4 中选 1 个）</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:16px 0 6px;"><strong>② Linux 线（L1~L4 中选 1 个）</strong></p>
+                            <table class="info-table">
                                     <tr><th>编号</th><th>对应平台实验<br>（西普真实目录）</th><th>你要查什么</th><th>覆盖条款</th><th>关键操作（考察点）</th></tr>
                                     <tr><td><strong>L1</strong></td><td><strong>Linux 系统安全评测 → 认证人工检查</strong></td><td>login.defs、pwquality.conf、system-auth、空口令 / 弱口令账户</td><td>8.1.4.1 a) / b)</td><td><code>cat /etc/login.defs</code>；<code>cat /etc/security/pwquality.conf</code>；<code>cat /etc/pam.d/system-auth</code>；<code>awk -F: '($2=="")' /etc/shadow</code></td></tr>
                                     <tr><td><strong>L2</strong></td><td><strong>Linux 系统安全评测 → 安全审计漏洞人工检查</strong></td><td>rsyslog / auditd 状态、<code>/var/log/secure</code>、audit 规则、日志留存</td><td>8.1.4.3 a) ~ c)</td><td><code>systemctl status rsyslog auditd</code>；<code>cat /var/log/secure</code>；<code>auditctl -l</code>；<code>cat /etc/logrotate.conf</code></td></tr>
                                     <tr><td><strong>L3</strong></td><td><strong>Linux 系统安全评测 → 系统人工检查</strong></td><td>开放端口与非必要服务、系统补丁与已知漏洞</td><td>8.1.4.4</td><td><code>ss -tlnp</code>；<code>systemctl list-unit-files --type=service --state=enabled</code>；<code>rpm -qa --last</code>；<code>yum check-update</code></td></tr>
                                     <tr><td><strong>L4</strong></td><td><strong>Linux 系统安全评测 → 账号人工检查</strong></td><td>账户最小化、sudo 权限、关键文件权限</td><td>8.1.4.2 / 8.1.4.1 b)</td><td><code>cat /etc/passwd</code>；<code>cat /etc/sudoers</code>；<code>getent group wheel</code>；<code>ls -l /etc/passwd /etc/shadow /etc/group</code></td></tr>
                                 </table>
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;">说明：上表"对应平台实验"列直接引用西普平台"主机设备基线核查"→"Windows/Linux 系统安全评测"目录下的实验名称；学生在平台内按该名称找到实验即可。Linux 目录下的"<strong>漏洞扫描工具使用</strong>"属于工具操作类实验，不是等保基线核查内容，<strong>本轮不选</strong>。</p>
+                            <p style="font-size:0.88rem;color:#666;">说明：Linux 目录下的"漏洞扫描工具使用"属工具操作类实验，不是等保基线核查内容，<strong>本轮不选</strong>。</p>
                         </div>
 
-                        <!-- 【实验 3/5】怎么做 + 待完成任务 -->
+                        <!-- 【实验 2/3】怎么做 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 三、怎么做——操作能力要求与待完成任务</div>
-                            <div class="lab-goal">课程标准学习任务 4 的能力要求是"<strong>能够使用配置核查工具对 Windows 和 Linux 系统进行安全配置核查与基线比对，填写测评记录表</strong>"。落到本轮上机，需具备以下 4 项操作能力，并完成下方 4 项待完成任务。</div>
+                            <div class="lab-head">🎯 二、怎么做——四步走</div>
+                            <div class="lab-goal">按「<strong>选实验 → 核查取证 → 填表判定 → 提交</strong>」四步走，全程对照<strong>素材6</strong> 和 <strong>素材7</strong> 完成。</div>
 
-                            <p style="margin:14px 0 6px;"><strong>▍1. 应具备的操作能力</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:42px;">#</th><th style="width:150px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:130px;">在哪个环节练</th></tr>
-                                    <tr><td>①</td><td><strong>平台操作能力</strong></td><td>能独立登录西普平台、进入「主机设备基线核查」→「Windows/Linux 系统安全评测」实验、启动虚拟机并提交实验结果；知道实验计时 / 次数限制；遇到环境打不开能规范描述现象并求助</td><td>2 个实验全程</td></tr>
-                                    <tr><td>②</td><td><strong>基线核查操作能力</strong></td><td>能在 Windows 图形界面（<code>secpol.msc</code> / 计算机管理 / 事件查看器）与 Linux 配置文件命令（<code>cat /etc/login.defs</code>、<code>grep sshd_config</code>、<code>ss -tlnp</code>）两条路径上，<strong>定位并读取</strong>口令策略、账户权限、审计日志、服务端口四类配置项</td><td>待完成任务②</td></tr>
-                                    <tr><td>③</td><td><strong>证据取证能力</strong></td><td>对每一条核查项都能取到<strong>可追溯的证据</strong>：配置界面 / 命令回显截图 + 截图编号，做到"谁说符合，证据在哪"</td><td>待完成任务②</td></tr>
-                                    <tr><td>④</td><td><strong>判定与记录能力</strong></td><td>能对照 GB/T 22239-2019（8.1.4 安全计算环境）逐项判定"符合 / 部分符合 / 不符合 / 不适用"，把"做到哪、差在哪"写清，规范填写《等保测评实验记录表》（素材7）</td><td>待完成任务③</td></tr>
-                                </table>
+                            <p style="margin:14px 0 6px;"><strong>▍1. 实验素材——按这个顺序用</strong></p>
+                            <div style="background:#e8f5e9;border-left:4px solid #43a047;padding:10px 14px;border-radius:6px;margin-bottom:10px;">
+                                <p style="margin:0 0 8px;font-weight:700;color:#1b5e20;">📌 先看素材6 → 再看素材7 → 判定时参考素材9</p>
+                                <ol style="margin:0 0 0 20px;line-height:1.9;">
+                                    <li><strong>第一步 · 看素材6</strong>（<em>西普平台实验选取清单与操作能力对照</em>）——先对照它<strong>确定要做哪 2 个实验</strong>，看清每个实验"要做的事"和"关键操作（考察点）"，再上平台动手。</li>
+                                    <li><strong>第二步 · 看素材7</strong>（<em>等保测评实验记录表（西普平台）</em>）——带着记录表去做实验，边核查边把实测结果填进去，<strong>就知道该取哪些证据、该填哪几条</strong>。</li>
+                                    <li><strong>第三步 · 判定时参考素材9</strong>（<em>AI 辅助合规判定案例（示范）</em>）——记录表里拿不准的条款，可参考它把实验截图交给 AI 出判定初稿，<strong>再人工逐条复核</strong>后填入素材7（AI 只出初稿，结论必须人工核验）。</li>
+                                </ol>
                             </div>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材6：西普平台实验选取清单与操作能力对照.docx" download title="下载《西普平台实验选取清单与操作能力对照》">⬇ 素材6：实验选取清单与操作能力对照 · 先看</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材7：等保测评实验记录表（西普平台）.docx" download title="下载《等保测评实验记录表（西普平台）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
+                                <a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材9：AI辅助合规性判断（案例）.docx" download title="下载《AI 辅助合规判定案例（示范 · 主机设备基线核查）》">⬇ 素材9：AI 辅助合规判定案例（示范）· 判定参考</a>
+                            </p>
+                            <p style="font-size:0.88rem;color:#666;">记录表（素材7）已按 <strong>8 个实验 × 3 条 = 24 条</strong>核查项预填"基线要求（期望值）"，<strong>你只需填写所选 2 个实验对应的 6 条</strong>（未选实验的行留空或整行删除）；判定拿不准时，回看知识模块里的"三法合一"判定原则。</p>
 
-                            <p style="margin:16px 0 6px;"><strong>▍2. 待完成的实验任务（4 项）</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:16px 0 6px;"><strong>▍2. 四步任务清单</strong></p>
+                            <table class="info-table">
                                     <tr><th style="width:64px;">任务</th><th>具体要求</th><th style="width:220px;">产出</th></tr>
                                     <tr><td><strong>① 选实验</strong></td><td>对照<strong>素材6</strong>，从 Windows 线 W1~W4 选 <strong>1 个</strong>、Linux 线 L1~L4 选 <strong>1 个</strong>（推荐 W1 + L1），在平台内找到并启动实验</td><td>确定 2 个实验编号</td></tr>
                                     <tr><td><strong>② 做核查、取证</strong></td><td>在虚拟机内定位配置项 → 执行核查操作 → <strong>每条核查项至少留 1 张截图</strong>（须含命令回显或配置界面），截图文件名与"截图编号"一致（如 <code>W1-01.png</code>）</td><td>带命令回显的证据截图</td></tr>
                                     <tr><td><strong>③ 填记录表、做判定</strong></td><td>打开<strong>素材7</strong>，把所选 2 个实验对应的 <strong>6 条</strong>核查项填写完整：实测结果（具体值）+ <strong>四档判定</strong> + 问题描述 + 整改建议，并写"核查小结 + 优先整改项"</td><td>填好的记录表（6 条）</td></tr>
                                     <tr><td><strong>④ 提交成果</strong></td><td>截图打包 + 记录表，按下方第五节要求命名并课内提交</td><td>截图包 + 记录表</td></tr>
                                 </table>
-                            </div>
                         </div>
 
-                        <!-- 【实验 4/5】学到什么 -->
+                        <!-- 【实验 3/3】怎么交 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 四、学到什么——实验目标与达标判据</div>
-                            <div class="lab-goal"><strong>总目标：</strong>在西普平台真实（虚拟化）主机上走通"<strong>选取核查项 → 平台操作取证 → 基线比对 → 合规判定 → 填写记录表</strong>"的完整闭环，产出<strong>有真实证据支撑</strong>的《等保测评实验记录表》。</div>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:56px;">编号</th><th>实验目标</th><th>达标判据</th></tr>
-                                    <tr><td>W1</td><td>掌握本地安全策略中口令复杂度、长度、最长期限、历史与账户锁定阈值的查看与配置，能判定是否满足三级要求</td><td>"实测结果"给出具体值（如最小长度 = 8）；"符合性判定"给出四档结论</td></tr>
-                                    <tr><td>W2</td><td>掌握审核策略的启用（登录 / 对象访问 / 策略变更，成功 + 失败）与事件日志留存设置，能验证"日志可查、留存满足"</td><td>"实测结果"列出已启用的审核类别；"问题描述"写清未开启的项</td></tr>
-                                    <tr><td>W3</td><td>掌握默认共享、Guest / 多余账户、445 等非必要端口与服务的检查与关闭，能识别"高危端口暴露"风险</td><td>"实测结果"给出端口 / 共享清单；"整改建议"给出关闭或限制的具体做法</td></tr>
-                                    <tr><td>W4</td><td>掌握用户权限分配与 NTFS 权限查看，能判定是否存在 Everyone 可写等过度授权</td><td>"实测结果"给出权限清单；"问题描述"点明过度授权的对象</td></tr>
-                                    <tr><td>L1</td><td>掌握 <code>/etc/login.defs</code>、<code>/etc/security/pwquality.conf</code>、<code>/etc/pam.d/system-auth</code>、<code>/etc/shadow</code> 的查看，能判定口令策略与登录失败处理是否合规</td><td>"实测结果"抄录关键参数值；"符合性判定"逐项四档</td></tr>
-                                    <tr><td>L2</td><td>掌握 rsyslog / auditd 服务状态、<code>/var/log/secure</code> 与 audit 规则的查看，能判定"审计是否开启、日志能否追溯"</td><td>"实测结果"给出服务状态与日志样例；"问题描述"写清缺失的审计项</td></tr>
-                                    <tr><td>L3</td><td>掌握开放端口与非必要服务（telnet / ftp 等）的检查与关闭，能判定"最小化安装"落实情况</td><td>"实测结果"给出开放端口清单；"整改建议"给出停用服务命令</td></tr>
-                                    <tr><td>L4</td><td>掌握账户最小化、sudo 权限、关键文件权限的查看与判定</td><td>"实测结果"给出账户列表与权限值；"符合性判定"给出结论</td></tr>
-                                </table>
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;">上表 8 条目标与你所选 2 个实验一一对应：选了哪 2 个，就重点达成对应的 2 条判据。</p>
-                        </div>
-
-                        <!-- 【实验 5/5】交什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
+                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
                             <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
                                 <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
@@ -2630,12 +2589,11 @@
                             </div>
                             <div class="lab-check" style="margin-top:14px;">
                                 <div class="lab-check-title">📋 提交前自查</div>
-                                ☐ 已按"先看素材6、再看素材7"的顺序使用素材　☐ 只用了素材6 和素材7（未误用知识页素材）　☐ 2 个实验（Windows 1 + Linux 1）全部完成　☐ 所选 2 个实验的 6 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写清了"差在哪"　☐ 核查小结给了四档统计与优先整改项　☐ 没有"以一台代表全部"
+                                ☐ 已按"素材6 → 素材7 → 素材9"的顺序使用素材　☐ 只用了素材6 / 素材7 / 素材9（未误用知识页素材）　☐ 2 个实验（Windows 1 + Linux 1）全部完成　☐ 所选 2 个实验的 6 条核查项都有截图且编号对应　☐"实测结果"是具体值而非结论　☐ 不符合项写清了"差在哪"　☐ 核查小结给了四档统计与优先整改项　☐ 没有"以一台代表全部"
                             </div>
                         </div>
 
-                        <div class="coming-soon">🔒 本子任务配套的核查素材包、记录表模板与讲解视频将陆续上线</div>
-                    </div>
+                        </div>
 
                     <!-- 4.2 网络设备配置核查 -->
                     <div class="substage" id="substage4.2">
@@ -2742,51 +2700,25 @@
 
 <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
-                        <!-- 【实验 1/5】做什么 -->
+                        <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>拿 <strong>三份真实设备配置</strong>（华为 <strong>防火墙 USG6650E / 交换机 S5720 / 路由器 AR6120</strong>）练手，走通"<strong>查 → 导 → 录 → 判</strong>"四步主线——按 8 个要点逐段读配置、把可疑行标出来，再逐条对照基线做四档判定。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-head">🧪 一、要做什么——本次任务、核查要点与对象</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>拿 <strong>三份真实设备配置</strong>（华为 <strong>防火墙 USG6650E / 交换机 S5720 / 路由器 AR6120</strong>）练手，走通"<strong>查 → 录 → 判 → 交</strong>"四步主线——按 8 个要点逐段读配置、把可疑行标出来，把配置原文录进记录表，再逐条对照基线做四档判定，最后提交记录表与实验报告。<strong>课内完成、当场提交。</strong></div>
 
-                            <p style="margin:14px 0 6px;"><strong>▍1. 实验环境与素材</strong></p>
+                            <p style="margin:14px 0 6px;"><strong>▍1. 实验环境</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th style="width:130px;">项目</th><th>内容</th></tr>
                                     <tr><td>实验性质</td><td>基于<strong>真实设备配置导出文件</strong>的离线核查（配置源文件由素材提供，无需登录真机）</td></tr>
                                     <tr><td>被测设备（3 台）</td><td>① 出口防火墙 华为 <strong>USG6650E</strong>（FW-01）　② 核心交换机 华为 <strong>S5720-28X-SI</strong>　③ 出口路由器 华为 <strong>AR6120</strong></td></tr>
-                                    <tr><td>导出命令</td><td>华为设备统一使用 <code>display current-configuration</code></td></tr>
-                                    <tr><td>判定工具</td><td>录入核查结果、做四档判定、导出记录表可使用 <strong>JSecProbe</strong>（也可借助 AI 辅助判定）</td></tr>
-                                    <tr><td>核心素材</td><td>素材2（防火墙配置）、素材4（交换机配置）、素材7（路由器配置）、素材3（记录表）、素材8（填写范例）</td></tr>
+                                    <tr><td>配置来源</td><td>三台设备的配置已由 <strong>素材2 / 素材4 / 素材7</strong> 提供（即设备 <code>display current-configuration</code> 的导出结果），<strong>直接打开核查，无需登录真机</strong></td></tr>
+                                    <tr><td>填到哪里</td><td>所有核查结果统一填进 <strong>素材3《网络设备安全测评记录表》</strong> 的对应栏——这就是本轮的产出。</td></tr>
                                 </table>
                             </div>
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 实验流程主线——四步走</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
-                                    <tr><td><strong>① 查</strong></td><td>按 <strong>8 个要点</strong>逐段读配置，把可疑行标出来</td><td>标出可疑行的配置清单</td></tr>
-                                    <tr><td><strong>② 导</strong></td><td>导出配置信息（通过命令）</td><td>完整配置导出回显</td></tr>
-                                    <tr><td><strong>③ 录</strong></td><td>把可疑行的配置原文抄进记录表，注明段落或行号</td><td>实测配置原文摘录</td></tr>
-                                    <tr><td><strong>④ 判</strong></td><td>逐条做四档判定，写清"做到哪、差在哪"</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
-                                </table>
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;">最后两步（录、判）可借助 JSecProbe 完成。</p>
-
-                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
-                            <p>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 素材3：网络设备安全测评记录表 · 必填</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2：防火墙配置导出（USG6650E）</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4：交换机配置导出（S5720）</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7：路由器配置导出（AR6120）</a>
-                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8：测评记录表填写范例（防火墙 FW-01）</a>
-                            </p>
-                        </div>
-
-                        <!-- 【实验 2/5】按哪 8 个要点查 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📋 二、查什么——按这 8 个要点逐条对照</div>
-                            <div class="lab-goal">读配置不是通读全文，而是<strong>带着 8 个要点去"找茬"</strong>。每读一条，先问：这条对应哪个要点？合规线是多少？当前配置差在哪？</div>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:14px 0 6px;"><strong>▍2. 核查要点——按这 8 个要点逐条对照</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">读配置不是通读全文，而是<strong>带着 8 个要点去"找茬"</strong>：每读一条，先问——这条对应哪个要点？合规线是多少？当前配置差在哪？</p>
+                            <table class="info-table">
                                     <tr><th style="width:56px;">#</th><th style="width:110px;">要点</th><th style="width:110px;">依据条款</th><th>合规要求（合格线）</th></tr>
                                     <tr><td>1</td><td><strong>密码策略</strong></td><td>8.1.4.1 a)</td><td>长度 ≥ 8，复杂度已启用，有效期 ≤ 90 天</td></tr>
                                     <tr><td>2</td><td><strong>登录策略</strong></td><td>8.1.4.1 b)</td><td>失败锁定阈值 ≤ 5 次，锁定时间 ≥ 15 分钟</td></tr>
@@ -2797,25 +2729,44 @@
                                     <tr><td>7</td><td><strong>服务端口</strong></td><td>8.1.4.4 b)</td><td>已关闭不必要的服务和端口</td></tr>
                                     <tr><td>8</td><td><strong>管理限制</strong></td><td>8.1.4.4 c)</td><td>使用 ACL 策略限制管理 IP 来源</td></tr>
                                 </table>
-                            </div>
-                            <p style="font-size:0.9rem;color:#8a6d00;">📌 这 8 个要点对应记录表里的 9 条测评指标（审计拆成"启用"与"记录保护"两条），逐条填满即为完成。</p>
-                        </div>
+                            <p style="font-size:0.9rem;color:#8a6d00;">📌 这 8 个要点对应<strong>素材3 记录表</strong>里的 9 条测评指标（审计拆成"启用"与"记录保护"两条），逐条填满即为完成。</p>
 
-                        <!-- 【实验 3/5】三台设备 -->
-                        <div class="lab-box">
-                            <div class="lab-head">🎯 三、练什么——三台被测设备（各一份配置导出）</div>
-                            <div class="lab-goal">三台设备必须<strong>各看一遍</strong>——<strong>一台加固不等于全部</strong>。每台设备对照 8 个要点逐项核查，重点核查项见下表：</div>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:16px 0 6px;"><strong>▍3. 三台被测设备（每台都要看一遍）</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">三台设备必须<strong>各看一遍</strong>——<strong>一台加固不等于全部</strong>。每台对照 8 个要点逐项核查，重点核查项见下表：</p>
+                            <table class="info-table">
                                     <tr><th style="white-space:nowrap;">编号</th><th style="white-space:nowrap;">设备类型</th><th style="white-space:nowrap;">典型型号</th><th style="white-space:nowrap;">导出命令</th><th style="white-space:nowrap;">配置素材</th><th>重点核查项</th></tr>
                                     <tr><td><strong>R1</strong></td><td>出口路由器</td><td>华为 AR6120</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7</a></td><td>登录失败处理、Telnet 明文管理、SNMPv2c / 私有团体字、公网口管理协议可达性、ACL 2001 放通 any</td></tr>
                                     <tr><td><strong>S1</strong></td><td>核心交换机</td><td>华为 S5720-28X-SI-AC</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4</a></td><td>空闲端口未 shutdown、管理 / 办公 VLAN 无访问控制、默认账号 huawei、SNMPv2c、日志仅 60 天</td></tr>
                                     <tr><td><strong>F1</strong></td><td>出口防火墙</td><td>华为 USG6650E</td><td><code>display current-configuration</code></td><td><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2</a></td><td>密码策略与有效期、失败锁定阈值、any→any 安全策略、管理面 ACL、日志留存 180 天</td></tr>
                                 </table>
-                            </div>
                             <p style="font-size:0.9rem;color:#8a6d00;">⚠️ F1（防火墙）已给出完整填写范例（素材8 及下方"查-示例"），本任务的产出重点放在 <strong>R1、S1 两张记录表</strong>上。</p>
+                        </div>
 
-                            <p style="margin:16px 0 6px;"><strong>▍查-示例：某企业出口防火墙 FW-01 配置导出（教学模拟）</strong></p>
+                        <!-- 【实验 2/3】怎么做 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 二、怎么做——四步走 + 填写示例</div>
+                            <div class="lab-goal">按「<strong>查 → 录 → 判 → 交</strong>」四步走：读配置找出可疑行 → 把配置<strong>原文</strong>录进《网络设备安全测评记录表》（素材3）→ 逐条四档判定并写清"做到哪、差在哪" → 提交记录表与实验报告。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 四步流程</strong></p>
+                            <table class="info-table">
+                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:230px;">填到哪 / 产出</th></tr>
+                                    <tr><td><strong>① 查</strong></td><td>打开配置素材（素材2 / 4 / 7），按 <strong>8 个要点</strong>逐段读配置，把可疑行标出来</td><td>标好可疑行的配置清单</td></tr>
+                                    <tr><td><strong>② 录</strong></td><td>把可疑行的<strong>配置原文（实测值）</strong>抄进 <strong>素材3《网络设备安全测评记录表》</strong>的「问题描述」栏，并注明配置段落</td><td>记录表「问题描述」栏</td></tr>
+                                    <tr><td><strong>③ 判</strong></td><td>逐条做<strong>四档判定</strong>填入「测评结果」栏，再补「风险分析」与可直接下发的「整改建议」</td><td>记录表「测评结果 / 风险分析 / 整改建议」栏</td></tr>
+                                    <tr><td><strong>④ 交</strong></td><td>记录表填完，撰写实验报告，按命名提交</td><td>记录表 + 实验报告</td></tr>
+                                </table>
+                            <p style="font-size:0.9rem;color:#8a6d00;background:#fff8e1;border-left:4px solid #ffb300;padding:8px 12px;border-radius:6px;margin:10px 0 0;">📌 <strong>「录」录到哪？</strong>——全部落在 <strong>素材3《网络设备安全测评记录表》</strong>上：配置原文填「问题描述」栏，四档结论填「测评结果」栏，另补「风险分析」「整改建议」。<strong>不借助任何其他工具。</strong></p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 实验素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材3：实践任务——《网络设备安全测评记录表》.docx" download title="下载《网络设备安全测评记录表》">⬇ 素材3：网络设备安全测评记录表 · 必填</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 素材2：防火墙配置导出（USG6650E）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 素材4：交换机配置导出（S5720）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 素材7：路由器配置导出（AR6120）</a>
+                                <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8：测评记录表填写范例（防火墙 FW-01）</a>
+                            </p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍3. 查-示例：某企业出口防火墙 FW-01 配置导出（教学模拟）</strong></p>
                             <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">数据来源：素材2 的 <code>display current-configuration</code> 回显。<strong>照着回显逐行对照</strong>，把 9 条指标全部填满——"不符合"必须落到具体配置行和原值上。</p>
                             <div style="background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px 14px;font-family:Consolas,Monaco,monospace;font-size:0.84rem;line-height:1.7;color:#24292f;overflow-x:auto;white-space:pre;"># ===== 某企业出口防火墙 FW-01 配置导出（教学模拟） =====
 # 设备型号：华为 USG6650E    系统版本：V600R007C20SPC500
@@ -2866,8 +2817,7 @@
 return</div>
 
                             <p style="margin:16px 0 6px;"><strong>▍对照结果（第 1 条已示范，其余请自己填）</strong></p>
-                            <div class="table-container">
-                                <table class="info-table rb-tbl">
+                            <table class="info-table rb-tbl">
                                     <colgroup><col style="width:11%"><col style="width:14%"><col style="width:9%"><col style="width:66%"></colgroup>
                                     <tr><th>测评指标编号</th><th>测评指标名称</th><th>测评结果</th><th>问题描述（落到具体配置行）</th></tr>
                                     <tr><td>8.1.4.1 a)</td><td>身份标识与鉴别（密码策略：长度≥8，复杂度启用，有效期≤90天）</td><td><strong>不符合</strong></td><td><code>password min-length 6</code>（低于 8 位）；<code>password complexity-check disable</code>（未启用复杂度校验）；<code>password expire 180</code>（超过 90 天）</td></tr>
@@ -2880,28 +2830,12 @@ return</div>
                                     <tr><td>8.1.4.4 b)</td><td>关闭不需要的服务</td><td></td><td></td></tr>
                                     <tr><td>8.1.4.4 c)</td><td>管理终端限制（使用 ACL 策略限制管理 IP 来源）</td><td></td><td></td></tr>
                                 </table>
-                            </div>
                             <p style="font-size:0.85rem;color:#8a6d00;margin:8px 0 0;">⚠️ 完整填写范例（含风险分析、整改建议）见 <a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材8：案例——基于导出配置的测评记录表填写范例（防火墙 FW-01）.docx" download title="下载《测评记录表填写范例（防火墙 FW-01）》">⬇ 素材8</a>，也可在知识页"案例"块内查看对照表。</p>
                         </div>
 
-                        <!-- 【实验 4/5】需要什么能力 -->
+                        <!-- 【实验 3/3】怎么交 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 四、需要什么能力——应具备的操作能力</div>
-                            <div class="lab-goal">落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:42px;">#</th><th style="width:160px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:120px;">在哪个环节练</th></tr>
-                                    <tr><td>①</td><td><strong>配置读取能力</strong></td><td>能读懂华为 <code>display current-configuration</code> 的段落结构，快速定位 password-policy、aaa、snmp-agent、security-policy 等关键配置块</td><td>实验①「查」</td></tr>
-                                    <tr><td>②</td><td><strong>逐行比对能力</strong></td><td>能对照 8 个要点的合格线，逐行找出不合规配置，并说明"差在哪一条、差多少"</td><td>实验①「查」</td></tr>
-                                    <tr><td>③</td><td><strong>证据摘录能力</strong></td><td>能把可疑行的<strong>配置原文</strong>抄进记录表，注明段落或行号，做到结论可追溯</td><td>实验②「录」</td></tr>
-                                    <tr><td>④</td><td><strong>判定与整改能力</strong></td><td>能做四档判定，并写出<strong>可以直接下发</strong>的整改命令（如 <code>undo telnet server enable</code>）</td><td>实验③「判」</td></tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- 【实验 5/5】交什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
+                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
                             <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
                                 <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 课堂作业（需提交）</div>
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
@@ -2917,9 +2851,7 @@ return</div>
                             </div>
                         </div>
 
-                        
-
-                    </div>
+                        </div>
 
                     <!-- 4.3 数据库安全配置核查 -->
                     <div class="substage" id="substage4.3">
@@ -2995,10 +2927,10 @@ return</div>
 
                         <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
-                        <!-- 【实验 1/5】做什么 -->
+                        <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 一、做什么——实验平台与本次任务</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实数据库上完成 <strong>MySQL 线与 SQL Server 线各选 1~2 个实验</strong>，走通"<strong>选 → 查 → 录 → 判 → 交</strong>"五步闭环，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实数据库上完成 <strong>MySQL 线与 SQL Server 线各选 1~2 个实验</strong>，走通"<strong>选 → 查 → 录 → 判 → 交</strong>"五步，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。<strong>课内完成、当场提交。</strong></div>
 
                             <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
                             <div class="table-container">
@@ -3008,36 +2940,13 @@ return</div>
                                     <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
                                     <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
                                     <tr><td>实验路径</td><td>登录后进入「<strong>数据库设备基线核查</strong>」→「<strong>MySQL 安全配置核查 / SQL Server 安全配置核查</strong>」→ 选择本轮实验 → 预约 / 开始实验 → 进入数据库实例操作</td></tr>
-                                    <tr><td>判定工具</td><td>录入核查结果、做四档判定、导出记录表可使用 <strong>JSecProbe</strong>（也可借助 AI 辅助判定）</td></tr>
+                                    <tr><td>填到哪里</td><td>逐条录入核查结果、做四档判定，统一填进<strong>测评记录表</strong>（素材7）</td></tr>
                                 </table>
                             </div>
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 实验流程主线——上机五步</strong></p>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
-                                    <tr><td><strong>① 选</strong></td><td>MySQL 线与 SQL Server 线各选 1~2 个实验，<strong>先看清库的版本、实例名和端口</strong>，再动手</td><td>确定实验编号</td></tr>
-                                    <tr><td><strong>② 查</strong></td><td>在真实库上跑核查命令，逐条截图留证——<strong>回显里要能看到命令本身和真实返回值</strong></td><td>带命令回显的证据截图</td></tr>
-                                    <tr><td><strong>③ 录</strong></td><td>把回显里的<strong>真实值</strong>抄进 JSecProbe「现场核查」或 AI 工具——<strong>抄参数值，不抄结论</strong>，如 <code>default_password_lifetime=0</code></td><td>实测参数值</td></tr>
-                                    <tr><td><strong>④ 判</strong></td><td>对照基线做四档判定，写清"做到哪、差在哪"——<strong>一条判定配一张回显截图</strong>，编号与记录表对应</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
-                                    <tr><td><strong>⑤ 交</strong></td><td>导出《数据库安全测评记录表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>记录表 docx + 截图包</td></tr>
-                                </table>
-                            </div>
-                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只在平台实验库上操作，<strong>不做删库、改密等破坏性动作</strong>；② 截图只交作业、不外传。</p>
-
-                            <p style="margin:14px 0 6px;"><strong>▍3. 实验专用素材下载</strong></p>
-                            <p>
-                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材7：等保测评实验记录表（西普平台·数据库安全配置核查）.docx" download title="下载《等保测评实验记录表（西普平台·数据库安全配置核查）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
-                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材8：AI 辅助合规判定案例（示范 · 数据库安全配置核查）.docx" download title="下载《AI 辅助合规判定案例（示范）》">⬇ 素材8：AI 辅助合规判定案例（示范）</a>
-                            </p>
-                        </div>
-
-                        <!-- 【实验 2/5】选什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📋 二、选什么——西普平台实验清单（MySQL 线 + SQL Server 线）</div>
-                            <div class="lab-goal">从西普平台「<strong>数据库设备基线核查</strong>」目录下选取实验：推荐 <strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）——口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度。</div>
-                            <div class="table-container">
-                                <table class="info-table">
+                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——MySQL 线 + SQL Server 线</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>数据库设备基线核查</strong>」目录下选取实验：推荐 <strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）——口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度。</p>
+                            <table class="info-table">
                                     <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要查什么</th><th style="width:180px;">覆盖维度</th></tr>
                                     <tr><td><strong>M1</strong></td><td><strong>MySQL 安全配置核查 → 口令策略与账户：</strong>validate_password 插件、密码有效期、空口令与匿名账户</td><td>8.1.4.1 / 8.1.4.2</td></tr>
                                     <tr><td><strong>M2</strong></td><td><strong>MySQL 安全配置核查 → 权限与网络：</strong>root 是否允许远程、用户权限、bind-address、端口、SSL</td><td>8.1.4.2 / 8.1.4.4 / 8.1.4.7</td></tr>
@@ -3047,46 +2956,35 @@ return</div>
                                     <tr><td><strong>S3</strong></td><td><strong>SQL Server 安全配置核查 → 加密与备份：</strong>TDE 加密状态、连接加密、备份与异地备份</td><td>8.1.4.7 / 8.1.4.8 / 8.1.4.9</td></tr>
                                     <tr><td style="background:#fff8e1;"><strong>推荐</strong></td><td style="background:#fff8e1;"><strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）：口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度</td><td style="background:#fff8e1;">课内完成</td></tr>
                                 </table>
-                            </div>
                             <p style="font-size:0.88rem;color:#666;">说明：上表"西普平台实验"列引用西普平台"数据库设备基线核查"目录下的实验名称；学生在平台内按该名称找到实验即可。若平台内网访问不到、实验名与上表略有出入，以「<strong>你要查什么</strong>」和覆盖维度为准，在平台内按关键词（如 <strong>validate_password</strong>、审计、TDE）搜索。</p>
                         </div>
 
-                        <!-- 【实验 3/5】需要什么能力 -->
+                        <!-- 【实验 2/3】怎么做 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 三、需要什么能力——应具备的操作能力</div>
-                            <div class="lab-goal">落到本轮上机，你需要具备以下 4 项可操作、可考核的能力——每一项都直接对应实验里的一个动作。</div>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:42px;">#</th><th style="width:160px;">操作能力</th><th>具体表现（做到什么算达标）</th><th style="width:120px;">在哪个环节练</th></tr>
-                                    <tr><td>①</td><td><strong>平台与客户端操作能力</strong></td><td>能独立登录西普平台、进入数据库核查实验、连接 MySQL / SQL Server 客户端并执行查询</td><td>2 个实验全程</td></tr>
-                                    <tr><td>②</td><td><strong>数据库核查命令能力</strong></td><td>能写出并执行账户、口令、权限、审计四类核查命令（<code>SELECT user,host FROM mysql.user</code>、<code>SHOW VARIABLES LIKE 'validate_password%'</code>、<code>SHOW PLUGINS LIKE 'audit_log'</code>、<code>EXEC xp_loginconfig 'audit level'</code> 等）</td><td>实验②「查」</td></tr>
-                                    <tr><td>③</td><td><strong>证据摘录能力</strong></td><td>能把回显里的<strong>真实参数值</strong>（而非结论）抄进记录表 / JSecProbe，如 <code>default_password_lifetime=0</code></td><td>实验③「录」</td></tr>
-                                    <tr><td>④</td><td><strong>判定与整改能力</strong></td><td>能做四档判定，并写出<strong>可直接执行的 SQL 或配置修改建议</strong>（如 <code>SET GLOBAL default_password_lifetime = 90;</code>）</td><td>实验④「判」</td></tr>
+                            <div class="lab-head">🎯 二、怎么做——上机五步</div>
+                            <div class="lab-goal">按「<strong>选 → 查 → 录 → 判 → 交</strong>」五步走，全程在平台上真机操作、逐条留证。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 五步流程</strong></p>
+                            <table class="info-table">
+                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
+                                    <tr><td><strong>① 选</strong></td><td>MySQL 线与 SQL Server 线各选 1~2 个实验，<strong>先看清库的版本、实例名和端口</strong>，再动手</td><td>确定实验编号</td></tr>
+                                    <tr><td><strong>② 查</strong></td><td>在真实库上跑核查命令，逐条截图留证——<strong>回显里要能看到命令本身和真实返回值</strong></td><td>带命令回显的证据截图</td></tr>
+                                    <tr><td><strong>③ 录</strong></td><td>把回显里的<strong>真实值</strong>抄进<strong>测评记录表</strong>（素材7）的对应栏位——<strong>抄参数值，不抄结论</strong>，如 <code>default_password_lifetime=0</code></td><td>实测参数值</td></tr>
+                                    <tr><td><strong>④ 判</strong></td><td>对照基线做四档判定，写清"做到哪、差在哪"——<strong>一条判定配一张回显截图</strong>，编号与记录表对应</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
+                                    <tr><td><strong>⑤ 交</strong></td><td>导出《数据库安全测评记录表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>记录表 docx + 截图包</td></tr>
                                 </table>
-                            </div>
+                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只在平台实验库上操作，<strong>不做删库、改密等破坏性动作</strong>；② 截图只交作业、不外传。</p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 实验素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材7：等保测评实验记录表（西普平台·数据库安全配置核查）.docx" download title="下载《等保测评实验记录表（西普平台·数据库安全配置核查）》">⬇ 素材7：等保测评实验记录表（西普平台）· 必填</a>
+                                <a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材8：AI 辅助合规判定案例（示范 · 数据库安全配置核查）.docx" download title="下载《AI 辅助合规判定案例（示范）》">⬇ 素材8：AI 辅助合规判定案例（示范）</a>
+                            </p>
                         </div>
 
-                        <!-- 【实验 4/5】实验目标 -->
+                        <!-- 【实验 3/3】怎么交 -->
                         <div class="lab-box">
-                            <div class="lab-head">🎯 四、学到什么——实验目标与达标判据</div>
-                            <div class="lab-goal"><strong>总目标：</strong>在西普平台真实数据库上走通"<strong>选实验 → 跑命令取证 → 抄录真实值 → 基线比对判定 → 导出记录表</strong>"的完整闭环，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。</div>
-                            <div class="table-container">
-                                <table class="info-table">
-                                    <tr><th style="width:56px;">编号</th><th>实验目标</th><th>达标判据</th></tr>
-                                    <tr><td>M1</td><td>掌握 MySQL 口令策略与账户核查：validate_password 插件状态、密码有效期、空口令 / 匿名账户</td><td>"实测结果"给出插件状态与参数值；"符合性判定"逐项四档</td></tr>
-                                    <tr><td>M2</td><td>掌握 MySQL 权限与网络核查：root 远程登录、用户权限、bind-address、端口、SSL</td><td>"实测结果"给出权限清单与监听地址；"整改建议"给出回收权限 / 改绑内网 IP 的语句</td></tr>
-                                    <tr><td>M3</td><td>掌握 MySQL 审计与日志核查：审计插件状态、general_log、日志留存与保护</td><td>"实测结果"给出审计配置项；"问题描述"写清缺失的审计项</td></tr>
-                                    <tr><td>S1</td><td>掌握 SQL Server 登录与账户核查：审核级别、SA 账户状态、空口令账户</td><td>"实测结果"给出账户状态；"符合性判定"给出结论</td></tr>
-                                    <tr><td>S2</td><td>掌握 SQL Server 审计与权限核查：服务器审计是否启用、登录审计规范、危险存储过程</td><td>"实测结果"给出审计启用状态；"整改建议"给出启用/禁用语句</td></tr>
-                                    <tr><td>S3</td><td>掌握 SQL Server 加密与备份核查：TDE 加密状态、连接加密、备份与异地备份</td><td>"实测结果"给出加密与备份策略；"问题描述"点明差距</td></tr>
-                                </table>
-                            </div>
-                            <p style="font-size:0.88rem;color:#666;">上表 6 条目标与你所选实验一一对应：选了哪几个，就重点达成对应的几条判据。</p>
-                        </div>
-
-                        <!-- 【实验 5/5】交什么 -->
-                        <div class="lab-box">
-                            <div class="lab-head">📑 五、交什么——成果与提交要求</div>
+                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
                             <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
                                 <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
@@ -3102,9 +3000,7 @@ return</div>
                             </div>
                         </div>
 
-                        
-
-                    </div>
+                        </div>
 
                     <!-- 4.4 应用系统安全功能验证 -->
                     <div class="substage" id="substage4.4">
