@@ -2462,23 +2462,25 @@
                                 <li><strong>补丁滞后：</strong>已被披露的高危漏洞（如永恒之蓝）未修补 → 勒索病毒 / 挖矿木马直接打进来</li>
                                 <li><strong>审计缺失：</strong>登录、对象访问、策略变更都没记录 → 出事后无法定责、无法溯源</li>
                             </ul>
-                            <p><strong>法律标准依据：</strong>《网络安全法》第二十一条（网络日志留存≥6 个月）、GB/T 22239 "安全计算环境"主机安全相关要求（6 个子类）、CIS Benchmark（业界事实基线）。</p>
+                            <p><strong>法律标准依据：</strong>《网络安全法》第二十一条（网络日志留存≥6 个月）、GB/T 22239 "安全计算环境"主机安全相关要求（8 个子类）、CIS Benchmark（业界事实基线）。</p>
                             <p><strong>与后续任务的关系：</strong>主机合规是 4.3 数据库、4.4 应用层核查的<strong>前提</strong>——如果主机本身口令都不过关，上面所有"应用层加固"都是空中楼阁。</p>
                         </div>
 
                         <!-- 模块 2：查什么 -->
                         <div class="concept-box">
-                            <div class="concept-title">📋 2. 查什么——6 个维度 × Windows / Linux 双线</div>
-                            <p>主机基线核查覆盖 <strong>6 个维度</strong>，每条对 Windows / Linux 都有具体检查项：</p>
+                            <div class="concept-title">📋 2. 查什么——8 个维度 × Windows / Linux 双线</div>
+                            <p>主机基线核查覆盖 <strong>8 个维度</strong>（与 GB/T 22239 "安全计算环境"主机相关条款一一对应），每条对 Windows / Linux 都有具体检查项：</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>核查维度</th><th>Windows 重点项</th><th>Linux 重点项</th><th>适用级别</th></tr>
-                                    <tr><td>身份鉴别</td><td>口令复杂度、最短长度、定期更换、双因素</td><td>/etc/login.defs、PAM 配置、SSH 双因素</td><td>二/三级</td></tr>
-                                    <tr><td>访问控制</td><td>禁用 Guest、共享账号清理、文件 ACL</td><td>sudo 权限、文件权限 644/755、禁用 root 直登</td><td>二/三级</td></tr>
-                                    <tr><td>安全审计</td><td>登录日志、对象访问日志、策略变更日志（≥6 个月）</td><td>/var/log/secure、/var/log/auth.log、auditd 规则</td><td>二/三级</td></tr>
-                                    <tr><td>入侵防范</td><td>Windows Defender、补丁更新、关闭 SMBv1</td><td>SELinux/AppArmor、内核补丁、关闭不必要的服务</td><td>二/三级</td></tr>
-                                    <tr><td>恶意代码防范</td><td>统一防病毒客户端、特征库自动更新</td><td>ClamAV、定时扫描</td><td>二/三级</td></tr>
-                                    <tr><td>数据备份恢复</td><td>系统盘备份策略、异地备份、恢复演练</td><td>crontab 备份、rsync 推送、restore 测试</td><td>二/三级</td></tr>
+                                    <tr><th>核查维度</th><th>标准依据</th><th>Windows 重点项</th><th>Linux 重点项</th><th>适用级别</th></tr>
+                                    <tr><td>身份鉴别</td><td>8.1.4.1</td><td>口令复杂度、最短长度 8 位、定期更换（≤90 天）、登录失败锁定（5 次）、双因素</td><td>/etc/login.defs、PAM 配置（pwquality）、SSH 双因素</td><td>二/三级</td></tr>
+                                    <tr><td>访问控制</td><td>8.1.4.2</td><td>禁用 Guest、默认账户重命名、共享账号清理、文件 ACL、最小权限与权限分离</td><td>sudo 权限、文件权限 644/755、禁用 root 直登</td><td>二/三级</td></tr>
+                                    <tr><td>安全审计</td><td>8.1.4.3</td><td>登录日志、对象访问日志、策略变更日志（成功 + 失败，≥6 个月）</td><td>/var/log/secure、/var/log/auth.log、auditd 规则</td><td>二/三级</td></tr>
+                                    <tr><td>入侵防范</td><td>8.1.4.4</td><td>最小安装、关闭不必要的服务与默认共享、关闭 135/137-139/445/3389 等高危端口、补丁更新</td><td>最小化安装、systemctl list-unit-files、关闭高危端口、内核补丁</td><td>二/三级</td></tr>
+                                    <tr><td>恶意代码防范</td><td>8.1.4.5</td><td>统一防病毒客户端、特征库自动更新、实时防护、定期全盘扫描</td><td>ClamAV、定时扫描</td><td>二/三级</td></tr>
+                                    <tr><td>数据完整性/保密性</td><td>8.1.4.7/8</td><td>传输 / 存储加密（BitLocker、EFS）</td><td>传输 / 存储加密（LUKS / dm-crypt）</td><td>二/三级</td></tr>
+                                    <tr><td>数据备份恢复</td><td>8.1.4.9</td><td>系统盘备份策略、异地备份、恢复演练</td><td>crontab 备份、rsync 推送、restore 测试</td><td>二/三级</td></tr>
+                                    <tr><td>剩余信息保护</td><td>8.1.4.10</td><td>存储空间清除（cipher /w）、清理休眠 / 页面文件残留</td><td>shred / dd 擦除、清空未用磁盘空间</td><td>二/三级</td></tr>
                                 </table>
                             </div>
                             <p><strong>检查表下载：</strong><a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材2：Windows配置核查检查表（快速参考）.docx" download title="下载《Windows 配置核查检查表》">⬇ Windows 配置核查检查表</a>、<a class="table-dl" href="各类表格/4.1 主机安全基线核查/素材3：Linux配置核查检查表（快速参考）.docx" download title="下载《Linux 配置核查检查表》">⬇ Linux 配置核查检查表</a></p>
@@ -2628,14 +2630,24 @@
                                 <li><strong>Console 无超时 / 无 ACL：</strong>物理接触或网络可达即可登入 → 边界失守</li>
                                 <li><strong>防火墙策略冗余 / 默认允许：</strong>多年累积的 ANY → ANY 规则 → 实际等于没有防火墙</li>
                             </ul>
-                            <p><strong>法律标准依据：</strong>GB/T 22239 "安全通信网络"和"安全区域边界"相关要求（网络架构、通信传输、边界防护、访问控制、入侵防范、安全审计）。</p>
+                            <p><strong>法律标准依据：</strong>GB/T 22239-2019 安全技术要求 → <strong>安全计算环境</strong>（关注设备自身的安全配置是否合规）。</p>
                             <p><strong>与后续任务的关系：</strong>① 网络设备的判定证据<strong>就是配置文件</strong>——本任务 4.2 与任务 3.2 的拓扑图<strong>双向印证</strong>；② 为 4.5 漏洞扫描提供"基线配置基线"参照。</p>
                         </div>
 
                         <!-- 模块 2：查什么 -->
                         <div class="concept-box">
-                            <div class="concept-title">📋 2. 查什么——三类设备 × 6 大维度</div>
-                            <p>核查覆盖路由器 / 交换机 / 防火墙三大类，每类设备按 6 个维度逐项查：</p>
+                            <div class="concept-title">📋 2. 查什么——四大核心维度 × 四类设备</div>
+                            <p>网络设备配置核查对照 <strong>GB/T 22239 安全计算环境</strong>要求，共 <strong>四大核心维度</strong>：</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th>维度</th><th>标准对应</th><th>核心检查内容</th></tr>
+                                    <tr><td>身份鉴别</td><td>8.1.4.1</td><td>密码策略、登录限制、远程管理加密</td></tr>
+                                    <tr><td>访问控制</td><td>8.1.4.2</td><td>账户权限、默认账户、最小权限</td></tr>
+                                    <tr><td>安全审计</td><td>8.1.4.3</td><td>日志功能、审计记录保护</td></tr>
+                                    <tr><td>入侵防范</td><td>8.1.4.4</td><td>服务端口、远程管理限制、漏洞修补</td></tr>
+                                </table>
+                            </div>
+                            <p style="margin-top:10px;">四类网络设备（<strong>路由器 / 交换机 / 防火墙 / 堡垒机</strong>）的现场关注点如下：</p>
                             <div class="table-container">
                                 <table class="info-table">
                                     <tr><th>设备</th><th>核查项</th><th>现场看什么</th><th>适用级别</th></tr>
@@ -2645,6 +2657,8 @@
                                     <tr><td>VLAN 划分（管理 VLAN 隔离）、ACL、STP 安全</td><td>show vlan brief / show spanning-tree</td><td>二/三级</td></tr>
                                     <tr><td rowspan="2">防火墙</td><td>策略最小化（默认拒绝、按需放通）</td><td>show running-config policy / display security-policy</td><td>二/三级</td></tr>
                                     <tr><td>出入站日志、HA 配置、WAF 联动</td><td>logging host / hrp standby-device</td><td>三级</td></tr>
+                                    <tr><td rowspan="2">堡垒机</td><td>运维账号唯一化（一人一账号）、双因素登录</td><td>查看运维账号与认证方式配置</td><td>二/三级</td></tr>
+                                    <tr><td>运维操作全程录屏审计、命令级审计与留存</td><td>查看会话审计 / 录像留存策略</td><td>三级</td></tr>
                                 </table>
                             </div>
                             <p><strong>配置导出素材下载（全华为系典型型号，三台设备各一份）：</strong><a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材7：实践任务3——路由器配置导出（华为 AR6120）.docx" download title="下载《路由器配置导出（华为 AR6120）》">⬇ 路由器配置导出（AR6120）</a>、<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材4：实践任务2——交换机配置导出（华为 S5720-28X-SI）.docx" download title="下载《交换机配置导出（华为 S5720-28X-SI）》">⬇ 交换机配置导出（S5720-28X-SI）</a>、<a class="table-dl" href="各类表格/4.2 网络设备配置核查/素材2：实践任务1——防火墙配置导出（华为 USG6650E）.docx" download title="下载《防火墙配置导出（华为 USG6650E）》">⬇ 防火墙配置导出（USG6650E）</a></p>
@@ -2888,15 +2902,18 @@ return</div>
 
                         <!-- 模块 2：查什么 -->
                         <div class="concept-box">
-                            <div class="concept-title">📋 2. 查什么——4 个子类 × MySQL / SQL Server 双线</div>
-                            <p>数据库核查覆盖 <strong>4 个子类</strong>：账户权限 / 口令策略 / 审计日志 / 备份与恢复。每条对 MySQL / SQL Server 都有对应命令：</p>
+                            <div class="concept-title">📋 2. 查什么——7 个维度 × MySQL / SQL Server 双线</div>
+                            <p>数据库核查覆盖 <strong>7 个维度</strong>：身份鉴别、访问控制、安全审计、入侵防范、数据完整性、数据保密性、数据备份恢复。每条对 MySQL / SQL Server 都有对应命令：</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>核查子类</th><th>MySQL 重点项</th><th>SQL Server 重点项</th><th>适用级别</th></tr>
-                                    <tr><td>账户权限</td><td>禁用默认账户、撤销 PUBLIC 不必要权限、应用账户只授所需库表（最小权限）</td><td>sp_helplogins / sys.server_principals / GRANT 最小化</td><td>二/三级</td></tr>
-                                    <tr><td>口令策略</td><td>validate_password_policy、复杂度 ≥3 类字符、最短 8 位、定期更换、历史密码不能重复</td><td>CHECK_POLICY / CHECK_EXPIRATION、PASSWORD 复杂度策略</td><td>二/三级</td></tr>
-                                    <tr><td>审计日志</td><td>general_log、log_bin、audit log plugin——留存 ≥6 个月、防篡改</td><td>SQL Server Audit、DDL 触发器、权限变更日志——留存 ≥6 个月</td><td>二/三级</td></tr>
-                                    <tr><td>备份与恢复</td><td>mysqldump / xtrabackup / binlog、异地备份、定期 restore 测试</td><td>完整备份 + 事务日志备份、异地存储、定期 restore 测试</td><td>二/三级</td></tr>
+                                    <tr><th>核查维度</th><th>标准依据</th><th>MySQL 重点项</th><th>SQL Server 重点项</th><th>适用级别</th></tr>
+                                    <tr><td>身份鉴别</td><td>8.1.4.1</td><td>validate_password 插件、复杂度 ≥3 类字符、最短 8 位、密码定期更换、登录失败处理</td><td>CHECK_POLICY / CHECK_EXPIRATION 密码策略、审核级别、禁用 SA 账户</td><td>二/三级</td></tr>
+                                    <tr><td>访问控制</td><td>8.1.4.2</td><td>禁用默认账户、撤销 PUBLIC 不必要权限、应用账户只授所需库表（最小权限）</td><td>sp_helplogins / sys.server_principals / GRANT 最小化</td><td>二/三级</td></tr>
+                                    <tr><td>安全审计</td><td>8.1.4.3</td><td>general_log、log_bin、audit log plugin——留存 ≥6 个月、防篡改</td><td>SQL Server Audit、DDL 触发器、权限变更日志——留存 ≥6 个月</td><td>二/三级</td></tr>
+                                    <tr><td>入侵防范</td><td>8.1.4.4</td><td>最小安装、bind-address 绑定内网 IP（非 0.0.0.0）、修改默认端口 3306</td><td>修改默认端口 1433、禁用高危扩展存储过程</td><td>二/三级</td></tr>
+                                    <tr><td>数据完整性</td><td>8.1.4.7</td><td>传输 SSL/TLS 加密、存储数据校验</td><td>连接加密、TDE 或数据校验</td><td>二/三级</td></tr>
+                                    <tr><td>数据保密性</td><td>8.1.4.8</td><td>传输 SSL/TLS 加密、存储 TDE / 列级加密</td><td>连接加密、TDE 加密</td><td>二/三级</td></tr>
+                                    <tr><td>数据备份恢复</td><td>8.1.4.9</td><td>mysqldump / xtrabackup / binlog、异地备份、定期 restore 测试</td><td>完整备份 + 事务日志备份、异地存储、定期 restore 测试</td><td>二/三级</td></tr>
                                 </table>
                             </div>
                             <p><strong>检查清单下载：</strong><a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材1：实践任务——MySQL配置核查清单.docx" download title="下载《MySQL 配置核查清单》">⬇ MySQL 配置核查清单</a>、<a class="table-dl" href="各类表格/4.3 数据库安全配置核查/素材3：实践任务——SQL Server配置核查清单.docx" download title="下载《SQL Server 配置核查清单》">⬇ SQL Server 配置核查清单</a></p>
@@ -2930,7 +2947,7 @@ return</div>
                         <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
                             <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实数据库上完成 <strong>MySQL 线与 SQL Server 线各选 1~2 个实验</strong>，走通"<strong>选 → 查 → 录 → 判 → 交</strong>"五步，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的真实 SQL Server 数据库上完成 <strong>S1~S4 中任选 1 个实验</strong>，走通"<strong>选 → 查 → 录 → 判 → 交</strong>"五步，产出<strong>有真实证据支撑</strong>的《数据库安全测评记录表》。<strong>课内完成、当场提交。</strong></div>
 
                             <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
                             <div class="table-container">
@@ -2939,24 +2956,22 @@ return</div>
                                     <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
                                     <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
                                     <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
-                                    <tr><td>实验路径</td><td>登录后进入「<strong>数据库设备基线核查</strong>」→「<strong>MySQL 安全配置核查 / SQL Server 安全配置核查</strong>」→ 选择本轮实验 → 预约 / 开始实验 → 进入数据库实例操作</td></tr>
+                                    <tr><td>实验路径</td><td>登录后进入「<strong>数据库设备基线核查</strong>」→「<strong>数据库安全配置核查</strong>」→ 选择 <strong>SQLServer 账号安全 / 安全审计 / 访问控制 / 备份和恢复</strong> 中本轮所选实验 → 预约 / 开始实验 → 进入数据库实例操作</td></tr>
                                     <tr><td>填到哪里</td><td>逐条录入核查结果、做四档判定，统一填进<strong>测评记录表</strong>（素材7）</td></tr>
                                 </table>
                             </div>
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——MySQL 线 + SQL Server 线</strong></p>
-                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>数据库设备基线核查</strong>」目录下选取实验：推荐 <strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）——口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度。</p>
+                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——SQL Server 线（S1~S4 任选其一）</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>数据库设备基线核查</strong>」→「<strong>数据库安全配置核查</strong>」目录下选取实验：<strong>S1~S4 任选 1 个</strong>，按下表对应维度完成核查并逐条留证。</p>
                             <table class="info-table">
                                     <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要查什么</th><th style="width:180px;">覆盖维度</th></tr>
-                                    <tr><td><strong>M1</strong></td><td><strong>MySQL 安全配置核查 → 口令策略与账户：</strong>validate_password 插件、密码有效期、空口令与匿名账户</td><td>8.1.4.1 / 8.1.4.2</td></tr>
-                                    <tr><td><strong>M2</strong></td><td><strong>MySQL 安全配置核查 → 权限与网络：</strong>root 是否允许远程、用户权限、bind-address、端口、SSL</td><td>8.1.4.2 / 8.1.4.4 / 8.1.4.7</td></tr>
-                                    <tr><td><strong>M3</strong></td><td><strong>MySQL 安全配置核查 → 审计与日志：</strong>审计插件状态、general_log、日志留存与保护</td><td>8.1.4.3</td></tr>
-                                    <tr><td><strong>S1</strong></td><td><strong>SQL Server 安全配置核查 → 登录与账户：</strong>审核级别、SA 账户状态、空口令账户</td><td>8.1.4.1 / 8.1.4.2</td></tr>
-                                    <tr><td><strong>S2</strong></td><td><strong>SQL Server 安全配置核查 → 审计与权限：</strong>服务器审计是否启用、登录审计规范、危险存储过程</td><td>8.1.4.3 / 8.1.4.4</td></tr>
-                                    <tr><td><strong>S3</strong></td><td><strong>SQL Server 安全配置核查 → 加密与备份：</strong>TDE 加密状态、连接加密、备份与异地备份</td><td>8.1.4.7 / 8.1.4.8 / 8.1.4.9</td></tr>
-                                    <tr><td style="background:#fff8e1;"><strong>推荐</strong></td><td style="background:#fff8e1;"><strong>M1 + M3</strong>（或 <strong>S1 + S2</strong>）：口令与审计是数据库测评最高频的丢分点，两条线合起来覆盖 ≥4 个维度</td><td style="background:#fff8e1;">课内完成</td></tr>
+                                    <tr><td><strong>S1</strong></td><td><strong>数据库安全配置核查 → SQLServer 账号安全：</strong>审核级别、SA 账户状态、空口令与废弃账户</td><td>8.1.4.1（身份鉴别）</td></tr>
+                                    <tr><td><strong>S2</strong></td><td><strong>数据库安全配置核查 → SQLServer 安全审计：</strong>服务器审计是否启用、登录审计规范、审计日志留存</td><td>8.1.4.3（安全审计）</td></tr>
+                                    <tr><td><strong>S3</strong></td><td><strong>数据库安全配置核查 → SQLServer 访问控制：</strong>账户权限最小分配、默认账户权限、危险权限</td><td>8.1.4.2（访问控制）</td></tr>
+                                    <tr><td><strong>S4</strong></td><td><strong>数据库安全配置核查 → SQLServer 备份和恢复：</strong>备份策略、备份文件有效性、恢复演练记录</td><td>8.1.4.9（数据备份恢复）</td></tr>
+                                    <tr><td style="background:#fff8e1;"><strong>要求</strong></td><td style="background:#fff8e1;" colspan="2"><strong>任选一个实验</strong>，按照实验指导进行核查操作，<strong>每条核查项至少保留 1 张截图</strong>（须含命令回显或配置界面），截图文件名与记录表"截图编号"一致（如 <code>s1-01.png</code>）</td></tr>
                                 </table>
-                            <p style="font-size:0.88rem;color:#666;">说明：上表"西普平台实验"列引用西普平台"数据库设备基线核查"目录下的实验名称；学生在平台内按该名称找到实验即可。若平台内网访问不到、实验名与上表略有出入，以「<strong>你要查什么</strong>」和覆盖维度为准，在平台内按关键词（如 <strong>validate_password</strong>、审计、TDE）搜索。</p>
+                            <p style="font-size:0.88rem;color:#666;">说明：上表"西普平台实验"列引用西普平台"数据库设备基线核查"目录下的实验名称；学生在平台内按该名称找到实验即可。若平台内网访问不到、实验名与上表略有出入，以「<strong>你要查什么</strong>」和覆盖维度为准，在平台内按关键词（如 <strong>账号安全</strong>、<strong>安全审计</strong>、<strong>访问控制</strong>、<strong>备份和恢复</strong>）搜索。</p>
                         </div>
 
                         <!-- 【实验 2/3】怎么做 -->
@@ -2967,9 +2982,9 @@ return</div>
                             <p style="margin:14px 0 6px;"><strong>▍1. 五步流程</strong></p>
                             <table class="info-table">
                                     <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
-                                    <tr><td><strong>① 选</strong></td><td>MySQL 线与 SQL Server 线各选 1~2 个实验，<strong>先看清库的版本、实例名和端口</strong>，再动手</td><td>确定实验编号</td></tr>
+                                    <tr><td><strong>① 选</strong></td><td>在 <strong>S1~S4</strong> 中任选 1 个实验，<strong>先看清库的版本、实例名和端口</strong>，再动手</td><td>确定实验编号</td></tr>
                                     <tr><td><strong>② 查</strong></td><td>在真实库上跑核查命令，逐条截图留证——<strong>回显里要能看到命令本身和真实返回值</strong></td><td>带命令回显的证据截图</td></tr>
-                                    <tr><td><strong>③ 录</strong></td><td>把回显里的<strong>真实值</strong>抄进<strong>测评记录表</strong>（素材7）的对应栏位——<strong>抄参数值，不抄结论</strong>，如 <code>default_password_lifetime=0</code></td><td>实测参数值</td></tr>
+                                    <tr><td><strong>③ 录</strong></td><td>把回显里的<strong>真实值</strong>抄进<strong>测评记录表</strong>（素材7）的对应栏位——<strong>抄参数值，不抄结论</strong>，如登录审核级别、SA 账户状态的当前取值</td><td>实测参数值</td></tr>
                                     <tr><td><strong>④ 判</strong></td><td>对照基线做四档判定，写清"做到哪、差在哪"——<strong>一条判定配一张回显截图</strong>，编号与记录表对应</td><td>符合性判定 + 问题描述 + 整改建议</td></tr>
                                     <tr><td><strong>⑤ 交</strong></td><td>导出《数据库安全测评记录表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>记录表 docx + 截图包</td></tr>
                                 </table>
@@ -3009,18 +3024,6 @@ return</div>
                             <p><strong>问题导入：</strong>底层查完了（主机、网络设备、数据库），现在到最前端的"应用"——用户在浏览器里点点点能体验到的一切。<strong>身份鉴别、访问控制、会话超时、剩余信息保护</strong>……这些"看得见的安全"是等保的硬指标。</p>
                         </div>
 
-                        <div class="kb-st-tables">
-                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
-                            <div class="kb-st-list">
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材1：案例导入文字材料.docx" download title="下载《案例导入文字材料》">⬇ 素材1：案例导入文字材料</a>
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《应用系统安全测评记录表》">⬇ 素材2：实践任务——《应用系统安全测评记录表》</a>
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材3：模拟测试用例——身份鉴别验证.docx" download title="下载《模拟测试用例——身份鉴别验证》">⬇ 素材3：模拟测试用例——身份鉴别验证</a>
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材4：模拟测试用例——访问控制验证.docx" download title="下载《模拟测试用例——访问控制验证》">⬇ 素材4：模拟测试用例——访问控制验证</a>
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材5：模拟应用系统（简易OA）预设缺陷清单.docx" download title="下载《简易 OA 预设缺陷清单》">⬇ 素材5：模拟应用系统（简易 OA）预设缺陷清单</a>
-                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材6：课后作业——越权漏洞分析.docx" download title="下载《课后作业——越权漏洞分析》">⬇ 素材6：课后作业——越权漏洞分析</a>
-                            </div>
-                        </div>
-
                         <!-- 模块 1：为什么查 -->
                         <div class="concept-box">
                             <div class="concept-title">🔍 1. 为什么查——应用层是用户"看得见的安全"</div>
@@ -3038,16 +3041,15 @@ return</div>
 
                         <!-- 模块 2：查什么 -->
                         <div class="concept-box">
-                            <div class="concept-title">📋 2. 查什么——5 个子类 × 人工验证为主</div>
-                            <p>应用层核查以<strong>人工测试</strong>为主，工具为辅。覆盖 <strong>5 个子类</strong>：</p>
+                            <div class="concept-title">📋 2. 查什么——4 个维度 × 人工验证 + 工具扫描</div>
+                            <p>应用层核查以<strong>人工验证</strong>为主、<strong>WVS 等 Web 扫描工具</strong>为辅，对应 GB/T 22239 应用系统相关的 <strong>4 个维度</strong>（<strong>本讲重点前三个，占 90%</strong>）：</p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>核查子类</th><th>核查项</th><th>现场怎么测</th><th>适用级别</th></tr>
-                                    <tr><td>身份鉴别</td><td>口令复杂度、登录失败锁定、双因素认证（重要系统）</td><td>手动尝试登录 / BurpSuite 拦截登录请求</td><td>二/三级</td></tr>
-                                    <tr><td>访问控制</td><td>按角色授权、垂直越权测试（低权限访问高权限功能）、水平越权测试（A 访问 B 数据）</td><td>用两个测试账号 + BurpSuite 改包验证</td><td>二/三级</td></tr>
-                                    <tr><td>安全审计</td><td>登录日志、权限变更日志、关键操作日志完整且防篡改</td><td>日志导出 + 时间戳对比</td><td>二/三级</td></tr>
-                                    <tr><td>会话管理</td><td>空闲超时自动退出、并发会话限制、登录后强制修改初始密码</td><td>空闲 N 分钟不操作 → 自动退出？</td><td>二/三级</td></tr>
-                                    <tr><td>剩余信息保护</td><td>退出后清理临时文件、内存中的敏感数据、Cookie 标记 HttpOnly/Secure</td><td>浏览器开发者工具看 Cookie 属性</td><td>三级</td></tr>
+                                    <tr><th style="width:90px;">维度</th><th style="width:104px;">标准要求节</th><th>核查项</th><th>现场怎么验</th></tr>
+                                    <tr><td>身份鉴别</td><td>8.1.4.1</td><td>口令复杂度与更换周期、登录失败处理、会话超时、远程管理加密、多因素认证（三级及以上）</td><td>试弱口令登录看是否被拒 / 连错 5 次看是否锁定 / 静置 15 分钟看是否退出 / 看地址栏是否 https</td></tr>
+                                    <tr><td>访问控制</td><td>8.1.4.2</td><td>账户分配、默认账户处置、过期账户清理、最小权限、垂直越权、水平越权</td><td>两个测试账号 + 改 URL 参数 / 换账号验证；WVS 扫出的注入、越权线索再人工复核</td></tr>
+                                    <tr><td>安全审计</td><td>8.1.4.3</td><td>审计功能是否启用、审计内容是否完整（时间 / 用户 / 事件 / 结果）、审计记录是否受保护</td><td>做一次成功登录 + 一次失败登录，去后台看日志有没有、字段全不全、普通用户能不能删</td></tr>
+                                    <tr><td>数据完整性</td><td>8.1.4.7</td><td>重要数据在传输与存储过程中的完整性保护（三级及以上）</td><td>看传输是否加密、敏感字段是否明文存储或回显</td></tr>
                                 </table>
                             </div>
                             <p><strong>测试用例下载：</strong><a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材3：模拟测试用例——身份鉴别验证.docx" download title="下载《身份鉴别验证》">⬇ 身份鉴别验证用例</a>、<a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材4：模拟测试用例——访问控制验证.docx" download title="下载《访问控制验证》">⬇ 访问控制验证用例</a>、<a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材5：模拟应用系统（简易OA）预设缺陷清单.docx" download title="下载《简易 OA 预设缺陷清单》">⬇ 简易 OA 预设缺陷清单</a></p>
@@ -3055,64 +3057,106 @@ return</div>
 
                         <!-- 模块 3：怎么查 -->
                         <div class="concept-box">
-                            <div class="concept-title">🛠️ 3. 怎么查——工具 + 测试用例 + 文档三法合一</div>
-                            <p>应用层核查以<strong>测试用例法</strong>为主线，<strong>BurpSuite 等工具</strong>为辅助，<strong>开发文档</strong>兜底：</p>
+                            <div class="concept-title">🛠️ 3. 怎么查——扫描找线索 + 人工复核 + 文档兜底</div>
+                            <p>应用层核查以<strong>测试用例法</strong>为主线、<strong>WVS 扫描</strong>为线索来源、<strong>实测复核</strong>为准绳：</p>
                             <ol>
-                                <li><strong>工具法（BurpSuite 测越权）：</strong>用两个测试账号登录 → 抓取低权限账号的请求 → 替换为高权限 URL / 参数 → 验证是否越权。</li>
+                                <li><strong>工具法（WVS 扫 Web 缺陷）：</strong>在西普平台的 WVS 实验里对靶站跑一次扫描，拿到 SQL 注入 / XSS / 弱口令等缺陷线索；<strong>扫描结果只是线索，必须人工复核</strong>才能真正判定。</li>
                                 <li><strong>测试用例法：</strong>按上方"测试用例下载"清单逐项执行——每项测试要写明"输入 / 操作 / 预期 / 实际"。</li>
                                 <li><strong>文档法：</strong>查阅开发文档（看是否做了安全设计说明）、安全设计文档（看是否有威胁建模）。</li>
                             </ol>
                             <p><strong>判定原则：</strong>每项判定四选一，"不符合"必须能<strong>复现步骤</strong>（截图 + 请求包 / 响应包）。</p>
                             <p><strong>必踩雷区：</strong>① "用户手册没说"≠"系统没有"——必须实际测试；② 默认口令 / 默认账号必须测；③ 越权测试要覆盖<strong>垂直 + 水平</strong>两个维度。</p>
-                            <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《应用系统安全测评记录表》">⬇ 《应用系统安全测评记录表》</a></p>
+                            <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《等保测评实验记录表》">⬇ 《等保测评实验记录表》</a></p>
                         </div>
 
-                        <div class="practice-box">
-                            <div class="concept-title">✏️ 练习任务（4.4，2学时）：给素材填表</div>
-                            <p><strong>应用系统安全功能验证：</strong>在简易 OA 模拟系统上完成身份鉴别、访问控制、会话超时等测试，填写《应用系统安全测评记录表》（<a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《应用系统安全测评记录表》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>4 人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
-                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
-                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
-                        </div>
+                        <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
+                        <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验 4.4：安全计算环境测评——工作量最大的"重头戏"</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>完成"安全计算环境"控制类测评。它有 <strong>11 个子类</strong>（身份鉴别、访问控制、安全审计、入侵防范、恶意代码防范、可信验证、数据完整性、数据保密性、数据备份恢复、剩余信息保护、个人信息保护），是十个控制类中最大的一个——真实项目里花在它身上的时间也最多。本实验的测评结论将直接喂给任务 8 的脆弱性识别。</div>
-                            <ol class="step-list">
-                                <li><strong>展开"安全计算环境"节点</strong>，先数一下子类数量，感受工作量；按"主机→数据库→应用"的顺序推进，别乱序。</li>
-                                <li><strong>逐项判定，善用"证据迁移"。</strong>模拟示例：身份鉴别d→不符合（系统仅采用用户名口令认证，未采用双因素认证机制）；入侵防范f→部分符合（服务器未部署主机入侵检测）；数据备份恢复c→不符合（数据库服务器未实现热冗余，仅每日冷备）。</li>
-                                <li><strong>给每个"不符合"预贴标签。</strong>在实验记录里顺手标注：这条会不会成为任务 8 风险评估里的"脆弱性"？（如"未双因素认证"→高危脆弱性）。现在多想一步，任务 8 少熬一夜。</li>
-                            </ol>
-                            <div class="ai-tip-box">
-                                <div class="ai-tip-title">🤖 测评项看不懂？这是本任务最高频的卡点</div>
-                                <p>计算环境的测评项术语最密集。正确姿势：把测评项原文<strong>连同你已知的系统情况</strong>一起给 AI，问"这条在查什么、看什么证据"：</p>
-                                <div class="prompt-tpl">
-                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                    等保三级"安全计算环境"的测评要求原文是：【粘贴测评项原文】。被测系统情况：Linux 服务器 + SQL Server 数据库 + Tomcat 应用。请解释：①这条要求防的是什么风险（举一个真实安全事件的例子）；②现场应该访谈/核查/测试什么才能拿到证据；③对应的整改措施一般有哪些。
-                                </div>
-                                <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>AI 只负责"翻译"标准和提供思路；<strong>"符合/不符合"的判定和证据必须由你给出</strong>——将来签字负责的是测评师，不是 AI。</p>
+                            <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的 <strong>WVS Web 扫描环境</strong>上，按 <strong>W1 → W2</strong> 顺序完成<strong>两个实验</strong>——W1 跑 Web 扫描，W2 分析扫描结果并把漏洞<strong>复现、加固、验证</strong>；<strong>再根据实验结果撰写</strong>《等保测评实验记录表》（素材2）。<strong>课内完成、当场提交。</strong></div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:120px;">项目</th><th>内容</th></tr>
+                                    <tr><td>实验名称</td><td><strong>应用系统安全功能验证</strong>（西普平台 <strong>WVS Web 扫描 + 扫描结果分析 + 记录表判定</strong>）</td></tr>
+                                    <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
+                                    <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
+                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
+                                    <tr><td>实验路径</td><td>登录后进入「<strong>应用系统安全测评</strong>」（目录第 3 项）→ 依次完成「<strong>W1 使用 WVS 进行 Web 扫描</strong> / <strong>W2 Web 应用扫描结果分析</strong>」两个实验</td></tr>
+                                    <tr><td>实验指导书</td><td><a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材11：实验指导书——Web应用扫描结果分析.docx" download title="下载《实验指导书——Web应用扫描结果分析》">⬇ 素材11：实验指导书——Web 应用扫描结果分析</a>（操作步骤以指导书为准）</td></tr>
+                                    <tr><td>填到哪里</td><td>把实验结果逐条落进 <strong>《等保测评实验记录表》</strong>（素材2）：<strong>个人信息 + 核查结果 + 证据编号 + 四档判定 + 问题描述 + 整改建议</strong></td></tr>
+                                </table>
                             </div>
-                            <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
-                                ☐ 11 个子类全部判定完毕　☐ 不符合项已预标注"是否为脆弱性"　☐ 完成至少一次"AI 翻译测评项"练习
-                            </div>
-                            <!-- 实验报告要求 -->
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
+                            <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
+
+                            <p style="margin:14px 0 6px;"><strong>▍2. 做什么——两个实验 + 一份记录表</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>应用系统安全测评</strong>」目录下<strong>按顺序</strong>完成下面两个实验，再根据实验结果撰写记录表——<strong>顺序固定（不可颠倒、不可跳过）</strong>，做完才有完整证据链。</p>
+                            <table class="info-table">
+                                    <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要做什么</th><th style="width:190px;">覆盖条款</th></tr>
+                                    <tr><td><strong>W1</strong></td><td><strong>使用 WVS 进行 Web 扫描：</strong>对平台靶站<strong>新建扫描任务</strong>（选扫描模板、填目标地址），执行<strong>完整扫描</strong>并导出扫描报告</td><td>8.1.4.4（漏洞发现）</td></tr>
+                                    <tr><td><strong>W2</strong></td><td><strong>Web 应用扫描结果分析：</strong>载入扫描结果逐条查看漏洞详情 → 按高 / 中 / 低危分档 → 挑出可复现漏洞（如<strong>目录遍历 / 信息泄露、SQL 注入、弱口令</strong>）→ 在靶站<strong>复现</strong> → 定位成因并<strong>加固</strong> → 再次访问<strong>验证修复效果</strong></td><td>8.1.4.4 / 8.1.4.2（漏洞修补与未授权访问）</td></tr>
+                                    <tr><td><strong>③</strong></td><td><strong>撰写《等保测评实验记录表》：</strong>根据实验结果逐条填<strong>核查结果 + 证据编号 + 四档判定 + 整改建议</strong>，并填写<strong>个人信息</strong>（班级 / 学号 / 姓名 / 日期）</td><td>记录表（素材2）</td></tr>
+                                    <tr><td style="background:#fff8e1;"><strong>要求</strong></td><td style="background:#fff8e1;" colspan="2"><strong>W1 → W2 全部完成</strong>（按顺序两步走）；每条判定至少保留 1 张截图（须含扫描结果回显或加固前后对比），截图文件名与记录表"证据编号"一致（如 <code>W1-01.png</code>）</td></tr>
+                                </table>
+                            <p style="font-size:0.88rem;color:#666;">说明：<strong>只扫平台提供的靶站，不扫描任何校外站点</strong>；平台内实验名与上表略有出入时，以「<strong>你要做什么</strong>」为准，按关键词（WVS、Web 扫描、扫描结果分析）在平台内找实验。</p>
+                        </div>
+
+                        <!-- 【实验 2/3】怎么做 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 二、怎么做——两个实验 → 一份记录表</div>
+                            <div class="lab-goal">两个实验<strong>按 W1 → W2 固定顺序</strong>完成（不可颠倒、不可跳过），边做边留证；<strong>再根据实验结果撰写记录表</strong>并作出判定。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 五步流程——扫 → 析 → 复固 → 录判 → 交</strong></p>
+                            <table class="info-table">
+                                    <tr><th style="width:78px;">环节</th><th>做什么</th><th style="width:236px;">产出什么</th></tr>
+                                    <tr><td><strong>① 扫</strong></td><td><strong>W1《使用 WVS 进行 Web 扫描》</strong>：进平台 →「应用系统安全测评」→ 新建扫描任务（选模板 + 填靶站地址）→ 执行<strong>完整扫描</strong> → 导出扫描报告；截取<strong>扫描配置页 + 扫描完成页</strong></td><td>W1 扫描报告 + 扫描截图</td></tr>
+                                    <tr><td><strong>② 析</strong></td><td><strong>W2《Web 应用扫描结果分析》</strong>：<code>File → Load Scan Results…</code> 载入扫描结果 → 逐条查看漏洞详情（如 <strong>Directory listing 目录遍历</strong>）→ 按高 / 中 / 低危分档 → 挑出 2~3 个<strong>可复现</strong>漏洞</td><td>漏洞分档清单 + 漏洞详情截图</td></tr>
+                                    <tr><td><strong>③ 复固</strong></td><td><strong>复现 → 加固 → 验证：</strong>在靶站（浏览器）复现漏洞（如直接访问目录路径，服务器列出文件列表）→ 定位成因 → <strong>加固</strong>（如 Apache 配置中把 <code>Options Indexes …</code> 改为 <code>Options -Indexes</code>）→ 重启服务 → 再次访问<strong>确认漏洞已修复</strong>；<strong>加固前后各截 1 张图</strong>对照</td><td>加固前后对比截图 + 修复结论</td></tr>
+                                    <tr><td><strong>④ 录判</strong></td><td>把扫描发现 + 加固效果，按 <strong>8 个栏位</strong>抄进<strong>《等保测评实验记录表》</strong>（素材2）——<strong>写事实，不写结论</strong>；填<strong>个人信息</strong>；对照基线做四档判定，写清"做到哪、差在哪"；<strong>一条判定配一张截图</strong>，编号与记录表对应</td><td>记录表（个人信息 + 8 栏 + 核查小结）</td></tr>
+                                    <tr><td><strong>⑤ 交</strong></td><td>导出记录表与截图包，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>记录表 docx + 截图包</td></tr>
+                                </table>
+                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只在平台靶站上操作，<strong>不做删库、改密等破坏性动作，不扫描校外站点</strong>；② 截图只交作业、不外传。</p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 记录表怎么填——逐栏说明 + 四档判定</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">把 W2 分析出的漏洞与加固效果，按 PPT 示例的 <strong>8 个栏位</strong>逐条填进《等保测评实验记录表》（素材2）；<strong>表头先填个人信息</strong>（课程 / 任务 / 班级 / 学号 / 姓名 / 日期）与<strong>测评对象</strong>（应用名称 + 版本 + 访问地址）。<strong>核查结果写事实，不写结论</strong>——扫描器报的"高危"必须先人工复核再判。</p>
+                            <table class="info-table">
+                                    <tr><th style="width:104px;">填什么</th><th>怎么填</th><th style="width:280px;">示例（水平越权）</th></tr>
+                                    <tr><td><strong>测评对象</strong></td><td>应用名称 + 版本 + 访问地址</td><td>平台靶站 V1.0 / <code>http://靶站地址</code></td></tr>
+                                    <tr><td><strong>测评项</strong></td><td>条款编号 + 名称</td><td>8.1.4.2 c) 访问控制-越权访问</td></tr>
+                                    <tr><td><strong>测评方法</strong></td><td>写清你用了什么办法验的</td><td>A 账号登录后修改订单 ID 参数，抓包对比响应</td></tr>
+                                    <tr><td><strong>核查结果</strong></td><td><strong>写看到的事实，不写结论</strong></td><td>orderId=1002 改为 1003 后返回 B 用户订单，含姓名与手机号</td></tr>
+                                    <tr><td><strong>证据编号</strong></td><td>填截图文件名，与截图包对应</td><td>W2-02.png</td></tr>
+                                    <tr><td><strong>符合性判定</strong></td><td>四选一：符合 / 部分符合 / 不符合 / 不适用</td><td>不符合</td></tr>
+                                    <tr><td><strong>问题描述</strong></td><td>写清"做到哪、差在哪"</td><td>服务端未校验资源归属，改 ID 即可越权读取他人订单</td></tr>
+                                    <tr><td><strong>整改建议</strong></td><td>给可执行动作 + 完成期限</td><td>服务端增加资源归属校验；5 个工作日内完成并复测</td></tr>
+                                </table>
+
+                            <p style="margin:16px 0 6px;"><strong>▍3. 实验素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材11：实验指导书——Web应用扫描结果分析.docx" download title="下载《实验指导书——Web应用扫描结果分析》">⬇ 素材11：实验指导书 · 操作步骤以它为准</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材2：实践任务——《应用系统安全测评记录表》.docx" download title="下载《等保测评实验记录表》">⬇ 素材2：等保测评实验记录表 · 必填</a>
+                                <a class="table-dl" href="各类表格/4.4 应用系统安全功能验证/素材9：应用系统安全功能核查速查卡.docx" download title="下载《应用系统安全功能核查速查卡》">⬇ 素材9：应用系统安全功能核查速查卡 · 判定口径</a>
+                            </p>
+                            <p style="font-size:0.88rem;color:#666;">用法：按<strong>素材11</strong> 指导书逐步操作（载入扫描结果 → 分析漏洞 → 复现 → 加固 → 验证）；拿不准某条算不算不合格时查<strong>素材9</strong> 速查卡；结论按 8 栏填进<strong>素材2</strong> 记录表。</p>
+                        </div>
+
+                        <!-- 【实验 3/3】怎么交 -->
+                        <div class="lab-box">
+                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li>报告文件名：<code>学号_姓名_实验4.4_安全计算环境测评.docx</code></li>
-                                    <li>字数：不少于 1500 字（含截图说明）</li>
-                                    <li>必含 5 项内容：
-                                        <ol type="①" style="margin:2px 0 6px 20px;">
-                                            <li><strong>实验目的</strong>（结合 4.4 三个知识模块，简述为什么应用层是"看得见的安全"）</li>
-                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、被测应用清单）</li>
-                                            <li><strong>实验过程</strong>（按"主机→数据库→应用"的顺序截图 + 关键 BurpSuite 请求包）</li>
-                                            <li><strong>实验结果</strong>（11 个子类判定表 + 不符合项的复现步骤 + 是否为脆弱性标注）</li>
-                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"测评师判定 vs AI 翻译"的边界）</li>
-                                        </ol>
-                                    </li>
-                                    <li>提交方式：学习通 → 任务 4.4 → 作业区</li>
+                                    <li><strong>《等保测评实验记录表》（素材2）</strong>——<strong>先填个人信息</strong>（课程 / 任务 / 班级 / 学号 / 姓名 / 日期）与测评对象，再按 <strong>8 个栏位</strong>逐条填（测评项 / 测评方法 / 核查结果 / 证据编号 / 符合性判定 / 问题描述 / 整改建议），含<strong>核查小结 + 优先整改项 + 签名</strong>；命名为 <code>班级-学号-姓名-4.4实验_记录表.docx</code></li>
+                                    <li><strong>操作截图包</strong>——W1 / W2 的关键截图（每条判定至少 1 张），须含<strong>扫描结果回显</strong>或<strong>加固前后对比</strong>，编号与记录表"证据编号"一一对应；命名为 <code>班级-学号-姓名-4.4实验_截图.zip</code></li>
+                                    <li><strong>平台登录与实验列表截图</strong>——含<strong>个人信息、实验名称、完成状态</strong>，证明本人在平台上完成了 W1、W2，并入截图包</li>
                                 </ol>
+                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.4 → 作业区（<strong>课内完成并提交</strong>）</p>
+                            </div>
+                            <div class="lab-check" style="margin-top:14px;">
+                                <div class="lab-check-title">📋 提交前自查</div>
+                                ☐ 记录表个人信息（班级 / 学号 / 姓名 / 日期）已填　☐ W1 → W2 两个实验都完成　☐ 每条判定都有截图且证据编号对应　☐ 核查结果写的是事实不是结论　☐ 扫描器报的"高危"已人工复核　☐ 加固效果有"修复前 / 修复后"对比图　☐ 不符合项写清了"差在哪"　☐ 整改建议给出可执行动作和期限　☐ 未扫描校外站点、未做破坏性操作
                             </div>
                         </div>
                     </div>
@@ -3122,17 +3166,6 @@ return</div>
                         <h3>🔍 情景分析</h3>
                         <div class="highlight">
                             <p><strong>问题导入：</strong>人工核查全部完成后，用<strong>自动化漏洞扫描</strong>补一遍盲点。Nessus / OpenVAS 等工具会扫出大量"高危"——但"扫描报告"≠"真实风险"。本子任务学<strong>扫描工具的正确使用 + 结果的客观解读</strong>。</p>
-                        </div>
-
-                        <div class="kb-st-tables">
-                            <div class="kb-st-title">📋 本子任务配套表格与素材（点击下载）</div>
-                            <div class="kb-st-list">
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材1：模拟漏洞扫描报告（用于实践任务2）.docx" download title="下载《模拟漏洞扫描报告》">⬇ 素材1：模拟漏洞扫描报告（用于实践任务2）</a>
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 素材2：漏洞扫描结果分析表</a>
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材3：OpenVAS快速操作手册.docx" download title="下载《OpenVAS 快速操作手册》">⬇ 素材3：OpenVAS 快速操作手册</a>
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材4：Nessus与OpenVAS对比（选型参考）.docx" download title="下载《Nessus 与 OpenVAS 对比》">⬇ 素材4：Nessus 与 OpenVAS 对比（选型参考）</a>
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材5：教师演示用——Nessus扫描结果快速解读卡.docx" download title="下载《Nessus 扫描结果快速解读卡》">⬇ 素材5：教师演示用——Nessus 扫描结果快速解读卡</a>
-                            </div>
                         </div>
 
                         <!-- 模块 1：为什么查 -->
@@ -3175,7 +3208,7 @@ return</div>
                             <div class="concept-title">🛠️ 3. 怎么查——工具 + 复测 + 风险矩阵三步走</div>
                             <p>漏洞扫描遵循"<strong>工具扫一遍 → 人工复测一遍 → 风险矩阵赋值</strong>"三步走：</p>
                             <ol>
-                                <li><strong>工具核查法（Nessus / OpenVAS）：</strong>按范围创建扫描任务 → 执行 → 导出报告。报告按 CVSS 评分自动分高 / 中 / 低危。</li>
+                                <li><strong>工具核查法（西普平台漏洞扫描工具）：</strong>在平台内创建扫描任务、选模板、填靶机 IP → 执行 → 导出报告。报告按 Critical / High / Medium / Low（CVSS）自动分档；扫描目标只限平台提供的靶机。</li>
                                 <li><strong>漏洞验证法（人工复测去误报）：</strong>对每个<strong>高危</strong>项目人工复测——查 CVE 详情、查利用条件、查资产是否真受影响。能复现 = 已验证；复现不了 = 误报。</li>
                                 <li><strong>风险矩阵法（结合资产 CIA 赋值）：</strong>对照任务 3 / 任务 4 的资产清单，给每条<strong>已验证高危</strong>打分——同一漏洞在数据库服务器上的风险级别远高于个人 PC。</li>
                             </ol>
@@ -3184,75 +3217,81 @@ return</div>
                             <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 《漏洞扫描结果分析表》</a></p>
                         </div>
 
-                        <div class="practice-box">
-                            <div class="concept-title">✏️ 练习任务（4.5，2学时）：给素材填表</div>
-                            <p><strong>漏洞扫描与结果分析：</strong>使用 Nessus / OpenVAS 对模拟靶机进行漏洞扫描，<strong>逐条人工复测高危项</strong>，填写《漏洞扫描结果分析表》（<a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 下载表格</a>）。</p>
-                            <p><strong>组织方式：</strong>4 人/组，轮换操作角色（<strong>核查员、记录员、验证员</strong>），教师巡回指导。</p>
-                            <p><strong>评价标准：</strong>工具操作熟练度（25%）+ 核查准确率（30%）+ 问题描述与风险判断（25%）+ 职业素养（20%）。</p>
-                            <p style="font-size:0.9rem;color:#666;">💡 本任务为<strong>纸面演练</strong>，不涉及 JSecProbe 系统操作；JSecProbe 上的实操请切到「🧪 实验」分类完成。</p>
-                        </div>
+                        <!-- ==================== 🧪 实验模块（本页所有内容归入「实验」页） ==================== -->
 
+                        <!-- 【实验 1/3】要做什么 -->
                         <div class="lab-box">
-                            <div class="lab-head">🧪 实验 4.5：安全管理中心测评——别漏了"总控室"</div>
-                            <div class="lab-goal"><strong>实验目标：</strong>完成"安全管理中心"控制类测评（系统管理、审计管理、安全管理、集中管控 4 个子类）。它是等保 2.0 新增的控制类，查的是"有没有一个统一的地方管设备、看日志、控权限"——实验三录的<strong>堡垒机（运维审计）和日志审计系统</strong>就是它的核心证据。</div>
-                            <ol class="step-list">
-                                <li><strong>展开"安全管理中心"节点</strong>，通读 4 个子类。</li>
-                                <li><strong>对照资产清单判定。</strong>模拟思路：系统管理→符合（部署堡垒机实现集中运维）；集中管控→部分符合（部署日志审计系统，但未实现对安全事件的自动关联分析与告警）。</li>
-                                <li><strong>联动思考：</strong>如果系统没录堡垒机和日志审计，这一类几乎全不符合——回去实验三补资产，体会"资产底账不清，测评寸步难行"。</li>
-                            </ol>
-                            <div class="lab-check">
-                                <div class="lab-check-title">📋 实验记录自查</div>
-                                ☐ 4 个子类均有判定　☐ 理解了安全管理中心与堡垒机/日志审计的对应关系
-                            </div>
-                            <!-- 实验报告要求 -->
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;margin-top:14px;">
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 实验报告要求（需提交）</div>
-                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
-                                    <li>报告文件名：<code>学号_姓名_实验4.5_漏洞扫描与结果分析.docx</code></li>
-                                    <li>字数：不少于 1500 字（含截图说明）</li>
-                                    <li>必含 5 项内容：
-                                        <ol type="①" style="margin:2px 0 6px 20px;">
-                                            <li><strong>实验目的</strong>（结合 4.5 三个知识模块，简述为什么扫描报告 ≠ 真实风险）</li>
-                                            <li><strong>实验环境</strong>（JSecProbe 版本、项目名称、扫描工具版本）</li>
-                                            <li><strong>实验过程</strong>（扫描任务创建截图 + 高危项复测记录 + 风险矩阵打分）</li>
-                                            <li><strong>实验结果</strong>（已验证高危 / 中危 / 低危 / 误报 四档分类清单 + 风险等级赋值）</li>
-                                            <li><strong>心得体会</strong>（不少于 300 字，重点谈"误报识别"和"资产等级联动"）</li>
-                                        </ol>
-                                    </li>
-                                    <li>提交方式：学习通 → 任务 4.5 → 作业区</li>
-                                </ol>
-                            </div>
-                        </div>
+                            <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的<strong>漏洞扫描环境</strong>里，先学会扫描工具怎么用（V1），再对 <strong>Windows 靶机</strong>跑一次完整扫描（V2），把结果逐条落进《漏洞扫描结果分析表》。<strong>课内完成、当场提交。</strong></div>
 
-                        <div class="lab-box">
-                            <div class="lab-head">🖥️ 补充上机：西普平台实操清单（10.11.0.70）</div>
-                            <div class="lab-goal"><strong>说明：</strong>JSecProbe 完成的是"测评流程"演练；以下上机在<strong>西普平台（10.11.0.70）</strong>进行，练的是"真机核查"的手感——两套环境互补，一边学"怎么判"，一边练"怎么查"。</div>
-                            <p style="background:#eaf6fd;border-left:4px solid #0288d1;border-radius:6px;padding:8px 12px;font-size:0.9rem;line-height:1.8;margin:8px 0;"><strong>平台入口：</strong><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>　<strong>账号：</strong>本人 11 位学号　<strong>密码：</strong>学号 + <code>1q2w</code>（例：学号 234234 → 密码 <code>2342341q2w</code>）</p>
+                            <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
                             <div class="table-container">
                                 <table class="info-table">
-                                    <tr><th>实操项目</th><th>平台</th><th>练什么</th></tr>
-                                    <tr><td>Windows / Linux 安全基线核查</td><td>西普</td><td>口令策略、账户锁定、日志审计等具体核查命令与配置位置</td></tr>
-                                    <tr><td>MySQL / SQL Server 安全配置核查</td><td>西普</td><td>账户权限、口令强度、日志配置的检查方法</td></tr>
-                                    <tr><td>PKI/CA、Apache / Tomcat / IIS 安全配置</td><td>西普</td><td>应用与中间件的安全功能验证</td></tr>
-                                    <tr><td>WVS Web 应用扫描</td><td>西普</td><td>漏洞扫描实操与扫描报告解读（高中低危）</td></tr>
+                                    <tr><th style="width:120px;">项目</th><th>内容</th></tr>
+                                    <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
+                                    <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
+                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
+                                    <tr><td>实验路径</td><td>登录后进入「<strong>漏洞扫描与结果分析</strong>」（目录第 4 项）→ 先做「<strong>漏洞扫描工具使用</strong>」→ 再做「<strong>Windows 漏洞扫描</strong>」→ 预约 / 开始实验</td></tr>
+                                    <tr><td>填到哪里</td><td>把扫描结果逐条落进 <strong>《漏洞扫描结果分析表》</strong>（素材2）：风险等级 + 是否误报 + 四档判定 + 整改建议</td></tr>
                                 </table>
                             </div>
-                            <div class="ai-tip-box">
-                                <div class="ai-tip-title">🤖 核查命令记不住？让 AI 当"随身教练"</div>
-                                <div class="prompt-tpl">
-                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
-                                    我在做等保测评的主机基线核查，系统是【Windows Server / CentOS / MySQL 8】。请给我一张"检查项—检查命令/操作路径—合格标准"对照表（如口令策略、登录失败处理、审计日志），并说明每条命令输出里要重点看什么。
-                                </div>
-                                <p style="font-size:0.88rem;color:#666;"><strong>用法提示：</strong>先自己查、卡住了再问；把 AI 给的对照表记进你的核查笔记——这本身就是行业里真实的"基线检查表"雏形。</p>
+                            <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
+
+                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——V1 学工具 → V2 跑扫描</strong></p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>漏洞扫描与结果分析</strong>」目录下完成下面两个实验——<strong>先学怎么用，再做正式扫描</strong>，两个都要做（不是二选一）。</p>
+                            <table class="info-table">
+                                    <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要做什么</th><th style="width:196px;">覆盖条款</th></tr>
+                                    <tr><td><strong>V1</strong></td><td><strong>漏洞扫描工具使用：</strong>熟悉扫描工具的任务配置、模板选择与结果查看，先跑通一次扫描</td><td>8.1.4.4（入侵防范—方法与工具）</td></tr>
+                                    <tr><td><strong>V2</strong></td><td><strong>Windows 漏洞扫描：</strong>对平台 Windows 靶机完成一次完整扫描，导出报告，挑出高危及以上条目</td><td>8.1.4.4（已知漏洞的发现与修补）</td></tr>
+                                    <tr><td style="background:#fff8e1;"><strong>要求</strong></td><td style="background:#fff8e1;" colspan="2">先 <strong>V1</strong> 熟悉工具、再 <strong>V2</strong> 完成正式扫描；<strong>高危及以上条目逐条截图</strong>（须含漏洞名称、风险等级与受影响主机），截图文件名与分析表"截图编号"一致（如 <code>v2-01.png</code>）</td></tr>
+                                </table>
+                            <p style="font-size:0.88rem;color:#666;">说明：<strong>只扫平台提供的靶机，不扫描任何校外地址</strong>；扫描前确认在授权范围内。平台内实验名与上表略有出入时，以「<strong>你要做什么</strong>」为准，按关键词（漏洞扫描、Windows）找实验。</p>
+                        </div>
+
+                        <!-- 【实验 2/3】怎么做 -->
+                        <div class="lab-box">
+                            <div class="lab-head">🎯 二、怎么做——上机五步</div>
+                            <div class="lab-goal">按「<strong>选 → 查 → 录 → 判 → 交</strong>」五步走，全程在平台上真机操作、逐条留证。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 五步流程</strong></p>
+                            <table class="info-table">
+                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
+                                    <tr><td><strong>① 选</strong></td><td>进入「漏洞扫描与结果分析」，确认 V1 / V2 两个实验，<strong>先看清靶机 IP 和扫描范围</strong>，再动手</td><td>确定实验与靶机</td></tr>
+                                    <tr><td><strong>② 查</strong></td><td>V1 学会建任务、选模板、看结果 → V2 对 Windows 靶机跑一次完整扫描并导出报告；<strong>高危条目逐条截图留证</strong>（含漏洞名称、风险等级、受影响主机）</td><td>扫描报告 + 证据截图</td></tr>
+                                    <tr><td><strong>③ 录</strong></td><td>把报告里的<strong>原始条目</strong>抄进<strong>分析表</strong>（素材2）的对应栏位——<strong>抄事实，不抄结论</strong>，如漏洞名称、CVSS 分值、受影响主机</td><td>实测条目</td></tr>
+                                    <tr><td><strong>④ 判</strong></td><td>按 CVSS 与"能不能被利用"分档，逐条对上条款（如 8.1.4.4 入侵防范），写清<strong>是否误报</strong>及验证方式，再给四档判定</td><td>分档 + 是否误报 + 四档判定 + 整改建议</td></tr>
+                                    <tr><td><strong>⑤ 交</strong></td><td>导出《漏洞扫描结果分析表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>分析表 docx + 截图包</td></tr>
+                                </table>
+                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只扫平台靶机，<strong>不扫描任何校外地址</strong>；② 截图只交作业、不外传。</p>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 实验素材下载</strong></p>
+                            <p>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材6：西普平台漏洞扫描操作卡.docx" download title="下载《西普平台漏洞扫描操作卡》">⬇ 素材6：西普平台漏洞扫描操作卡 · 先看</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 素材2：漏洞扫描结果分析表 · 必填</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材7：CVSS 评分与风险等级对照表.docx" download title="下载《CVSS 评分与风险等级对照表》">⬇ 素材7：CVSS 评分与风险等级对照表</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材8：误报识别与验证记录卡.docx" download title="下载《误报识别与验证记录卡》">⬇ 素材8：误报识别与验证记录卡</a>
+                            </p>
+                            <p style="font-size:0.88rem;color:#666;">用法：先按<strong>素材6</strong> 的操作卡跑通扫描；分档拿不准查<strong>素材7</strong>；怀疑是误报的条目按<strong>素材8</strong> 的三步验证法复核；结论填进<strong>素材2</strong>。</p>
+                        </div>
+
+                        <!-- 【实验 3/3】怎么交 -->
+                        <div class="lab-box">
+                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
+                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+                                    <li><strong>扫描取证包</strong>——任务配置页、结果列表、导出的报告截屏（高危及以上条目至少 1 张），按 <code>v2-01.png</code> 方式命名并与分析表"截图编号"一一对应</li>
+                                    <li><strong>《漏洞扫描结果分析表》（素材2）</strong>——高危及以上条目逐条填（风险等级 + 是否误报 + 四档判定 + 整改建议）；按 <strong>班级 + 学号 + 姓名 + 4.5 实验</strong> 命名</li>
+                                    <li><strong>平台登录与实验列表截图</strong>——证明本人在平台上完成了 V1、V2（含个人信息、实验名称、完成状态），并入截图包</li>
+                                </ol>
+                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 4.5 → 作业区（<strong>课内完成并提交</strong>）</p>
                             </div>
-                            <!-- 补充上机说明 -->
-                            <div style="background:#f3f6fb;border:1.5px dashed #5e35b1;border-radius:10px;padding:12px 16px;margin-top:14px;">
-                                <div style="font-weight:700;color:#5e35b1;margin-bottom:6px;">ℹ️ 补充上机说明</div>
-                                <p style="margin:0 0 4px 0;line-height:1.7;font-size:0.92rem;">本节为<strong>西普平台补充上机清单</strong>，<strong>不单独提交实验报告</strong>。建议把"真机核查"截图整合到对应子任务（4.1 / 4.3 / 4.4 / 4.5）的 JSecProbe 实验报告"实验过程"章节里，作为<strong>真实环境的补充证据</strong>。</p>
+                            <div class="lab-check" style="margin-top:14px;">
+                                <div class="lab-check-title">📋 提交前自查</div>
+                                ☐ V1、V2 两个实验都完成　☐ 高危及以上条目都有截图且编号对应　☐ 抄录的是报告原始条目而非结论　☐"是否误报"一栏写了验证过程而不是空着　☐ 整改建议有可执行动作和期限　☐ 扫描目标只用了平台提供的靶机
                             </div>
                         </div>
 
-                        <div class="coming-soon">🔒 本任务配套的靶机环境、核查工具包与讲解视频将陆续上线</div>
                     </div>
                 </div>
 
@@ -4108,7 +4147,7 @@ return</div>
             // 默认只展开第一块，避免学生一进页面就要下滑很久。
             // 需要给其他任务也加上时，把子任务编号加进 ENABLE 数组即可（如 '4.5'）。
             (function setupLabAccordion() {
-                var ENABLE = ['4.1', '4.2', '4.3'];
+                var ENABLE = ['4.1', '4.2', '4.3', '4.4', '4.5'];
                 var SUBSTAGE_PREFIX = 'substage';
 
                 function isOpen(box) { return !box.classList.contains('is-collapsed'); }
@@ -4481,7 +4520,7 @@ var SUYANG_CASES = {
                                 { label: '高杠杆用法：让 AI 出主意', method: '适合交给它的是：整理对照表、生成补证清单、写核查脚本草稿、把不懂的概念讲一遍；不适合交给它的是：替你下结论、替你判断客户的整改是否到位。', kws: ['清单', '对照', '脚本', '草稿', '解释', '整理', '启发', '辅助', '用它', '建议'] },
                                 { label: '先有基本功，再谈提效', method: '先练出「没有 AI 也能做完一整遍」的本事，再让 AI 帮你提速：顺序反了，就会变成离开 AI 就不会干活的空心人。', kws: ['基本功', '手工', '练习', '沉淀', '独立', '能力', '依赖', '替我思考', '顺序', '先'] }
                             ],
-                            ref: 'AI 幻觉（Hallucination）/ JSecProbe AI 辅助判定 / 大模型辅助测评的边界'
+                            ref: 'AI 幻觉（Hallucination）/ 大模型辅助判定 / 大模型辅助测评的边界'
                         }
                     ]
                 },
@@ -5181,8 +5220,8 @@ var SUYANG_CASES = {
         // buildTabsFor 把所有内容块搬到 cat-group 里，所以要跨层找
         var tbl = sub.querySelector('.cat-group[data-cat="knowledge"] .kb-st-tables')
                   || sub.querySelector(':scope > .kb-st-tables');
-        // 4.1 / 4.2 / 4.3 实验模块不展示该汇总块（其核心素材已在实验模块第一节单独列出）
-        if (taskId === '4.1' || taskId === '4.2' || taskId === '4.3') { if (tbl) tbl.remove(); return; }
+        // 4.1 ~ 4.5 实验模块不展示该汇总块（其核心素材已在实验模块"怎么做"一节单独列出）
+        if (taskId === '4.1' || taskId === '4.2' || taskId === '4.3' || taskId === '4.4' || taskId === '4.5') { if (tbl) tbl.remove(); return; }
         var lab = sub.querySelector('.cat-group[data-cat="lab"] .lab-box')
                   || sub.querySelector(':scope > .lab-box');
         if (tbl && lab) {
