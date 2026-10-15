@@ -6352,7 +6352,7 @@ return</div>
 
                             <p><strong>必踩雷区：</strong>① 不接受扫描器结论——必须人工复测；② 不区分资产等级——所有"高危"都按最高级报 = 报告失真；③ 漏掉 Web 应用扫描——综合扫描器对业务逻辑漏洞基本无能为力。</p>
 
-                            <p><strong>记录表下载：</strong><a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 《漏洞扫描结果分析表》</a></p>
+                            <p><strong>实验指导书下载：</strong><a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材11：实验指导书——Windows漏洞扫描（OpenVAS）.docx" download title="下载《实验指导书——Windows 漏洞扫描》">⬇ 《实验指导书：Windows 漏洞扫描》</a>　<strong>分析表下载：</strong><a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 《漏洞扫描结果分析表》</a></p>
 
                         </div>
 
@@ -6362,133 +6362,75 @@ return</div>
 
 
 
-                        <!-- 【实验 1/3】要做什么 -->
+                        <!-- 【实验 1/1】做什么 · 交什么（简化：两个实验） -->
 
                         <div class="lab-box">
 
-                            <div class="lab-head">🧪 一、要做什么——本次任务与实验清单</div>
+                            <div class="lab-head">🧪 本次实验——做什么、交什么</div>
 
-                            <div class="lab-goal"><strong>本次上机任务：</strong>在西普实验平台的<strong>漏洞扫描环境</strong>里，先学会扫描工具怎么用（V1），再对 <strong>Windows 靶机</strong>跑一次完整扫描（V2），把结果逐条落进《漏洞扫描结果分析表》。<strong>课内完成、当场提交。</strong></div>
+                            <div class="lab-goal"><strong>本次实验共 2 项，按顺序完成、课内提交学习通。</strong>实验一：在西普平台做「Windows 漏洞扫描」，提交扫描报告截图及其中文翻译；实验二：根据给定的模拟漏洞扫描报告（素材1）整理《漏洞扫描结果分析表》（素材2），提交整理好的表。</div>
 
-
-
-                            <p style="margin:14px 0 6px;"><strong>▍1. 平台环境与登录信息</strong></p>
+                            <p style="margin:14px 0 6px;"><strong>▍实验一　西普平台 Windows 漏洞扫描（只做这一个）</strong></p>
 
                             <div class="table-container">
 
                                 <table class="info-table">
 
-                                    <tr><th style="width:120px;">项目</th><th>内容</th></tr>
+                                    <tr><th style="width:96px;">项目</th><th>内容</th></tr>
 
-                                    <tr><td>平台网址</td><td><a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;text-decoration:underline;"><code>http://10.11.0.70</code></a>（校园网内访问，点击直接打开）</td></tr>
+                                    <tr><td>实验位置</td><td>登录西普平台 <a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;"><code>http://10.11.0.70</code></a>（账号 = 本人学号，密码 = 学号 + <code>1q2w</code>）→ 目录「<strong>漏洞扫描与结果分析</strong>」→ 只做 <strong>Windows 漏洞扫描</strong>。同目录下的「漏洞扫描工具使用」「Metasploitable3 漏洞信息收集」<strong>本轮不做</strong>。</td></tr>
 
-                                    <tr><td>登录账号</td><td><strong>本人 11 位学号</strong>（如 20230101001）</td></tr>
+                                    <tr><td>怎么做</td><td>按 <strong>素材11：实验指导书</strong> 操作——登录扫描工具网页管理界面 → 填写靶机 IP 发起扫描 → 查看扫描报告 → 点开漏洞条目查看详细说明与修复建议。</td></tr>
 
-                                    <tr><td>登录密码</td><td><strong>学号 + 1q2w</strong>（如 202301010011q2w）</td></tr>
-
-                                    <tr><td>实验路径</td><td>登录后进入「<strong>漏洞扫描与结果分析</strong>」（目录第 4 项）→ 先做「<strong>漏洞扫描工具使用</strong>」→ 再做「<strong>Windows 漏洞扫描</strong>」→ 预约 / 开始实验</td></tr>
-
-                                    <tr><td>填到哪里</td><td>把扫描结果逐条落进 <strong>《漏洞扫描结果分析表》</strong>（素材2）：风险等级 + 是否误报 + 四档判定 + 整改建议</td></tr>
+                                    <tr><td>交什么</td><td><strong>① 扫描报告截图</strong>（扫描结果列表 + 至少 2 个漏洞的详情页，须含漏洞名称 / 风险等级 / 受影响主机）；<strong>② 截图内容的中文翻译</strong>——把报告里的英文漏洞名称、等级、描述与修复建议逐条译成中文，与截图编号一一对应。</td></tr>
 
                                 </table>
 
                             </div>
 
-                            <p style="font-size:0.88rem;color:#666;">⚠️ 登录后先核对个人信息；账号无法登录、或实验环境打不开时，按"现象 + 报错原文"描述后举手求助，不要反复试错浪费时间。</p>
+                            <p style="margin:14px 0 6px;"><strong>▍实验二　整理《漏洞扫描结果分析表》（素材2）</strong></p>
 
+                            <div class="table-container">
 
+                                <table class="info-table">
 
-                            <p style="margin:14px 0 6px;"><strong>▍2. 选什么实验——V1 学工具 → V2 跑扫描</strong></p>
+                                    <tr><th style="width:96px;">项目</th><th>内容</th></tr>
 
-                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">从「<strong>漏洞扫描与结果分析</strong>」目录下完成下面两个实验——<strong>先学怎么用，再做正式扫描</strong>，两个都要做（不是二选一）。</p>
+                                    <tr><td>输入</td><td><strong>素材1：模拟漏洞扫描报告</strong>（一份脱敏的扫描报告，含漏洞汇总表与漏洞详细信息）。</td></tr>
 
-                            <table class="info-table">
+                                    <tr><td>做什么</td><td>把报告里的漏洞<strong>逐条</strong>整理进 <strong>素材2《漏洞扫描结果分析表》</strong>——漏洞编号 / 漏洞名称 / CVE 编号 / 风险等级 / 影响主机 / 是否误报 / 验证方式 / 对应等保指标 / 合规影响 / 整改优先级 / 整改建议，全部栏位填完。</td></tr>
 
-                                    <tr><th style="width:56px;">编号</th><th>西普平台实验 / 你要做什么</th><th style="width:196px;">覆盖条款</th></tr>
-
-                                    <tr><td><strong>V1</strong></td><td><strong>漏洞扫描工具使用：</strong>熟悉扫描工具的任务配置、模板选择与结果查看，先跑通一次扫描</td><td>8.1.4.4（入侵防范—方法与工具）</td></tr>
-
-                                    <tr><td><strong>V2</strong></td><td><strong>Windows 漏洞扫描：</strong>对平台 Windows 靶机完成一次完整扫描，导出报告，挑出高危及以上条目</td><td>8.1.4.4（已知漏洞的发现与修补）</td></tr>
-
-                                    <tr><td style="background:#fff8e1;"><strong>要求</strong></td><td style="background:#fff8e1;" colspan="2">先 <strong>V1</strong> 熟悉工具、再 <strong>V2</strong> 完成正式扫描；<strong>高危及以上条目逐条截图</strong>（须含漏洞名称、风险等级与受影响主机），截图文件名与分析表"截图编号"一致（如 <code>v2-01.png</code>）</td></tr>
+                                    <tr><td>交什么</td><td><strong>整理好后的素材2</strong>（.docx），按 <strong>班级-学号-姓名-4.5实验</strong> 命名。</td></tr>
 
                                 </table>
 
-                            <p style="font-size:0.88rem;color:#666;">说明：<strong>只扫平台提供的靶机，不扫描任何校外地址</strong>；扫描前确认在授权范围内。平台内实验名与上表略有出入时，以「<strong>你要做什么</strong>」为准，按关键词（漏洞扫描、Windows）找实验。</p>
+                            </div>
 
-                        </div>
-
-
-
-                        <!-- 【实验 2/3】怎么做 -->
-
-                        <div class="lab-box">
-
-                            <div class="lab-head">🎯 二、怎么做——上机五步</div>
-
-                            <div class="lab-goal">按「<strong>选 → 查 → 录 → 判 → 交</strong>」五步走，全程在平台上真机操作、逐条留证。</div>
-
-
-
-                            <p style="margin:14px 0 6px;"><strong>▍1. 五步流程</strong></p>
-
-                            <table class="info-table">
-
-                                    <tr><th style="width:74px;">环节</th><th>做什么</th><th style="width:250px;">产出什么</th></tr>
-
-                                    <tr><td><strong>① 选</strong></td><td>进入「漏洞扫描与结果分析」，确认 V1 / V2 两个实验，<strong>先看清靶机 IP 和扫描范围</strong>，再动手</td><td>确定实验与靶机</td></tr>
-
-                                    <tr><td><strong>② 查</strong></td><td>V1 学会建任务、选模板、看结果 → V2 对 Windows 靶机跑一次完整扫描并导出报告；<strong>高危条目逐条截图留证</strong>（含漏洞名称、风险等级、受影响主机）</td><td>扫描报告 + 证据截图</td></tr>
-
-                                    <tr><td><strong>③ 录</strong></td><td>把报告里的<strong>原始条目</strong>抄进<strong>分析表</strong>（素材2）的对应栏位——<strong>抄事实，不抄结论</strong>，如漏洞名称、CVSS 分值、受影响主机</td><td>实测条目</td></tr>
-
-                                    <tr><td><strong>④ 判</strong></td><td>按 CVSS 与"能不能被利用"分档，逐条对上条款（如 8.1.4.4 入侵防范），写清<strong>是否误报</strong>及验证方式，再给四档判定</td><td>分档 + 是否误报 + 四档判定 + 整改建议</td></tr>
-
-                                    <tr><td><strong>⑤ 交</strong></td><td>导出《漏洞扫描结果分析表》，课内提交——交不了就先交已完成部分并注明，<strong>不要填假数据</strong></td><td>分析表 docx + 截图包</td></tr>
-
-                                </table>
-
-                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>两条纪律：</strong>① 只扫平台靶机，<strong>不扫描任何校外地址</strong>；② 截图只交作业、不外传。</p>
-
-
-
-                            <p style="margin:16px 0 6px;"><strong>▍2. 实验素材下载</strong></p>
+                            <p style="margin:14px 0 6px;"><strong>▍实验素材下载</strong></p>
 
                             <p>
 
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材6：西普平台漏洞扫描操作卡.docx" download title="下载《西普平台漏洞扫描操作卡》">⬇ 素材6：西普平台漏洞扫描操作卡 · 先看</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材11：实验指导书——Windows漏洞扫描（OpenVAS）.docx" download title="下载《实验指导书——Windows 漏洞扫描》">⬇ 素材11：实验指导书（实验一按它做）</a>
 
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 素材2：漏洞扫描结果分析表 · 必填</a>
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材1：模拟漏洞扫描报告（用于实践任务2）.docx" download title="下载《模拟漏洞扫描报告》">⬇ 素材1：模拟漏洞扫描报告（实验二输入）</a>
+
+                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材2：漏洞扫描结果分析表.docx" download title="下载《漏洞扫描结果分析表》">⬇ 素材2：漏洞扫描结果分析表（实验二必交）</a>
 
                                 <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材7：CVSS 评分与风险等级对照表.docx" download title="下载《CVSS 评分与风险等级对照表》">⬇ 素材7：CVSS 评分与风险等级对照表</a>
 
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材8：误报识别与验证记录卡.docx" download title="下载《误报识别与验证记录卡》">⬇ 素材8：误报识别与验证记录卡</a>
-
                             </p>
 
-                            <p style="font-size:0.88rem;color:#666;">用法：先按<strong>素材6</strong> 的操作卡跑通扫描；分档拿不准查<strong>素材7</strong>；怀疑是误报的条目按<strong>素材8</strong> 的三步验证法复核；结论填进<strong>素材2</strong>。</p>
+                            <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>纪律：</strong>只扫平台提供的靶机，<strong>不扫描任何校外地址</strong>；截图只作作业提交、不外传。</p>
 
-                        </div>
+                            <div class="lab-report-req" style="margin-top:14px;background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
 
-
-
-                        <!-- 【实验 3/3】怎么交 -->
-
-                        <div class="lab-box">
-
-                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
-
-                            <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
-
-                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项）</div>
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（2 项）</div>
 
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
 
-                                    <li><strong>扫描取证包</strong>——任务配置页、结果列表、导出的报告截屏（高危及以上条目至少 1 张），按 <code>v2-01.png</code> 方式命名并与分析表"截图编号"一一对应</li>
+                                    <li><strong>实验一：扫描报告截图 + 中文翻译</strong>——截图按 <code>v1-01.png</code> 起编号；翻译可整在一份 docx 里，与截图编号一一对应；打包命名 <code>班级-学号-姓名-4.5实验_截图.zip</code>。</li>
 
-                                    <li><strong>《漏洞扫描结果分析表》（素材2）</strong>——高危及以上条目逐条填（风险等级 + 是否误报 + 四档判定 + 整改建议）；按 <strong>班级 + 学号 + 姓名 + 4.5 实验</strong> 命名</li>
-
-                                    <li><strong>平台登录与实验列表截图</strong>——证明本人在平台上完成了 V1、V2（含个人信息、实验名称、完成状态），并入截图包</li>
+                                    <li><strong>实验二：整理好的《漏洞扫描结果分析表》（素材2）</strong>——命名 <code>班级-学号-姓名-4.5实验_分析表.docx</code>。</li>
 
                                 </ol>
 
@@ -6500,7 +6442,7 @@ return</div>
 
                                 <div class="lab-check-title">📋 提交前自查</div>
 
-                                ☐ V1、V2 两个实验都完成　☐ 高危及以上条目都有截图且编号对应　☐ 抄录的是报告原始条目而非结论　☐"是否误报"一栏写了验证过程而不是空着　☐ 整改建议有可执行动作和期限　☐ 扫描目标只用了平台提供的靶机
+                                ☐ 平台实验只做了「Windows 漏洞扫描」　☐ 报告截图清晰、含漏洞名称与等级　☐ 每张截图都配了中文翻译　☐ 素材2 每条都填了是否误报 / 等保指标 / 合规影响 / 整改优先级与建议　☐ 两份成果命名规范、已上传学习通
 
                             </div>
 
