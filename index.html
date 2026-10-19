@@ -5492,9 +5492,9 @@
 
 
 
-                            <p style="margin:16px 0 6px;"><strong>▍3. 三台被测设备（每台都要看一遍）</strong></p>
+                            <p style="margin:16px 0 6px;"><strong>▍3.实验要求：从交换机和路由器中任选一完成测评记录</strong></p>
 
-                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">三台设备必须<strong>各看一遍</strong>——<strong>一台加固不等于全部</strong>。每台对照 8 个要点逐项核查，重点核查项见下表：</p>
+                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">对照 8 个要点逐项核查，重点核查项见下表：</p>
 
                             <table class="info-table">
 
@@ -6380,7 +6380,7 @@ return</div>
 
                                     <tr><td>实验位置</td><td>登录西普平台 <a href="http://10.11.0.70" target="_blank" rel="noopener" style="color:#1565c0;font-weight:700;"><code>http://10.11.0.70</code></a>（账号 = 本人学号，密码 = 学号 + <code>1q2w</code>）→ 目录「<strong>漏洞扫描与结果分析</strong>」→ 只做 <strong>Windows 漏洞扫描</strong>。同目录下的「漏洞扫描工具使用」「Metasploitable3 漏洞信息收集」<strong>本轮不做</strong>。</td></tr>
 
-                                    <tr><td>怎么做</td><td>按 <strong>素材11：实验指导书</strong> 操作——登录扫描工具网页管理界面 → 填写靶机 IP 发起扫描 → 查看扫描报告 → 点开漏洞条目查看详细说明与修复建议。</td></tr>
+                                    <tr><td>怎么做</td><td>按 <strong>实验指导书</strong> 操作——登录扫描工具网页管理界面 → 填写靶机 IP 发起扫描 → 查看扫描报告 → 点开漏洞条目查看详细说明与修复建议。</td></tr>
 
                                     <tr><td>交什么</td><td><strong>① 扫描报告截图</strong>（扫描结果列表 + 至少 2 个漏洞的详情页，须含漏洞名称 / 风险等级 / 受影响主机）；<strong>② 截图内容的中文翻译</strong>——把报告里的英文漏洞名称、等级、描述与修复建议逐条译成中文，与截图编号一一对应。</td></tr>
 
@@ -6410,7 +6410,7 @@ return</div>
 
                             <p>
 
-                                <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材11：实验指导书——Windows漏洞扫描（OpenVAS）.docx" download title="下载《实验指导书——Windows 漏洞扫描》">⬇ 素材11：实验指导书（实验一按它做）</a>
+                                
 
                                 <a class="table-dl" href="各类表格/4.5 漏洞扫描与结果分析/素材1：模拟漏洞扫描报告（用于实践任务2）.docx" download title="下载《模拟漏洞扫描报告》">⬇ 素材1：模拟漏洞扫描报告（实验二输入）</a>
 
@@ -6506,6 +6506,8 @@ return</div>
 
                         <p>像真实测评一样，与"系统管理员""安全管理员"面对面交流。示例问题："贵单位的密码策略是如何设置的？""备份多久做一次？恢复演练做过吗？"<strong>访谈要记录关键信息</strong>，与技术核查结果相互印证。</p>
 
+                        <p style="margin-top:10px;"><strong>课件：</strong><a class="table-dl" href="PPT/5.2 模拟人员访谈.pdf" target="_blank" rel="noopener" title="打开《5.2 模拟人员访谈》课件 PDF">📄 5.2 模拟人员访谈（PDF 课件）</a>　<strong>实验：</strong>见「实验」页——用对话智能体做一次模拟访谈，填写《人员访谈记录表》。</p>
+
                     </div>
 
 
@@ -6514,167 +6516,85 @@ return</div>
 
 
 
-                        <!-- 【实验 1/3】要做什么 -->
+                        <!-- 【实验 5.1】安全管理文档核查（做什么 / 怎么做 / 交什么） -->
 
                         <div class="lab-box">
 
-                            <div class="lab-head">🧪 一、要做什么——两个实践任务</div>
+                            <div class="lab-head">🧪 实验 5.1：安全管理文档核查——查文档、找问题、给整改</div>
 
-                            <div class="lab-goal"><strong>本次上机任务：</strong>以一家企业（XX公司）提交的 <strong>模拟安全管理制度文档包</strong> 为被测对象，完成 <strong>2 个实践任务</strong>，课内完成、当场提交学习通。</div>
+                            <div class="lab-goal"><strong>本次上机任务：</strong>用 XX 公司提交的<strong>模拟安全管理制度文档包（5 份）</strong>做一次文档核查：逐份找出缺陷，并提出整改建议。<strong>课内完成、提交学习通。</strong></div>
 
-
-
-                            <p style="margin:14px 0 6px;"><strong>▍1. 实验对象与依据</strong></p>
+                            <p style="margin:16px 0 6px;"><strong>▍一、做什么——两个任务</strong></p>
 
                             <div class="table-container">
 
                                 <table class="info-table">
 
-                                    <tr><th style="width:130px;">项目</th><th>内容</th></tr>
+                                    <tr><th style="width:96px;">任务</th><th>做法</th><th style="width:210px;">产出</th></tr>
 
-                                    <tr><td>实验对象</td><td>XX公司模拟安全管理制度文档包（共 5 份文档，既有合格文档，也有缺陷文档）</td></tr>
+                                    <tr><td><strong>任务 1</strong><br>合规性核查</td><td>对照<strong>素材4</strong>（核查依据），逐份审阅<strong>素材1</strong> 里的 5 份文档：是否具备、内容是否完整、审批 / 版本 / 评审是否齐备</td><td>《安全管理文档核查表》（<strong>素材2</strong>）</td></tr>
 
-                                    <tr><td>对照依据</td><td>GB/T 22239-2019《网络安全等级保护基本要求》管理要求 · <strong>安全管理制度</strong>（安全策略 / 管理制度 / 制定和发布 / 评审和修订）</td></tr>
-
-                                    <tr><td>组织方式</td><td>个人独立完成（或 2 人一组：一人核查、一人复核）</td></tr>
+                                    <tr><td><strong>任务 2</strong><br>汇总整改</td><td>把任务 1 发现的问题按四类维度（安全策略 / 管理制度 / 制定和发布 / 评审和修订）分类，写<strong>可操作</strong>的整改建议与优先级</td><td>《安全管理测评汇总表》（<strong>素材3</strong>）</td></tr>
 
                                 </table>
 
                             </div>
 
-
-
-                            <p style="margin:16px 0 6px;"><strong>▍2. 两个实践任务一览</strong></p>
-
-                            <div class="table-container">
-
-                                <table class="info-table">
-
-                                    <tr><th style="width:72px;">任务</th><th style="width:180px;">任务名称</th><th>要做的事</th><th style="width:170px;">产出</th><th style="width:78px;">时长</th></tr>
-
-                                    <tr><td><strong>任务 1</strong></td><td>安全管理文档合规性核查</td><td>对照核查要求（<strong>素材4</strong>），逐份核查文档包（<strong>素材1</strong>）：是否具备、内容是否完整、审批 / 版本 / 评审是否齐备，把结论填进核查表（<strong>素材2</strong>）</td><td>《安全管理文档核查表》（素材2）</td><td>约 20 分钟</td></tr>
-
-                                    <tr><td><strong>任务 2</strong></td><td>安全管理综合测评与整改建议</td><td>汇总任务 1 发现的问题 → 按四类维度分类 → 提出<strong>具体可操作</strong>的整改建议与优先级，形成汇总表（<strong>素材3</strong>）</td><td>《安全管理测评汇总表》（素材3）</td><td>约 15 分钟</td></tr>
-
-                                </table>
-
-                            </div>
-
-                            <p style="font-size:0.88rem;color:#666;">⚠ 两个任务是一体的：任务 1 负责"找出问题"，任务 2 负责"把问题变成可执行的整改建议"，缺一不可。</p>
-
-                        </div>
-
-
-
-                        <!-- 【实验 2/3】怎么做 -->
-
-                        <div class="lab-box">
-
-                            <div class="lab-head">🎯 二、怎么做——五步走</div>
-
-                            <div class="lab-goal">按 <strong>取文档 → 审文档 → 记录发现 → 补充确认 → 汇总整改</strong> 五步走，全程对照 <strong>素材4</strong> 完成。</div>
-
-
-
-                            <p style="margin:14px 0 6px;"><strong>▍1. 四份实验素材——按这个顺序用</strong></p>
-
-                            <div style="background:#e8f5e9;border-left:4px solid #43a047;padding:10px 14px;border-radius:6px;margin-bottom:10px;">
-
-                                <p style="margin:0 0 8px;font-weight:700;color:#1b5e20;">📌 先看素材4 → 再查素材1 → 结果填素材2 → 汇总填素材3</p>
-
-                                <ol style="margin:0 0 0 20px;line-height:1.9;">
-
-                                    <li><strong>素材4 · 对照依据</strong>——先看清"应有制度有哪些、核查要点是什么"。</li>
-
-                                    <li><strong>素材1 · 被测对象</strong>——逐份翻看 5 份文档，找出缺陷（缺内容 / 太简略 / 无审批 / 无版本 / 无评审）。</li>
-
-                                    <li><strong>素材2 · 任务1 产出</strong>——把每份文档的核查结论填进去（含 1 行示例）。</li>
-
-                                    <li><strong>素材3 · 任务2 产出</strong>——汇总问题、写整改建议与优先级。</li>
-
-                                </ol>
-
-                            </div>
+                            <p style="font-size:0.9rem;color:#555;">素材顺序：<strong>先看素材4（依据）→ 再审素材1（对象）→ 结论填素材2 → 汇总填素材3</strong>。</p>
 
                             <p>
 
-                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材1：模拟制度文档包（XX公司）.docx" download title="下载《模拟制度文档包（XX公司）》">⬇ 素材1：模拟制度文档包（XX公司）· 被测对象</a>
+                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材1：模拟制度文档包（XX公司）.docx" download title="下载《模拟制度文档包（XX公司）》">⬇ 素材1：模拟制度文档包 · 被测对象</a>
 
-                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材2：实践任务——《安全管理文档核查表》（模板）.docx" download title="下载《安全管理文档核查表》（模板）">⬇ 素材2：安全管理文档核查表（模板）· 任务1 产出</a>
+                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材2：实践任务——《安全管理文档核查表》（模板）.docx" download title="下载《安全管理文档核查表》（模板）">⬇ 素材2：文档核查表（模板）· 任务1 产出</a>
 
-                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材3：实践任务——《安全管理测评汇总表》（模板）.docx" download title="下载《安全管理测评汇总表》（模板）">⬇ 素材3：安全管理测评汇总表（模板）· 任务2 产出</a>
+                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材3：实践任务——《安全管理测评汇总表》（模板）.docx" download title="下载《安全管理测评汇总表》（模板）">⬇ 素材3：测评汇总表（模板）· 任务2 产出</a>
 
-                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材4：安全管理要求对照摘录（等保2.0）.docx" download title="下载《安全管理要求对照摘录（等保2.0）》">⬇ 素材4：安全管理要求对照摘录 · 对照依据</a>
+                                <a class="table-dl" href="各类表格/5.1 安全管理文档核查/素材4：安全管理要求对照摘录（等保2.0）.docx" download title="下载《安全管理要求对照摘录（等保2.0）》">⬇ 素材4：管理要求对照摘录 · 依据</a>
 
                             </p>
 
-
-
-                            <p style="margin:16px 0 6px;"><strong>▍2. 五步任务清单</strong></p>
+                            <p style="margin:16px 0 6px;"><strong>▍二、怎么做——五步</strong></p>
 
                             <div class="table-container">
 
                                 <table class="info-table">
 
-                                    <tr><th style="width:80px;">步骤</th><th>具体要求</th><th style="width:190px;">产出 / 提示</th></tr>
+                                    <tr><th style="width:104px;">步骤</th><th>做什么</th></tr>
 
-                                    <tr><td><strong>① 取文档</strong></td><td>打开<strong>素材1</strong>，先看"文档交接单"，确认共 5 份文档</td><td>—</td></tr>
+                                    <tr><td><strong>① 取文档</strong></td><td>打开素材1，先看"文档交接单"，确认共 5 份文档</td></tr>
 
-                                    <tr><td><strong>② 审文档</strong></td><td>对照<strong>素材4</strong>，逐份审阅 5 份文档：是否具备、内容是否完整、有无审批 / 版本 / 评审</td><td>每份文档在素材2 中填一行</td></tr>
+                                    <tr><td><strong>② 审文档</strong></td><td>对照素材4，逐份看五点：是否具备 / 内容是否完整 / 有无审批 / 有无版本 / 有无评审</td></tr>
 
-                                    <tr><td><strong>③ 记录发现</strong></td><td>把结论填进<strong>素材2</strong>：是否具备 + 审批 + 版本 + 完善度 + 问题备注（问题要写"缺哪一章 / 少了什么步骤"）</td><td>素材2 填完（任务 1 完成）</td></tr>
+                                    <tr><td><strong>③ 记录发现</strong></td><td>结论填进素材2；问题要写清"<strong>缺哪一章、少了什么步骤</strong>"</td></tr>
 
-                                    <tr><td><strong>④ 补充确认</strong></td><td>对拿不准的项，回看<strong>素材4</strong>的判定要点再定；确认没有"无理由的不适用"</td><td>核查结论可靠</td></tr>
+                                    <tr><td><strong>④ 补充确认</strong></td><td>拿不准的回看素材4 的判定要点再定；不要出现"无理由的不适用"</td></tr>
 
-                                    <tr><td><strong>⑤ 汇总整改</strong></td><td>把问题按四类维度（安全策略 / 管理制度 / 制定和发布 / 评审和修订）分类，填进<strong>素材3</strong>，给出可操作整改建议与优先级</td><td>素材3 填完（任务 2 完成）</td></tr>
+                                    <tr><td><strong>⑤ 汇总整改</strong></td><td>问题按四类维度分类填素材3；整改建议写成"<strong>做什么 + 谁做 + 何时完成</strong>"，并标优先级（高 / 中 / 低）</td></tr>
 
                                 </table>
 
                             </div>
 
-
-
-                            <p style="margin:16px 0 6px;"><strong>▍3. 一个简单示例（照这个思路填）</strong></p>
-
-                            <p style="font-size:0.9rem;color:#555;margin:0 0 8px;">以文档包里的《人员安全管理制度》为例，任务 1 核查后这样填（<strong>素材2</strong>）：</p>
+                            <p style="margin:14px 0 6px;"><strong>示例（照这个写）：</strong></p>
 
                             <div class="table-container">
 
                                 <table class="info-table">
 
-                                    <tr><th style="width:150px;">应有制度文件</th><th style="width:72px;">是否具备</th><th style="width:160px;">是否有审批</th><th style="width:150px;">是否版本控制</th><th style="width:80px;">内容完善</th><th>问题备注</th></tr>
+                                    <tr><th style="width:110px;">环节</th><th>示例</th></tr>
 
-                                    <tr><td>《人员安全管理制度》</td><td>是</td><td>是（张XX，2024-09-01）</td><td>是（V1.0，无修订记录）</td><td>部分</td><td>内容不完整，缺少"人员离岗"章节，未规定离岗时账号回收、权限移交等要求</td></tr>
+                                    <tr><td>核查表<br>（素材2）</td><td>《人员安全管理制度》｜具备：是｜审批：是（2024-09-01）｜版本：V1.0，无修订记录｜内容完善：部分｜问题备注：缺少"人员离岗"章节，未规定账号回收、权限移交</td></tr>
 
-                                </table>
-
-                            </div>
-
-                            <p style="font-size:0.9rem;color:#555;margin:12px 0 8px;">再把这条发现写成任务 2 的整改建议（<strong>素材3</strong>）：</p>
-
-                            <div class="table-container">
-
-                                <table class="info-table">
-
-                                    <tr><th style="width:90px;">测评维度</th><th style="width:220px;">问题描述</th><th style="width:210px;">不符合项标准依据</th><th>整改建议</th><th style="width:64px;">优先级</th></tr>
-
-                                    <tr><td>管理制度</td><td>《人员安全管理制度》缺少"人员离岗"章节</td><td>GB/T 22239-2019 管理要求 · 安全管理人员（人员离岗）</td><td>由人事部补充"人员离岗管理"章节，明确离岗审批、账号回收、权限移交、资产归还，2026-04-30 前完成发布</td><td>高</td></tr>
+                                    <tr><td>汇总表<br>（素材3）</td><td>维度：管理制度｜问题：《人员安全管理制度》缺"人员离岗"章节｜依据：GB/T 22239-2019 安全管理人员（人员离岗）｜整改建议：由人事部补充"人员离岗管理"章节，明确离岗审批、账号回收、权限移交、资产归还，2026-04-30 前完成发布｜优先级：高</td></tr>
 
                                 </table>
 
                             </div>
 
-                            <p style="font-size:0.88rem;color:#666;">要点：问题描述要<strong>具体</strong>（缺哪一章），整改建议要<strong>可操作</strong>（做什么 + 谁来做 + 何时完成），不能写"加强管理"这类空话。</p>
+                            <p style="font-size:0.9rem;color:#b71c1c;">要点：问题要写<strong>具体</strong>（缺哪一章），整改建议要<strong>能落地</strong>（做什么 + 谁做 + 何时完成 + 优先级），不写"加强管理"这类空话。</p>
 
-                        </div>
-
-
-
-                        <!-- 【实验 3/3】怎么交 -->
-
-                        <div class="lab-box">
-
-                            <div class="lab-head">📑 三、怎么交——成果与提交要求</div>
+                            <p style="margin:16px 0 6px;"><strong>▍三、交什么</strong></p>
 
                             <div class="lab-report-req" style="background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
 
@@ -6682,9 +6602,9 @@ return</div>
 
                                 <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
 
-                                    <li><strong>《安全管理文档核查表》（素材2）</strong>——5 份文档全部核查、逐行填写完整（是否具备 + 审批 + 版本 + 完善度 + 问题备注）；按 <strong>班级 + 学号 + 姓名 + 5.1 实践任务1</strong> 命名</li>
+                                    <li><strong>《安全管理文档核查表》（素材2）</strong>——5 份文档逐行填完（是否具备 + 审批 + 版本 + 完善度 + 问题备注）；命名 <code>班级-学号-姓名-5.1任务1</code></li>
 
-                                    <li><strong>《安全管理测评汇总表》（素材3）</strong>——汇总问题、按四类维度分类、给出可操作整改建议与优先级；按 <strong>班级 + 学号 + 姓名 + 5.1 实践任务2</strong> 命名</li>
+                                    <li><strong>《安全管理测评汇总表》（素材3）</strong>——问题按四类维度分类 + 整改建议与优先级；命名 <code>班级-学号-姓名-5.1任务2</code></li>
 
                                 </ol>
 
@@ -6696,7 +6616,7 @@ return</div>
 
                                 <div class="lab-check-title">📋 提交前自查</div>
 
-                                ☐ 5 份文档都在素材2 里有对应行　☐ 每行都填了"是否具备 / 审批 / 版本 / 完善度 / 问题备注"　☐ 问题备注写的是"缺什么"而不是只写"不合格"　☐ 素材3 的问题按四类维度分了类　☐ 整改建议有"做什么 + 谁做 + 何时完成"　☐ 优先级标了（高 / 中 / 低）　☐ 没有"无理由的不适用"
+                                ☐ 5 份文档在素材2 里都有对应行　☐ 每条问题写清了"缺什么"　☐ 素材3 的问题按四类维度分了类　☐ 整改建议有"做什么 + 谁做 + 何时完成"　☐ 标了优先级、两份表命名规范
 
                             </div>
 
@@ -6704,6 +6624,150 @@ return</div>
 
 
 
+                        <!-- ==================== 🎤 实验 5.2：模拟人员访谈（对话智能体） ==================== -->
+
+                        <style>
+                        /* ===== 5.2 模拟人员访谈 · 对话智能体（局部样式，全部以 .rpa 作用域） ===== */
+                        .rpa{border:1px solid #cfd8e3;border-radius:12px;background:#fff;overflow:hidden;margin:10px 0 4px;}
+                        .rpa-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:10px 14px;background:#eaf2fb;border-bottom:1px solid #cfd8e3;}
+                        .rpa-title{font-weight:700;color:#0d47a1;font-size:0.98rem;}
+                        .rpa-note{font-size:0.84rem;color:#546e7a;margin-left:auto;}
+                        .rpa-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:12px 14px 4px;}
+                        .rpa-role{text-align:left;background:#fbfdff;border:1.5px solid #cfd8e3;border-radius:10px;padding:10px 12px;cursor:pointer;font-family:inherit;line-height:1.5;transition:.15s;}
+                        .rpa-role:hover{border-color:#64b5f6;background:#f4faff;}
+                        .rpa-role.active{border-color:#1e88e5;background:#e8f3fe;box-shadow:0 0 0 2px rgba(30,136,229,.12) inset;}
+                        .rpa-role-ico{display:block;font-size:1.1rem;}
+                        .rpa-role-name{display:block;font-weight:700;color:#1a237e;font-size:0.92rem;margin-top:2px;}
+                        .rpa-role-desc{display:block;font-size:0.78rem;color:#607d8b;}
+                        .rpa-chat{height:300px;overflow-y:auto;padding:14px;background:#f7f9fc;border-top:1px solid #e3eaf3;display:flex;flex-direction:column;gap:10px;}
+                        .rpa-empty{color:#90a4ae;font-size:0.9rem;text-align:center;margin:auto 0;}
+                        .rpa-msg{max-width:84%;border-radius:10px;padding:8px 12px;font-size:0.9rem;line-height:1.7;white-space:pre-wrap;word-break:break-word;}
+                        .rpa-msg--me{align-self:flex-end;background:#d9ecff;color:#0d3c68;}
+                        .rpa-msg--role{align-self:flex-start;background:#fff;border:1px solid #dde5ee;color:#263238;}
+                        .rpa-msg--sys{align-self:center;background:#fff8e1;border:1px dashed #ffb74d;color:#8d6e00;font-size:0.84rem;max-width:96%;}
+                        .rpa-who{display:block;font-size:0.78rem;color:#78909c;margin-bottom:3px;}
+                        .rpa-chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px 0;}
+                        .rpa-chip{background:#fff;border:1px solid #b0bec5;border-radius:14px;padding:4px 10px;font-size:0.82rem;color:#37474f;cursor:pointer;font-family:inherit;}
+                        .rpa-chip:hover{border-color:#1e88e5;color:#0d47a1;background:#f4faff;}
+                        .rpa-inputbar{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;}
+                        .rpa-inputbar input{flex:1 1 260px;min-width:180px;padding:9px 12px;border:1.5px solid #cfd8e3;border-radius:8px;font-size:0.9rem;font-family:inherit;}
+                        .rpa-inputbar input:focus{outline:none;border-color:#1e88e5;}
+                        .rpa-send{background:#1e88e5;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:0.9rem;cursor:pointer;font-family:inherit;font-weight:700;}
+                        .rpa-send:hover{background:#1565c0;}
+                        .rpa-send:disabled{background:#b0bec5;cursor:not-allowed;}
+                        .rpa-ghost{background:#fff;border:1.5px solid #b0bec5;border-radius:8px;padding:9px 14px;font-size:0.88rem;color:#455a64;cursor:pointer;font-family:inherit;}
+                        .rpa-ghost:hover{border-color:#1e88e5;color:#0d47a1;}
+                        .rpa-foot{padding:0 14px 12px;font-size:0.82rem;color:#607d8b;line-height:1.6;}
+                        @media (max-width:720px){.rpa-roles{grid-template-columns:1fr;}.rpa-chat{height:260px;}}
+                        </style>
+
+                        <div class="lab-box">
+
+                            <div class="lab-head">🎤 实验 5.2：模拟人员访谈——用对话智能体做一次真实访谈</div>
+
+                            <div class="lab-goal"><strong>本次上机任务：</strong>技术测评测的是"设备"，安全管理测评测的是"人"——文档核查只能证明"制度写没写"，<strong>访谈才能验证"到底做没做"</strong>。本实验用页面内的<strong>对话智能体</strong>模拟被访谈人：<strong>你选角色 → 你提问 → 智能体按角色特点自动应答 → 你把回答整理进《人员访谈记录表》</strong>，课内完成、提交学习通。</div>
+
+                            <p style="margin:14px 0 6px;"><strong>▍1. 做什么——三步</strong></p>
+
+                            <div class="table-container">
+
+                                <table class="info-table">
+
+                                    <tr><th style="width:74px;">步骤</th><th>具体要求</th><th style="width:180px;">产出 / 提示</th></tr>
+
+                                    <tr><td><strong>① 选角色</strong></td><td>在下方智能体里选一位被访谈人：<strong>系统管理员（张三）</strong> / <strong>安全主管（李四）</strong> / <strong>普通员工（王五）</strong>。3~4 人一组时可分工：测评师（提问）、记录员（记录）、被访谈人（对照智能体的回答理解角色）</td><td>确定访谈对象</td></tr>
+
+                                    <tr><td><strong>② 提问</strong></td><td>你负责输入问题——先问岗位职责，再按<strong>访谈提纲</strong>追问执行细节：多问"<strong>如何 / 多久 / 最近一次 / 谁负责</strong>"，少问"是否"。对方第一遍往往给的是"制度说法"，<strong>同一个话题追问一次，才会露出真实情况</strong></td><td>对话记录（可复制导出）</td></tr>
+
+                                    <tr><td><strong>③ 整理</strong></td><td>把回答里的事实要点、暴露出来的问题、下一步要核查什么，整理填写<strong>《人员访谈记录表》</strong>（素材1）——记录原话要点，不要只写"符合 / 不符合"</td><td>《人员访谈记录表》（必交）</td></tr>
+
+                                </table>
+
+                            </div>
+
+                            <p style="margin:16px 0 6px;"><strong>▍2. 对话智能体——在这里做访谈</strong></p>
+
+                            <div class="rpa" id="rpa">
+
+                                <div class="rpa-head">
+
+                                    <span class="rpa-title">🎤 模拟人员访谈 · 对话智能体</span>
+
+                                    <span class="rpa-note" id="rpaNote">先选一位被访谈人，再开始提问</span>
+
+                                </div>
+
+                                <div class="rpa-roles" id="rpaRoles">
+
+                                    <button type="button" class="rpa-role" data-role="sysadmin"><span class="rpa-role-ico">🖥️</span><span class="rpa-role-name">系统管理员 · 张三</span><span class="rpa-role-desc">管 3 台服务器、2 个数据库的日常运维</span></button>
+
+                                    <button type="button" class="rpa-role" data-role="secmgr"><span class="rpa-role-ico">🛡️</span><span class="rpa-role-name">安全主管 · 李四</span><span class="rpa-role-desc">负责制定安全管理制度、组织安全培训</span></button>
+
+                                    <button type="button" class="rpa-role" data-role="staff"><span class="rpa-role-ico">👤</span><span class="rpa-role-name">普通员工 · 王五</span><span class="rpa-role-desc">业务部门员工，日常用 OA 系统办公</span></button>
+
+                                </div>
+
+                                <div class="rpa-chat" id="rpaChat">
+
+                                    <div class="rpa-empty" id="rpaEmpty">👆 先选一位被访谈人，然后在下方输入你的问题开始访谈。</div>
+
+                                </div>
+
+                                <div class="rpa-chips" id="rpaChips"></div>
+
+                                <div class="rpa-inputbar">
+
+                                    <input id="rpaInput" type="text" placeholder="输入你的问题，例如：密码多久更换一次？" autocomplete="off">
+
+                                    <button type="button" class="rpa-send" id="rpaSend">发送</button>
+
+                                    <button type="button" class="rpa-ghost" id="rpaExport" title="把本次访谈的问答导出为 .txt 文件（可直接整理进《人员访谈记录表》）">⬇ 导出对话</button>
+
+                                    <button type="button" class="rpa-ghost" id="rpaCopy" title="把问答复制到剪贴板（粘贴进 Word / 记录表）">📋 复制</button>
+
+                                    <button type="button" class="rpa-ghost" id="rpaReset" title="清空当前对话，换一位被访谈人重新开始">↺ 重开</button>
+
+                                </div>
+
+                                <div class="rpa-foot">💡 <strong>追问技巧：</strong>回答里出现"大概、可能、基本上""这个要问我们领导""我们都是 100% 按制度执行"这类信号时，继续追：<strong>"最近一次是什么时候？""这件事谁负责？""有没有出现过例外？"</strong>。同一个话题问第二遍，通常能问出真实执行情况。<br>📄 访谈结束后点 <strong>⬇ 导出对话</strong>，把问答存成文件（也可 <strong>📋 复制</strong> 后粘贴进 Word），再整理进《人员访谈记录表》。</div>
+
+                            </div>
+
+                            <p style="margin:16px 0 6px;"><strong>▍3. 实验素材下载</strong></p>
+
+                            <p>
+
+                                <a class="table-dl" href="各类表格/5.2 模拟人员访谈/素材1：实践任务——《人员访谈记录表》（模板）.docx" download title="下载《人员访谈记录表》（模板）">⬇ 素材1：人员访谈记录表（模板）· 必交</a>
+
+                                <a class="table-dl" href="各类表格/5.2 模拟人员访谈/素材2：访谈提纲（模板）.docx" download title="下载《访谈提纲》（模板）">⬇ 素材2：访谈提纲（模板）· 提问参考</a>
+
+                                <a class="table-dl" href="PPT/5.2 模拟人员访谈.pdf" target="_blank" rel="noopener" title="打开《5.2 模拟人员访谈》课件 PDF">📄 5.2 模拟人员访谈（PPT 课件）</a>
+
+                            </p>
+
+                            <div class="lab-report-req" style="margin-top:14px;background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+
+                                <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（1 份表）</div>
+
+                                <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+
+                                    <li><strong>《人员访谈记录表》（素材1）</strong>——至少完成 <strong>1 位角色</strong>的访谈记录（选安全主管或系统管理员效果最好）：受访人信息 + 访谈要点（≥3 条，写清原话要点）+ 初步判断与发现的问题（≥2 条）+ 下一步核查建议 + 签名日期；按 <strong>班级-学号-姓名-5.2实验</strong> 命名</li>
+
+                                </ol>
+
+                                <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 5.2 → 作业区（<strong>课内完成并提交</strong>）</p>
+
+                            </div>
+
+                            <div class="lab-check" style="margin-top:14px;">
+
+                                <div class="lab-check-title">📋 提交前自查</div>
+
+                                ☐ 至少完整访谈了 1 位角色　☐ 每个话题都追问过一次（拿到的是真实执行情况，不是"制度说法"）　☐ 访谈要点 ≥3 条、写的是事实与关键数字（如"3 个离职账号未清理"）　☐ 发现的问题 ≥2 条　☐ 下一步核查建议落到具体动作（查什么记录、找谁核实）　☐ 填了签名与日期
+
+                            </div>
+
+                        </div>
 
 
                 </div>
@@ -6718,7 +6782,15 @@ return</div>
 
                     <div class="highlight">
 
-                        <p><strong>问题导入：</strong>现场测评结束了，一大摞核查记录、访谈记录、扫描报告摆在面前——客户的第一个问题一定是：<strong>"结论呢？我们系统到底过没过？"</strong>本任务学习把零散证据变成一份规范、有说服力的《等保测评报告》。</p>
+                        <p><strong>问题导入：</strong>现场测评结束了，一大摞核查记录、访谈记录、扫描报告摆在面前——客户的第一个问题一定是：<strong>"结论呢？我们系统到底过没过？"</strong>本任务把零散的测评证据一步步"加工"成一份规范、有说服力的《等保测评报告》。</p>
+
+                        <p style="margin-top:12px;"><strong>📑 本任务三份课件（PDF，可在线浏览、可下载）：</strong></p>
+
+                        <p style="margin-top:6px;line-height:2.2;">
+                            <a class="table-dl" href="PPT/6.1 单项测评结论判定.pdf" target="_blank" rel="noopener" title="打开《6.1 单项测评结论判定》课件 PDF">📄 6.1 单项测评结论判定</a>
+                            <a class="table-dl" href="PPT/6.2 系统整体测评结论形成.pdf" target="_blank" rel="noopener" title="打开《6.2 系统整体测评结论形成》课件 PDF">📄 6.2 系统整体测评结论形成</a>
+                            <a class="table-dl" href="PPT/6.3 编制完整等保测评报告.pdf" target="_blank" rel="noopener" title="打开《6.3 编制完整等保测评报告》课件 PDF">📄 6.3 编制完整等保测评报告</a>
+                        </p>
 
                     </div>
 
@@ -6728,209 +6800,407 @@ return</div>
 
 
 
+                    <!-- ---------- 知识模块 1 ---------- -->
+
                     <div class="concept-box">
 
-                        <div class="concept-title">🧮 6.1 单项测评结论判定</div>
+                        <div class="concept-title">🧭 一、从证据到报告——结论是"逐级加工"出来的</div>
 
-                        <p>每个测评指标都要给出一个结论，四种判定：</p>
+                        <p>测评结论不是拍脑袋写出来的，而是一条<strong>逐级加工</strong>的流水线，每一级都以上一级为输入：</p>
+
+                        <p style="text-align:center;font-weight:700;color:#1565c0;margin:10px 0;line-height:1.9;">现场测评证据 →<strong> 单项测评结果判定</strong> → 单元测评结果汇总 → 整体测评分析 → 风险分析与评价 → 等级测评结论（优 / 良 / 中 / 差）</p>
+
+                        <p>其中<strong>单项测评结果判定</strong>是整条链路的"第一粒扣子"——<strong>地基歪了，整栋楼都会歪</strong>。</p>
 
                         <div class="table-container">
 
                             <table class="info-table">
 
-                                <tr><th>结论</th><th>判定条件（通俗版）</th></tr>
+                                <tr><th>层级</th><th>判断对象</th><th>形成方法</th><th>一句话理解</th></tr>
 
-                                <tr><td><span class="badge badge-green">符合</span></td><td>要求全部做到，证据齐全</td></tr>
+                                <tr><td><strong>单项测评结论</strong></td><td>一个测评项 × 一个测评对象</td><td>用"<strong>优势证据</strong>"法判定（本任务重点）</td><td>原材料</td></tr>
 
-                                <tr><td><span class="badge badge-orange">部分符合</span></td><td>做了一部分，还有差距</td></tr>
+                                <tr><td><strong>单元测评结论</strong></td><td>多个测评对象 × 同一个测评单元</td><td>汇总单项结论：全部符合→符合；全部不符合→不符合；<strong>出现部分符合 → 判"部分符合"</strong>；全部不适用→不适用</td><td>半成品</td></tr>
 
-                                <tr><td><span class="badge badge-red">不符合</span></td><td>没做，或证据证明不达标</td></tr>
-
-                                <tr><td><span class="badge badge-blue">不适用</span></td><td>系统不涉及该项（需说明理由）</td></tr>
+                                <tr><td><strong>整体测评结论</strong></td><td>整个被测系统</td><td>从<strong>控制间 / 层面间 / 区域间</strong>综合分析，并结合风险影响</td><td>成品</td></tr>
 
                             </table>
 
                         </div>
 
+                        <p><strong>为什么要强调"统一方法"：</strong>同一份证据，两个测评师可能给出两个结论（见课件 6.1 的导入案例）。判定方法不统一，报告就谈不上客观、可比。所以"优势证据法"是全员必须遵守的<strong>统一规则</strong>，不是个人经验。</p>
+
                     </div>
 
 
+
+                    <!-- ---------- 知识模块 2 ---------- -->
 
                     <div class="concept-box">
 
-                        <div class="concept-title">📊 6.2 系统整体测评结论形成</div>
+                        <div class="concept-title">🧮 二、单项测评结论判定——四种结果 + 优势证据法</div>
 
-                        <p>汇总所有单项结论，综合分析形成<strong>系统整体结论</strong>（优/良/中/差）。要能识别"部分符合"项带来的<strong>安全风险</strong>，并在报告中如实反映。报告还需撰写<strong>具体可行的整改建议</strong>——不能只说"建议加强"，要说明<strong>怎么改、改成什么样</strong>。</p>
+                        <p>单项测评结论只有四个取值，每一个都必须<strong>有证据、有依据</strong>：</p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th>判定结果</th><th>含义</th><th>适用场景</th></tr>
+
+                                <tr><td><span class="badge badge-green">符合</span></td><td>测评证据表明<strong>所有</strong>要求内容与预期测评结果一致</td><td>系统完全满足标准要求</td></tr>
+
+                                <tr><td><span class="badge badge-orange">部分符合</span></td><td>测评证据表明<strong>部分</strong>要求内容与预期测评结果一致</td><td>部分满足，有差距但非完全缺失</td></tr>
+
+                                <tr><td><span class="badge badge-red">不符合</span></td><td>测评证据表明<strong>所有</strong>要求内容均与预期测评结果不一致</td><td>系统完全不满足标准要求</td></tr>
+
+                                <tr><td><span class="badge badge-blue">不适用</span></td><td>该测评项所对抗的威胁在系统中<strong>不存在</strong></td><td>系统不涉及该项技术或管理领域</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>四条判定原则（顺序不能乱）：</strong></p>
+
+                        <ol>
+
+                            <li><strong>先判断威胁是否存在</strong>——威胁不存在才可判"不适用"（例：系统无无线网络 → "无线接入控制"判不适用），理由必须写清楚，不能一句"系统没这要求"就了事。</li>
+
+                            <li><strong>逐项拆解要求内容</strong>——一个测评项往往含多个子项（如"身份鉴别"含 ①标识唯一 ②口令复杂度 ③定期更换），必须<strong>拆到每个子项分别比对</strong>，不能整体"大概看着行"。</li>
+
+                            <li><strong>使用"优势证据"法</strong>——从拿到的多个证据中挑出<strong>证明力最强</strong>的那一个，再与预期结果比较。</li>
+
+                            <li><strong>综合判定</strong>——所有要求都一致 → <strong>符合</strong>；都不一致 → <strong>不符合</strong>；其余 → <strong>部分符合</strong>。</li>
+
+                        </ol>
+
+                        <p><strong>优势证据法（本任务重点）：</strong>不同测评人员对"哪个证据更可信"的理解不同，选择的证据就不同，结论自然产生差异。必须统一按下表取证：</p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th>测评领域</th><th>优势证据层级（从高到低）</th><th>典型示例</th></tr>
+
+                                <tr><td>物理安全</td><td><strong>实地察看</strong> ＞ 文档审查 ＞ 访谈</td><td>机房温湿度：听管理员说"正常"（访谈）＜ 看温湿度记录（文档）＜ 现场看温湿度计（察看）</td></tr>
+
+                                <tr><td>技术安全</td><td><strong>工具测试</strong> ＞ 配置检查 ＞ 访谈</td><td>"管理员说配置了"不算数——要看配置文件、要跑工具验证</td></tr>
+
+                                <tr><td>管理安全</td><td>结合实际分析确定</td><td>既看制度"有没有"，更看执行记录"做没做"——<strong>有制度无记录 → 部分符合</strong></td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>判定四步流程：</strong>判断威胁是否存在 → 拆解要求内容 → 选出优势证据 → 对照预期作出判定，并在记录中写明<strong>依据条款与判定理由</strong>。</p>
+
+                        <p><strong>四个高频错误（务必避开）：</strong>① "大部分满足"就判<strong>符合</strong>（错——任何一项要求不满足就不能判符合）；② "有一点不足"就判<strong>不符合</strong>（错——应为部分符合）；③ "不适用"理由不充分（必须说明威胁不存在）；④ <strong>过度依赖访谈证据</strong>（"管理员说配置了"却未核实 = 无效证据）。</p>
 
                     </div>
 
 
+
+                    <!-- ---------- 知识模块 3 ---------- -->
 
                     <div class="concept-box">
 
-                        <div class="concept-title">📄 6.3 编制完整等保测评报告</div>
+                        <div class="concept-title">📊 三、系统整体测评结论——不是数票，是看位置和权重</div>
 
-                        <p>依据2021版等级测评报告模板（整体结构+编写要点+逻辑关联性），把前序任务的记录表、方案、核查结果汇编成一份完整报告，并经过<strong>审核与修订流程</strong>。</p>
+                        <p><strong>核心认知：</strong>单项结论全是"符合"，系统也不一定安全。整体结论不仅要看"符合"项的<strong>数量</strong>，更要看"不符合 / 部分符合"项的<strong>位置与权重</strong>——例如"数据备份恢复""应急预案与事件处置"这类核心指标出问题，1 项就足以改变整体判定。</p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th>整体结论</th><th>判定标准</th><th>示例</th></tr>
+
+                                <tr><td><span class="badge badge-green">符合</span></td><td>所有指标均为"符合"</td><td>极少见，通常出现在已完成整改并复测通过的系统中</td></tr>
+
+                                <tr><td><span class="badge badge-orange">基本符合</span></td><td>存在"部分符合"或"不符合"项，但<strong>无重大安全隐患</strong></td><td>大部分指标符合，个别管理类指标有差距</td></tr>
+
+                                <tr><td><span class="badge badge-red">不符合</span></td><td>存在<strong>重大安全隐患</strong>（高危漏洞、核心指标不满足）</td><td>存在可被利用的高危漏洞、关键设备无冗余、未实现双因素认证</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>形成四步：</strong>① <strong>统计</strong>——数出符合 / 部分符合 / 不符合 / 不适用各多少项；② <strong>看分布</strong>——不符合项集中在哪个层面、哪个单元（技术还是管理）；③ <strong>评影响</strong>——哪些问题影响核心业务、哪些是致命缺陷；④ <strong>下判断</strong>——明确给出符合 / 基本符合 / 不符合其中之一，且必须与正文的风险描述一致。</p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th>❌ 常见错误</th><th>✅ 正确做法</th></tr>
+
+                                <tr><td>只数数量，不看位置："只有 4 项不符合，总体应该算基本符合"</td><td>看这 4 项是不是核心指标（如数据备份恢复、入侵防范等）</td></tr>
+
+                                <tr><td>忽视高风险项："只有 1 项不符合，应该问题不大"</td><td>关键项 1 项不符合，也可能直接导致整体结论为"不符合"</td></tr>
+
+                                <tr><td>结论与描述矛盾：正文说存在多项高危风险，结论却是"基本符合"</td><td>结论必须与风险分析结果一致</td></tr>
+
+                                <tr><td>结论过于模糊："系统安全状况尚可"</td><td>整体结论必须明确落到符合 / 基本符合 / 不符合三档之一</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>与等级测评结论的关系：</strong>整体结论之上还有等保测评结论的"优 / 良 / 中 / 差"四档——S = 技术得分 × 权重 + 管理得分 × 权重，各维度得分取决于该维度中"符合"项占全部测评项的比例。所有档位都建立在单项判定之上：<strong>单项判定的准确率，就是测评师职业操守的"及格线"。</strong></p>
 
                     </div>
 
 
 
-                    <div class="practice-box">
+                    <!-- ---------- 知识模块 4 ---------- -->
 
-                        <div class="concept-title">✏️ 实验任务（第7-8周，6学时）</div>
+                    <div class="concept-box">
 
-                        <p>①完成单项结论判定练习；②汇总分析形成整体结论草稿；③依据前序项目记录，<strong>独立编制一份完整等保测评报告</strong>（含单项结论、整体结论、整改建议）。</p>
+                        <div class="concept-title">📄 四、测评报告编制与整改建议——好报告长什么样</div>
 
-                        <p><strong>组织方式：</strong>个人独立完成；小组互评后教师终评。</p>
+                        <p>测评报告是测评工作的<strong>最终产品</strong>，也是测评师专业能力的<strong>最终证明</strong>：它是公安机关监督检查的法定依据，是客户管理层了解现状、作出整改决策的依据，也是客户技术团队开展整改的说明书。一份规范的测评报告由<strong>十要素</strong>构成：</p>
 
-                        <p><strong>评价标准：</strong>报告结构完整性（25%）+ 结论判定准确性（25%）+ 整改建议可行性（25%）+ 格式与表述规范性（25%）。</p>
+                        <div class="table-container">
 
-                        <p><strong>📌 期中提醒：</strong>第9周期中考核（闭卷上机），考查等保2.0标准体系、安全通用要求等前半程内容。</p>
+                            <table class="info-table">
+
+                                <tr><th style="width:40px;">序</th><th>组成部分</th><th>核心内容</th></tr>
+
+                                <tr><td>1</td><td>封面</td><td>报告名称、被测系统名称、委托单位、测评机构、报告日期、版本号</td></tr>
+
+                                <tr><td>2</td><td>目录</td><td>自动生成、页码准确</td></tr>
+
+                                <tr><td>3</td><td>项目概述</td><td>项目背景、测评目的、测评范围、测评依据</td></tr>
+
+                                <tr><td>4</td><td>测评对象与方法</td><td>测评对象清单、采用的测评方法（访谈 / 核查 / 测试）</td></tr>
+
+                                <tr><td>5</td><td>单项测评结论</td><td>逐项判定，含指标编号、名称、结果、问题描述</td></tr>
+
+                                <tr><td>6</td><td>系统整体测评结论</td><td>汇总分析、符合性判断、风险趋势</td></tr>
+
+                                <tr><td>7</td><td>安全问题汇总</td><td>按风险等级汇总所有问题</td></tr>
+
+                                <tr><td>8</td><td>整改建议</td><td>针对每个问题的具体整改措施</td></tr>
+
+                                <tr><td>9</td><td>附件</td><td>测评证据索引、记录表附件</td></tr>
+
+                                <tr><td>10</td><td>签章页</td><td>测评人员签名、机构盖章</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>格式规范要点：</strong>正文宋体 / 仿宋、标题黑体，字号统一；页码从正文开始编、封面不编号；表格统一边框、表头加粗、编号连续；章节编号层级清晰（1 → 1.1 → 1.1.1）；引用标准必须标注条款编号（如 8.1.4.1 a)）。</p>
+
+                        <p><strong>整改建议四要素：</strong>问题描述（具体、准确、可验证）→ 风险分析（说明安全影响）→ 整改建议（具体、可操作）→ 优先级（紧急 / 高 / 中 / 低）。</p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th>❌ 差建议</th><th>✅ 好建议</th></tr>
+
+                                <tr><td>"建议加强密码管理"</td><td>"经核查，Windows 服务器未启用口令复杂度策略。建议：在组策略中启用『密码必须符合复杂性要求』，最小长度设为 8 位，『强制密码历史』设为 5 个，10 个工作日内完成。"</td></tr>
+
+                                <tr><td>"建议及时更新补丁"</td><td>"系统存在 Apache Struts2 远程代码执行漏洞（CVE-2017-5638）。建议：升级 Struts2 至 2.5.22 或更高版本；部署 WAF 拦截恶意请求；7 天内完成。"</td></tr>
+
+                                <tr><td>"建议完善安全管理制度"</td><td>"安全管理制度中缺少《安全事件报告与处置管理制度》。建议：参照 GB/T 22239 8.1.10.12 要求，制定并发布该制度，明确事件报告流程和处置职责。"</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p><strong>整改优先级（四档）：</strong>🔴 <strong>紧急</strong> —— 存在可直接利用的高危漏洞、核心系统无防护，24–48 小时内处置；🟠 <strong>高</strong> —— 重要配置缺陷、中危漏洞、核心功能缺失，3–7 天内完成；🟡 <strong>中</strong> —— 一般配置问题、低危漏洞、管理文档缺失，7–30 天内完成；🟢 <strong>低</strong> —— 优化建议、非关键项，30–90 天内完成。</p>
 
                     </div>
 
 
+
+                    <!-- ---------- 实验模块：一个大实验，三个环节 ---------- -->
 
                     <div class="lab-box">
 
-                        <div class="lab-head">🧪 实验五：自动化核查——机器查一遍，人来定结论</div>
+                        <div class="lab-head">🧪 综合实验：从测评证据到一份完整的《等保测评报告》（三个环节）</div>
 
-                        <div class="lab-goal"><strong>实验目标：</strong>体验 JSecProbe 的自动化核查（机器自动检查设备配置），并理解人机分工：<strong>机器负责"跑命令、比基线"，人负责"看结果、下判定"</strong>——这正对应 6.1 单项测评结论判定的两种来源：自动化证据 + 人工证据。</div>
+                        <div class="lab-goal"><strong>本次实验只做一件事：把前六个任务攒下的测评记录，一路加工成一份可交付的等保测评报告。</strong>全程分<strong>三个环节</strong>，依次对应 6.1 / 6.2 / 6.3——<strong>上一环节的产出就是下一环节的输入</strong>：先逐条判定单项结论（环节一）→ 再汇总形成系统整体结论（环节二）→ 最后汇编成完整报告并撰写整改建议（环节三）。三个环节属于同一个实验，课内依次完成、依次提交。</div>
 
-                        <ol class="step-list">
+                        <p style="margin:16px 0 6px;"><strong style="font-size:1.02rem;">▍环节一　单项测评结论判定（对应 6.1）</strong></p>
 
-                            <li><strong>进入"自动化核查"功能</strong>，选择你的项目，勾选目标设备（如 Web 服务器 01）。</li>
+                        <div class="table-container">
 
-                            <li><strong>执行核查。</strong>点击"开始核查"，观察进度：系统正在对设备逐条执行检查命令并比对安全基线。</li>
+                            <table class="info-table">
 
-                            <li><strong>读结果：</strong>每项结果为通过 / 失败 / 警告，失败项即"疑似不符合"。注意用词——"疑似"：机器判失败只说明<strong>配置与基线不一致</strong>，可能真有风险，也可能是该系统业务上有正当理由，<strong>最终判定必须人工复核</strong>。</li>
+                                <tr><th style="width:96px;">项目</th><th>内容</th></tr>
 
-                            <li><strong>一键导入。</strong>将核查结果导入"现场核查"，自动关联到对应测评项——体会自动化如何把测评师从重复录入中解放出来。对"失败"项逐条复核后再确认最终结论。</li>
+                                <tr><td>输入</td><td><strong>素材1-1《单项判定练习卡》</strong>——10 个测评项的模拟测评证据。</td></tr>
 
-                        </ol>
+                                <tr><td>做什么</td><td>对每一个测评项依次完成五步：① 读证据；② 判断该测评项所对抗的<strong>威胁是否存在</strong>（决定是否"不适用"）；③ 把测评项<strong>拆解</strong>成几个要求子项；④ 从证据中挑出<strong>优势证据</strong>；⑤ 作出判定（符合 / 部分符合 / 不符合 / 不适用），并写明<strong>判定依据与理由</strong>。</td></tr>
 
-                        <div class="ai-tip-box">
+                                <tr><td>交什么</td><td>填好的<strong>《单项测评判定练习表》素材1-2</strong>——10 个场景全部填完，每个场景都要有"优势证据 + 判定结果 + 理由"。</td></tr>
 
-                            <div class="ai-tip-title">🤖 核查结果读不懂？让 AI 帮你"翻译"</div>
-
-                            <div class="prompt-tpl">
-
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-
-                                自动化核查中有一项失败，检查项为：【粘贴检查项名称】，设备输出为：【粘贴命令输出/截图内容】。请解释：①这个检查项在查什么；②输出说明设备现状是什么；③如果判定为不符合，问题描述怎么写；④有哪些"看起来失败但其实合理"的情况需要人工确认。
-
-                            </div>
+                            </table>
 
                         </div>
 
-                        <div class="lab-check">
+                        <p style="font-size:0.9rem;color:#b71c1c;background:#ffebee;border-left:4px solid #e53935;padding:8px 12px;border-radius:6px;">⚠️ <strong>三个自问 + 三条不要：</strong>问自己——这个测评项对抗的威胁存在吗？这个测评项有几个要求内容？哪个证据最可信？　不要因为"大部分满足"就判符合；不要因为"有一点不足"就判不符合；管理安全不能只看文档"有没有"，要结合实际情况。</p>
 
-                            <div class="lab-check-title">📋 实验记录自查</div>
+                        <p style="margin:16px 0 6px;"><strong>✅ 示例（照这个写——只用素材1-1 的场景1、场景2 做示范，其余 8 项自己完成）：</strong></p>
 
-                            ☐ 至少对 1 台设备执行了核查　☐ 能读懂结果报告并通过/失败含义　☐ 结果已关联测评项　☐ 对至少 1 个失败项做了人工复核
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th style="width:52px;">场景</th><th style="width:92px;">测评项编号</th><th style="width:88px;">是否适用</th><th>优势证据</th><th style="width:140px;">要求内容拆分</th><th style="width:72px;">判定结果</th><th>判定依据（简要说明）</th></tr>
+
+                                <tr><td>1</td><td>8.1.4.1 a)</td><td>适用<br><span style="color:#777;font-size:0.8rem;">系统确实存在登录账户</span></td><td>核查 /etc/login.defs：PASS_MIN_LEN=8；核查 /etc/pam.d/system-auth：已启用 pam_cracklib.so（difok=3）<br><span style="color:#777;font-size:0.8rem;">（配置核查 &gt; 访谈口述，取能复现的那条）</span></td><td>①唯一性<br>②复杂度<br>③定期更换</td><td><strong>部分符合</strong></td><td>②复杂度满足（访谈与配置一致）；③定期更换<strong>不</strong>满足——未配置 PASS_MAX_DAYS，密码可以长期不换；①唯一性由账户名唯一机制默认满足。三个要求里有一项没落实 → 只能判“部分符合”，<strong>不能因为“大部分满足”就判符合</strong>。</td></tr>
+
+                                <tr><td>2<br><span style="color:#777;font-size:0.8rem;">对照</span></td><td>8.1.4.1 b)</td><td>适用</td><td><strong>测试</strong>：连续 5 次错误登录后账户被锁定 30 分钟（测试级证据最强）；配置一致：pam_tally2 deny=5、超时 300 秒<br><span style="color:#777;font-size:0.8rem;">（测试 + 配置 + 访谈三方一致）</span></td><td>①结束会话<br>②限制次数<br>③超时退出</td><td><strong>符合</strong></td><td>三项要求全部落实，且测试、配置、访谈三方一致 → 判“符合”。<strong>和场景1 对比</strong>：这次没有缺项，所以不判“部分符合”。</td></tr>
+
+                            </table>
 
                         </div>
+
+                        <p style="font-size:0.9rem;color:#b71c1c;"><strong>两个栏位怎么填：</strong>① <strong>是否适用</strong>——只有当系统确实<strong>没有这个对象或威胁</strong>时才填“不适用”（例：系统根本没有无线设备，SSID 相关项才可不适用）；素材里既然已经出现了这个对象，就照常判定。② <strong>优势证据</strong>——可信度排序：<strong>测试/实测 &gt; 配置核查 &gt; 文档审查 &gt; 访谈口述</strong>；几条证据互相冲突时，取能复现的那条作为优势证据，并把冲突写进判定依据。</p>
+
+                        <p style="margin:8px 0 0;font-size:0.92rem;"><strong>素材下载：</strong><a class="table-dl" href="各类表格/6.1 单项测评结论判定/素材1-1：单项判定练习卡（10个场景）.docx" download title="下载《单项判定练习卡（10 个场景）》">⬇ 素材1-1：单项判定练习卡（输入）</a><a class="table-dl" href="各类表格/6.1 单项测评结论判定/素材1-2：单项测评判定练习表.docx" download title="下载《单项测评判定练习表》">⬇ 素材1-2：单项测评判定练习表（必交）</a><a class="table-dl" href="各类表格/6.1 单项测评结论判定/素材1-3：单项→单元→整体结论关系示意图.docx" download title="下载《单项→单元→整体结论关系示意图》">⬇ 素材1-3：单项→单元→整体结论关系示意图</a><a class="table-dl" href="各类表格/6.1 单项测评结论判定/素材1-4：教师演示用——快速判定参考卡.docx" download title="下载《快速判定参考卡》">⬇ 素材1-4：快速判定参考卡</a></p>
+
+
+
+                        <p style="margin:22px 0 6px;"><strong style="font-size:1.02rem;">▍环节二　汇总分析，形成系统整体测评结论（对应 6.2）</strong></p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th style="width:96px;">项目</th><th>内容</th></tr>
+
+                                <tr><td>输入</td><td><strong>素材2-1《单项测评结论清单》</strong>——一份系统的全部单项结论（已按层面分类），另附<strong>素材2-4《高风险项快速判定卡》</strong>、<strong>素材2-3《整体结论参考模板》</strong>（写结论时套用的范文）。</td></tr>
+
+                                <tr><td>做什么</td><td>① <strong>统计</strong>：数出符合 / 部分符合 / 不符合 / 不适用各多少项<strong>及其占比</strong>（占比 = 该项数量 ÷ 总指标数 × 100%），逐行填进汇总统计表；② <strong>看分布</strong>：不符合项集中在哪个层面（技术还是管理）；③ <strong>评影响</strong>：对照高风险项快速判定卡挑出核心指标问题，说明它带来的安全影响；④ <strong>下判断</strong>：给出整体结论（符合 / 基本符合 / 不符合），并写出 3–5 句判断依据。</td></tr>
+
+                                <tr><td>交什么</td><td>填好的<strong>《整体结论判断表》</strong>——含统计汇总表 + 整体结论 + 判断依据。</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p style="margin:16px 0 6px;"><strong>✅ 示例（照这个写——把素材2-1 的结论数一遍，填成下面这张判断表）：</strong></p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th style="width:140px;">分析维度</th><th>示例填法（数据来自 素材2-1，共 21 项）</th></tr>
+
+                                <tr><td><strong>一、汇总统计</strong></td><td></td></tr>
+
+                                <tr><td>总指标数</td><td>21</td></tr>
+
+                                <tr><td>符合</td><td>数量：13　　占比：61.9%</td></tr>
+
+                                <tr><td>部分符合</td><td>数量：5　　占比：23.8%</td></tr>
+
+                                <tr><td>不符合</td><td>数量：3　　占比：14.3%</td></tr>
+
+                                <tr><td>不适用</td><td>数量：0　　占比：0%</td></tr>
+
+                                <tr><td><strong>二、风险趋势判断</strong></td><td></td></tr>
+
+                                <tr><td>高风险项清单</td><td>1. 安全区域边界——入侵防范（不符合，未部署入侵检测系统）<br>2. 安全计算环境——数据备份恢复（不符合，备份恢复能力不满足）<br>3. 安全管理——安全建设管理（不符合，建设过程缺少安全管理制度约束）</td></tr>
+
+                                <tr><td>风险集中领域</td><td>3 项“不符合”全部为高风险，横跨技术（区域边界、计算环境）与管理（安全建设管理）两条线；技术问题集中在<strong>区域边界和计算环境</strong>，管理层面 5 项里有 3 项未达“符合”。另要注意：“部分符合”里也藏着高风险项（安全计算环境——入侵防范）。</td></tr>
+
+                                <tr><td>整体风险评估</td><td>存在可以被直接利用的防护缺口（边界没有入侵检测、高危漏洞未修复），备份恢复能力也不满足，一旦发生入侵或数据损坏将难以快速恢复；但核心业务功能本身未被攻破，属于“有明确短板、尚未失控”。</td></tr>
+
+                                <tr><td><strong>三、最终结论</strong></td><td></td></tr>
+
+                                <tr><td>整体结论类型</td><td>□ 符合　　<strong>☑ 基本符合</strong>　　□ 不符合</td></tr>
+
+                                <tr><td>理由简述</td><td>本次共测评 21 项指标，符合 13 项（61.9%）、部分符合 5 项、不符合 3 项、不适用 0 项。存在 3 项高风险“不符合”，且集中在入侵防范、数据备份恢复等关键防护环节，尚未达到“符合”；但主要安全制度与技术措施均已建立，未出现核心业务被攻破的情形。综合判定：<strong>XX市政务信息服务平台基本符合网络安全等级保护第三级要求</strong>，建议尽快完成高风险项整改。</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p style="font-size:0.9rem;color:#b71c1c;"><strong>三个提醒：</strong>① 判断表里<strong>只有总数行、没有“按层面”的行</strong>，所以第一步只数“总数 + 占比”，占比 = 该项数量 ÷ 21 × 100%，保留一位小数（13÷21＝61.9%）；层面分布写在“风险集中领域”里。② 判断表要写“XX系统基本符合第X级”，但素材2-1 里<strong>没有系统名和等级</strong>——它们在 <strong>素材3-3《模拟系统基本信息》</strong>：XX市政务信息服务平台、第三级（S3A3）。③ 结论要凑齐<strong>有数、有位置、有影响</strong>三件套：总数与占比 + 问题集中在哪个层面 + 这些缺口会造成什么后果。</p>
+
+                        <p style="margin:8px 0 0;font-size:0.92rem;"><strong>素材下载：</strong><a class="table-dl" href="各类表格/6.2 系统整体测评结论形成/素材2-1：单项测评结论清单（用于实践任务1）.docx" download title="下载《单项测评结论清单》">⬇ 素材2-1：单项测评结论清单（输入）</a><a class="table-dl" href="各类表格/6.2 系统整体测评结论形成/素材2-2：整体结论判断表.docx" download title="下载《整体结论判断表》">⬇ 素材2-2：整体结论判断表（必交）</a><a class="table-dl" href="各类表格/6.2 系统整体测评结论形成/素材2-3：整体结论参考模板.docx" download title="下载《整体结论参考模板》">⬇ 素材2-3：整体结论参考模板</a><a class="table-dl" href="各类表格/6.2 系统整体测评结论形成/素材2-4：高风险项快速判定卡.docx" download title="下载《高风险项快速判定卡》">⬇ 素材2-4：高风险项快速判定卡</a></p>
+
+
+
+                        <p style="margin:22px 0 6px;"><strong style="font-size:1.02rem;">▍环节三　汇编完整测评报告，撰写整改建议（对应 6.3）</strong></p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th style="width:96px;">项目</th><th>内容</th></tr>
+
+                                <tr><td>输入</td><td><strong>素材3-1《测评报告模板（结构框架）》</strong> + <strong>素材3-2《前序项目测评记录表（模拟数据）》</strong> + <strong>素材3-3《模拟系统基本信息》</strong> + 环节一、环节二的产出。</td></tr>
+
+                                <tr><td>做什么</td><td>按模板十要素把报告"搭"起来，再逐节填实：① 填封面（项目名称、日期、版本号）；② 写项目概述（背景、目的、范围、依据）；③ 填测评对象与方法；④ 以 <strong>素材3-2《前序项目测评记录表》</strong>为数据源，逐条填写"单项测评结论"，每条判定注明依据条款（环节一的 10 个场景是判定方法的练习，不直接作为本报告的数据源）；⑤ 把<strong>环节二的整体结论</strong>写进"系统整体测评结论"；⑥ 汇总安全问题并按风险等级排序；⑦ 逐条撰写整改建议（问题 → 风险 → 建议 → 优先级，具体到"做什么、做到什么程度"）；⑧ 生成目录、附签章页，对照自查清单核查格式。</td></tr>
+
+                                <tr><td>交什么</td><td>一份<strong>完整《等保测评报告》</strong>（.docx，按模板编制，含单项结论、整体结论、问题汇总与整改建议）。</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p style="margin:16px 0 6px;"><strong>✅ 示例（照这个写——先看封面怎么填，再看“记录表里的一行”怎样变成报告里的三处内容）：</strong></p>
+
+                        <div class="table-container">
+
+                            <table class="info-table">
+
+                                <tr><th style="width:140px;">报告位置</th><th>示例（数据来自 素材3-2、素材3-3）</th></tr>
+
+                                <tr><td><strong>封面</strong></td><td>报告名称：《XX市政务信息服务平台网络安全等级保护测评报告》｜被测系统：XX市政务信息服务平台｜安全保护等级：第三级（S3A3）｜委托单位：XX市政务服务管理局｜测评机构：XX信息安全测评中心（加盖公章）｜报告日期：2026 年 9 月｜版本号：V1.0<br><span style="color:#777;font-size:0.8rem;">（这 7 项全部来自 素材3-3《模拟系统基本信息》，照抄即可，不要自己编单位名）</span></td></tr>
+
+                                <tr><td><strong>第三章<br>单项测评结论</strong><br><span style="color:#777;font-size:0.8rem;">（3.4 安全计算环境）</span></td><td>记录表原文（素材3-2 表4）：<code>8.1.4.1 d) 身份鉴别｜❌ 不符合｜无双因素认证</code><br>写成报告：<strong>8.1.4.1 d) 身份鉴别——不符合。</strong>测评证据：访谈与核查确认系统登录仅使用静态口令，未部署双因素认证。判定依据：不满足 GB/T 22239-2019 8.1.4.1 d)“应采用口令、密码技术、生物技术等两种或两种以上组合的鉴别技术对用户进行身份鉴别”的要求。<br><span style="color:#777;font-size:0.8rem;">（公式：编号 + 指标名 + 结论 + 测评证据 + 依据条款 + 判定说明）</span></td></tr>
+
+                                <tr><td><strong>第五章<br>安全问题汇总</strong></td><td>序号 1｜层面：安全计算环境｜指标：身份鉴别（8.1.4.1 d）｜问题描述：核心业务系统仅使用静态口令单因素鉴别，未启用双因素认证｜风险等级：<strong>高</strong></td></tr>
+
+                                <tr><td><strong>第六章<br>整改建议</strong><br><span style="color:#777;font-size:0.8rem;">（对应上面第 1 条）</span></td><td><strong>问题</strong>：核心业务系统登录仅采用静态口令，未启用双因素认证。<br><strong>风险</strong>：口令一旦泄露或被撞库，攻击者可以直接以合法身份登录，存在越权操作与数据泄露风险。<br><strong>建议</strong>：① 在现有口令基础上叠加短信验证码或动态令牌等第二种鉴别技术；② 先在管理员与运维账号范围启用（2 周内完成），再覆盖全部用户（30 天内完成）；③ 在《账户与权限管理制度》中明确双因素认证的适用岗位与责任部门。<br><strong>优先级</strong>：🔴 紧急</td></tr>
+
+                            </table>
+
+                        </div>
+
+                        <p style="font-size:0.9rem;color:#b71c1c;"><strong>四条硬规矩：</strong>① 第三章单项结论的<strong>数据源是 素材3-2《前序项目测评记录表》</strong>（本项目 5 张表 24 条），不是环节一的 10 个模拟场景——环节一是“练判定方法”，练完就把方法用到素材3-2 的记录上。② 第五章的问题、第六章的建议必须和第三章<strong>一一对应</strong>（同一个编号、同一个问题），不许“结论说 A、建议写 B”。③ 每条建议都要<strong>照着能做</strong>：做什么 + 做到什么程度 + 谁做 + 何时完成 + 优先级，不写“加强安全管理”这类空话。④ 目录用 Word「引用 → 目录」自动生成并更新，不要手打页码。</p>
+
+                        <p style="margin:8px 0 0;font-size:0.92rem;"><strong>素材下载：</strong><a class="table-dl" href="各类表格/6.3 编制完整等保测评报告/素材3-1：测评报告模板（结构框架）.docx" download title="下载《测评报告模板（结构框架）》">⬇ 素材3-1：测评报告模板（必用）</a><a class="table-dl" href="各类表格/6.3 编制完整等保测评报告/素材3-2：前序项目测评记录表（模拟数据）.docx" download title="下载《前序项目测评记录表（模拟数据）》">⬇ 素材3-2：前序项目测评记录表（模拟数据）</a><a class="table-dl" href="各类表格/6.3 编制完整等保测评报告/素材3-3：模拟系统基本信息.docx" download title="下载《模拟系统基本信息》">⬇ 素材3-3：模拟系统基本信息</a><a class="table-dl" href="各类表格/6.3 编制完整等保测评报告/素材3-4：整改建议示例（完整版）.docx" download title="下载《整改建议示例（完整版）》">⬇ 素材3-4：整改建议示例（完整版）</a><a class="table-dl" href="国标文件/网络安全等级保护测评报告模板（2025版）.pdf" target="_blank" rel="noopener" title="打开《网络安全等级保护测评报告模板（2025 版）》">📄 国标：测评报告模板（2025 版）</a></p>
+
+
+
+                        <div class="lab-report-req" style="margin-top:18px;background:#fff8e1;border:1.5px dashed #ff8f00;border-radius:10px;padding:12px 16px;">
+
+                            <div style="font-weight:700;color:#e65100;margin-bottom:6px;">📑 必交成果（3 项，随三个环节依次提交）</div>
+
+                            <ol style="margin:0 0 6px 20px;line-height:1.7;font-size:0.92rem;">
+
+                                <li><strong>环节一：《单项测评判定练习表》</strong>——10 个场景全填，每个场景含优势证据、判定结果与理由。命名 <code>班级-学号-姓名-任务6_练习表.docx</code>。</li>
+
+                                <li><strong>环节二：《整体结论判断表》</strong>——含统计汇总表、整体结论与 3–5 句依据。命名 <code>班级-学号-姓名-任务6_整体结论表.docx</code>。</li>
+
+                                <li><strong>环节三：完整《等保测评报告》</strong>——按模板十要素编制，含单项结论、整体结论、问题汇总与整改建议。命名 <code>班级-学号-姓名-任务6_测评报告.docx</code>。</li>
+
+                            </ol>
+
+                            <p style="margin:6px 0 0;font-size:0.92rem;"><strong>提交方式：</strong>学习通 → 任务 6 → 作业区（<strong>课内依次完成并提交</strong>，三个环节都要交齐）</p>
+
+                        </div>
+
+                        <div class="lab-check" style="margin-top:14px;">
+
+                            <div class="lab-check-title">📋 提交前自查</div>
+
+                            ☐ 环节一每个场景都写了优势证据与理由　☐ 环节二整体结论明确落到三档之一、且与风险描述一致　☐ 环节三报告十要素齐全、目录页码准确　☐ 每条整改建议含"问题→风险→建议→优先级"　☐ 三份成果命名规范、均已上传学习通
+
+                        </div>
+
+                        <p style="margin-top:14px;font-size:0.9rem;color:#666;">📌 <strong>期中提醒：</strong>第 9 周期中考核（闭卷上机），考查等保 2.0 标准体系、安全通用要求（物理环境 / 通信网络 / 区域边界 / 计算环境 / 安全管理）、测评流程与方案编制等前半程内容——本任务的结论判定方法与报告结构，是实操考核的重点。</p>
 
                     </div>
 
 
-
-                    <div class="lab-box">
-
-                        <div class="lab-head">🧪 实验六：AI 辅助分析——智能测评的正确打开方式</div>
-
-                        <div class="lab-goal"><strong>实验目标：</strong>体验 JSecProbe 的 AI 分析功能（文件分析 / 命令结果分析 / 截图分析三种类型），理解 6.2 "系统整体结论"的辅助形成方式，并建立职业认知：<strong>AI 分析结果仅供参考，最终结论由测评人员确认并负责</strong>。</div>
-
-                        <ol class="step-list">
-
-                            <li><strong>前提确认：</strong>该功能需配置 AI API Key（如 DeepSeek 或 OpenAI）；未配置则跳过，由教师演示。</li>
-
-                            <li><strong>选分析类型并上传素材。</strong>三选一：①文件分析——上传一份配置文件（如防火墙策略文件）；②命令结果分析——粘贴一条命令的执行输出；③截图分析——上传系统配置界面截图。</li>
-
-                            <li><strong>执行并阅读结论。</strong>AI 自动识别配置是否符合安全基线，给出分析结论、风险等级和测评建议。</li>
-
-                            <li><strong>关联测评项。</strong>将分析结论关联到对应测评项；关联前先自问：我同意这个结论吗？不同意就以我的证据为准。</li>
-
-                        </ol>
-
-                        <div class="ai-tip-box">
-
-                            <div class="ai-tip-title">🤖 这是全课程最需要"清醒"的实验</div>
-
-                            <p>本实验本身就在用 AI 做测评——正好把任务 1 学的 AI 红线用在刀刃上：</p>
-
-                            <ul style="margin-left:20px;line-height:1.9;">
-
-                                <li><strong>交叉验证：</strong>AI 说"不符合"，你要能指出它依据的是哪条配置；说不出依据的结论不敢采信；</li>
-
-                                <li><strong>留痕：</strong>把 AI 分析结论截图存档并标注"AI 辅助，已人工复核"——这本身就是规范工作习惯；</li>
-
-                                <li><strong>责任归属：</strong>将来报告上签字的是测评师。AI 出错叫"误报"，测评师照抄出错叫"事故"。</li>
-
-                            </ul>
-
-                        </div>
-
-                        <div class="lab-check">
-
-                            <div class="lab-check-title">📋 实验记录自查</div>
-
-                            ☐ 完成 1 次 AI 分析（或观看演示）　☐ 结论关联测评项前做了自己的判断　☐ 分析结果已截图留痕
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="lab-box">
-
-                        <div class="lab-head">🧪 实验八：报告生成——一学期成果的"验收仪式"</div>
-
-                        <div class="lab-goal"><strong>实验目标：</strong>用 JSecProbe 自动生成等保测评报告并导出。它会汇总你任务 2~6 的全部数据（项目信息、资产、10 个控制类的测评记录、核查结果）——<strong>报告质量 = 前期数据质量</strong>，这一步是给前面每一步打分。</div>
-
-                        <ol class="step-list">
-
-                            <li><strong>生成前自检（重要）。</strong>确认：10 个控制类都有测评记录；资产清单完整；自动化核查结果已关联。数据有洞，报告就有洞。</li>
-
-                            <li><strong>进入"报告生成"功能</strong>，选择项目和报告类型——选"等保测评总结分析报告"（另有问题清单、整改建议等类型，可对比生成）。</li>
-
-                            <li><strong>生成并预览。</strong>检查报告的完整结构：封面 → 目录 → 正文（测评概况、单项结论统计、整体结论、问题清单、整改建议）→ 附件。</li>
-
-                            <li><strong>导出为 Word/PDF 并提交学习通。</strong>对照下方 6.3 的知识逐节核对，确认自己能讲清每一章的数据来源。</li>
-
-                        </ol>
-
-                        <div class="ai-tip-box">
-
-                            <div class="ai-tip-title">🤖 报告写"结论分析与整改建议"章节时，AI 这样用</div>
-
-                            <div class="prompt-tpl">
-
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-
-                                我的等保测评发现以下不符合项：【粘贴你的问题清单】。请按"问题 → 风险分析 → 整改建议 → 建议责任岗位"的格式帮我梳理整改建议表，每条建议要具体到"做什么、做到什么程度"，不要出现"加强""完善"这类空话。
-
-                            </div>
-
-                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>报告主体必须来自系统生成的真实数据。让 AI 凭空编报告 = 伪造测评记录，真实项目里要负法律责任。</p>
-
-                        </div>
-
-                        <div class="lab-check">
-
-                            <div class="lab-check-title">📋 实验记录自查</div>
-
-                            ☐ 生成前完成了数据自检　☐ 报告四大部分齐全　☐ 成功导出 Word/PDF　☐ 能说清报告每章的数据来自哪个实验
-
-                        </div>
-
-                    </div>
-
-
-
-                    <div class="coming-soon">🔒 报告模板与前序项目测评记录数据包将陆续上线</div>
 
                 </div>
 
@@ -8232,7 +8502,7 @@ return</div>
 
             (function setupLabAccordion() {
 
-                var ENABLE = ['4.1', '4.2', '4.3', '4.4', '4.5'];
+                var ENABLE = ['4.1', '4.2', '4.3', '4.4', '4.5', '5'];
 
                 var SUBSTAGE_PREFIX = 'substage';
 
@@ -8274,11 +8544,33 @@ return</div>
 
 
 
+                // 容器：白名单内的子任务（.substage）；没有子任务的整任务页（如任务5 的 #stage5）用 task-stage 作容器
+
+                var ACC_CONTAINERS = [];
+
                 document.querySelectorAll('.substage').forEach(function (sub) {
 
-                    var taskId = sub.id.indexOf(SUBSTAGE_PREFIX) === 0 ? sub.id.slice(SUBSTAGE_PREFIX.length) : sub.id;
+                    var tid = sub.id.indexOf(SUBSTAGE_PREFIX) === 0 ? sub.id.slice(SUBSTAGE_PREFIX.length) : sub.id;
 
-                    if (ENABLE.indexOf(taskId) < 0) return;
+                    if (ENABLE.indexOf(tid) >= 0) ACC_CONTAINERS.push(sub);
+
+                });
+
+                document.querySelectorAll('.task-stage').forEach(function (st) {
+
+                    var tid = st.id.indexOf('stage') === 0 ? st.id.slice('stage'.length) : st.id;
+
+                    if (ENABLE.indexOf(tid) < 0) return;
+
+                    if (st.querySelector('.substage')) return;   // 该任务已按子任务拆分，走上面的分支
+
+                    ACC_CONTAINERS.push(st);
+
+                });
+
+                ACC_CONTAINERS.forEach(function (sub) {
+
+                    var taskId = sub.id.indexOf(SUBSTAGE_PREFIX) === 0 ? sub.id.slice(SUBSTAGE_PREFIX.length) : sub.id.replace(/^stage/, '');
 
 
 
@@ -9150,6 +9442,32 @@ var SUYANG_CASES = {
 
                             ]
 
+                        },
+
+
+
+                        {
+
+                            id: 's6c', comp: '客观公正 · 职业判断',
+
+                            title: '「就 4 项不符合，当然是基本符合」——被复核人打回的整体结论',
+
+                            scene: '项目复评会上，复核人把你写的整体结论打回："某政务系统共 46 个测评项，你数了数只有 4 项不符合，就直接写了『基本符合』。可这 4 项里，一项是『数据备份恢复——未做异地备份』，一项是管理类的『应急预案与事件处置——制度缺失』。你数了数量，却没看位置和权重。"你心里有点不服：4 项占比还不到 10%，真有那么严重吗？',
+
+                            question: '请分析"只看不符合项数量、不看位置和权重"的判定方式问题出在哪里，并说明你会如何重写这段整体结论。',
+
+                            points: [
+
+                                { label: '位置与权重认知', method: '整体结论不是"数票"——要看不符合项是不是核心指标（如数据备份恢复、入侵防范、应急预案等），核心指标 1 项不符合也可能直接把整体结论拉到"不符合"。', kws: ['权重', '位置', '核心', '关键', '数据备份', '应急预案', '重要', '指标', '分布', '占比'] },
+
+                                { label: '依据与证据意识', method: '整体结论必须由统计数据和标准条款支撑，并明确落到"符合/基本符合/不符合"三档之一——"尚可""总体不错"这类模糊表述都不合格。', kws: ['依据', '证据', '数据', '统计', '标准', '条款', '明确', '三档', '客观'] },
+
+                                { label: '结论一致性', method: '结论必须与正文的风险描述一致：正文写"存在多项高危风险"，结论却写"基本符合"，自相矛盾的报告等于自己否定自己。', kws: ['一致', '矛盾', '风险描述', '对应', '自相', '相符'] },
+
+                                { label: '客观公正与责任', method: '判定不因客户关系"放水"、也不因个人喜好"从严"——结论直接影响客户的整改投入与安全决策，写轻了会掩盖重大风险，写重了会造成不必要成本，都必须以证据为准。', kws: ['客观', '公正', '责任', '如实', '放水', '从严', '底线', '决策', '整改'] }
+
+                            ]
+
                         }
 
                     ]
@@ -9830,7 +10148,7 @@ var SUYANG_CASES = {
 
                     '4.5': { ppts: ['4.5 漏洞扫描与结果分析.pptx'], stds: ['22239', '28448'] },
 
-                    '5':   { ppts: ['5.1 安全管理文档核查.pptx'], stds: ['22239', '28448'] },
+                    '5':   { ppts: ['5.1 安全管理文档核查.pptx', '5.2 模拟人员访谈.pptx'], stds: ['22239', '28448'] },
 
                     '6':   { ppts: [], stds: ['28448', '22239', 'report'] },
 
@@ -9868,7 +10186,7 @@ var SUYANG_CASES = {
 
                     '5':   { top: '情景分析', m1: '5.1', m2: '5.1', m3: '5.1', m4: '5.1', m5: '5.1', ev: '5.1' },
 
-                    '6':   { top: '情景分析', sg: '6.1', sg1: '6.1', sg2: '6.1', ov: '6.2', ov1: '6.2', ov2: '6.3' },
+                    '6':   { top: '情景分析', k1: '从证据到报告', k2: '单项测评结论判定', k3: '系统整体测评结论', k4: '测评报告编制' },
 
                     '7':   { top: '情景分析', c: '责任共担', c1: '责任共担' },
 
@@ -9892,7 +10210,7 @@ var SUYANG_CASES = {
 
                     '1.1': '等级保护制度', '1.2': '定级方法', '2.1': '关键概念：测评方案', '2.2': '六步法',
 
-                    '3.1': '为什么查', '3.2': '为什么查', '4.1': '为什么查', '4.2': '为什么查', '4.3': '为什么查', '4.4': '为什么查', '4.5': '为什么查', '5': '5.1', '6': '6.1', '7': '责任共担'
+                    '3.1': '为什么查', '3.2': '为什么查', '4.1': '为什么查', '4.2': '为什么查', '4.3': '为什么查', '4.4': '为什么查', '4.5': '为什么查', '5': '5.1', '6': '从证据到报告', '7': '责任共担'
 
                 };
 
@@ -10052,103 +10370,107 @@ var SUYANG_CASES = {
 
                     if (res.ppts.length) {
 
-                        var pLabel = res.ppts[0].replace(/（理论版）/, '').replace(/\.pptx$/, '');
+                        // 一个任务可能有多份课件（如任务5：5.1 文档核查 + 5.2 模拟人员访谈），逐份生成卡片
 
-                        var pcard;
+                        res.ppts.forEach(function (pptFile) {
 
-                        if (/^(4\.|5$)/.test(unitKey)) {
+                            var pLabel = pptFile.replace(/（理论版）/, '').replace(/\.pptx$/, '');
 
-                            // 任务4：课件 PDF 已上线，点击直接打开（PPT/同名.pdf）
+                            var pcard;
 
-                            var pdfFile = 'PPT/' + res.ppts[0].replace(/\.pptx$/, '.pdf');
+                            if (/^(4\.|5$|6$)/.test(unitKey)) {
 
-                            pcard = document.createElement('a');
+                                // 任务4 / 任务5 / 任务6：课件 PDF 已上线，点击直接打开（PPT/同名.pdf）
 
-                            pcard.className = 'kb-mod-card kb-ppt-mod';
+                                var pdfFile = 'PPT/' + pptFile.replace(/\.pptx$/, '.pdf');
 
-                            pcard.href = encodeURI(pdfFile);
+                                pcard = document.createElement('a');
 
-                            pcard.target = '_blank';
+                                pcard.className = 'kb-mod-card kb-ppt-mod';
 
-                            pcard.rel = 'noopener';
+                                pcard.href = encodeURI(pdfFile);
 
-                            pcard.title = '点击打开 PDF 课件：' + pLabel;
+                                pcard.target = '_blank';
 
-                            pcard.innerHTML =
+                                pcard.rel = 'noopener';
 
-                                '<span class="kb-mod-no">📑</span>' +
+                                pcard.title = '点击打开 PDF 课件：' + pLabel;
 
-                                '<span class="kb-mod-name">' +
+                                pcard.innerHTML =
 
-                                  '<span class="kb-ppt-badge">PDF</span>' +
+                                    '<span class="kb-mod-no">📑</span>' +
 
-                                  '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                                    '<span class="kb-mod-name">' +
 
-                                  '<span class="kb-ppt-status kb-ppt-status--open">点击打开</span>' +
+                                      '<span class="kb-ppt-badge">PDF</span>' +
 
-                                '</span>';
+                                      '<span class="kb-ppt-title">' + pLabel + '</span>' +
 
-                            pcard.addEventListener('click', function () {
+                                      '<span class="kb-ppt-status kb-ppt-status--open">点击打开</span>' +
 
-                                if (typeof trackOperation === 'function') {
+                                    '</span>';
 
-                                    trackOperation('打开课件PDF', pLabel);
+                                pcard.addEventListener('click', function () {
 
-                                }
+                                    if (typeof trackOperation === 'function') {
 
-                            });
+                                        trackOperation('打开课件PDF', pLabel);
 
-                        } else {
+                                    }
 
-                            pcard = document.createElement('button');
+                                });
 
-                            pcard.type = 'button';
+                            } else {
 
-                            pcard.className = 'kb-mod-card kb-ppt-mod kb-ppt-mod--disabled';
+                                pcard = document.createElement('button');
 
-                            pcard.setAttribute('aria-disabled', 'true');
+                                pcard.type = 'button';
 
-                            pcard.title = '课件暂未提供在线浏览，请联系任课教师获取：' + pLabel;
+                                pcard.className = 'kb-mod-card kb-ppt-mod kb-ppt-mod--disabled';
 
-                            pcard.innerHTML =
+                                pcard.setAttribute('aria-disabled', 'true');
 
-                                '<span class="kb-mod-no">📑</span>' +
+                                pcard.title = '课件暂未提供在线浏览，请联系任课教师获取：' + pLabel;
 
-                                '<span class="kb-mod-name">' +
+                                pcard.innerHTML =
 
-                                  '<span class="kb-ppt-badge">PPT</span>' +
+                                    '<span class="kb-mod-no">📑</span>' +
 
-                                  '<span class="kb-ppt-title">' + pLabel + '</span>' +
+                                    '<span class="kb-mod-name">' +
 
-                                  '<span class="kb-ppt-status">暂未开放</span>' +
+                                      '<span class="kb-ppt-badge">PPT</span>' +
 
-                                '</span>';
+                                      '<span class="kb-ppt-title">' + pLabel + '</span>' +
 
-                            pcard.addEventListener('click', function (e) {
+                                      '<span class="kb-ppt-status">暂未开放</span>' +
 
-                                e.preventDefault();
+                                    '</span>';
 
-                                // 课件下载入口已下线：不再打开 window.open / 跳转
+                                pcard.addEventListener('click', function (e) {
 
-                                if (typeof trackOperation === 'function') {
+                                    e.preventDefault();
 
-                                    trackOperation('尝试访问课件（已下线）', pLabel);
+                                    // 课件下载入口已下线：不再打开 window.open / 跳转
 
-                                }
+                                    if (typeof trackOperation === 'function') {
 
-                                alert('「' + pLabel + '」课件暂未提供在线浏览，请联系任课教师获取。');
+                                        trackOperation('尝试访问课件（已下线）', pLabel);
 
-                            });
+                                    }
 
-                        }
+                                    alert('「' + pLabel + '」课件暂未提供在线浏览，请联系任课教师获取。');
 
-                        nav.appendChild(pcard);
+                                });
+
+                            }
+
+                            nav.appendChild(pcard);
+
+                        });
 
                         // （按老师要求：去掉"⬇ 原文件"小按钮，只保留课件入口）
 
                     }
-
-
 
                     // ---- 5. 模块卡片 + 内容面板（标准原文融入目标模块） ----
 
@@ -11892,23 +12214,27 @@ var SUYANG_CASES = {
 
     }, edges: [['top','m1'],['top','m2'],['top','m3'],['top','m4'],['top','m5'],['top','ev']] };
 
-    KM_DATA['6'] = { h: 310, nodes: {
+    KM_DATA['6'] = { h: 300, nodes: {
 
-        top:{ x:276, y:26,  label:'汇总测评记录', sub:'证据在手 · 结论在后', info:'现场测评产生大量记录，报告编制就是把零散证据变成一份规范、有说服力的《等保测评报告》。' },
+        top:{ x:340, y:26,  label:'从证据到报告', sub:'逐级加工 · 环环相扣', info:'现场测评产生大量记录，报告编制就是把零散证据变成一份规范、有说服力的《等保测评报告》——单项判定 → 整体结论 → 报告编制，一步错则步步错。' },
 
-        sg: { x:136, y:126, label:'单项测评结论', sub:'每个指标四选一', info:'单项测评结论：对每个测评指标判定"符合/部分符合/不符合/不适用"，每个判定都必须有证据支撑。' },
+        k1: { x:88,  y:130, label:'结论生成链条', sub:'单项→单元→整体', info:'测评结论是逐级加工出来的：现场证据 → 单项判定 → 单元汇总 → 整体分析 → 风险评价 → 等级结论（优/良/中/差）。单项是原材料、单元是半成品、整体是成品。' },
 
-        ov: { x:416, y:126, label:'系统整体结论', sub:'系统级 · 优良中差', info:'系统整体结论：汇总所有单项结论，综合研判形成优/良/中/差的档位。' },
+        k2: { x:252, y:130, label:'单项结论判定', sub:'四种结果 · 优势证据', info:'每个测评项在每种对象上四选一：符合/部分符合/不符合/不适用；判定必须用"优势证据"法——物理安全：察看>文档>访谈；技术安全：工具>配置>访谈；管理安全：结合实际。' },
 
-        sg1:{ x:76,  y:226, label:'四种判定', sub:'符合/部分/不符合/不适用', info:'通俗版：符合=全部做到、证据齐全；部分符合=做了还有差距；不符合=没做或证据证明不达标；不适用=要求与本系统无关。' },
+        k3: { x:428, y:130, label:'整体结论形成', sub:'符合/基本符合/不符合', info:'不只数"符合"的项数，更要看"不符合/部分符合"项的位置与权重；统计 → 看分布 → 评影响 → 下判断，结论必须与风险描述一致。' },
 
-        sg2:{ x:206, y:226, label:'整改建议', sub:'怎么改 · 改成什么样', info:'整改建议要具体可行：说明怎么改、改成什么样——"建议加强管理"式空话是报告大忌。' },
+        k4: { x:592, y:130, label:'报告编制规范', sub:'十要素 · 整改建议', info:'测评报告十要素：封面、目录、项目概述、对象与方法、单项结论、整体结论、问题汇总、整改建议、附件、签章页；整改建议按"问题→风险→建议→优先级"来写，具体可操作。' },
 
-        ov1:{ x:346, y:226, label:'风险综合研判', sub:'部分符合的风险', info:'对"部分符合"项分析其带来的安全风险，在报告中如实反映——整体结论不是简单投票，而是综合研判。' },
+        k1a:{ x:88,  y:236, label:'单元结论汇总', sub:'半成品', info:'单元结论由单项结论汇总而来：全部符合→符合；全部不符合→不符合；出现部分符合→部分符合；全部不适用→不适用。' },
 
-        ov2:{ x:486, y:226, label:'测评报告', sub:'规范出具 · 交付', info:'报告按规范结构出具：结论客观、证据可追溯，是客户整改与监管核查的依据。' }
+        k2a:{ x:252, y:236, label:'判定四原则', sub:'威胁·拆解·证据·综合', info:'①先判断威胁是否存在 ②逐项拆解要求内容 ③使用优势证据法 ④综合判定（全一致→符合；全不一致→不符合；其余→部分符合）。' },
 
-    }, edges: [['top','sg'],['top','ov'],['sg','sg1'],['sg','sg2'],['ov','ov1'],['ov','ov2']] };
+        k3a:{ x:428, y:236, label:'风险趋势判断', sub:'看位置与权重', info:'不只看"符合"的数量，更看"不符合/部分符合"的位置——核心指标（数据备份恢复、应急预案与事件处置等）出问题，1 项也可能直接改变整体结论。' },
+
+        k4a:{ x:592, y:236, label:'格式与自查', sub:'字体·页码·编号', info:'正文宋体/仿宋、标题黑体；页码从正文开始编；章节编号层级清晰（1→1.1→1.1.1）；引用标准必须标注条款编号（如 8.1.4.1 a)）。' }
+
+    }, edges: [['top','k1'],['top','k2'],['top','k3'],['top','k4'],['k1','k1a'],['k2','k2a'],['k3','k3a'],['k4','k4a']] };
 
     KM_DATA['7'] = { h: 310, nodes: {
 
@@ -13045,6 +13371,367 @@ var SUYANG_CASES = {
     }
 
     </script>
+
+<script>
+/* ==================== 5.2 模拟人员访谈 · 对话智能体（纯前端，无需联网） ====================
+   设计说明：
+   - 三位被访谈人的人设与"实际执行情况"完全取自《5.2 模拟人员访谈》PPT 的角色卡（张三 / 李四 / 王五）。
+   - 交互：学生选角色 → 自己输入问题 → 智能体按角色特点自动应答。
+   - 教学机制：每个话题"第一次问"回答的是制度口径（写没写），"追问第二次"才吐出真实执行情况（做没做）
+     ——对应 PPT 里"访谈是验证真实性的关键手段"。
+   ================================================================================== */
+(function () {
+    'use strict';
+
+    var ROLES = {
+        sysadmin: {
+            name: '系统管理员 · 张三',
+            short: '张三',
+            post: '系统管理员（负责 3 台服务器、2 个数据库的日常运维）',
+            hello: '（抬头）您好，我是张三，服务器和数据库这块平时都是我在管。您问吧，我尽量答。',
+            topics: [
+                { kws: ['岗位职责', '职责', '负责什么', '负责哪些', '做什么工作', '工作内容', '管什么'],
+                  off: '我主要负责 3 台服务器和 2 个数据库的日常运维——装系统、配权限、做备份、盯着服务别出问题。',
+                  tru: '（笑了笑）说是"主要"，其实服务器、数据库、网络、还有办公电脑出毛病都找我一个人，人手就我一个，实在忙不过来。' },
+                { kws: ['密码策略', '密码', '口令', '多久换', '更换周期', '复杂度'],
+                  off: '密码是按规定来的：长度、复杂度都有要求，90 天更换一次，这个制度文件里都写着。',
+                  tru: '（压低声音）说实话，太忙了，基本想不起来换。有几台机器还是出厂默认口令，测试库那个口令就是 123456——您别记太细啊。' },
+                { kws: ['账户', '账号', '用户', '权限分配', '离职', '离岗', '清理'],
+                  off: '账户按申请流程开：谁需要谁提申请，我这边建账号、分权限，都留了台账。',
+                  tru: '（犹豫了一下）离职的……嗯，有 3 个离职员工的账号还在系统里，一直没顾上清。人都走了，我想着不影响使用就先留着了。' },
+                { kws: ['日志', '审计', '记录', '有没有人看', '谁看'],
+                  off: '审计日志是开启的，系统里的操作都有记录，这个是按要求做的。',
+                  tru: '（摆摆手）开着是开着，但真没人看。日志文件一直涨，几个月没人翻过，出了事才想起来查一查。' },
+                { kws: ['补丁', '更新', '升级', '打补丁', '漏洞修补'],
+                  off: '补丁有更新流程：先测试环境验证，再上生产环境。',
+                  tru: '（压低声音）流程是那么写的。实际上怕出问题，能不更新就不更新——有几台机器快一年没打过补丁了，等厂家催或者真出事再说。' },
+                { kws: ['备份', '恢复', '还原', '演练'],
+                  off: '备份是做的：数据库每天有备份任务，服务器也有镜像。',
+                  tru: '（停顿）备份确实有，但恢复没试过。真出事能不能还原……说实话我心里没底，没演练过。' },
+                { kws: ['安全事件', '应急', '处置', '出事', '被攻击', '中招', '上报'],
+                  off: '出了安全事件先报告领导，然后按应急预案处理。',
+                  tru: '（挠头）应急预案我知道有这么个文件，具体条款真没细看过。真出事我大概就是先看日志、先断网，再给主管打电话——差不多是这样。' },
+                { kws: ['培训', '学习', '考核'],
+                  off: '安全培训我参加过，公司统一组织的。',
+                  tru: '（想了想）今年就一次，听完就散了，也没考试。讲得比较宏观，具体到我们怎么操作的内容不多。' }
+            ],
+            chips: ['请先简单介绍一下您的岗位职责？', '密码策略是怎么规定的？多久换一次？', '账户是怎么管理的？离职人员的账号会清理吗？', '系统日志有人看吗？', '补丁一般多久更新一次？', '系统出了安全事件，您会怎么处理？'],
+            fb: '（挠头）您问的这个……我这边不太清楚，可能得问我们主管。设备、账号、补丁、备份这些事是我在管，您可以问这些。'
+        },
+        secmgr: {
+            name: '安全主管 · 李四',
+            short: '李四',
+            post: '安全主管（负责制定安全管理制度、组织安全培训）',
+            hello: '您好您好，我是李四，安全和制度这块是我在抓。您有什么问题尽管问，我们还是很重视安全的。',
+            topics: [
+                { kws: ['岗位职责', '职责', '负责什么', '负责哪些', '做什么工作', '工作内容', '组织架构', '机构'],
+                  off: '我负责制定安全管理制度、组织安全培训，还有日常安全工作的协调。组织架构上我们是有一个安全管理小组的。',
+                  tru: '（顿了顿）小组是挂了名的，但专职的安全人员就我一个，其他都是各部门兼职挂着。制度、培训、预案、风险评估，全压在我这儿。' },
+                { kws: ['制度', '安全策略', '发布', '审批', '已制定'],
+                  off: '制度我们早就制定了，一整套都齐了，安全策略、管理办法都有。',
+                  tru: '（降低声音）制度写是写了，但审批流程还没走完，到现在没正式发文。所以严格说，现在是"有稿子、没生效"。' },
+                { kws: ['培训', '教育', '考核', '演练培训'],
+                  off: '培训我们很重视，每年都会安排，覆盖全员。',
+                  tru: '（苦笑）今年就组织了一次全员培训，走个过场，签到完就结束，也没做考核。说实话效果有限。' },
+                { kws: ['应急预案', '预案', '演练', '应急响应'],
+                  off: '应急预案已经编制完成，也报备了。',
+                  tru: '（停顿）预案是编好了，但从来没演练过。真出事能不能按预案跑起来，我们自己也没底。' },
+                { kws: ['风险评估', '风险', '定期评估', '自查'],
+                  off: '风险评估是定期开展的，按规定周期来。',
+                  tru: '（压低声音）这个……没定期做。主要是没人懂怎么做风险评估，工具、方法都不熟，就一直拖着。' },
+                { kws: ['第三方', '外包', '供应商', '访问流程', '保密协议'],
+                  off: '第三方人员进来要走审批、签保密协议，我们是有流程的。',
+                  tru: '（想了想）流程有，但执行得比较松——有的运维是直接远程连进来干活，权限给得比较宽，离场也没专门清理。' },
+                { kws: ['密码', '口令', '多久换', '密码策略'],
+                  off: '密码策略在制度里有明确规定：复杂度、更换周期都写了，90 天一次。',
+                  tru: '（摇头）制度规定 90 天，实际执行嘛……上次内部检查就发现有人一年没换。这个是执行层面的事，得盯着才行。' },
+                { kws: ['日志', '审计', '审查', '检查记录'],
+                  off: '安全审计工作我们是有安排的，日志定期审查。',
+                  tru: '（摆手）说是定期，其实主要靠系统管理员自己看。我这边没有审查记录，检查的时候也拿不出签字的东西。' }
+            ],
+            chips: ['贵单位的安全管理组织架构是怎样的？', '安全管理制度是什么时候制定的？正式发布了吗？', '安全培训多久组织一次？有考核吗？', '应急预案演练过吗？多久一次？', '风险评估是定期开展的吗？', '第三方人员访问系统需要走什么流程？'],
+            fb: '这个具体细节我不太掌握，您可以问安全策略、制度发布、培训、预案、风险评估这些方面——这些是我在负责的。'
+        },
+        staff: {
+            name: '普通员工 · 王五',
+            short: '王五',
+            post: '业务部门普通员工（日常使用 OA 系统办公）',
+            hello: '啊，您好。我就是业务部门的，平时用 OA 办公，安全的那些东西……我了解得不多，您问吧。',
+            topics: [
+                { kws: ['岗位', '职责', '负责什么', '做什么工作', '工作内容', '部门'],
+                  off: '我是业务部门的，平时就是处理业务单据、走 OA 流程，跟系统打交道的部分不多。',
+                  tru: '（想了想）我们部门就我一个人兼顾这些，安全上要做什么，其实也不太清楚该找谁问。' },
+                { kws: ['安全制度', '制度', '知道吗', '了解吗', '内容包括'],
+                  off: '公司有安全制度的，这个我知道，入职的时候好像讲过。',
+                  tru: '（不好意思）具体内容真不太清楚，就记得有这么个制度。要是问里面的条款，我答不上来。' },
+                { kws: ['培训', '学习', '考核', '参加过'],
+                  off: '培训我参加过。',
+                  tru: '（想了想）就参加过 1 次，讲得挺快的，我没太听懂。也没考试，听完就过去了。' },
+                { kws: ['密码', '口令', '密码怎么设', '复杂度', '换密码'],
+                  off: '密码我是按要求设置的，设置了密码。',
+                  tru: '（笑）我用的是"生日 + 姓名首字母"，好记啊。太复杂的我怕忘了，写的便利贴还贴在显示器边上呢。' },
+                { kws: ['钓鱼', '邮件', '附件', '可疑', '安全事件', '点击'],
+                  off: '可疑邮件我们收到要上报的。',
+                  tru: '（压低声音）我收到过一次可疑邮件，说是什么发票，我没多想就点开附件了，后来好像也没什么事，就没跟人说。' },
+                { kws: ['备份', '数据', '文件存放'],
+                  off: '重要文件我都存在 OA 系统里，也存了一份在自己电脑上。',
+                  tru: '（顿了顿）重要的资料就是本地电脑和共享盘各放一份，U 盘有时候也拷。没有专门的备份规矩，都是自己看着办。' }
+            ],
+            chips: ['请简单介绍一下您的工作内容？', '您知道公司有哪些安全管理制度吗？', '安全培训您参加过几次？有考试吗？', '您的登录密码是怎么设置的？', '如果收到可疑邮件您会怎么做？', '重要文件平时怎么保存？'],
+            fb: '哎呀，这个我真不懂。安全的事您得问我们主管或者系统管理员，我就是个用系统的。'
+        }
+    };
+
+    var PROBE = ['最近', '上一次', '上次', '实际', '具体', '多久', '多少', '谁负责', '谁看', '谁做', '哪次', '有没有', '有没', '例外', '记录', '台账', '到底', '真的', '确实'];
+
+    var el = function (id) { return document.getElementById(id); };
+    var chat, note, input, chipsBox;
+    var cur = null;          // 当前角色 key
+    var asked = {};          // { roleKey: { topicIndex: 次数 } }
+    var lastTopic = {};      // { roleKey: topicIndex } —— 支持"那最近一次呢？"这类追问延续话题
+    var log = [];            // [{who:'me'|'role'|'sys', text}]
+    var truthCount = 0;
+
+    function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+
+    function push(who, text, whoLabel) {
+        var d = document.createElement('div');
+        d.className = 'rpa-msg rpa-msg--' + (who === 'me' ? 'me' : who === 'role' ? 'role' : 'sys');
+        d.innerHTML = (who === 'role' && whoLabel ? '<span class="rpa-who">' + esc(whoLabel) + '</span>' : '') + esc(text);
+        chat.appendChild(d);
+        chat.scrollTop = chat.scrollHeight;
+        log.push({ who: who, text: text, whoLabel: whoLabel || '' });
+    }
+
+    function sysTip(text) { push('sys', text); }
+
+    function updateNote() {
+        if (!note) return;
+        if (!cur) { note.textContent = '先选一位被访谈人，再开始提问'; return; }
+        var n = (asked[cur] ? Object.keys(asked[cur]).length : 0);
+        note.textContent = '当前访谈：' + ROLES[cur].short + ' · 已提问 ' + (asked[cur + '_q'] || 0) + ' 次 · 已问出实情 ' + (asked[cur + '_t'] || 0) + ' 项';
+    }
+
+    function renderChips() {
+        if (!chipsBox) return;
+        chipsBox.innerHTML = '';
+        if (!cur) return;
+        ROLES[cur].chips.forEach(function (q) {
+            var b = document.createElement('button');
+            b.type = 'button';
+            b.className = 'rpa-chip';
+            b.textContent = q;
+            b.addEventListener('click', function () { ask(q); });
+            chipsBox.appendChild(b);
+        });
+    }
+
+    function switchRole(key) {
+        cur = key;
+        // 换角色 = 重新开始一次访谈：对话与统计都重置
+        asked[key] = {};
+        asked[key + '_q'] = 0;
+        asked[key + '_t'] = 0;
+        asked[key + '_hit'] = {};
+        lastTopic[key] = null;
+        log = [];
+        if (chat) chat.innerHTML = '';
+        var rs = document.querySelectorAll('#rpaRoles .rpa-role');
+        for (var i = 0; i < rs.length; i++) {
+            rs[i].classList.toggle('active', rs[i].getAttribute('data-role') === key);
+        }
+        push('role', ROLES[key].hello, ROLES[key].name);
+        updateNote();
+        renderChips();
+        if (input) { input.disabled = false; input.focus(); }
+        if (typeof trackOperation === 'function') { try { trackOperation('访谈智能体选角色', ROLES[key].name); } catch (e) {} }
+    }
+
+    function matchTopic(role, t) {
+        var best = -1, bestLen = 0;
+        role.topics.forEach(function (tp, ti) {
+            tp.kws.forEach(function (k) {
+                if (t.indexOf(k) >= 0 && k.length > bestLen) { bestLen = k.length; best = ti; }
+            });
+        });
+        return best;
+    }
+
+    function ask(text) {
+        text = (text === undefined ? (input ? input.value : '') : text) || '';
+        text = text.replace(/^\s+|\s+$/g, '');
+        if (!text) return;
+        if (!cur) { alert('请先选择一位被访谈人（角色）再提问。'); return; }
+        if (input) input.value = '';
+        push('me', text);
+
+        var role = ROLES[cur];
+        var t = text.replace(/\s/g, '');
+        var isProbeQ = PROBE.some(function (k) { return t.indexOf(k) >= 0; });
+        var ti = matchTopic(role, t);
+
+        // 追问延续：没提到话题关键词、但明显是针对上一个话题追问（如"那最近一次呢？"）时，延续上一话题
+        if (ti < 0 && isProbeQ && t.length <= 30 && lastTopic[cur] !== undefined && lastTopic[cur] !== null) {
+            ti = lastTopic[cur];
+        }
+
+        asked[cur + '_q'] = (asked[cur + '_q'] || 0) + 1;
+
+        if (ti < 0) {
+            push('role', role.fb, role.name);
+            sysTip('💡 这个问题不在该角色的职责范围内。可以换个角度问：制度怎么规定的？最近一次实际执行是什么时候？');
+            updateNote();
+            if (typeof trackOperation === 'function') { try { trackOperation('访谈智能体提问', role.short + '·未命中话题'); } catch (e) {} }
+            return;
+        }
+        lastTopic[cur] = ti;
+
+        var n = (asked[cur][ti] || 0) + 1;
+        asked[cur][ti] = n;
+
+        if (n === 1) {
+            push('role', role.topics[ti].off, role.name);
+            sysTip('💡 这是"制度口径"。同一个话题再追问一次（如"最近一次是什么时候？""这件事谁负责？"），才能问出真实执行情况。');
+        } else {
+            var tru = role.topics[ti].tru;
+            // 实情文本自带语气描写（以"（"开头）时不再叠加追问前缀，避免"（压低声音）（压低声音）"
+            var msg = tru.charAt(0) === '（' ? tru : (isProbeQ ? '（顿了顿，压低声音）' : '（左右看了看）') + tru;
+            push('role', msg, role.name);
+            if (!asked[cur + '_hit']) { asked[cur + '_hit'] = {}; }
+            if (!asked[cur + '_hit'][ti]) {
+                asked[cur + '_hit'][ti] = 1;
+                asked[cur + '_t'] = (asked[cur + '_t'] || 0) + 1;
+                truthCount++;
+            }
+        }
+        updateNote();
+        if (typeof trackOperation === 'function') { try { trackOperation('访谈智能体提问', role.short + '·' + role.topics[ti].kws[0]); } catch (e) {} }
+    }
+
+    // 组装访谈记录文本（导出 / 复制共用）
+    function buildText() {
+        if (!cur || !log.length) return '';
+        var now = new Date();
+        var pad = function (x) { return (x < 10 ? '0' : '') + x; };
+        var stamp = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' ' + pad(now.getHours()) + ':' + pad(now.getMinutes());
+        var role = ROLES[cur];
+        var lines = [];
+        lines.push('【模拟人员访谈 · 对话记录】');
+        lines.push('任务：5.2 模拟人员访谈（对话智能体）');
+        lines.push('被访谈人：' + role.name);
+        lines.push('岗位：' + role.post);
+        lines.push('访谈时间：' + stamp);
+        lines.push('提问次数：' + (asked[cur + '_q'] || 0) + '　问出执行层面实情：' + (asked[cur + '_t'] || 0) + ' 项');
+        lines.push('————————————————');
+        log.filter(function (x) { return x.who !== 'sys'; }).forEach(function (x) {
+            lines.push((x.who === 'me' ? '问：' : '答（' + x.whoLabel + '）：') + x.text);
+            lines.push('');
+        });
+        lines.push('————————————————');
+        lines.push('整理提示：把上面的要点整理进《人员访谈记录表》（素材1）——只写事实与关键数字（如“90 天”“3 个离职账号未清理”），不要写结论；');
+        lines.push('“初步判断与发现的问题”从回答中暴露的矛盾与缺口提炼；“下一步核查建议”写明查什么记录、找谁核实。');
+        return lines.join('\r\n');
+    }
+
+    // 还没有实质问答（只有开场白）时不导出
+    function noQA() {
+        if (!cur || !log.length) return true;
+        var q = 0;
+        for (var i = 0; i < log.length; i++) { if (log[i].who === 'me') q++; }
+        return q === 0;
+    }
+
+    function copyLog() {
+        if (noQA()) { alert('还没有问答内容：先在下面输入问题、问几轮，再复制。'); return; }
+        var txt = buildText();
+        var done = function () { alert('已复制本次访谈问答。\r\n粘贴到《人员访谈记录表》里，再整理成"访谈要点 / 发现的问题 / 下一步核查建议"。'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(txt).then(done, function () { fallbackCopy(txt, done); });
+        } else { fallbackCopy(txt, done); }
+    }
+
+    // 导出本次对话为 .txt 文件（UTF-8 BOM，Windows 记事本 / Word 打开不乱码）
+    function exportLog() {
+        if (noQA()) { alert('还没有问答内容：先在下面输入问题、问几轮，再导出对话记录。'); return; }
+        var txt = buildText();
+        if (!txt) { alert('还没有访谈内容，先选角色并提问。'); return; }
+        var now = new Date();
+        var pad = function (x) { return (x < 10 ? '0' : '') + x; };
+        var fname = '模拟人员访谈_' + ROLES[cur].short + '_' + now.getFullYear() + pad(now.getMonth() + 1) +
+                    pad(now.getDate()) + '_' + pad(now.getHours()) + pad(now.getMinutes()) + '.txt';
+        var blob = new Blob(['\ufeff' + txt], { type: 'text/plain;charset=utf-8' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = fname;
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(function () {
+            if (a.parentNode) a.parentNode.removeChild(a);
+            URL.revokeObjectURL(url);
+        }, 1500);
+        if (typeof trackOperation === 'function') { try { trackOperation('导出访谈对话', ROLES[cur].short); } catch (e) {} }
+        alert('已导出对话记录：\r\n' + fname + '\r\n\r\n（保存在浏览器的“下载”目录）\r\n用法：打开文件，把要点整理进《人员访谈记录表》（素材1）。');
+    }
+
+    function fallbackCopy(txt, done) {
+        var ta = document.createElement('textarea');
+        ta.value = txt;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); done(); } catch (e) { alert('复制失败，请手动选中聊天内容复制。'); }
+        document.body.removeChild(ta);
+    }
+
+    function reset() {
+        if (!cur) return;
+        if (!confirm('确认清空当前角色的对话，重新开始访谈？')) return;
+        asked[cur] = {};
+        asked[cur + '_q'] = 0;
+        asked[cur + '_t'] = 0;
+        asked[cur + '_hit'] = {};
+        switchRole(cur);
+    }
+
+    function init() {
+        chat = el('rpaChat');
+        note = el('rpaNote');
+        input = el('rpaInput');
+        chipsBox = el('rpaChips');
+        if (!chat || !input) return;
+
+        var rs = document.querySelectorAll('#rpaRoles .rpa-role');
+        for (var i = 0; i < rs.length; i++) {
+            rs[i].addEventListener('click', function () { switchRole(this.getAttribute('data-role')); });
+        }
+        var send = el('rpaSend');
+        if (send) send.addEventListener('click', function () { ask(); });
+        if (input) {
+            input.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); ask(); } });
+        }
+        var cp = el('rpaCopy');
+        if (cp) cp.addEventListener('click', copyLog);
+        var ex = el('rpaExport');
+        if (ex) ex.addEventListener('click', exportLog);
+        var rp = el('rpaReset');
+        if (rp) rp.addEventListener('click', reset);
+
+        var em = el('rpaEmpty');
+        if (em) em.parentNode.removeChild(em);
+        input.disabled = true;
+        updateNote();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+</script>
 
 </body>
 
