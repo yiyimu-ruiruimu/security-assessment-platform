@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudLab 云计算实验环境 · 信息安全测评与风险评估</title>
+<style>
+  :root{--bg:#f4f6fa;--panel:#fff;--border:#e3e8f0;--text:#1f2937;--muted:#6b7280;--primary:#2563eb;--primary-dark:#1e40af;--green:#10b981;--red:#ef4444;--orange:#f59e0b;--sidebar:#1e293b;--sidebar-text:#cbd5e1;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  body{background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;}
+  .sidebar{width:230px;background:var(--sidebar);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;}
+  .logo{padding:18px 20px;font-size:17px;font-weight:bold;color:#fff;border-bottom:1px solid #334155;}
+  .nav{flex:1;padding:12px 0;}
+  .nav-item{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;transition:all .15s;border-left:3px solid transparent;}
+  .nav-item:hover{background:#334155;color:#fff;}
+  .nav-item.active{background:#334155;color:#fff;border-left-color:var(--primary);}
+  .sidebar-footer{padding:14px 18px;border-top:1px solid #334155;font-size:12px;color:#64748b;line-height:1.8;}
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0;}
+  .topbar h2{font-size:16px;}
+  .env-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:3px 10px;border-radius:12px;border:1px solid #a7f3d0;}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .content{flex:1;overflow-y:auto;padding:20px 24px;}
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .25s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;}
+  .card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .grid{display:grid;gap:16px;}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .stat-card .label{font-size:13px;color:var(--muted);}
+  .stat-card .value{font-size:26px;font-weight:700;margin:6px 0 4px;}
+  .stat-card .sub{font-size:12px;}
+  .stat-card.primary{border-top:3px solid var(--primary);}
+  .stat-card.green{border-top:3px solid var(--green);}
+  .stat-card.orange{border-top:3px solid var(--orange);}
+  .stat-card.red{border-top:3px solid var(--red);}
+  .btn{border:none;border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-sm{padding:4px 10px;font-size:12px;}
+  .btn-outline{background:#fff;color:var(--primary);border:1px solid var(--primary);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:10px 12px;background:#f8fafc;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:hover td{background:#f8fafc;}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:2px 10px;border-radius:12px;white-space:nowrap;}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;}
+  .status.running{background:#ecfdf5;color:#059669;}.status.running::before{background:var(--green);}
+  .status.stopped{background:#f3f4f6;color:#6b7280;}.status.stopped::before{background:#9ca3af;}
+  .status.warn{background:#fffbeb;color:#d97706;}.status.warn::before{background:var(--orange);}
+  .status.bad{background:#fef2f2;color:var(--red);}.status.bad::before{background:var(--red);}
+  .tag-ok{color:#059669;font-weight:600;}
+  .tag-bad{color:var(--red);font-weight:600;}
+  .tag-warn{color:#d97706;font-weight:600;}
+  .progress-track{height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;flex:1;}
+  .progress-fill{height:100%;border-radius:4px;}
+  .resource-row{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:13px;}
+  .resource-row .name{width:90px;color:var(--muted);}
+  .resource-row .pct{width:70px;text-align:right;color:var(--muted);}
+  .arch-layer{border:2px dashed var(--border);border-radius:10px;padding:14px;margin-bottom:6px;}
+  .arch-layer .layer-title{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .arch-nodes{display:flex;gap:10px;flex-wrap:wrap;}
+  .arch-node{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;text-align:center;min-width:120px;cursor:pointer;transition:all .15s;}
+  .arch-node:hover{border-color:var(--primary);background:#eff6ff;transform:translateY(-2px);}
+  .arch-node .node-name{font-weight:600;display:block;margin-bottom:3px;}
+  .arch-node .node-desc{font-size:11px;color:var(--muted);}
+  .arrow-down{text-align:center;color:var(--muted);margin:2px 0 6px;}
+  .toast{position:fixed;top:70px;right:24px;background:#1f2937;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;display:none;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:380px;}
+  .toast.show{display:block;animation:fadeIn .3s;}
+  .modal-mask{position:fixed;inset:0;background:rgba(15,23,42,.5);display:none;align-items:center;justify-content:center;z-index:200;}
+  .modal-mask.show{display:flex;}
+  .modal{background:#fff;border-radius:12px;width:560px;max-height:85vh;overflow-y:auto;}
+  .modal-header{padding:16px 22px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .modal-close{cursor:pointer;color:var(--muted);font-size:20px;}
+  .modal-body{padding:20px 22px;font-size:13px;line-height:1.9;}
+  .risk-banner{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 16px;font-size:13px;color:#9a3412;margin-bottom:16px;}
+  .notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;font-size:13px;color:#1e40af;margin-bottom:16px;}
+  .check-item{border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+  .check-item .ci-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .check-item .ci-title{font-weight:600;font-size:14px;}
+  .ci-code{background:#eef2ff;color:#4338ca;font-size:12px;padding:2px 10px;border-radius:10px;}
+  .ci-where{font-size:12px;color:var(--muted);}
+  .check-item select,.check-item textarea,.check-item input{font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;}
+  .check-item textarea{width:100%;resize:vertical;}
+  .ci-grid{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-top:10px;align-items:start;}
+  .score-box{font-size:20px;font-weight:700;}
+  .quiz-opt{display:block;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--primary);background:#eff6ff;}
+  .quiz-opt.picked{border-color:var(--primary);background:#eff6ff;}
+  .quiz-opt.correct{border-color:var(--green);background:#ecfdf5;}
+  .quiz-opt.wrong{border-color:var(--red);background:#fef2f2;}
+  .lpill{display:inline-block;background:#f1f5f9;border-radius:10px;padding:2px 10px;font-size:12px;color:#475569;margin:2px;}
+  @media(max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr);}.grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo">☁️ CloudLab 实验平台</div>
+  <div class="nav">
+    <div class="nav-item active" data-page="dashboard">📊 平台概览与架构</div>
+    <div class="nav-item" data-page="vms">🖥️ 云主机管理</div>
+    <div class="nav-item" data-page="network">🌐 网络与安全组</div>
+    <div class="nav-item" data-page="storage">💾 存储与备份</div>
+    <div class="nav-item" data-page="audit">📋 审计与告警</div>
+    <div class="nav-item" data-page="task">📝 等保核查任务</div>
+  </div>
+  <div class="sidebar-footer">
+    课程：信息安全测评与风险评估<br>
+    7.1 云平台架构认知 / 云安全配置核查<br>
+    实验环境版本 v1.0（模拟）
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h2 id="pageTitle">平台概览与架构</h2>
+    <span class="env-tag">● 模拟实验环境运行中</span>
+    <div class="topbar-right"><div class="avatar">学</div><span>student01 · 租户：教育实训项目组</span></div>
+  </div>
+  <div class="content">
+
+    <!-- ============ 概览 ============ -->
+    <div class="page active" id="page-dashboard">
+      <div class="notice">📖 <b>7-1.1 实践任务1</b>：请依次浏览左侧各页面，完成《云平台架构认知记录表》：① 资源池划分 ② 虚拟机规格 ③ VPC/子网 ④ 安全组策略 ⑤ 租户信息。</div>
+      <div class="grid grid-4">
+        <div class="stat-card primary"><div class="label">虚拟机总数</div><div class="value">6</div><div class="sub" style="color:var(--green)">5 运行 · 1 已停止</div></div>
+        <div class="stat-card green"><div class="label">vCPU 使用率</div><div class="value">42%</div><div class="sub">22 / 48 vCPU</div></div>
+        <div class="stat-card orange"><div class="label">内存使用</div><div class="value">58%</div><div class="sub">92.8 / 160 GB</div></div>
+        <div class="stat-card red"><div class="label">存储使用</div><div class="value">35%</div><div class="sub">700 / 2000 GB</div></div>
+      </div>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <div class="card">
+          <h3>🏗️ 云平台四层架构（点击节点查看说明）</h3>
+          <div class="arch-layer"><div class="layer-title">④ 服务层 —— IaaS 基础服务</div>
+            <div class="arch-nodes">
+              <div class="arch-node" onclick="showArch('云主机 ECS')"><span class="node-name">🖥️ 云主机</span><span class="node-desc">IaaS 计算服务</span></div>
+              <div class="arch-node" onclick="showArch('云硬盘 Cinder')"><span class="node-name">💾 云硬盘</span><span class="node-desc">块存储服务</span></div>
+              <div class="arch-node" onclick="showArch('VPC 网络')"><span class="node-name">🌐 VPC</span><span class="node-desc">虚拟私有网络</span></div>
+            </div>
+          </div>
+          <div class="arrow-down">▲　▲　▲</div>
+          <div class="arch-layer"><div class="layer-title">③ 管理平台层 —— 资源池统一调度</div>
+            <div class="arch-nodes">
+              <div class="arch-node" onclick="showArch('Nova 计算')"><span class="node-name">⚙️ Nova（计算）</span><span class="node-desc">虚拟机生命周期</span></div>
+              <div class="arch-node" onclick="showArch('Neutron 网络')"><span class="node-name">🔀 Neutron（网络）</span><span class="node-desc">VPC / 安全组 / 路由</span></div>
+              <div class="arch-node" onclick="showArch('Cinder 存储')"><span class="node-name">📦 Cinder（存储）</span><span class="node-desc">卷与快照</span></div>
+              <div class="arch-node" onclick="showArch('Keystone 认证')"><span class="node-name">🔑 Keystone（认证）</span><span class="node-desc">租户 / 项目隔离</span></div>
+            </div>
+          </div>
+          <div class="arrow-down">▲　▲　▲</div>
+          <div class="arch-layer"><div class="layer-title">② 虚拟化层</div>
+            <div class="arch-nodes">
+              <div class="arch-node" onclick="showArch('KVM')"><span class="node-name">🧩 KVM</span><span class="node-desc">计算虚拟化</span></div>
+              <div class="arch-node" onclick="showArch('Ceph')"><span class="node-name">🧩 Ceph</span><span class="node-desc">存储虚拟化</span></div>
+              <div class="arch-node" onclick="showArch('OVS')"><span class="node-name">🧩 Open vSwitch</span><span class="node-desc">网络虚拟化</span></div>
+            </div>
+          </div>
+          <div class="arrow-down">▲　▲　▲</div>
+          <div class="arch-layer"><div class="layer-title">① 物理层</div>
+            <div class="arch-nodes">
+              <div class="arch-node" onclick="showArch('服务器集群')"><span class="node-name">🗄️ 服务器集群 ×3</span><span class="node-desc">controller / compute×2</span></div>
+              <div class="arch-node" onclick="showArch('存储阵列')"><span class="node-name">🗄️ 存储阵列</span><span class="node-desc">2 TB</span></div>
+              <div class="arch-node" onclick="showArch('网络设备')"><span class="node-name">🔌 网络设备</span><span class="node-desc">交换 / 防火墙</span></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h3>📦 资源池划分（实践任务①：记录总量与分配）</h3>
+            <div class="resource-row"><span class="name">vCPU 池</span><div class="progress-track"><div class="progress-fill" style="width:42%;background:var(--primary)"></div></div><span class="pct">22/48</span></div>
+            <div class="resource-row"><span class="name">内存池</span><div class="progress-track"><div class="progress-fill" style="width:58%;background:var(--orange)"></div></div><span class="pct">92.8/160G</span></div>
+            <div class="resource-row"><span class="name">存储池</span><div class="progress-track"><div class="progress-fill" style="width:35%;background:var(--green)"></div></div><span class="pct">700/2000G</span></div>
+            <div class="resource-row"><span class="name">浮动IP池</span><div class="progress-track"><div class="progress-fill" style="width:60%;background:var(--red)"></div></div><span class="pct">6/10</span></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">🔒 资源池按租户配额隔离分配——资源隔离是等保要求的基础。</div>
+          </div>
+          <div class="card">
+            <h3>🏢 租户 / 项目信息（实践任务⑤）</h3>
+            <table>
+              <thead><tr><th>租户/项目</th><th>资源配额</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>edu-training（本租户）</td><td>8 vCPU / 16G / 500G</td><td>教学实训</td></tr>
+                <tr><td>edu-research</td><td>8 vCPU / 16G / 500G</td><td>科研仿真（独立VPC）</td></tr>
+                <tr><td>ops-admin</td><td>平台管理</td><td>云服务商运维</td></tr>
+              </tbody>
+            </table>
+            <div style="font-size:12px;color:var(--muted);margin-top:8px;">💡 多租户隔离是云安全的基石：不同租户默认互不可见。</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>⚡ 核心服务状态</h3>
+        <table>
+          <thead><tr><th>服务</th><th>所在节点</th><th>状态</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>Keystone（认证）</td><td>controller-01</td><td><span class="status running">运行中</span></td><td>租户认证与权限</td></tr>
+            <tr><td>Nova（计算）</td><td>compute-01/02</td><td><span class="status running">运行中</span></td><td>虚拟机管理</td></tr>
+            <tr><td>Neutron（网络）</td><td>controller-01</td><td><span class="status running">运行中</span></td><td>VPC / 安全组</td></tr>
+            <tr><td>Cinder（块存储）</td><td>storage-01</td><td><span class="status running">运行中</span></td><td>云硬盘</td></tr>
+            <tr><td>Ceilometer（监控告警）</td><td>controller-01</td><td><span class="status running">运行中</span></td><td>入侵/异常流量告警</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ============ 云主机 ============ -->
+    <div class="page" id="page-vms">
+      <div class="notice">🖥️ <b>观察点</b>：虚拟机的规格（vCPU/内存/磁盘）与所用<b>镜像</b>。注意：是否有虚拟机使用了<b>未加固</b>的默认镜像？（对应等保 8.2.4.4a 加固镜像）</div>
+      <div class="card">
+        <h3>虚拟机列表（租户：edu-training）</h3>
+        <table>
+          <thead><tr><th>名称</th><th>镜像</th><th>规格</th><th>状态</th><th>IP 地址</th><th>所在节点</th><th>操作</th></tr></thead>
+          <tbody id="vm-table"></tbody>
+        </table>
+      </div>
+      <div class="risk-banner">🕵️ <b>实践任务2 线索</b>：逐条核对"镜像"列——加固镜像 vs 默认镜像有什么区别？哪台云主机存在风险？</div>
+    </div>
+
+    <!-- ============ 网络与安全组 ============ -->
+    <div class="page" id="page-network">
+      <div class="notice">🌐 <b>观察点</b>：① 不同租户的 VPC 是否隔离（8.2.2.1b）② 安全组规则是否最小权限（8.2.3.1a）——警惕 <b>0.0.0.0/0</b>（对所有地址放行）的规则！</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>VPC 与子网（实践任务③）</h3>
+          <table>
+            <thead><tr><th>VPC 名称</th><th>所属租户</th><th>网段</th><th>子网</th><th>隔离状态</th></tr></thead>
+            <tbody>
+              <tr><td>vpc-edu-training</td><td>edu-training</td><td>192.168.1.0/24</td><td>subnet-web / subnet-db</td><td><span class="tag-ok">✔ 与其他租户隔离</span></td></tr>
+              <tr><td>vpc-edu-research</td><td>edu-research</td><td>10.0.2.0/24</td><td>subnet-research</td><td><span class="tag-ok">✔ 与其他租户隔离</span></td></tr>
+            </tbody>
+          </table>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px;">💡 每个租户使用独立 VPC，路由表相互独立——不同云服务客户虚拟网络之间的隔离（8.2.2.1b）。</div>
+        </div>
+        <div class="card">
+          <h3>虚拟路由器与拓扑</h3>
+          <div class="arch-layer"><div class="layer-title">外部网络 203.0.113.0/24（浮动IP）</div>
+            <div class="arch-nodes"><div class="arch-node"><span class="node-name">🌐 Internet 网关</span><span class="node-desc">NAT / EIP</span></div></div>
+          </div>
+          <div class="arrow-down">⬇ vrouter-edu（Neutron 路由器）⬇</div>
+          <div class="arch-layer"><div class="layer-title">vpc-edu-training · 192.168.1.0/24</div>
+            <div class="arch-nodes">
+              <div class="arch-node"><span class="node-name">🖥️ web-server-01</span><span class="node-desc">192.168.1.10</span></div>
+              <div class="arch-node"><span class="node-name">🖥️ db-server-01</span><span class="node-desc">192.168.1.20</span></div>
+              <div class="arch-node"><span class="node-name">🖥️ test-vm-01</span><span class="node-desc">192.168.1.30</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>安全组规则（实践任务④：记录已配置的安全组策略）</h3>
+        <table>
+          <thead><tr><th>安全组</th><th>方向</th><th>协议/端口</th><th>源地址</th><th>策略</th><th>风险评估</th></tr></thead>
+          <tbody id="sg-table"></tbody>
+        </table>
+        <div class="risk-banner" style="margin-top:12px;">🕵️ <b>实践任务2 线索</b>："源地址 0.0.0.0/0" 意味着向整个互联网开放。哪些规则违反了"最小权限"原则？对应等保要求项是什么？</div>
+      </div>
+    </div>
+
+    <!-- ============ 存储与备份 ============ -->
+    <div class="page" id="page-storage">
+      <div class="notice">💾 <b>观察点</b>：① 云硬盘是否配置<b>自动备份策略</b>（8.2.4.6a 客户本地备份）② 对象存储桶的<b>访问权限</b>是否公共可读（8.2.4.5a 数据保密性）。</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>云硬盘（Cinder 卷）</h3>
+          <table>
+            <thead><tr><th>卷名称</th><th>大小</th><th>挂载到</th><th>自动备份策略</th><th>状态</th></tr></thead>
+            <tbody id="vol-table"></tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>对象存储（桶）</h3>
+          <table>
+            <thead><tr><th>桶名称</th><th>对象数</th><th>大小</th><th>访问权限</th><th>风险评估</th></tr></thead>
+            <tbody id="bucket-table"></tbody>
+          </table>
+          <div style="font-size:12px;color:var(--muted);margin-top:8px;">💡 公共读 = 任何互联网用户无需授权即可下载桶内全部对象。</div>
+        </div>
+      </div>
+      <div class="risk-banner">🕵️ <b>实践任务2 线索</b>：备份策略与桶权限共埋有 2 处风险，找到它们并给出整改建议。</div>
+    </div>
+
+    <!-- ============ 审计与告警 ============ -->
+    <div class="page" id="page-audit">
+      <div class="notice">📋 <b>观察点</b>：① 特权操作（虚拟机删除/重启等）是否被记录（8.2.3.3a 安全审计）② 是否启用入侵/异常流量检测与告警（8.2.3.2d）。</div>
+      <div class="card">
+        <h3>操作审计日志（特权命令审计）</h3>
+        <table>
+          <thead><tr><th>时间</th><th>操作者</th><th>操作类型</th><th>对象</th><th>结果</th></tr></thead>
+          <tbody id="audit-table"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>入侵检测与告警记录</h3>
+        <table>
+          <thead><tr><th>时间</th><th>告警类型</th><th>来源 → 目标</th><th>流量</th><th>处置</th></tr></thead>
+          <tbody id="alert-table"></tbody>
+        </table>
+        <div style="font-size:12px;color:var(--muted);margin-top:8px;">💡 告警类型包括：客户发起的攻击行为、对虚拟网络节点的攻击、虚拟机与宿主机/虚拟机之间的异常流量（8.2.3.2 a~d）。</div>
+      </div>
+    </div>
+
+    <!-- ============ 核查任务 ============ -->
+    <div class="page" id="page-task">
+      <div class="card">
+        <h3>📝 任务一：填写《云计算安全测评记录表》（对应 7-1.2 实践任务1）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">逐项核查下方 7 个指标：点击"查看位置"跳转到对应页面取证 → 选择测评结果 → 填写问题描述与整改建议 → 最后导出记录表。<br>测评结果取值：<b>符合 / 部分符合 / 不符合 / 不适用</b>。示例——问题描述："安全组规则中，入方向策略存在 0.0.0.0/0 允许访问 3389 端口"；整改建议："删除 0.0.0.0/0 策略，仅开放必要的业务端口"。</div>
+        <div id="checklist"></div>
+        <div style="display:flex;gap:12px;margin-top:6px;">
+          <button class="btn btn-primary" onclick="exportReport()">⬇ 导出《云计算安全测评记录表》</button>
+          <button class="btn btn-outline" onclick="resetChecklist()">重置填写</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🕵️ 任务二：云平台配置风险模拟分析（对应 7-1.2 实践任务2）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">本实验环境中埋了 <b>5 处配置风险</b>。请从下面候选发现中勾选你认为属于真实风险项（混有干扰项），然后提交评分。要求至少找出 3 处并说出对应等保要求。</div>
+        <div id="quiz"></div>
+        <div style="display:flex;gap:14px;align-items:center;margin-top:6px;">
+          <button class="btn btn-primary" onclick="submitQuiz()">提交评分</button>
+          <span class="score-box" id="quiz-score"></span>
+          <span id="quiz-feedback" style="font-size:13px;color:var(--muted);"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🧠 思考题（7-1.1 记录表 · 课后讨论）</h3>
+        <div style="font-size:14px;line-height:2;">
+          1️⃣ 你认为云平台最核心的安全机制是什么？<br>
+          2️⃣ 控制权从高到低 IaaS &gt; PaaS &gt; SaaS——为什么"用户拥有越多控制权，安全责任越大"？<br>
+          3️⃣ 案例：某公司存储桶权限设为"公开"导致超 100 万用户数据泄露——责任在云服务商还是客户？依据责任共担模型说明理由。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 模态框 -->
+<div class="modal-mask" id="modal-mask" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header"><span id="modal-title">详情</span><span class="modal-close" onclick="closeModal()">✕</span></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const vms=[
+ {name:"web-server-01",img:"CentOS-7.9-hardened（加固镜像）",spec:"4 vCPU / 8G / 80G",st:"running",ip:"192.168.1.10",node:"compute-01"},
+ {name:"db-server-01",img:"CentOS-7.9-hardened（加固镜像）",spec:"4 vCPU / 16G / 200G",st:"running",ip:"192.168.1.20",node:"compute-02"},
+ {name:"test-vm-01",img:"CentOS-7.9-default（默认镜像 · 未加固）",spec:"2 vCPU / 4G / 40G",st:"running",ip:"192.168.1.30",node:"compute-01"},
+ {name:"monitor-01",img:"Ubuntu-22.04-hardened（加固镜像）",spec:"2 vCPU / 4G / 40G",st:"running",ip:"192.168.1.40",node:"compute-02"},
+ {name:"backup-vm-01",img:"Ubuntu-22.04-hardened（加固镜像）",spec:"2 vCPU / 8G / 100G",st:"stopped",ip:"192.168.1.50",node:"compute-01"},
+ {name:"jenkins-01",img:"CentOS-7.9-hardened（加固镜像）",spec:"8 vCPU / 16G / 240G",st:"running",ip:"192.168.1.60",node:"compute-02"}
+];
+const sgs=[
+ {sg:"web-sg",dir:"入方向",port:"TCP 80",src:"0.0.0.0/0",act:"允许",risk:"ok",note:"Web 服务对公众开放，业务必需"},
+ {sg:"web-sg",dir:"入方向",port:"TCP 22",src:"192.168.1.0/24",act:"允许",risk:"ok",note:"仅内网管理网段可 SSH，最小权限"},
+ {sg:"db-sg",dir:"入方向",port:"TCP 3306",src:"0.0.0.0/0",act:"允许",risk:"bad",note:"数据库端口对全网开放！"},
+ {sg:"rdp-sg",dir:"入方向",port:"TCP 3389",src:"0.0.0.0/0",act:"允许",risk:"bad",note:"远程桌面对全网开放！"},
+ {sg:"web-sg",dir:"出方向",port:"全部",src:"0.0.0.0/0",act:"允许",risk:"warn",note:"出方向全放行，建议按需收敛"}
+];
+const vols=[
+ {name:"vol-web-01",size:"80 GB",mount:"web-server-01",backup:"每日 02:00 自动备份至 backup-vm-01",st:"running",risk:"ok"},
+ {name:"vol-db-01",size:"200 GB",mount:"db-server-01",backup:"每日 03:00 自动备份至 backup-vm-01",st:"running",risk:"ok"},
+ {name:"vol-jenkins-01",size:"240 GB",mount:"jenkins-01",backup:"未配置自动备份策略",st:"running",risk:"bad"}
+];
+const buckets=[
+ {name:"web-static-assets",objs:"1,204",size:"5.2 GB",acl:"私有读写",risk:"ok",note:""},
+ {name:"user-data-backup",objs:"86",size:"120 GB",acl:"公共读（public-read）",risk:"bad",note:"含用户个人信息备份"},
+ {name:"image-repo",objs:"35",size:"40 GB",acl:"私有读写",risk:"ok",note:""}
+];
+const audits=[
+ {t:"2026-10-24 09:12",who:"ops-admin（云服务商）",op:"虚拟机重启",obj:"test-vm-01",res:"已记录"},
+ {t:"2026-10-23 17:45",who:"student01（云客户）",op:"虚拟机删除",obj:"old-web-03",res:"已记录"},
+ {t:"2026-10-23 10:30",who:"student01（云客户）",op:"安全组规则变更",obj:"db-sg 新增 3306 放行规则",res:"已记录"},
+ {t:"2026-10-22 14:08",who:"ops-admin（云服务商）",op:"快照创建",obj:"vol-db-01",res:"已记录"},
+ {t:"2026-10-21 08:55",who:"ops-admin（云服务商）",op:"云存储桶 ACL 修改",obj:"user-data-backup → 公共读",res:"已记录"}
+];
+const alerts=[
+ {t:"2026-10-24 08:41",type:"对虚拟网络节点的端口扫描",from:"203.0.113.88 → vrouter-edu",flow:"12,406 pps",res:"已告警并拦截"},
+ {t:"2026-10-24 02:17",type:"虚拟机与宿主机异常流量",from:"test-vm-01 → compute-01 宿主机",flow:"峰值 860 Mbps",res:"已告警"},
+ {t:"2026-10-23 22:05",type:"暴力破解（SSH）",from:"198.51.100.24 → web-server-01:22",flow:"3,204 次尝试",res:"已告警并封禁IP"},
+ {t:"2026-10-23 11:33",type:"虚拟机间异常横向流量",from:"test-vm-01 → db-server-01:3306",flow:"持续 45 分钟",res:"已告警"}
+];
+/* 核查清单：id, 编号, 指标, 结论事实, 页面 */
+const checks=[
+ {code:"8.2.2.1b)",name:"虚拟网络隔离",where:"网络与安全组",fact:"两个租户各自使用独立 VPC（192.168.1.0/24 与 10.0.2.0/24），路由表独立，相互不可见。"},
+ {code:"8.2.3.1a)",name:"虚拟化网络边界访问控制",where:"网络与安全组",fact:"已配置安全组并设置规则，但存在 2 条源地址为 0.0.0.0/0 的高危端口（3306、3389）放行规则。"},
+ {code:"8.2.3.2d)",name:"攻击行为告警",where:"审计与告警",fact:"已启用入侵检测，能记录攻击类型/时间/流量并在检测到攻击或异常流量时告警。"},
+ {code:"8.2.3.3a)",name:"特权命令审计",where:"审计与告警",fact:"已启用操作审计，虚拟机删除/重启、安全组变更、ACL 修改等特权操作均有记录。"},
+ {code:"8.2.4.4a)",name:"加固镜像",where:"云主机管理",fact:"6 台云主机中 5 台使用加固镜像，test-vm-01 使用未加固的默认镜像（CentOS-7.9-default）。"},
+ {code:"8.2.4.6a)",name:"本地数据备份",where:"存储与备份",fact:"vol-web-01、vol-db-01 已配置自动备份，vol-jenkins-01 未配置任何自动备份策略。"},
+ {code:"8.2.4.5a)",name:"数据存储于中国境内（数据保密性）",where:"存储与备份",fact:"数据中心位于境内；但对象存储桶 user-data-backup（含用户个人信息）权限为公共读，存在泄露风险。"}
+];
+const suggested={
+ "8.2.2.1b)":{res:"符合",desc:"不同云服务客户使用独立 VPC，虚拟网络之间实现隔离。",fix:"保持现状，定期核查路由表与对等连接配置。"},
+ "8.2.3.1a)":{res:"不符合",desc:"db-sg 放行 3306 端口至 0.0.0.0/0，rdp-sg 放行 3389 端口至 0.0.0.0/0，违反最小权限原则。",fix:"删除 0.0.0.0/0 规则，3306/3389 仅对指定管理网段开放。"},
+ "8.2.3.2d)":{res:"符合",desc:"入侵检测已启用，攻击行为与异常流量均有告警记录。",fix:"保持告警推送通道畅通，定期演练告警响应。"},
+ "8.2.3.3a)":{res:"符合",desc:"虚拟机删除/重启等特权操作均记录在审计日志中。",fix:"建议将日志留存期延长至等保要求的 6 个月以上并异地备份。"},
+ "8.2.4.4a)":{res:"部分符合",desc:"test-vm-01 使用未加固的默认镜像 CentOS-7.9-default，存在已知漏洞风险。",fix:"更换为加固镜像或对系统进行安全加固后重建。"},
+ "8.2.4.6a)":{res:"不符合",desc:"vol-jenkins-01（240GB）未配置任何自动备份策略，存在数据丢失风险。",fix:"为该卷配置每日自动备份，并定期验证备份可恢复性。"},
+ "8.2.4.5a)":{res:"不符合",desc:"对象存储桶 user-data-backup 含用户个人信息，访问权限为公共读。",fix:"立即改为私有读写，启用桶级加密并审计访问日志。"}
+};
+const quizItems=[
+ {q:"发现：db-sg 安全组入方向存在 3306 端口对 0.0.0.0/0 放行的规则",risk:true,why:"高危端口对全网开放，攻击面过大 → 8.2.3.1a)"},
+ {q:"发现：对象存储桶 user-data-backup（含用户个人信息）权限为公共读",risk:true,why:"任何人可下载数据，泄露风险 → 8.2.4.5a)"},
+ {q:"发现：云主机 test-vm-01 使用未加固的默认镜像",risk:true,why:"存在已知漏洞 → 8.2.4.4a)"},
+ {q:"发现：云硬盘 vol-jenkins-01 未配置自动备份策略",risk:true,why:"数据丢失风险 → 8.2.4.6a)"},
+ {q:"发现：web-sg 允许 TCP 80 对 0.0.0.0/0 放行",risk:false,why:"Web 服务本应对公众提供，属业务必需，不算配置风险"},
+ {q:"发现：平台启用了操作审计，特权命令均有日志记录",risk:false,why:"这是合规配置，是加分项而非风险"},
+ {q:"发现：两个租户使用独立 VPC 且路由隔离",risk:false,why:"合规配置，对应 8.2.2.1b) 符合项"}
+];
+/* 状态 */
+const checkState={};
+checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});
+const quizState=new Set();
+
+/* ================= 渲染 ================= */
+function renderTables(){
+ document.getElementById("vm-table").innerHTML=vms.map(v=>{
+  const bad=v.img.includes("default");
+  return `<tr><td><b>${v.name}</b></td><td>${bad?`<span class="tag-bad">⚠ ${v.img}</span>`:v.img}</td><td>${v.spec}</td><td><span class="status ${v.st}">${v.st==="running"?"运行中":"已停止"}</span></td><td>${v.ip}</td><td>${v.node}</td><td><button class="btn btn-outline btn-sm" onclick='showVM("${v.name}")'>控制台</button></td></tr>`;
+ }).join("");
+ document.getElementById("sg-table").innerHTML=sgs.map(s=>{
+  const cls=s.risk==="bad"?"tag-bad":s.risk==="warn"?"tag-warn":"tag-ok";
+  return `<tr><td><b>${s.sg}</b></td><td>${s.dir}</td><td>${s.port}</td><td>${s.src==="0.0.0.0/0"?`<span class="tag-bad">0.0.0.0/0</span>`:s.src}</td><td>${s.act}</td><td class="${cls}">${s.note}</td></tr>`;
+ }).join("");
+ document.getElementById("vol-table").innerHTML=vols.map(v=>{
+  const bad=v.risk==="bad";
+  return `<tr><td><b>${v.name}</b></td><td>${v.size}</td><td>${v.mount}</td><td>${bad?`<span class="tag-bad">⚠ ${v.backup}</span>`:v.backup}</td><td><span class="status running">可用</span></td></tr>`;
+ }).join("");
+ document.getElementById("bucket-table").innerHTML=buckets.map(b=>{
+  const bad=b.risk==="bad";
+  return `<tr><td><b>${b.name}</b></td><td>${b.objs}</td><td>${b.size}</td><td>${bad?`<span class="tag-bad">⚠ ${b.acl}</span>`:b.acl}</td><td class="${bad?"tag-bad":"tag-ok"}">${bad?"数据泄露风险！":"正常"}</td></tr>`;
+ }).join("");
+ document.getElementById("audit-table").innerHTML=audits.map(a=>`<tr><td>${a.t}</td><td>${a.who}</td><td>${a.op}</td><td>${a.obj}</td><td><span class="tag-ok">✔ ${a.res}</span></td></tr>`).join("");
+ document.getElementById("alert-table").innerHTML=alerts.map(a=>`<tr><td>${a.t}</td><td><span class="tag-warn">⚠ ${a.type}</span></td><td>${a.from}</td><td>${a.flow}</td><td>${a.res}</td></tr>`).join("");
+}
+function renderChecklist(){
+ document.getElementById("checklist").innerHTML=checks.map((c,i)=>{
+  const s=checkState[c.code];
+  return `<div class="check-item">
+   <div class="ci-head">
+    <span class="ci-title">${i+1}. ${c.name} <span class="ci-code">${c.code}</span></span>
+    <span>取证位置：<a href="#" onclick="goto('${pageOf(c.where)}');return false;" style="color:var(--primary);">前往「${c.where}」→</a></span>
+   </div>
+   <div style="font-size:13px;color:var(--muted);">🔎 现场情况：<span style="color:var(--text)">${c.fact}</span></div>
+   <div class="ci-grid">
+    <label>测评结果：</label>
+    <select onchange="checkState['${c.code}'].res=this.value" style="width:180px;">
+      <option value="">— 请选择 —</option>
+      ${["符合","部分符合","不符合","不适用"].map(r=>`<option ${s.res===r?"selected":""}>${r}</option>`).join("")}
+    </select>
+    <label>问题描述：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].desc=this.value" placeholder="具体描述（可参考右侧行下方'现场情况'）">${s.desc}</textarea>
+    <label>整改建议：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].fix=this.value" placeholder="可操作的整改建议">${s.fix}</textarea>
+   </div>
+  </div>`;
+ }).join("");
+}
+function pageOf(where){return where==="云主机管理"?"vms":where==="网络与安全组"?"network":where==="存储与备份"?"storage":"audit";}
+function renderQuiz(){
+ document.getElementById("quiz").innerHTML=quizItems.map((q,i)=>
+  `<label class="quiz-opt" id="quiz-${i}" onclick="toggleQuiz(${i})"><input type="checkbox" style="margin-right:8px;" ${quizState.has(i)?"checked":""}><b>候选发现 ${i+1}</b>：${q.q}</label>`).join("");
+}
+function toggleQuiz(i){
+ if(quizState.has(i))quizState.delete(i);else quizState.add(i);
+ renderQuiz();
+}
+function submitQuiz(){
+ if(quizState.size===0){toast("请先勾选候选发现再提交");return;}
+ let score=0;const riskIdxs=[];
+ quizItems.forEach((q,i)=>{
+  const el=document.getElementById("quiz-"+i);
+  el.classList.remove("correct","wrong");
+  const picked=quizState.has(i);
+  if(picked===q.risk)score++;
+  if(q.risk)riskIdxs.push(i+1);
+  el.classList.add(picked===q.risk?"correct":"wrong");
+  el.querySelector("input").disabled=true;
+ });
+ document.getElementById("quiz-score").textContent=`得分：${score} / ${quizItems.length}`;
+ const found=quizItems.filter((q,i)=>quizState.has(i)&&q.risk).length;
+ document.getElementById("quiz-feedback").innerHTML=`真实风险共 5 处，你找到 <b>${found}</b> 处。绿色=判断正确，红色=判断有误。<br>真实风险：${riskIdxs.join("、")}（对应等保：8.2.3.1a / 8.2.4.5a / 8.2.4.4a / 8.2.4.6a，以及 web-sg 之外的 RDP 规则 8.2.3.1a）`;
+ quizState.clear();
+ toast(`评分完成：${score} / ${quizItems.length}，请查看各项解释`);
+}
+/* 导出记录表 */
+function exportReport(){
+ const rows=checks.map(c=>{
+  const s=checkState[c.code];
+  return `<tr><td style="border:1px solid #999;padding:6px;">${c.code}</td><td style="border:1px solid #999;padding:6px;">${c.name}</td><td style="border:1px solid #999;padding:6px;">${s.res||""}</td><td style="border:1px solid #999;padding:6px;">${s.desc||""}</td><td style="border:1px solid #999;padding:6px;">${s.fix||""}</td></tr>`;
+ }).join("");
+ const html=`<html><head><meta charset="utf-8"><title>云计算安全测评记录表</title></head><body style="font-family:SimSun;">
+ <h2 style="text-align:center;">云计算安全测评记录表</h2>
+ <p>测评对象：CloudLab 模拟云平台（edu-training 租户）　测评人：student01　日期：2026-10-24　依据：GB/T 22239-2019 云计算安全扩展要求</p>
+ <table style="border-collapse:collapse;width:100%;font-size:12px;"><tr><th style="border:1px solid #999;padding:6px;">测评指标编号</th><th style="border:1px solid #999;padding:6px;">测评指标名称</th><th style="border:1px solid #999;padding:6px;">测评结果</th><th style="border:1px solid #999;padding:6px;">问题描述</th><th style="border:1px solid #999;padding:6px;">整改建议</th></tr>${rows}</table>
+ <p style="font-size:12px;color:#666;">填写说明：测评结果取值为 符合 / 部分符合 / 不符合 / 不适用。</p>
+ </body></html>`;
+ const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="云计算安全测评记录表-student01.html";a.click();
+ toast("记录表已导出，可直接打印或提交学习通");
+}
+function resetChecklist(){
+ checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});
+ renderChecklist();toast("已重置全部填写内容");
+}
+/* 导航 */
+const titles={dashboard:"平台概览与架构",vms:"云主机管理",network:"网络与安全组",storage:"存储与备份",audit:"审计与告警",task:"等保核查任务"};
+function goto(p){
+ document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+ document.getElementById("page-"+p).classList.add("active");
+ document.querySelectorAll(".nav-item").forEach(e=>e.classList.toggle("active",e.dataset.page===p));
+ document.getElementById("pageTitle").textContent=titles[p];
+ document.querySelector(".content").scrollTop=0;
+}
+document.querySelectorAll(".nav-item").forEach(e=>e.addEventListener("click",()=>goto(e.dataset.page)));
+/* 模态框 */
+function showModal(t,b){document.getElementById("modal-title").textContent=t;document.getElementById("modal-body").innerHTML=b;document.getElementById("modal-mask").classList.add("show");}
+function closeModal(){document.getElementById("modal-mask").classList.remove("show");}
+function showVM(name){
+ const v=vms.find(x=>x.name===name);
+ const bad=v.img.includes("default");
+ showModal("云主机控制台 — "+v.name,`
+  <p><b>规格：</b>${v.spec}　<b>状态：</b>${v.st==="running"?"运行中":"已停止"}　<b>IP：</b>${v.ip}　<b>节点：</b>${v.node}</p>
+  <p><b>镜像：</b>${bad?`<span class="tag-bad">⚠ ${v.img}</span> — 该镜像未做安全加固，可能存在已知漏洞（等保 8.2.4.4a 关注项）`:`<span class="tag-ok">✔ ${v.img}</span>`}</p>
+  <p style="margin-top:8px;color:var(--muted);">💡 测评视角：核对镜像是否为"加固的操作系统镜像或提供安全加固服务"，未加固镜像应记录为部分符合/不符合项。</p>`);
+}
+const archInfo={
+ "KVM":"计算虚拟化层：将物理 CPU/内存抽象为多台虚拟机，实现虚拟机之间的资源隔离。",
+ "Ceph":"存储虚拟化：将多块物理磁盘组成统一存储池，提供三副本数据保护（对应数据备份恢复 8.2.4.6c 副本一致性）。",
+ "OVS":"网络虚拟化：Open vSwitch 在宿主机上实现虚拟交换，配合 Neutron 实现 VPC 隔离与安全组。",
+ "Nova 计算":"管理平台层计算组件：负责虚拟机创建、迁移、删除等生命周期管理。虚拟机迁移时访问控制策略应随其迁移（8.2.4.2a）。",
+ "Neutron 网络":"管理平台层网络组件：提供 VPC、子网、路由器、安全组。不同租户 VPC 隔离（8.2.2.1b）由它实现。",
+ "Cinder 存储":"管理平台层块存储组件：提供云硬盘卷与快照，支持备份策略。",
+ "Keystone 认证":"管理平台层认证组件：管理租户/项目、用户与角色，实现多租户身份隔离。",
+ "云主机 ECS":"IaaS 服务：客户可自主管理操作系统、中间件、应用与数据——OS 安全由客户负责！",
+ "云硬盘 Cinder":"IaaS 服务：客户应在本地保存业务数据备份（8.2.4.6a）。",
+ "VPC 网络":"IaaS 服务：租户专属虚拟网络，客户可自主设置安全策略（8.2.2.1d）。",
+ "服务器集群":"物理层：controller-01（控制）、compute-01/02（计算）、storage-01（存储），位于中国境内数据中心（8.2.1.1a）。",
+ "存储阵列":"物理层存储设备：2TB，由 Ceph 统一管理，多副本保护。",
+ "网络设备":"物理层网络设备：交换机与硬件防火墙，物理安全由云服务商负责。"
+};
+function showArch(k){showModal("架构节点 — "+k,`<p>${archInfo[k]||""}</p><p style="margin-top:8px;color:var(--muted);">责任共担提示：虚拟化层与物理层由<b>云服务商</b>负责；客户虚拟机上的操作系统、数据由<b>客户</b>负责。</p>`);}
+/* toast */
+let toastTimer;
+function toast(msg){
+ const t=document.getElementById("toast");
+ t.textContent=msg;t.classList.add("show");
+ clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),3200);
+}
+renderTables();renderChecklist();renderQuiz();
+</script>
+</body>
+</html>
