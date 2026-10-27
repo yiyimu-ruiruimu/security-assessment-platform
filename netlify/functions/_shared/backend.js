@@ -27,20 +27,44 @@ function getSiteBase(event) {
 
 /* ---------- 校验 Netlify Identity 令牌，返回用户信息或 null ---------- */
 async function verifyUser(event) {
+    var r = await verifyUserDetailed(event);
+    return r.user;
+}
+
+/* 带诊断的令牌校验：把失败原因（有没有令牌 / Identity 返回什么状态码）一并交回，
+ * 便于前端区分"没登录"（401）与"登录了但不是管理员"（403）。 */
+async function verifyUserDetailed(event) {
+    var headers = (event && event.headers) || {};
+    var auth = headers.authorization || headers.Authorization || '';
+    var base = getSiteBase(event);
+    if (auth.indexOf('Bearer ') !== 0) {
+        return { user: null, reason: 'no_token', hasToken: false, identityStatus: 0, base: base };
+    }
+    var token = auth.slice(7).trim();
+    if (!token) {
+        return { user: null, reason: 'empty_token', hasToken: false, identityStatus: 0, base: base };
+    }
     try {
-        var headers = (event && event.headers) || {};
-        var auth = headers.authorization || headers.Authorization || '';
-        if (auth.indexOf('Bearer ') !== 0) return null;
-        var token = auth.slice(7).trim();
-        if (!token) return null;
-        var base = getSiteBase(event);
         var res = await fetch(base + '/.netlify/identity/user', {
             headers: { Authorization: 'Bearer ' + token }
         });
-        if (!res.ok) return null;
-        return await res.json();   // { id, email, app_metadata, user_metadata, ... }
+        if (!res.ok) {
+            var body = await res.text().catch(function () { return ''; });
+            return {
+                user: null, reason: 'identity_' + res.status, hasToken: true,
+                identityStatus: res.status, identityBody: String(body || '').slice(0, 300), base: base
+            };
+        }
+        var u = await res.json();   // { id, email, app_metadata, user_metadata, ... }
+        if (!u || !u.email) {
+            return { user: null, reason: 'no_email_claim', hasToken: true, identityStatus: 200, base: base };
+        }
+        return { user: u, reason: 'ok', hasToken: true, identityStatus: 200, base: base };
     } catch (e) {
-        return null;
+        return {
+            user: null, reason: 'fetch_error', hasToken: true, identityStatus: 0,
+            detail: String(e && e.message || e).slice(0, 200), base: base
+        };
     }
 }
 
@@ -237,6 +261,7 @@ async function sbDelete(table, filters) {
 module.exports = {
     requireEnv: requireEnv,
     verifyUser: verifyUser,
+    verifyUserDetailed: verifyUserDetailed,
     isAdminEmail: isAdminEmail,
     adminDebug: adminDebug,
     json: json,

@@ -428,20 +428,30 @@
                 $('mainView').style.display = 'none';
                 $('quizCard').style.display = 'none';
                 $('gameCard').style.display = 'none';
-                // 诊断：直接显示服务端读到的变量名与名单条数，便于定位配置问题
                 var diag = $('deniedDiag');
-                if (diag) {
-                    var vars = info.envVars || [];
-                    var n = (typeof info.emailCount === 'number') ? info.emailCount : 0;
-                    if (!vars.length) {
-                        diag.innerHTML = '诊断：服务端<b>没有读到</b>任何管理员变量（当前登录 ' + info.email +
-                            '）。请确认变量名是 <b>ADMIN_EMAILS</b>（全大写 + 下划线），并已重新部署。';
-                    } else if (!n) {
-                        diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，但<b>名单为空</b>（值可能为空或格式不对）。';
+                if (!diag) return;
+                if (info.ok === false) {
+                    // 接口本身没通过：401 = 令牌失效/身份校验失败；403 = 登录正常但不在管理员名单
+                    if (info.status === 401) {
+                        diag.innerHTML = '诊断：身份校验未通过（HTTP 401，原因 ' + (info.reason || 'token 无效') +
+                            '）。<b>不是管理员名单的问题</b>——请先退出登录再重新登录，然后刷新本页。';
+                    } else if (info.status === 403) {
+                        diag.innerHTML = '诊断：登录正常，但服务端没有把您识别为管理员（HTTP 403）。请退出重登后再看。';
                     } else {
-                        diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，名单共 <b>' + n +
-                            '</b> 条邮箱，但当前账号 ' + info.email + ' 不在其中（请核对拼写、是否有引号）。';
+                        diag.innerHTML = '诊断：日志服务返回 HTTP ' + info.status + '，请确认 Functions 已部署。';
                     }
+                    return;
+                }
+                var vars = info.envVars || [];
+                var n = (typeof info.emailCount === 'number') ? info.emailCount : 0;
+                if (!vars.length) {
+                    diag.innerHTML = '诊断：服务端<b>没有读到</b>任何管理员变量（当前登录 ' + info.email +
+                        '）。请确认变量名是 <b>ADMIN_EMAILS</b>（全大写 + 下划线），并已重新部署。';
+                } else if (!n) {
+                    diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，但<b>名单为空</b>（值可能为空或格式不对）。';
+                } else {
+                    diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，名单共 <b>' + n +
+                        '</b> 条邮箱，但当前账号 ' + info.email + ' 不在其中（请核对拼写、是否有引号）。';
                 }
             }
         }).catch(function () {
