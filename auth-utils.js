@@ -143,13 +143,28 @@
             if (!u) return null;
             var token = getAccessToken(u);
             if (!token) return null;
-            return fetch('/.netlify/functions/logs?self=1', {
-                headers: { 'Authorization': 'Bearer ' + token }
-            }).then(function (r) {
-                if (!r.ok) return { ok: false, status: r.status };
-                return r.json();
-            }).catch(function () { return null; });
-        });
+
+            function attempt(tk) {
+                return fetch('/.netlify/functions/logs?self=1', {
+                    headers: { 'Authorization': 'Bearer ' + tk }
+                }).then(function (r) {
+                    if (!r.ok) return { ok: false, status: r.status };
+                    return r.json();
+                });
+            }
+
+            return attempt(token).then(function (info) {
+                // 令牌过期是常态：netlify-identity-widget 的 access_token 可能已失效，
+                // 先强制刷新一次再重试，避免把"掉线"误报成"没有权限"。
+                if (info && info.ok === false && info.status === 401 && typeof u.jwt === 'function') {
+                    return u.jwt(true).then(function (fresh) {
+                        if (!fresh) return info;
+                        return attempt(fresh);
+                    }).catch(function () { return info; });
+                }
+                return info;
+            });
+        }).catch(function () { return null; });
     }
 
     /* ---------- 查询日志（admin.html 用，后端校验管理员身份） ---------- */

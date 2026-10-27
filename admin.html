@@ -97,6 +97,7 @@
         <p style="font-size:1.05rem; color:#a93226;">无访问权限</p>
         <p class="muted" style="margin:8px 0 0; font-size:0.9rem;">当前账号不是教师管理员。请联系平台负责人在 Netlify 环境变量 ADMIN_EMAILS 中加入您的邮箱。</p>
         <p class="muted" id="deniedDiag" style="margin:10px 0 0; font-size:0.82rem; color:#7f8c8d;"></p>
+        <button class="btn btn-primary" id="reloginBtn" style="display:none; margin-top:14px;" onclick="doRelogin()">退出并重新登录</button>
     </div>
 
     <div id="mainView" style="display:none;">
@@ -262,6 +263,14 @@
     function doLogin() {
         if (typeof netlifyIdentity === 'undefined') { showMsg('err', '登录组件未加载：请先部署到 Netlify 并开启 Identity 服务。'); return; }
         netlifyIdentity.open('login');
+    }
+
+    /* 401 时用：清掉本地过期令牌，重新拉起登录窗口 */
+    function doRelogin() {
+        try { if (typeof netlifyIdentity !== 'undefined') netlifyIdentity.logout(); } catch (e) { /* noop */ }
+        setTimeout(function () {
+            try { if (typeof netlifyIdentity !== 'undefined') netlifyIdentity.open('login'); } catch (e) { /* noop */ }
+        }, 400);
     }
 
     function fmtTime(iso) {
@@ -430,13 +439,17 @@
                 $('gameCard').style.display = 'none';
                 var diag = $('deniedDiag');
                 if (!diag) return;
+                var reBtn = $('reloginBtn');
+                if (reBtn) reBtn.style.display = 'none';
                 if (info.ok === false) {
                     // 接口本身没通过：401 = 令牌失效/身份校验失败；403 = 登录正常但不在管理员名单
                     if (info.status === 401) {
                         diag.innerHTML = '诊断：身份校验未通过（HTTP 401，原因 ' + (info.reason || 'token 无效') +
-                            '）。<b>不是管理员名单的问题</b>——请先退出登录再重新登录，然后刷新本页。';
+                            '）。<b>不是管理员名单的问题</b>——点下方按钮重新登录后再刷新。';
+                        if (reBtn) reBtn.style.display = 'inline-block';
                     } else if (info.status === 403) {
                         diag.innerHTML = '诊断：登录正常，但服务端没有把您识别为管理员（HTTP 403）。请退出重登后再看。';
+                        if (reBtn) reBtn.style.display = 'inline-block';
                     } else {
                         diag.innerHTML = '诊断：日志服务返回 HTTP ' + info.status + '，请确认 Functions 已部署。';
                     }
@@ -444,6 +457,7 @@
                 }
                 var vars = info.envVars || [];
                 var n = (typeof info.emailCount === 'number') ? info.emailCount : 0;
+                var masks = (info.emailMasks || []).join('、');
                 if (!vars.length) {
                     diag.innerHTML = '诊断：服务端<b>没有读到</b>任何管理员变量（当前登录 ' + info.email +
                         '）。请确认变量名是 <b>ADMIN_EMAILS</b>（全大写 + 下划线），并已重新部署。';
@@ -451,7 +465,8 @@
                     diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，但<b>名单为空</b>（值可能为空或格式不对）。';
                 } else {
                     diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，名单共 <b>' + n +
-                        '</b> 条邮箱，但当前账号 ' + info.email + ' 不在其中（请核对拼写、是否有引号）。';
+                        '</b> 条：<b>' + masks + '</b>；当前登录账号是 <b>' + info.email +
+                        '</b>，两者不一致（请核对拼写、域名、是否有空格或引号）。';
                 }
             }
         }).catch(function () {

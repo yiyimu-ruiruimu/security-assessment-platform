@@ -35,6 +35,7 @@ exports.handler = async function (event) {
             diag: true,
             adminEnvVars: dbg.envVars,          // ['ADMIN_EMAILS'] 说明变量已被读到
             adminEmailCount: dbg.emailCount,     // >0 说明名单解析出了邮箱
+            adminEmailMasks: dbg.emailMasks,      // 脱敏后的名单，用于比对拼写
             identitySettingsStatus: idProbe,     // 200 说明 Identity 服务正常
             siteBase: v.base,
             token: { hasToken: v.hasToken, reason: v.reason, identityStatus: v.identityStatus }
@@ -63,7 +64,8 @@ exports.handler = async function (event) {
             email: email,
             admin: isAdmin,
             envVars: dbg.envVars,
-            emailCount: dbg.emailCount
+            emailCount: dbg.emailCount,
+            emailMasks: dbg.emailMasks
         });
     }
 
@@ -76,7 +78,8 @@ exports.handler = async function (event) {
             hint: '当前账号不是教师管理员',
             email: email,
             envVars: dbg.envVars,
-            emailCount: dbg.emailCount
+            emailCount: dbg.emailCount,
+            emailMasks: dbg.emailMasks
         });
     }
 

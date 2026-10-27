@@ -118,12 +118,22 @@ function isAdminEmail(email) {
 }
 
 /* 诊断信息：只暴露"变量名 + 邮箱条数 + 是否命中"，不泄露具体邮箱值 */
+function maskEmail(e) {
+    var s = String(e || '');
+    var at = s.indexOf('@');
+    if (at <= 0) return '***';
+    var local = s.slice(0, at), domain = s.slice(at);
+    if (local.length <= 2) return local.charAt(0) + '***' + domain;
+    return local.slice(0, 2) + '***' + domain;
+}
+
 function adminDebug(email) {
     var r = adminEmailList();
     return {
         matched: !!email && r.list.indexOf(String(email).trim().toLowerCase()) !== -1,
         envVars: r.names,
-        emailCount: r.list.length
+        emailCount: r.list.length,
+        emailMasks: r.list.map(maskEmail)     // 例：zh***@bitc.edu.cn（脱敏，用于比对拼写）
     };
 }
 
