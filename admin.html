@@ -96,6 +96,7 @@
     <div id="deniedView" style="display:none; text-align:center; padding:18px 0;">
         <p style="font-size:1.05rem; color:#a93226;">无访问权限</p>
         <p class="muted" style="margin:8px 0 0; font-size:0.9rem;">当前账号不是教师管理员。请联系平台负责人在 Netlify 环境变量 ADMIN_EMAILS 中加入您的邮箱。</p>
+        <p class="muted" id="deniedDiag" style="margin:10px 0 0; font-size:0.82rem; color:#7f8c8d;"></p>
     </div>
 
     <div id="mainView" style="display:none;">
@@ -427,6 +428,21 @@
                 $('mainView').style.display = 'none';
                 $('quizCard').style.display = 'none';
                 $('gameCard').style.display = 'none';
+                // 诊断：直接显示服务端读到的变量名与名单条数，便于定位配置问题
+                var diag = $('deniedDiag');
+                if (diag) {
+                    var vars = info.envVars || [];
+                    var n = (typeof info.emailCount === 'number') ? info.emailCount : 0;
+                    if (!vars.length) {
+                        diag.innerHTML = '诊断：服务端<b>没有读到</b>任何管理员变量（当前登录 ' + info.email +
+                            '）。请确认变量名是 <b>ADMIN_EMAILS</b>（全大写 + 下划线），并已重新部署。';
+                    } else if (!n) {
+                        diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，但<b>名单为空</b>（值可能为空或格式不对）。';
+                    } else {
+                        diag.innerHTML = '诊断：已读到变量 ' + vars.join('、') + '，名单共 <b>' + n +
+                            '</b> 条邮箱，但当前账号 ' + info.email + ' 不在其中（请核对拼写、是否有引号）。';
+                    }
+                }
             }
         }).catch(function () {
             showMsg('err', '身份校验失败，请刷新重试。');

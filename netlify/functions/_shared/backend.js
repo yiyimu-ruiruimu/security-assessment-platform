@@ -44,10 +44,63 @@ async function verifyUser(event) {
     }
 }
 
+/* ---------- 管理员邮箱名单 ----------
+ * 容错设计：Netlify 环境变量名大小写/连字符敏感，历史上出现过 ADMIN-EMAILS、
+ * admin-emails、ADMIN_EMAIL 等写法导致读取为空。这里统一收口：
+ *   1) 先按常见写法逐个尝试；
+ *   2) 再遍历全部环境变量，凡规范化后等于 adminemails / adminemail 的一并纳入；
+ *   3) 值统一去引号、去 mailto:，支持英文/中文逗号、分号、换行、空格分隔。
+ */
+var ADMIN_VAR_CANDIDATES = [
+    'ADMIN_EMAILS', 'ADMIN_EMAIL', 'ADMINEMAILS', 'ADMIN-EMAILS',
+    'admin-emails', 'admin_emails', 'Admin_Emails', 'TEACHER_EMAILS'
+];
+
+function normEnvKey(k) {
+    return String(k || '').toLowerCase().replace(/[^a-z]/g, '');
+}
+
+function adminEmailList() {
+    var names = [], raw = [];
+    ADMIN_VAR_CANDIDATES.forEach(function (n) {
+        var v = process.env[n];
+        if (v != null && String(v).trim() !== '') { names.push(n); raw.push(v); }
+    });
+    Object.keys(process.env).forEach(function (k) {
+        if (names.indexOf(k) !== -1) return;
+        var nk = normEnvKey(k);
+        if (nk === 'adminemails' || nk === 'adminemail' || nk === 'teacheremails') {
+            var v = process.env[k];
+            if (v != null && String(v).trim() !== '') { names.push(k); raw.push(v); }
+        }
+    });
+    var list = [];
+    raw.forEach(function (v) {
+        String(v)
+            .replace(/[\u201c\u201d\u2018\u2019"']/g, '')   // 去各种引号
+            .split(/[,\uff0c;\uff1b\s]+/)                    // 英/中文逗号、分号、空白
+            .forEach(function (s) {
+                s = String(s).trim().replace(/^mailto:/i, '').toLowerCase();
+                if (s && s.indexOf('@') > 0 && s.length <= 200 && list.indexOf(s) === -1) list.push(s);
+            });
+    });
+    return { list: list, names: names };
+}
+
 function isAdminEmail(email) {
     if (!email) return false;
-    var list = requireEnv('ADMIN_EMAILS').split(',').map(function (s) { return s.trim().toLowerCase(); }).filter(Boolean);
-    return list.indexOf(String(email).toLowerCase()) !== -1;
+    var list = adminEmailList().list;
+    return list.indexOf(String(email).trim().toLowerCase()) !== -1;
+}
+
+/* 诊断信息：只暴露"变量名 + 邮箱条数 + 是否命中"，不泄露具体邮箱值 */
+function adminDebug(email) {
+    var r = adminEmailList();
+    return {
+        matched: !!email && r.list.indexOf(String(email).trim().toLowerCase()) !== -1,
+        envVars: r.names,
+        emailCount: r.list.length
+    };
 }
 
 function json(status, obj) {
@@ -185,6 +238,7 @@ module.exports = {
     requireEnv: requireEnv,
     verifyUser: verifyUser,
     isAdminEmail: isAdminEmail,
+    adminDebug: adminDebug,
     json: json,
     normTime: normTime,
     getClientIp: getClientIp,

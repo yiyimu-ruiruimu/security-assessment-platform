@@ -21,10 +21,16 @@ exports.handler = async function (event) {
     const email = String(user.email || '').toLowerCase();
     const isAdmin = B.isAdminEmail(email);
 
-    // 2) 身份探测：?self=1
+    // 2) 身份探测：?self=1（附带 env 诊断：读到了哪些变量名、名单里有几条邮箱）
     const q = (event.queryStringParameters || {});
     if (q.self === '1' || q.self === 'true') {
-        return B.json(200, { email: email, admin: isAdmin });
+        const dbg = B.adminDebug(email);
+        return B.json(200, {
+            email: email,
+            admin: isAdmin,
+            envVars: dbg.envVars,
+            emailCount: dbg.emailCount
+        });
     }
 
     // 3) 仅管理员可查
