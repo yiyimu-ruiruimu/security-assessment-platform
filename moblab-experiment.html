@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MobLab 移动互联实验环境 · 信息安全测评与风险评估</title>
+<style>
+  :root{--bg:#f4f6fa;--panel:#fff;--border:#e3e8f0;--text:#1f2937;--muted:#6b7280;--primary:#0ea5e9;--primary-dark:#0369a1;--green:#10b981;--red:#ef4444;--orange:#f59e0b;--purple:#8b5cf6;--sidebar:#0f2436;--sidebar-text:#cbd5e1;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  body{background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;}
+  .sidebar{width:230px;background:var(--sidebar);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;}
+  .logo{padding:18px 20px;font-size:17px;font-weight:bold;color:#fff;border-bottom:1px solid #1e3a52;}
+  .nav{flex:1;padding:12px 0;}
+  .nav-item{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;transition:all .15s;border-left:3px solid transparent;}
+  .nav-item:hover{background:#1e3a52;color:#fff;}
+  .nav-item.active{background:#1e3a52;color:#fff;border-left-color:var(--primary);}
+  .sidebar-footer{padding:14px 18px;border-top:1px solid #1e3a52;font-size:12px;color:#5f7a90;line-height:1.8;}
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0;}
+  .topbar h2{font-size:16px;}
+  .env-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:3px 10px;border-radius:12px;border:1px solid #a7f3d0;}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .content{flex:1;overflow-y:auto;padding:20px 24px;}
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .25s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;}
+  .card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .grid{display:grid;gap:16px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .stat-card .label{font-size:13px;color:var(--muted);}
+  .stat-card .value{font-size:26px;font-weight:700;margin:6px 0 4px;}
+  .stat-card .sub{font-size:12px;}
+  .stat-card.primary{border-top:3px solid var(--primary);}
+  .stat-card.green{border-top:3px solid var(--green);}
+  .stat-card.orange{border-top:3px solid var(--orange);}
+  .stat-card.red{border-top:3px solid var(--red);}
+  .btn{border:none;border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-sm{padding:4px 10px;font-size:12px;}
+  .btn-outline{background:#fff;color:var(--primary);border:1px solid var(--primary);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:10px 12px;background:#f8fafc;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:hover td{background:#f8fafc;}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:2px 10px;border-radius:12px;white-space:nowrap;}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;}
+  .status.online{background:#ecfdf5;color:#059669;}.status.online::before{background:var(--green);}
+  .status.offline{background:#f3f4f6;color:#6b7280;}.status.offline::before{background:#9ca3af;}
+  .status.warn{background:#fffbeb;color:#d97706;}.status.warn::before{background:var(--orange);}
+  .status.bad{background:#fef2f2;color:var(--red);}.status.bad::before{background:var(--red);}
+  .tag-ok{color:#059669;font-weight:600;}
+  .tag-bad{color:var(--red);font-weight:600;}
+  .tag-warn{color:#d97706;font-weight:600;}
+  .notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;font-size:13px;color:#1e40af;margin-bottom:16px;}
+  .risk-banner{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 16px;font-size:13px;color:#9a3412;margin:12px 0 0;}
+  /* 端管云架构 */
+  .layer{border:2px dashed var(--border);border-radius:10px;padding:14px;margin-bottom:6px;}
+  .layer .layer-title{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .nodes{display:flex;gap:10px;flex-wrap:wrap;}
+  .node{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;text-align:center;min-width:120px;cursor:pointer;transition:all .15s;}
+  .node:hover{border-color:var(--primary);background:#f0f9ff;transform:translateY(-2px);}
+  .node .n-name{font-weight:600;display:block;margin-bottom:3px;}
+  .node .n-desc{font-size:11px;color:var(--muted);}
+  .node.dev{border-left:3px solid var(--primary);}
+  .node.net{border-left:3px solid var(--orange);}
+  .node.app{border-left:3px solid var(--purple);}
+  .arrow-down{text-align:center;color:var(--muted);margin:2px 0 6px;}
+  /* 手机模型 */
+  .phone{width:170px;border:3px solid #1f2937;border-radius:22px;background:#fff;margin:0 auto;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.12);}
+  .phone .notch{height:20px;background:#1f2937;border-radius:0 0 12px 12px;margin:0 30px;}
+  .phone .screen{padding:12px 10px;min-height:230px;font-size:11px;}
+  .phone .app-icon{display:inline-flex;flex-direction:column;align-items:center;width:46px;margin:6px 0;font-size:9px;color:var(--muted);text-align:center;}
+  .phone .app-icon .ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;margin-bottom:2px;}
+  .phone .app-icon.signed .ico{background:var(--green);}
+  .phone .app-icon.unsigned .ico{background:var(--red);}
+  .phone .homebar{height:4px;width:56px;background:#cbd5e1;border-radius:2px;margin:8px auto;}
+  .wifi-row{display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:6px;font-size:11px;}
+  .wifi-row:hover{background:#f1f5f9;}
+  /* 配置组 */
+  .cfg-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:13px;}
+  .cfg-item .cfg-label b{display:block;}
+  .cfg-item .cfg-label span{font-size:12px;color:var(--muted);}
+  .cfg-val{font-weight:600;}
+  .switch{width:44px;height:24px;border-radius:12px;position:relative;cursor:pointer;flex-shrink:0;}
+  .switch::after{content:"";position:absolute;width:18px;height:18px;border-radius:50%;background:#fff;top:3px;transition:all .2s;}
+  .switch.on{background:var(--green);}.switch.on::after{right:3px;}
+  .switch.off{background:#cbd5e1;}.switch.off::after{left:3px;}
+  /* 任务页 */
+  .check-item{border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+  .check-item .ci-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .check-item .ci-title{font-weight:600;font-size:14px;}
+  .ci-code{background:#ecfeff;color:#0e7490;font-size:12px;padding:2px 10px;border-radius:10px;}
+  .ci-grid{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-top:10px;align-items:start;font-size:13px;}
+  .check-item select,.check-item textarea{font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;}
+  .check-item textarea{width:100%;resize:vertical;}
+  .quiz-opt{display:block;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--primary);background:#f0f9ff;}
+  .quiz-opt.correct{border-color:var(--green);background:#ecfdf5;}
+  .quiz-opt.wrong{border-color:var(--red);background:#fef2f2;}
+  .score-box{font-size:20px;font-weight:700;}
+  .toast{position:fixed;top:70px;right:24px;background:#1f2937;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;display:none;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:380px;}
+  .toast.show{display:block;animation:fadeIn .3s;}
+  .modal-mask{position:fixed;inset:0;background:rgba(15,35,54,.5);display:none;align-items:center;justify-content:center;z-index:200;}
+  .modal-mask.show{display:flex;}
+  .modal{background:#fff;border-radius:12px;width:560px;max-height:85vh;overflow-y:auto;}
+  .modal-header{padding:16px 22px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .modal-close{cursor:pointer;color:var(--muted);font-size:20px;}
+  .modal-body{padding:20px 22px;font-size:13px;line-height:1.9;}
+  @media(max-width:1100px){.grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo">📱 MobLab 移动互联实验平台</div>
+  <div class="nav">
+    <div class="nav-item active" data-page="arch">🏗️ 端管云架构总览</div>
+    <div class="nav-item" data-page="ac">📡 无线控制器（AC）</div>
+    <div class="nav-item" data-page="mdm">📲 MDM 终端管理</div>
+    <div class="nav-item" data-page="app">🧩 移动应用管控</div>
+    <div class="nav-item" data-page="wids">🚨 无线入侵检测</div>
+    <div class="nav-item" data-page="task">📝 等保核查任务</div>
+  </div>
+  <div class="sidebar-footer">
+    课程：信息安全测评与风险评估<br>
+    7.2.1 移动互联架构认知<br>
+    7.2.2 移动安全配置核查<br>
+    实验环境版本 v1.0（模拟）
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h2 id="pageTitle">端管云架构总览</h2>
+    <span class="env-tag">● 模拟实验环境运行中</span>
+    <div class="topbar-right"><div class="avatar">学</div><span>student01 · 企业移动办公模拟环境</span></div>
+  </div>
+  <div class="content">
+
+    <!-- ===== 架构 ===== -->
+    <div class="page active" id="page-arch">
+      <div class="notice">📖 <b>7-2.1 实践任务</b>：观察下方"端管云"架构，完成《移动互联架构认知》：① 标注各组件名称 ② 找出至少 3 个安全控制点并说明对应标准 ③ 说明哪些环节是等保检查重点。</div>
+      <div class="grid grid-4" style="grid-template-columns:repeat(3,1fr);">
+        <div class="stat-card primary"><div class="label">在线移动终端</div><div class="value">8</div><div class="sub" style="color:var(--red)">⚠ 2 台未安装 MDM 客户端</div></div>
+        <div class="stat-card orange"><div class="label">无线 AP</div><div class="value">3</div><div class="sub" style="color:var(--red)">⚠ 存在违规配置</div></div>
+        <div class="stat-card purple" style="border-top:3px solid var(--purple);"><div class="label">移动应用</div><div class="value">6</div><div class="sub" style="color:var(--red)">⚠ 1 个非证书签名应用</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h3>🏗️ 移动办公"端管云"三层架构（点击节点查看安全关注点）</h3>
+        <div class="layer"><div class="layer-title">☁️ 云（应用/服务层）—— 移动应用 + 云端服务平台</div>
+          <div class="nodes">
+            <div class="node app" onclick="showNode('移动OA APP')"><span class="n-name">📮 移动OA APP</span><span class="n-desc">HTTPS 访问</span></div>
+            <div class="node app" onclick="showNode('企业邮件服务')"><span class="n-name">📧 企业邮件服务</span><span class="n-desc">云端服务器</span></div>
+            <div class="node app" onclick="showNode('后端服务器集群')"><span class="n-name">🗄️ 后端服务器集群</span><span class="n-desc">ECS / 数据库 / 中间件</span></div>
+          </div>
+        </div>
+        <div class="arrow-down">▲ HTTPS / 业务数据 ▲</div>
+        <div class="layer"><div class="layer-title">📶 管（网络层）—— 无线网络 + 接入网关</div>
+          <div class="nodes">
+            <div class="node net" onclick="showNode('WiFi AP')"><span class="n-name">📡 WiFi AP ×3</span><span class="n-desc">无线接入点</span></div>
+            <div class="node net" onclick="showNode('无线接入网关')"><span class="n-name">🔀 无线接入网关</span><span class="n-desc">★ 等保检查重点</span></div>
+            <div class="node net" onclick="showNode('无线控制器AC')"><span class="n-name">🎛️ 无线控制器 AC</span><span class="n-desc">统一配置管理</span></div>
+            <div class="node net" onclick="showNode('企业防火墙')"><span class="n-name">🛡️ 企业防火墙</span><span class="n-desc">有线/无线边界</span></div>
+          </div>
+        </div>
+        <div class="arrow-down">▲ WPA2 加密 / 接入认证 ▲</div>
+        <div class="layer"><div class="layer-title">📱 端（终端层）—— 移动终端</div>
+          <div class="nodes">
+            <div class="node dev" onclick="showNode('员工智能手机')"><span class="n-name">📱 员工手机 ×8</span><span class="n-desc">BYOD 自带设备</span></div>
+            <div class="node dev" onclick="showNode('平板电脑')"><span class="n-name">📲 平板电脑</span><span class="n-desc">移动办公</span></div>
+            <div class="node dev" onclick="showNode('专用终端POS')"><span class="n-name">💳 专用终端（POS）</span><span class="n-desc">业务专用</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>🔍 网络连接路径（7-2.1 教师演示要点）</h3>
+          <table>
+            <thead><tr><th>路径</th><th>说明</th><th>等保检查点</th></tr></thead>
+            <tbody>
+              <tr><td>移动终端 → WiFi AP</td><td>无线接入（认证+加密）</td><td>访问控制：禁止WEP（8.3.2.2）</td></tr>
+              <tr><td>WiFi AP → 无线接入网关</td><td>★ 有线与无线之间必须通过无线接入网关设备</td><td>边界防护（8.3.2.1）</td></tr>
+              <tr><td>无线接入网关 → 企业内网</td><td>有线与无线网络边界隔离</td><td>边界防护 + 入侵防范（8.3.2.3）</td></tr>
+              <tr><td>企业内网 → 云端服务</td><td>移动应用数据上云</td><td>结合云计算扩展要求</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>⚠️ 端管云三大安全风险（学习目标②）</h3>
+          <table>
+            <thead><tr><th>层</th><th>典型风险</th><th>典型场景</th></tr></thead>
+            <tbody>
+              <tr><td><b>端</b></td><td>设备丢失/被盗、恶意软件、系统漏洞、未授权访问</td><td>手机丢失未启用远程擦除；root后权限失控；解锁密码过于简单</td></tr>
+              <tr><td><b>管</b></td><td>中间人攻击、非法接入、信号劫持、弱加密破解</td><td>伪造WiFi热点（Evil Twin）；蹭网；Deauth攻击；破解WEP</td></tr>
+              <tr><td><b>云</b></td><td>逆向工程、数据明文存储、不安全传输、权限滥用</td><td>APK未混淆；口令明文存储；HTTP明文传输；读取无关权限</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== AC ===== -->
+    <div class="page" id="page-ac">
+      <div class="notice">📡 <b>7-2.2 教师演示/实践任务2</b>：模拟企业级无线控制器配置界面。逐项检查：① 认证方式（非WEP）② 加密算法（AES）③ SSID广播 ④ WPS ⑤ 是否多AP共用同一密钥。</div>
+      <div class="card">
+        <h3>🎛️ 无线控制器 AC-01（192.168.50.1）— 全局安全配置</h3>
+        <div id="ac-cfg"></div>
+      </div>
+      <div class="card">
+        <h3>📡 AP 列表（无线接入点的物理位置 · 8.3.1.1）</h3>
+        <table>
+          <thead><tr><th>AP 名称</th><th>SSID</th><th>位置</th><th>覆盖说明</th><th>状态</th></tr></thead>
+          <tbody id="ap-table"></tbody>
+        </table>
+        <div class="risk-banner">🕵️ <b>核查线索</b>：对照 WEP vs WPA 对比表——WEP 的加密算法是 RC4（已破解，数分钟可破），等保明令禁止。找出列表里不合规的 AP。</div>
+      </div>
+      <div class="card">
+        <h3>🔐 WEP vs WPA 速查（等保合规性）</h3>
+        <table>
+          <thead><tr><th>对比项</th><th>WEP ❌</th><th>WPA/WPA2 ✔</th><th>WPA3 ✔</th></tr></thead>
+          <tbody>
+            <tr><td>加密算法</td><td class="tag-bad">RC4（已破解）</td><td>AES（安全）</td><td>AES-256（更安全）</td></tr>
+            <tr><td>密钥管理</td><td class="tag-bad">静态密钥</td><td>动态（4次握手）</td><td>动态（SAE）</td></tr>
+            <tr><td>破解难度</td><td class="tag-bad">容易（数分钟）</td><td>困难</td><td>极难</td></tr>
+            <tr><td>等保合规</td><td class="tag-bad">不合规</td><td class="tag-ok">合规</td><td class="tag-ok">合规</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== MDM ===== -->
+    <div class="page" id="page-mdm">
+      <div class="notice">📲 <b>7-2.2 实践任务1</b>：模拟 MDM（移动设备管理）平台。检查：① 是否安装并运行终端管理客户端 ② 是否支持远程锁定/擦除 ③ 是否存在 root/越狱设备 ④ 锁屏密码策略。</div>
+      <div class="grid grid-4">
+        <div class="stat-card primary"><div class="label">纳管设备</div><div class="value">8</div><div class="sub">全部员工设备</div></div>
+        <div class="stat-card green"><div class="label">MDM 客户端运行</div><div class="value">6</div><div class="sub" style="color:var(--red)">2 台未安装 → 8.3.3.1a)</div></div>
+        <div class="stat-card red"><div class="label">风险设备</div><div class="value">3</div><div class="sub">root / 无锁屏密码</div></div>
+        <div class="stat-card orange"><div class="label">远程擦除演练</div><div class="value">支持</div><div class="sub">最近一次：10-20</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h3>📲 受管设备列表</h3>
+        <table>
+          <thead><tr><th>设备</th><th>使用者</th><th>MDM 客户端</th><th>锁屏密码</th><th>root/越狱</th><th>远程锁定/擦除</th><th>操作</th></tr></thead>
+          <tbody id="mdm-table"></tbody>
+        </table>
+        <div class="risk-banner">🕵️ <b>核查线索</b>：未安装 MDM 客户端、未设置锁屏密码、root 设备分别违反什么要求？等保三级还要求"接受远程锁定、远程擦除"。</div>
+      </div>
+      <div class="card">
+        <h3>🧰 BYOD 管控策略对比（7-2.1 知识点）</h3>
+        <table>
+          <thead><tr><th>措施</th><th>方式</th><th>利弊分析</th></tr></thead>
+          <tbody>
+            <tr><td><b>MDM</b> 移动设备管理</td><td>统一管理设备，下发策略</td><td>企业掌控力强，但员工抵触</td></tr>
+            <tr><td><b>MAM</b> 移动应用管理</td><td>仅管理企业应用，不管个人应用</td><td>平衡企业安全与员工隐私</td></tr>
+            <tr><td><b>容器化</b> 工作与个人分离</td><td>设备中划分"工作区"和"个人区"</td><td class="tag-ok">目前最优方案</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 应用管控 ===== -->
+    <div class="page" id="page-app">
+      <div class="notice">🧩 <b>观察点</b>：等保 8.3.3.2 要求"只允许指定证书签名的应用安装运行"。检查应用白名单策略与终端实际安装的应用。</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>🧩 应用管控策略（MDM 下发）</h3>
+          <div id="app-cfg"></div>
+        </div>
+        <div class="card">
+          <h3>📦 企业应用库与签名状态</h3>
+          <table>
+            <thead><tr><th>应用</th><th>版本</th><th>证书签名</th><th>白名单</th><th>说明</th></tr></thead>
+            <tbody id="applib-table"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="grid grid-2" style="margin-top:16px;">
+        <div class="card">
+          <h3>📱 终端实拍 — 员工A（合规示范）</h3>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);"><span>09:12</span><span>📶 WPA2 ✔</span></div>
+              <div style="margin:10px 0 4px;font-weight:600;font-size:12px;">企业应用（工作区）</div>
+              <div>
+                <span class="app-icon signed"><span class="ico">📮</span>移动OA<br>✔签名</span>
+                <span class="app-icon signed"><span class="ico">📧</span>企业邮箱<br>✔签名</span>
+                <span class="app-icon signed"><span class="ico">💬</span>企业微信<br>✔签名</span>
+              </div>
+              <div style="margin:10px 0 4px;font-weight:600;font-size:12px;">个人应用（个人区）</div>
+              <div>
+                <span class="app-icon"><span class="ico" style="background:#64748b;">🎵</span>音乐</span>
+                <span class="app-icon"><span class="ico" style="background:#64748b;">🛒</span>购物</span>
+              </div>
+            </div>
+            <div class="homebar"></div>
+          </div>
+          <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:8px;">✔ MDM客户端运行 · 锁屏密码 · 容器化分离 · 全部为签名应用</div>
+        </div>
+        <div class="card">
+          <h3>📱 终端实拍 — 员工B（存在违规）</h3>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen">
+              <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);"><span>09:14</span><span style="color:var(--red);">📶 FreeWiFi-X ⚠</span></div>
+              <div style="margin:10px 0 4px;font-weight:600;font-size:12px;">最近安装</div>
+              <div>
+                <span class="app-icon unsigned"><span class="ico">🔑</span>WiFi万能钥匙<br>✘无签名</span>
+                <span class="app-icon unsigned"><span class="ico">📄</span>破解版OA<br>✘非官方渠道</span>
+              </div>
+              <div style="margin:8px 0 4px;font-size:11px;color:var(--red);">⚠ 检测到：HTTP 明文传输 / 申请通讯录、定位权限</div>
+              <div style="font-size:11px;color:var(--muted);">MDM 状态：<span class="tag-bad">未安装</span> · 锁屏密码：<span class="tag-bad">未设置</span></div>
+            </div>
+            <div class="homebar"></div>
+          </div>
+          <div style="text-align:center;font-size:12px;color:var(--muted);margin-top:8px;">⚠ 未装MDM · 无锁屏密码 · 非签名APP · 连接未认证公共WiFi（对应案例导入）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 入侵检测 ===== -->
+    <div class="page" id="page-wids">
+      <div class="notice">🚨 <b>7-2.2 实践任务3</b>：分析无线入侵检测日志：① 是否发现非授权接入行为 ② 是否配置了无线入侵检测/防御功能 ③ 是否检测到针对无线接入设备的攻击行为。</div>
+      <div class="card">
+        <h3>🚨 无线入侵检测（WIDS）日志</h3>
+        <table>
+          <thead><tr><th>时间</th><th>事件类型</th><th>详情</th><th>处置</th></tr></thead>
+          <tbody id="wids-table"></tbody>
+        </table>
+        <div class="risk-banner">🕵️ <b>核查线索</b>：日志中的"伪造热点（Evil Twin）"就是 PPT 案例导入里的中间人攻击——公共WiFi是免费的，但数据不是。等保三级要求"应能够阻断非授权设备"。</div>
+      </div>
+      <div class="card">
+        <h3>⚙️ WIDS 功能配置</h3>
+        <div id="wids-cfg"></div>
+      </div>
+    </div>
+
+    <!-- ===== 核查任务 ===== -->
+    <div class="page" id="page-task">
+      <div class="card">
+        <h3>📝 任务：填写《移动互联安全测评记录表》（对应 7-2.2 课后作业）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">逐项核查 6 个核心指标：点击"查看位置"跳转取证 → 选择测评结果 → 填写问题描述与整改建议 → 导出记录表。<br>测评结果取值：<b>符合 / 部分符合 / 不符合 / 不适用</b>。</div>
+        <div id="checklist"></div>
+        <div style="display:flex;gap:12px;margin-top:6px;">
+          <button class="btn btn-primary" onclick="exportReport()">⬇ 导出《移动互联安全测评记录表》</button>
+          <button class="btn btn-outline" onclick="resetChecklist()">重置填写</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🕵️ 任务：移动安全违规配置识别（对应 7-2.1 实践任务2《移动互联安全隐患分析表》）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">本实验环境埋了 <b>6 处违规配置</b>。从候选发现中勾选真实违规项（混有干扰项）并提交评分。每一条违规背后都对应明确的等保条款（参考 7-2.2 第13页"常见问题"）。</div>
+        <div id="quiz"></div>
+        <div style="display:flex;gap:14px;align-items:center;margin-top:6px;">
+          <button class="btn btn-primary" onclick="submitQuiz()">提交评分</button>
+          <span class="score-box" id="quiz-score"></span>
+          <span id="quiz-feedback" style="font-size:13px;color:var(--muted);"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🧠 思考题（课堂讨论）</h3>
+        <div style="font-size:14px;line-height:2;">
+          1️⃣ 为什么等保 2.0 要单独设置"移动互联安全扩展要求"？移动安全与云计算扩展要求如何交叉融合？<br>
+          2️⃣ "Wi-Fi万能钥匙"案例中：无认证接入有哪些风险？外部人员接入内网后可能做什么？<br>
+          3️⃣ BYOD 场景下，企业想管控、员工想隐私——MDM / MAM / 容器化各有什么利弊？<br>
+          4️⃣ 为什么等保明令禁止 WEP？一分钟内你能向企业网管讲清楚吗？
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-mask" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header"><span id="modal-title">详情</span><span class="modal-close" onclick="closeModal()">✕</span></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const acCfg=[
+ {label:"全局认证方式",desc:"默认认证模板（应用于办公 SSID）",val:"WPA2-Enterprise（802.1X + 认证服务器）",ok:true},
+ {label:"全局加密算法",desc:"数据帧加密",val:"AES-CCMP",ok:true},
+ {label:"SSID 广播（office-sec）",desc:"等保要求关闭 SSID 广播（8.3.2.3c）",val:"开启 ⚠",ok:false,sw:"on"},
+ {label:"WPS 功能",desc:"WPS 存在PIN暴力破解漏洞，应禁用（8.3.2.3d）",val:"未禁用 ⚠",ok:false,sw:"on"},
+ {label:"多AP密钥策略",desc:"禁止多个AP共用同一认证密钥（8.3.2.3e）",val:"guest-AP 与 lobby-AP 共用同一 PSK ⚠",ok:false},
+ {label:"口令长度策略",desc:"等保要求口令长度不少于 8 位",val:"12 位",ok:true}
+];
+const aps=[
+ {name:"office-AP-01",ssid:"office-sec",loc:"3F 办公区走廊中段",cov:"覆盖3F办公区，未过度覆盖室外",st:"online",ok:true},
+ {name:"office-AP-02",ssid:"office-sec",loc:"5F 办公区东侧",cov:"覆盖5F办公区",st:"online",ok:true},
+ {name:"guest-AP-01",ssid:"guest-wifi",loc:"1F 大堂",cov:"认证方式 WEP，密钥与 lobby-AP 相同 ⚠",st:"warn",ok:false}
+];
+const devices=[
+ {dev:"iPhone 15（员工A）",user:"张三",mdm:"已安装运行",lock:"已设置（6位+生物）",root:"否",wipe:"支持",ok:true},
+ {dev:"Mate 60（员工B）",user:"李四",mdm:"未安装 ⚠",lock:"未设置 ⚠",root:"否",wipe:"不支持（未纳管）⚠",ok:false},
+ {dev:"Mi 14（员工C）",user:"王五",mdm:"已安装运行",lock:"已设置",root:"已 root ⚠",wipe:"支持",ok:false},
+ {dev:"iPad Pro（行政部）",user:"赵六",mdm:"已安装运行",lock:"已设置",root:"否",wipe:"支持",ok:true},
+ {dev:"P60（员工D）",user:"孙七",mdm:"未安装 ⚠",lock:"已设置",root:"否",wipe:"不支持（未纳管）⚠",ok:false},
+ {dev:"专用终端 POS-01",user:"营业部",mdm:"已安装运行",lock:"已设置（12位）",root:"否",wipe:"支持",ok:true},
+ {dev:"iPhone 13（员工E）",user:"周八",mdm:"已安装运行",lock:"已设置",root:"否",wipe:"支持",ok:true},
+ {dev:"Pixel 8（员工F）",user:"吴九",mdm:"已安装运行",lock:"已设置",root:"否",wipe:"支持",ok:true}
+];
+const appCfg=[
+ {label:"应用安装策略",desc:"等保 8.3.3.2b：只允许指定证书签名的应用安装运行",val:"仅允许白名单应用（三级要求）",ok:true},
+ {label:"白名单机制",desc:"应用白名单数量",val:"6 个企业应用",ok:true},
+ {label:"非签名应用拦截",desc:"检测到非证书签名 APP 安装时",val:"仅告警未阻断 ⚠（员工B 已装上 2 个非签名APP）",ok:false},
+ {label:"应用权限审计",desc:"检测 APP 申请与业务无关的敏感权限",val:"已启用（发现 2 项越权申请）",ok:true}
+];
+const applib=[
+ {app:"移动OA",ver:"v3.2.1",sig:"✔ 企业证书签名",wl:"✔",note:"业务必需"},
+ {app:"企业邮箱",ver:"v6.1.0",sig:"✔ 企业证书签名",wl:"✔",note:"业务必需"},
+ {app:"企业微信",ver:"v4.1.8",sig:"✔ 企业证书签名",wl:"✔",note:"业务必需"},
+ {app:"移动考勤",ver:"v2.0.3",sig:"✔ 企业证书签名",wl:"✔",note:"业务必需"},
+ {app:"WiFi万能钥匙",ver:"v4.9.2",sig:"✘ 无签名（第三方）",wl:"✘",note:"⭐ 员工B违规安装；会分享WiFi密码——正是案例导入的安全隐患！"},
+ {app:"破解版OA客户端",ver:"未知",sig:"✘ 非官方渠道",wl:"✘",note:"⭐ 员工B违规安装；HTTP明文传输+申请通讯录/定位权限"}
+];
+const wids=[
+ {t:"2026-10-24 10:22",type:"非授权接入尝试",detail:"未知设备 MAC:8C:1D:xx 试图接入 office-sec（认证失败×3）",act:"已记录"},
+ {t:"2026-10-24 09:47",type:"伪造热点（Evil Twin）",detail:"发现与 office-sec 同名的伪造热点，信号强度异常，疑似中间人攻击诱骗",act:"已告警并加入黑名单"},
+ {t:"2026-10-23 21:15",type:"Deauth 攻击",detail:"检测到针对 office-AP-01 的去认证帧泛洪（信号劫持手段）",act:"已告警"},
+ {t:"2026-10-23 18:40",type:"弱加密网络发现",detail:"检测到 WEP 加密网络 guest-wifi（本环境自有 AP），存在被破解风险",act:"已告警 ⚠"},
+ {t:"2026-10-22 14:03",type:"蹭网设备",detail:"员工使用工具分享 guest 密码，2 台外部设备接入成功（对应案例：Wi-Fi万能钥匙）",act:"已记录 ⚠"}
+];
+const widsCfg=[
+ {label:"无线入侵检测功能",desc:"检测非授权接入、伪造热点、Deauth 等",val:"已启用",ok:true},
+ {label:"非授权设备阻断",desc:"等保三级要求“应能够阻断非授权设备”",val:"仅告警，未自动阻断 ⚠（三级不符合）",ok:false},
+ {label:"攻击行为告警",desc:"检测到攻击时通知管理员",val:"已启用（邮件+短信）",ok:true}
+];
+/* 核查清单（对应 9 大指标中的 6 项实操核查） */
+const checks=[
+ {code:"8.3.1.1 a)",name:"无线接入点的物理位置",where:"无线控制器（AC）",fact:"office-AP-01/02 位置合理、未过度覆盖；但需现场核实 AP 是否安装在可控区域内。"},
+ {code:"8.3.2.1 a)",name:"边界防护",where:"端管云架构总览",fact:"有线与无线网络之间已通过无线接入网关设备连接（拓扑核查通过）。"},
+ {code:"8.3.2.2 a)",name:"访问控制（认证与加密）",where:"无线控制器（AC）",fact:"办公 SSID 使用 WPA2-Enterprise + AES，口令 12 位；但 guest-AP-01 使用 WEP 认证，违反“禁止使用WEP”要求。"},
+ {code:"8.3.2.3 c/d/e)",name:"入侵防范（SSID/WPS/密钥）",where:"无线控制器（AC）",fact:"SSID 广播未关闭；WPS 功能未禁用；guest-AP 与 lobby-AP 共用同一认证密钥——三项均违规。"},
+ {code:"8.3.2.3 a/b)",name:"入侵防范（检测与阻断）",where:"无线入侵检测",fact:"WIDS 已启用并能检测非授权接入、伪造热点、Deauth 攻击并告警；但未配置自动阻断功能，不满足三级“应能够阻断”要求。"},
+ {code:"8.3.3.1 a)",name:"移动终端管控",where:"MDM 终端管理",fact:"8 台设备中 6 台安装并运行 MDM 客户端；员工B、员工D 未安装；员工C 设备已 root；远程锁定/擦除仅对纳管设备生效。"},
+ {code:"8.3.3.2 b)",name:"移动应用管控",where:"移动应用管控",fact:"已建立应用白名单（6个签名应用）；但非签名应用拦截策略为“仅告警未阻断”，员工B 已实际安装 2 个非签名应用。"}
+];
+const suggested={
+ "8.3.1.1 a)":{res:"符合",desc:"无线接入点位置合理，避免过度覆盖和电磁干扰。",fix:"保持现状，定期现场巡检 AP 位置与覆盖范围。"},
+ "8.3.2.1 a)":{res:"符合",desc:"有线与无线网络之间通过无线接入网关设备连接。",fix:"保持现状，拓扑变更时同步更新核查记录。"},
+ "8.3.2.2 a)":{res:"不符合",desc:"guest-AP-01 使用 WEP 认证方式，加密算法为 RC4，可在数分钟内被破解，违反 8.3.2.2 禁止 WEP 的要求。",fix:"将 guest-AP-01 认证方式升级为 WPA2/WPA3，加密算法改为 AES。"},
+ "8.3.2.3 c/d/e)":{res:"不符合",desc:"office SSID 广播未关闭；WPS 功能未禁用；guest-AP 与 lobby-AP 共用同一认证密钥，分别违反 8.3.2.3 c)、d)、e)。",fix:"关闭 SSID 广播；禁用 WPS；为每个 AP 设置独立密钥并纳入定期更换策略。"},
+ "8.3.2.3 a/b)":{res:"部分符合",desc:"已启用无线入侵检测并能检测非授权接入、伪造热点、Deauth 攻击并告警；但缺少自动阻断能力。",fix:"启用非授权设备自动阻断功能，满足等保三级“应能够阻断非授权设备”要求。"},
+ "8.3.3.1 a)":{res:"部分符合",desc:"6/8 台设备安装运行 MDM 客户端；员工B、D 未安装；员工C 设备已 root，存在权限失控风险。",fix:"强制推送 MDM 客户端至全部设备；对 root 设备执行隔离或重置；定期验证远程锁定/擦除功能。"},
+ "8.3.3.2 b)":{res:"部分符合",desc:"已建立白名单机制，但拦截策略为仅告警未阻断，员工B 已安装 2 个非证书签名应用。",fix:"将拦截策略改为“阻断并告警”；卸载非签名应用；对员工开展移动安全意识培训。"}
+};
+const quizItems=[
+ {q:"发现：guest-AP-01 使用 WEP 认证方式",risk:true,why:"等保明令禁止 WEP（RC4 已破解）→ 违反 8.3.2.2"},
+ {q:"发现：office-sec SSID 广播未关闭",risk:true,why:"等保要求关闭 SSID 广播 → 违反 8.3.2.3 c)"},
+ {q:"发现：WPS 功能未禁用",risk:true,why:"WPS 存在 PIN 暴力破解漏洞 → 违反 8.3.2.3 d)"},
+ {q:"发现：guest-AP 与 lobby-AP 共用同一认证密钥",risk:true,why:"禁止多个AP共用同一密钥 → 违反 8.3.2.3 e)"},
+ {q:"发现：员工B 设备未安装 MDM 客户端，员工C 设备已 root",risk:true,why:"终端必须安装管控客户端、root 后权限失控 → 违反 8.3.3.1 a)"},
+ {q:"发现：员工B 安装了 2 个非证书签名应用（WiFi万能钥匙/破解版OA）",risk:true,why:"只允许指定证书签名的应用安装运行 → 违反 8.3.3.2 b)"},
+ {q:"发现：办公 SSID 使用 WPA2-Enterprise + AES 加密",risk:false,why:"这是合规配置（合规 ✔），不是违规"},
+ {q:"发现：企业应用库中 4 个业务应用均有企业证书签名",risk:false,why:"合规配置，正是 8.3.3.2 要求的做法"}
+];
+const nodeInfo={
+ "移动OA APP":"云层：承载企业办公业务。安全关注：是否存在逆向工程、数据明文存储、HTTP明文传输、权限滥用。",
+ "企业邮件服务":"云层：员工B连上公共WiFi登录邮件被截获凭证——正是案例导入的事故路径。安全关注：传输加密（HTTPS）。",
+ "后端服务器集群":"云层：ECS/数据库/中间件。移动+云交叉：数据存云端需结合云计算安全扩展要求（数据保密性、完整性）。",
+ "WiFi AP":"管层：无线接入点。安全关注：认证方式（禁止WEP）、加密（AES）、SSID广播、AP物理位置（8.3.1.1 避免过度覆盖）。",
+ "无线接入网关":"管层：★等保检查重点——有线与无线网络边界之间必须通过无线接入网关设备（8.3.2.1），实现边界防护。",
+ "无线控制器AC":"管层：统一管理所有AP的认证、加密、SSID策略——本次核查的主战场。",
+ "企业防火墙":"管层：有线/无线边界隔离与访问控制。",
+ "员工智能手机":"端层：BYOD 自带设备。安全关注：MDM客户端、锁屏密码、root/越狱、恶意APP。",
+ "平板电脑":"端层：移动办公设备，同样需纳入 MDM 管控。",
+ "专用终端POS":"端层：业务专用终端，安全要求更严格（等保三级：接受远程锁定、远程擦除）。"
+};
+const checkState={};checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});
+const quizState=new Set();
+
+/* ================= 渲染 ================= */
+function render(){
+ document.getElementById("ac-cfg").innerHTML=acCfg.map(c=>`
+  <div class="cfg-item">
+    <div class="cfg-label"><b>${c.label}</b><span>${c.desc}</span></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="cfg-val ${c.ok?"tag-ok":"tag-bad"}">${c.val}</span>
+      ${c.sw?`<span class="switch ${c.sw}" onclick="toast('模拟环境：配置为只读，请记录该违规项')"></span>`:""}
+    </div>
+  </div>`).join("");
+ document.getElementById("ap-table").innerHTML=aps.map(a=>`<tr><td><b>${a.name}</b></td><td>${a.ssid}</td><td>${a.loc}</td><td>${a.ok?a.cov:`<span class="tag-bad">⚠ ${a.cov}</span>`}</td><td><span class="status ${a.st}">${a.st==="online"?"在线":"告警"}</span></td></tr>`).join("");
+ document.getElementById("mdm-table").innerHTML=devices.map(d=>`<tr>
+  <td><b>${d.dev}</b></td><td>${d.user}</td>
+  <td>${d.mdm.includes("⚠")?`<span class="tag-bad">⚠ ${d.mdm}</span>`:`<span class="tag-ok">✔ ${d.mdm}</span>`}</td>
+  <td>${d.lock.includes("⚠")?`<span class="tag-bad">⚠ ${d.lock}</span>`:d.lock}</td>
+  <td>${d.root==="否"?"否":`<span class="tag-bad">⚠ ${d.root}</span>`}</td>
+  <td>${d.wipe.includes("⚠")?`<span class="tag-warn">${d.wipe}</span>`:`<span class="tag-ok">✔ ${d.wipe}</span>`}</td>
+  <td><button class="btn btn-outline btn-sm" onclick="toast('模拟环境：远程擦除指令已下发（仅演示）')">远程擦除</button></td></tr>`).join("");
+ document.getElementById("app-cfg").innerHTML=appCfg.map(c=>`
+  <div class="cfg-item">
+    <div class="cfg-label"><b>${c.label}</b><span>${c.desc}</span></div>
+    <span class="cfg-val ${c.ok?"tag-ok":"tag-bad"}">${c.val}</span>
+  </div>`).join("");
+ document.getElementById("applib-table").innerHTML=applib.map(a=>`<tr><td><b>${a.app}</b></td><td>${a.ver}</td><td>${a.sig.startsWith("✔")?`<span class="tag-ok">${a.sig}</span>`:`<span class="tag-bad">${a.sig}</span>`}</td><td>${a.wl}</td><td>${a.note}</td></tr>`).join("");
+ document.getElementById("wids-table").innerHTML=wids.map(w=>`<tr><td>${w.t}</td><td><span class="tag-warn">⚠ ${w.type}</span></td><td>${w.detail}</td><td>${w.act}</td></tr>`).join("");
+ document.getElementById("wids-cfg").innerHTML=widsCfg.map(c=>`
+  <div class="cfg-item">
+    <div class="cfg-label"><b>${c.label}</b><span>${c.desc}</span></div>
+    <span class="cfg-val ${c.ok?"tag-ok":"tag-bad"}">${c.val}</span>
+  </div>`).join("");
+ renderChecklist();renderQuiz();
+}
+function renderChecklist(){
+ document.getElementById("checklist").innerHTML=checks.map((c,i)=>{
+  const s=checkState[c.code];
+  return `<div class="check-item">
+   <div class="ci-head">
+    <span class="ci-title">${i+1}. ${c.name} <span class="ci-code">${c.code}</span></span>
+    <span>取证位置：<a href="#" onclick="goto('${pageOf(c.where)}');return false;" style="color:var(--primary);">前往「${c.where}」→</a></span>
+   </div>
+   <div style="font-size:13px;color:var(--muted);">🔎 现场情况：<span style="color:var(--text)">${c.fact}</span></div>
+   <div class="ci-grid">
+    <label>测评结果：</label>
+    <select onchange="checkState['${c.code}'].res=this.value" style="width:180px;">
+      <option value="">— 请选择 —</option>
+      ${["符合","部分符合","不符合","不适用"].map(r=>`<option ${s.res===r?"selected":""}>${r}</option>`).join("")}
+    </select>
+    <label>问题描述：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].desc=this.value">${s.desc}</textarea>
+    <label>整改建议：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].fix=this.value">${s.fix}</textarea>
+   </div>
+  </div>`;
+ }).join("");
+}
+function pageOf(w){return w==="无线控制器（AC）"?"ac":w==="端管云架构总览"?"arch":w==="无线入侵检测"?"wids":w==="MDM 终端管理"?"mdm":"app";}
+function renderQuiz(){
+ document.getElementById("quiz").innerHTML=quizItems.map((q,i)=>
+  `<label class="quiz-opt" id="quiz-${i}" onclick="toggleQuiz(${i})"><input type="checkbox" style="margin-right:8px;" ${quizState.has(i)?"checked":""}><b>候选发现 ${i+1}</b>：${q.q}</label>`).join("");
+}
+function toggleQuiz(i){quizState.has(i)?quizState.delete(i):quizState.add(i);renderQuiz();}
+function submitQuiz(){
+ if(!quizState.size){toast("请先勾选候选发现再提交");return;}
+ let score=0;const riskIdxs=[];
+ quizItems.forEach((q,i)=>{
+  const el=document.getElementById("quiz-"+i);
+  el.classList.remove("correct","wrong");
+  const picked=quizState.has(i);
+  if(picked===q.risk)score++;
+  if(q.risk)riskIdxs.push(i+1);
+  el.classList.add(picked===q.risk?"correct":"wrong");
+  el.querySelector("input").disabled=true;
+ });
+ document.getElementById("quiz-score").textContent=`得分：${score} / ${quizItems.length}`;
+ const found=quizItems.filter((q,i)=>quizState.has(i)&&q.risk).length;
+ document.getElementById("quiz-feedback").innerHTML=`真实违规共 6 处，你找到 <b>${found}</b> 处。绿色=判断正确，红色=判断有误。真实违规：${riskIdxs.join("、")}`;
+ quizState.clear();
+ toast(`评分完成：${score} / ${quizItems.length}，请查看各项解释`);
+}
+function exportReport(){
+ const rows=checks.map(c=>{
+  const s=checkState[c.code];
+  return `<tr><td style="border:1px solid #999;padding:6px;">${c.code}</td><td style="border:1px solid #999;padding:6px;">${c.name}</td><td style="border:1px solid #999;padding:6px;">${s.res||""}</td><td style="border:1px solid #999;padding:6px;">${s.desc||""}</td><td style="border:1px solid #999;padding:6px;">${s.fix||""}</td></tr>`;
+ }).join("");
+ const html=`<html><head><meta charset="utf-8"><title>移动互联安全测评记录表</title></head><body style="font-family:SimSun;">
+ <h2 style="text-align:center;">移动互联安全测评记录表</h2>
+ <p>测评对象：MobLab 模拟企业移动办公环境　测评人：student01　日期：2026-10-24　依据：GB/T 22239-2019 移动互联安全扩展要求（8.3节）</p>
+ <table style="border-collapse:collapse;width:100%;font-size:12px;"><tr><th style="border:1px solid #999;padding:6px;">测评指标编号</th><th style="border:1px solid #999;padding:6px;">测评指标名称</th><th style="border:1px solid #999;padding:6px;">测评结果</th><th style="border:1px solid #999;padding:6px;">问题描述</th><th style="border:1px solid #999;padding:6px;">整改建议</th></tr>${rows}</table>
+ <p style="font-size:12px;color:#666;">填写说明：测评结果取值为 符合 / 部分符合 / 不符合 / 不适用。</p>
+ </body></html>`;
+ const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="移动互联安全测评记录表-student01.html";a.click();
+ toast("记录表已导出，可直接打印或提交学习通");
+}
+function resetChecklist(){checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});renderChecklist();toast("已重置全部填写内容");}
+/* 导航 */
+const titles={arch:"端管云架构总览",ac:"无线控制器（AC）",mdm:"MDM 终端管理",app:"移动应用管控",wids:"无线入侵检测",task:"等保核查任务"};
+function goto(p){
+ document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+ document.getElementById("page-"+p).classList.add("active");
+ document.querySelectorAll(".nav-item").forEach(e=>e.classList.toggle("active",e.dataset.page===p));
+ document.getElementById("pageTitle").textContent=titles[p];
+ document.querySelector(".content").scrollTop=0;
+}
+document.querySelectorAll(".nav-item").forEach(e=>e.addEventListener("click",()=>goto(e.dataset.page)));
+function showModal(t,b){document.getElementById("modal-title").textContent=t;document.getElementById("modal-body").innerHTML=b;document.getElementById("modal-mask").classList.add("show");}
+function closeModal(){document.getElementById("modal-mask").classList.remove("show");}
+function showNode(k){showModal("节点安全关注点 — "+k,`<p>${nodeInfo[k]||""}</p>`);}
+let toastTimer;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),3200);}
+render();
+</script>
+</body>
+</html>

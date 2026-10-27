@@ -1308,6 +1308,82 @@
 
 
 
+
+    /* ===== 7.1 实验共用区（入口 + 素材） ===== */
+    .lab-shared {
+        background: #f4f9ff;
+        border: 1px solid #bbd8f7;
+        border-left: 5px solid #0d47a1;
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin: 14px 0;
+    }
+
+    .lab-shared-head {
+        font-weight: 700;
+        color: #0d47a1;
+        font-size: 1.02rem;
+        margin-bottom: 6px;
+    }
+
+    /* 步骤内的“到位标准” */
+    .step-check {
+        display: block;
+        margin-top: 6px;
+        font-size: 0.9rem;
+        color: #1b5e20;
+        background: #eef7ee;
+        border-left: 3px solid #2e7d32;
+        padding: 4px 8px;
+        border-radius: 4px;
+    }
+
+    /* 正文内的素材链接 */
+    .inline-dl {
+        color: #0d47a1;
+        border-bottom: 1px dashed #0d47a1;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .inline-dl:hover { background: #e3f0fd; }
+
+    /* ===== AI 使用提醒：默认折叠，点标题展开 ===== */
+    .ai-tip-box.ai-acc { padding: 12px 16px; }
+
+    .ai-tip-box.ai-acc > .ai-tip-title {
+        margin: 0;
+        cursor: pointer;
+        user-select: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.15s;
+    }
+
+    .ai-tip-box.ai-acc > .ai-tip-title::after {
+        content: '▸';
+        margin-left: auto;
+        font-size: 0.95rem;
+        transition: transform 0.2s ease;
+    }
+
+    .ai-tip-box.ai-acc:not(.is-collapsed) > .ai-tip-title::after { content: '▾'; }
+
+    .ai-tip-box.ai-acc > .ai-tip-title:hover { color: #4a148c; }
+
+    .ai-tip-box.ai-acc > .ai-tip-title:focus-visible {
+        outline: 2px solid #7b1fa2;
+        outline-offset: 3px;
+    }
+
+    .ai-tip-box.ai-acc.is-collapsed > *:not(.ai-tip-title) { display: none; }
+
+    @media print {
+        .ai-tip-box.ai-acc.is-collapsed > *:not(.ai-tip-title) { display: block !important; }
+        .ai-tip-box.ai-acc > .ai-tip-title::after { content: none; }
+    }
+
     @media print {
 
         .lab-acc-bar { display: none !important; }
@@ -7597,9 +7673,21 @@ return</div>
 
                         </div>
 
-<div class="lab-box">
+<div class="lab-shared">
+
+                            <div class="lab-shared-head">🚀 实验入口（实验一、实验二共用同一个环境）</div>
+
+                            <p style="margin:8px 0 10px;">CloudLab 只需打开<strong>一次</strong>：实验一在「📊 平台概览与架构 / 🖥️ 云主机管理 / 🌐 网络与安全组」取架构证据，实验二在「📝 等保核查任务」逐项判定。<strong>环境共用，素材不共用</strong>——实验一的素材统一编号 <b>1-1 ～ 1-5</b>，实验二的素材统一编号 <b>2-1 ～ 2-5</b>，分别放在各自实验里，按编号下载，别下错。</p>
+
+                            <p><a class="table-dl" href="cloudlab-experiment.html" target="_blank" rel="noopener" title="打开 CloudLab 云计算实验平台（模拟环境）">🚀 打开 CloudLab 云计算实验平台（模拟环境 · 无需账号）</a></p>
+
+                        </div>
+
+                        <div class="lab-box">
 
                             <div class="lab-head">🧪 实验一·架构认知：云平台架构认知——把“架构图”变成可点开的真系统</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>一份填满 <strong>6 项观察内容</strong> + <strong>2 张截图</strong>的《云平台架构认知记录表》，命名 <b>班级+学号+姓名+7.1实验一</b> 提交学习通。下面 7 步按顺序做，每步末尾的“✅ 到位标准”就是该步的验收条件——7 步都到位，成果自然齐了。</div>
 
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
@@ -7615,27 +7703,21 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍实验入口</strong></p>
-
-                            <p><a class="table-dl" href="cloudlab-experiment.html" target="_blank" rel="noopener" title="打开 CloudLab 云计算实验平台（模拟环境）">🚀 打开 CloudLab 云计算实验平台（模拟环境 · 浏览器直接打开，无需账号）</a></p>
-
-                            
-
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:18px 0 6px;"><strong>📎 实验一配套素材（编号 1-1 ～ 1-5，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1：实践任务——《云平台架构认知记录表》.docx" download>⬇ 素材1：云平台架构认知记录表</a>
+                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1-1：实践任务——《云平台架构认知记录表》.docx" download>⬇ 素材 1-1：云平台架构认知记录表（必交 · 前两项已给示例）</a>
 
-                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材2：三种云服务模式对比卡（学生快速参考）.docx" download>⬇ 素材2：三种云服务模式对比卡</a>
+                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1-2：三种云服务模式对比卡（学生快速参考）.docx" download>⬇ 素材 1-2：三种云服务模式对比卡</a>
 
-                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材3：云服务模式辨识练习.docx" download>⬇ 素材3：云服务模式辨识练习</a>
+                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1-3：云服务模式辨识练习.docx" download>⬇ 素材 1-3：云服务模式辨识练习</a>
 
-                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材4：云安全责任共担模型示意图.docx" download>⬇ 素材4：云安全责任共担模型示意图</a>
+                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1-4：云安全责任共担模型示意图.docx" download>⬇ 素材 1-4：云安全责任共担模型示意图</a>
 
-                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材5：教师演示用——云平台架构展示要点.docx" download>⬇ 素材5：教师演示——云平台架构展示要点</a>
+                                    <a class="table-dl" href="各类表格/7.1 云平台架构认知/素材1-5：教师演示用——云平台架构展示要点.docx" download>⬇ 素材 1-5：教师演示——云平台架构展示要点</a>
 
                                 </div>
 
@@ -7643,17 +7725,19 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜打开实验环境。</strong>点击本页上方「🚀 打开 CloudLab 云计算实验平台」链接（新标签页打开，无需账号密码）；也可以直接双击平台文件夹里的 cloudlab-experiment.html 文件，用 Chrome 或 Edge 浏览器打开。左侧导航共 6 个页面：📊平台概览与架构 / 🖥️云主机管理 / 🌐网络与安全组 / 💾存储与备份 / 📋审计与告警 / 📝等保核查任务——下面的步骤就是在这些页面间切换取证。</li>
+                                <li><strong>第 1 步｜打开环境，先认路。</strong>点页面顶部「🚀 实验入口」里的「🚀 打开 CloudLab 云计算实验平台」（新标签页，无需账号）。左侧 6 个页面里，<strong>本实验只用前 3 个</strong>：「📊 平台概览与架构」「🖥️ 云主机管理」「🌐 网络与安全组」；「📋 审计与告警」「📝 等保核查任务」留给实验二。<span class="step-check">✅ 到位标准：能看到四层架构图和 6 台云主机。</span></li>
 
-<li><strong>看架构：「平台概览与架构」页。</strong>从上到下把四层架构图点一遍（物理层 → 虚拟化层 → 管理平台层 → 服务层），每点一个节点会弹出该部件的说明与“谁负责”。记下：物理层有哪三台服务器？管理平台层有哪四个组件？</li>
+                                <li><strong>第 2 步｜看架构 → 填「四层架构与责任划分」。</strong>先打开 <a class="inline-dl" href="各类表格/7.1 云平台架构认知/素材1-1：实践任务——《云平台架构认知记录表》.docx" download>素材 1-1《云平台架构认知记录表》</a>放在手边（本实验素材 1-1，前面两项已给示例）。回到「平台概览与架构」页把四层架构图的节点逐个点开，弹窗会写它“干什么、归谁负责”。分不清哪个部件归云商还是归租户，翻 <a class="inline-dl" href="各类表格/7.1 云平台架构认知/素材1-4：云安全责任共担模型示意图.docx" download>素材 1-4《云安全责任共担模型示意图》</a>。按这个颗粒度记：物理层＝服务器集群×3（controller + compute-01/02）+ 存储阵列 2TB + 网络设备；虚拟化层＝KVM（计算）/ Ceph（存储）/ Open vSwitch（网络）；管理平台层＝Nova / Neutron / Cinder / Keystone；服务层＝云主机 / 云硬盘 / VPC。<strong>每个部件后面补一句“归云商 / 归租户”</strong>——这句就是判断“查平台还是查客户”的依据。<span class="step-check">✅ 到位标准：四层各至少 2 个部件，且每个部件都标了责任归属。</span></li>
 
-                                <li><strong>看资源：「平台概览」右侧资源池。</strong>记录 vCPU / 内存 / 存储 / 浮动 IP 四个池的总量与已分配量，并回答：资源池为什么必须按租户配额隔离？</li>
+                                <li><strong>第 3 步｜看资源 → 核「资源池划分」。</strong>「平台概览与架构」页右侧资源池卡片，把 4 个池的“已用 / 总量 + 使用率”按顺序抄下（vCPU、内存、存储、浮动 IP），再读一遍卡片下方那行小字（资源池按租户配额隔离分配）。<strong>这一项素材 1-1 已给示例（灰底）</strong>，你要做的是回页面对数字——对不上说明看错列了。<span class="step-check">✅ 到位标准：4 个池都有“已用/总量”与百分比，不写“基本够用”。</span></li>
 
-                                <li><strong>看主机：「云主机管理」页。</strong>逐条记录 6 台云主机的规格与镜像，找出哪一台用的是<b>未加固的默认镜像</b>——这一条下一单元要判定为“部分符合”。</li>
+                                <li><strong>第 4 步｜看主机 → 核「虚拟机规格」。</strong>「云主机管理」页共 6 台，逐台记：名称｜镜像｜vCPU/内存/磁盘｜IP｜所在节点。抄完再把“镜像”列扫一遍，<strong>揪出那台用默认镜像（未加固）的</strong>，标 ⚠ 并写一句风险——它在实验二会判“部分符合”（对应 8.2.4.4 a)）。此项也已给示例，核对即可。<span class="step-check">✅ 到位标准：6 台齐全，未加固那台被单独标出并说明风险。</span></li>
 
-                                <li><strong>看网络：「网络与安全组」页。</strong>记录两个租户的 VPC 网段与子网，确认二者隔离；再逐条抄下安全组规则，特别标出<b>源地址为 0.0.0.0/0</b> 的规则。</li>
+                                <li><strong>第 5 步｜看网络 → 填「虚拟网络（VPC）」「安全组/防火墙规则」。</strong>「网络与安全组」页先记 VPC：两条 VPC 各属哪个租户、网段、子网（web / db 分开意味着什么？）；再记安全组：安全组名、方向、协议端口、源地址、策略，<strong>逐条抄，凡源地址是 0.0.0.0/0 的单独打星</strong>，并判断这个端口该不该对全网开放（80 该、3389 不该）。<span class="step-check">✅ 到位标准：VPC 两条都在，安全组规则条条有源地址，0.0.0.0/0 的已标出。</span></li>
 
-                                <li><strong>看租户：「平台概览」租户表。</strong>记录本租户（edu-training）的名称与资源配额，理解“多租户隔离是云安全基石”。</li>
+                                <li><strong>第 6 步｜看租户 → 填「租户/项目」。</strong>「平台概览与架构」页租户表：记本租户 edu-training 的名称、配额（vCPU / 内存 / 存储）、用途，并抄下 edu-research、ops-admin 作对照——对照是为了说明<strong>“配额隔离 ≠ 网络隔离”，两者要分别验证</strong>。<span class="step-check">✅ 到位标准：3 个租户都在，配额与用途写全，能说出隔离靠什么实现。</span></li>
+
+                                <li><strong>第 7 步｜截图 → 命名 → 提交。</strong>截 2 张图：①「平台概览与架构」页的四层架构图；②「网络与安全组」页的安全组列表，<strong>把 0.0.0.0/0 那条圈出来</strong>。加上填好的《云平台架构认知记录表》（本实验「素材 1-1」下载），命名 <strong>班级+学号+姓名+7.1实验一</strong>，到学习通「作业」上传。<span class="step-check">✅ 到位标准：1 份表 + 2 张图，命名规范——缺一样都算没交。</span></li>
 
                             </ol>
 
@@ -7672,6 +7756,8 @@ return</div>
                                     <tr><td>④ 安全组规则</td><td>网络与安全组</td><td>安全组名、方向、协议端口、源地址、策略</td><td>对应 8.2.3.1a) 虚拟化网络边界访问控制</td></tr>
 
                                     <tr><td>⑤ 租户 / 项目</td><td>平台概览与架构</td><td>租户名称、资源配额、用途</td><td>多租户隔离是云安全的基石</td></tr>
+
+                                    <tr><td>⑥ 四层架构与责任划分</td><td>平台概览与架构（点开每个节点）</td><td>四层各有哪些部件、每个部件归云商还是归租户</td><td>责任共担决定举证边界：谁举证、查什么</td></tr>
 
                                 </table>
 
@@ -7701,7 +7787,7 @@ return</div>
 
                                 <ul style="margin:4px 0 6px 20px;">
 
-                                    <li>《云平台架构认知记录表》（素材1，五个观察项全部填出具体数值 / 名称，不写“若干”）；</li>
+                                    <li>《云平台架构认知记录表》（素材 1-1，<strong>六个观察项</strong>全部填出具体数值 / 名称，不写“若干”；「资源池划分」「虚拟机规格」两项已给示例，其余四项自行完成）；</li>
 
                                     <li>2 张截图：「平台概览与架构」页的四层架构图 + 「网络与安全组」页中标出 0.0.0.0/0 规则的安全组列表；</li>
 
@@ -7717,7 +7803,7 @@ return</div>
 
                                 <div class="lab-check-title">📋 交付自查</div>
 
-                                ☐ 五个观察项全部有具体数值/名称（不写“若干”）　☐ 能指着 CloudLab 页面说出四层架构各层的组件　☐ 找出未加固镜像的云主机并说明风险　☐ 抄录的安全组规则里有 0.0.0.0/0 的记录　☐ 能口头回答“哪些归云商、哪些归租户”
+                                ☐ 六个观察项全部有具体数值/名称（不写“若干”）　☐ 能指着 CloudLab 页面说出四层架构各层的组件　☐ 找出未加固镜像的云主机并说明风险　☐ 安全组规则逐条抄录，0.0.0.0/0 的已标出并判断该不该开放　☐ 能口头回答“哪些归云商、哪些归租户”
 
                             </div>
 
@@ -7726,6 +7812,8 @@ return</div>
                         <div class="lab-box">
 
                             <div class="lab-head">🧪 实验二·配置核查：云安全配置核查——在 CloudLab 完成一份能交的测评记录表</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>「⬇ 导出」生成的《云计算安全测评记录表》（<strong>7 项判定 + 问题描述 + 整改建议</strong>齐全）+ 风险识别得分截图，命名 <b>班级+学号+姓名+7.1实验二</b> 提交学习通。下面 8 步按顺序做，每步的“✅ 到位标准”必须达到。</div>
 
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
@@ -7741,43 +7829,43 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍实验入口</strong></p>
-
-                            <p><a class="table-dl" href="cloudlab-experiment.html" target="_blank" rel="noopener" title="打开 CloudLab 云计算实验平台（模拟环境）">🚀 打开 CloudLab 云计算实验平台 → 点击左侧「📝 等保核查任务」</a></p>
-
-                                                        <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:18px 0 6px;"><strong>📎 实验二配套素材（编号 2-1 ～ 2-5，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材1：实践任务——《云计算安全测评记录表》.docx" download>⬇ 素材1：云计算安全测评记录表</a>
+                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2-1：实践任务——《云计算安全测评记录表》.docx" download>⬇ 素材 2-1：云计算安全测评记录表（必交）</a>
 
-                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2：模拟云平台配置截图描述（用于实践任务2）.docx" download>⬇ 素材2：模拟云平台配置截图描述</a>
+                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2-2：模拟云平台配置截图描述（用于实践任务2）.docx" download>⬇ 素材 2-2：模拟云平台配置截图描述</a>
 
-                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材3：实践任务2——风险识别与分析表.docx" download>⬇ 素材3：风险识别与分析表</a>
+                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2-3：实践任务2——风险识别与分析表.docx" download>⬇ 素材 2-3：风险识别与分析表</a>
 
-                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材4：云平台配置检查对照表（快速参考）.docx" download>⬇ 素材4：云平台配置检查对照表</a>
+                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2-4：云平台配置检查对照表（快速参考）.docx" download>⬇ 素材 2-4：云平台配置检查对照表</a>
 
-                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材5：教师演示用——云平台核查要点速查卡.docx" download>⬇ 素材5：教师演示——云平台核查要点速查卡</a>
+                                    <a class="table-dl" href="各类表格/7.2 云安全配置核查/素材2-5：教师演示用——云平台核查要点速查卡.docx" download>⬇ 素材 2-5：教师演示——云平台核查要点速查卡</a>
 
                                 </div>
 
                             </div>
 
-<ol class="step-list">
+                            <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜打开实验环境。</strong>打开 CloudLab（方式同实验一），点击左侧导航「📝 等保核查任务」进入核查页；再下载本实验素材1《云计算安全测评记录表》放在手边——页面里逐项判定，表里逐项落笔，两边是同一份清单。</li>
+                                <li><strong>第 1 步｜进入核查页。</strong>CloudLab 已在顶部「🚀 实验入口」打开过；点左侧「📝 等保核查任务」，页面列出 7 项指标（虚拟网络隔离、虚拟化网络边界访问控制、攻击行为告警、特权命令审计、加固镜像、本地数据备份、数据保密性）。<span class="step-check">✅ 到位标准：7 项都在，每项右侧有「前往取证页」按钮。</span></li>
 
-<li><strong>任务一：《云计算安全测评记录表》（约 30 分钟）。</strong>页面列出 7 项指标，每项点“前往取证页”跳转到对应页面 → 对照页面上的“现场情况”选择测评结果（<b>符合 / 部分符合 / 不符合 / 不适用</b>）→ 写问题描述与整改建议。</li>
+                                <li><strong>第 2 步｜把记录表放在手边。</strong>下载并打开 <a class="inline-dl" href="各类表格/7.2 云安全配置核查/素材2-1：实践任务——《云计算安全测评记录表》.docx" download>素材 2-1《云计算安全测评记录表》</a>——页面里逐项判定、表里逐项落笔，两边是同一份清单；只在页面上点完不导表，等于没做。<span class="step-check">✅ 到位标准：记录表 7 行就位，与页面 7 项一一对上。</span></li>
 
-                                <li><strong>写“问题描述”的三条硬要求：</strong>① 指出具体对象（哪个安全组、哪台主机、哪个桶）；② 写出具体配置值（如“TCP 3389 对 0.0.0.0/0 放行”）；③ 不含糊（禁止“配置不当”“存在风险”这类空话）。</li>
+                                <li><strong>第 3 步｜逐项取证（7 项，约 30 分钟）。</strong>每项点「前往取证页」→ 跳到对应页面 → 把“现场情况”里<strong>看得见的原文</strong>摘成证据：对象（哪台主机 / 哪个安全组 / 哪个桶）+ 配置值（端口、源地址、留存天数、镜像名）。拿不准这项该看什么，查 <a class="inline-dl" href="各类表格/7.2 云安全配置核查/素材2-4：云平台配置检查对照表（快速参考）.docx" download>素材 2-4《云平台配置检查对照表》</a>。<span class="step-check">✅ 到位标准：每项至少 1 条能复现的证据，抄的是页面原文，不是印象。</span></li>
 
-                                <li><strong>写“整改建议”的两条硬要求：</strong>① 可操作（改哪个开关、删哪条规则、加什么策略）；② 不越界（平台侧的问题写“建议云服务商……”，客户侧的问题写“客户应……”）。</li>
+                                <li><strong>第 4 步｜四档判定。</strong>照证据选结论：<strong>符合</strong>（要求全满足）/ <strong>部分符合</strong>（做了但不完整，如 6 台里 1 台用未加固镜像）/ <strong>不符合</strong>（该有的没有，如未部署入侵检测）/ <strong>不适用</strong>（确实没有该对象；本项目 7 项都适用，不要乱填）。判定必须与证据同向：写“不符合”就要指出缺什么。<span class="step-check">✅ 到位标准：7 项都有判定，且没有“描述写缺失、结论写符合”的自相矛盾。</span></li>
 
-                                <li><strong>导出记录表。</strong>全部填完后点「⬇ 导出」生成记录表文件，按 <b>班级 + 学号 + 姓名 + 7.2 实验</b> 命名后提交。</li>
+                                <li><strong>第 5 步｜写问题描述（三条硬要求）。</strong>①点名对象；②写出配置值；③不含糊。正例：“安全组 web-sg 放行 TCP 3389、源地址 0.0.0.0/0，管理端口暴露在公网”；反例：“安全组配置不当，存在风险”。<span class="step-check">✅ 到位标准：每条描述能让没到过现场的人照着复现。</span></li>
 
-                                <li><strong>任务二：配置风险模拟分析（约 15 分钟）。</strong>平台里埋了 <b>5 处</b>配置风险（混有干扰项），从候选发现中勾选真实风险并提交评分；要求至少找出 3 处，并能说出对应的等保条款。</li>
+                                <li><strong>第 6 步｜写整改建议（两条硬要求）。</strong>①可操作（删哪条规则、加什么策略、改哪个开关）；②不越界（平台侧写“建议云服务商……”，客户侧写“客户应……”）。建议要能直接派给某个角色去执行。<span class="step-check">✅ 到位标准：「部分符合 / 不符合」的每一项都有建议，且标明责任方。</span></li>
+
+                                <li><strong>第 7 步｜导出并提交。</strong>全部填完点「⬇ 导出」生成记录表文件 → 命名 <strong>班级+学号+姓名+7.1实验二</strong> → 学习通「作业」上传。<span class="step-check">✅ 到位标准：导出成功且 7 项完整，不是空表。</span></li>
+
+                                <li><strong>第 8 步｜任务二：配置风险识别（约 15 分钟）。</strong>平台里埋了 <strong>5 处</strong>配置风险（夹着干扰项），在“候选发现”里勾选真实风险并提交，<strong>至少找出 3 处</strong>，每处写清对应条款号，结果填进 <a class="inline-dl" href="各类表格/7.2 云安全配置核查/素材2-3：实践任务2——风险识别与分析表.docx" download>素材 2-3《风险识别与分析表》</a>，并截一张能看到“找出数量 + 得分”的图。<span class="step-check">✅ 到位标准：≥3 处真实风险 + 条款号 + 得分截图。</span></li>
 
                             </ol>
 
@@ -7926,9 +8014,21 @@ return</div>
 
                         </div>
 
+                        <div class="lab-shared">
+
+                            <div class="lab-shared-head">🚀 实验入口（实验一、实验二共用同一个环境）</div>
+
+                            <p style="margin:8px 0 10px;">MobLab 移动互联实验平台 只需打开<strong>一次</strong>：实验一在「🏗️ 端管云架构总览 / 📡 无线控制器（AC） / 📲 MDM 终端管理 / 🧩 移动应用管控」取架构证据，实验二在「🚨 无线入侵检测 / 📝 等保核查任务」逐项判定。<strong>环境共用，素材不共用</strong>——实验一的素材统一编号 <b>1-1 ～ 1-4</b>，实验二的素材统一编号 <b>2-1 ～ 2-4</b>，分别放在各自实验里，按编号下载。</p>
+
+                            <p><a class="table-dl" href="moblab-experiment.html" target="_blank" rel="noopener" title="打开 MobLab 移动互联实验平台（模拟环境）">🚀 打开 MobLab 移动互联实验平台（模拟环境 · 无需账号）</a></p>
+
+                        </div>
+
                         <div class="lab-box">
 
                             <div class="lab-head">🧪 实验一·架构认知：移动互联架构认知——画一张“端—管—云”图，标出三处最脆弱点</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>一张“端—管—云”三层架构图（照片 / PDF 均可，要含三层组件、边界设备、扩展要求标注）+ 数据流向说明（5~8 句，指出最脆弱的一段）+ 3 处最脆弱点，命名 <b>班级+学号+姓名+7.2实验一</b> 提交学习通。下面 7 步按顺序做，每步末尾的“✅ 到位标准”就是该步的验收条件。</div>
 
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
@@ -7944,17 +8044,17 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验一配套素材（编号 1-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材1：移动互联网络拓扑图.docx" download>⬇ 素材1：移动互联网络拓扑图</a>
+                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材1-1：移动互联网络拓扑图.docx" download>⬇ 素材 1-1：移动互联网络拓扑图</a>
 
-                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材2：安全隐患识别场景.docx" download>⬇ 素材2：安全隐患识别场景</a>
+                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材1-2：安全隐患识别场景.docx" download>⬇ 素材 1-2：安全隐患识别场景</a>
 
-                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材3：等保2.0移动互联安全扩展要求对照表.docx" download>⬇ 素材3：移动互联安全扩展要求对照表</a>
+                                    <a class="table-dl" href="各类表格/7.3 移动互联架构认知/素材1-3：等保2.0移动互联安全扩展要求对照表.docx" download>⬇ 素材 1-3：移动互联安全扩展要求对照表</a>
 
                                 </div>
 
@@ -7962,17 +8062,19 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验 3 份素材到个人文件夹（建议新建“7.2 实验一”目录）；准备画图工具——PPT、Windows 画图、ProcessOn 均可，手绘后拍照也可以；打开素材1 拓扑图先通读一遍。</li>
+                                <li><strong>第 1 步｜打开环境，先认路。</strong>点上方「🚀 实验入口」里的「打开 MobLab」。左侧 6 个页面里，<strong>本实验只用前 4 个</strong>：「🏗️ 端管云架构总览」「📡 无线控制器（AC）」「📲 MDM 终端管理」「🧩 移动应用管控」；「🚨 无线入侵检测」「📝 等保核查任务」留给实验二。<span class="step-check">✅ 到位标准：能看到三层架构图，以及“终端 8 / AP 3 / 应用 6”三个数字。</span></li>
 
-<li><strong>读拓扑（素材1）。</strong>把图上的设备按“端 / 管 / 云”三段归类，标出每段的边界设备（谁是把关的）。</li>
+                                <li><strong>第 2 步｜看架构 → 画“端—管—云”三层。</strong>先打开 <a class="inline-dl" href="各类表格/7.3 移动互联架构认知/素材1-1：移动互联网络拓扑图.docx" download>素材 1-1《移动互联网络拓扑图》</a> 放在手边。回到「端管云架构总览」页，把每个节点点一遍（节点会弹出安全关注点），按“端（终端）/ 管（无线与边界）/ 云（应用与服务）”三层落位，标出每层的<strong>边界设备</strong>——AP、无线接入网关、企业防火墙。<span class="step-check">✅ 到位标准：三层齐全，且每层都写出“谁是把关设备”，不写“网络设备”这种笼统说法。</span></li>
 
-                                <li><strong>画架构图。</strong>复用任务 3 的分层画法：三段各一层，层内画组件，层间画数据流箭头（APP → AP → AC → 业务服务器；更新包 ← 分发平台）。</li>
+                                <li><strong>第 3 步｜抄网络连接路径（含条款号）。</strong>页面下方的「网络连接路径」表给了 4 条路径和对应等保检查点：终端→AP（访问控制 8.3.2.2 禁 WEP）、AP→无线接入网关（边界防护 8.3.2.1）、网关→内网（边界隔离 + 入侵防范 8.3.2.3）、云端访问（HTTPS）。逐条抄进“数据流向”栏，写下一条办公数据从手机到业务系统的完整走法。<span class="step-check">✅ 到位标准：4 条路径都写全，每条后面都带条款号；能说清哪一段最脆弱及理由。</span></li>
 
-                                <li><strong>写数据流向（5~8 句）。</strong>说清一条办公数据从手机到业务系统的完整路径，并标注<b>哪一段最脆弱、为什么</b>。</li>
+                                <li><strong>第 4 步｜找 3 处最脆弱点。</strong>架构总览顶部有 3 个 ⚠ 标记：<b>2 台终端未装 MDM 客户端</b>、<b>AP 存在违规配置</b>、<b>1 个应用非证书签名</b>。分别点进 mdm / ac / app 三页核实到底哪台、哪个配置不对。<span class="step-check">✅ 到位标准：写出 3 条“哪台设备 + 哪个配置 + 会导致什么后果”，不写“安全性不足”这类空话。</span></li>
 
-                                <li><strong>标扩展要求（素材3）。</strong>在架构图上圈出每条扩展要求对应的位置——比如“移动终端管控”圈在端侧、“无线接入认证”圈在 AC。</li>
+                                <li><strong>第 5 步｜把扩展要求落到图上。</strong>对照 <a class="inline-dl" href="各类表格/7.3 移动互联架构认知/素材1-3：等保2.0移动互联安全扩展要求对照表.docx" download>素材 1-3《等保2.0移动互联安全扩展要求对照表》</a>，在架构图上圈出每条要求的位置：无线接入认证圈在 <b>AC</b>、终端管控圈在 <b>MDM</b>、应用签名圈在 <b>APP 分发</b>、边界隔离圈在 <b>无线接入网关</b>。<span class="step-check">✅ 到位标准：每条扩展要求在图上都能圈到具体设备，圈不出来的说明还没读懂。</span></li>
 
-                                <li><strong>做隐患识别（素材2）。</strong>逐个场景判断：属于哪一段的问题？对应哪条扩展要求？</li>
+                                <li><strong>第 6 步｜三页补细节（记具体值）。</strong>AC 页看：认证方式（是否 WEP）、加密算法（AES）、SSID 是否隐藏、WPS 是否关闭、多 AP 是否共用同一密钥，并对照页内 WEP vs WPA 速查找出不合规的 AP；MDM 页看：纳管 8 台 / 客户端运行 6 台 / 3 台风险设备（root 或无锁屏）；APP 页看：企业应用库签名状态、白名单策略，对比员工 A（合规）与员工 B（未装 MDM、装 WiFi 万能钥匙、破解版 OA）。<span class="step-check">✅ 到位标准：每页至少记下 2 个页面上的具体值，能指着界面说“这里不合规”。</span></li>
+
+                                <li><strong>第 7 步｜做隐患归类，交图。</strong>用 <a class="inline-dl" href="各类表格/7.3 移动互联架构认知/素材1-2：安全隐患识别场景.docx" download>素材 1-2《安全隐患识别场景》</a> 逐个场景判断：属于端 / 管 / 云哪一段？对应哪条扩展要求？结论写在图下方，连同架构图与数据流向一起按命名提交。<span class="step-check">✅ 到位标准：场景全部归类，“段位 + 条款”两项都写，没有空着的场景。</span></li>
 
                             </ol>
 
@@ -8024,6 +8126,8 @@ return</div>
 
                             <div class="lab-head">🧪 实验二·配置核查：移动安全配置核查——用“配置 + 台账 + 日志”三份证据填表</div>
 
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>平台「⬇ 导出」生成的《移动互联安全测评记录表》（<strong>6 项判定 + 问题描述 + 整改建议</strong>齐全）+ 违规配置识别得分截图，命名 <b>班级+学号+姓名+7.2实验二</b> 提交学习通。下面 8 步按顺序做。</div>
+
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
                             <ul style="margin:4px 0 10px 22px;">
@@ -8038,19 +8142,19 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验二配套素材（编号 2-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材1：模拟无线控制器配置核查表.docx" download>⬇ 素材1：模拟无线控制器配置核查表</a>
+                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材2-1：模拟无线控制器配置核查表.docx" download>⬇ 素材 2-1：模拟无线控制器配置核查表</a>
 
-                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材2：入侵检测日志分析表.docx" download>⬇ 素材2：入侵检测日志分析表</a>
+                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材2-2：入侵检测日志分析表.docx" download>⬇ 素材 2-2：入侵检测日志分析表</a>
 
-                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材3：移动互联安全测评记录表（填写模板）.docx" download>⬇ 素材3：移动互联安全测评记录表（模板 · 必填）</a>
+                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材2-3：移动互联安全测评记录表（填写模板）.docx" download>⬇ 素材 2-3：移动互联安全测评记录表（模板 · 必填）</a>
 
-                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材4：移动终端与应用管控核查表.docx" download>⬇ 素材4：移动终端与应用管控核查表</a>
+                                    <a class="table-dl" href="各类表格/7.4 移动安全配置核查/素材2-4：移动终端与应用管控核查表.docx" download>⬇ 素材 2-4：移动终端与应用管控核查表</a>
 
                                 </div>
 
@@ -8058,17 +8162,21 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验 4 份素材；先打开素材3 记录表模板通读一遍，明确要填哪些列（核查项 / 方法 / 结果 / 证据 / 判定 / 问题描述 / 整改建议），再按下面步骤核查——带着表格去查，不会漏。</li>
+                                <li><strong>第 1 步｜进入核查页，认 6 项指标。</strong>点左侧「📝 等保核查任务」，页面列出 6 项核心指标（无线接入控制、边界防护、入侵防范、终端管控、应用管控、监测审计）。<span class="step-check">✅ 到位标准：6 项都在，每项右侧有「查看位置」按钮。</span></li>
 
-<li><strong>读配置（素材1）。</strong>逐项核对：认证方式、口令强度、VLAN 划分、管理账号、日志设置——把“不合格项”圈出来，并写下该配置对应的风险。</li>
+                                <li><strong>第 2 步｜把素材放在手边。</strong>下载并打开 <a class="inline-dl" href="各类表格/7.4 移动安全配置核查/素材2-3：移动互联安全测评记录表（填写模板）.docx" download>素材 2-3《移动互联安全测评记录表（填写模板）》</a>、<a class="inline-dl" href="各类表格/7.4 移动安全配置核查/素材2-4：移动终端与应用管控核查表.docx" download>素材 2-4《移动终端与应用管控核查表》</a>——平台导出的表结构与模板一致，先看清“方法→结果→证据→判定→建议”五列各填什么。<span class="step-check">✅ 到位标准：能说出五列分别写什么，知道“证据”列要写页面位置或截图编号。</span></li>
 
-                                <li><strong>读日志（素材2）。</strong>从入侵检测日志里找出异常接入记录（如大量失败认证、陌生 MAC、异常时段），判断是“攻击尝试”还是“配置缺陷被利用”。</li>
+                                <li><strong>第 3 步｜无线接入取证（8.3.2.2）。</strong>进「📡 无线控制器（AC）」页，看 AC-01 全局安全配置：认证方式是否 WEP、加密是否 AES、SSID 是否广播、WPS 是否开启、多 AP 是否共用密钥；再对 AP 列表逐个核，对照 WEP vs WPA 速查找出不合规的 AP，并填 <a class="inline-dl" href="各类表格/7.4 移动安全配置核查/素材2-1：模拟无线控制器配置核查表.docx" download>素材 2-1《模拟无线控制器配置核查表》</a>。<span class="step-check">✅ 到位标准：不合规的 AP 指名道姓，写明“错在哪个参数、应该是什么值”。</span></li>
 
-                                <li><strong>查台账（素材4）。</strong>核对终端清单：有多少台设备未注册 MDM？有多少台 root/越狱？应用是否都来自官方渠道？</li>
+                                <li><strong>第 4 步｜终端管控取证（8.3.3.1a）。</strong>进「📲 MDM 终端管理」页：纳管 8 台、客户端运行 6 台、3 台风险设备（root 或无锁屏），看是否支持远程锁定 / 远程擦除及最近一次演练时间；对未纳管终端说明为什么是风险。<span class="step-check">✅ 到位标准：能说清“2 台未装客户端”“3 台 root / 无锁屏”分别违反哪条，且写出远程擦除的核查结论。</span></li>
 
-                                <li><strong>填记录表（素材3）。</strong>每项写：核查项 → 方法（查配置/查台账/看日志）→ 结果 → 证据 → 四档判定 → 问题描述 → 整改建议。</li>
+                                <li><strong>第 5 步｜应用管控取证（8.3.3.2）。</strong>进「🧩 移动应用管控」页：企业应用库的签名状态与白名单策略，重点看员工 B 的 WiFi 万能钥匙（无签名）、破解版 OA（非官方渠道）、HTTP 明文传输与过度授权。<span class="step-check">✅ 到位标准：列出至少 3 条应用层问题，并说明“为什么只允许指定证书签名的应用”。</span></li>
 
-                                <li><strong>汇总优先整改项。</strong>在记录表末尾写 3 条“最该先改的”，并说明理由（风险最高 / 成本最低 / 影响面最大）。</li>
+                                <li><strong>第 6 步｜入侵检测取证（8.3.2.3）。</strong>进「🚨 无线入侵检测」页：WIDS 日志里找伪造热点（Evil Twin）、非授权接入、针对无线设备的攻击记录，并确认是否配置了阻断能力；把日志结论填 <a class="inline-dl" href="各类表格/7.4 移动安全配置核查/素材2-2：入侵检测日志分析表.docx" download>素材 2-2《入侵检测日志分析表》</a>。<span class="step-check">✅ 到位标准：把日志事件和“PPT 案例导入里的中间人攻击”对上号，写出对应条款。</span></li>
+
+                                <li><strong>第 7 步｜判定 + 写问题描述与整改建议，导出。</strong>逐项选测评结果（符合 / 部分符合 / 不符合 / 不适用），问题描述要“点名对象 + 具体配置值”，整改建议要“可操作、不越界”（写“启用 WPA2-AES 并关闭 WPS”，不写“加强无线安全”）。填完点「⬇ 导出」生成记录表。<span class="step-check">✅ 到位标准：6 项都有判定与描述；整改建议具体到配置项，没有“加强”“完善”这类空词。</span></li>
+
+                                <li><strong>第 8 步｜做违规识别，交材料。</strong>同一页面下方是「移动安全违规配置识别」——环境里埋了 <b>6 处违规</b>（混有干扰项），勾选真实违规项后提交评分，截图；把导出的记录表与截图按命名提交学习通。<span class="step-check">✅ 到位标准：得分截图能看到找出数量，记录表能正常打开且 6 项齐全。</span></li>
 
                             </ol>
 
@@ -8211,9 +8319,21 @@ return</div>
 
                         </div>
 
+                        <div class="lab-shared">
+
+                            <div class="lab-shared-head">🚀 实验入口（实验一、实验二共用同一个环境）</div>
+
+                            <p style="margin:8px 0 10px;">IoTLab 物联网实验平台 只需打开<strong>一次</strong>：实验一在「🏗️ 三层架构总览 / 🌡️ 感知节点设备管理 / 🔀 网关节点管理」取架构证据，实验二在「📡 通信与抗重放 / 🚨 安全事件日志 / 📝 等保核查任务」逐项判定。<strong>环境共用，素材不共用</strong>——实验一的素材统一编号 <b>1-1 ～ 1-5</b>，实验二的素材统一编号 <b>2-1 ～ 2-5</b>，分别放在各自实验里，按编号下载。</p>
+
+                            <p><a class="table-dl" href="iotlab-experiment.html" target="_blank" rel="noopener" title="打开 IoTLab 物联网实验平台（模拟环境）">🚀 打开 IoTLab 物联网实验平台（模拟环境 · 无需账号）</a></p>
+
+                        </div>
+
                         <div class="lab-box">
 
                             <div class="lab-head">🧪 实验一·架构认知：物联网架构认知——三层图 + 威胁落位表</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>一份《物联网架构分析记录表》+ 三层架构图（照片 / PDF 均可，每层用红笔标出风险点）+ 威胁落位表，命名 <b>班级+学号+姓名+7.3实验一</b> 提交学习通。下面 7 步按顺序做，每步末尾的“✅ 到位标准”就是该步的验收条件。</div>
 
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
@@ -8229,19 +8349,19 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验一配套素材（编号 1-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材1：教师演示——物联网三层架构示意图（含安全风险标注）.docx" download>⬇ 素材1：物联网三层架构示意图（含风险标注）</a>
+                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材1-1：教师演示——物联网三层架构示意图（含安全风险标注）.docx" download>⬇ 素材 1-1：物联网三层架构示意图（含风险标注）</a>
 
-                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材2：实践任务——《物联网架构分析记录表》.docx" download>⬇ 素材2：物联网架构分析记录表（必填）</a>
+                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材1-2：实践任务——《物联网架构分析记录表》.docx" download>⬇ 素材 1-2：物联网架构分析记录表（必填）</a>
 
-                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材3：场景说明卡（供实践任务使用）.docx" download>⬇ 素材3：场景说明卡</a>
+                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材1-3：场景说明卡（供实践任务使用）.docx" download>⬇ 素材 1-3：场景说明卡</a>
 
-                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材4：物联网各层安全威胁速查表.docx" download>⬇ 素材4：各层安全威胁速查表</a>
+                                    <a class="table-dl" href="各类表格/7.5 物联网架构认知/素材1-4：物联网各层安全威胁速查表.docx" download>⬇ 素材 1-4：各层安全威胁速查表</a>
 
                                 </div>
 
@@ -8249,15 +8369,19 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验 4 份素材；画图工具准备同 7.2 实验一（PPT / 画图 / ProcessOn / 手绘拍照均可）；先读素材3 场景说明卡，选定要分析的场景（园区监控或智能家居）。</li>
+                                <li><strong>第 1 步｜打开环境，先认路。</strong>点上方「🚀 实验入口」里的「打开 IoTLab」。左侧 6 个页面里，<strong>本实验用前 3 个</strong>：「🏗️ 三层架构总览」「🌡️ 感知节点设备管理」「🔀 网关节点管理」；「📡 通信与抗重放」「🚨 安全事件日志」「📝 等保核查任务」留给实验二。<span class="step-check">✅ 到位标准：能看到三层架构图，以及“感知节点 250 / 网关 4 / 云平台 1”三个数字。</span></li>
 
-<li><strong>选场景（素材3）。</strong>从场景卡里选一个（园区监控 / 智能家居），明确“谁在用、采集什么数据、数据去哪”。</li>
+                                <li><strong>第 2 步｜看架构 → 画三层图。</strong>在「三层架构总览」页把每个节点点一遍（弹窗写安全关注点），按“感知层（眼睛手脚）/ 网络层（神经网络）/ 应用层（大脑）”三层落位，抄下各层设备与数量：温湿度 200、照明 50、水表 300、摄像头 24、门禁 RFID；网关 4 台；云平台 + 管理界面 + APP。<span class="step-check">✅ 到位标准：三层齐全，每层至少写 3 个组件，数量与页面一致。</span></li>
 
-                                <li><strong>画三层图。</strong>感知层（列设备型号）、网络层（列网关与传输方式）、平台应用层（列平台与业务系统），层间画数据流箭头。</li>
+                                <li><strong>第 3 步｜写数据流向。</strong>照“传感器 → 网关 → MQTT/HTTPS → 云平台 → 管理界面 / APP”写清一条环境数据的上行路径，再写一条控制指令的下行路径（APP → 云 → 网关 → 执行器），标出协议。<span class="step-check">✅ 到位标准：上下行两条路径都写，能说清“网关是哪个协议的转换点”。</span></li>
 
-                                <li><strong>落威胁（素材4）。</strong>把速查表里的威胁逐条贴到图上对应位置：默认口令贴感知层、明文传输贴网络层、API 无鉴权贴平台层。</li>
+                                <li><strong>第 4 步｜标风险点（对应违规 6 处）。</strong>页面顶部提示已发现违规 6 处、分布三层：感知节点存在物理防护缺陷、网关未启用接入白名单、云平台侧配置问题。点节点核实后，在三层图上用红笔标出位置。<span class="step-check">✅ 到位标准：6 处违规在图上都能指到具体设备，不是笼统写“某层有风险”。</span></li>
 
-                                <li><strong>填记录表（素材2）。</strong>写出每层的组件清单、数据流向、信任边界与主要威胁，并标出“本次测评要重点核查的 3 个设备”。</li>
+                                <li><strong>第 5 步｜做威胁落位表。</strong>用 <a class="inline-dl" href="各类表格/7.5 物联网架构认知/素材1-4：物联网各层安全威胁速查表.docx" download>素材 1-4《物联网各层安全威胁速查表》</a> 逐条落位：每条威胁属于哪一层、影响哪类设备、对应哪条扩展要求（8.4.1 / 8.4.2 / 8.4.3）。<span class="step-check">✅ 到位标准：每层至少落 2 条威胁，且“层 + 设备 + 条款”三项都写。</span></li>
+
+                                <li><strong>第 6 步｜对照扩展要求补缺口。</strong>打开 <a class="inline-dl" href="各类表格/7.5 物联网架构认知/素材1-5：等保2.0物联网扩展要求快速索引（第三级）.docx" download>素材 1-5《等保2.0物联网扩展要求快速索引（第三级）》</a>，检查三层图里有没有漏掉的要求（如感知节点物理防护 8.4.1.1、网关接入控制 8.4.2.1、抗数据重放 8.4.3.3）。<span class="step-check">✅ 到位标准：索引里的每条要求都能在图上找到落点，找不到的补进图里。</span></li>
+
+                                <li><strong>第 7 步｜填记录表，交材料。</strong>把三层图、数据流向、威胁落位表填进 <a class="inline-dl" href="各类表格/7.5 物联网架构认知/素材1-2：实践任务——《物联网架构分析记录表》.docx" download>素材 1-2《物联网架构分析记录表》</a>，按命名提交。<span class="step-check">✅ 到位标准：记录表每一项都有内容，没有留空的格。</span></li>
 
                             </ol>
 
@@ -8307,6 +8431,8 @@ return</div>
 
                             <div class="lab-head">🧪 实验二·配置核查：物联网安全配置核查——抽样 + 平台取证，填出记录表</div>
 
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>平台「⬇ 导出」生成的《物联网安全测评记录表》（<strong>6 大维度 17 项判定</strong> + 问题描述 + 整改建议）+ 配置风险识别得分截图，命名 <b>班级+学号+姓名+7.3实验二</b> 提交学习通。下面 8 步按顺序做。</div>
+
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
                             <ul style="margin:4px 0 10px 22px;">
@@ -8321,19 +8447,19 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验二配套素材（编号 2-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材1：实践任务——模拟物联网系统配置数据.docx" download>⬇ 素材1：模拟物联网系统配置数据</a>
+                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材2-1：实践任务——模拟物联网系统配置数据.docx" download>⬇ 素材 2-1：模拟物联网系统配置数据</a>
 
-                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材2：实践任务——《物联网安全测评记录表》.docx" download>⬇ 素材2：物联网安全测评记录表（必填）</a>
+                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材2-2：实践任务——《物联网安全测评记录表》.docx" download>⬇ 素材 2-2：物联网安全测评记录表（必填）</a>
 
-                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材3：案例分析——智能家居物联网系统.docx" download>⬇ 素材3：案例分析——智能家居物联网系统</a>
+                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材2-3：案例分析——智能家居物联网系统.docx" download>⬇ 素材 2-3：案例分析——智能家居物联网系统</a>
 
-                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材4：物联网安全测评快速参考卡.docx" download>⬇ 素材4：物联网安全测评快速参考卡</a>
+                                    <a class="table-dl" href="各类表格/7.6 物联网安全配置核查/素材2-4：物联网安全测评快速参考卡.docx" download>⬇ 素材 2-4：物联网安全测评快速参考卡</a>
 
                                 </div>
 
@@ -8341,15 +8467,21 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验 4 份素材；打开素材1 设备清单先数一数：几种型号、几个区域、共多少台——抽样方案就从这三个数开始算。</li>
+                                <li><strong>第 1 步｜进入核查页，认 6 个维度。</strong>点左侧「📝 等保核查任务」，页面把 17 项指标分成 6 个维度（感知节点物理防护、接入控制、入侵防范、感知节点设备安全、网关设备安全、抗数据重放）。建议 4 人一组分工：测评工程师、记录员、验证测试员、报告编写员。<span class="step-check">✅ 到位标准：17 项都能定位到所属维度，知道每项要跳哪个页面取证。</span></li>
 
-<li><strong>定抽样方案。</strong>从素材1 的设备清单里按型号 + 区域抽样（同型号抽 10%，每区域至少 1 台），在记录表开头写明抽样理由。</li>
+                                <li><strong>第 2 步｜把素材放在手边。</strong>下载 <a class="inline-dl" href="各类表格/7.6 物联网安全配置核查/素材2-2：实践任务——《物联网安全测评记录表》.docx" download>素材 2-2《物联网安全测评记录表》</a> 与 <a class="inline-dl" href="各类表格/7.6 物联网安全配置核查/素材2-4：物联网安全测评快速参考卡.docx" download>素材 2-4《物联网安全测评快速参考卡》</a>，先看清表结构与“符合 / 部分符合 / 不符合 / 不适用”的判断口径。<span class="step-check">✅ 到位标准：能说出四档判定各自的含义，知道判定要写证据。</span></li>
 
-                                <li><strong>逐项核查。</strong>按五个着力点核查抽样设备，每项写：核查项 → 方法 → 结果 → 证据 → 四档判定 → 问题描述 → 整改建议。</li>
+                                <li><strong>第 3 步｜感知节点取证（8.4.1.1 / 8.4.3.1）。</strong>进「🌡️ 感知节点设备管理」页，看抽查样本表：哪些设备装在阳光直射区、哪些室外设备没有防护箱体、哪些关键监控节点没有 UPS、哪些还在用出厂默认口令（admin）、哪些固件从未更新。结合 <a class="inline-dl" href="各类表格/7.6 物联网安全配置核查/素材2-1：实践任务——模拟物联网系统配置数据.docx" download>素材 2-1《模拟物联网系统配置数据》</a> 填核查结论。<span class="step-check">✅ 到位标准：至少找出“阳光直射 / 无防护箱 / 默认口令 / 固件未更新”各 1 例，并写明对应条款。</span></li>
 
-                                <li><strong>做案例责任划分（素材3）。</strong>智能家居案例里，把发现的问题按“设备厂商 / 平台运营方 / 用户”三方归类，并说明依据。</li>
+                                <li><strong>第 4 步｜网关取证（8.4.2.1 / 8.4.2.2 / 8.4.3.2）。</strong>进「🔀 网关节点管理」页，看 4 台网关：是否启用接入白名单（决定“只有授权感知节点可接入”）、是否有非法数据过滤（限制通信目标地址）、固件版本是否仍是 2019 年的 v2.1.0、密钥是否支持在线更新。<span class="step-check">✅ 到位标准：4 台网关逐台核对，能指出“白名单没开 = 谁都能接入”的后果。</span></li>
 
-                                <li><strong>写整改优先级。</strong>物联网整改往往牵扯停业务，写建议时要注明“是否影响业务连续性”，给出可先做的补偿措施。</li>
+                                <li><strong>第 5 步｜抗重放测试（8.4.3.3）。</strong>进「📡 通信与抗重放」页，先看通信协议安全配置（是否带时间戳 / 序列号、是否做完整性校验），再点两个测试按钮：重放门禁开门指令、重放温湿度历史数据，观察网关 / 平台是否识别。<span class="step-check">✅ 到位标准：两个测试都做了，能写出“是否识别、为什么”，并对应到 a) 新鲜性 / b) 完整性。</span></li>
+
+                                <li><strong>第 6 步｜从日志反推配置问题。</strong>进「🚨 安全事件日志」页，看陌生地址连接、伪造节点、重放攻击各暴露了哪一层哪一条问题；再对一遍 Mirai 的三个成因（默认密码、固件不更新、公网暴露），在平台里找到对应位置。<span class="step-check">✅ 到位标准：能说出 3 条“日志现象 → 违规配置 → 条款”的对应关系。</span></li>
+
+                                <li><strong>第 7 步｜判定 + 描述 + 建议，导出。</strong>逐项选判定并写问题描述（点名设备 + 具体值，如“GW-01 固件 v2.1.0 自 2019 年未升级”）与整改建议（如“启用接入白名单并限制网关出站地址”）；填完点「⬇ 导出」。<span class="step-check">✅ 到位标准：17 项都有判定；描述有设备名和值，建议是可执行的配置动作。</span></li>
+
+                                <li><strong>第 8 步｜做风险识别，交材料。</strong>页面下方「智能园区配置风险分析」埋了 <b>6 处风险</b>（混有干扰项），勾选真实风险提交评分并截图；把记录表与截图按命名提交。<span class="step-check">✅ 到位标准：截图能看到找出数量，记录表可正常打开、17 项齐全。</span></li>
 
                             </ol>
 
@@ -8498,9 +8630,21 @@ return</div>
 
                         </div>
 
+                        <div class="lab-shared">
+
+                            <div class="lab-shared-head">🚀 实验入口（实验一、实验二共用同一个环境）</div>
+
+                            <p style="margin:8px 0 10px;">ICSLab 工控系统实验平台 只需打开<strong>一次</strong>：实验一在「🏭 五层架构总览 / 🛡️ 网络边界与隔离」取架构证据，实验二在「⚙️ PLC 控制器管理 / 📡 协议与无线安全 / 📋 监测与审计 / 📝 等保核查任务」逐项判定。<strong>环境共用，素材不共用</strong>——实验一的素材统一编号 <b>1-1 ～ 1-5</b>，实验二的素材统一编号 <b>2-1 ～ 2-5</b>，分别放在各自实验里，按编号下载。</p>
+
+                            <p><a class="table-dl" href="icslab-experiment.html" target="_blank" rel="noopener" title="打开 ICSLab 工控系统实验平台（模拟环境）">🚀 打开 ICSLab 工控系统实验平台（模拟环境 · 无需账号）</a></p>
+
+                        </div>
+
                         <div class="lab-box">
 
                             <div class="lab-head">🧪 实验一·架构认知：工控系统架构认知——DCS 架构图 + 脆弱点分析表</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>一份《工控系统架构认知记录表》（五层划分 + 设备 + 隔离措施 + 连接方式 + 弱点）+ 一张 DCS 五层架构图 + 《工控系统安全脆弱点分析表》，命名 <b>班级+学号+姓名+7.4实验一</b> 提交学习通。下面 7 步按顺序做。</div>
 
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
@@ -8516,19 +8660,19 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验一配套素材（编号 1-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材1：工控系统架构认知记录表.docx" download>⬇ 素材1：工控系统架构认知记录表（必填）</a>
+                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材1-1：工控系统架构认知记录表.docx" download>⬇ 素材 1-1：工控系统架构认知记录表（必填）</a>
 
-                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材2：工控系统安全脆弱点分析表.docx" download>⬇ 素材2：工控系统安全脆弱点分析表</a>
+                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材1-2：工控系统安全脆弱点分析表.docx" download>⬇ 素材 1-2：工控系统安全脆弱点分析表</a>
 
-                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材3：化工厂DCS系统架构图（模拟）.docx" download>⬇ 素材3：化工厂 DCS 系统架构图（模拟）</a>
+                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材1-3：化工厂DCS系统架构图（模拟）.docx" download>⬇ 素材 1-3：化工厂 DCS 系统架构图（模拟）</a>
 
-                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材5：工控系统 vs IT系统快速对比卡.docx" download>⬇ 素材5：工控系统 vs IT 系统快速对比卡</a>
+                                    <a class="table-dl" href="各类表格/7.7 工控系统架构认知/素材1-5：工控系统 vs IT系统快速对比卡.docx" download>⬇ 素材 1-5：工控系统 vs IT 系统快速对比卡</a>
 
                                 </div>
 
@@ -8536,15 +8680,19 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验的记录表、脆弱点分析表、DCS 架构图与对比卡素材；准备红蓝两色笔（或 PPT 两个颜色）：红色画生产网 / 管理网边界，蓝色标“便道”。</li>
+                                <li><strong>第 1 步｜打开环境，先认路。</strong>点上方「🚀 实验入口」里的「打开 ICSLab」。左侧 6 个页面里，<strong>本实验用前 2 个</strong>：「🏭 五层架构总览」「🛡️ 网络边界与隔离」；「⚙️ PLC 控制器管理」「📡 协议与无线安全」「📋 监测与审计」「📝 等保核查任务」留给实验二。<span class="step-check">✅ 到位标准：能看到五层架构图，以及“PLC 12 台 / 安全域 3 个 / 脆弱点 7 个”三个数字。</span></li>
 
-<li><strong>读架构图（素材3）。</strong>把设备按四层归类，用红线画出“生产网 / 管理网”的分界线。</li>
+                                <li><strong>第 2 步｜看五层架构（IEC 62264）。</strong>在「五层架构总览」页把每层节点点开：L5 企业资源层（ERP / OA）、L4 生产管理层（MES / 工控安全管理平台）、L3 过程监控层（SCADA）、L2 控制层（PLC / DCS 控制器）、L1 现场设备层（仪表 / 阀门 / 传感器）。逐层抄设备。<span class="step-check">✅ 到位标准：五层齐全，每层写清“这层是干什么的 + 有哪些设备”。</span></li>
 
-                                <li><strong>找便道。</strong>在图上标出所有跨越边界的连接：工程师站双网卡、远程运维 VPN、无线网桥、U 盘拷贝路径——每一条都要写清“为什么存在”（运维需要）和“风险是什么”。</li>
+                                <li><strong>第 3 步｜查层间隔离（本厂最要命的地方）。</strong>重点看 L4 与 L3 之间：页面标注“应部署工业网闸（单向隔离）——当前未部署”“应部署工业防火墙实现安全域隔离——当前未部署”，以及办公网与工控网直连。把这三条单独记下来。<span class="step-check">✅ 到位标准：能说清“没网闸 / 没防火墙 / 直连”分别会被什么攻击利用。</span></li>
 
-                                <li><strong>填记录表（素材1）。</strong>写清各层组件、数据流向、边界设备、以及本次核查重点。</li>
+                                <li><strong>第 4 步｜数资产、抄脆弱点。</strong>统计 PLC 12 台（存在默认口令 / 弱口令）、安全域 3 个（生产一区 / 二区 / 三区）、已发现脆弱点 7 个（对应 7.4.1 / 7.4.2 缺陷清单）。逐个记下编号与位置。<span class="step-check">✅ 到位标准：7 个脆弱点都有编号，能指到具体设备或链路。</span></li>
 
-                                <li><strong>做脆弱点分析（素材2）。</strong>每条脆弱点写：位置 → 成因 → 可能后果（对生产的影响）→ 补偿措施 → 最终整改建议（注明是否需要停机窗口）。</li>
+                                <li><strong>第 5 步｜填架构认知记录表。</strong>打开 <a class="inline-dl" href="各类表格/7.7 工控系统架构认知/素材1-1：工控系统架构认知记录表.docx" download>素材 1-1《工控系统架构认知记录表》</a>，按“五层划分是否完整 / 各层主要设备 / 层间隔离措施 / 企业层与工控层连接方式 / 可被利用的弱点”五项填写。<span class="step-check">✅ 到位标准：五项全填，隔离措施那栏要写出“未部署”的实际情况，不写“已部署”。</span></li>
+
+                                <li><strong>第 6 步｜做脆弱点分析。</strong>用 <a class="inline-dl" href="各类表格/7.7 工控系统架构认知/素材1-2：工控系统安全脆弱点分析表.docx" download>素材 1-2《工控系统安全脆弱点分析表》</a> 把 7 个脆弱点逐条展开：位置、现象、对应条款（7.4.1 网络架构 / 7.4.2 边界防护等）、可被利用的攻击路径。<span class="step-check">✅ 到位标准：每条脆弱点都有“位置 + 条款 + 攻击路径”三要素。</span></li>
+
+                                <li><strong>第 7 步｜对照 IT 系统做对比，交材料。</strong>用 <a class="inline-dl" href="各类表格/7.7 工控系统架构认知/素材1-5：工控系统 vs IT系统快速对比卡.docx" download>素材 1-5《工控系统 vs IT 系统快速对比卡》</a> 说清工控为什么“可用性优先、补丁不能随便打”，把差异写进记录表备注，按命名提交。<span class="step-check">✅ 到位标准：能举 2 个具体差异，并说出对测评方法的影响。</span></li>
 
                             </ol>
 
@@ -8594,6 +8742,8 @@ return</div>
 
                             <div class="lab-head">🧪 实验二·配置核查：工控安全配置核查——记录表 + 缺陷整改方案</div>
 
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>平台「⬇ 导出」生成的《工业控制系统安全测评记录表》（判定 + 问题描述 + 整改建议）+ 一份缺陷整改方案（含优先级），命名 <b>班级+学号+姓名+7.4实验二</b> 提交学习通。下面 8 步按顺序做。</div>
+
                             <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
 
                             <ul style="margin:4px 0 10px 22px;">
@@ -8608,19 +8758,19 @@ return</div>
 
                             </ul>
 
-                            <p style="margin:12px 0 8px;"><strong>▍配套素材（点击下载）</strong></p>
+                            <p style="margin:12px 0 8px;"><strong>📎 实验二配套素材（编号 2-x，仅本实验使用）</strong></p>
 
                             <div class="kb-st-tables">
 
                                 <div class="kb-st-list">
 
-                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材1：实践任务——《工业控制系统安全测评记录表》.docx" download>⬇ 素材1：工业控制系统安全测评记录表（必填）</a>
+                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材2-1：实践任务——《工业控制系统安全测评记录表》.docx" download>⬇ 素材 2-1：工业控制系统安全测评记录表（必填）</a>
 
-                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材2：工控设备安全配置核查清单（快速参考）.docx" download>⬇ 素材2：工控设备安全配置核查清单（快速参考）</a>
+                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材2-2：工控设备安全配置核查清单（快速参考）.docx" download>⬇ 素材 2-2：工控设备安全配置核查清单（快速参考）</a>
 
-                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材3：模拟工控设备配置核查报告（脱敏版）.docx" download>⬇ 素材3：模拟工控设备配置核查报告（脱敏版 · 示范）</a>
+                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材2-3：模拟工控设备配置核查报告（脱敏版）.docx" download>⬇ 素材 2-3：模拟工控设备配置核查报告（脱敏版 · 示范）</a>
 
-                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材4：工控安全配置缺陷分析与整改建议练习.docx" download>⬇ 素材4：配置缺陷分析与整改建议练习</a>
+                                    <a class="table-dl" href="各类表格/7.8 工控安全配置核查/素材2-4：工控安全配置缺陷分析与整改建议练习.docx" download>⬇ 素材 2-4：配置缺陷分析与整改建议练习</a>
 
                                 </div>
 
@@ -8628,15 +8778,21 @@ return</div>
 
                             <ol class="step-list">
 
-                                                                <li><strong>第 0 步｜准备。</strong>下载本实验 4 份素材；先花 10 分钟读素材3 示范报告，学它的“问题描述—风险影响—整改建议”三段写法——这就是接下来答题要模仿的格式。</li>
+                                <li><strong>第 1 步｜先读案例，记六步法。</strong>在「📝 等保核查任务」页读案例“一根网线引发的停产事故”（停机 4 小时、损失超 200 万），把四项调查发现与等保判定对上号；同时记住核查六步法：准备 → 信息收集 → 身份鉴别 → 访问控制 → 审计 → 综合评估。<span class="step-check">✅ 到位标准：能复述六步法顺序，并说出案例里四项发现各判什么。</span></li>
 
-<li><strong>对照清单核查（素材2）。</strong>按六大着力点逐项核查，每项记录“方法 / 结果 / 证据 / 判定”。</li>
+                                <li><strong>第 2 步｜把素材放在手边。</strong>下载 <a class="inline-dl" href="各类表格/7.8 工控安全配置核查/素材2-1：实践任务——《工业控制系统安全测评记录表》.docx" download>素材 2-1《工业控制系统安全测评记录表》</a> 与 <a class="inline-dl" href="各类表格/7.8 工控安全配置核查/素材2-2：工控设备安全配置核查清单（快速参考）.docx" download>素材 2-2《工控设备安全配置核查清单（快速参考）》</a>，看清每个核查维度要什么证据。<span class="step-check">✅ 到位标准：知道每类证据从哪个页面取（设备清单 / 组态界面 / 日志）。</span></li>
 
-                                <li><strong>参考示范报告（素材3）。</strong>注意示范报告里“问题描述—风险影响—整改建议”三段的写法，尤其是对生产影响的表述方式。</li>
+                                <li><strong>第 3 步｜PLC 身份鉴别取证（8.5.4.1）。</strong>进「⚙️ PLC 控制器管理」页，逐项核：是否存在默认账户 admin/admin、root/root；密码长度与复杂度是否满足；远程管理端口 23(Telnet) 是否开放（应关闭）、22(SSH) 是否可用（应开放）。<span class="step-check">✅ 到位标准：三项都有结论，能指出哪台 PLC 用了默认口令。</span></li>
 
-                                <li><strong>做缺陷整改练习（素材4）。</strong>对给定 5 处缺陷，逐条写出：立即补偿措施（今天就能做、不影响生产）+ 窗口期整改（需停机/检修）+ 残余风险说明。</li>
+                                <li><strong>第 4 步｜访问控制取证（最小权限三检查）。</strong>同一页看“用户角色划分 / 最小权限 / 权限分离”：是否所有用户同权限、操作员是否拥有管理员权限、工程投运与在线修改是否隔离（案例里的 PLC-R01 在线允许改程序）。<span class="step-check">✅ 到位标准：三项检查都有“合规 / 不合规”判断，并写出对应的实际现象。</span></li>
 
-                                <li><strong>汇总成记录表（素材1）。</strong>末尾写“优先整改三项”，并按“风险高低 × 实施难度”排序。</li>
+                                <li><strong>第 5 步｜边界与隔离取证。</strong>进「🛡️ 网络边界与隔离」页：L4-L3 是否有工业网闸、内部是否按业务划安全域并隔离、实时控制系统是否独立组网、是否有 E-Mail/Web/Telnet/FTP 穿越边界；再看远程维护通道是否暴露在公网。<span class="step-check">✅ 到位标准：能说出“办公网直连工控网”对应的条款与攻击场景（震网式入口）。</span></li>
+
+                                <li><strong>第 6 步｜协议与无线取证。</strong>进「📡 协议与无线安全」页：Modbus 无认证/无加密（点“模拟攻击者写线圈”看后果）、无线通信是否有唯一标识与鉴别、通信是否加密。<span class="step-check">✅ 到位标准：能解释“为什么 Modbus 谁都能发指令”，并写出对应整改方向。</span></li>
+
+                                <li><strong>第 7 步｜审计取证（五检查子项）。</strong>进「📋 监测与审计」页，逐项核：审计功能是否开启、审计内容是否覆盖登录/注销/参数修改/程序下载、记录要素是否完整、记录是否受保护（能否被普通用户删除）、保存是否满 6 个月。<span class="step-check">✅ 到位标准：五项逐项有结论；同时记住“监控显示正常 ≠ 真的正常”。</span></li>
+
+                                <li><strong>第 8 步｜判定 + 写整改方案，导出提交。</strong>在「📝 等保核查任务」里逐项判定并写问题描述与整改建议，导出记录表；再用 <a class="inline-dl" href="各类表格/7.8 工控安全配置核查/素材2-4：工控安全配置缺陷分析与整改建议练习.docx" download>素材 2-4《工控安全配置缺陷分析与整改建议练习》</a> 写整改方案，按“风险最高 / 成本最低 / 影响面最大”排优先级。<span class="step-check">✅ 到位标准：记录表判定齐全；整改方案有优先级排序和“先改什么”的理由。</span></li>
 
                             </ol>
 
@@ -9546,6 +9702,8 @@ return</div>
 
                     if (el.classList.contains('lab-box')) return 'lab';
 
+                    if (el.classList.contains('lab-shared')) return 'lab';
+
                     if (el.classList.contains('ai-tip-box')) return 'ai';
 
                     if (el.classList.contains('coming-soon')) return 'lab';
@@ -9704,6 +9862,8 @@ return</div>
 
                                     if (typeof window.__labExpandFor === 'function') window.__labExpandFor(tip);
 
+                                    if (typeof window.__aiTipExpandFor === 'function') window.__aiTipExpandFor(tip);
+
                                     tip.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
                                     tip.classList.remove('flash');
@@ -9780,7 +9940,7 @@ return</div>
 
             (function setupLabAccordion() {
 
-                var ENABLE = ['4.1', '4.2', '4.3', '4.4', '4.5', '5', '6'];
+                var ENABLE = ['4.1', '4.2', '4.3', '4.4', '4.5', '5', '6', '7.1', '7.2', '7.3', '7.4'];
 
                 var SUBSTAGE_PREFIX = 'substage';
 
@@ -11614,13 +11774,13 @@ var SUYANG_CASES = {
 
                     '6':   { ppts: [], stds: ['28448', '22239', 'report'] },
 
-                    '7.1': { ppts: ['7.1 云平台架构认知.pptx', '7.2 云安全配置核查.pptx'], stds: ['22239', '28448'] },
+                    '7.1': { ppts: ['7.1.1 云平台架构认知.pptx', '7.1.2 云安全配置核查.pptx'], stds: ['22239', '28448'] },
 
-                    '7.2': { ppts: ['7.2 移动互联架构认知.pptx', '7.2 移动安全配置核查.pptx'], pptOnline: false, stds: ['22239', '28448'] },
+                    '7.2': { ppts: ['7.2.1 移动互联架构认知.pptx', '7.2.2 移动安全配置核查.pptx'], stds: ['22239', '28448'] },
 
-                    '7.3': { ppts: ['7.3 物联网架构认知.pptx', '7.3 物联网安全配置核查.pptx'], pptOnline: false, stds: ['22239', '28448'] },
+                    '7.3': { ppts: ['7.3.1 物联网架构认知.pptx', '7.3.2 物联网安全配置核查.pptx'], stds: ['22239', '28448'] },
 
-                    '7.4': { ppts: ['7.4 工控系统架构认知.pptx', '7.4 工控安全配置核查.pptx'], pptOnline: false, stds: ['22239', '28448'] },
+                    '7.4': { ppts: ['7.4.1 工控系统架构认知.pptx', '7.4.2 工控安全配置核查.pptx'], stds: ['22239', '28448'] },
 
                     '8':   { ppts: [], stds: ['20984', '22239', 'datalaw'] }
 
@@ -15238,6 +15398,59 @@ var SUYANG_CASES = {
     } else {
         init();
     }
+})();
+</script>
+
+<script>
+/* AI 使用提醒：全站默认折叠，点标题展开；打印时自动展开 */
+(function () {
+    var TIP_SEL = '.ai-tip-box';
+
+    function tipTitle(box) {
+        for (var i = 0; i < box.children.length; i++) {
+            if (box.children[i].classList.contains('ai-tip-title')) return box.children[i];
+        }
+        return null;
+    }
+
+    function setOpen(box, title, open) {
+        box.classList.toggle('is-collapsed', !open);
+        if (title) title.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    function init() {
+        var boxes = document.querySelectorAll(TIP_SEL);
+        Array.prototype.forEach.call(boxes, function (box) {
+            if (box.classList.contains('ai-acc')) return;
+            var title = tipTitle(box);
+            if (!title) return;
+            box.classList.add('ai-acc', 'is-collapsed');
+            title.setAttribute('role', 'button');
+            title.setAttribute('tabindex', '0');
+            title.setAttribute('aria-expanded', 'false');
+            title.title = '点击展开 / 收起 AI 使用提醒';
+            title.addEventListener('click', function () {
+                setOpen(box, title, box.classList.contains('is-collapsed'));
+            });
+            title.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+                    e.preventDefault();
+                    setOpen(box, title, box.classList.contains('is-collapsed'));
+                }
+            });
+        });
+    }
+
+    // 供“素养”页 AI 索引跳转时自动展开
+    window.__aiTipExpandFor = function (el) {
+        if (!el || !el.closest) return;
+        var box = el.closest('.ai-tip-box.is-collapsed');
+        if (!box) return;
+        setOpen(box, tipTitle(box), true);
+    };
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+    else init();
 })();
 </script>
 

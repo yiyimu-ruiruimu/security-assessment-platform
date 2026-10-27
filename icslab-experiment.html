@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICSLab 工控系统实验环境 · 信息安全测评与风险评估</title>
+<style>
+  :root{--bg:#f4f6fa;--panel:#fff;--border:#e3e8f0;--text:#1f2937;--muted:#6b7280;--primary:#dc2626;--primary-dark:#b91c1c;--green:#10b981;--red:#ef4444;--orange:#f59e0b;--purple:#8b5cf6;--sidebar:#450a0a;--sidebar-text:#fecaca;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  body{background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;}
+  .sidebar{width:230px;background:var(--sidebar);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;}
+  .logo{padding:18px 20px;font-size:17px;font-weight:bold;color:#fff;border-bottom:1px solid #7f1d1d;}
+  .nav{flex:1;padding:12px 0;}
+  .nav-item{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;transition:all .15s;border-left:3px solid transparent;}
+  .nav-item:hover{background:#7f1d1d;color:#fff;}
+  .nav-item.active{background:#7f1d1d;color:#fff;border-left-color:#fca5a5;}
+  .sidebar-footer{padding:14px 18px;border-top:1px solid #7f1d1d;font-size:12px;color:#c08a8a;line-height:1.8;}
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0;}
+  .topbar h2{font-size:16px;}
+  .env-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:3px 10px;border-radius:12px;border:1px solid #a7f3d0;}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .content{flex:1;overflow-y:auto;padding:20px 24px;}
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .25s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;}
+  .card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .grid{display:grid;gap:16px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .stat-card .label{font-size:13px;color:var(--muted);}
+  .stat-card .value{font-size:26px;font-weight:700;margin:6px 0 4px;}
+  .stat-card .sub{font-size:12px;}
+  .stat-card.primary{border-top:3px solid var(--primary);}
+  .stat-card.orange{border-top:3px solid var(--orange);}
+  .stat-card.red{border-top:3px solid var(--red);}
+  .stat-card.purple{border-top:3px solid var(--purple);}
+  .btn{border:none;border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-sm{padding:4px 10px;font-size:12px;}
+  .btn-outline{background:#fff;color:var(--primary);border:1px solid var(--primary);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:10px 12px;background:#f8fafc;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:hover td{background:#f8fafc;}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:2px 10px;border-radius:12px;white-space:nowrap;}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;}
+  .status.online{background:#ecfdf5;color:#059669;}.status.online::before{background:var(--green);}
+  .status.warn{background:#fffbeb;color:#d97706;}.status.warn::before{background:var(--orange);}
+  .status.bad{background:#fef2f2;color:var(--red);}.status.bad::before{background:var(--red);}
+  .tag-ok{color:#059669;font-weight:600;}
+  .tag-bad{color:var(--red);font-weight:600;}
+  .tag-warn{color:#d97706;font-weight:600;}
+  .notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;font-size:13px;color:#1e40af;margin-bottom:16px;}
+  .risk-banner{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 16px;font-size:13px;color:#9a3412;margin:12px 0 0;}
+  .layer{border:2px dashed var(--border);border-radius:10px;padding:14px;margin-bottom:6px;display:flex;align-items:center;gap:14px;}
+  .layer .lv-badge{flex-shrink:0;width:64px;text-align:center;font-weight:700;font-size:13px;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 4px;line-height:1.5;}
+  .layer .layer-body{flex:1;}
+  .layer .layer-title{font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:600;}
+  .nodes{display:flex;gap:10px;flex-wrap:wrap;}
+  .node{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:12px;text-align:center;min-width:104px;cursor:pointer;transition:all .15s;}
+  .node:hover{border-color:var(--primary);background:#fef2f2;transform:translateY(-2px);}
+  .node .n-name{font-weight:600;display:block;margin-bottom:2px;}
+  .node .n-desc{font-size:10px;color:var(--muted);}
+  .arrow-down{text-align:center;color:var(--muted);margin:2px 0 6px;font-size:12px;}
+  .cfg-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:13px;gap:14px;}
+  .cfg-item .cfg-label b{display:block;}
+  .cfg-item .cfg-label span{font-size:12px;color:var(--muted);}
+  .cfg-val{font-weight:600;text-align:right;max-width:52%;}
+  .check-item{border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+  .check-item .ci-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .check-item .ci-title{font-weight:600;font-size:14px;}
+  .ci-code{background:#fef2f2;color:#991b1b;font-size:12px;padding:2px 10px;border-radius:10px;}
+  .ci-grid{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-top:10px;align-items:start;font-size:13px;}
+  .check-item select,.check-item textarea{font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;}
+  .check-item textarea{width:100%;resize:vertical;}
+  .quiz-opt{display:block;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--primary);background:#fef2f2;}
+  .quiz-opt.correct{border-color:var(--green);background:#ecfdf5;}
+  .quiz-opt.wrong{border-color:var(--red);background:#fef2f2;}
+  .score-box{font-size:20px;font-weight:700;}
+  .toast{position:fixed;top:70px;right:24px;background:#1f2937;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;display:none;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:380px;}
+  .toast.show{display:block;animation:fadeIn .3s;}
+  .modal-mask{position:fixed;inset:0;background:rgba(60,10,10,.5);display:none;align-items:center;justify-content:center;z-index:200;}
+  .modal-mask.show{display:flex;}
+  .modal{background:#fff;border-radius:12px;width:560px;max-height:85vh;overflow-y:auto;}
+  .modal-header{padding:16px 22px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .modal-close{cursor:pointer;color:var(--muted);font-size:20px;}
+  .modal-body{padding:20px 22px;font-size:13px;line-height:1.9;}
+  .gauge{font-family:Consolas,monospace;}
+  @media(max-width:1100px){.grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo">🏭 ICSLab 工控实验平台</div>
+  <div class="nav">
+    <div class="nav-item active" data-page="arch">🏭 五层架构总览</div>
+    <div class="nav-item" data-page="plc">⚙️ PLC 控制器管理</div>
+    <div class="nav-item" data-page="boundary">🛡️ 网络边界与隔离</div>
+    <div class="nav-item" data-page="protocol">📡 协议与无线安全</div>
+    <div class="nav-item" data-page="audit">📋 监测与审计</div>
+    <div class="nav-item" data-page="task">📝 等保核查任务</div>
+  </div>
+  <div class="sidebar-footer">
+    课程：信息安全测评与风险评估<br>
+    7.4.1 工控系统架构认知<br>
+    7.4.2 工控安全配置核查<br>
+    实验环境版本 v1.0（模拟）
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h2 id="pageTitle">五层架构总览</h2>
+    <span class="env-tag">● 模拟实验环境运行中</span>
+    <div class="topbar-right"><div class="avatar">学</div><span>student01 · 某化工厂 DCS 系统（模拟）</span></div>
+  </div>
+  <div class="content">
+
+    <!-- ===== 架构 ===== -->
+    <div class="page active" id="page-arch">
+      <div class="notice">📖 <b>7-4.1 实践任务1</b>：观察化工厂 DCS 系统五层架构，完成《工控系统架构认知记录表》：① 五层划分是否完整 ② 各层主要设备 ③ 层间隔离措施 ④ 企业层与工控层连接方式 ⑤ 找出可被利用的安全弱点。</div>
+      <div class="grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat-card primary"><div class="label">PLC 控制器</div><div class="value">12</div><div class="sub" style="color:var(--red)">⚠ 存在默认口令/弱口令</div></div>
+        <div class="stat-card orange"><div class="label">安全域</div><div class="value">3</div><div class="sub">生产一区 / 二区 / 三区</div></div>
+        <div class="stat-card purple"><div class="label">L4-L3 隔离</div><div class="value">未部署网闸</div><div class="sub" style="color:var(--red)">⚠ 办公网与工控网直连</div></div>
+        <div class="stat-card red"><div class="label">已发现脆弱点</div><div class="value">7</div><div class="sub">对应 7.4.1/7.4.2 缺陷清单</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h3>🏭 某化工厂 DCS 系统五层架构（依据 IEC 62264-1，点击节点查看安全关注点）</h3>
+        <div class="layer"><div class="lv-badge">L5<br><span style="font-size:10px;color:var(--muted);">实时性低</span></div>
+          <div class="layer-body"><div class="layer-title">企业资源层 —— ERP 系统：企业决策、供应链管理（类似企业 OA/财务）</div>
+            <div class="nodes">
+              <div class="node" onclick="showNode('ERP 服务器')"><span class="n-name">🗄️ ERP 服务器</span><span class="n-desc">企业资源计划</span></div>
+              <div class="node" onclick="showNode('OA/Web 服务器')"><span class="n-name">🌐 OA / Web 服务器</span><span class="n-desc">信息管理区</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow-down">▼ 应部署<b>工业网闸（单向隔离）</b>——当前未部署 ⚠ ▼</div>
+        <div class="layer"><div class="lv-badge">L4</div>
+          <div class="layer-body"><div class="layer-title">生产管理层 —— MES 管理区：生产调度、工艺管理（生产指挥中心）</div>
+            <div class="nodes">
+              <div class="node" onclick="showNode('MES 服务器')"><span class="n-name">🗄️ MES 服务器</span><span class="n-desc">生产管理</span></div>
+              <div class="node" onclick="showNode('工控安全集中管理平台')"><span class="n-name">🛡️ 工控安全集中管理平台</span><span class="n-desc">策略统一下发</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow-down">▼ 应部署<b>工业防火墙</b>实现安全域隔离 ▼</div>
+        <div class="layer"><div class="lv-badge">L3</div>
+          <div class="layer-body"><div class="layer-title">过程监控层 —— 生产一区：数据采集、人机交互（生产仪表盘）</div>
+            <div class="nodes">
+              <div class="node" onclick="showNode('SCADA 服务器')"><span class="n-name">🖥️ SCADA 服务器</span><span class="n-desc">监控与数据采集</span></div>
+              <div class="node" onclick="showNode('HMI 工程师站')"><span class="n-name">💻 HMI 操作员/工程师站</span><span class="n-desc">人机交互</span></div>
+              <div class="node" onclick="showNode('OPC 服务器')"><span class="n-name">🔗 OPC 服务器</span><span class="n-desc">数据接口</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow-down">▼ 现场总线 / 工业以太网（PROFINET）▼</div>
+        <div class="layer"><div class="lv-badge">L2<br><span style="font-size:10px;color:var(--red);">实时性高</span></div>
+          <div class="layer-body"><div class="layer-title">现场控制层 —— 生产二区：逻辑控制、实时响应（生产大脑）</div>
+            <div class="nodes">
+              <div class="node" onclick="showNode('PLC 控制器')"><span class="n-name">⚙️ PLC ×12</span><span class="n-desc">逻辑控制</span></div>
+              <div class="node" onclick="showNode('DCS 控制单元')"><span class="n-name">🎛️ DCS 控制单元</span><span class="n-desc">过程控制</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow-down">▼ 4-20mA / DI-DO 信号 ▼</div>
+        <div class="layer"><div class="lv-badge">L1</div>
+          <div class="layer-body"><div class="layer-title">现场设备层 —— 生产三区：感知物理世界、执行动作（生产手和眼）</div>
+            <div class="nodes">
+              <div class="node" onclick="showNode('传感器')"><span class="n-name">🌡️ 传感器</span><span class="n-desc">温度/压力/流量</span></div>
+              <div class="node" onclick="showNode('执行器')"><span class="n-name">🔧 执行器</span><span class="n-desc">阀门/电机</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>🐎 工控系统“三驾马车”（SCADA / DCS / PLC）</h3>
+          <table>
+            <thead><tr><th>类型</th><th>特点</th><th>典型应用</th></tr></thead>
+            <tbody>
+              <tr><td><b>SCADA</b><br><span style="font-size:11px;color:var(--muted);">监控和数据采集系统</span></td><td>广域分布、远程监控、集中调度；秒~分钟级；协议 IEC 60870-5、DNP3</td><td>电力调度、油气管网、供水管网</td></tr>
+              <tr><td><b>DCS</b><br><span style="font-size:11px;color:var(--muted);">分布式控制系统</span></td><td>局域集中、过程控制、连续生产；毫秒级；协议 Modbus TCP、PROFINET</td><td>化工厂、炼油厂、发电厂</td></tr>
+              <tr><td><b>PLC</b><br><span style="font-size:11px;color:var(--muted);">可编程逻辑控制器</span></td><td>本地控制、逻辑控制、实时响应（扫描周期 10-100ms）</td><td>生产线控制、电梯控制、机器控制</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>⚔️ 工控系统 vs 传统 IT 系统（四个优先）</h3>
+          <table>
+            <thead><tr><th>维度</th><th>传统 IT</th><th>工控系统</th></tr></thead>
+            <tbody>
+              <tr><td>首要目标</td><td>机密性 &gt; 完整性 &gt; 可用性</td><td class="tag-bad">可用性 &gt; 完整性 &gt; 机密性</td></tr>
+              <tr><td>实时性</td><td>秒级~分钟级</td><td>毫秒级（PLC 扫描 10-100ms）</td></tr>
+              <tr><td>生命周期</td><td>3-5 年</td><td>15-20 年</td></tr>
+              <tr><td>补丁更新</td><td>频繁、可重启</td><td>极少、重启需停产</td></tr>
+              <tr><td>通信协议</td><td>TCP/IP、HTTP</td><td>Modbus、PROFINET、S7</td></tr>
+              <tr><td>物理隔离</td><td>通常连接互联网</td><td>传统物理隔离，现正打破</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card">
+        <h3>💀 案例背景 —— 震网病毒 Stuxnet（7-4.1 案例导入）</h3>
+        <table>
+          <thead><tr><th>维度</th><th>内容</th></tr></thead>
+          <tbody>
+            <tr><td>攻击目标</td><td>伊朗纳坦兹核设施</td></tr>
+            <tr><td>攻击方式</td><td>攻击西门子 S7-300/400 系列 PLC</td></tr>
+            <tr><td>攻击效果</td><td>修改离心机转速，导致约 1000 台离心机物理损坏</td></tr>
+            <tr><td>隐蔽性</td><td>向监控系统回传伪造的正常数据——监控显示“正常”不代表真的正常</td></tr>
+            <tr><td>规模</td><td>感染全球超过 20 万个网络节点</td></tr>
+            <tr><td>历史地位</td><td>首个被确认的网络战武器；物理隔离环境也可能被攻击（USB 摆渡）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== PLC ===== -->
+    <div class="page" id="page-plc">
+      <div class="notice">⚙️ <b>核查维度：控制设备安全（GB/T 22239-2019 8.5.4.1 第三级）</b>——核查目标：控制设备是否对登录用户进行<b>身份标识和鉴别</b>（检查子项：用户角色划分 / 密码策略 / 远程管理方式）。</div>
+      <div class="card">
+        <h3>🔑 身份鉴别核查要点（以西门子 PLC 为例，7-4.2 核查方法）</h3>
+        <table>
+          <thead><tr><th>操作</th><th>命令 / 方法</th><th>合规判定要点</th></tr></thead>
+          <tbody>
+            <tr><td>查看用户列表</td><td>通过 TIA Portal → 项目属性 → 用户与角色</td><td class="tag-bad">⚠ 是否存在默认账户 admin/admin、root/root？</td></tr>
+            <tr><td>检查密码策略</td><td>查看设备组态 → 安全设置</td><td class="tag-bad">⚠ 密码长度 &lt;8、无复杂度要求 → 不符合</td></tr>
+            <tr><td>检查远程管理方式</td><td>查看设备 IP 端口：22(SSH) / 23(Telnet)</td><td><span class="tag-ok">22(SSH) 应开放 ✔</span>　<span class="tag-bad">23(Telnet) 应关闭（明文传输）✘</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🔑 访问控制核查要点（7-4.2：最小权限三检查子项）</h3>
+        <table>
+          <thead><tr><th>检查子项</th><th>具体要求</th><th>本厂不合规示例</th></tr></thead>
+          <tbody>
+            <tr><td>用户角色划分</td><td>应区分管理员、操作员、只读用户等角色</td><td class="tag-bad">⚠ 所有用户拥有相同权限</td></tr>
+            <tr><td>最小权限原则</td><td>每个用户仅授予完成工作所需的最小权限</td><td class="tag-bad">⚠ 操作员拥有管理员权限</td></tr>
+            <tr><td>权限分离</td><td>工程投运与在线修改权限应有效隔离</td><td class="tag-bad">⚠ 在线运行时允许程序修改（PLC-R01 曾因此被误改程序停产 4 小时）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>⚙️ PLC 控制器列表（反应釜车间 + 精馏塔车间）</h3>
+        <table>
+          <thead><tr><th>设备</th><th>型号</th><th>位置</th><th>管理口令</th><th>固件版本</th><th>程序备份</th><th>状态</th></tr></thead>
+          <tbody id="plc-table"></tbody>
+        </table>
+        <div class="risk-banner">🕵️ <b>脆弱点线索（对应 7-4.1 实践任务2 缺陷①④）</b>：哪些 PLC 仍在使用<b>默认口令/弱口令</b>？哪些<b>固件多年未更新</b>（重启需停产，更新困难）？</div>
+      </div>
+      <div class="card">
+        <h3>🔄 PLC 工作原理 —— 扫描周期演示（循环 10-100ms）</h3>
+        <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;">
+          <div style="flex:1;min-width:220px;">
+            <div class="cfg-item"><div class="cfg-label"><b>1️⃣ 输入采样</b><span>读取输入信号（传感器/按钮等）</span></div><span class="tag-ok" id="plc-stage1">待运行</span></div>
+            <div class="cfg-item"><div class="cfg-label"><b>2️⃣ 程序执行</b><span>按用户程序逻辑进行运算</span></div><span class="tag-ok" id="plc-stage2">待运行</span></div>
+            <div class="cfg-item"><div class="cfg-label"><b>3️⃣ 输出刷新</b><span>运算结果输出（电机/阀门等）</span></div><span class="tag-ok" id="plc-stage3">待运行</span></div>
+          </div>
+          <div style="min-width:220px;">
+            <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">模拟观察 PLC 扫描周期（安全含义：恶意代码若篡改“程序执行”阶段，物理后果在毫秒内发生——震网病毒的攻击点）：</p>
+            <button class="btn btn-primary" onclick="runScan()">▶ 运行一次扫描周期</button>
+            <div id="scan-log" class="gauge" style="margin-top:12px;font-size:12px;color:#15803d;min-height:80px;white-space:pre-line;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>💻 工控安全配置核查常用命令速查（7-4.2 · 适用于西门子 PLC）</h3>
+        <table>
+          <thead><tr><th>核查项</th><th>命令 / 操作方法</th><th>说明</th></tr></thead>
+          <tbody>
+            <tr><td>设备信息</td><td class="gauge">show version</td><td>查看固件版本，判断是否过时</td></tr>
+            <tr><td>网络接口</td><td class="gauge">show interface</td><td>查看端口状态</td></tr>
+            <tr><td>用户列表</td><td>通过 TIA Portal 查看</td><td>检查账户配置</td></tr>
+            <tr><td>开放端口</td><td>端口扫描工具</td><td>检查 22/23/80 等端口</td></tr>
+            <tr><td>日志配置</td><td>设备系统设置</td><td>检查审计功能</td></tr>
+            <tr><td>SNMP 配置</td><td class="gauge">show snmp</td><td>检查 SNMP 版本和社区串</td></tr>
+          </tbody>
+        </table>
+        <div class="risk-banner">💡 教师演示要点（7-4.2）：① 工控设备管理接口（HTTP、Telnet、SNMP）应严格限制访问来源 ② 默认账户和默认密码是最常见的安全漏洞 ③ 如设备无法实现安全要求，应由上位控制或管理设备实现同等功能。</div>
+      </div>
+    </div>
+
+    <!-- ===== 边界 ===== -->
+    <div class="page" id="page-boundary">
+      <div class="notice">🛡️ <b>核查维度：访问控制（网络架构）</b>——工控核心指标：① 工控系统与企业其他系统之间应采用<b>单向技术隔离</b>（工业网闸）② 内部应根据业务划分<b>安全域</b>并隔离 ③ 实时控制系统应<b>独立网络设备组网</b> ④ <b>禁止 E-Mail/Web/Telnet/FTP 穿越边界</b>。</div>
+      <div class="card">
+        <h3>🛡️ 网络边界核查（L4-L3 隔离 / 安全域隔离 / 边界服务）</h3>
+        <div id="boundary-cfg"></div>
+      </div>
+      <div class="card">
+        <h3>🌐 远程维护通道核查</h3>
+        <div id="remote-cfg"></div>
+        <div class="risk-banner">🕵️ <b>脆弱点线索（缺陷②⑤）</b>：工控系统与企业办公网络是直连还是有网闸？远程维护端口是否暴露在公网？——这两项都是震网式攻击的理想入口。</div>
+      </div>
+    </div>
+
+    <!-- ===== 协议与无线 ===== -->
+    <div class="page" id="page-protocol">
+      <div class="notice">📡 <b>核查维度：协议安全 + 无线使用控制</b>——工控协议（Modbus）设计时未考虑安全，无认证/加密机制；无线通信应提供唯一性标识和鉴别，且通信过程应采用加密技术保障数据机密性与完整性。</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>📡 工控协议安全核查</h3>
+          <div id="proto-cfg"></div>
+        </div>
+        <div class="card">
+          <h3>📶 无线使用控制核查</h3>
+          <div id="wifi-cfg"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🧪 Modbus 无认证风险模拟演示</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">Modbus 协议报文无认证机制——任何能接入网络的设备都可以直接下发控制指令。点击模拟“攻击者向 PLC 发送写线圈指令”：</p>
+        <button class="btn btn-primary" onclick="modbusAttack()">▶ 模拟未认证写指令攻击</button>
+        <div id="modbus-result" style="margin-top:12px;font-size:13px;line-height:1.9;"></div>
+      </div>
+    </div>
+
+    <!-- ===== 审计 ===== -->
+    <div class="page" id="page-audit">
+      <div class="notice">📋 <b>观察点</b>：工控主机管理系统应对主机应用/进程、外设接口、移动存储设备进行管控，对用户操作行为进行审计——缺陷⑥“缺乏日志审计功能”就藏在这里。另外牢记：震网病毒会向监控系统回传伪造数据，监控显示正常 ≠ 真的正常。</div>
+      <div class="card">
+        <h3>🛡️ 工控安全监测与审计配置</h3>
+        <div id="audit-cfg"></div>
+      </div>
+      <div class="card">
+        <h3>📋 操作审计日志（采样）</h3>
+        <table>
+          <thead><tr><th>时间</th><th>来源</th><th>操作</th><th>记录情况</th></tr></thead>
+          <tbody id="audit-table"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🔑 安全审计核查要点（7-4.2 · 控制设备安全审计五检查子项）</h3>
+        <table>
+          <thead><tr><th>检查子项</th><th>具体要求</th><th>本厂情况</th></tr></thead>
+          <tbody>
+            <tr><td>审计功能开启</td><td>安全审计功能应处于开启状态</td><td class="tag-bad">⚠ 日志功能未启用</td></tr>
+            <tr><td>审计内容覆盖</td><td>应覆盖登录、注销、参数修改、程序下载等</td><td class="tag-bad">⚠ 仅记录部分操作</td></tr>
+            <tr><td>审计记录要素</td><td>应包含日期、时间、用户、事件类型、结果等</td><td class="tag-bad">⚠ 记录信息不完整</td></tr>
+            <tr><td>审计记录保护</td><td>审计记录应受保护，避免删除或篡改</td><td class="tag-warn">待验证：尝试以普通用户身份删除日志</td></tr>
+            <tr><td>日志保存期限</td><td>应定期备份，保存不少于 6 个月</td><td class="tag-bad">⚠ 日志保存不足 6 个月</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 核查任务 ===== -->
+    <div class="page" id="page-task">
+      <div class="card">
+        <h3>🔥 案例导入 —— “一根网线引发的停产事故”（7-4.2 案例素材）</h3>
+        <p style="font-size:13px;line-height:2;">某车间 PLC 因弱口令被误改程序，致<b>停机 4 小时，损失超 200 万元</b>。调查发现四项配置问题：</p>
+        <table>
+          <thead><tr><th>#</th><th>调查发现</th><th>对应等保判定（8.5.4.1）</th></tr></thead>
+          <tbody>
+            <tr><td>①</td><td>PLC 使用默认账户密码，从未更改</td><td class="tag-bad">身份鉴别 —— 不符合</td></tr>
+            <tr><td>②</td><td>工控网络与办公网络未做隔离</td><td class="tag-bad">访问控制（网络架构）—— 不符合</td></tr>
+            <tr><td>③</td><td>操作日志未开启，无法追溯修改者</td><td class="tag-bad">安全审计 —— 不符合</td></tr>
+            <tr><td>④</td><td>设备管理端口（Telnet）暴露在网内</td><td class="tag-bad">身份鉴别（明文管理）—— 不符合</td></tr>
+          </tbody>
+        </table>
+        <div class="risk-banner">💬 结论：工控设备的安全配置是<b>“最后一公里”</b>——配置不当，再先进的架构也形同虚设。本实验平台埋入的 6 处脆弱点正来自这些真实配置问题。</div>
+      </div>
+      <div class="card">
+        <h3>🧭 工控设备配置核查实操六步法（7-4.2 标准操作流程）</h3>
+        <div style="font-size:14px;line-height:2.2;text-align:center;">
+          ① <b>准备</b>（获取设备清单/拓扑/管理权限，确保已授权）→ ② <b>信息收集</b>（记录型号、固件版本、开放端口）→ ③ <b>身份鉴别核查</b>（账户、密码策略、认证方式，重点查默认/弱口令）→ ④ <b>访问控制核查</b>（用户角色、权限分配，验证最小权限）→ ⑤ <b>审计核查</b>（日志功能、审计策略，确认覆盖范围）→ ⑥ <b>综合评估</b>（汇总问题、填写记录表、形成整改建议）
+        </div>
+      </div>
+      <div class="card">
+        <h3>📝 任务：填写《工业控制系统安全测评记录表》（对应 7.4.2 实践任务1，约 20 分钟）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">逐项核查工控安全扩展要求核心指标：点击“查看位置”跳转取证 → 选择测评结果 → 填写问题描述与整改建议 → 导出记录表。<br>测评结果取值：<b>符合 / 部分符合 / 不符合 / 不适用</b>。</div>
+        <div id="checklist"></div>
+        <div style="display:flex;gap:12px;margin-top:6px;">
+          <button class="btn btn-primary" onclick="exportReport()">⬇ 导出《工业控制系统安全测评记录表》</button>
+          <button class="btn btn-outline" onclick="resetChecklist()">重置填写</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🕵️ 任务：工控系统安全脆弱点分析（对应 7-4.1 实践任务2 六项缺陷清单）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">本实验环境埋了 <b>7 处脆弱点</b>（含 7-4.1 缺陷①~⑥及 7-4.2 常见问题 Telnet 明文管理）。从候选发现中勾选真实脆弱点（混有干扰项），逐项分析风险 → 判断是否符合等保要求 → 提出改进建议。</div>
+        <div id="quiz"></div>
+        <div style="display:flex;gap:14px;align-items:center;margin-top:6px;">
+          <button class="btn btn-primary" onclick="submitQuiz()">提交评分</button>
+          <span class="score-box" id="quiz-score"></span>
+          <span id="quiz-feedback" style="font-size:13px;color:var(--muted);"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🧩 核查报告与等保标准对应关系（7-4.2 · 测评报告编制核心能力）</h3>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">将核查发现与等保条款一一对应，是测评报告编制的核心能力。示范样例：</p>
+        <table>
+          <thead><tr><th>核查发现</th><th>对应等保条款</th><th>结论判定</th></tr></thead>
+          <tbody>
+            <tr><td>PLC 使用默认口令 admin/admin</td><td>8.5.4.1 a) 身份鉴别</td><td class="tag-bad">不符合</td></tr>
+            <tr><td>所有用户拥有管理员权限</td><td>8.5.4.1 a) 访问控制</td><td class="tag-bad">不符合</td></tr>
+            <tr><td>未开启审计日志功能</td><td>8.5.4.1 a) 安全审计</td><td class="tag-bad">不符合</td></tr>
+            <tr><td>补丁超过 12 个月未更新</td><td>8.5.4.1 b) 补丁更新</td><td class="tag-warn">部分符合</td></tr>
+            <tr><td>设备 USB 接口未禁用</td><td>8.5.4.1 c) 接口管理</td><td class="tag-bad">不符合</td></tr>
+            <tr><td>上位机实现访问控制</td><td>8.5.4.1 a) 由上位控制设备实现</td><td class="tag-ok">符合</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🧠 思考题（课堂讨论）</h3>
+        <div style="font-size:14px;line-height:2;">
+          1️⃣ 为什么攻击 PLC 能够物理摧毁设备？（提示：PLC 直接控制电机/阀门）<br>
+          2️⃣ 震网病毒告诉我们：物理隔离就安全吗？监控系统显示“正常”就真的正常吗？<br>
+          3️⃣ 为什么等保 2.0 要增加工控安全扩展要求？工控系统“四个优先”与 IT 系统有何根本不同？<br>
+          4️⃣ 工控安全测评师为什么被称为“国门卫士”？——电力、石油、交通、供水，任何环节出问题都影响国计民生。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-mask" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header"><span id="modal-title">详情</span><span class="modal-close" onclick="closeModal()">✕</span></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const plcs=[
+ {dev:"PLC-R01（反应釜温度控制）",model:"西门子 S7-300",loc:"反应釜车间",pwd:"s7admin（弱口令）⚠",fw:"v2.0（2015 年，从未更新）⚠",bak:"无程序备份 ⚠",st:"bad"},
+ {dev:"PLC-R02（反应釜压力控制）",model:"西门子 S7-300",loc:"反应釜车间",pwd:"已修改（强口令）",fw:"v2.0（2015 年，从未更新）⚠",bak:"每月备份 ✔",st:"warn"},
+ {dev:"PLC-D01（精馏塔流量控制）",model:"西门子 S7-400",loc:"精馏塔车间",pwd:"已修改（强口令）",fw:"v3.1（2023 年更新）",bak:"每月备份 ✔",st:"online"},
+ {dev:"PLC-D02（精馏塔液位控制）",model:"西门子 S7-400",loc:"精馏塔车间",pwd:"未设置口令 ⚠",fw:"v2.0（2015 年，从未更新）⚠",bak:"无程序备份 ⚠",st:"bad"}
+];
+const boundaryCfg=[
+ {label:"L4-L3 单向隔离（工业网闸）",desc:"工控系统与企业其他系统之间应采用单向技术隔离手段",val:"未部署网闸，办公网与工控网直连 ⚠",ok:false},
+ {label:"安全域划分与隔离",desc:"应根据业务特点划分安全域（生产一/二/三区）",val:"已划分三区，一区↔二区已部署工业防火墙 ✔；二区↔三区未隔离 ⚠",ok:false},
+ {label:"实时控制系统独立组网",desc:"实时控制系统应使用独立网络设备组网（物理隔离）",val:"L2 控制层使用独立交换机 ✔",ok:true},
+ {label:"边界通用服务限制",desc:"禁止 E-Mail/Web/Telnet/FTP 穿越工控边界",val:"未限制，Telnet/FTP 可穿越边界 ⚠",ok:false},
+ {label:"工业监控审计系统",desc:"L3 部署工业监控审计，实时监测异常网络行为和非法入侵",val:"已采购未部署（设备在库房）⚠",ok:false}
+];
+const remoteCfg=[
+ {label:"远程维护通道",desc:"供应商远程维护 PLC 的通道",val:"维护端口经 port-map 暴露在互联网 ⚠",ok:false},
+ {label:"远程访问认证",desc:"远程维护应经 VPN+双因素认证",val:"仅简单口令，无 VPN ⚠",ok:false},
+ {label:"移动存储管控",desc:"工控主机 USB 等外设接口管控（震网经 U 摆渡传播）",val:"已部署工控主机管理客户端，USB 默认禁用 ✔",ok:true}
+];
+const protoCfg=[
+ {label:"Modbus 认证机制",desc:"工控协议设计时未考虑安全：Modbus 无认证/加密",val:"明文传输，无认证，任意设备可下发指令 ⚠",ok:false},
+ {label:"PROFINET 网段隔离",desc:"控制流量与管理流量分离",val:"已通过 VLAN 分离 ✔",ok:true},
+ {label:"协议白名单",desc:"工控防火墙应按协议深度包检测（DPI）过滤非法指令",val:"仅做端口过滤，未做指令级过滤 ⚠",ok:false}
+];
+const wifiCfg=[
+ {label:"无线接入唯一标识与鉴别",desc:"无线通信应提供唯一性标识和鉴别",val:"巡检用 WiFi 已启用 802.1X 认证 ✔",ok:true},
+ {label:"无线通信加密",desc:"通信过程应采用加密技术保障数据机密性与完整性",val:"WPA2-AES 已启用 ✔",ok:true},
+ {label:"拨号使用控制",desc:"严格限制拨号接入工控网络",val:"历史拨号线路已全部拆除 ✔",ok:true}
+];
+const auditCfg=[
+ {label:"主机应用与进程管控",desc:"工控主机管理系统管控应用/进程、外设接口、移动存储",val:"已部署客户端并统一策略下发 ✔",ok:true},
+ {label:"用户操作行为审计",desc:"对工程师站/操作员站操作行为审计",val:"工程师站操作未记录（日志功能未开启）⚠",ok:false},
+ {label:"安全设备日志关联分析",desc:"集中管理平台对设备日志关联分析与预警",val:"审计系统未部署，无关联分析 ⚠",ok:false},
+ {label:"数据真实性校验",desc:"监控数据应能鉴别真伪（震网回传伪造数据）",val:"HMI 直接信任 PLC 上报值，无交叉校验 ⚠",ok:false}
+];
+const audits=[
+ {t:"2026-10-24 10:15",src:"工程师站（操作员张工）",op:"下发 PLC-R01 参数修改指令",rec:"⚠ 未记录（日志功能未开启）"},
+ {t:"2026-10-24 09:40",src:"未知主机 10.66.12.88",op:"对 PLC-R02 发起 Modbus 写指令",rec:"✔ 工业防火墙记录并拦截"},
+ {t:"2026-10-23 20:12",src:"外部 IP（经远程维护端口）",op:"登录维护接口尝试弱口令 ×214 次",rec:"✔ 已记录（端口暴露问题仍在）"},
+ {t:"2026-10-23 15:05",src:"USB 存储（外协人员）",op:"拷贝组态文件",rec:"✔ 主机管控客户端拦截并告警"},
+ {t:"2026-10-22 11:30",src:"HMI 监控画面",op:"温度读数与现场红外测温仪偏差 15℃",rec:"⚠ 无交叉校验机制，无法鉴别真伪"}
+];
+/* 核查清单 */
+const checks=[
+ {code:"访问控制-网络架构",name:"工控系统与企业其他系统单向隔离",where:"网络边界与隔离",fact:"L4 与 L3 之间未部署工业网闸，办公网与工控网直接互连。"},
+ {code:"访问控制-安全域",name:"内部安全域划分与隔离",where:"网络边界与隔离",fact:"已划分生产一/二/三区；一区↔二区有工业防火墙，二区↔三区未隔离。"},
+ {code:"访问控制-边界服务",name:"禁止通用服务穿越边界",where:"网络边界与隔离",fact:"未限制 Telnet/FTP/E-Mail/Web，可穿越工控边界。"},
+ {code:"访问控制-远程维护",name:"远程维护通道管控",where:"网络边界与隔离",fact:"供应商远程维护端口经端口映射暴露在互联网，仅简单口令、无 VPN。"},
+ {code:"控制设备安全",name:"控制设备身份鉴别与访问控制",where:"PLC 控制器管理",fact:"抽查 4 台 PLC：1 台未设口令、1 台弱口令；固件 2015 年至今未更新；1 台无程序备份。"},
+ {code:"协议安全",name:"工控协议安全（Modbus 无认证）",where:"协议与无线安全",fact:"Modbus 明文传输无认证，任意设备可下发写指令；防火墙仅端口过滤未做指令级过滤。"},
+ {code:"无线使用控制",name:"无线通信标识鉴别与加密",where:"协议与无线安全",fact:"巡检 WiFi 已启用 802.1X + WPA2-AES，拨号线路已拆除——本项符合。"},
+ {code:"安全审计",name:"操作行为审计与日志关联分析",where:"监测与审计",fact:"工程师站操作日志未开启；工业审计系统已采购未部署，无日志关联分析。"}
+];
+const suggested={
+ "访问控制-网络架构":{res:"不符合",desc:"办公网与工控网直连，未部署工业网闸实现单向隔离。",fix:"在 L4/L3 之间部署工业网闸或正向隔离装置，实现单向数据传输。"},
+ "访问控制-安全域":{res:"部分符合",desc:"已划分三个安全域，一/二区之间有工业防火墙，但二区↔三区未隔离。",fix:"在生产二区与三区之间增配工业防火墙，按业务最小互通原则配置策略。"},
+ "访问控制-边界服务":{res:"不符合",desc:"Telnet/FTP 等通用服务可穿越工控边界。",fix:"在边界设备上封禁 Telnet/FTP/E-Mail/Web 等通用服务，管理流量走专用运维通道。"},
+ "访问控制-远程维护":{res:"不符合",desc:"远程维护端口暴露公网，仅简单口令认证。",fix:"关闭公网映射，远程维护必须经 VPN+双因素认证并留痕审计。"},
+ "控制设备安全":{res:"部分符合",desc:"2/4 台 PLC 口令缺失或为弱口令；固件 2015 年至今未更新；1 台无程序备份。",fix:"强制修改全部默认/弱口令；结合停产检修窗口升级固件；建立组态程序定期备份机制。"},
+ "协议安全":{res:"不符合",desc:"Modbus 明文无认证，任意接入设备可下发控制指令。",fix:"部署具备 Modbus 深度包检测能力的工控防火墙，按指令级白名单过滤。"},
+ "无线使用控制":{res:"符合",desc:"无线接入已启用唯一标识鉴别与加密，拨号已拆除。",fix:"保持现状，定期核查无线配置漂移。"},
+ "安全审计":{res:"不符合",desc:"工程师站操作日志未开启，审计系统已采购未部署。",fix:"开启主机操作审计，完成工业审计系统部署并接入集中管理平台做日志关联分析。"}
+};
+const quizItems=[
+ {q:"发现：部分 PLC 使用默认口令或弱口令（如 s7admin、未设口令）",risk:true,why:"缺陷①：控制设备身份鉴别缺失 → 控制设备安全不符合"},
+ {q:"发现：工控系统与企业办公网络直接连接，未部署网闸",risk:true,why:"缺陷②：应采用单向技术隔离手段 → 访问控制-网络架构不符合"},
+ {q:"发现：Modbus 协议无认证/加密机制，任意设备可下发指令",risk:true,why:"缺陷③：协议设计未考虑安全 → 需工控防火墙指令级过滤"},
+ {q:"发现：PLC 固件 2015 年至今未更新（重启需停产）",risk:true,why:"缺陷④：补丁更新困难 → 应结合检修窗口建立更新机制"},
+ {q:"发现：供应商远程维护端口暴露在互联网",risk:true,why:"缺陷⑤：攻击入口 → 应关闭映射、走 VPN+双因素"},
+ {q:"发现：工程师站操作日志未开启，审计系统已采购未部署",risk:true,why:"缺陷⑥：缺乏日志审计 → 事件无法追溯"},
+ {q:"发现：PLC 通过 Telnet（23 端口）明文远程管理",risk:true,why:"7-4.2 常见问题：明文传输管理流量 → 应改用 SSH，关闭 Telnet"},
+ {q:"发现：L2 实时控制层使用独立网络设备组网",risk:false,why:"这是合规配置（实时控制系统物理隔离 ✔），不是脆弱点"},
+ {q:"发现：PLC 扫描周期为 10-100ms",risk:false,why:"这是 PLC 正常工作特性（输入采样→程序执行→输出刷新），不是安全缺陷"}
+];
+const nodeInfo={
+ "ERP 服务器":"L5 企业资源层：企业决策、供应链管理。与工控网之间应有单向隔离——它是攻击者从办公网进入工控网的跳板。",
+ "OA/Web 服务器":"L5 信息管理区：部署 OA、Web、ERP、CRM 等业务服务器，属传统 IT 安全防护范围。",
+ "MES 服务器":"L4 生产管理层：生产调度、工艺管理。工控安全集中管理平台部署于此，统一监测与策略下发。",
+ "工控安全集中管理平台":"L4：对工控安全设备运行状况监测、日志关联分析、安全策略统一下发，支撑应急响应与追溯。",
+ "SCADA 服务器":"L3 过程监控层：数据采集与监视控制。SCADA 特点：广域分布、远程监控、集中调度（电力/管网常用）。",
+ "HMI 工程师站":"L3：人机交互终端。震网病毒的警示：HMI 显示“正常”可能只是 PLC 回传的伪造数据。",
+ "OPC 服务器":"L3：数据接口服务，是 IT 与 OT 数据交换的关键节点，应重点管控。",
+ "PLC 控制器":"L2 现场控制层：★最核心也最易被攻击的设备。扫描周期 10-100ms（输入采样→程序执行→输出刷新），恶意篡改程序执行阶段会在毫秒内造成物理后果——震网病毒攻击点。",
+ "DCS 控制单元":"L2：分布式控制，局域集中、连续生产（化工厂/炼油厂常用），毫秒级实时性。",
+ "传感器":"L1 现场设备层：温度/压力/流量传感器，感知物理世界。",
+ "执行器":"L1：阀门、电机等，直接执行物理动作——工控攻击最终影响的是它们。"
+};
+const checkState={};checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});
+const quizState=new Set();
+
+/* ================= 渲染 ================= */
+function render(){
+ document.getElementById("plc-table").innerHTML=plcs.map(p=>`<tr>
+  <td><b>${p.dev}</b></td><td>${p.model}</td><td>${p.loc}</td>
+  <td>${p.pwd.includes("⚠")?`<span class="tag-bad">⚠ ${p.pwd}</span>`:`<span class="tag-ok">✔ ${p.pwd}</span>`}</td>
+  <td>${p.fw.includes("⚠")?`<span class="tag-warn">${p.fw}</span>`:`<span class="tag-ok">✔ ${p.fw}</span>`}</td>
+  <td>${p.bak.includes("⚠")?`<span class="tag-bad">${p.bak}</span>`:`<span class="tag-ok">✔ ${p.bak}</span>`}</td>
+  <td><span class="status ${p.st}">${p.st==="online"?"正常":p.st==="warn"?"待关注":"违规"}</span></td></tr>`).join("");
+ const cfgHtml=arr=>arr.map(c=>`
+  <div class="cfg-item">
+    <div class="cfg-label"><b>${c.label}</b><span>${c.desc}</span></div>
+    <span class="cfg-val ${c.ok?"tag-ok":"tag-bad"}">${c.val}</span>
+  </div>`).join("");
+ document.getElementById("boundary-cfg").innerHTML=cfgHtml(boundaryCfg);
+ document.getElementById("remote-cfg").innerHTML=cfgHtml(remoteCfg);
+ document.getElementById("proto-cfg").innerHTML=cfgHtml(protoCfg);
+ document.getElementById("wifi-cfg").innerHTML=cfgHtml(wifiCfg);
+ document.getElementById("audit-cfg").innerHTML=cfgHtml(auditCfg);
+ document.getElementById("audit-table").innerHTML=audits.map(a=>`<tr><td>${a.t}</td><td>${a.src}</td><td>${a.op}</td><td>${a.rec.startsWith("✔")?`<span class="tag-ok">${a.rec}</span>`:`<span class="tag-bad">${a.rec}</span>`}</td></tr>`).join("");
+ renderChecklist();renderQuiz();
+}
+function renderChecklist(){
+ document.getElementById("checklist").innerHTML=checks.map((c,i)=>{
+  const s=checkState[c.code];
+  return `<div class="check-item">
+   <div class="ci-head">
+    <span class="ci-title">${i+1}. ${c.name} <span class="ci-code">${c.code}</span></span>
+    <span>取证位置：<a href="#" onclick="goto('${pageOf(c.where)}');return false;" style="color:var(--primary);">前往「${c.where}」→</a></span>
+   </div>
+   <div style="font-size:13px;color:var(--muted);">🔎 现场情况：<span style="color:var(--text)">${c.fact}</span></div>
+   <div class="ci-grid">
+    <label>测评结果：</label>
+    <select onchange="checkState['${c.code}'].res=this.value" style="width:180px;">
+      <option value="">— 请选择 —</option>
+      ${["符合","部分符合","不符合","不适用"].map(r=>`<option ${s.res===r?"selected":""}>${r}</option>`).join("")}
+    </select>
+    <label>问题描述：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].desc=this.value">${s.desc}</textarea>
+    <label>整改建议：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].fix=this.value">${s.fix}</textarea>
+   </div>
+  </div>`;
+ }).join("");
+}
+function pageOf(w){return w==="PLC 控制器管理"?"plc":w==="网络边界与隔离"?"boundary":w==="协议与无线安全"?"protocol":"audit";}
+function renderQuiz(){
+ document.getElementById("quiz").innerHTML=quizItems.map((q,i)=>
+  `<label class="quiz-opt" id="quiz-${i}" onclick="toggleQuiz(${i})"><input type="checkbox" style="margin-right:8px;" ${quizState.has(i)?"checked":""}><b>候选发现 ${i+1}</b>：${q.q}</label>`).join("");
+}
+function toggleQuiz(i){quizState.has(i)?quizState.delete(i):quizState.add(i);renderQuiz();}
+function submitQuiz(){
+ if(!quizState.size){toast("请先勾选候选发现再提交");return;}
+ let score=0;const riskIdxs=[];
+ quizItems.forEach((q,i)=>{
+  const el=document.getElementById("quiz-"+i);
+  el.classList.remove("correct","wrong");
+  const picked=quizState.has(i);
+  if(picked===q.risk)score++;
+  if(q.risk)riskIdxs.push(i+1);
+  el.classList.add(picked===q.risk?"correct":"wrong");
+  el.querySelector("input").disabled=true;
+ });
+ document.getElementById("quiz-score").textContent=`得分：${score} / ${quizItems.length}`;
+ const found=quizItems.filter((q,i)=>quizState.has(i)&&q.risk).length;
+ document.getElementById("quiz-feedback").innerHTML=`真实脆弱点共 7 处（7-4.1 缺陷①~⑥ + 7-4.2 常见问题 Telnet 明文管理），你找到 <b>${found}</b> 处。绿色=判断正确，红色=判断有误。真实脆弱点：${riskIdxs.join("、")}`;
+ quizState.clear();
+ toast(`评分完成：${score} / ${quizItems.length}，请查看各项解释`);
+}
+function runScan(){
+ const s1=document.getElementById("plc-stage1"),s2=document.getElementById("plc-stage2"),s3=document.getElementById("plc-stage3");
+ const log=document.getElementById("scan-log");
+ [s1,s2,s3].forEach(s=>s.textContent="运行中…");
+ log.textContent="";
+ let ms=0;
+ setTimeout(()=>{s1.textContent="✔ 完成（采样 8 路输入）";ms+=15;log.textContent=`T+0ms   输入采样开始…\nT+15ms  采样完成，读取温度/压力/流量信号`;},400);
+ setTimeout(()=>{s2.textContent="✔ 完成（逻辑运算）";ms+=25;log.textContent+=`\nT+40ms  程序执行：PID 运算，与设定值比较`;},900);
+ setTimeout(()=>{s3.textContent="✔ 完成（输出刷新）";ms+=30;log.textContent+=`\nT+70ms  输出刷新：调节阀门开度至 42%\nT+70ms  本周期结束（总耗时 70ms，符合 10-100ms）\n\n⚠ 安全含义：若“程序执行”阶段被篡改（震网），\n   毫秒级周期内即可输出危险控制量，且监控无感知。`;},1400);
+ toast("扫描周期演示完成，注意安全含义说明");
+}
+function modbusAttack(){
+ document.getElementById("modbus-result").innerHTML=`<span class="tag-bad">⛔ 攻击成功！</span><br>攻击者模拟为合法主站，向 PLC-D02 发送 Modbus 写线圈指令（功能码 05），<b>无需任何认证即被接受</b>，液位控制阈值被改为危险值。<br><br>📖 这就是“工控协议设计时未考虑安全”的现实写照：Modbus 报文没有认证与加密字段。等保核查时需确认是否部署了具备<b>指令级深度包检测（DPI）</b>的工控防火墙来弥补协议缺陷。<br><br>💡 结合震网案例：攻击 PLC 的最终效果是物理世界的阀门、电机被恶意操控。`;
+ toast("模拟完成：未认证指令被 PLC 接受");
+}
+function exportReport(){
+ const rows=checks.map(c=>{
+  const s=checkState[c.code];
+  return `<tr><td style="border:1px solid #999;padding:6px;">${c.code}</td><td style="border:1px solid #999;padding:6px;">${c.name}</td><td style="border:1px solid #999;padding:6px;">${s.res||""}</td><td style="border:1px solid #999;padding:6px;">${s.desc||""}</td><td style="border:1px solid #999;padding:6px;">${s.fix||""}</td></tr>`;
+ }).join("");
+ const html=`<html><head><meta charset="utf-8"><title>工业控制系统安全测评记录表</title></head><body style="font-family:SimSun;">
+ <h2 style="text-align:center;">工业控制系统安全测评记录表</h2>
+ <p>测评对象：ICSLab 模拟某化工厂 DCS 系统　测评人：student01　日期：2026-10-24　依据：GB/T 22239-2019 8.5.4 安全计算环境——控制设备安全（第三级）</p>
+ <table style="border-collapse:collapse;width:100%;font-size:12px;"><tr><th style="border:1px solid #999;padding:6px;">测评维度/控制点</th><th style="border:1px solid #999;padding:6px;">核心检查项</th><th style="border:1px solid #999;padding:6px;">测评结果</th><th style="border:1px solid #999;padding:6px;">测评记录/问题描述</th><th style="border:1px solid #999;padding:6px;">整改建议/备注</th></tr>${rows}</table>
+ <p style="font-size:12px;color:#666;">填写说明：测评结果取值为 符合 / 部分符合 / 不符合 / 不适用。</p>
+ </body></html>`;
+ const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="工业控制系统安全测评记录表-student01.html";a.click();
+ toast("记录表已导出，可直接打印或提交学习通");
+}
+function resetChecklist(){checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});renderChecklist();toast("已重置全部填写内容");}
+/* 导航 */
+const titles={arch:"五层架构总览",plc:"PLC 控制器管理",boundary:"网络边界与隔离",protocol:"协议与无线安全",audit:"监测与审计",task:"等保核查任务"};
+function goto(p){
+ document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+ document.getElementById("page-"+p).classList.add("active");
+ document.querySelectorAll(".nav-item").forEach(e=>e.classList.toggle("active",e.dataset.page===p));
+ document.getElementById("pageTitle").textContent=titles[p];
+ document.querySelector(".content").scrollTop=0;
+}
+document.querySelectorAll(".nav-item").forEach(e=>e.addEventListener("click",()=>goto(e.dataset.page)));
+function showModal(t,b){document.getElementById("modal-title").textContent=t;document.getElementById("modal-body").innerHTML=b;document.getElementById("modal-mask").classList.add("show");}
+function closeModal(){document.getElementById("modal-mask").classList.remove("show");}
+function showNode(k){showModal("节点安全关注点 — "+k,`<p>${nodeInfo[k]||""}</p>`);}
+let toastTimer;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),3200);}
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IoTLab 物联网实验环境 · 信息安全测评与风险评估</title>
+<style>
+  :root{--bg:#f4f6fa;--panel:#fff;--border:#e3e8f0;--text:#1f2937;--muted:#6b7280;--primary:#16a34a;--primary-dark:#15803d;--green:#10b981;--red:#ef4444;--orange:#f59e0b;--purple:#8b5cf6;--sidebar:#14532d;--sidebar-text:#d1fae5;}
+  *{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",sans-serif;}
+  body{background:var(--bg);color:var(--text);height:100vh;display:flex;overflow:hidden;}
+  .sidebar{width:230px;background:var(--sidebar);color:var(--sidebar-text);display:flex;flex-direction:column;flex-shrink:0;}
+  .logo{padding:18px 20px;font-size:17px;font-weight:bold;color:#fff;border-bottom:1px solid #1d6b3c;}
+  .nav{flex:1;padding:12px 0;}
+  .nav-item{padding:12px 20px;cursor:pointer;display:flex;align-items:center;gap:10px;font-size:14px;transition:all .15s;border-left:3px solid transparent;}
+  .nav-item:hover{background:#1d6b3c;color:#fff;}
+  .nav-item.active{background:#1d6b3c;color:#fff;border-left-color:#86efac;}
+  .sidebar-footer{padding:14px 18px;border-top:1px solid #1d6b3c;font-size:12px;color:#86b39a;line-height:1.8;}
+  .main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+  .topbar{height:56px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 24px;gap:14px;flex-shrink:0;}
+  .topbar h2{font-size:16px;}
+  .env-tag{background:#ecfdf5;color:#059669;font-size:12px;padding:3px 10px;border-radius:12px;border:1px solid #a7f3d0;}
+  .topbar-right{margin-left:auto;display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted);}
+  .avatar{width:30px;height:30px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;}
+  .content{flex:1;overflow-y:auto;padding:20px 24px;}
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .25s;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:16px;}
+  .card h3{font-size:14px;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+  .grid{display:grid;gap:16px;}
+  .grid-2{grid-template-columns:1fr 1fr;}
+  .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+  .stat-card .label{font-size:13px;color:var(--muted);}
+  .stat-card .value{font-size:26px;font-weight:700;margin:6px 0 4px;}
+  .stat-card .sub{font-size:12px;}
+  .stat-card.primary{border-top:3px solid var(--primary);}
+  .stat-card.orange{border-top:3px solid var(--orange);}
+  .stat-card.red{border-top:3px solid var(--red);}
+  .stat-card.purple{border-top:3px solid var(--purple);}
+  .btn{border:none;border-radius:6px;padding:7px 16px;font-size:13px;cursor:pointer;transition:all .15s;}
+  .btn-primary{background:var(--primary);color:#fff;}
+  .btn-primary:hover{background:var(--primary-dark);}
+  .btn-sm{padding:4px 10px;font-size:12px;}
+  .btn-outline{background:#fff;color:var(--primary);border:1px solid var(--primary);}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th{text-align:left;padding:10px 12px;background:#f8fafc;color:var(--muted);font-weight:500;border-bottom:1px solid var(--border);}
+  td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  tr:hover td{background:#f8fafc;}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:2px 10px;border-radius:12px;white-space:nowrap;}
+  .status::before{content:"";width:6px;height:6px;border-radius:50%;}
+  .status.online{background:#ecfdf5;color:#059669;}.status.online::before{background:var(--green);}
+  .status.warn{background:#fffbeb;color:#d97706;}.status.warn::before{background:var(--orange);}
+  .status.bad{background:#fef2f2;color:var(--red);}.status.bad::before{background:var(--red);}
+  .tag-ok{color:#059669;font-weight:600;}
+  .tag-bad{color:var(--red);font-weight:600;}
+  .tag-warn{color:#d97706;font-weight:600;}
+  .notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:10px 16px;font-size:13px;color:#1e40af;margin-bottom:16px;}
+  .risk-banner{background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:10px 16px;font-size:13px;color:#9a3412;margin:12px 0 0;}
+  .layer{border:2px dashed var(--border);border-radius:10px;padding:14px;margin-bottom:6px;}
+  .layer .layer-title{font-size:12px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+  .nodes{display:flex;gap:10px;flex-wrap:wrap;}
+  .node{background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:13px;text-align:center;min-width:120px;cursor:pointer;transition:all .15s;}
+  .node:hover{border-color:var(--primary);background:#f0fdf4;transform:translateY(-2px);}
+  .node .n-name{font-weight:600;display:block;margin-bottom:3px;}
+  .node .n-desc{font-size:11px;color:var(--muted);}
+  .node.sense{border-left:3px solid var(--primary);}
+  .node.net{border-left:3px solid var(--orange);}
+  .node.app{border-left:3px solid var(--purple);}
+  .arrow-down{text-align:center;color:var(--muted);margin:2px 0 6px;}
+  .cfg-item{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border:1px solid var(--border);border-radius:8px;margin-bottom:10px;font-size:13px;}
+  .cfg-item .cfg-label b{display:block;}
+  .cfg-item .cfg-label span{font-size:12px;color:var(--muted);}
+  .cfg-val{font-weight:600;text-align:right;max-width:55%;}
+  .check-item{border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+  .check-item .ci-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;}
+  .check-item .ci-title{font-weight:600;font-size:14px;}
+  .ci-code{background:#f0fdf4;color:#166534;font-size:12px;padding:2px 10px;border-radius:10px;}
+  .ci-grid{display:grid;grid-template-columns:150px 1fr;gap:10px;margin-top:10px;align-items:start;font-size:13px;}
+  .check-item select,.check-item textarea{font-size:13px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;}
+  .check-item textarea{width:100%;resize:vertical;}
+  .quiz-opt{display:block;border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:8px;cursor:pointer;font-size:13px;transition:all .15s;}
+  .quiz-opt:hover{border-color:var(--primary);background:#f0fdf4;}
+  .quiz-opt.correct{border-color:var(--green);background:#ecfdf5;}
+  .quiz-opt.wrong{border-color:var(--red);background:#fef2f2;}
+  .score-box{font-size:20px;font-weight:700;}
+  .toast{position:fixed;top:70px;right:24px;background:#1f2937;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;display:none;z-index:300;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:380px;}
+  .toast.show{display:block;animation:fadeIn .3s;}
+  .modal-mask{position:fixed;inset:0;background:rgba(15,40,25,.5);display:none;align-items:center;justify-content:center;z-index:200;}
+  .modal-mask.show{display:flex;}
+  .modal{background:#fff;border-radius:12px;width:560px;max-height:85vh;overflow-y:auto;}
+  .modal-header{padding:16px 22px;border-bottom:1px solid var(--border);font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;}
+  .modal-close{cursor:pointer;color:var(--muted);font-size:20px;}
+  .modal-body{padding:20px 22px;font-size:13px;line-height:1.9;}
+  @media(max-width:1100px){.grid-2{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo">🌡️ IoTLab 物联网实验平台</div>
+  <div class="nav">
+    <div class="nav-item active" data-page="arch">🏗️ 三层架构总览</div>
+    <div class="nav-item" data-page="sense">🌡️ 感知节点设备管理</div>
+    <div class="nav-item" data-page="gw">🔀 网关节点管理</div>
+    <div class="nav-item" data-page="comm">📡 通信与抗重放</div>
+    <div class="nav-item" data-page="log">🚨 安全事件日志</div>
+    <div class="nav-item" data-page="task">📝 等保核查任务</div>
+  </div>
+  <div class="sidebar-footer">
+    课程：信息安全测评与风险评估<br>
+    7.3.1 物联网架构认知<br>
+    7.3.2 物联网安全配置核查<br>
+    实验环境版本 v1.0（模拟）
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h2 id="pageTitle">三层架构总览</h2>
+    <span class="env-tag">● 模拟实验环境运行中</span>
+    <div class="topbar-right"><div class="avatar">学</div><span>student01 · 智能园区物联网系统（模拟）</span></div>
+  </div>
+  <div class="content">
+
+    <!-- ===== 架构 ===== -->
+    <div class="page active" id="page-arch">
+      <div class="notice">📖 <b>7-3.1 实践任务1</b>：观察智能园区物联网系统的三层架构，完成《物联网架构分析记录表》：① 识别感知层设备 ② 识别网络层技术 ③ 识别应用层系统 ④ 绘制三层架构图并用红笔标注每层安全风险点。</div>
+      <div class="grid" style="grid-template-columns:repeat(4,1fr);">
+        <div class="stat-card primary"><div class="label">感知节点</div><div class="value">250</div><div class="sub" style="color:var(--red)">⚠ 存在物理防护缺陷</div></div>
+        <div class="stat-card orange"><div class="label">物联网网关</div><div class="value">4</div><div class="sub" style="color:var(--red)">⚠ 未启用接入白名单</div></div>
+        <div class="stat-card purple"><div class="label">云平台/应用</div><div class="value">1 套</div><div class="sub">园区综合管理平台</div></div>
+        <div class="stat-card red"><div class="label">已发现违规</div><div class="value">6</div><div class="sub">分布在三层之中</div></div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h3>🏗️ 智能园区物联网三层架构（点击节点查看安全关注点）</h3>
+        <div class="layer"><div class="layer-title">🖥️ 应用层 —— “大脑”：数据汇聚与智能处理</div>
+          <div class="nodes">
+            <div class="node app" onclick="showNode('物联网云平台')"><span class="n-name">☁️ 物联网云平台</span><span class="n-desc">数据存储 / 分析</span></div>
+            <div class="node app" onclick="showNode('园区综合管理界面')"><span class="n-name">🖥️ 综合管理界面</span><span class="n-desc">Web 展示 / 决策</span></div>
+            <div class="node app" onclick="showNode('移动端APP')"><span class="n-name">📱 移动端 APP</span><span class="n-desc">运维人员巡检</span></div>
+          </div>
+        </div>
+        <div class="arrow-down">▲ MQTT / HTTPS ▲</div>
+        <div class="layer"><div class="layer-title">📡 网络层 —— “神经网络”：可靠传送</div>
+          <div class="nodes">
+            <div class="node net" onclick="showNode('物联网网关')"><span class="n-name">🔀 物联网网关 ×4</span><span class="n-desc">★ 测评核心对象</span></div>
+            <div class="node net" onclick="showNode('NB-IoT 蜂窝通信')"><span class="n-name">📶 NB-IoT / 4G</span><span class="n-desc">远传水表/电表</span></div>
+            <div class="node net" onclick="showNode('ZigBee 短距通信')"><span class="n-name">📡 ZigBee / LoRa</span><span class="n-desc">传感器组网</span></div>
+            <div class="node net" onclick="showNode('园区有线网络')"><span class="n-name">🔌 园区以太网</span><span class="n-desc">网关上联骨干</span></div>
+          </div>
+        </div>
+        <div class="arrow-down">▲ ZigBee / LoRa / NB-IoT ▲</div>
+        <div class="layer"><div class="layer-title">🌡️ 感知层 —— “眼睛、耳朵、手脚”：全面感知</div>
+          <div class="nodes">
+            <div class="node sense" onclick="showNode('温湿度传感器')"><span class="n-name">🌡️ 温湿度传感器 ×200</span><span class="n-desc">环境监测</span></div>
+            <div class="node sense" onclick="showNode('智能照明控制器')"><span class="n-name">💡 智能照明控制器 ×50</span><span class="n-desc">感知+执行器</span></div>
+            <div class="node sense" onclick="showNode('智能水表')"><span class="n-name">🚰 智能水表 ×300</span><span class="n-desc">NB-IoT 远传</span></div>
+            <div class="node sense" onclick="showNode('安防摄像头')"><span class="n-name">📷 安防摄像头 ×24</span><span class="n-desc">视频监控</span></div>
+            <div class="node sense" onclick="showNode('门禁RFID读写器')"><span class="n-name">🚪 门禁 RFID</span><span class="n-desc">身份识别</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>⚠️ 三层架构安全风险（7-3.1 学习目标③）</h3>
+          <table>
+            <thead><tr><th>层</th><th>主要威胁</th><th>等保要求</th></tr></thead>
+            <tbody>
+              <tr><td><b>感知层</b></td><td>物理破坏、侧信道攻击、节点俘获、伪造节点</td><td>8.4.1.1 物理防护 / 8.4.2.1 接入控制</td></tr>
+              <tr><td><b>网络层</b></td><td>中间人攻击、数据窃听、DDoS、协议攻击、非授权访问</td><td>8.4.2.2 入侵防范 / 8.4.2.1 接入控制</td></tr>
+              <tr><td><b>应用层</b></td><td>数据泄露、身份伪造、应用漏洞、云端攻击、权限滥用</td><td>安全通用要求（计算环境）</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>🔍 物联网 vs 传统信息系统（为什么单独设扩展要求）</h3>
+          <table>
+            <thead><tr><th>对比维度</th><th>传统系统</th><th>物联网系统</th></tr></thead>
+            <tbody>
+              <tr><td>设备数量</td><td>可控（数十到数百台）</td><td>海量（数千到数百万台）</td></tr>
+              <tr><td>设备能力</td><td>计算资源充足</td><td>资源受限（低功耗、低存储）</td></tr>
+              <tr><td>部署环境</td><td>可控机房</td><td>野外、无人值守</td></tr>
+              <tr><td>生命周期</td><td>3-5 年升级</td><td>10 年以上使用</td></tr>
+              <tr><td>安全更新</td><td>可定期打补丁</td><td>更新困难</td></tr>
+              <tr><td>通信方式</td><td>有线为主</td><td>无线为主</td></tr>
+              <tr><td>攻击面</td><td>相对集中</td><td>极其分散</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 感知节点 ===== -->
+    <div class="page" id="page-sense">
+      <div class="notice">🌡️ <b>核查维度一 / 维度四</b>：感知节点设备物理防护（8.4.1.1：物理破坏防护、环境状态反映、正常工作环境、电力供应）与感知节点设备安全（8.4.3.1：授权配置、身份标识与鉴别）。结合现场“照片”逐项核查。</div>
+      <div class="card">
+        <h3>🌡️ 感知节点部署现场核查表（抽查样本）</h3>
+        <table>
+          <thead><tr><th>设备</th><th>部署位置</th><th>安装环境</th><th>供电方式</th><th>管理口令</th><th>固件版本</th><th>状态</th></tr></thead>
+          <tbody id="sense-table"></tbody>
+        </table>
+        <div class="risk-banner">🕵️ <b>核查线索（对应 7-3.2 实践任务2）</b>：① 哪些设备安装在<b>阳光直射</b>区（温度读数会偏差）？② 哪些室外设备<b>无防护箱体</b>（日晒雨淋）？③ 哪些设备仍在用<b>出厂默认口令</b>（如 admin——Mirai 僵尸网络的敲门砖）？④ 哪些固件<b>从未更新</b>？</div>
+      </div>
+      <div class="card">
+        <h3>⚙️ 感知节点设备安全配置（8.4.3.1）</h3>
+        <div id="sense-cfg"></div>
+      </div>
+      <div class="card">
+        <h3>避坑提示（7-3.2 第13页）</h3>
+        <table>
+          <thead><tr><th>❌ 常见问题</th><th>后果</th></tr></thead>
+          <tbody>
+            <tr><td>传感器安装在阳光直射区域</td><td>温度读数偏差，环境状态无法正确反映（8.4.1.1b）</td></tr>
+            <tr><td>室外设备无防护箱体</td><td>日晒雨淋导致设备故障（8.4.1.1a）</td></tr>
+            <tr><td>关键监控节点无 UPS 供电</td><td>断电后监控失效（8.4.1.1d）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 网关 ===== -->
+    <div class="page" id="page-gw">
+      <div class="notice">🔀 <b>核查维度二 / 三 / 五</b>：接入控制（8.4.2.1 只有授权感知节点可接入）、入侵防范（8.4.2.2 限制通信目标地址）、网关节点设备安全（8.4.3.2：合法设备标识鉴别、非法数据过滤、密钥在线更新、配置在线更新）。登录网关管理界面逐项核查。</div>
+      <div class="card">
+        <h3>🔀 物联网网关列表（4 台）</h3>
+        <table>
+          <thead><tr><th>网关</th><th>位置</th><th>下联感知节点</th><th>固件版本</th><th>状态</th></tr></thead>
+          <tbody>
+            <tr><td><b>GW-01</b></td><td>A 区机房</td><td>温湿度×50、照明×12</td><td><span class="tag-warn">v2.1.0（2019年，从未升级 ⚠）</span></td><td><span class="status online">在线</span></td></tr>
+            <tr><td><b>GW-02</b></td><td>B 区机房</td><td>温湿度×60、照明×15</td><td><span class="tag-warn">v2.1.0（2019年，从未升级 ⚠）</span></td><td><span class="status online">在线</span></td></tr>
+            <tr><td><b>GW-03</b></td><td>C 区弱电井</td><td>温湿度×45、门禁×8</td><td><span class="tag-warn">v2.1.0（2019年，从未升级 ⚠）</span></td><td><span class="status online">在线</span></td></tr>
+            <tr><td><b>GW-04</b></td><td>D 区机房</td><td>摄像头×24（视频流）</td><td><span class="tag-warn">v2.1.0（2019年，从未升级 ⚠）</span></td><td><span class="status online">在线</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>⚙️ 网关节点安全配置核查（8.4.2.1 / 8.4.2.2 / 8.4.3.2）</h3>
+        <div id="gw-cfg"></div>
+        <div class="risk-banner">🕵️ <b>核查线索</b>：网关未启用接入白名单 = 任何设备都能接入；无非法数据过滤 = 接受所有来源数据；密钥从未更新 = 一旦泄露长期有效——分别违反哪几条要求？</div>
+      </div>
+      <div class="card">
+        <h3>常见问题（7-3.2 第17页）</h3>
+        <table>
+          <thead><tr><th>❌ 常见问题</th><th>对应要求</th></tr></thead>
+          <tbody>
+            <tr><td>网关节点无数据过滤机制，接受所有来源数据</td><td>8.4.3.2 b) 非法数据过滤</td></tr>
+            <tr><td>密钥长期不变，无更新机制</td><td>8.4.3.2 c) 关键密钥在线更新</td></tr>
+            <tr><td>无配置参数更新能力，固件版本老旧</td><td>8.4.3.2 d) 关键配置参数在线更新</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ===== 通信与抗重放 ===== -->
+    <div class="page" id="page-comm">
+      <div class="notice">📡 <b>核查维度六</b>：抗数据重放（8.4.3.3：a) 数据新鲜性鉴别——时间戳/序列号；b) 历史数据非法修改鉴别——完整性校验）。尝试重放攻击测试，观察平台反应。</div>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>⚙️ 通信协议安全配置</h3>
+          <div id="comm-cfg"></div>
+        </div>
+        <div class="card">
+          <h3>🧪 重放攻击模拟测试</h3>
+          <p style="font-size:13px;color:var(--muted);margin-bottom:12px;">点击按钮模拟“截获 10 分钟前的一帧开门指令并原样重发”，观察网关/平台是否识别：</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-primary" onclick="replayTest(1)">▶ 测试1：重放门禁开门指令</button>
+            <button class="btn btn-primary" onclick="replayTest(2)">▶ 测试2：重放温湿度历史数据</button>
+          </div>
+          <div id="replay-result" style="margin-top:14px;font-size:13px;line-height:1.9;min-height:60px;"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>📖 数据重放攻击的危害（7-3.2 误区辨析）</h3>
+        <div style="font-size:13px;line-height:2;">
+          ❌ 误区：“数据重放攻击只有理论可能”<br>
+          ✅ 正确理解：历史数据重放可造成<b>虚假信息注入</b>（伪造环境数据欺骗平台）、<b>控制指令重发</b>（重放开门/断电指令）等实际危害。<br>
+          ✅ 核查方法：核查数据包是否包含<b>时间戳或序列号</b>，尝试重放攻击测试；核查数据<b>完整性校验机制</b>。
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 日志 ===== -->
+    <div class="page" id="page-log">
+      <div class="notice">🚨 <b>观察点</b>：从安全事件日志反推违规配置——陌生地址连接、伪造节点、重放攻击，分别暴露了哪一层、哪一条要求的问题？</div>
+      <div class="card">
+        <h3>🚨 安全事件日志（平台 + 网关）</h3>
+        <table>
+          <thead><tr><th>时间</th><th>事件类型</th><th>详情</th><th>暴露的问题</th></tr></thead>
+          <tbody id="log-table"></tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>📖 案例背景 —— Mirai 僵尸网络（7-3.2 案例导入）</h3>
+        <div style="font-size:13px;line-height:2;">
+          2016 年，Mirai 利用物联网设备（主要是网络摄像头等）的<b>默认密码漏洞</b>，发动了美国史上最大规模 DDoS 攻击，导致 Twitter 等知名网站大面积瘫痪。事后调查发现：<br>
+          ● 大量设备使用出厂默认密码（如 admin）<br>
+          ● 设备固件存在已知漏洞但从未更新<br>
+          ● 感知节点暴露在公网，无访问控制<br>
+          💡 本实验环境里同样存在这三个问题——它们就藏在“感知节点设备管理”和“安全事件日志”里。
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 核查任务 ===== -->
+    <div class="page" id="page-task">
+      <div class="card">
+        <h3>📝 任务：填写《物联网安全测评记录表》（对应 7-3.2 实践任务1，6 大维度 17 项指标）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:14px;">逐项核查 6 个维度：点击“查看位置”跳转取证 → 选择测评结果 → 填写问题描述与整改建议 → 导出记录表。<br>测评结果取值：<b>符合 / 部分符合 / 不符合 / 不适用</b>。分组建议：4人/组（测评工程师、记录员、验证测试员、报告编写员），约 35 分钟。</div>
+        <div id="checklist"></div>
+        <div style="display:flex;gap:12px;margin-top:6px;">
+          <button class="btn btn-primary" onclick="exportReport()">⬇ 导出《物联网安全测评记录表》</button>
+          <button class="btn btn-outline" onclick="resetChecklist()">重置填写</button>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🕵️ 任务：智能园区配置风险分析（对应 7-3.2 实践任务2）</h3>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">案例场景：某智能园区部署物联网系统（温湿度传感器 200 个、智能照明控制器 50 个、网关 4 台、云平台 1 套）。本实验环境埋了 <b>6 处风险</b>，从候选发现中勾选真实风险项（混有干扰项）并提交评分。</div>
+        <div id="quiz"></div>
+        <div style="display:flex;gap:14px;align-items:center;margin-top:6px;">
+          <button class="btn btn-primary" onclick="submitQuiz()">提交评分</button>
+          <span class="score-box" id="quiz-score"></span>
+          <span id="quiz-feedback" style="font-size:13px;color:var(--muted);"></span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>🧠 思考题与误区辨析（课堂讨论）</h3>
+        <div style="font-size:14px;line-height:2;">
+          1️⃣ 智能水表泄露案例：泄露源头在哪？感知层、网络层还是应用层？<br>
+          2️⃣ “物联网设备小，不用做等保”——对吗？（提示：感知节点被控制可能成为攻击跳板）<br>
+          3️⃣ “物理环境安全不重要”——感知节点部署在无人值守环境，物理安全是第几道防线？<br>
+          4️⃣ 智能医疗设备、智能网联汽车被攻击会怎样？为什么说物联网安全测评守护的不只是数据？
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-mask" id="modal-mask" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-header"><span id="modal-title">详情</span><span class="modal-close" onclick="closeModal()">✕</span></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= 数据 ================= */
+const senses=[
+ {dev:"温湿度传感器 S-101",loc:"A 区绿地（室外）",env:"无防护箱体，日晒雨淋 ⚠",power:"电池供电",pwd:"admin（默认）⚠",fw:"v1.0（2019，未更新）⚠",st:"bad"},
+ {dev:"温湿度传感器 S-102",loc:"3F 机房（室内）",env:"安装位置合理",power:"电池供电",pwd:"已修改（强口令）",fw:"v1.2（已更新）",st:"online"},
+ {dev:"温湿度传感器 S-103",loc:"B 区天台（室外）",env:"阳光直射区域 ⚠",power:"电池供电",pwd:"已修改（强口令）",fw:"v1.2（已更新）",st:"warn"},
+ {dev:"智能照明控制器 L-01",loc:"A 区走廊",env:"吊顶内，正常",power:"市电（无UPS）⚠",pwd:"admin（默认）⚠",fw:"v1.0（2019，未更新）⚠",st:"bad"},
+ {dev:"智能水表 W-301",loc:"园区管网",env:"表井内，正常",power:"电池（10年）",pwd:"已修改",fw:"v2.0（已更新）",st:"online"},
+ {dev:"安防摄像头 C-01",loc:"园区周界（室外）",env:"有防护罩，正常",power:"市电+UPS ✔",pwd:"已修改（强口令）",fw:"v3.1（已更新）",st:"online"},
+ {dev:"门禁 RFID 读卡器 D-01",loc:"1F 大门",env:"室内，正常",power:"市电+UPS ✔",pwd:"已修改",fw:"v2.3（已更新）",st:"online"}
+];
+const senseCfg=[
+ {label:"管理口令策略",desc:"出厂默认口令是物联网设备最常见的安全风险，必须强制修改",val:"未强制：新设备入网不检查口令 ⚠",ok:false},
+ {label:"软件配置变更控制",desc:"8.4.3.1a：保证只有授权用户方可配置或变更软件应用",val:"本地登录无认证机制 ⚠",ok:false},
+ {label:"固件更新机制",desc:"固件存在已知漏洞但从未更新（Mirai 案例成因之一）",val:"无自动更新，运维靠人工换设备 ⚠",ok:false},
+ {label:"与网关身份鉴别",desc:"8.4.3.1b：具备鉴别连接网关节点设备能力（MAC绑定等）",val:"ZigBee 网络已启用设备入网许可 ✔",ok:true}
+];
+const gwCfg=[
+ {label:"接入控制白名单",desc:"8.4.2.1：只有授权的感知节点可以接入（设备ID/MAC绑定）",val:"未启用，接受任何设备接入 ⚠",ok:false},
+ {label:"通信目标地址限制",desc:"8.4.2.2：限制与感知/网关节点通信的目标地址，避免对陌生地址攻击",val:"未配置通信白名单 ⚠",ok:false},
+ {label:"合法设备标识鉴别",desc:"8.4.3.2a：应具备对连接设备标识鉴别能力",val:"部分实现（仅视频网段启用）",ok:false},
+ {label:"非法数据过滤",desc:"8.4.3.2b：应具备过滤非法和伪造节点数据能力",val:"无过滤机制，接受所有来源数据 ⚠",ok:false},
+ {label:"关键密钥在线更新",desc:"8.4.3.2c：授权用户能在线更新关键密钥",val:"密钥为 2019 年初始密钥，从未更新 ⚠",ok:false},
+ {label:"关键配置在线更新",desc:"8.4.3.2d：授权用户能在线更新关键配置参数",val:"固件 2019 年至今未升级 ⚠",ok:false}
+];
+const commCfg=[
+ {label:"传输加密",desc:"感知数据明文传输导致信息泄露（智能水表案例成因）",val:"ZigBee 有链路加密；NB-IoT 水表数据明文上云 ⚠",ok:false},
+ {label:"数据新鲜性鉴别",desc:"8.4.3.3a：鉴别数据新鲜性，避免历史数据重放（时间戳/序列号）",val:"数据包不含时间戳/序列号 ⚠",ok:false},
+ {label:"历史数据修改鉴别",desc:"8.4.3.3b：鉴别历史数据的非法修改（完整性校验）",val:"无完整性校验机制 ⚠",ok:false},
+ {label:"通信协议限定",desc:"网关仅允许约定协议通信",val:"MQTT/HTTPS 白名单已启用（云方向）✔",ok:true}
+];
+const logs=[
+ {t:"2026-10-24 11:02",type:"陌生地址连接",detail:"GW-01 收到来自非白名单地址的连接请求并被接受（未配置通信白名单）",leak:"8.4.2.2 入侵防范未配置 ⚠"},
+ {t:"2026-10-24 09:38",type:"伪造节点接入",detail:"未注册设备伪装成温湿度传感器成功接入 GW-02 并上报数据",leak:"8.4.2.1 接入控制未启用 ⚠"},
+ {t:"2026-10-23 22:15",type:"暴力破解",detail:"互联网扫描器批量尝试摄像头 admin/admin 默认口令，2 台弱口令设备被登录",leak:"出厂默认口令未修改 ⚠"},
+ {t:"2026-10-23 16:47",type:"异常指令重发",detail:"同一开门指令在 5 分钟内出现 37 次（疑似重放），门禁均执行",leak:"8.4.3.3 抗数据重放缺失 ⚠"},
+ {t:"2026-10-22 08:20",type:"恶意代码感染",detail:"1 台固件老旧的照明控制器被 Mirai 变种蠕虫感染并尝试向外传播",leak:"固件未更新 + 明文传输 ⚠"},
+ {t:"2026-10-21 14:33",type:"数据篡改迹象",detail:"平台发现 S-103 历史温度数据被改写但无任何告警（无完整性校验）",leak:"8.4.3.3b 历史数据修改鉴别缺失 ⚠"}
+];
+/* 6 维度核查清单 */
+const checks=[
+ {code:"8.4.1.1 a)",name:"感知节点物理防护：物理破坏防护",where:"感知节点设备管理",fact:"抽查发现 S-101（A区绿地）室外无防护箱体，日晒雨淋。"},
+ {code:"8.4.1.1 b)",name:"感知节点物理防护：环境状态反映",where:"感知节点设备管理",fact:"S-103（B区天台）安装在阳光直射区域，温度读数存在偏差，环境状态无法正确反映。"},
+ {code:"8.4.1.1 d)",name:"感知节点物理防护：电力供应",where:"感知节点设备管理",fact:"关键感知节点中照明控制器 L-01 为市电直供且无 UPS；摄像头等关键节点已配 UPS。"},
+ {code:"8.4.2.1",name:"接入控制：只有授权感知节点可接入",where:"网关节点管理",fact:"网关未启用接入白名单，未注册设备伪装成传感器成功接入。"},
+ {code:"8.4.2.2",name:"入侵防范：限制通信目标地址",where:"网关节点管理",fact:"感知/网关节点均未配置通信目标地址白名单，可对陌生地址发起连接。"},
+ {code:"8.4.3.1 a)",name:"感知节点安全：授权配置与鉴别",where:"感知节点设备管理",fact:"管理口令未强制修改（抽查仍存在 admin 默认口令），本地登录无认证机制；部分节点已启用入网许可。"},
+ {code:"8.4.3.2 b/c/d)",name:"网关节点安全：过滤/密钥更新/配置更新",where:"网关节点管理",fact:"无非法数据过滤机制；密钥为 2019 年初始密钥从未更新；固件 2019 年至今未升级。"},
+ {code:"8.4.3.3 a/b)",name:"抗数据重放：新鲜性与完整性",where:"通信与抗重放",fact:"数据包不含时间戳/序列号，重放测试开门指令被照常执行；无完整性校验，历史数据被篡改无告警。"}
+];
+const suggested={
+ "8.4.1.1 a)":{res:"不符合",desc:"感知节点 S-101 部署于室外且无防护箱体，日晒雨淋将导致设备故障。",fix:"加装户外防护箱体（防雨防晒），纳入验收检查项。"},
+ "8.4.1.1 b)":{res:"不符合",desc:"S-103 安装于阳光直射区域，温度读数偏差，无法正确反映环境状态。",fix:"迁移至遮阳位置或加装遮光罩，重新校准读数。"},
+ "8.4.1.1 d)":{res:"部分符合",desc:"摄像头等关键节点有 UPS，但照明控制器等关键感知节点市电直供无 UPS。",fix:"为关键感知节点配置 UPS 或双路供电，并建立电力维护记录。"},
+ "8.4.2.1":{res:"不符合",desc:"网关未启用接入控制白名单，未注册设备可伪装成传感器接入。",fix:"启用设备 ID/MAC 绑定白名单，非授权设备接入即拒绝并告警。"},
+ "8.4.2.2":{res:"不符合",desc:"感知/网关节点未配置通信目标地址限制，可连接陌生地址。",fix:"在网关配置通信白名单，仅允许与约定平台地址通信。"},
+ "8.4.3.1 a)":{res:"不符合",desc:"抽查发现默认口令 admin 未修改，本地登录无认证机制。",fix:"强制修改全部默认口令为新设备入网检查项；启用本地配置认证。"},
+ "8.4.3.2 b/c/d)":{res:"不符合",desc:"网关无非法数据过滤机制；密钥 2019 年至今未更新；固件从未升级。",fix:"启用非法/伪造数据过滤；建立密钥定期在线更换机制；升级固件并纳入版本管理。"},
+ "8.4.3.3 a/b)":{res:"不符合",desc:"数据包无时间戳/序列号，重放开门指令被照常执行；历史数据被篡改无告警。",fix:"通信协议增加时间戳/序列号做新鲜性鉴别；启用完整性校验（MAC/签名）。"}
+};
+const quizItems=[
+ {q:"发现：部分室外传感器无防护箱体（日晒雨淋）",risk:true,why:"感知节点物理防护 → 8.4.1.1a"},
+ {q:"发现：温湿度传感器 S-103 安装在阳光直射区",risk:true,why:"环境状态无法正确反映 → 8.4.1.1b"},
+ {q:"发现：网关未启用接入控制白名单",risk:true,why:"任何设备都可接入 → 8.4.2.1"},
+ {q:"发现：部分感知节点仍使用出厂默认口令 admin",risk:true,why:"默认密码是物联网最常见风险（Mirai）→ 8.4.3.1a"},
+ {q:"发现：密钥自 2019 年部署后从未更新",risk:true,why:"关键密钥应支持在线更新 → 8.4.3.2c"},
+ {q:"发现：数据包无时间戳/序列号，重放开门指令被照常执行",risk:true,why:"无数据新鲜性鉴别 → 8.4.3.3a"},
+ {q:"发现：摄像头已配置 UPS 供电，口令已修改，固件已更新",risk:false,why:"这是合规配置（合规 ✔），不是风险"},
+ {q:"发现：园区骨干网采用以太网 + 光纤上联",risk:false,why:"网络层技术选型本身不是违规配置"}
+];
+const nodeInfo={
+ "物联网云平台":"应用层：数据存储与分析。安全关注：数据泄露、云端攻击、权限滥用——适用安全通用要求（计算环境）。",
+ "园区综合管理界面":"应用层：Web 业务展示。安全关注：Web 应用漏洞、身份伪造、越权访问。",
+ "移动端APP":"应用层：运维巡检入口。安全关注：APP 安全漏洞、传输加密、登录鉴别。",
+ "物联网网关":"网络层/感知层交界：★测评核心对象。核查 8.4.2.1 接入控制、8.4.2.2 入侵防范、8.4.3.2 网关设备安全（鉴别/过滤/密钥与配置在线更新）。",
+ "NB-IoT 蜂窝通信":"网络层：运营商级广覆盖。安全关注：数据窃听（明文传输）、非授权接入。",
+ "ZigBee 短距通信":"网络层：低功耗组网。安全关注：协议攻击、伪造节点入网。",
+ "园区有线网络":"网络层：稳定可靠骨干。适用安全通用要求（通信网络、区域边界）。",
+ "温湿度传感器":"感知层：信息采集设备。安全关注：物理防护（8.4.1.1）、默认口令、固件老旧、伪造节点（8.4.2.1）。",
+ "智能照明控制器":"感知层+执行器：可下发控制指令。被俘获后可被恶意控制——重放攻击危害的直接目标。",
+ "智能水表":"感知层：案例导入主角——数据明文传输、默认密码、暴露公网导致数据泄露。",
+ "安防摄像头":"感知层：Mirai 僵尸网络的主要宿主。安全关注：默认口令、固件漏洞、公网暴露。",
+ "门禁RFID读写器":"感知层：身份识别。安全关注：重放攻击（开门指令）、伪造卡。"
+};
+const checkState={};checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});
+const quizState=new Set();
+
+/* ================= 渲染 ================= */
+function render(){
+ document.getElementById("sense-table").innerHTML=senses.map(s=>`<tr>
+  <td><b>${s.dev}</b></td><td>${s.loc}</td>
+  <td>${s.env.includes("⚠")?`<span class="tag-bad">⚠ ${s.env}</span>`:s.env}</td>
+  <td>${s.power.includes("⚠")?`<span class="tag-warn">${s.power}</span>`:s.power}</td>
+  <td>${s.pwd.includes("⚠")?`<span class="tag-bad">⚠ ${s.pwd}</span>`:`<span class="tag-ok">✔ ${s.pwd}</span>`}</td>
+  <td>${s.fw.includes("⚠")?`<span class="tag-warn">${s.fw}</span>`:`<span class="tag-ok">✔ ${s.fw}</span>`}</td>
+  <td><span class="status ${s.st==="online"?"online":"bad"}">${s.st==="online"?"正常":"违规"}</span></td></tr>`).join("");
+ const cfgHtml=arr=>arr.map(c=>`
+  <div class="cfg-item">
+    <div class="cfg-label"><b>${c.label}</b><span>${c.desc}</span></div>
+    <span class="cfg-val ${c.ok?"tag-ok":"tag-bad"}">${c.val}</span>
+  </div>`).join("");
+ document.getElementById("sense-cfg").innerHTML=cfgHtml(senseCfg);
+ document.getElementById("gw-cfg").innerHTML=cfgHtml(gwCfg);
+ document.getElementById("comm-cfg").innerHTML=cfgHtml(commCfg);
+ document.getElementById("log-table").innerHTML=logs.map(l=>`<tr><td>${l.t}</td><td><span class="tag-warn">⚠ ${l.type}</span></td><td>${l.detail}</td><td class="tag-bad">${l.leak}</td></tr>`).join("");
+ renderChecklist();renderQuiz();
+}
+function renderChecklist(){
+ document.getElementById("checklist").innerHTML=checks.map((c,i)=>{
+  const s=checkState[c.code];
+  return `<div class="check-item">
+   <div class="ci-head">
+    <span class="ci-title">${i+1}. ${c.name} <span class="ci-code">${c.code}</span></span>
+    <span>取证位置：<a href="#" onclick="goto('${pageOf(c.where)}');return false;" style="color:var(--primary);">前往「${c.where}」→</a></span>
+   </div>
+   <div style="font-size:13px;color:var(--muted);">🔎 现场情况：<span style="color:var(--text)">${c.fact}</span></div>
+   <div class="ci-grid">
+    <label>测评结果：</label>
+    <select onchange="checkState['${c.code}'].res=this.value" style="width:180px;">
+      <option value="">— 请选择 —</option>
+      ${["符合","部分符合","不符合","不适用"].map(r=>`<option ${s.res===r?"selected":""}>${r}</option>`).join("")}
+    </select>
+    <label>问题描述：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].desc=this.value">${s.desc}</textarea>
+    <label>整改建议：</label>
+    <textarea rows="2" oninput="checkState['${c.code}'].fix=this.value">${s.fix}</textarea>
+   </div>
+  </div>`;
+ }).join("");
+}
+function pageOf(w){return w==="感知节点设备管理"?"sense":w==="网关节点管理"?"gw":w==="通信与抗重放"?"comm":"log";}
+function renderQuiz(){
+ document.getElementById("quiz").innerHTML=quizItems.map((q,i)=>
+  `<label class="quiz-opt" id="quiz-${i}" onclick="toggleQuiz(${i})"><input type="checkbox" style="margin-right:8px;" ${quizState.has(i)?"checked":""}><b>候选发现 ${i+1}</b>：${q.q}</label>`).join("");
+}
+function toggleQuiz(i){quizState.has(i)?quizState.delete(i):quizState.add(i);renderQuiz();}
+function submitQuiz(){
+ if(!quizState.size){toast("请先勾选候选发现再提交");return;}
+ let score=0;const riskIdxs=[];
+ quizItems.forEach((q,i)=>{
+  const el=document.getElementById("quiz-"+i);
+  el.classList.remove("correct","wrong");
+  const picked=quizState.has(i);
+  if(picked===q.risk)score++;
+  if(q.risk)riskIdxs.push(i+1);
+  el.classList.add(picked===q.risk?"correct":"wrong");
+  el.querySelector("input").disabled=true;
+ });
+ document.getElementById("quiz-score").textContent=`得分：${score} / ${quizItems.length}`;
+ const found=quizItems.filter((q,i)=>quizState.has(i)&&q.risk).length;
+ document.getElementById("quiz-feedback").innerHTML=`真实风险共 6 处，你找到 <b>${found}</b> 处。绿色=判断正确，红色=判断有误。真实风险：${riskIdxs.join("、")}`;
+ quizState.clear();
+ toast(`评分完成：${score} / ${quizItems.length}，请查看各项解释`);
+}
+function replayTest(n){
+ const box=document.getElementById("replay-result");
+ if(n===1){
+  box.innerHTML=`<span class="tag-bad">⛔ 测试结果：重放攻击成功！</span><br>10 分钟前的开门指令被网关照常执行（门禁开启）——因为数据包<b>不含时间戳/序列号</b>，无法鉴别数据新鲜性。<br>对应要求：<b>8.4.3.3 a) 数据新鲜性鉴别</b> → 记录为不符合项。`;
+ }else{
+  box.innerHTML=`<span class="tag-bad">⛔ 测试结果：历史数据重放成功！</span><br>平台接受了 3 天前的温湿度数据并入库展示——无完整性校验，历史数据可被非法修改重放。<br>对应要求：<b>8.4.3.3 b) 历史数据非法修改鉴别</b> → 记录为不符合项。<br><br>💡 这就是“数据重放攻击只有理论可能”这一误区的现实反驳：重放可造成虚假信息注入、控制指令重发。`;
+ }
+ toast("重放测试完成，结果已记录到页面");
+}
+function exportReport(){
+ const rows=checks.map(c=>{
+  const s=checkState[c.code];
+  return `<tr><td style="border:1px solid #999;padding:6px;">${c.code}</td><td style="border:1px solid #999;padding:6px;">${c.name}</td><td style="border:1px solid #999;padding:6px;">${s.res||""}</td><td style="border:1px solid #999;padding:6px;">${s.desc||""}</td><td style="border:1px solid #999;padding:6px;">${s.fix||""}</td></tr>`;
+ }).join("");
+ const html=`<html><head><meta charset="utf-8"><title>物联网安全测评记录表</title></head><body style="font-family:SimSun;">
+ <h2 style="text-align:center;">物联网安全测评记录表</h2>
+ <p>测评对象：IoTLab 模拟智能园区物联网系统　测评人：student01　日期：2026-10-24　依据：GB/T 22239-2019 物联网安全扩展要求（8.4节）</p>
+ <table style="border-collapse:collapse;width:100%;font-size:12px;"><tr><th style="border:1px solid #999;padding:6px;">测评指标编号</th><th style="border:1px solid #999;padding:6px;">测评指标名称</th><th style="border:1px solid #999;padding:6px;">测评结果</th><th style="border:1px solid #999;padding:6px;">测评记录/问题描述</th><th style="border:1px solid #999;padding:6px;">整改建议/备注</th></tr>${rows}</table>
+ <p style="font-size:12px;color:#666;">填写说明：测评结果取值为 符合 / 部分符合 / 不符合 / 不适用。完整记录表含 17 项指标，可按课堂要求拆分填写。</p>
+ </body></html>`;
+ const blob=new Blob([html],{type:"text/html;charset=utf-8"});
+ const a=document.createElement("a");
+ a.href=URL.createObjectURL(blob);a.download="物联网安全测评记录表-student01.html";a.click();
+ toast("记录表已导出，可直接打印或提交学习通");
+}
+function resetChecklist(){checks.forEach(c=>checkState[c.code]={res:"",desc:"",fix:""});renderChecklist();toast("已重置全部填写内容");}
+/* 导航 */
+const titles={arch:"三层架构总览",sense:"感知节点设备管理",gw:"网关节点管理",comm:"通信与抗重放",log:"安全事件日志",task:"等保核查任务"};
+function goto(p){
+ document.querySelectorAll(".page").forEach(e=>e.classList.remove("active"));
+ document.getElementById("page-"+p).classList.add("active");
+ document.querySelectorAll(".nav-item").forEach(e=>e.classList.toggle("active",e.dataset.page===p));
+ document.getElementById("pageTitle").textContent=titles[p];
+ document.querySelector(".content").scrollTop=0;
+}
+document.querySelectorAll(".nav-item").forEach(e=>e.addEventListener("click",()=>goto(e.dataset.page)));
+function showModal(t,b){document.getElementById("modal-title").textContent=t;document.getElementById("modal-body").innerHTML=b;document.getElementById("modal-mask").classList.add("show");}
+function closeModal(){document.getElementById("modal-mask").classList.remove("show");}
+function showNode(k){showModal("节点安全关注点 — "+k,`<p>${nodeInfo[k]||""}</p>`);}
+let toastTimer;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),3200);}
+render();
+</script>
+</body>
+</html>
