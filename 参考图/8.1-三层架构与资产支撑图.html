@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.1 参考图｜优品商城三层架构与资产支撑图</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+        background: #f4f6f9;
+        color: #2c2c2a;
+        padding: 24px 16px;
+    }
+    .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 12px;
+        padding: 28px 32px 32px;
+    }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+    .sub { font-size: 13px; color: #6b7280; margin-bottom: 18px; line-height: 1.6; }
+    .notice {
+        background: #fff8e6;
+        border-left: 4px solid #d97706;
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+    .notice strong { color: #92400e; }
+    .svg-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 12px 8px; background: #fff; }
+    .map-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 24px;
+        font-size: 13px;
+    }
+    .map-table th, .map-table td {
+        border: 1px solid #d1d5db;
+        padding: 8px 10px;
+        text-align: left;
+        line-height: 1.6;
+        vertical-align: top;
+    }
+    .map-table th { background: #f1efe8; font-weight: 600; white-space: nowrap; }
+    .map-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .tip { margin-top: 20px; font-size: 13px; color: #374151; line-height: 1.8; }
+    .tip strong { color: #1f2937; }
+    .back { display: inline-block; margin-top: 22px; font-size: 13px; color: #185fa5; text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+    @media print {
+        body { background: #fff; padding: 0; }
+        .wrap { border-radius: 0; padding: 12px; }
+        .back { display: none; }
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1>8.1 参考图｜优品商城三层架构与资产支撑图</h1>
+    <p class="sub">配套实验：8.1 资产识别与 CIA 赋值 · 第 1 步「读场景，先画架构」 · 场景来源：素材 4《电商系统资产识别场景说明》</p>
+    <div class="notice">
+        <strong>先画，再看。</strong>这是参考答案，不是标准模板——请先按素材 4 自己在纸上画一张三层图，画完再来对照：你的三层分对了吗？每项资产都找到它撑着的业务了吗？和本图不一样的，把理由写进赋值表备注，<strong>有依据的分歧是对的</strong>。
+    </div>
+
+    <div class="svg-box">
+        <svg viewBox="0 0 680 590" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+        <title>优品商城三层架构与资产支撑图</title>
+        <desc>业务层五项交易、系统层商城平台四个层级与运维通道、组件层十项资产及其支撑的业务</desc>
+        <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+        </defs>
+        <text x="40" y="52" font-size="14" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">第一层 业务（交易）</text>
+        <rect x="40" y="64" width="112" height="40" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+        <text x="96" y="84" font-size="13" fill="#0C447C" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册 / 登录</text>
+        <rect x="162" y="64" width="112" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+        <text x="218" y="84" font-size="13" fill="#085041" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览 / 搜索</text>
+        <rect x="284" y="64" width="112" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+        <text x="340" y="84" font-size="13" fill="#3C3489" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单购买</text>
+        <rect x="406" y="64" width="112" height="40" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+        <text x="462" y="84" font-size="13" fill="#633806" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+        <rect x="528" y="64" width="112" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+        <text x="584" y="84" font-size="13" fill="#712B13" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单查询</text>
+        <line x1="180" y1="110" x2="180" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <line x1="340" y1="110" x2="340" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <line x1="500" y1="110" x2="500" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <rect x="40" y="148" width="600" height="158" rx="12" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="56" y="172" font-size="14" font-weight="500" fill="#444441" font-family="PingFang SC, Microsoft YaHei, sans-serif">第二层 系统 —— 优品商城平台</text>
+        <rect x="56" y="186" width="112" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="112" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">互联网边界</text>
+        <text x="112" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">防火墙 ×1</text>
+        <text x="112" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-08</text>
+        <rect x="184" y="186" width="124" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="246" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web 层</text>
+        <text x="246" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web服务器 ×2</text>
+        <text x="246" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-05 · Tomcat</text>
+        <rect x="324" y="186" width="144" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="396" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用层</text>
+        <text x="396" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用服务器×2·Java</text>
+        <text x="396" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-06 · 支付接口 A-04</text>
+        <rect x="484" y="186" width="140" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="554" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据层</text>
+        <text x="554" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据库×2·主从</text>
+        <text x="554" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-07 · MySQL</text>
+        <rect x="56" y="266" width="568" height="28" rx="6" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="340" y="280" font-size="12" fill="#444441" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">运维通道：运维人员经跳板机（A-09）管理全系统 ｜ 配置文件（A-10）：连接信息·密钥</text>
+        <line x1="340" y1="312" x2="340" y2="334" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+        <text x="40" y="362" font-size="14" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">第三层 组件 —— 资产清单（标色 = 直接支撑该项业务，灰 = 全业务公共支撑）</text>
+        <rect x="40" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="50" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-01 · 数据</text>
+        <text x="50" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">用户数据库</text>
+        <circle cx="53" cy="428" r="3.5" fill="#185FA5"/>
+        <text x="61" y="428" font-size="11" fill="#185FA5" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册登录</text>
+        <text x="50" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">存账号·密码哈希</text>
+        <rect x="162" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="172" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-02 · 数据</text>
+        <text x="172" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">商品信息库</text>
+        <circle cx="175" cy="428" r="3.5" fill="#0F6E56"/>
+        <text x="183" y="428" font-size="11" fill="#0F6E56" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览搜索</text>
+        <text x="172" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">存商品与库存</text>
+        <rect x="284" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="294" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-03 · 数据</text>
+        <text x="294" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单数据</text>
+        <circle cx="297" cy="428" r="3.5" fill="#534AB7"/>
+        <circle cx="306" cy="428" r="3.5" fill="#854F0B"/>
+        <circle cx="315" cy="428" r="3.5" fill="#993C1D"/>
+        <text x="322" y="428" font-size="11" fill="#444441" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单·支付·查询</text>
+        <text x="294" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单全周期记录</text>
+        <rect x="406" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="416" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-04 · 软件</text>
+        <text x="416" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支付接口</text>
+        <circle cx="419" cy="428" r="3.5" fill="#854F0B"/>
+        <text x="427" y="428" font-size="11" fill="#854F0B" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+        <text x="416" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">对接支付宝·微信</text>
+        <rect x="528" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="538" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-05 · 硬件</text>
+        <text x="538" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web服务器</text>
+        <circle cx="541" cy="428" r="3.5" fill="#888780"/>
+        <text x="549" y="428" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+        <text x="538" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">入口·负载均衡</text>
+        <rect x="40" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="50" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-06 · 硬件</text>
+        <text x="50" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用服务器</text>
+        <circle cx="53" cy="518" r="3.5" fill="#888780"/>
+        <text x="61" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+        <text x="50" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">运行业务逻辑</text>
+        <rect x="162" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="172" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-07 · 硬件</text>
+        <text x="172" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据库服务器</text>
+        <circle cx="175" cy="518" r="3.5" fill="#888780"/>
+        <text x="183" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+        <text x="172" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">主从·承载三库</text>
+        <rect x="284" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="294" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-08 · 硬件</text>
+        <text x="294" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">防火墙</text>
+        <circle cx="297" cy="518" r="3.5" fill="#888780"/>
+        <text x="305" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+        <text x="294" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">边界安全屏障</text>
+        <rect x="406" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="416" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-09 · 硬件</text>
+        <text x="416" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">跳板机</text>
+        <circle cx="419" cy="518" r="3.5" fill="#888780"/>
+        <text x="427" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑运维</text>
+        <text x="416" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">不直接面向业务</text>
+        <rect x="528" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+        <text x="538" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-10 · 文档</text>
+        <text x="538" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">系统配置文件</text>
+        <circle cx="541" cy="518" r="3.5" fill="#888780"/>
+        <text x="549" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+        <text x="538" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">连接信息·密钥</text>
+        <text x="40" y="572" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">图例</text>
+        <circle cx="78" cy="568" r="3.5" fill="#185FA5"/>
+        <text x="86" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册登录</text>
+        <circle cx="150" cy="568" r="3.5" fill="#0F6E56"/>
+        <text x="158" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览搜索</text>
+        <circle cx="222" cy="568" r="3.5" fill="#534AB7"/>
+        <text x="230" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单购买</text>
+        <circle cx="294" cy="568" r="3.5" fill="#854F0B"/>
+        <text x="302" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+        <circle cx="366" cy="568" r="3.5" fill="#993C1D"/>
+        <text x="374" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单查询</text>
+        <circle cx="438" cy="568" r="3.5" fill="#888780"/>
+        <text x="446" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">全业务公共支撑</text>
+        </svg>
+    </div>
+
+    <table class="map-table">
+        <tr><th style="width:22%;">资产</th><th style="width:16%;">所在层</th><th style="width:28%;">直接支撑的业务</th><th>怎么撑的</th></tr>
+        <tr><td>A-01 用户数据库</td><td>数据层</td><td>注册 / 登录</td><td>存账号、手机号、密码哈希——没有它没人能登录</td></tr>
+        <tr><td>A-02 商品信息库</td><td>数据层</td><td>商品浏览 / 搜索</td><td>存商品名、价格、库存、描述——浏览搜的就是它</td></tr>
+        <tr><td>A-03 订单数据</td><td>数据层</td><td>下单购买、在线支付、订单查询（3 项）</td><td>订单号、金额、状态贯穿交易全流程，业务价值密度最高</td></tr>
+        <tr><td>A-04 支付接口</td><td>应用层</td><td>在线支付</td><td>对接支付宝 / 微信，支付动作的出口</td></tr>
+        <tr><td>A-05 Web 服务器 ×2</td><td>Web 层</td><td>全部业务（入口）</td><td>所有用户请求先进这里，负载均衡分发</td></tr>
+        <tr><td>A-06 应用服务器 ×2</td><td>应用层</td><td>全部业务（逻辑）</td><td>注册校验、下单扣库存等逻辑都在它上面跑</td></tr>
+        <tr><td>A-07 数据库服务器 ×2 主从</td><td>数据层</td><td>全部业务（承载数据）</td><td>A-01 / 02 / 03 三个库都放在它上面</td></tr>
+        <tr><td>A-08 防火墙</td><td>互联网边界</td><td>全部业务（安全前提）</td><td>边界防护——它断了，五项业务外面都进不来</td></tr>
+        <tr><td>A-09 跳板机</td><td>运维通道</td><td>不直接面向业务</td><td>运维人员唯一管理入口，保障系统持续运转</td></tr>
+        <tr><td>A-10 系统配置文件</td><td>文档</td><td>全部业务（运行支撑）</td><td>含数据库连接信息、密钥——它泄露，上面全裸奔</td></tr>
+    </table>
+
+    <p class="tip"><strong>看图的三句话：</strong>
+    ① 业务不是悬空的——每项业务都能往下指到具体资产；
+    ② A-03 订单数据一项撑 3 项业务，是 CIA 赋值时最该打高的数据资产；
+    ③ 灰色资产（Web / 应用 / 数据库服务器、防火墙）是“共同命脉”——任何一台出问题，五项业务一起瘫痪，这正是它们“可用性”要打高的原因。</p>
+
+    <a class="back" href="../index.html">← 返回课程平台</a>
+</div>
+</body>
+</html>

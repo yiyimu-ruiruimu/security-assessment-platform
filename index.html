@@ -8930,259 +8930,689 @@ return</div>
 
                 <div class="task-stage" id="stage8">
 
-                    <h3>🔍 情景分析</h3>
+                    <h3>🔍 任务导入</h3>
 
                     <div class="highlight">
-
-                        <p><strong>问题导入：</strong>测评回答"符不符合标准"，风险评估进一步回答"<strong>风险有多大</strong>？"——资产多值钱？威胁有多凶？漏洞有多严重？三者一综合，风险值就出来了。这是课程的压轴任务（12学时），完成后你就能独立开展一次完整的风险评估。</p>
-
-                    </div>
-
-
-
-                    <div class="km-box" data-km="8"></div>
-
-
-
-                    <div class="diagram-box">
-
-                        <svg width="700" height="120" viewBox="0 0 700 120" xmlns="http://www.w3.org/2000/svg">
-
-                            <defs>
-
-                                <marker id="arrow5" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#0d47a1"></path></marker>
-
-                            </defs>
-
-                            <rect x="10" y="30" width="130" height="60" rx="8" fill="#e3f0fd" stroke="#0d47a1" stroke-width="2"></rect>
-
-                            <text x="75" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#0d47a1">资产识别</text>
-
-                            <text x="75" y="75" text-anchor="middle" font-size="10" fill="#555">CIA三性赋值</text>
-
-                            <line x1="140" y1="60" x2="165" y2="60" stroke="#0d47a1" stroke-width="2" marker-end="url(#arrow5)"></line>
-
-                            <rect x="168" y="30" width="130" height="60" rx="8" fill="#fff3e0" stroke="#b26a00" stroke-width="2"></rect>
-
-                            <text x="233" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#b26a00">威胁识别</text>
-
-                            <text x="233" y="75" text-anchor="middle" font-size="10" fill="#555">威胁源分析与赋值</text>
-
-                            <line x1="298" y1="60" x2="323" y2="60" stroke="#0d47a1" stroke-width="2" marker-end="url(#arrow5)"></line>
-
-                            <rect x="326" y="30" width="130" height="60" rx="8" fill="#fdecea" stroke="#c0392b" stroke-width="2"></rect>
-
-                            <text x="391" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">脆弱性识别</text>
-
-                            <text x="391" y="75" text-anchor="middle" font-size="10" fill="#555">扫描报告+核查记录</text>
-
-                            <line x1="456" y1="60" x2="481" y2="60" stroke="#0d47a1" stroke-width="2" marker-end="url(#arrow5)"></line>
-
-                            <rect x="484" y="30" width="110" height="60" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2"></rect>
-
-                            <text x="539" y="55" text-anchor="middle" font-size="13" font-weight="bold" fill="#7b1fa2">风险计算</text>
-
-                            <text x="539" y="75" text-anchor="middle" font-size="10" fill="#555">矩阵法/相乘法</text>
-
-                            <line x1="594" y1="60" x2="612" y2="60" stroke="#0d47a1" stroke-width="2" marker-end="url(#arrow5)"></line>
-
-                            <rect x="615" y="30" width="75" height="60" rx="8" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"></rect>
-
-                            <text x="652" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#2e7d32">评估报告</text>
-
-                            <text x="652" y="75" text-anchor="middle" font-size="10" fill="#555">风险处置建议</text>
-
-                        </svg>
-
-                    </div>
-
-
-
-                    <div class="table-container">
-
-                        <table class="info-table">
-
-                            <tr><th>子任务</th><th>内容（通俗版）</th><th>产出</th></tr>
-
-                            <tr><td><strong>8.1 资产识别与CIA赋值</strong></td><td>列出所有资产（服务器、数据、应用…），按保密性C/完整性I/可用性A打分定级</td><td>资产清单</td></tr>
-
-                            <tr><td><strong>8.2 威胁识别与赋值</strong></td><td>谁可能来搞破坏？（病毒、黑客、内部人员、自然灾害…）出现频率多高？</td><td>威胁识别表</td></tr>
-
-                            <tr><td><strong>8.3 脆弱性识别与赋值</strong></td><td>系统哪里弱？（结合任务4的漏洞扫描报告和核查记录）</td><td>脆弱性分析表</td></tr>
-
-                            <tr><td><strong>8.4 风险计算</strong></td><td>用<strong>矩阵法</strong>或<strong>相乘法</strong>算出风险值，划分高中低风险等级</td><td>风险计算表</td></tr>
-
-                            <tr><td><strong>8.5 编制风险评估报告</strong></td><td>依据 GB/T 20984 汇总成完整报告，提出风险处置建议</td><td>风险评估报告</td></tr>
-
-                        </table>
-
-                    </div>
-
-
-
-                    <div class="practice-box">
-
-                        <div class="concept-title">✏️ 实验任务（第14-16周，12学时）</div>
-
-                        <p>以前序任务中测评过的模拟系统为对象，完整走一遍风险评估流程：资产清单 → 威胁识别表 → 脆弱性分析表 → 风险计算表 → 风险评估报告。</p>
-
-                        <p><strong>组织方式：</strong>项目制作/实训室，小组协作+个人成果。</p>
-
-                        <p><strong>📌 期末提醒：</strong>第17周综合复习（系统梳理核心知识点与实操技能）后参加期末考核。</p>
-
-                    </div>
-
-
-
-                    <div class="lab-box">
-
-                        <div class="lab-head">🧪 实验（结合实验三）：资产识别与 CIA 赋值——给"底账"贴上"价签"</div>
-
-                        <div class="lab-goal"><strong>实验目标：</strong>风险评估的第一步。<strong>不需要重新录入资产</strong>——直接复用 JSecProbe 实验三建立的资产清单，在此基础上为每项资产完成 CIA 三性赋值。体会两件事：① 资产的价值不是"这台服务器值多少钱"，而是<strong>"它出事，业务损失多大"</strong>；② 同一台服务器，三性赋值往往不同（如公开网站可用性高、保密性低）。</div>
-
-                        <ol class="step-list">
-
-                            <li><strong>导出资产底账。</strong>登录 JSecProbe 打开"政务服务中心综合管理平台"项目，将实验三录入的系统构成清单整理为《资产识别表》（可用表格工具重排），补充三列：<strong>资产归属 / 责任部门 / 备注</strong>。</li>
-
-                            <li><strong>逐项 CIA 赋值。</strong>对每项资产的保密性 C、完整性 I、可用性 A 分别按 1~5 打分，依据是"受损后的业务影响"，参考下表：</li>
-
-                        </ol>
-
-                        <div class="table-container">
-
+                        <p><strong>任务定位：</strong>前面七个任务回答的是“<strong>符不符合标准</strong>”，本任务回答“<strong>风险到底有多大</strong>”。资产多值钱？威胁有多凶？漏洞有多严重？三者一综合，才谈得上“先改哪里、后改哪里”。</p>
+                        <p><strong>12 学时怎么走：</strong>五个单元是一条流水线，前一步的表就是后一步的输入，<strong>顺序不能乱</strong>——8.1 资产清单 → 8.2 威胁识别表 → 8.3 脆弱性表 → 8.4 风险计算表 → 8.5 风险评估报告。素材全部来自前序任务：资产底账来自实验三，脆弱性证据来自任务 4 的扫描报告与核查记录。</p>
+                        <p style="margin-top:8px;"><strong>五个单元各管一件事，进单元前先看“核心问题”，做完对照“交付物”：</strong></p>
+                        <div class="table-container" style="margin-top:8px;">
                             <table class="info-table">
-
-                                <tr><th>赋值</th><th>保密性 C（泄露后果）</th><th>完整性 I（被篡改后果）</th><th>可用性 A（不可用后果）</th></tr>
-
-                                <tr><td><strong>5 很高</strong></td><td>引发重大社会影响/违法</td><td>业务中断且无法恢复</td><td>业务全面中断，无法替代</td></tr>
-
-                                <tr><td><strong>3 中</strong></td><td>影响部分用户/局部范围</td><td>业务受损但可修复</td><td>业务降级运行</td></tr>
-
-                                <tr><td><strong>1 很低</strong></td><td>几乎无影响</td><td>轻微、可立即纠正</td><td>短时可接受</td></tr>
-
+                                <tr><th style="width:10%;">单元</th><th style="width:27%;">核心问题</th><th style="width:38%;">关键方法</th><th style="width:25%;">交付物</th></tr>
+                                <tr><td><strong>8.1</strong></td><td>我有什么、哪个最值钱？</td><td>三层分类 + CIA 五级赋值 + 平均值法</td><td>资产清单与CIA赋值表</td></tr>
+                                <tr><td><strong>8.2</strong></td><td>谁会来、多久来一次？</td><td>威胁源两分法 + 频率五级赋值</td><td>威胁识别表</td></tr>
+                                <tr><td><strong>8.3</strong></td><td>我哪里容易被攻破？</td><td>技术五层 + 管理两类 + 难易/严重两部分赋值</td><td>脆弱性识别与赋值汇总表</td></tr>
+                                <tr><td><strong>8.4</strong></td><td>风险到底多大、先改哪条？</td><td>矩阵法 5×5 + 相乘法 R=√(L×F)</td><td>风险计算表 + 处置建议</td></tr>
+                                <tr><td><strong>8.5</strong></td><td>怎么写成一份能看懂的报告？</td><td>八章结构 + 结论前置 + 逐条可派工</td><td>风险评估报告</td></tr>
                             </table>
-
                         </div>
-
-                        <ol class="step-list" start="3">
-
-                            <li><strong>确定资产等级。</strong>取 C、I、A 三者中的<strong>最高值</strong>作为该资产的等级——这个"取高"思路与等保定级的 S/A 取高如出一辙，对照体会。</li>
-
-                            <li><strong>标注关键资产。</strong>等级 ≥4 的资产用颜色标出——它们将是你后面威胁识别、风险计算的重点对象（关键资产优先，不必对每项资产做全流程）。</li>
-
-                        </ol>
-
-                        <div class="ai-tip-box">
-
-                            <div class="ai-tip-title">🤖 赋值阶段，AI 这样用</div>
-
-                            <p>赋值最容易犯的错是"拍脑袋"——所有资产全打 3 分。先自己赋一版，再用 AI 当"对答案的助教"：</p>
-
-                            <div class="prompt-tpl">
-
-                                <span class="prompt-tpl-label">💬 提示词模板：</span>
-
-                                某市政务服务中心综合管理平台中有一项资产：【如：办事群众身份信息数据库】。业务背景：【简述该数据用于哪些业务】。请分别从保密性、完整性、可用性三个角度分析它受损后的业务影响，给出 1~5 的赋值建议并说明理由。请注意不要直接替我定结论，给出理由让我自己比对。
-
-                            </div>
-
-                            <p style="font-size:0.88rem;color:#666;"><strong>比对方法：</strong>AI 给的理由里若有你没想到的影响（如"该数据库被篡改会导致错误审批"），说明你赋低了；若你的理由更贴合本校模拟场景，保留自己的赋值并在备注里写明依据。</p>
-
-                        </div>
-
-                        <div class="lab-check">
-
-                            <div class="lab-check-title">📋 交付自查</div>
-
-                            ☐ 资产来自实验三清单（未凭空新增）　☐ 每项资产有 C/I/A 三个分值　☐ 每个分值能说出业务影响依据　☐ 关键资产（≥4 级）已标出
-
-                        </div>
-
                     </div>
 
+                    <div style="margin-bottom:15px;">
+                        <button class="substage-btn active" data-substage="8.1">8.1 资产识别与CIA赋值</button>
+                        <button class="substage-btn" data-substage="8.2">8.2 威胁识别与赋值</button>
+                        <button class="substage-btn" data-substage="8.3">8.3 脆弱性识别与赋值</button>
+                        <button class="substage-btn" data-substage="8.4">8.4 风险计算（矩阵法·相乘法）</button>
+                        <button class="substage-btn" data-substage="8.5">8.5 编制风险评估报告</button>
+                    </div>
 
+                    <!-- ==================== 8.1 资产识别与CIA赋值 ==================== -->
+                    <div class="substage active" id="substage8.1">
 
-                    <div class="lab-box">
+                        <h3>🔍 情景分析</h3>
 
-                        <div class="lab-head">📄 文档任务链：从威胁识别到风险评估报告（8.2 → 8.5）</div>
-
-                        <div class="lab-goal"><strong>任务目标：</strong>四个子任务是一条流水线，前一步的表就是后一步的输入，<strong>顺序不能乱</strong>：威胁识别表 + 脆弱性分析表 → 风险计算表 → 风险评估报告。所有素材都来自前序任务的成果（实验三资产清单、任务 4 的扫描与核查记录），这正是"以测促评"的体现。</div>
-
-                        <ol class="step-list">
-
-                            <li><strong>8.2 威胁识别与赋值。</strong>针对关键资产，从<strong>威胁源（谁）× 威胁行为（怎么搞）</strong>两个维度列表：威胁源包括环境因素（断电、火灾、水灾）、人为无意（误操作）、人为有意（病毒、黑客、内部恶意人员）。每条威胁按<strong>出现频率</strong>赋值（5=很可能每年发生 / 3=可能 / 1=罕见），并写明判断依据（如"系统暴露于互联网 → 漏洞扫描类威胁赋 5"）。</li>
-
-                            <li><strong>8.3 脆弱性识别与赋值。</strong>直接翻任务 4 的成果：<strong>漏洞扫描报告里的漏洞 + 核查记录里的"不符合"项</strong>，逐条整理成脆弱性清单，按严重程度赋值（5=可直接被利用导致严重后果 / 3=需一定条件 / 1=影响轻微）。每条脆弱性必须写"证据来源"（哪份报告/哪条记录）。</li>
-
-                            <li><strong>8.4 风险计算（矩阵法）。</strong>对"威胁—脆弱性"配对逐个计算：<strong>风险值 = 威胁频率 × 脆弱性严重程度</strong>（相乘法），再对照 5×5 矩阵读出风险等级：</li>
-
-                        </ol>
-
-                        <div class="table-container">
-
-                            <table class="info-table">
-
-                                <tr><th>风险等级</th><th>判定</th><th>处置策略</th></tr>
-
-                                <tr><td><span class="badge badge-red">高风险</span></td><td>风险值 ≥ 15</td><td>立即处置：整改前应有补偿措施</td></tr>
-
-                                <tr><td><span class="badge badge-orange">中风险</span></td><td>6 ≤ 风险值 &lt; 15</td><td>限期处置：列入整改计划</td></tr>
-
-                                <tr><td><span class="badge badge-green">低风险</span></td><td>风险值 &lt; 6</td><td>接受/观察：定期复查</td></tr>
-
-                            </table>
-
+                        <div class="highlight">
+                            <p><strong>引入：</strong>你要保护一座房子，首先得知道——房子里<strong>有什么是值钱的</strong>？</p>
+                            <p><strong>案例——“你保护的是什么？”：</strong>2017 年 9 月，美国征信巨头 Equifax 宣布数据泄露：约 <strong>1.47 亿人</strong>的姓名、社保号、住址被窃取——几乎半个美国的信用档案暴露。</p>
+                            <p><strong>调查发现：</strong>没人说得清有多少台服务器在运行出问题的组件；修复清单漏掉几十台系统；管理层答不上来“到底有哪些资产”。</p>
+                            <p><strong>核心问题：</strong>如果连“自己有哪些资产、哪些最敏感”都答不上来，后面的<strong>漏洞扫描、补丁管理、风险计算</strong>会怎样？<span style="color:#b26a00;font-weight:700;">（课末回收）</span></p>
                         </div>
 
-                        <ol class="step-list" start="4">
+                        <div class="km-box" data-km="8.1"></div>
 
-                            <li><strong>8.5 编制风险评估报告。</strong>依据 GB/T 20984，报告至少包含六部分：① 概述（评估目的、范围、依据）② 资产识别（附资产表）③ 威胁识别（附威胁表）④ 脆弱性识别（附脆弱性表）⑤ 风险分析与计算（附矩阵与计算表，画出风险分布）⑥ 风险处置建议（对每条高/中风险给出"接受/降低/转移/规避"的选择及理由）。</li>
+                        <div class="concept-box">
+                            <div class="concept-title">📖 是什么——资产、三层结构与五大类别</div>
+                            <p><strong>▍定义：</strong>GB/T 20984-2022 把资产定义为“<strong>对组织有价值的任何东西</strong>”——包括信息资产、软件资产、硬件资产、服务资产、人员资产。通俗一点：<strong>资产 = 需要保护的东西</strong>，可以是有形的（服务器、防火墙、门禁），也可以是无形的（数据、声誉、人员）。</p>
+                            <p><strong>▍三层结构：新版标准以“业务”为核心，而不是以“单一资产”为核心。</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:16%;">层次</th><th style="width:38%;">是什么</th><th style="width:46%;">举例</th></tr>
+                                    <tr><td><strong>业务资产</strong></td><td>组织赖以运转的核心业务与服务</td><td>电子政务服务平台、医院 HIS 系统、电商交易系统</td></tr>
+                                    <tr><td><strong>系统资产</strong></td><td>支撑业务运行的信息系统</td><td>HIS / LIS / PACS、门户网站、教务管理系统</td></tr>
+                                    <tr><td><strong>组件资产</strong></td><td>构成信息系统的具体组件</td><td>数据库服务器、Web 服务器、防火墙、网络设备、应用软件</td></tr>
+                                </table>
+                            </div>
+                            <p>先问“业务靠什么撑着”，再往下拆系统、拆组件——这是新版标准与旧版最根本的区别。本课程以<strong>组件资产</strong>为主要操作对象，但每一项都要能说出“它撑着哪个业务”，否则清单就会退化成一张设备表。</p>
+                            <p><strong>▍五大类别（组件层面的分类仍然适用）：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:14%;">资产类别</th><th style="width:30%;">包含内容</th><th style="width:56%;">举例</th></tr>
+                                    <tr><td><strong>硬件资产</strong></td><td>物理设备</td><td>服务器、网络设备、存储设备、终端设备</td></tr>
+                                    <tr><td><strong>软件资产</strong></td><td>应用软件、系统软件</td><td>操作系统、数据库、业务应用、中间件</td></tr>
+                                    <tr><td><strong>数据资产</strong></td><td>各类数据</td><td>业务数据、配置数据、审计日志、用户信息</td></tr>
+                                    <tr><td><strong>人员资产</strong></td><td>人员与岗位</td><td>管理员、操作员、开发人员、外包人员</td></tr>
+                                    <tr><td><strong>服务资产</strong></td><td>内外部服务</td><td>运维服务、云服务、第三方接口</td></tr>
+                                </table>
+                            </div>
+                        </div>
 
-                        </ol>
+                        <div class="concept-box">
+                            <div class="concept-title">❓ 为什么——资产识别是风险评估的“第一步”，不是“清单填写”</div>
+                            <p><strong>它是后面三步的输入：</strong>8.2 的威胁要“<strong>针对某项资产</strong>”识别，8.3 的脆弱性要“<strong>落到某项资产</strong>”上，8.4 的风险值里资产价值是第一项。第一步错了，后面全歪——这不是“先做哪一步”的顺序问题，而是“输入错、结论必错”的链条问题。</p>
+                            <p><strong>“三无资产”的教训：</strong>攻防演练里被打穿的，常常不是安全设备买得不够，而是资产不清楚——存在大量<strong>无负责人、无标识、无维护</strong>的“三无资产”。它不在任何人的台账里，也就不会在任何人补丁计划里。</p>
+                            <p><strong>回到 Equifax：</strong>不是没有补丁、不是没有扫描工具，而是<strong>不知道哪些机器需要打</strong>。清单漏一台，修复就漏一台；漏的那一台，就是入口。</p>
+                        </div>
 
-                        <div class="ai-tip-box">
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 怎么做——五步法 + CIA 赋值 + 价值计算</div>
+                            <p><strong>第一步到第三步：把清单建起来。</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:8%;">步骤</th><th style="width:20%;">做什么</th><th style="width:42%;">具体动作</th><th style="width:30%;">本单元产出</th></tr>
+                                    <tr><td>1</td><td>确定评估范围</td><td>明确涉及的业务、系统、网络区域与边界</td><td>范围说明（含不测部分及理由）</td></tr>
+                                    <tr><td>2</td><td>收集资产信息</td><td>文档、访谈、现场查看、工具扫描四条路并用</td><td>资产原始信息</td></tr>
+                                    <tr><td>3</td><td>资产分类</td><td>按“业务 → 系统 → 组件”归类，再标五类属性</td><td>资产清单骨架（编号 A-01…）</td></tr>
+                                    <tr><td>4</td><td>资产赋值</td><td>对 C / I / A 分别按 1~5 打分</td><td>CIA 三列分值</td></tr>
+                                    <tr><td>5</td><td>编制资产清单</td><td>汇总成正式清单，标注关键资产</td><td>《资产清单与CIA赋值表》</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>第四步的关键：赋值问的是“业务影响”，不是“设备价格”。</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:8%;">赋值</th><th style="width:30%;">机密性 C（泄露后果）</th><th style="width:31%;">完整性 I（被篡改后果）</th><th style="width:31%;">可用性 A（不可用后果）</th></tr>
+                                    <tr><td><strong>5 很高</strong></td><td>含组织最重要秘密，泄露造成灾难性损害</td><td>篡改造成无法接受的损害，难以弥补</td><td>不允许中断，业务全面瘫痪</td></tr>
+                                    <tr><td><strong>4 高</strong></td><td>含组织重要秘密，遭受严重损害</td><td>造成重大影响，较难弥补</td><td>允许中断 &lt; 10 分钟，影响重大</td></tr>
+                                    <tr><td><strong>3 中等</strong></td><td>含一般性秘密，受到损害</td><td>造成明显影响，可以弥补</td><td>允许中断 &lt; 30 分钟，影响明显</td></tr>
+                                    <tr><td><strong>2 低</strong></td><td>仅内部公开，向外扩散影响轻微</td><td>造成轻微影响，容易弥补</td><td>短时中断可接受，业务降级运行</td></tr>
+                                    <tr><td><strong>1 很低</strong></td><td>可对社会公开，几乎无影响</td><td>影响可忽略</td><td>中断几乎不影响业务</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>第五步：把三性合成一个“资产价值”。</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:18%;">方法</th><th style="width:26%;">公式</th><th style="width:26%;">特点</th><th style="width:30%;">什么时候用</th></tr>
+                                    <tr><td><strong>最大值法</strong></td><td>max(C, I, A)</td><td>保守型，就高不就低</td><td>与等保定级 S/A 取高同一思路</td></tr>
+                                    <tr><td><strong>平均值法</strong></td><td>(C + I + A) / 3</td><td>均衡型</td><td>本课程统一用此法，保留 1 位小数</td></tr>
+                                    <tr><td><strong>加权法</strong></td><td>w₁C + w₂I + w₃A</td><td>业务特点明确时更准</td><td>不同属性重要性差异大的系统</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>关键资产：</strong>资产价值 <strong>≥ 4</strong> 的即为关键资产——它们将是你后面威胁识别、风险计算的重点对象。不必对每项资产做全流程，但关键资产一项都不能漏。</p>
+                        </div>
 
-                            <div class="ai-tip-title">🤖 风险评估全链条，AI 的正确用法</div>
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验·资产识别：给“底账”贴上“价签”</div>
 
-                            <p>风险评估是全课程<strong>最适合用 AI 提效</strong>的环节，但要守住一条红线：<strong>表格里的每个数值由你判定，AI 负责核查与润色</strong>：</p>
+                            <div class="lab-goal"><strong>🎯 本实验的交付物（终点摆在最前面）：</strong>一份填满 <strong>6 项资产 × C/I/A 三列分值 + 资产价值 + 关键性说明</strong>的《资产清单与CIA赋值表》，外加一段“关键资产清单”。命名 <b>班级+学号+姓名+8.1</b> 提交学习通。</div>
 
-                            <div class="prompt-tpl">
+                            <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
+                            <ul style="margin:4px 0 10px 22px;">
+                                <li>从一段系统架构描述里，拆出“业务 → 系统 → 组件”三层资产，并按五大类别归类；</li>
+                                <li>对每项资产的 C / I / A 分别赋值，且每个分值都能说出一句“业务影响依据”；</li>
+                                <li>用平均值法算出资产价值，标出 ≥4 的关键资产；</li>
+                                <li>说清“资产价值”与“设备价格”为什么不是一回事。</li>
+                            </ul>
 
-                                <span class="prompt-tpl-label">💬 提示词模板（计算核对）：</span>
-
-                                我用相乘法做风险计算，某资产面临威胁【病毒感染，频率=5】，对应脆弱性【未部署主机防病毒软件，严重度=4】。请核对：① 5×4=20 按高/中/低划分应属哪个等级；② 这个配对是否合理——有没有更该先算的"威胁-脆弱性"组合被漏掉了。
-
+                            <p style="margin:18px 0 6px;"><strong>📎 实验配套素材（仅本单元使用，按编号下载）</strong></p>
+                            <div class="kb-st-tables">
+                                <div class="kb-st-list">
+                                    <a class="table-dl" href="各类表格/8.1 资产识别与CIA赋值/素材1：资产赋值速查卡（学生快速参考）.docx" download>⬇ 素材 1：资产赋值速查卡（快速参考）</a>
+                                    <a class="table-dl" href="各类表格/8.1 资产识别与CIA赋值/素材2：资产清单与CIA赋值表.docx" download>⬇ 素材 2：资产清单与CIA赋值表（必交）</a>
+                                    <a class="table-dl" href="各类表格/8.1 资产识别与CIA赋值/素材3：参考标准——GBT 20984 资产赋值表.docx" download>⬇ 素材 3：GB/T 20984 资产赋值表（参考标准）</a>
+                                    <a class="table-dl" href="各类表格/8.1 资产识别与CIA赋值/素材4：实践任务——电商系统资产识别场景说明.docx" download>⬇ 素材 4：电商系统资产识别场景说明（任务场景）</a>
+                                    <a class="table-dl" href="各类表格/8.1 资产识别与CIA赋值/素材5：教师演示用——资产赋值讨论卡片.docx" download>⬇ 素材 5：教师演示——资产赋值讨论卡片</a>
+                                </div>
                             </div>
 
-                            <div class="prompt-tpl">
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜读场景，先画架构。</strong>打开 <a class="inline-dl" href="各类表格/8.1 资产识别与CIA赋值/素材4：实践任务——电商系统资产识别场景说明.docx" download>素材 4《电商系统资产识别场景说明》</a>，把“优品商城”的系统组成读一遍（互联网边界防火墙、Web 服务器 2 台、应用服务器 2 台、数据库主备、支付接口、运维人员）。先在纸上画一张三层图：<strong>业务（交易）→ 系统（商城平台）→ 组件（服务器 / 数据库 / 接口 / 人）</strong>。<span class="step-check">✅ 到位标准：能指着图说出“这项资产撑着哪个业务”。</span><a class="inline-dl" href="参考图/8.1-参考答案.html#step1" target="_blank">🖼 参考答案：三层架构与资产支撑图（先自己画，画完再对照）</a></li>
+                                <li><strong>第 2 步｜建清单，编号归类。</strong>打开 <a class="inline-dl" href="各类表格/8.1 资产识别与CIA赋值/素材2：资产清单与CIA赋值表.docx" download>素材 2《资产清单与CIA赋值表》</a>，按素材 4 的 <strong>A-01 ～ A-10 填 10 项资产</strong>，每项标“硬件 / 软件 / 数据 / 文档”中的一类。<strong>注意：</strong>数据库里的“用户数据”和“数据库服务器”是两项资产，一个数据、一个硬件——这是最容易漏的地方。<span class="step-check">✅ 到位标准：10 项齐全、编号与素材 4 一致，四大类别至少出现 3 类。</span><a class="inline-dl" href="参考图/8.1-参考答案.html#step2" target="_blank">📋 参考答案：10 项资产清单与类别判断（填完再对）</a></li>
+                                <li><strong>第 3 步｜逐项 CIA 赋值，写依据。</strong>对每项资产问三句话：<strong>泄露了损失多大？被篡改了后果多严重？宕机了影响多大？</strong>照着 <a class="inline-dl" href="各类表格/8.1 资产识别与CIA赋值/素材1：资产赋值速查卡（学生快速参考）.docx" download>素材 1《资产赋值速查卡》</a> 或 <a class="inline-dl" href="各类表格/8.1 资产识别与CIA赋值/素材3：参考标准——GBT 20984 资产赋值表.docx" download>素材 3《GB/T 20984 资产赋值表》</a> 定档。每一项分值后面写一句依据，例如“用户数据 C=5：含姓名、手机号、收货地址，泄露可被用于精准诈骗”。<span class="step-check">✅ 到位标准：30 个分值全部有依据，不出现“感觉重要所以给 5”。</span><a class="inline-dl" href="参考图/8.1-参考答案.html#step3" target="_blank">📋 参考答案：30 个分值与逐条依据（先自己赋一版）</a></li>
+                                <li><strong>第 4 步｜算价值，标关键资产。</strong>用平均值法 (C+I+A)/3 算出资产价值，<strong>保留 1 位小数</strong>；把价值 ≥4 的资产标成关键资产，并在“关键性说明”里写清它一旦出事会影响哪条业务。<span class="step-check">✅ 到位标准：价值能由三个分值复算出来，关键资产与后续实验对象一致。</span><a class="inline-dl" href="参考图/8.1-参考答案.html#step4" target="_blank">🧮 参考答案：价值计算表与 5 项关键资产（算完再对）</a></li>
+                                <li><strong>第 5 步｜对答案，再定稿提交。</strong>和 <a class="inline-dl" href="各类表格/8.1 资产识别与CIA赋值/素材5：教师演示用——资产赋值讨论卡片.docx" download>素材 5《资产赋值讨论卡片》</a> 里的讨论问题过一遍（用户数据库泄露会面临什么？篡改会怎样？宕机 1 小时影响多大？）。分值有分歧的，把理由写进备注——<strong>分歧本身是对的，只要有依据</strong>。最后按命名规范提交。<span class="step-check">✅ 到位标准：表已填满、依据齐全、命名规范——缺一样都算没交。</span><a class="inline-dl" href="参考图/8.1-参考答案.html#step5" target="_blank">✅ 参考答案：交付自查清单与三处合理分歧（提交前对一遍）</a></li>
+                            </ol>
 
-                                <span class="prompt-tpl-label">💬 提示词模板（报告润色）：</span>
-
-                                以下是我写的风险评估报告"风险处置建议"部分：【粘贴草稿】。请检查：① 建议是否与风险等级匹配（高风险的建议是否够"硬"）；② 是否存在空话（如"加强管理"这类没有动作的建议）；③ 语言是否像正式的评估报告。指出问题即可，不要整段替我重写。
-
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:22%;">资产</th><th style="width:10%;">C</th><th style="width:10%;">I</th><th style="width:10%;">A</th><th style="width:14%;">价值</th><th style="width:34%;">依据怎么写（示例）</th></tr>
+                                    <tr><td>用户数据库（数据）</td><td>5</td><td>5</td><td>4</td><td>4.7 · 关键</td><td>含姓名、手机号、地址；篡改会导致错发漏发；短时不可用可降级</td></tr>
+                                    <tr><td>商品信息库（数据）</td><td>2</td><td>4</td><td>3</td><td>3.0</td><td>商品信息本可公开；价格被篡改会直接造成交易纠纷</td></tr>
+                                    <tr><td>Web 服务器（硬件）</td><td>2</td><td>3</td><td>5</td><td>3.3</td><td>不含敏感数据；配置被改影响可控；宕机则全站不可访问</td></tr>
+                                </table>
                             </div>
 
-                            <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>让 AI 直接生成整套风险评估表格 = 期末最可能挂科的技能。评估的判断过程才是考核核心。</p>
+                            <div class="risk-banner">⚠️ <strong>三个常见坑：</strong>① 所有资产全打 3 分——等于没赋值，风险计算阶段全部失效；② 按“这台服务器多少钱”赋值——资产价值问的是<strong>业务损失</strong>，不是采购价；③ 只列硬件和软件，漏掉<strong>数据、文档</strong>——泄露事故里最先出事的往往正是数据，配置文档里还藏着密钥。</div>
 
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 赋值阶段，AI 这样用：当“对答案的助教”，不当“代笔”</div>
+                                <p>赋值最容易犯的错是“拍脑袋”。先自己赋一版，再让 AI 从业务影响角度提反例：</p>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    某电商交易系统有一项资产：【如：办事群众身份信息数据库】。业务背景：【简述该数据用于哪些业务】。请分别从保密性、完整性、可用性三个角度分析它受损后的业务影响，给出 1~5 的赋值建议并说明理由。请注意不要直接替我定结论，给出理由让我自己比对。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>比对方法：</strong>AI 给的理由里若有你没想到的影响（如“该数据库被篡改会导致错误发货”），说明你赋低了；若你的理由更贴合本场景，保留自己的赋值并在备注里写明依据。</p>
+                            </div>
+
+                            <div class="lab-submit">
+                                <div class="lab-submit-title">📤 必须提交的实验结果（通过学习通提交）</div>
+                                <ul style="margin:4px 0 6px 20px;">
+                                    <li>《资产清单与CIA赋值表》（素材 2）：10 项资产、C/I/A 共 30 个分值、价值与关键性说明齐全；</li>
+                                    <li>关键资产清单：价值 ≥4 的资产编号、名称、一句话理由；</li>
+                                    <li>文件命名：<strong>班级+学号+姓名+8.1</strong>。</li>
+                                </ul>
+                                <p style="margin:6px 0 0;">📮 <strong>提交方式：</strong>登录<strong>学习通</strong> → 本课程 →「作业」中的本次任务，按命名规范上传，截止时间以学习通发布为准。</p>
+                            </div>
+
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 资产来自场景说明（未凭空新增）　☐ 数据与承载它的服务器分开列　☐ 每项资产有 C/I/A 三个分值　☐ 每个分值有一句业务影响依据　☐ 价值由分值复算得出、保留 1 位　☐ 关键资产（≥4）已标出并说明理由
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== 8.2 威胁识别与赋值 ==================== -->
+                    <div class="substage" id="substage8.2">
+
+                        <h3>🔍 情景分析</h3>
+
+                        <div class="highlight">
+                            <p><strong>案例——“一句日志引发的全球警报”：</strong>2021 年 11 月，Java 日志组件 Log4j 被曝出一个“记日志时顺手执行代码”的漏洞（Log4Shell）。12 月 9 日细节公开，<strong>数小时内</strong>全球扫描器就开始批量试探，从 Minecraft 服务器到企业核心系统，几乎无一幸免。</p>
+                            <p><strong>关键事实：</strong>被利用的不是什么高深功能，而是“把用户输入写进日志”这个再普通不过的动作；Log4j 又藏在<strong>十亿级</strong>设备的依赖链深处，很多单位根本不知道自己用了它。</p>
+                            <p><strong>核心问题：</strong>一个“平平无奇”的日志功能，为什么能引发<strong>全球十级警报</strong>？<span style="color:#b26a00;font-weight:700;">（课末回收：学完威胁赋值，请回来给 Log4Shell 打分——你打的分数，就是当年全球应急的警报等级。）</span></p>
                         </div>
 
-                        <div class="lab-check">
+                        <div class="km-box" data-km="8.2"></div>
 
-                            <div class="lab-check-title">📋 交付自查</div>
-
-                            ☐ 四张表（威胁/脆弱性/计算/报告附录）齐全　☐ 脆弱性每条有证据来源　☐ 至少完成 5 组"威胁-脆弱性"配对计算　☐ 高/中风险均有处置建议且写明策略类型
-
+                        <div class="concept-box">
+                            <div class="concept-title">📖 是什么——威胁、威胁源，以及它和脆弱性的区别</div>
+                            <p><strong>▍定义：</strong>威胁是“<strong>可能导致信息资产遭受损害、破坏或未经授权访问的事件、行为或环境因素</strong>”。通俗说：威胁 = 可能造成破坏的<strong>力量或事件</strong>（黑客、病毒、火灾、误操作……）。</p>
+                            <p><strong>▍三个词别混：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:14%;">概念</th><th style="width:22%;">是什么</th><th style="width:34%;">类比</th><th style="width:30%;">例子</th></tr>
+                                    <tr><td><strong>威胁</strong></td><td>主体 / 事件</td><td>想要破门而入的坏人</td><td>黑客攻击、勒索软件、火灾</td></tr>
+                                    <tr><td><strong>脆弱性</strong></td><td>资产自身的弱点</td><td>门锁的质量问题</td><td>弱口令、未打补丁、无备份</td></tr>
+                                    <tr><td><strong>风险</strong></td><td>两者相遇后的后果</td><td>被偷走造成的损失</td><td>数据泄露、业务停摆</td></tr>
+                                </table>
+                            </div>
+                            <p>“未打补丁”是<strong>脆弱性</strong>，不是威胁；“黑客利用未打补丁的漏洞”才是威胁。写表时这两列一混，后面 8.4 的配对就配不起来。</p>
+                            <p><strong>▍两类威胁源：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:14%;">大类</th><th style="width:22%;">细分</th><th style="width:64%;">典型表现</th></tr>
+                                    <tr><td rowspan="3"><strong>人为威胁</strong></td><td>恶意攻击</td><td>黑客攻击、内部人员恶意破坏、竞争对手、外部间谍（APT）</td></tr>
+                                    <tr><td>非恶意 / 意外</td><td>误操作、配置错误、管理疏忽、弱口令、未及时打补丁</td></tr>
+                                    <tr><td>社会工程</td><td>钓鱼邮件、冒充身份、电话诈骗</td></tr>
+                                    <tr><td rowspan="3"><strong>环境威胁</strong></td><td>自然灾害</td><td>地震、洪水、雷击、台风、火灾</td></tr>
+                                    <tr><td>环境因素</td><td>温湿度异常、电力中断、电磁干扰</td></tr>
+                                    <tr><td>系统故障</td><td>硬件故障、软件缺陷、网络中断</td></tr>
+                                </table>
+                            </div>
                         </div>
 
+                        <div class="concept-box">
+                            <div class="concept-title">❓ 为什么——威胁必须“赋值”，不能只列名字</div>
+                            <p><strong>它是风险公式的第二项：</strong>风险 = f(资产价值, <strong>威胁可能性</strong>, 脆弱性严重程度)。资产价值有了、威胁只写个名字，风险就永远算不出来。</p>
+                            <p><strong>因为不同威胁的可能性差得很远：</strong>暴露在互联网上的 Web 服务，每周都在被扫描；而机房火灾可能十年不遇。若两者按同一权重对待，资源就会被摊平到“不可能发生的事”上，真正该防的反而没人管。</p>
+                            <p><strong>赋值的三个现实依据：</strong>① 有没有历史记录（本单位发生过几次）；② 行业态势如何（同类单位近期是否中招）；③ 现有防护水平如何（现有措施能不能挡住）。<strong>不能因为“我们没发生过”就一律给 1</strong>——没发生，可能只是还没被盯上。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 怎么做——四步识别 + 五级赋值</div>
+                            <p><strong>▍四步走：</strong>识别威胁源（谁 / 什么）→ 分析威胁方式（怎么搞）→ 评估发生频率（多久一次）→ 赋值（1~5）。</p>
+                            <p><strong>▍两种识别方法：</strong>① <strong>威胁源分类法</strong>——按资产类型逐类想“谁可能来破坏”；② <strong>威胁参考目录法</strong>——拿标准 / 行业威胁库逐条对照。<strong>本课程用“资产驱动法”</strong>：先有资产，再针对每项资产列威胁——这样列出来的每一条都能落到具体对象上，后面才好配对。</p>
+                            <p><strong>▍五级赋值标准（GB/T 20984-2022）：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:10%;">赋值</th><th style="width:14%;">等级</th><th style="width:22%;">频率参考</th><th style="width:54%;">判断要点</th></tr>
+                                    <tr><td><strong>5</strong></td><td>很高</td><td>≥ 1 次 / 周</td><td>频率很高；大多数情况下几乎不可避免；或已证实经常发生</td></tr>
+                                    <tr><td><strong>4</strong></td><td>高</td><td>≥ 1 次 / 月</td><td>频率较高；大多数情况下很有可能发生；或已证实多次发生</td></tr>
+                                    <tr><td><strong>3</strong></td><td>中等</td><td>≥ 1 次 / 半年</td><td>频率中等；某种情况下可能会发生；或已证实曾经发生过</td></tr>
+                                    <tr><td><strong>2</strong></td><td>低</td><td>≥ 1 次 / 年</td><td>频率较小；一般不太可能发生；或没有被证实发生过</td></tr>
+                                    <tr><td><strong>1</strong></td><td>很低</td><td>&lt; 1 次 / 年</td><td>几乎不可能发生；仅可能在罕见和例外情况下发生</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍赋值示例（某企业 ERP）：</strong>暴露在互联网、近半年扫描攻击频繁 → 黑客攻击 <strong>4</strong>；有严格权限与审计、无泄密事件 → 内部泄密 <strong>2</strong>；同行业近期多起勒索、自身防护一般 → 勒索软件 <strong>4</strong>；机房有消防、无火灾记录 → 火灾 <strong>2</strong>。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验·威胁识别：给每项关键资产列“谁会来、多久来一次”</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物：</strong>一份《威胁识别表》——<strong>每项关键资产至少 3 种威胁</strong>，每条含威胁名称、威胁源类别、频率赋值、赋值理由四要素；命名 <b>班级+学号+姓名+8.2</b> 提交学习通。</div>
+
+                            <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
+                            <ul style="margin:4px 0 10px 22px;">
+                                <li>区分“威胁”与“脆弱性”，不把“未打补丁”写成威胁；</li>
+                                <li>针对一项资产，从人为、环境两个方向把威胁列全，不漏内部风险；</li>
+                                <li>按频率标准给威胁赋值，并用“历史 / 行业 / 防护”三问写出理由；</li>
+                                <li>把威胁与 8.1 的资产编号对齐，为 8.4 的“威胁—脆弱性配对”留好接口。</li>
+                            </ul>
+
+                            <p style="margin:18px 0 6px;"><strong>📎 实验配套素材（仅本单元使用）</strong></p>
+                            <div class="kb-st-tables">
+                                <div class="kb-st-list">
+                                    <a class="table-dl" href="各类表格/8.2 威胁识别与赋值/素材1：实践任务场景描述.docx" download>⬇ 素材 1：实践任务场景描述（高校教务系统）</a>
+                                    <a class="table-dl" href="各类表格/8.2 威胁识别与赋值/素材2：威胁识别表（实践任务）.docx" download>⬇ 素材 2：威胁识别表（必交）</a>
+                                    <a class="table-dl" href="各类表格/8.2 威胁识别与赋值/素材3：威胁-脆弱性关联分析表.docx" download>⬇ 素材 3：威胁-脆弱性关联分析表</a>
+                                    <a class="table-dl" href="各类表格/8.2 威胁识别与赋值/素材4：威胁赋值快速参考卡.docx" download>⬇ 素材 4：威胁赋值快速参考卡</a>
+                                    <a class="table-dl" href="各类表格/8.2 威胁识别与赋值/素材5：常见威胁与对应资产参考表.docx" download>⬇ 素材 5：常见威胁与对应资产参考表</a>
+                                </div>
+                            </div>
+
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜读场景，接上资产清单。</strong>打开 <a class="inline-dl" href="各类表格/8.2 威胁识别与赋值/素材1：实践任务场景描述.docx" download>素材 1《实践任务场景描述》</a>：某高校教务管理系统，B/S 架构、DMZ 区 Web 服务器 2 台、数据库在核心区、互联网边界有防火墙。把资产按“Web 服务器 / 数据库 / 教务数据 / 运维人员”列出来，<strong>编号沿用 8.1 的规则</strong>。<span class="step-check">✅ 到位标准：资产清单与 8.1 对得上，不另起一套编号。</span></li>
+                                <li><strong>第 2 步｜逐项列威胁，每项至少 3 条。</strong>翻 <a class="inline-dl" href="各类表格/8.2 威胁识别与赋值/素材5：常见威胁与对应资产参考表.docx" download>素材 5《常见威胁与对应资产参考表》</a> 对照着列，但别照抄——只留<strong>本场景成立</strong>的。Web 服务器：漏洞利用、DDoS、网页篡改、恶意代码；数据库：SQL 注入、内部数据窃取、误删；教务数据：批量导出、越权查询；人员：社工钓鱼、误操作。<span class="step-check">✅ 到位标准：每项资产 ≥3 条，且人为威胁与内部威胁都出现。</span></li>
+                                <li><strong>第 3 步｜标威胁源，分人为 / 环境。</strong>每条威胁后面标清来源：外部恶意、内部恶意、内部无意、环境。这一步是为了检查“有没有只盯着黑客”——<strong>内部误操作和环境故障往往赋值不高，但一旦发生就是全停</strong>。<span class="step-check">✅ 到位标准：四类来源至少各出现 1 条。</span></li>
+                                <li><strong>第 4 步｜赋值 + 写理由。</strong>照 <a class="inline-dl" href="各类表格/8.2 威胁识别与赋值/素材4：威胁赋值快速参考卡.docx" download>素材 4《威胁赋值快速参考卡》</a> 的频率档给 1~5 分，每条写一句理由，格式建议：“<strong>因为系统暴露在互联网、近半年被扫描多次 → 漏洞利用赋 4</strong>”。<span class="step-check">✅ 到位标准：没有“全部 3 分”，每条理由都能被第三个人复核。</span></li>
+                                <li><strong>第 5 步｜做一次威胁—脆弱性关联（选做，为 8.3 铺路）。</strong>用 <a class="inline-dl" href="各类表格/8.2 威胁识别与赋值/素材3：威胁-脆弱性关联分析表.docx" download>素材 3《威胁-脆弱性关联分析表》</a>，把每条威胁和它“打算利用的弱点”连起来。连不上的威胁，要么是威胁写虚了，要么是脆弱性还没识别出来——记下来，下一单元查。<span class="step-check">✅ 到位标准：至少 5 组配对，且每组能说出“利用了什么弱点”。</span></li>
+                            </ol>
+
+                            <div class="risk-banner">⚠️ <strong>三个常见坑：</strong>① 把“未打补丁”“弱口令”写成威胁——那是脆弱性；② 所有威胁一律 3 分——最后算出来的风险全是中等，等于没算；③ 只列黑客攻击，漏掉<strong>内部人员与环境故障</strong>——而这两类恰恰是“低频高损”的典型。</div>
+
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 威胁识别阶段，AI 当“补漏清单”，不当“答案”</div>
+                                <p>自己列完再让 AI 补充，重点是找出你漏掉的那一类：</p>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板：</span>
+                                    场景：某高校教务管理系统，B/S 架构，Web 服务器在 DMZ，数据库在核心区，互联网边界有防火墙，运维由 2 名管理员负责。我已识别出这些威胁：【粘贴你的清单】。请从等保测评师视角：① 指出我漏掉的威胁类别（尤其是内部威胁与环境威胁）；② 对每条威胁给出 1~5 的频率赋值建议及依据；③ 提醒哪些条目其实是“脆弱性”而不是“威胁”。不要替我写整张表。
+                                </div>
+                            </div>
+
+                            <div class="lab-submit">
+                                <div class="lab-submit-title">📤 必须提交的实验结果（通过学习通提交）</div>
+                                <ul style="margin:4px 0 6px 20px;">
+                                    <li>《威胁识别表》（素材 2）：资产名称 / 威胁名称 / 威胁源类别 / 频率赋值 / 赋值理由；</li>
+                                    <li>（选做）《威胁-脆弱性关联分析表》（素材 3）；</li>
+                                    <li>文件命名：<strong>班级+学号+姓名+8.2</strong>。</li>
+                                </ul>
+                                <p style="margin:6px 0 0;">📮 <strong>提交方式：</strong>登录<strong>学习通</strong> → 本课程 →「作业」中的本次任务，按命名规范上传。</p>
+                            </div>
+
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 每项关键资产 ≥3 条威胁　☐ 威胁表述是“事件”而不是“弱点”　☐ 每条有威胁源类别　☐ 每条有 1~5 赋值　☐ 赋值理由能落到“历史 / 行业 / 防护”之一　☐ 资产编号与 8.1 一致
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ==================== 8.3 脆弱性识别与赋值 ==================== -->
+                    <div class="substage" id="substage8.3">
+
+                        <h3>🔍 情景分析</h3>
+
+                        <div class="highlight">
+                            <p><strong>引入：</strong>威胁是“谁想攻击你”，脆弱性是“你身上<strong>哪里有伤口</strong>”——不知道伤口在哪，怎么防御？</p>
+                            <p><strong>案例——“一个被遗忘的账号”：</strong>2021 年 5 月，美国最大成品油管道运营商 Colonial Pipeline 遭勒索攻击，管道停摆约一周，最终支付 <strong>440 万美元</strong>赎金。</p>
+                            <p><strong>关键事实：</strong>攻击起点不是零日漏洞，而是一个<strong>早已不再使用、却依然有效</strong>的 VPN 账号——离职人员账号未注销，且没有多因素认证。安全团队后来复盘：这条脆弱性在清单上只值“中危”。</p>
+                            <p><strong>核心问题：</strong>为什么一个“不再使用”、只值“中危”的账号，能放倒一家行业巨头？<span style="color:#b26a00;font-weight:700;">（课末回收）</span></p>
+                        </div>
+
+                        <div class="km-box" data-km="8.3"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">📖 是什么——技术脆弱性与管理脆弱性</div>
+                            <p><strong>▍定义：</strong>GB/T 20984-2022 把脆弱性定义为“<strong>资产中存在的、可能被威胁利用的弱点或缺陷</strong>”，包括技术脆弱性与管理脆弱性两类。它回答的是：<strong>“我哪里容易被攻破？”</strong></p>
+                            <p><strong>▍技术脆弱性——五个层面，逐层找“伤口”：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:18%;">层面</th><th style="width:26%;">识别对象</th><th style="width:56%;">典型脆弱性</th></tr>
+                                    <tr><td><strong>物理环境</strong></td><td>机房、数据中心、设备物理环境</td><td>门禁缺失、无防盗报警、无消防、无 UPS、温湿度不受控</td></tr>
+                                    <tr><td><strong>网络结构</strong></td><td>网络拓扑、网络设备配置</td><td>核心区与 DMZ 未隔离、边界访问控制过宽、无入侵检测、路由协议无认证</td></tr>
+                                    <tr><td><strong>主机系统</strong></td><td>Windows / Linux 服务器</td><td>补丁缺失、默认口令、开放高危端口、未启用审计、无用服务未关闭</td></tr>
+                                    <tr><td><strong>数据库</strong></td><td>MySQL / SQL Server / Oracle</td><td>弱口令、权限过大、未开启审计、敏感数据明文存储</td></tr>
+                                    <tr><td><strong>应用系统</strong></td><td>Web 应用、业务系统</td><td>SQL 注入、XSS、越权访问、上传漏洞、会话管理缺陷</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍管理脆弱性——两类，往往比技术漏洞更致命：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:20%;">类别</th><th style="width:26%;">关注什么</th><th style="width:54%;">典型表现</th></tr>
+                                    <tr><td><strong>技术管理</strong></td><td>与具体技术活动相关的管理缺陷</td><td>无变更审批、无备份策略、无漏洞管理流程、日志无人看、离职账号不注销</td></tr>
+                                    <tr><td><strong>组织管理</strong></td><td>与安全管理环境相关的缺陷</td><td>安全职责不清、制度多年未修订、长期不培训、无应急演练、无供应商管理</td></tr>
+                                </table>
+                            </div>
+                            <p>Colonial Pipeline 的 VPN 账号属于<strong>技术管理脆弱性</strong>：账号生命周期管理缺失；再多一条“无 MFA”则是<strong>技术脆弱性</strong>。两条都是“中危”，叠在一起就是“停摆一周”。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">❓ 为什么——威胁只有“利用脆弱性”才能造成危害</div>
+                            <p><strong>三者是一条链：</strong>威胁（谁）→ 利用 → 脆弱性（哪里弱）→ 影响 → 资产（损失什么）。少了脆弱性这一环，威胁再凶也只是“门外站着”，进不来。</p>
+                            <p><strong>反过来也成立：</strong>脆弱性没有被威胁利用，就暂时不构成风险。所以识别脆弱性时不能只“列弱点”，还要想“<strong>这个弱点可能被什么威胁利用</strong>”——这一步直接决定 8.4 怎么配对。</p>
+                            <p><strong>它也是“以测促评”的落点：</strong>任务 4 的漏洞扫描报告、任务 3 ～ 6 的核查记录里，那些“不符合”“部分符合”的条目，就是现成的脆弱性清单。做风险评估不需要从零开始，<strong>要把前面的测评成果搬过来</strong>。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 怎么做——三种识别方法 + 两部分赋值</div>
+                            <p><strong>▍三种识别方法，各管一段：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:16%;">方法</th><th style="width:36%;">怎么做</th><th style="width:48%;">最适合发现什么</th></tr>
+                                    <tr><td><strong>访谈</strong></td><td>问管理员、运维、业务人员“平时怎么做的”</td><td>管理脆弱性：制度有没有落地、账号怎么管、变更谁审批</td></tr>
+                                    <tr><td><strong>文档核查</strong></td><td>查制度、审批记录、培训记录、演练记录、日志</td><td>管理脆弱性：制度是否过期、记录是否齐全、职责是否明确</td></tr>
+                                    <tr><td><strong>工具测试</strong></td><td>漏洞扫描、配置核查、渗透测试</td><td>技术脆弱性：补丁、端口、口令、注入、越权</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍赋值分两部分看：</strong>① <strong>被利用的难易程度</strong>——脚本小子就能打，还是需要高水平攻击者、特定条件？② <strong>被利用后的严重程度</strong>——只影响一台主机，还是能横向到核心数据？两部分综合后给 1~5 分。</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:10%;">赋值</th><th style="width:30%;">被利用难易</th><th style="width:60%;">综合判断（严重程度）</th></tr>
+                                    <tr><td><strong>5</strong></td><td>公开工具即可利用</td><td>可直接获取核心权限 / 数据，或导致业务全面中断</td></tr>
+                                    <tr><td><strong>4</strong></td><td>稍加学习即可利用</td><td>可获取重要权限，影响核心业务</td></tr>
+                                    <tr><td><strong>3</strong></td><td>需要一定条件</td><td>可造成局部影响，需配合其他条件才能扩大</td></tr>
+                                    <tr><td><strong>2</strong></td><td>需要较高技术或内网位置</td><td>影响有限，可较快恢复</td></tr>
+                                    <tr><td><strong>1</strong></td><td>极难利用或仅理论可行</td><td>影响轻微，几乎可忽略</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍每条必须写“证据来源”：</strong>哪份扫描报告的哪一条、哪份核查记录的哪一项。没有来源的脆弱性，在报告里站不住脚，在整改时也派不下去。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验·脆弱性识别：从扫描报告和制度文件里“找伤口”</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物：</strong>《技术脆弱性识别表》+《管理脆弱性识别表》+《脆弱性识别与赋值汇总表》（含编号、类别、所属资产、赋值、证据来源）。命名 <b>班级+学号+姓名+8.3</b> 提交学习通。</div>
+
+                            <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
+                            <ul style="margin:4px 0 10px 22px;">
+                                <li>从一份模拟漏洞扫描报告里，把“漏洞条目”翻译成“脆弱性条目”；</li>
+                                <li>从一份管理制度片段里，读出制度过期、培训缺失、职责不清等管理脆弱性；</li>
+                                <li>给每条脆弱性标“被利用难易 + 严重程度”的 1~5 赋值，并写明证据来源；</li>
+                                <li>把技术与管理的条目合并成一张可追溯的汇总表，供 8.4 配对使用。</li>
+                            </ul>
+
+                            <p style="margin:18px 0 6px;"><strong>📎 实验配套素材（仅本单元使用）</strong></p>
+                            <div class="kb-st-tables">
+                                <div class="kb-st-list">
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材1：技术脆弱性识别表.docx" download>⬇ 素材 1：技术脆弱性识别表</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材2：模拟漏洞扫描报告（片段）.docx" download>⬇ 素材 2：模拟漏洞扫描报告（片段）</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材3：模拟信息系统脆弱性数据.docx" download>⬇ 素材 3：模拟信息系统脆弱性数据</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材4：模拟安全管理制度文档片段.docx" download>⬇ 素材 4：模拟安全管理制度文档片段</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材5：管理脆弱性识别表.docx" download>⬇ 素材 5：管理脆弱性识别表</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材6：脆弱性识别与赋值汇总表.docx" download>⬇ 素材 6：脆弱性识别与赋值汇总表（必交）</a>
+                                    <a class="table-dl" href="各类表格/8.3 脆弱性识别与赋值/素材7：教师演示用——脆弱性赋值参考标准.docx" download>⬇ 素材 7：教师演示——脆弱性赋值参考标准</a>
+                                </div>
+                            </div>
+
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜技术侧：把扫描结果读成“脆弱性”。</strong>打开 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材2：模拟漏洞扫描报告（片段）.docx" download>素材 2《模拟漏洞扫描报告（片段）》</a>，里面是 Nessus 对 172.16.1.0/24 的扫描结果。逐条抄进 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材1：技术脆弱性识别表.docx" download>素材 1《技术脆弱性识别表》</a>：漏洞名、风险等级、影响主机、<strong>可能被什么威胁利用</strong>。<span class="step-check">✅ 到位标准：扫描报告里的高危 / 中危条目一条不漏，且都落到具体主机上。</span></li>
+                                <li><strong>第 2 步｜管理侧：从制度文本里读出“缺陷”。</strong>读 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材4：模拟安全管理制度文档片段.docx" download>素材 4《模拟安全管理制度文档片段》</a>，注意这些信号：制度发布于 2019 年、最近一次培训在 2022 年 6 月、8 份制度里缺少应急预案……把每条落进 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材5：管理脆弱性识别表.docx" download>素材 5《管理脆弱性识别表》</a>，标清是“技术管理”还是“组织管理”。<span class="step-check">✅ 到位标准：至少 4 条，两类管理脆弱性都有。</span></li>
+                                <li><strong>第 3 步｜合并去重、统一编号。</strong>把两张表合到 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材6：脆弱性识别与赋值汇总表.docx" download>素材 6《脆弱性识别与赋值汇总表》</a>，编号 V-01 起，标“技术 / 管理”、所属资产编号（与 8.1 一致）。<strong>同一台主机的多个漏洞可以合并成一条“补丁缺失”，但要在描述里列清漏洞名。</strong><span class="step-check">✅ 到位标准：编号连续、资产可对、无重复条目。</span></li>
+                                <li><strong>第 4 步｜赋值：难易 + 严重，两部分都要说。</strong>照 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材7：教师演示用——脆弱性赋值参考标准.docx" download>素材 7《脆弱性赋值参考标准》</a> 给 1~5 分，并在备注里分开写“利用难易”和“影响范围”。例如“V-03 数据库弱口令：利用难度低（公开工具可爆破）、影响范围大（可读全库）→ 赋 5”。<span class="step-check">✅ 到位标准：每条赋值都能拆成“难易 + 严重”两句话。</span></li>
+                                <li><strong>第 5 步｜补证据来源，做一次交叉检查。</strong>每条填“证据来源”（如“素材 2 扫描报告第 3 条”“素材 4 制度片段第 2 段”）。再用 <a class="inline-dl" href="各类表格/8.3 脆弱性识别与赋值/素材3：模拟信息系统脆弱性数据.docx" download>素材 3《模拟信息系统脆弱性数据》</a> 对照，看有没有漏掉“资产—脆弱性—威胁对应”里的条目。<span class="step-check">✅ 到位标准：每条有来源，且能回答“这条会被哪个威胁利用”。</span></li>
+                            </ol>
+
+                            <div class="risk-banner">⚠️ <strong>三个常见坑：</strong>① 只盯技术漏洞，管理脆弱性一条不写——而 Colonial Pipeline 恰恰栽在管理上；② 把“未做等保测评”当脆弱性——那是合规状态，不是资产弱点；③ 赋值只写一个数字、不写理由——8.4 配对时无法判断这条该和哪个威胁配。</div>
+
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 脆弱性阶段，AI 当“第二双眼睛”</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板（查漏）：</span>
+                                    以下是我从一份模拟漏洞扫描报告和管理制度片段中识别的脆弱性清单：【粘贴清单】。请从等保测评师视角：① 指出哪些条目其实是“风险”或“威胁”，不是脆弱性；② 指出我漏掉的管理脆弱性（账号生命周期、变更管理、备份、培训、应急）；③ 对每条给出“被利用难易 + 严重程度”的赋值建议。只指出问题，不要替我重写整张表。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>提醒：</strong>AI 说“某条应赋 5”时，追问一句“凭什么”；说不清依据的，就按你自己的现场判断。</p>
+                            </div>
+
+                            <div class="lab-submit">
+                                <div class="lab-submit-title">📤 必须提交的实验结果（通过学习通提交）</div>
+                                <ul style="margin:4px 0 6px 20px;">
+                                    <li>《技术脆弱性识别表》（素材 1）+《管理脆弱性识别表》（素材 5）；</li>
+                                    <li>《脆弱性识别与赋值汇总表》（素材 6）：编号、类别、所属资产、赋值、证据来源齐全；</li>
+                                    <li>文件命名：<strong>班级+学号+姓名+8.3</strong>。</li>
+                                </ul>
+                                <p style="margin:6px 0 0;">📮 <strong>提交方式：</strong>登录<strong>学习通</strong> → 本课程 →「作业」中的本次任务。</p>
+                            </div>
+
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 技术条目来自扫描报告、管理条目来自制度片段　☐ 每条有统一编号且资产可对　☐ 每条有 1~5 赋值　☐ 赋值能拆成“难易 + 严重”　☐ 每条有证据来源　☐ 能说出每条“会被哪个威胁利用”
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== 8.4 风险计算 ==================== -->
+                    <div class="substage" id="substage8.4">
+
+                        <h3>🔍 情景分析</h3>
+
+                        <div class="highlight">
+                            <p><strong>案例——“被‘算’低的风险”：</strong>2018 年 10 月与 2019 年 3 月，波音 737 MAX 接连发生狮航、埃航两起空难，<strong>346 人</strong>遇难。事后调查显示：在事故前的风险评估里，MCAS 系统相关失效被判定为“<strong>后果可控、无需专门训练</strong>”，一路绿灯。</p>
+                            <p><strong>关键事实：</strong>不是没人做评估，而是评估把“单点失效”拆成了“两个独立故障”——概率一乘，风险值就下来了；而真实世界里，两个“独立”的传感器可能同时被同一根管子骗到。</p>
+                            <p><strong>核心问题：</strong>问题出在“<strong>方法</strong>”还是“<strong>人</strong>”？评估矩阵里，究竟哪一格被人为调低了？<span style="color:#b26a00;font-weight:700;">（课末回收）</span></p>
+                        </div>
+
+                        <div class="km-box" data-km="8.4"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">📖 是什么——把三个要素合成一个“风险值”</div>
+                            <p><strong>▍核心关系：</strong>风险 = f(资产价值, 威胁可能性, 脆弱性严重程度)。三者缺一不可：资产不值钱，风险有限；威胁不成立，风险不成立；脆弱性补上了，风险自然下降。</p>
+                            <p><strong>▍两种常用方法：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:14%;">方法</th><th style="width:34%;">怎么算</th><th style="width:26%;">优点</th><th style="width:26%;">什么时候用</th></tr>
+                                    <tr><td><strong>矩阵法</strong></td><td>把“可能性”和“损失”放进二维矩阵交叉比对，直接读等级</td><td>直观、快、好汇报</td><td>项目初期、快速评估、向管理层汇报</td></tr>
+                                    <tr><td><strong>相乘法</strong></td><td>两个要素相乘（开方归一）得到风险值，再对照等级表</td><td>可计算、可排序</td><td>需要精确排序、做整改优先级时</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍先算两个中间量：</strong>可能性 L 由“威胁频率 + 脆弱性严重程度”综合；损失 F 由“资产价值 + 脆弱性影响范围”综合。两者都取 1~5，才能进矩阵或进公式。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">❓ 为什么——风险计算的“诚实”比“精确”更重要</div>
+                            <p><strong>它是资源分配的依据：</strong>高风险先改、中风险列入计划、低风险接受观察。算错了，钱和人就投错了地方。</p>
+                            <p><strong>它最容易被“人为调低”：</strong>把“两个故障同时发生”当成不可能，把“需要专门培训”写成“无需训练”，把“已知的传感器缺陷”从矩阵里挪走——每一步单看都有理由，合起来就是把风险算没了。737 MAX 的教训不是“公式错了”，而是<strong>输入被做手脚、假设没被质疑</strong>。</p>
+                            <p><strong>所以本单元有两条纪律：</strong>① 每个输入值必须能追溯到 8.1~8.3 的某一行；② 每一条“不构成风险”的判断，都要写下“凭什么”。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 怎么做——矩阵法、相乘法与等级划分</div>
+                            <p><strong>▍矩阵法：先定 L 与 F，再查表。</strong>以 L 为纵轴（1 很低 ～ 5 很高）、F 为横轴，交叉格即风险等级：</p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:16%;">可能性 \ 损失</th><th>1 很低</th><th>2 低</th><th>3 中等</th><th>4 高</th><th>5 很高</th></tr>
+                                    <tr><td><strong>5 很高</strong></td><td>高</td><td>高</td><td>很高</td><td>很高</td><td>很高</td></tr>
+                                    <tr><td><strong>4 高</strong></td><td>中</td><td>高</td><td>高</td><td>很高</td><td>很高</td></tr>
+                                    <tr><td><strong>3 中等</strong></td><td>中</td><td>中</td><td>高</td><td>高</td><td>很高</td></tr>
+                                    <tr><td><strong>2 低</strong></td><td>低</td><td>中</td><td>中</td><td>高</td><td>高</td></tr>
+                                    <tr><td><strong>1 很低</strong></td><td>低</td><td>低</td><td>中</td><td>中</td><td>高</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍相乘法（GB/T 20984 推荐）：</strong>风险值 <strong>R = √(L × F)</strong>，结果落在 1~5；小数四舍五入取整后再对照等级表。</p>
+                            <p><strong>示例（与课件一致）：</strong>某医院核心数据库，资产价值 5、威胁频率 4、脆弱性严重程度 4 → 可能性 L=4、损失 F=5 → R = √(4×5) ≈ 4.5，<strong>取整为 4，属“高风险”</strong>。</p>
+                            <p><strong>▍风险等级划分（1~5 制）：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:14%;">等级</th><th style="width:24%;">风险值范围</th><th style="width:36%;">处置要求</th><th style="width:26%;">颜色标识</th></tr>
+                                    <tr><td><strong>很高</strong></td><td>≥ 4.5</td><td>立即处置（24 小时内启动）</td><td>🔴 红</td></tr>
+                                    <tr><td><strong>高</strong></td><td>3.5 ～ 4.4</td><td>优先处置（7 天内）</td><td>🟠 橙</td></tr>
+                                    <tr><td><strong>中等</strong></td><td>2.5 ～ 3.4</td><td>有计划处置（30 天内）</td><td>🟡 黄</td></tr>
+                                    <tr><td><strong>低</strong></td><td>1.5 ～ 2.4</td><td>可接受，纳入计划</td><td>🔵 蓝</td></tr>
+                                    <tr><td><strong>很低</strong></td><td>&lt; 1.5</td><td>可接受，持续监控</td><td>🟢 绿</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍四种处置策略：</strong><strong>规避</strong>（停用功能 / 下线系统）、<strong>降低</strong>（整改加固、补丁、加控制）、<strong>转移</strong>（保险、外包、责任约定）、<strong>接受</strong>（在可接受范围内，持续监控）。高风险必须处置，低风险可以接受，但“接受”也要写清理由与监控措施。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验一·矩阵法：先用“查表”把风险等级读出来</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物：</strong>《风险计算表（矩阵法）》——每组“威胁—脆弱性”配对，填清资产价值、威胁频率、脆弱性严重程度、可能性 L、损失 F、风险等级。<strong>至少完成 5 组配对</strong>。命名 <b>班级+学号+姓名+8.4</b> 提交学习通。</div>
+
+                            <p style="margin:18px 0 6px;"><strong>📎 实验配套素材（仅本单元使用）</strong></p>
+                            <div class="kb-st-tables">
+                                <div class="kb-st-list">
+                                    <a class="table-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材1：教师演示用——模拟数据.docx" download>⬇ 素材 1：教师演示——模拟数据（网上办事大厅）</a>
+                                    <a class="table-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材2：实践任务——《风险计算表（矩阵法）》.docx" download>⬇ 素材 2：风险计算表（矩阵法）（必交）</a>
+                                    <a class="table-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材3：实践任务——《风险计算表（相乘法）》.docx" download>⬇ 素材 3：风险计算表（相乘法）（必交）</a>
+                                    <a class="table-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材4：5×5风险矩阵表（学生快速参考卡）.docx" download>⬇ 素材 4：5×5 风险矩阵表（快速参考）</a>
+                                    <a class="table-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材5：风险等级划分与处置建议卡.docx" download>⬇ 素材 5：风险等级划分与处置建议卡</a>
+                                </div>
+                            </div>
+
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜拿数据，先配对。</strong>打开 <a class="inline-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材1：教师演示用——模拟数据.docx" download>素材 1《模拟数据》</a>（某政务系统“网上办事大厅”），把资产、威胁、脆弱性按“<strong>某威胁利用某脆弱性、影响某资产</strong>”配成组。<strong>配不上的不要硬配</strong>——那说明 8.2 或 8.3 有漏项。<span class="step-check">✅ 到位标准：≥5 组，每组三要素齐全且逻辑成立。</span></li>
+                                <li><strong>第 2 步｜定 L 和 F。</strong>L 由威胁频率与脆弱性严重程度综合（取两者中更能代表“发生可能性”的一档，并在备注写理由）；F 由资产价值与影响范围定。两个值都必须能追回 8.1~8.3 的某项分值。<span class="step-check">✅ 到位标准：L、F 都有出处，不是凭感觉。</span></li>
+                                <li><strong>第 3 步｜查矩阵，读等级。</strong>用 <a class="inline-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材4：5×5风险矩阵表（学生快速参考卡）.docx" download>素材 4《5×5 风险矩阵表》</a>，按 (L, F) 找到格子，填进 <a class="inline-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材2：实践任务——《风险计算表（矩阵法）》.docx" download>素材 2《风险计算表（矩阵法）》</a>。填完横向看一遍：有没有“同一资产、同一威胁，两条结论差两级”的矛盾？<span class="step-check">✅ 到位标准：每组有等级，且同一资产内部不矛盾。</span></li>
+                                <li><strong>第 4 步｜做一次“反向质疑”。</strong>挑出等级最低的两组，各写一句“如果要把它算高，需要什么条件成立？”——这就是 737 MAX 事故里缺失的那一步。<span class="step-check">✅ 到位标准：两句质疑都具体（如“若攻击者已在内网”“若备份不可用”）。</span></li>
+                            </ol>
+
+                            <div class="risk-banner">⚠️ <strong>口径提醒：</strong>本课程统一用 <strong>1~5 制</strong>（R = √(L×F)，等级见上表）。不要再把“资产价值 × 威胁频率 × 脆弱性严重程度”三个数直接相乘（那会得到 1~125，与本表对不上）——<strong>口径混用是这一单元最常见的失分点</strong>，素材 5 里的旧范围仅作参考，以课件与本页口径为准。</div>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验二·相乘法：把风险值算出来，再排出整改顺序</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物：</strong>《风险计算表（相乘法）》+ 一段“<strong>风险处置建议</strong>”（对高及以上逐条给出规避 / 降低 / 转移 / 接受的选择与理由）。</div>
+
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜同一批配对，换算法。</strong>把实验一的 5 组配对搬进 <a class="inline-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材3：实践任务——《风险计算表（相乘法）》.docx" download>素材 3《风险计算表（相乘法）》</a>，用 R = √(L×F) 算风险值，保留 1 位小数，再按等级表定级。<span class="step-check">✅ 到位标准：每组有计算过程，不是只填结果。</span></li>
+                                <li><strong>第 2 步｜对照两种方法。</strong>同一组配对，矩阵法读出的等级与相乘法算出的等级是否一致？不一致的，写出原因（如边界值 4.5 落在“很高”与“高”之间）。<span class="step-check">✅ 到位标准：至少找出 1 组差异并解释。</span></li>
+                                <li><strong>第 3 步｜排序，定整改顺序。</strong>按风险值从高到低排序，前 3 名列为“优先整改”，并写明“先改哪一条控制措施、由谁执行、多久完成”。<span class="step-check">✅ 到位标准：排序可复算，整改动作能派给具体角色。</span></li>
+                                <li><strong>第 4 步｜给处置策略，不留空话。</strong>照 <a class="inline-dl" href="各类表格/8.4 风险计算（矩阵法相乘法）/素材5：风险等级划分与处置建议卡.docx" download>素材 5《风险等级划分与处置建议卡》</a>，对高及以上风险逐条选策略。反例：“加强安全管理”；正例：“对 V-03 数据库弱口令，7 日内改为 12 位以上强口令并启用登录失败锁定，责任人：运维组”。<span class="step-check">✅ 到位标准：每条建议有动作、有时限、有责任人。</span></li>
+                            </ol>
+
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 风险计算阶段，AI 只做“复核员”</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板（计算复核）：</span>
+                                    我用相乘法做风险计算：某资产价值 5，威胁频率 4，对应脆弱性严重程度 4。我取可能性 L=4、损失 F=5，算得 R=√(4×5)≈4.5，按等级表列为“很高”。请核对：① 计算与取整是否正确；② 按“≥4.5 很高 / 3.5~4.4 高”的口径，这个结论是否应判“高”；③ 这个“威胁—脆弱性”配对是否成立，有没有更该先算的组合被漏掉。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>让 AI 直接生成整套风险计算表 = 期末最可能失分的做法。判断过程才是考核核心。</p>
+                            </div>
+
+                            <div class="lab-submit">
+                                <div class="lab-submit-title">📤 必须提交的实验结果（通过学习通提交）</div>
+                                <ul style="margin:4px 0 6px 20px;">
+                                    <li>《风险计算表（矩阵法）》（素材 2）+《风险计算表（相乘法）》（素材 3），各 ≥5 组配对；</li>
+                                    <li>风险处置建议：高及以上逐条给出策略、动作、时限、责任人；</li>
+                                    <li>文件命名：<strong>班级+学号+姓名+8.4</strong>。</li>
+                                </ul>
+                                <p style="margin:6px 0 0;">📮 <strong>提交方式：</strong>登录<strong>学习通</strong> → 本课程 →「作业」中的本次任务。</p>
+                            </div>
+
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 每组的威胁与脆弱性确实相关　☐ L、F 都能追回前三个单元的分值　☐ 风险值有计算过程、保留 1 位　☐ 等级按 1~5 制判定　☐ 至少 1 组做了两法对照　☐ 高风险逐条有处置策略与责任人
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==================== 8.5 编制风险评估报告 ==================== -->
+                    <div class="substage" id="substage8.5">
+
+                        <h3>🔍 情景分析</h3>
+
+                        <div class="highlight">
+                            <p><strong>案例——“一份没人看懂的报告”：</strong>1986 年 1 月 28 日，美国“挑战者号”航天飞机升空 73 秒后解体，7 名航天员遇难。事故前夜，承包商工程师反复指出：<strong>低温会让 O 型密封圈失去弹性</strong>，发射风险极高。</p>
+                            <p><strong>关键事实：</strong>数据摆上了桌，但被淹没在一叠“发射正常”的历史记录里；管理层看到的是一份<strong>没有结论、没有优先级</strong>的材料。调查委员会的费曼把 O 型圈丢进一杯冰水，几秒钟就让所有人看懂了那个“没人看懂”的风险。</p>
+                            <p><strong>核心问题：</strong>报告“<strong>写了</strong>”，为什么没人“<strong>看懂</strong>”？如果是你，会把这条关键风险放在报告的<strong>哪一页、哪一行</strong>？<span style="color:#b26a00;font-weight:700;">（课末回收）</span></p>
+                        </div>
+
+                        <div class="km-box" data-km="8.5"></div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">📖 是什么——报告是风险评估的“最终产品”</div>
+                            <p><strong>▍三个用途：</strong>① <strong>决策依据</strong>——领导据此决定投多少钱、先改哪里；② <strong>合规证据</strong>——证明你履行了风险评估义务；③ <strong>整改路线图</strong>——把“发现的问题”变成“谁在什么时候做什么”。</p>
+                            <p><strong>▍八个核心章节（GB/T 20984 参考框架）：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:26%;">章节</th><th style="width:74%;">核心内容</th></tr>
+                                    <tr><td><strong>第一章 概述</strong></td><td>评估背景、目的、范围、依据、方法</td></tr>
+                                    <tr><td><strong>第二章 评估对象简介</strong></td><td>系统概况、网络拓扑、部署情况</td></tr>
+                                    <tr><td><strong>第三章 资产识别</strong></td><td>资产清单、CIA 赋值、重要资产标注</td></tr>
+                                    <tr><td><strong>第四章 威胁识别</strong></td><td>威胁源识别、威胁频次分析</td></tr>
+                                    <tr><td><strong>第五章 脆弱性识别</strong></td><td>技术脆弱性、管理脆弱性</td></tr>
+                                    <tr><td><strong>第六章 风险分析</strong></td><td>计算方法、计算结果、风险分布</td></tr>
+                                    <tr><td><strong>第七章 已有安全措施确认</strong></td><td>现有措施的有效性分析（哪些风险已被压住）</td></tr>
+                                    <tr><td><strong>第八章 风险处置建议</strong></td><td>逐项整改建议、优先级、责任与时限</td></tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">❓ 为什么——写了没人看懂，等于没写</div>
+                            <p><strong>报告的价值不在厚度，在“能不能推动行动”。</strong>挑战者号的报告并不缺数据，缺的是：一句明确的结论（“低温下不该发射”）、一个显眼的优先级、一个能让非专家看懂的表达。</p>
+                            <p><strong>三类读者，三种读法：</strong>决策者只看结论与建议；技术负责人看风险分布与整改项；审计 / 监管看依据与证据链。报告要同时满足三者——<strong>结论前置、证据在后、建议可执行</strong>。</p>
+                            <p><strong>它还是前四个单元的“总验收”：</strong>资产编号、威胁编号、脆弱性编号、风险值必须一条线穿到底。任何一处对不上，报告的可信度就整体打折。</p>
+                        </div>
+
+                        <div class="concept-box">
+                            <div class="concept-title">🛠️ 怎么做——格式、正文、质量三条线</div>
+                            <p><strong>▍格式要素：</strong>封面（报告名称、委托单位、评估机构、日期、版本）、目录、章节编号统一、图表编号与标题、附录（资产表、威胁表、脆弱性表、计算表、扫描报告）。</p>
+                            <p><strong>▍正文写作要点：</strong></p>
+                            <div class="table-container">
+                                <table class="info-table">
+                                    <tr><th style="width:22%;">章节</th><th style="width:78%;">写到什么程度算合格</th></tr>
+                                    <tr><td>概述</td><td>说清“为什么评、评了什么、依据什么、怎么评”，范围要写边界与不测部分</td></tr>
+                                    <tr><td>资产 / 威胁 / 脆弱性</td><td>表格完整、编号可追溯、每条有赋值依据或证据来源</td></tr>
+                                    <tr><td>风险分析</td><td>给出计算方法、计算表、风险分布（高 / 中 / 低各几条），并解释最严重的 3 条</td></tr>
+                                    <tr><td>处置建议</td><td>逐条对应风险编号，写清策略类型、具体动作、责任方、时限</td></tr>
+                                </table>
+                            </div>
+                            <p><strong>▍五条质量标准：</strong>完整（章节不缺）、准确（数字可复算）、一致（编号前后一致）、可读（结论前置、少堆术语）、可行动（建议能派下去）。</p>
+                        </div>
+
+                        <div class="lab-box">
+                            <div class="lab-head">🧪 实验·编制报告：把四张表“装订”成一份能推动行动的报告</div>
+
+                            <div class="lab-goal"><strong>🎯 本实验的交付物：</strong>一份完整的《XX 系统信息安全风险评估报告》（Word，八章齐全，含四张附表与风险分布）+ 一份《报告质量评分表》自评。命名 <b>班级+学号+姓名+8.5</b> 提交学习通。</div>
+
+                            <div class="lab-goal"><strong>🎯 实验目的：</strong>完成本实验后，你应该能够——</div>
+                            <ul style="margin:4px 0 10px 22px;">
+                                <li>把 8.1~8.4 的成果整合成一份编号一致、数据可复算的报告；</li>
+                                <li>按八章结构写全正文，做到“结论前置、证据在后、建议可执行”；</li>
+                                <li>用质量评分表给自己的报告打分，找出最薄弱的一章；</li>
+                                <li>在小组互评中给出具体、可改的修改意见，而不是“写得不错”。</li>
+                            </ul>
+
+                            <p style="margin:18px 0 6px;"><strong>📎 实验配套素材（仅本单元使用）</strong></p>
+                            <div class="kb-st-tables">
+                                <div class="kb-st-list">
+                                    <a class="table-dl" href="各类表格/8.5 编制风险评估报告/素材1：教师演示用——模拟数据.docx" download>⬇ 素材 1：教师演示——模拟数据（人力资源系统，全套）</a>
+                                    <a class="table-dl" href="各类表格/8.5 编制风险评估报告/素材2：风险评估报告模板.docx" download>⬇ 素材 2：风险评估报告模板（必用）</a>
+                                    <a class="table-dl" href="各类表格/8.5 编制风险评估报告/素材3：风险评估报告质量评分表.docx" download>⬇ 素材 3：风险评估报告质量评分表（自评 + 互评）</a>
+                                    <a class="table-dl" href="各类表格/8.5 编制风险评估报告/素材4：风险评估报告章节详细内容示例（供学生参考）.docx" download>⬇ 素材 4：章节详细内容示例（参考写法）</a>
+                                    <a class="table-dl" href="各类表格/8.5 编制风险评估报告/素材5：常见术语对照（学生快速参考）.docx" download>⬇ 素材 5：常见术语对照（快速参考）</a>
+                                </div>
+                            </div>
+
+                            <ol class="step-list">
+                                <li><strong>第 1 步｜先盘“弹药”，再动笔。</strong>把 8.1 资产表、8.2 威胁表、8.3 脆弱性表、8.4 计算表摊开，检查三件事：编号是否连续、资产能否一一对应、每条风险能否追到“威胁 + 脆弱性”。缺数据的，用 <a class="inline-dl" href="各类表格/8.5 编制风险评估报告/素材1：教师演示用——模拟数据.docx" download>素材 1《模拟数据》</a> 补齐，并在报告中注明“数据来源”。<span class="step-check">✅ 到位标准：四张表能串成一条线，不出现“孤儿编号”。</span></li>
+                                <li><strong>第 2 步｜搭骨架。</strong>用 <a class="inline-dl" href="各类表格/8.5 编制风险评估报告/素材2：风险评估报告模板.docx" download>素材 2《风险评估报告模板》</a> 建文档，先把八章标题、图表位置、附录清单列出来，<strong>再往里填内容</strong>——不要从第一段开始写。<span class="step-check">✅ 到位标准：八章齐全，目录与正文标题一致。</span></li>
+                                <li><strong>第 3 步｜写正文，照示例但别抄示例。</strong>不会写的章节看 <a class="inline-dl" href="各类表格/8.5 编制风险评估报告/素材4：风险评估报告章节详细内容示例（供学生参考）.docx" download>素材 4《章节详细内容示例》</a> 学“写法结构”，内容必须换成你自己的数据。术语拿不准查 <a class="inline-dl" href="各类表格/8.5 编制风险评估报告/素材5：常见术语对照（学生快速参考）.docx" download>素材 5《常见术语对照》</a>。<span class="step-check">✅ 到位标准：没有整段照抄示例，所有数字来自自己的表。</span></li>
+                                <li><strong>第 4 步｜写“结论前置”的风险分析。</strong>第六章开头先用一段话讲清：共识别多少条风险、高 / 中 / 低各几条、最严重的三条是什么、分别影响哪条业务。再放计算表与分布图。<span class="step-check">✅ 到位标准：非技术读者读这一段就能知道“最该担心什么”。</span></li>
+                                <li><strong>第 5 步｜写处置建议，逐条能派工。</strong>按风险编号逐条写：策略（规避 / 降低 / 转移 / 接受）+ 具体动作 + 责任方 + 时限。高风险必须“立即 / 7 天内”，中风险“30 天内”，低风险“纳入计划”。<span class="step-check">✅ 到位标准：没有“加强管理”这类空话，每条都有动作和责任人。</span></li>
+                                <li><strong>第 6 步｜自评 + 互评。</strong>用 <a class="inline-dl" href="各类表格/8.5 编制风险评估报告/素材3：风险评估报告质量评分表.docx" download>素材 3《质量评分表》</a> 自评一遍，找出得分最低的一章重写；再与同组交换，按同一张表互评，<strong>每条意见要指出“第几章、第几段、改成什么”</strong>。<span class="step-check">✅ 到位标准：自评有分数、互评有具体修改建议。</span></li>
+                            </ol>
+
+                            <div class="risk-banner">⚠️ <strong>三个常见坑：</strong>① 四张表的编号各自为政——资产 A-01 在报告里变成“服务器 1”，追溯链一断，结论就不可信；② 只写“存在风险”，不写“风险多大、影响哪条业务”；③ 整改建议写成口号（“加强安全意识”“完善制度”），没有动作、没有责任人、没有时限。</div>
+
+                            <div class="ai-tip-box">
+                                <div class="ai-tip-title">🤖 报告阶段，AI 当“编辑”，不当“作者”</div>
+                                <div class="prompt-tpl">
+                                    <span class="prompt-tpl-label">💬 提示词模板（质检润色）：</span>
+                                    以下是我写的风险评估报告“风险处置建议”部分：【粘贴草稿】。请检查：① 建议是否与风险等级匹配（高风险的时限是否够紧）；② 是否存在空话（如“加强管理”这类没有动作的建议）；③ 语言是否像正式评估报告。指出问题即可，不要整段替我重写。
+                                </div>
+                                <p style="font-size:0.88rem;color:#666;"><strong>红线：</strong>让 AI 直接生成整份报告 = 放弃本课程最核心的综合能力训练，期末综合答辩必然露馅。</p>
+                            </div>
+
+                            <div class="lab-submit">
+                                <div class="lab-submit-title">📤 必须提交的实验结果（通过学习通提交）</div>
+                                <ul style="margin:4px 0 6px 20px;">
+                                    <li>《XX 系统信息安全风险评估报告》（Word）：八章齐全 + 四张附表 + 风险分布；</li>
+                                    <li>《报告质量评分表》：自评得分 + 互评意见（至少 3 条具体修改建议）；</li>
+                                    <li>文件命名：<strong>班级+学号+姓名+8.5</strong>。</li>
+                                </ul>
+                                <p style="margin:6px 0 0;">📮 <strong>提交方式：</strong>登录<strong>学习通</strong> → 本课程 →「作业」中的本次任务。<strong>结课提醒：</strong>第 17 周综合复习后参加期末考核。</p>
+                            </div>
+
+                            <div class="lab-check">
+                                <div class="lab-check-title">📋 交付自查</div>
+                                ☐ 八章齐全、目录与正文一致　☐ 资产 / 威胁 / 脆弱性 / 风险编号前后一致　☐ 风险值可复算　☐ 风险分布有高 / 中 / 低数量　☐ 高风险逐条有处置建议、责任方、时限　☐ 自评 + 互评都完成
+                            </div>
+                        </div>
                     </div>
 
                 </div>
 
 
-
             </div>
-
-
 
             <!-- ============ 右侧说明面板 ============ -->
 
@@ -9678,33 +10108,29 @@ return</div>
 
                 <!-- 任务8说明 -->
 
+                <!-- 任务8说明 -->
+
                 <div class="exp-stage" id="exp-stage8">
 
                     <h2>任务8 风险评估全流程实战</h2>
 
-                    <p><strong>学时：</strong>12学时（第14-16周）| <strong>形式：</strong>项目制作/实训室</p>
+                    <p><strong>学时：</strong>12 学时（第 14-16 周，5 个单元 8.1~8.5）| <strong>形式：</strong>项目制作 / 实训室（小组协作 + 个人成果）</p>
 
                     <div class="concept-box">
 
                         <div class="concept-title">🎯 能力目标</div>
 
-                        <p>能进行资产识别与CIA三性赋值；能识别威胁源并完成威胁赋值；能运用扫描报告和核查记录识别脆弱性；能运用矩阵法或相乘法进行风险计算；能编制完整的风险评估报告。</p>
-
-                    </div>
-
-                    <div class="concept-box">
-
-                        <div class="concept-title">📖 专业知识</div>
-
-                        <p>风险评估基本流程与关键要素（GB/T 20984）、资产/威胁/脆弱性识别与赋值方法、风险计算方法（矩阵法/相乘法）、报告编制规范。</p>
+                        <p>能独立完成一次完整的风险评估：资产识别与 CIA 三性赋值 → 威胁识别与频率赋值 → 脆弱性识别与严重程度赋值 → 用矩阵法 / 相乘法计算风险并分级 → 编制一份可推动行动的风险评估报告。</p>
 
                     </div>
 
                     <div class="highlight">
 
-                        <p><strong>学习成果：</strong>资产清单、威胁识别表、脆弱性分析表、风险计算表、风险评估报告。</p>
+                        <p><strong>学习成果：</strong>一条流水线、五份成果——资产清单 → 威胁识别表 → 脆弱性汇总表 → 风险计算表 → 风险评估报告。前一份是后一份的输入，<strong>顺序不能乱</strong>。</p>
 
-                        <p><strong>结课：</strong>第17周综合复习 → 期末考核（30%）。</p>
+                        <p><strong>评价：</strong>表格完整与可追溯 30% + 赋值依据 25% + 风险计算 25% + 报告质量 20%。</p>
+
+                        <p><strong>结课：</strong>第 17 周综合复习 → 期末考核（30%）。</p>
 
                     </div>
 
@@ -9712,13 +10138,221 @@ return</div>
 
                     <div class="quiz-btn-note">知识 · 实验 · 素养 三维考查，100 分通过</div>
 
+                    <div class="exp-substage" id="exp-substage8.1">
+
+                        <h2>单元 8.1 资产识别与CIA赋值</h2>
+
+                        <p><strong>学时：</strong>2 学时 | <strong>形式：</strong>讲授 + 实训</p>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">🎯 学习目标</div>
+
+                            <p>理解资产识别在风险评估中的核心地位；掌握“业务→系统→组件”三层结构与五大类别；能对每项资产按 1~5 完成 C/I/A 赋值并计算资产价值；能识别价值 ≥4 的关键资产。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📖 关键概念</div>
+
+                            <p><strong>资产：</strong>对组织有价值的任何东西（GB/T 20984-2022）——有形的是设备，无形的是数据、人员、服务与声誉。</p>
+
+                            <p><strong>CIA 三性：</strong>机密性（泄露损失）/ 完整性（篡改后果）/ 可用性（中断影响），各按 1~5 赋值。</p>
+
+                            <p><strong>资产价值：</strong>最大值法 max(C,I,A)、平均值法 (C+I+A)/3、加权法；本课程统一用平均值法，保留 1 位小数。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📝 学习通作业（唯一）</div>
+
+                            <p>完成《资产清单与CIA赋值表》（<strong>10 项资产 × C/I/A 共 30 个分值 + 价值 + 关键性说明</strong>），附关键资产清单，命名 <strong>班级+学号+姓名+8.1</strong> 提交。课堂练习（不单独提交）：Equifax 案例讨论、架构拆解、赋值对答案。</p>
+
+                        </div>
+
+                        <div class="highlight">
+
+                            <p><strong>评价：</strong>清单完整 30% + 赋值依据 40% + 关键资产识别 20% + 规范 10%。</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="exp-substage" id="exp-substage8.2">
+
+                        <h2>单元 8.2 威胁识别与赋值</h2>
+
+                        <p><strong>学时：</strong>2 学时 | <strong>形式：</strong>讲授 + 实训</p>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">🎯 学习目标</div>
+
+                            <p>理解威胁的定义及其与脆弱性的区别；掌握人为 / 环境两类威胁源；能按频率五级标准给威胁赋值并写出依据；能识别每项关键资产至少 3 种威胁。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📖 关键概念</div>
+
+                            <p><strong>威胁 ≠ 脆弱性：</strong>威胁是“想破门的坏人”，脆弱性是“门锁的质量问题”，风险是“被偷走的损失”。</p>
+
+                            <p><strong>威胁源：</strong>人为（恶意攻击 / 非恶意误操作 / 社会工程）+ 环境（自然灾害 / 环境因素 / 系统故障）。</p>
+
+                            <p><strong>赋值标准：</strong>5（≥1 次/周）～ 1（&lt;1 次/年）；依据看历史记录、行业态势、现有防护水平。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📝 学习通作业（唯一）</div>
+
+                            <p>完成《威胁识别表》（每项关键资产 ≥3 条威胁，含威胁源类别、频率赋值、赋值理由），命名 <strong>班级+学号+姓名+8.2</strong> 提交。选做：《威胁-脆弱性关联分析表》。</p>
+
+                        </div>
+
+                        <div class="highlight">
+
+                            <p><strong>评价：</strong>威胁覆盖度 35% + 赋值依据 35% + 威胁源分类 20% + 规范 10%。</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="exp-substage" id="exp-substage8.3">
+
+                        <h2>单元 8.3 脆弱性识别与赋值</h2>
+
+                        <p><strong>学时：</strong>2 学时 | <strong>形式：</strong>讲授 + 实训</p>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">🎯 学习目标</div>
+
+                            <p>理解脆弱性的定义与两类划分；能从漏洞扫描报告与管理制度文本中识别技术与管理的脆弱性；能按“被利用难易 + 严重程度”给 1~5 赋值并写证据来源。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📖 关键概念</div>
+
+                            <p><strong>技术脆弱性五层：</strong>物理环境、网络结构、主机系统、数据库、应用系统。</p>
+
+                            <p><strong>管理脆弱性两类：</strong>技术管理（变更、备份、账号、日志）、组织管理（职责、制度、培训、应急）。</p>
+
+                            <p><strong>三种识别方法：</strong>访谈（问怎么做）、文档核查（看记录）、工具测试（扫漏洞）——各管一段，别只用扫描器。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📝 学习通作业（唯一）</div>
+
+                            <p>提交《技术脆弱性识别表》+《管理脆弱性识别表》+《脆弱性识别与赋值汇总表》（编号、类别、所属资产、赋值、证据来源），命名 <strong>班级+学号+姓名+8.3</strong>。</p>
+
+                        </div>
+
+                        <div class="highlight">
+
+                            <p><strong>评价：</strong>识别完整 35% + 赋值依据 30% + 证据可追溯 25% + 规范 10%。</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="exp-substage" id="exp-substage8.4">
+
+                        <h2>单元 8.4 风险计算（矩阵法 / 相乘法）</h2>
+
+                        <p><strong>学时：</strong>3 学时 | <strong>形式：</strong>讲授 + 实训</p>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">🎯 学习目标</div>
+
+                            <p>理解风险 = f(资产价值, 威胁可能性, 脆弱性严重程度)；能用 5×5 矩阵法读出风险等级；能用相乘法 R=√(L×F) 算出风险值并排序；能对高风险逐条给出处置策略。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📖 关键概念</div>
+
+                            <p><strong>两个中间量：</strong>可能性 L（威胁频率 + 脆弱性严重程度）、损失 F（资产价值 + 影响范围），均取 1~5。</p>
+
+                            <p><strong>等级划分（1~5 制）：</strong>≥4.5 很高 / 3.5~4.4 高 / 2.5~3.4 中等 / 1.5~2.4 低 / &lt;1.5 很低。</p>
+
+                            <p><strong>四种策略：</strong>规避、降低、转移、接受——高风险必须处置，低风险可接受但要写监控措施。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📝 学习通作业（唯一）</div>
+
+                            <p>提交《风险计算表（矩阵法）》+《风险计算表（相乘法）》（各 ≥5 组配对），附风险处置建议（策略、动作、时限、责任人），命名 <strong>班级+学号+姓名+8.4</strong>。</p>
+
+                        </div>
+
+                        <div class="highlight">
+
+                            <p><strong>评价：</strong>配对合理 30% + 计算正确 30% + 两法对照 15% + 处置建议 25%。</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="exp-substage" id="exp-substage8.5">
+
+                        <h2>单元 8.5 编制风险评估报告</h2>
+
+                        <p><strong>学时：</strong>3 学时 | <strong>形式：</strong>项目制作</p>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">🎯 学习目标</div>
+
+                            <p>掌握风险评估报告的八章结构与格式要求；能整合前四单元成果，做到编号一致、数据可复算；能写出“结论前置、建议可派工”的报告；能按质量评分表自评与互评。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📖 关键概念</div>
+
+                            <p><strong>八章结构：</strong>概述 → 对象简介 → 资产识别 → 威胁识别 → 脆弱性识别 → 风险分析 → 已有措施确认 → 风险处置建议。</p>
+
+                            <p><strong>五条质量线：</strong>完整、准确、一致、可读、可行动。</p>
+
+                            <p><strong>三类读者：</strong>决策者看结论与建议，技术负责人看风险分布与整改项，监管看依据与证据链。</p>
+
+                        </div>
+
+                        <div class="concept-box">
+
+                            <div class="concept-title">📝 学习通作业（唯一）</div>
+
+                            <p>提交完整《XX 系统信息安全风险评估报告》（Word，八章 + 四张附表 + 风险分布）与《报告质量评分表》（自评 + 互评），命名 <strong>班级+学号+姓名+8.5</strong>。</p>
+
+                        </div>
+
+                        <div class="highlight">
+
+                            <p><strong>评价：</strong>结构完整 20% + 数据一致 25% + 风险分析 30% + 处置建议 15% + 表达规范 10%。</p>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
+
             </div>
-
         </div>
-
-
 
         <div class="nav-buttons">
 
@@ -11294,7 +11928,11 @@ var SUYANG_CASES = {
 
                     var id = el.id || '';
 
-                    if (id.indexOf('substage') === 0) return id.slice(8);
+                    if (id.indexOf('substage') === 0) {
+                        var k = id.slice(8);
+                        if (window.SUYANG_CASES && !SUYANG_CASES[k] && SUYANG_CASES[k.split('.')[0]]) k = k.split('.')[0];
+                        return k;
+                    }
 
                     if (id.indexOf('stage') === 0) return id.slice(5);
 
@@ -11862,7 +12500,15 @@ var SUYANG_CASES = {
 
                     '7.4': { ppts: ['7.4.1 工控系统架构认知.pptx', '7.4.2 工控安全配置核查.pptx'], stds: ['22239', '28448'] },
 
-                    '8':   { ppts: [], stds: ['20984', '22239', 'datalaw'] }
+                    '8.1': { ppts: ['8.1 资产识别与CIA赋值.pptx'], stds: ['20984', '22239'] },
+
+                    '8.2': { ppts: ['8.2 威胁识别与赋值.pptx'], stds: ['20984', '22239'] },
+
+                    '8.3': { ppts: ['8.3 脆弱性识别与赋值.pptx'], stds: ['20984', '22239'] },
+
+                    '8.4': { ppts: ['8.4 风险计算（矩阵法相乘法）.pptx'], stds: ['20984', '22239'] },
+
+                    '8.5': { ppts: ['8.5 编制风险评估报告.pptx'], stds: ['20984', '22239', 'datalaw'] }
 
                 };
 
@@ -11904,7 +12550,15 @@ var SUYANG_CASES = {
 
                     '7.4': { top: '情景分析', g1: '是什么', g2: '为什么', w1: '怎么做' },
 
-                    '8':   { top: '情景分析' }
+                    '8.1': { top: '情景分析', c1: '是什么', c2: '是什么', c3: '怎么做', k1: '怎么做', k2: '怎么做', k3: '怎么做' },
+
+                    '8.2': { top: '情景分析', a1: '是什么', a2: '是什么', a3: '怎么做', k1: '怎么做', k2: '怎么做', k3: '怎么做' },
+
+                    '8.3': { top: '情景分析', a1: '是什么', a2: '是什么', a3: '怎么做', k1: '怎么做', k2: '怎么做', k3: '怎么做' },
+
+                    '8.4': { top: '情景分析', a1: '是什么', a2: '是什么', a3: '怎么做', k1: '怎么做', k2: '怎么做', k3: '怎么做' },
+
+                    '8.5': { top: '情景分析', a1: '是什么', a2: '是什么', a3: '怎么做', k1: '怎么做', k2: '怎么做', k3: '怎么做' }
 
                 };
 
@@ -11924,7 +12578,7 @@ var SUYANG_CASES = {
 
                     '1.1': '等级保护制度', '1.2': '定级方法', '2.1': '关键概念：测评方案', '2.2': '六步法',
 
-                    '3.1': '为什么查', '3.2': '为什么查', '4.1': '为什么查', '4.2': '为什么查', '4.3': '为什么查', '4.4': '为什么查', '4.5': '为什么查', '5': '5.1', '6': '从证据到报告', '7.1': '责任共担', '7.2': '端—管—云', '7.3': '三层架构', '7.4': '工控四层架构'
+                    '3.1': '为什么查', '3.2': '为什么查', '4.1': '为什么查', '4.2': '为什么查', '4.3': '为什么查', '4.4': '为什么查', '4.5': '为什么查', '5': '5.1', '6': '从证据到报告', '7.1': '责任共担', '7.2': '端—管—云', '7.3': '三层架构', '7.4': '工控四层架构', '8.1': '是什么', '8.2': '是什么', '8.3': '是什么', '8.4': '怎么做', '8.5': '是什么'
 
                 };
 
@@ -12092,11 +12746,14 @@ var SUYANG_CASES = {
 
                             var pcard;
 
-                            if (/^(4\.|5$|6$|7\.)/.test(unitKey) && res.pptOnline !== false) {
+                            if (/^(4\.|5$|6$|7\.|8\.)/.test(unitKey) && res.pptOnline !== false) {
 
                                 // 任务4 / 任务5 / 任务6：课件 PDF 已上线，点击直接打开（PPT/同名.pdf）
 
+                                // 2026-11-04 8.x 课件 PDF 已上线，与其他任务统一：在线打开 PDF（不再下载 PPT 源文件）
+                                var isPptSrc = false;
                                 var pdfFile = 'PPT/' + pptFile.replace(/\.pptx$/, '.pdf');
+                                if (unitKey === '8.1') pdfFile = 'PPT/8.1资产识别与CIA赋值.pdf'; // 该 PDF 文件名无空格
 
                                 pcard = document.createElement('a');
 
@@ -12108,7 +12765,7 @@ var SUYANG_CASES = {
 
                                 pcard.rel = 'noopener';
 
-                                pcard.title = '点击打开 PDF 课件：' + pLabel;
+                                pcard.title = (isPptSrc ? '点击下载 PPT 源文件：' : '点击打开 PDF 课件：') + pLabel;
 
                                 pcard.innerHTML =
 
@@ -12116,11 +12773,11 @@ var SUYANG_CASES = {
 
                                     '<span class="kb-mod-name">' +
 
-                                      '<span class="kb-ppt-badge">PDF</span>' +
+                                      '<span class="kb-ppt-badge">' + (isPptSrc ? 'PPT' : 'PDF') + '</span>' +
 
                                       '<span class="kb-ppt-title">' + pLabel + '</span>' +
 
-                                      '<span class="kb-ppt-status kb-ppt-status--open">点击打开</span>' +
+                                      '<span class="kb-ppt-status kb-ppt-status--open">' + (isPptSrc ? '点击下载' : '点击打开') + '</span>' +
 
                                     '</span>';
 
@@ -14006,23 +14663,95 @@ var SUYANG_CASES = {
 
     }, edges: [['top','g1'],['top','g2'],['g1','w1'],['g2','w1']] };
 
-    KM_DATA['8'] = { h: 320, nodes: {
+    KM_DATA['8.1'] = { h: 300, nodes: {
 
-        top:{ x:276, y:26,  label:'风险评估', sub:'GB/T 20984', info:'风险评估回答"风险有多大"：依据 GB/T 20984，从资产、威胁、脆弱性三要素出发量化风险。' },
+        top:{ x:340, y:30,  label:'资产识别', sub:'8.1 CIA 赋值', info:'资产识别是风险评估的第一步：先回答"我有什么、哪个最值钱"。清单不全，后面的威胁识别、脆弱性识别、风险计算全部建立在错误的地基上——Equifax 就是输在"不知道自己有什么"。' },
 
-        a1: { x:66,  y:126, label:'资产识别', sub:'CIA 赋值 · 取高', info:'资产识别与 CIA 赋值：按"受损后的业务影响"为 C/I/A 打 1~5 分，资产等级取三者最高——与等保定级"取高"思路一致。' },
+        c1: { x:110, y:130, label:'三层结构', sub:'业务·系统·组件', info:'新版 GB/T 20984 以业务为核心：业务资产（交易/办事/诊疗）→ 系统资产（商城平台、HIS）→ 组件资产（服务器、数据库、接口）。本课程以组件为操作对象，但每项都要能说出它撑着哪个业务。' },
 
-        t1: { x:206, y:126, label:'威胁识别', sub:'威胁源 · 频率', info:'威胁识别：分析谁可能搞破坏（病毒、黑客、内部人员、自然灾害）及其出现频率，并赋值。' },
+        c2: { x:340, y:130, label:'五大类别', sub:'硬·软·数·人·服务', info:'硬件、软件、数据、人员、服务。最容易漏的是数据、人员与服务——而泄露事故里最先出事的往往正是这三类。' },
 
-        v1: { x:346, y:126, label:'脆弱性识别', sub:'漏洞 + 核查', info:'脆弱性识别：系统哪里弱——直接复用任务4的漏洞扫描报告与核查记录，这正是"以测促评"的体现。' },
+        c3: { x:570, y:130, label:'CIA 赋值', sub:'1~5 五级标准', info:'C：泄露损失多大？I：被篡改后果多严重？A：宕机影响多大？各按 1~5 赋值，依据是"受损后的业务影响"，不是设备采购价格。' },
 
-        rc: { x:486, y:126, label:'风险计算', sub:'矩阵法 / 相乘法', info:'风险计算：用矩阵法或相乘法综合三要素，得出每个风险的风险值——前一步的表就是后一步的输入。' },
+        k1: { x:110, y:230, label:'价值计算', sub:'最大·平均·加权', info:'最大值法 max(C,I,A) 就高不就低；平均值法 (C+I+A)/3 均衡；加权法按业务特点配权。本课程统一用平均值法，保留 1 位小数。' },
 
-        rl: { x:276, y:236, label:'风险等级', sub:'高 / 中 / 低', info:'风险等级：按风险值划分高/中/低，高风险优先处置。' },
+        k2: { x:340, y:230, label:'关键资产', sub:'价值 ≥4', info:'价值 ≥4 的资产列为关键资产，是威胁识别与风险计算的重点对象。不必对每项资产做全流程，但关键资产一项都不能漏。' },
 
-        rd: { x:486, y:236, label:'风险处置', sub:'降低 / 转移 / 接受', info:'风险处置策略：降低风险（整改加固）、转移风险（保险/外包）、接受风险（在可接受范围内），按等级选择。' }
+        k3: { x:570, y:230, label:'资产清单', sub:'编号 A-01 可追溯', info:'正式清单要能追：编号、名称、类别、C/I/A、价值、责任人、所在位置。编号一旦确定，后面四个单元全部沿用，不能中途改名。' }
 
-    }, edges: [['top','a1'],['top','t1'],['top','v1'],['top','rc'],['a1','rc'],['t1','rc'],['v1','rc'],['rc','rl'],['rl','rd']] };
+    }, edges: [['top','c1'],['top','c2'],['top','c3'],['c1','k1'],['c2','k2'],['c3','k3']] };
+
+    KM_DATA['8.2'] = { h: 300, nodes: {
+
+        top:{ x:340, y:30,  label:'威胁识别', sub:'8.2 频率赋值', info:'威胁回答"谁会来、多久来一次"。它是风险公式的第二项：只写威胁名字，风险就永远算不出来。' },
+
+        a1: { x:110, y:130, label:'威胁源', sub:'人为·环境', info:'人为：恶意攻击、内部恶意、误操作、管理疏忽、社会工程；环境：自然灾害、电力/温湿度、系统故障。两类都要列，别只盯黑客。' },
+
+        a2: { x:340, y:130, label:'威胁方式', sub:'怎么搞', info:'同一威胁源可以有多种方式：黑客可以漏洞利用、DDoS、网页篡改。写清"方式"才能和脆弱性配对。' },
+
+        a3: { x:570, y:130, label:'频率赋值', sub:'1~5 五级', info:'5（≥1 次/周）～1（<1 次/年）。依据三问：历史记录、行业态势、现有防护水平——不能因为"没发生过"就一律给 1。' },
+
+        k1: { x:110, y:230, label:'五级标准', sub:'≥周 … <年', info:'5 很高 ≥1次/周；4 高 ≥1次/月；3 中等 ≥1次/半年；2 低 ≥1次/年；1 很低 <1次/年。赋值必须写理由。' },
+
+        k2: { x:340, y:230, label:'判断三问', sub:'历史·行业·防护', info:'本单位发生过几次？同类单位近期是否中招？现有措施能不能挡住？三问答完再定档，避免拍脑袋。' },
+
+        k3: { x:570, y:230, label:'威胁识别表', sub:'资产 × 威胁', info:'每项关键资产 ≥3 条威胁，逐条标威胁源类别、频率赋值、赋值理由；资产编号沿用 8.1。' }
+
+    }, edges: [['top','a1'],['top','a2'],['top','a3'],['a1','k1'],['a2','k2'],['a3','k3']] };
+
+    KM_DATA['8.3'] = { h: 300, nodes: {
+
+        top:{ x:340, y:30,  label:'脆弱性识别', sub:'8.3 严重程度赋值', info:'脆弱性回答"我哪里容易被攻破"。威胁只有利用脆弱性才能造成危害——它是把威胁与资产连起来的那一环。' },
+
+        a1: { x:110, y:130, label:'技术五层', sub:'物理→应用', info:'物理环境、网络结构、主机系统、数据库、应用系统。逐层找：门禁、隔离、补丁、弱口令、注入——每一层都有典型弱点。' },
+
+        a2: { x:340, y:130, label:'管理两类', sub:'技术·组织', info:'技术管理：变更审批、备份、账号生命周期、日志；组织管理：职责、制度时效、培训、应急演练。Colonial Pipeline 栽在账号未注销。' },
+
+        a3: { x:570, y:130, label:'识别三法', sub:'访谈·核查·测试', info:'访谈问"怎么做"，文档核查看"有没有记录"，工具测试扫"技术漏洞"。只用扫描器，管理脆弱性必然全漏。' },
+
+        k1: { x:110, y:230, label:'赋值两部分', sub:'难易 + 严重', info:'先看被利用的难易程度（脚本小子能否打），再看利用后的严重程度（单机还是核心数据），两部分综合给 1~5。' },
+
+        k2: { x:340, y:230, label:'证据来源', sub:'报告 · 记录', info:'每条脆弱性必须写清来源：哪份扫描报告的哪一条、哪份核查记录的哪一项。没有来源的条目，报告里站不住、整改时派不下去。' },
+
+        k3: { x:570, y:230, label:'汇总表', sub:'V-01 可追溯', info:'技术与管理的条目合并去重，统一编号 V-01 起，标类别、所属资产、赋值、证据来源，供 8.4 做"威胁—脆弱性"配对。' }
+
+    }, edges: [['top','a1'],['top','a2'],['top','a3'],['a1','k1'],['a2','k2'],['a3','k3']] };
+
+    KM_DATA['8.4'] = { h: 300, nodes: {
+
+        top:{ x:340, y:30,  label:'风险计算', sub:'8.4 矩阵法·相乘法', info:'风险 = f(资产价值, 威胁可能性, 脆弱性严重程度)。三要素齐了，才谈得上"风险多大、先改哪条"。' },
+
+        a1: { x:110, y:130, label:'矩阵法', sub:'5×5 查表', info:'L 为纵轴、F 为横轴，交叉格即等级。优点直观、快、好汇报；适合项目初期与向管理层说明。' },
+
+        a2: { x:340, y:130, label:'相乘法', sub:'R = √(L×F)', info:'R=√(可能性 × 损失)，结果 1~5，四舍五入取整。可计算、可排序，适合做整改优先级。' },
+
+        a3: { x:570, y:130, label:'等级划分', sub:'1~5 五档', info:'≥4.5 很高 / 3.5~4.4 高 / 2.5~3.4 中等 / 1.5~2.4 低 / <1.5 很低。三值直接相乘得到 1~125 的旧口径不要与本表混用。' },
+
+        k1: { x:110, y:230, label:'处置策略', sub:'规避·降低·转移·接受', info:'规避：停用功能或下线；降低：整改加固；转移：保险/外包/责任约定；接受：在可接受范围内并持续监控。高风险必须处置。' },
+
+        k2: { x:340, y:230, label:'两法对照', sub:'结论是否一致', info:'同一组配对用两种方法各算一次，不一致时说明原因（如 4.5 落在"很高"与"高"的边界），这本身就是一次质量检查。' },
+
+        k3: { x:570, y:230, label:'输入报告', sub:'计算表 + 排序', info:'输出一张按风险值排序的计算表：风险编号、资产、威胁、脆弱性、L、F、R、等级、处置策略——它直接成为报告第六章的正文。' }
+
+    }, edges: [['top','a1'],['top','a2'],['top','a3'],['a1','k1'],['a2','k2'],['a3','k3']] };
+
+    KM_DATA['8.5'] = { h: 300, nodes: {
+
+        top:{ x:340, y:30,  label:'评估报告', sub:'8.5 最终产品', info:'报告不是"交差材料"，而是决策依据、合规证据与整改路线图。写了没人看懂，等于没写。' },
+
+        a1: { x:110, y:130, label:'八章结构', sub:'概述→建议', info:'概述、对象简介、资产识别、威胁识别、脆弱性识别、风险分析、已有措施确认、风险处置建议——顺序即逻辑，不能省章。' },
+
+        a2: { x:340, y:130, label:'数据整合', sub:'编号一条线', info:'资产 A-xx、威胁 T-xx、脆弱性 V-xx、风险 R-xx 必须前后一致、可逐级回溯。任何一处断链，整份报告的可信度打折。' },
+
+        a3: { x:570, y:130, label:'写作要求', sub:'结论前置', info:'决策者只看结论与建议，技术负责人看风险分布，监管看证据链。开头一段就要说清"最该担心什么"。' },
+
+        k1: { x:110, y:230, label:'质量标准', sub:'完整·准确·一致·可读·可行动', info:'五条线缺一不可。最常见的失分不是"写得不专业"，而是数字对不上、建议不可执行。' },
+
+        k2: { x:340, y:230, label:'自评互评', sub:'质量评分表', info:'先用评分表自评、找出最弱一章重写，再交叉互评；互评意见要指出"第几章、第几段、改成什么"。' },
+
+        k3: { x:570, y:230, label:'整改建议', sub:'策略·动作·责任·时限', info:'逐条对应风险编号：策略类型 + 具体动作 + 责任方 + 时限。高风险立即/7 天，中风险 30 天，低风险纳入计划。' }
+
+    }, edges: [['top','a1'],['top','a2'],['top','a3'],['a1','k1'],['a2','k2'],['a3','k3']] };
 
     </script>
 
@@ -14146,7 +14875,7 @@ var SUYANG_CASES = {
 
             var n = d.nodes[id];
 
-            var unitNames = { '1.1':'单元 1.1','1.2':'单元 1.2','2.1':'单元 2.1','2.2':'单元 2.2','3':'任务3','4':'任务4','5':'任务5','6':'任务6','7':'任务7','7.1':'单元 7.1','7.2':'单元 7.2','7.3':'单元 7.3','7.4':'单元 7.4','8':'任务8' };
+            var unitNames = { '1.1':'单元 1.1','1.2':'单元 1.2','2.1':'单元 2.1','2.2':'单元 2.2','3':'任务3','4':'任务4','5':'任务5','6':'任务6','7':'任务7','7.1':'单元 7.1','7.2':'单元 7.2','7.3':'单元 7.3','7.4':'单元 7.4','8':'任务8','8.1':'单元 8.1','8.2':'单元 8.2','8.3':'单元 8.3','8.4':'单元 8.4','8.5':'单元 8.5' };
 
             document.getElementById('kmPopTitle').textContent = n.label;
 
@@ -14232,24 +14961,20 @@ var SUYANG_CASES = {
 
         }
 
-        /* 返回拦截本单元的最近一个未通过前置单元（null = 未锁定） */
-
+        /* 返回拦截本单元的最近一个未通过前置单元（null = 未锁定）。
+           2026-11-04 应教师要求取消串行解锁：单元测评不再依赖前置单元通过，
+           各单元测评可直接作答。原判定逻辑已注释保留，便于日后恢复。 */
         function lockedByUnit(u) {
-
+            return null; // 串行解锁已取消
+            /*
             var idx = UNIT_ORDER.indexOf(u);
-
             if (idx <= 0) return null;
-
             for (var i = 0; i < idx; i++) {
-
                 var pre = UNIT_ORDER[i];
-
                 if (!passState(pre)) return pre;
-
             }
-
             return null;
-
+            */
         }
 
 

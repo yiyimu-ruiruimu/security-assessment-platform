@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8.1 参考答案｜资产识别与 CIA 赋值（步骤 1–5）</title>
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", sans-serif;
+        background: #f4f6f9; color: #2c2c2a; padding: 24px 16px; line-height: 1.65;
+    }
+    .wrap { max-width: 980px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 32px 34px; }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+    .sub { font-size: 13px; color: #6b7280; margin-bottom: 16px; }
+    .notice { background: #fff8e6; border-left: 4px solid #d97706; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-bottom: 16px; }
+    .notice strong { color: #92400e; }
+    .toc { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+    .toc a {
+        font-size: 13px; text-decoration: none; color: #185fa5; background: #e6f1fb;
+        border: 1px solid #b5d4f4; border-radius: 999px; padding: 5px 12px;
+    }
+    .toc a:hover { background: #d6e8fa; }
+    section { margin-bottom: 34px; scroll-margin-top: 16px; }
+    h2 { font-size: 16px; font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+    .badge { background: #185fa5; color: #fff; font-size: 12px; border-radius: 5px; padding: 3px 8px; font-weight: 500; }
+    h3 { font-size: 14px; font-weight: 600; margin: 18px 0 8px; color: #1f2937; }
+    p.note { font-size: 13px; color: #4b5563; margin-bottom: 10px; }
+    .svg-box { border: 1px solid #e5e7eb; border-radius: 10px; padding: 10px 6px; background: #fff; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 10px; }
+    th, td { border: 1px solid #d1d5db; padding: 7px 9px; text-align: left; vertical-align: top; }
+    th { background: #f1efe8; font-weight: 600; white-space: nowrap; }
+    td.num { text-align: center; font-weight: 600; white-space: nowrap; }
+    tr.key td { background: #fdf6f6; }
+    .tag-key { display: inline-block; background: #fcebeb; color: #a32d2d; border-radius: 4px; font-size: 11px; padding: 1px 6px; margin-left: 6px; }
+    .flag { background: #fef3c7; color: #92400e; border-radius: 4px; font-size: 11px; padding: 1px 6px; }
+    ul.plain { margin: 8px 0 0 20px; font-size: 13px; }
+    ul.plain li { margin-bottom: 5px; }
+    .box-warn { background: #fdf6ec; border-left: 4px solid #d98706; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-top: 14px; }
+    .box-tip { background: #eef7f2; border-left: 4px solid #0f6e56; border-radius: 6px; padding: 10px 14px; font-size: 13px; margin-top: 14px; }
+    .check { font-size: 13px; margin-top: 8px; }
+    .check div { margin-bottom: 6px; }
+    .back { display: inline-block; margin-top: 6px; font-size: 13px; color: #185fa5; text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+    @media print {
+        body { background: #fff; padding: 0; }
+        .wrap { border-radius: 0; padding: 10px; }
+        .toc, .back { display: none; }
+        section { page-break-inside: avoid; }
+    }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1>8.1 参考答案｜资产识别与 CIA 赋值</h1>
+    <p class="sub">配套实验：8.1 资产识别与 CIA 赋值 · 场景：优品商城电商交易系统（素材 4）· 对应步骤 1–5</p>
+    <div class="notice">
+        <strong>先做，再看。</strong>这是参考答案，不是标准答案。请先按素材 4、素材 2 自己做完对应步骤，再打开这一节对照。分值和你不一样的，先问自己“我的依据站不站得住”——<strong>有依据的分歧是对的</strong>，把理由写进备注即可。
+    </div>
+
+    <div class="toc">
+        <a href="#step1">步骤 1 · 三层架构图</a>
+        <a href="#step2">步骤 2 · 资产清单</a>
+        <a href="#step3">步骤 3 · CIA 赋值与依据</a>
+        <a href="#step4">步骤 4 · 价值计算与关键资产</a>
+        <a href="#step5">步骤 5 · 自查与分歧讨论</a>
+    </div>
+
+    <section id="step1">
+        <h2><span class="badge">步骤 1</span>读场景，先画架构</h2>
+        <p class="note">三层关系：<strong>业务（交易）→ 系统（商城平台）→ 组件（服务器 / 数据库 / 接口 / 人）</strong>。画图的作用是回答一句话：这项资产到底撑着哪个业务。</p>
+        <div class="svg-box">
+            <svg viewBox="0 0 680 590" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+            <title>优品商城三层架构与资产支撑图</title>
+            <desc>业务层五项交易、系统层商城平台四个层级与运维通道、组件层十项资产及其支撑的业务</desc>
+            <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+            </defs>
+            <text x="40" y="52" font-size="14" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">第一层 业务（交易）</text>
+            <rect x="40" y="64" width="112" height="40" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+            <text x="96" y="84" font-size="13" fill="#0C447C" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册 / 登录</text>
+            <rect x="162" y="64" width="112" height="40" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+            <text x="218" y="84" font-size="13" fill="#085041" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览 / 搜索</text>
+            <rect x="284" y="64" width="112" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+            <text x="340" y="84" font-size="13" fill="#3C3489" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单购买</text>
+            <rect x="406" y="64" width="112" height="40" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+            <text x="462" y="84" font-size="13" fill="#633806" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+            <rect x="528" y="64" width="112" height="40" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
+            <text x="584" y="84" font-size="13" fill="#712B13" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单查询</text>
+            <line x1="180" y1="110" x2="180" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+            <line x1="340" y1="110" x2="340" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+            <line x1="500" y1="110" x2="500" y2="140" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+            <rect x="40" y="148" width="600" height="158" rx="12" fill="#F1EFE8" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="56" y="172" font-size="14" font-weight="500" fill="#444441" font-family="PingFang SC, Microsoft YaHei, sans-serif">第二层 系统 —— 优品商城平台</text>
+            <rect x="56" y="186" width="112" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="112" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">互联网边界</text>
+            <text x="112" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">防火墙 ×1</text>
+            <text x="112" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-08</text>
+            <rect x="184" y="186" width="124" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="246" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web 层</text>
+            <text x="246" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web服务器 ×2</text>
+            <text x="246" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-05 · Tomcat</text>
+            <rect x="324" y="186" width="144" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="396" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用层</text>
+            <text x="396" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用服务器×2·Java</text>
+            <text x="396" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-06 · 支付接口 A-04</text>
+            <rect x="484" y="186" width="140" height="64" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="554" y="206" font-size="13" font-weight="500" fill="#2C2C2A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据层</text>
+            <text x="554" y="226" font-size="12" fill="#5F5E5A" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据库×2·主从</text>
+            <text x="554" y="242" font-size="11" fill="#888780" text-anchor="middle" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-07 · MySQL</text>
+            <rect x="56" y="266" width="568" height="28" rx="6" fill="#D3D1C7" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="340" y="280" font-size="12" fill="#444441" text-anchor="middle" dominant-baseline="central" font-family="PingFang SC, Microsoft YaHei, sans-serif">运维通道：运维人员经跳板机（A-09）管理全系统 ｜ 配置文件（A-10）：连接信息·密钥</text>
+            <line x1="340" y1="312" x2="340" y2="334" stroke="#888780" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+            <text x="40" y="362" font-size="14" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">第三层 组件 —— 资产清单（标色 = 直接支撑该项业务，灰 = 全业务公共支撑）</text>
+            <rect x="40" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="50" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-01 · 数据</text>
+            <text x="50" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">用户数据库</text>
+            <circle cx="53" cy="428" r="3.5" fill="#185FA5"/>
+            <text x="61" y="428" font-size="11" fill="#185FA5" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册登录</text>
+            <text x="50" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">存账号·密码哈希</text>
+            <rect x="162" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="172" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-02 · 数据</text>
+            <text x="172" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">商品信息库</text>
+            <circle cx="175" cy="428" r="3.5" fill="#0F6E56"/>
+            <text x="183" y="428" font-size="11" fill="#0F6E56" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览搜索</text>
+            <text x="172" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">存商品与库存</text>
+            <rect x="284" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="294" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-03 · 数据</text>
+            <text x="294" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单数据</text>
+            <circle cx="297" cy="428" r="3.5" fill="#534AB7"/>
+            <circle cx="306" cy="428" r="3.5" fill="#854F0B"/>
+            <circle cx="315" cy="428" r="3.5" fill="#993C1D"/>
+            <text x="322" y="428" font-size="11" fill="#444441" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单·支付·查询</text>
+            <text x="294" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单全周期记录</text>
+            <rect x="406" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="416" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-04 · 软件</text>
+            <text x="416" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支付接口</text>
+            <circle cx="419" cy="428" r="3.5" fill="#854F0B"/>
+            <text x="427" y="428" font-size="11" fill="#854F0B" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+            <text x="416" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">对接支付宝·微信</text>
+            <rect x="528" y="374" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="538" y="390" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-05 · 硬件</text>
+            <text x="538" y="410" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">Web服务器</text>
+            <circle cx="541" cy="428" r="3.5" fill="#888780"/>
+            <text x="549" y="428" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+            <text x="538" y="445" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">入口·负载均衡</text>
+            <rect x="40" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="50" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-06 · 硬件</text>
+            <text x="50" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">应用服务器</text>
+            <circle cx="53" cy="518" r="3.5" fill="#888780"/>
+            <text x="61" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+            <text x="50" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">运行业务逻辑</text>
+            <rect x="162" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="172" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-07 · 硬件</text>
+            <text x="172" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">数据库服务器</text>
+            <circle cx="175" cy="518" r="3.5" fill="#888780"/>
+            <text x="183" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+            <text x="172" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">主从·承载三库</text>
+            <rect x="284" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="294" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-08 · 硬件</text>
+            <text x="294" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">防火墙</text>
+            <circle cx="297" cy="518" r="3.5" fill="#888780"/>
+            <text x="305" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+            <text x="294" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">边界安全屏障</text>
+            <rect x="406" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="416" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-09 · 硬件</text>
+            <text x="416" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">跳板机</text>
+            <circle cx="419" cy="518" r="3.5" fill="#888780"/>
+            <text x="427" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑运维</text>
+            <text x="416" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">不直接面向业务</text>
+            <rect x="528" y="464" width="112" height="80" rx="8" fill="#FFFFFF" stroke="#B4B2A9" stroke-width="0.5"/>
+            <text x="538" y="480" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">A-10 · 文档</text>
+            <text x="538" y="500" font-size="13" font-weight="500" fill="#2C2C2A" font-family="PingFang SC, Microsoft YaHei, sans-serif">系统配置文件</text>
+            <circle cx="541" cy="518" r="3.5" fill="#888780"/>
+            <text x="549" y="518" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">支撑全部业务</text>
+            <text x="538" y="535" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">连接信息·密钥</text>
+            <text x="40" y="572" font-size="11" fill="#888780" font-family="PingFang SC, Microsoft YaHei, sans-serif">图例</text>
+            <circle cx="78" cy="568" r="3.5" fill="#185FA5"/>
+            <text x="86" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">注册登录</text>
+            <circle cx="150" cy="568" r="3.5" fill="#0F6E56"/>
+            <text x="158" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">浏览搜索</text>
+            <circle cx="222" cy="568" r="3.5" fill="#534AB7"/>
+            <text x="230" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">下单购买</text>
+            <circle cx="294" cy="568" r="3.5" fill="#854F0B"/>
+            <text x="302" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">在线支付</text>
+            <circle cx="366" cy="568" r="3.5" fill="#993C1D"/>
+            <text x="374" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">订单查询</text>
+            <circle cx="438" cy="568" r="3.5" fill="#888780"/>
+            <text x="446" y="572" font-size="11" fill="#5F5E5A" font-family="PingFang SC, Microsoft YaHei, sans-serif">全业务公共支撑</text>
+            </svg>
+        </div>
+
+        <h3>资产 → 业务的对应关系（口语版，课堂上照着讲）</h3>
+        <table>
+            <tr><th style="width:20%">资产</th><th style="width:13%">所在层</th><th style="width:26%">直接支撑的业务</th><th>怎么撑的</th></tr>
+            <tr><td>A-01 用户数据库</td><td>数据层</td><td>注册 / 登录</td><td>存账号、手机号、密码哈希——没有它没人能登录</td></tr>
+            <tr><td>A-02 商品信息库</td><td>数据层</td><td>商品浏览 / 搜索</td><td>存商品名、价格、库存、描述——浏览搜的就是它</td></tr>
+            <tr><td>A-03 订单数据</td><td>数据层</td><td>下单购买、在线支付、订单查询（3 项）</td><td>订单号、金额、状态贯穿交易全流程，业务价值密度最高</td></tr>
+            <tr><td>A-04 支付接口</td><td>应用层</td><td>在线支付</td><td>对接支付宝 / 微信，支付动作的出口</td></tr>
+            <tr><td>A-05 Web 服务器</td><td>Web 层</td><td>全部业务（入口）</td><td>所有用户请求先进这里，2 台负载均衡</td></tr>
+            <tr><td>A-06 应用服务器</td><td>应用层</td><td>全部业务（逻辑）</td><td>注册校验、下单扣库存等逻辑都在它上面跑</td></tr>
+            <tr><td>A-07 数据库服务器</td><td>数据层</td><td>全部业务（承载数据）</td><td>A-01 / 02 / 03 三个库都放在它上面</td></tr>
+            <tr><td>A-08 防火墙</td><td>互联网边界</td><td>全部业务（安全前提）</td><td>边界防护——它断了，五项业务外面都进不来</td></tr>
+            <tr><td>A-09 跳板机</td><td>运维通道</td><td>不直接面向业务</td><td>运维人员唯一管理入口，保障系统持续运转</td></tr>
+            <tr><td>A-10 系统配置文件</td><td>文档</td><td>全部业务（运行支撑）</td><td>含数据库连接信息、密钥——它泄露，上面全裸奔</td></tr>
+        </table>
+        <div class="box-tip"><strong>三句话记住：</strong>① 业务不悬空，每项业务都能往下指到资产；② A-03 一项撑 3 项业务，是赋值最该打高的数据资产；③ 灰色资产是“共同命脉”，任何一台出问题，五项业务一起受影响——这正是它们可用性打高的原因。</div>
+    </section>
+
+    <section id="step2">
+        <h2><span class="badge">步骤 2</span>建清单，编号归类</h2>
+        <p class="note">素材 4 已给全 10 项资产，编号照抄，不要自己重排；类别从「硬件 / 软件 / 数据 / 文档」里选（本场景没有人员与服务类资产，若把“运维人员”单独列为<strong>人员</strong>资产，也算合理扩展，但要写在备注里）。</p>
+        <table>
+            <tr><th style="width:9%">编号</th><th style="width:19%">资产名称</th><th style="width:10%">类别</th><th style="width:14%">所属层</th><th>说明（照素材 4）</th></tr>
+            <tr><td>A-01</td><td>用户数据库</td><td>数据</td><td>数据层</td><td>含姓名、手机号、地址、密码哈希</td></tr>
+            <tr><td>A-02</td><td>商品信息库</td><td>数据</td><td>数据层</td><td>含商品名称、价格、库存、描述</td></tr>
+            <tr><td>A-03</td><td>订单数据</td><td>数据</td><td>数据层</td><td>含订单号、用户 ID、商品、金额、状态</td></tr>
+            <tr><td>A-04</td><td>支付接口</td><td>软件</td><td>应用层</td><td>对接支付宝 / 微信支付</td></tr>
+            <tr><td>A-05</td><td>Web 服务器</td><td>硬件</td><td>Web 层</td><td>2 台，运行 Tomcat</td></tr>
+            <tr><td>A-06</td><td>应用服务器</td><td>硬件</td><td>应用层</td><td>2 台，运行 Java 应用</td></tr>
+            <tr><td>A-07</td><td>数据库服务器</td><td>硬件</td><td>数据层</td><td>2 台（主从），运行 MySQL</td></tr>
+            <tr><td>A-08</td><td>防火墙</td><td>硬件</td><td>互联网边界</td><td>边界防护</td></tr>
+            <tr><td>A-09</td><td>跳板机</td><td>硬件</td><td>运维通道</td><td>运维管理入口</td></tr>
+            <tr><td>A-10</td><td>系统配置文件</td><td>文档</td><td>运维通道</td><td>含数据库连接信息、密钥等</td></tr>
+        </table>
+        <div class="box-warn"><strong>四个最容易被扣分的点：</strong>
+        <ul class="plain">
+            <li><strong>数据 ≠ 服务器。</strong>A-01 用户数据库（数据）和 A-07 数据库服务器（硬件）是两项资产，一个被偷走、一个被宕机，后果完全不同。</li>
+            <li><strong>支付接口是“软件”不是“数据”。</strong>它本身是程序逻辑；它流转的金额、订单号属于 A-03 订单数据。</li>
+            <li><strong>配置文件是“文档”。</strong>很多人只列硬件和软件，把它漏掉——而它恰恰含密钥，是后面唯一一个 C 打 5 的非数据库资产。</li>
+            <li><strong>编号别重排。</strong>素材 4 的 A-01～A-10 是后面实验、威胁与脆弱性编号的对齐基准，改了会全乱。</li>
+        </ul></div>
+    </section>
+
+    <section id="step3">
+        <h2><span class="badge">步骤 3</span>逐项 CIA 赋值，写依据</h2>
+        <p class="note">三句话定档：<strong>泄露了损失多大（C）？被篡改了后果多严重（I）？宕机了影响多大（A）？</strong>照素材 1 速查卡或素材 3 的 GB/T 20984 赋值表对档，每个分值后面必须有一句业务影响依据。</p>
+        <table>
+            <tr><th style="width:17%">资产</th><th style="width:27%">C（保密性）与依据</th><th style="width:28%">I（完整性）与依据</th><th> A（可用性）与依据</th></tr>
+            <tr><td>A-01 用户数据库</td><td><strong>5</strong>｜姓名+手机号+地址+密码哈希，泄露可被精准诈骗、撞库，并触发监管处罚</td><td><strong>5</strong>｜篡改余额或收货地址会导致错发、漏发与纠纷，且难以追溯弥补</td><td><strong>4</strong>｜短时可离线（允许中断 &lt; 10 分钟），但登录会全面受阻</td></tr>
+            <tr><td>A-02 商品信息库</td><td><strong>2</strong>｜商品信息本身就是公开可查的</td><td><strong>4</strong>｜改价、改库存直接造成错单与交易纠纷，损失较难弥补</td><td><strong>3</strong>｜可降级为静态页面，允许中断 &lt; 30 分钟</td></tr>
+            <tr><td>A-03 订单数据</td><td><strong>4</strong>｜含用户 ID、金额、收货地址，属重要交易信息</td><td><strong>5</strong>｜金额与状态被篡改，账务无法追溯，无法接受</td><td><strong>4</strong>｜下单短时排队可容忍，中断 &lt; 10 分钟</td></tr>
+            <tr><td>A-04 支付接口</td><td><strong>4</strong>｜涉及支付凭证与签名密钥</td><td><strong>5</strong>｜改金额、改收款方即直接资金损失</td><td><strong>5</strong>｜支付不允许中断，中断即刻丢单</td></tr>
+            <tr><td>A-05 Web 服务器</td><td><strong>2</strong>｜本身不存敏感数据（配置另算 A-10）</td><td><strong>3</strong>｜页面或配置被改，影响明显但可从备份恢复</td><td><strong>5</strong>｜全站入口，2 台全宕则五项业务都访问不了</td></tr>
+            <tr><td>A-06 应用服务器</td><td><strong>3</strong>｜运行时内存中有用户数据，日志可能留痕</td><td><strong>4</strong>｜业务逻辑被篡改会导致大范围错单，较难弥补</td><td><strong>5</strong>｜所有业务逻辑在此运行，不允许中断</td></tr>
+            <tr><td>A-07 数据库服务器</td><td><strong>4</strong>｜承载三个库，权限最高，被控等于全库失守</td><td><strong>5</strong>｜数据载体被破坏，全库数据不可信</td><td><strong>5</strong>｜虽有主从，仍属数据层命脉，不允许中断</td></tr>
+            <tr><td>A-08 防火墙</td><td><strong>2</strong>｜策略本身敏感度低</td><td><strong>3</strong>｜策略被改会端口暴露或误阻断，可恢复</td><td><strong>5</strong>｜边界失效，全站暴露或全站不可达</td></tr>
+            <tr><td>A-09 跳板机</td><td><strong>4</strong>｜含运维账号与内网拓扑，泄露等于交出内网地图</td><td><strong>4</strong>｜被控后可横向移动到全部服务器</td><td><strong>3</strong>｜短时不可用可由本地应急通道替代，&lt; 30 分钟</td></tr>
+            <tr><td>A-10 系统配置文件</td><td><strong>5</strong>｜含数据库连接串与密钥，泄露等于拿到库钥匙</td><td><strong>4</strong>｜篡改后应用连错库或被指向攻击者，影响严重</td><td><strong>2</strong>｜有备份与模板可重建，允许中断 &lt; 1 小时</td></tr>
+        </table>
+        <div class="box-tip"><strong>三个“为什么这样打”的典型问题：</strong>
+        <ul class="plain">
+            <li><strong>为什么 A-01 的 A 不是 5？</strong>数据库宕机时，已登录用户仍可浏览商品、下单可先入队列，业务能短时降级——所以按速查卡落在“允许中断 &lt; 10 分钟”的 4 档。</li>
+            <li><strong>为什么 A-10 配置文件 C 打 5、A 只打 2？</strong>它泄密的后果最重（直接交出数据库钥匙），但它随时可从备份或模板重建，缺失的可用性影响相对小。</li>
+            <li><strong>为什么 A-05 Web 服务器 C 只有 2？</strong>它只是请求入口，不落敏感数据；敏感数据在 A-01/02/03 里——资产边界划清，赋值才不会串味。</li>
+        </ul></div>
+    </section>
+
+    <section id="step4">
+        <h2><span class="badge">步骤 4</span>算价值，标关键资产</h2>
+        <p class="note">公式：<strong>资产价值 =（C + I + A）÷ 3</strong>，保留 1 位小数；<strong>价值 ≥ 4 标为关键资产</strong>。价值必须能由三个分值复算出来，不能“感觉重要给个 4.5”。</p>
+        <table>
+            <tr><th style="width:9%">编号</th><th style="width:19%">资产名称</th><th style="width:8%">C</th><th style="width:8%">I</th><th style="width:8%">A</th><th style="width:13%">计算</th><th style="width:12%">资产价值</th><th>关键性说明</th></tr>
+            <tr class="key"><td>A-01</td><td>用户数据库</td><td class="num">5</td><td class="num">5</td><td class="num">4</td><td>(5+5+4)/3</td><td class="num">4.7 <span class="tag-key">关键</span></td><td>登录的唯一凭据源，出事全站用户受影响</td></tr>
+            <tr class="key"><td>A-04</td><td>支付接口</td><td class="num">4</td><td class="num">5</td><td class="num">5</td><td>(4+5+5)/3</td><td class="num">4.7 <span class="tag-key">关键</span></td><td>资金出口，中断即丢单，篡改即丢钱</td></tr>
+            <tr class="key"><td>A-07</td><td>数据库服务器</td><td class="num">4</td><td class="num">5</td><td class="num">5</td><td>(4+5+5)/3</td><td class="num">4.7 <span class="tag-key">关键</span></td><td>三个库的载体，数据层单点命脉</td></tr>
+            <tr class="key"><td>A-03</td><td>订单数据</td><td class="num">4</td><td class="num">5</td><td class="num">4</td><td>(4+5+4)/3</td><td class="num">4.3 <span class="tag-key">关键</span></td><td>一项撑下单、支付、查询三条业务</td></tr>
+            <tr class="key"><td>A-06</td><td>应用服务器</td><td class="num">3</td><td class="num">4</td><td class="num">5</td><td>(3+4+5)/3</td><td class="num">4.0 <span class="tag-key">关键</span></td><td>全部业务逻辑在此运行，宕机即全停</td></tr>
+            <tr><td>A-09</td><td>跳板机</td><td class="num">4</td><td class="num">4</td><td class="num">3</td><td>(4+4+3)/3</td><td class="num">3.7</td><td>管理入口，权限高但非直接业务资产</td></tr>
+            <tr><td>A-10</td><td>系统配置文件</td><td class="num">5</td><td class="num">4</td><td class="num">2</td><td>(5+4+2)/3</td><td class="num">3.7</td><td>分值不低但单项偏低，价值排序靠后——别只看 C</td></tr>
+            <tr><td>A-05</td><td>Web 服务器</td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td>(2+3+5)/3</td><td class="num">3.3</td><td>入口，可用性极高但机密性低</td></tr>
+            <tr><td>A-08</td><td>防火墙</td><td class="num">2</td><td class="num">3</td><td class="num">5</td><td>(2+3+5)/3</td><td class="num">3.3</td><td>边界防护，失效即全网暴露</td></tr>
+            <tr><td>A-02</td><td>商品信息库</td><td class="num">2</td><td class="num">4</td><td class="num">3</td><td>(2+4+3)/3</td><td class="num">3.0</td><td>可公开，主要风险在价格被篡改</td></tr>
+        </table>
+
+        <h3>关键资产清单（价值 ≥ 4，交作业要单独交这一份）</h3>
+        <table>
+            <tr><th style="width:9%">编号</th><th style="width:19%">资产名称</th><th style="width:10%">价值</th><th>一句话理由（写进关键性说明）</th></tr>
+            <tr><td>A-01</td><td>用户数据库</td><td class="num">4.7</td><td>登录凭据的唯一样本来源，泄露涉个人信息合规责任，篡改导致错单</td></tr>
+            <tr><td>A-04</td><td>支付接口</td><td class="num">4.7</td><td>资金唯一出口，不可中断，篡改金额直接造成资金损失</td></tr>
+            <tr><td>A-07</td><td>数据库服务器</td><td class="num">4.7</td><td>承载全部三个数据库，一旦被控或宕机，五项业务同时受影响</td></tr>
+            <tr><td>A-03</td><td>订单数据</td><td class="num">4.3</td><td>贯穿下单、支付、查询三条业务，篡改后账务无法追溯</td></tr>
+            <tr><td>A-06</td><td>应用服务器</td><td class="num">4.0</td><td>全部业务逻辑的运行载体，不可中断，逻辑被改会大面积错单</td></tr>
+        </table>
+        <div class="box-tip"><strong>为什么 A-10 配置文件 C 打了 5 却不是关键资产？</strong>因为价值是三维平均：它的 A 只有 2（可重建），把均值拉到 3.7。这正好说明“单项高 ≠ 关键资产”——但要注意：<strong>价值不到 4 不等于可以不管</strong>，它在后续威胁分析里往往是被攻击的跳板，威胁值会很高。</div>
+    </section>
+
+    <section id="step5">
+        <h2><span class="badge">步骤 5</span>对答案，再定稿提交</h2>
+        <h3>交付自查（对照素材 2 逐项打勾）</h3>
+        <div class="check">
+            <div>☐ 10 项资产全部来自场景说明，编号 A-01～A-10 与素材 4 一致（未自己重排、未凭空新增）</div>
+            <div>☐ 数据与承载它的服务器分开列（A-01/A-07、A-02/A-07、A-03/A-07）</div>
+            <div>☐ 每项资产都有 C / I / A 三个分值，共 <strong>30 个分值</strong></div>
+            <div>☐ 每个分值都能说出一句业务影响依据，不出现“感觉重要所以给 5”</div>
+            <div>☐ 资产价值由三个分值复算得出、保留 1 位小数（如 (5+5+4)/3 = 4.7）</div>
+            <div>☐ 关键资产（≥4）已标出，共 5 项，每项有一句话理由</div>
+            <div>☐ 文件命名：<strong>班级 + 学号 + 姓名 + 8.1</strong></div>
+        </div>
+
+        <h3>三处可以合理分歧的地方（分歧写进备注就是加分项）</h3>
+        <table>
+            <tr><th style="width:22%">分歧点</th><th style="width:39%">打高的理由</th><th>打低的理由</th></tr>
+            <tr><td>A-05 Web 服务器<br>A = 5 还是 4？</td><td>按“整体服务”评：入口不可用 = 全站不可访问，给 5</td><td>按“单台”评：2 台负载均衡，单台宕机业务不受影响，给 4</td></tr>
+            <tr><td>A-10 配置文件<br>A = 2 还是 3？</td><td>配置缺失会导致应用起不来，需人工介入，给 3</td><td>有备份与模板，5 分钟内可恢复，给 2</td></tr>
+            <tr><td>A-09 跳板机<br>C = 4 还是 5？</td><td>若存明文运维口令、内网拓扑，泄露后果灾难性，给 5</td><td>若已做堡垒机加固与双因素，给 4</td></tr>
+        </table>
+        <p class="note" style="margin-top:10px;">评分口径：<strong>分歧本身不扣分，没依据才扣分。</strong>只要备注里写清“我是按整体还是按单台评的”，两种口径都给分；答辩时说得出依据，比分数对不对更重要。</p>
+        <div class="box-warn"><strong>交之前最后看一眼：</strong>有没有出现“所有资产都打 3 分”“按服务器采购价赋值”“只列硬件软件、漏掉数据和文档”这三种典型错——只要中一条，整张表在后面的风险计算里就失效了。</div>
+    </section>
+
+    <a class="back" href="../index.html">← 返回课程平台</a>
+</div>
+</body>
+</html>
